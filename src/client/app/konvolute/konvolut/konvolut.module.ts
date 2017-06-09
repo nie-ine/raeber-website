@@ -6,10 +6,13 @@ import { NgModule } from '@angular/core';
 
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutComponent } from './konvolut.component';
+import {KonvolutSteckbriefComponent} from "./konvolut-steckbrief/konvolut-steckbrief.component";
+import {MdCardModule} from "@angular/material";
 
 @NgModule({
-  imports: [ KonvolutRoutingModule ],
-  declarations: [ KonvolutComponent ],
+  imports: [ KonvolutRoutingModule, MdCardModule ],
+  declarations: [ KonvolutComponent,
+  KonvolutSteckbriefComponent],
   exports: [ KonvolutComponent ],
   providers: []
 })

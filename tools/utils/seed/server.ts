@@ -18,7 +18,7 @@ export function serveSPA() {
  * which itself initiates a BrowserSync reload.
  * @param {any} e - The file that has changed.
  */
-export function notifyLiveReload(e: any) {
+export function notifyLiveReload(e:any) {
   let fileName = e.path;
   codeChangeTool.changed(fileName);
 }

@@ -12,8 +12,7 @@ declare module 'express-history-api-fallback' {
 
   function fallback(index: string, options?: IOptions): RequestHandler;
 
-  module fallback {
-  }
+  module fallback {}
 
   export = fallback;
 }

@@ -7,10 +7,7 @@
   "tasks": [
     {
       "taskName": "tslint",
-      "args": [
-        "run",
-        "lint"
-      ],
+      "args": [ "run", "lint" ],
       "problemMatcher": {
         "owner": "tslint",
         "fileLocation": [

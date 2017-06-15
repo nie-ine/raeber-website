@@ -1,6 +1,7 @@
 import * as browserSync from 'browser-sync';
-import Config from '../../config';
 // import * as path from 'path';
+
+import Config from '../../config';
 
 class ChangeFileManager {
   private _files: string[] = [];
@@ -49,7 +50,7 @@ let listen = () => {
  */
 let changed = (files: any) => {
   if (!(files instanceof Array)) {
-    files = [ files ];
+    files = [files];
   }
   browserSync.reload(files);
 };

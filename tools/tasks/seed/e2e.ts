@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as history from 'express-history-api-fallback';
 import * as gulp from 'gulp';
-import { join, resolve } from 'path';
+import { resolve, join } from 'path';
 import { protractor } from 'gulp-protractor';
 import Config from '../../config';
 
@@ -33,11 +33,7 @@ export = (done: any) => {
       gulp
         .src(join(Config.DEV_DEST, '**/*.e2e-spec.js'))
         .pipe(protractor({ configFile: 'protractor.conf.js' }))
-        .on('error', (error: string) => {
-          throw error;
-        })
-        .on('end', () => {
-          server.close(done);
-        });
+        .on('error', (error: string) => { throw error; })
+        .on('end', () => { server.close(done); });
     });
 };

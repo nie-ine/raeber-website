@@ -5,7 +5,7 @@ import Config from '../../config';
 
 export = () => {
   let coverageFolder = Config.COVERAGE_TS_DIR;
-  let watchedFiles: string[] = [ join(coverageFolder, '**') ];
+  let watchedFiles: string[] = [join(coverageFolder, '**')];
 
   // Serve files from the coverage of this project
   browserSync.create().init({

@@ -3,7 +3,7 @@ import * as util from 'gulp-util';
 import * as runSequence from 'run-sequence';
 
 import Config from './tools/config';
-import { loadCompositeTasks, loadTasks } from './tools/utils';
+import { loadTasks, loadCompositeTasks } from './tools/utils';
 
 
 loadTasks(Config.SEED_TASKS_DIR);

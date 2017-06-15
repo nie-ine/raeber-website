@@ -17,7 +17,6 @@ export class TemplateLocalsBuilder {
     this.stringifySystemConfigDev = true;
     return this;
   }
-
   withoutStringifiedEnvConfig() {
     this.stringifyEnvConfig = false;
     return this;
@@ -25,7 +24,7 @@ export class TemplateLocalsBuilder {
 
 
   build() {
-    const configEnvName = argv[ 'env-config' ] || argv[ 'config-env' ] || 'dev';
+    const configEnvName = argv['env-config'] || argv['config-env'] || 'dev';
     const configPath = Config.getPluginConfig('environment-config');
     const envOnlyConfig = this.getConfig(configPath, configEnvName);
     const baseConfig = this.getConfig(configPath, 'base');
@@ -40,7 +39,7 @@ export class TemplateLocalsBuilder {
       { ENV_CONFIG: this.stringifyEnvConfig ? JSON.stringify(envConfig) : envConfig }
     );
     if (this.stringifySystemConfigDev) {
-      Object.assign(locals, { SYSTEM_CONFIG_DEV: JSON.stringify(Config.SYSTEM_CONFIG_DEV) });
+      Object.assign(locals, {SYSTEM_CONFIG_DEV: JSON.stringify(Config.SYSTEM_CONFIG_DEV)});
     }
     return locals;
   }

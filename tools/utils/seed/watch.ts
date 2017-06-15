@@ -16,9 +16,7 @@ export function watch(taskname: string, root: string = Config.APP_SRC) {
   return function () {
     let paths: string[] = [
       join(root, '**')
-    ].concat(Config.TEMP_FILES.map((p) => {
-      return '!' + p;
-    }));
+    ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
     // watches for user defined paths to trigger compilation
     if (Config.EXTRA_WATCH_PATHS) {

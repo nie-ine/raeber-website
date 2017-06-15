@@ -3,8 +3,6 @@
 
 declare module 'open' {
   function open(target: string, app?: string): void;
-
-  module open {
-  }
+  module open {}
   export = open;
 }

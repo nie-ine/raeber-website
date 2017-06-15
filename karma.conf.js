@@ -39,23 +39,23 @@ module.exports = function (config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
 
       // RxJs.
-      {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
-      {pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false},
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
 
       // paths loaded via module imports
       // Angular itself
-      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: true},
-      {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
+      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
+      { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
-      {pattern: 'dist/dev/**/*.js', included: false, watched: true},
-      {pattern: 'dist/dev/**/*.html', included: false, watched: true, served: true},
-      {pattern: 'dist/dev/**/*.css', included: false, watched: true, served: true},
+      { pattern: 'dist/dev/**/*.js', included: false, watched: true },
+      { pattern: 'dist/dev/**/*.html', included: false, watched: true, served: true },
+      { pattern: 'dist/dev/**/*.css', included: false, watched: true, served: true },
 
       // suppress annoying 404 warnings for resources, images, etc.
-      {pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true},
+      { pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true },
 
       'test-config.js',
-      'dist/dev/app/system-config.js',
+      'dist/dev/system-config.js',
       'test-main.js'
     ],
 
@@ -116,7 +116,7 @@ module.exports = function (config) {
 
     // Passing command line arguments to tests
     client: {
-      files: argv.files ? minimatch.makeRe(argv.files).source : null
+      files:  argv.files ? minimatch.makeRe(argv.files).source : null
     }
   });
 

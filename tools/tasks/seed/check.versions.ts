@@ -15,24 +15,24 @@ export = () => {
   let semver = require('semver');
 
   exec('npm --version',
-    function (error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
 
       if (!semver.gte(stdout, Config.VERSION_NPM)) {
-        reportError('NPM is not in required version! Required is ' + Config.VERSION_NPM + ' and you\'re using ' + stdout);
+    reportError('NPM is not in required version! Required is ' + Config.VERSION_NPM + ' and you\'re using ' + stdout);
       }
     });
 
   exec('node --version',
-    function (error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
 
       if (!semver.gte(stdout, Config.VERSION_NODE)) {
-        reportError('NODE is not in required version! Required is ' + Config.VERSION_NODE + ' and you\'re using ' + stdout);
+    reportError('NODE is not in required version! Required is ' + Config.VERSION_NODE + ' and you\'re using ' + stdout);
       }
     });
 };

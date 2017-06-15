@@ -48,7 +48,7 @@ export class SeedConfig {
    * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
    * @type {number}
    */
-  PORT = argv[ 'port' ] || 5555;
+  PORT = argv['port'] || 5555;
 
   /**
    * The root folder of the project (up two levels from the current directory).
@@ -66,26 +66,26 @@ export class SeedConfig {
    * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
    * @type {boolean}
    */
-  DEBUG = argv[ 'debug' ] || false;
+  DEBUG = argv['debug'] || false;
 
   /**
    * The port where the documentation application will run.
    * The default docs port is `4003`, which can be overriden by the `--docs-port` flag when running `npm start`.
    * @type {number}
    */
-  DOCS_PORT = argv[ 'docs-port' ] || 4003;
+  DOCS_PORT = argv['docs-port'] || 4003;
 
   /**
    * The port where the unit test coverage report application will run.
    * The default coverage port is `4004`, which can by overriden by the `--coverage-port` flag when running `npm start`.
    * @type {number}
    */
-  COVERAGE_PORT = argv[ 'coverage-port' ] || 4004;
+  COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-   * The path to the coverage output
-   * NB: this must match what is configured in ./karma.conf.js
-   */
+  * The path to the coverage output
+  * NB: this must match what is configured in ./karma.conf.js
+  */
   COVERAGE_DIR = 'coverage_js';
   COVERAGE_TS_DIR = 'coverage';
 
@@ -95,7 +95,7 @@ export class SeedConfig {
    * which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
-  APP_BASE = argv[ 'base' ] || '/';
+  APP_BASE = argv['base'] || '/';
 
   /**
    * The base path of node modules.
@@ -119,14 +119,14 @@ export class SeedConfig {
    * The default directory is `app`.
    * @type {string}
    */
-  BOOTSTRAP_DIR = argv[ 'app' ] || 'app';
+  BOOTSTRAP_DIR = argv['app'] || 'app';
 
   /**
    * The directory where the client files are located.
    * The default directory is `client`.
    * @type {string}
    */
-  APP_CLIENT = argv[ 'client' ] || 'client';
+  APP_CLIENT = argv['client'] || 'client';
 
   /**
    * The bootstrap file to be used to boot the application.
@@ -310,10 +310,7 @@ export class SeedConfig {
    * Set ENABLE_SCSS environment variable to 'true' or '1'
    * @type {boolean}
    */
-  ENABLE_SCSS = [
-      'true',
-      '1'
-    ].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv[ 'scss' ] || false;
+  ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
   /**
    * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
@@ -338,7 +335,7 @@ export class SeedConfig {
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
     // Temporary fix. See https://github.com/angular/angular/issues/9359
-    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT }
+    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
   ];
 
   /**
@@ -353,20 +350,20 @@ export class SeedConfig {
    */
   TEMP_FILES: string[] = [
     '**/*___jb_tmp___',
-    '**/*~'
+    '**/*~',
   ];
 
   /**
    * List of directories to include in commonjs
    * @type {string[]}
    */
-  ROLLUP_INCLUDE_DIR: string[] = [ 'node_modules/**' ];
+  ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
 
-  /**
-   * List of named export Object key value pairs
-   * key: dependencie file
-   * value: exported Objects
-   */
+ /**
+  * List of named export Object key value pairs
+  * key: dependencie file
+  * value: exported Objects
+  */
   ROLLUP_NAMED_EXPORTS: any[] = [];
 
   /**
@@ -401,17 +398,19 @@ export class SeedConfig {
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
-      '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
-      '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      '@angular/platform-browser/testing':
+        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      '@angular/platform-browser-dynamic/testing':
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'app/': '/app/',
+      'app/': `${this.APP_BASE}app/`,
       // For test config
       'dist/dev/': '/base/dist/dev/',
       '': 'node_modules/'
     },
     packages: {
-      app: {
+      [this.BOOTSTRAP_DIR]: {
         defaultExtension: 'js'
       }
     }
@@ -521,12 +520,13 @@ export class SeedConfig {
    * White list for CSS color guard
    * @type {[string, string][]}
    */
-  COLOR_GUARD_WHITE_LIST: [ string, string ][] = [];
+  COLOR_GUARD_WHITE_LIST: [string, string][] = [
+  ];
 
   /**
-   * Browser-sync middleware configurations array.
-   * @type {Array}
-   */
+  * Browser-sync middleware configurations array.
+  * @type {Array}
+  */
   PROXY_MIDDLEWARE: any[] = [];
 
   /**
@@ -540,7 +540,7 @@ export class SeedConfig {
    */
   QUERY_STRING_GENERATOR = () => {
     return Date.now().toString();
-  };
+  }
 
   /**
    * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
@@ -548,12 +548,8 @@ export class SeedConfig {
    */
   private get _APP_ASSETS(): InjectableDependency[] {
     return [
-      {
-        src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`,
-        inject: true,
-        vendor: false
-      },
-      ...this.APP_ASSETS
+      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+      ...this.APP_ASSETS,
     ];
   }
 
@@ -570,15 +566,12 @@ export class SeedConfig {
      */
     let defaults = {
       'browser-sync': {
-        middleware: [
-          require('connect-history-api-fallback')({
-            index: `${this.APP_BASE}index.html`
-          }),
-          ...this.PROXY_MIDDLEWARE
-        ],
+        middleware: [require('connect-history-api-fallback')({
+          index: `${this.APP_BASE}index.html`
+        }), ...this.PROXY_MIDDLEWARE],
         port: this.PORT,
         startPath: this.APP_BASE,
-        open: argv[ 'b' ] ? false : true,
+        open: argv['b'] ? false : true,
         injectChanges: false,
         server: {
           baseDir: `${this.DIST_DIR}/empty/`,
@@ -600,7 +593,7 @@ export class SeedConfig {
        * @type {object}
        */
       'gulp-sass': {
-        includePaths: [ './node_modules/' ]
+        includePaths: ['./node_modules/']
       },
 
       /**
@@ -627,13 +620,9 @@ export class SeedConfig {
   getKarmaReporters(): any {
     return {
       preprocessors: {
-        'dist/**/!(*spec|index|*.module|*.routes).js': [ 'coverage' ]
+        'dist/**/!(*spec|index|*.module|*.routes).js': ['coverage']
       },
-      reporters: [
-        'mocha',
-        'coverage',
-        'karma-remap-istanbul'
-      ],
+      reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
       coverageReporter: {
         dir: this.COVERAGE_DIR + '/',
         reporters: [
@@ -664,8 +653,8 @@ export class SeedConfig {
    * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
    */
   getPluginConfig(pluginKey: string): any {
-    if (this._PLUGIN_CONFIGS[ pluginKey ]) {
-      return this._PLUGIN_CONFIGS[ pluginKey ];
+    if (this._PLUGIN_CONFIGS[pluginKey]) {
+      return this._PLUGIN_CONFIGS[pluginKey];
     }
     return null;
   }
@@ -677,13 +666,13 @@ export class SeedConfig {
   addPackageBundles(pack: ExtendPackages) {
 
     if (pack.path) {
-      this.SYSTEM_CONFIG_DEV.paths[ pack.name ] = pack.path;
-      this.SYSTEM_BUILDER_CONFIG.paths[ pack.name ] = pack.path;
+      this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+      this.SYSTEM_BUILDER_CONFIG.paths[pack.name] = pack.path;
     }
 
     if (pack.packageMeta) {
-      this.SYSTEM_CONFIG_DEV.packages[ pack.name ] = pack.packageMeta;
-      this.SYSTEM_BUILDER_CONFIG.packages[ pack.name ] = pack.packageMeta;
+      this.SYSTEM_CONFIG_DEV.packages[pack.name] = pack.packageMeta;
+      this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
     }
   }
 
@@ -695,9 +684,9 @@ export class SeedConfig {
 
   }
 
-  /**
-   * Convert named rollup array to object
-   */
+/**
+ * Convert named rollup array to object
+ */
   getRollupNamedExports() {
     let namedExports = {};
     this.ROLLUP_NAMED_EXPORTS.map(namedExport => {
@@ -728,10 +717,10 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
   const t = d.buildType || d.env;
   d.buildType = t;
   if (!t) {
-    d.buildType = Object.keys(BUILD_TYPES).map(k => BUILD_TYPES[ k ]);
+    d.buildType = Object.keys(BUILD_TYPES).map(k => BUILD_TYPES[k]);
   }
   if (!(d.buildType instanceof Array)) {
-    (<any>d).env = [ d.buildType ];
+    (<any>d).env = [d.buildType];
   }
   return d.buildType.indexOf(type) >= 0;
 }
@@ -749,8 +738,8 @@ function appVersion(): number | string {
  * Returns the application build type.
  */
 function getBuildType() {
-  let type = (argv[ 'build-type' ] || argv[ 'env' ] || '').toLowerCase();
-  let base: string[] = argv[ '_' ];
+  let type = (argv['build-type'] || argv['env'] || '').toLowerCase();
+  let base: string[] = argv['_'];
   let prodKeyword = !!base.filter(o => o.indexOf(BUILD_TYPES.PRODUCTION) >= 0).pop();
   if ((base && prodKeyword) || type === BUILD_TYPES.PRODUCTION) {
     return BUILD_TYPES.PRODUCTION;

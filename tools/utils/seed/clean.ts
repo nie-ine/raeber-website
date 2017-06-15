@@ -1,5 +1,5 @@
 import * as util from 'gulp-util';
-import { normalize, relative } from 'path';
+import { relative, normalize } from 'path';
 import * as rimraf from 'rimraf';
 
 import Config from '../../config';
@@ -8,13 +8,13 @@ import Config from '../../config';
  * Cleans the given path(s) using `rimraf`.
  * @param {string or string[]} paths - The path or list of paths to clean.
  */
-export function clean(paths: string | string[]): (done: () => void) => void {
+export function clean(paths: string|string[]): (done: () => void) => void {
   return done => {
     let pathsToClean: string[];
     if (paths instanceof Array) {
       pathsToClean = paths;
     } else {
-      pathsToClean = [ <string>paths ];
+      pathsToClean = [<string>paths];
     }
 
     let promises = pathsToClean.map(p => {

@@ -3,7 +3,7 @@ if (!Object.hasOwnProperty('name')) {
     get: function () {
       var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
       var name = matches && matches.length > 1 ? matches[1] : "";
-      Object.defineProperty(this, 'name', {value: name});
+      Object.defineProperty(this, 'name', { value: name });
       return name;
     }
   });
@@ -16,8 +16,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
 // Cancel Karma's synchronous start,
 // we will call `__karma__.start()` later, once all the specs are loaded.
-__karma__.loaded = function () {
-};
+__karma__.loaded = function () { };
 
 Promise.all([
   System.import('@angular/core/testing'),

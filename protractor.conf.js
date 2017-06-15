@@ -26,7 +26,7 @@ const config = {
     browserName: 'chrome'
   },
 
-  onPrepare: function () {
+  onPrepare: function() {
     browser.ignoreSynchronization = false;
   },
 

@@ -26,7 +26,7 @@ const isProd = Config.BUILD_TYPE === 'prod';
 if (isProd) {
   processors.push(
     cssnano({
-      discardComments: { removeAll: true },
+      discardComments: {removeAll: true},
       discardUnused: false, // unsafe, see http://goo.gl/RtrzwF
       zindex: false, // unsafe, see http://goo.gl/vZ4gbQ
       reduceIdents: false // unsafe, see http://goo.gl/tNOPv0
@@ -34,9 +34,9 @@ if (isProd) {
   );
 }
 
-const appSCSSFiles = join(Config.APP_SRC, '**', '*.scss');
-const entrySCSSFiles = join(Config.CSS_SRC, '**', '*.scss');
-const abtractSCSSFiles = join(Config.SCSS_SRC, '**', '*.scss');
+const appSCSSFiles      = join(Config.APP_SRC, '**', '*.scss');
+const entrySCSSFiles    = join(Config.CSS_SRC, '**', '*.scss');
+const abtractSCSSFiles  = join(Config.SCSS_SRC, '**', '*.scss');
 
 /**
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
@@ -62,7 +62,7 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
-  return getSCSSFiles('process-component-scss', [ appSCSSFiles ], [ abtractSCSSFiles ])
+  return getSCSSFiles('process-component-scss', [appSCSSFiles], [abtractSCSSFiles])
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
@@ -79,12 +79,10 @@ function processComponentScss() {
 /**
  + * Get SCSS Files to process
  + */
-function getSCSSFiles(cacheName: string, filesToCompile: string[], filesToExclude: string[] = []) {
-  let allFiles: string[] = filesToCompile.concat(filesToExclude);
-  let filteredFiles: string[] = filesToCompile.concat(
-    filesToExclude.map((path: string) => {
-      return '!' + path;
-    })
+function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:string[] = []) {
+  let allFiles:string[] = filesToCompile.concat(filesToExclude);
+  let filteredFiles:string[] = filesToCompile.concat(
+    filesToExclude.map((path:string) => { return '!' + path; })
   );
   return gulp.src(allFiles)
     .pipe(plugins.cached(cacheName))
@@ -145,7 +143,7 @@ function getExternalCss() {
  * Get a stream of external scss files for subsequent processing.
  */
 function getExternalScssStream() {
-  return getSCSSFiles('process-external-scss', getExternalScss(), [ abtractSCSSFiles ])
+  return getSCSSFiles('process-external-scss', getExternalScss(), [abtractSCSSFiles])
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
 }
 
@@ -155,7 +153,7 @@ function getExternalScssStream() {
  */
 function getExternalScss() {
   return Config.DEPENDENCIES.filter(dep => /\.scss$/.test(dep.src)).map(dep => dep.src)
-    .concat([ entrySCSSFiles ]);
+    .concat([entrySCSSFiles]);
 }
 
 /**

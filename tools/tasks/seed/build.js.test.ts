@@ -20,9 +20,9 @@ export =
   class BuildJsTest extends TypeScriptTask {
     run() {
       let tsProject: any;
-      let typings = gulp.src([
+      let typings = gulp.src( [
         Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
-      ]);
+      ] );
       let src = [
         join(Config.APP_SRC, '**/*.spec.ts')
       ];
@@ -34,7 +34,7 @@ export =
       // Only do a typed build every X builds, otherwise do a typeless build to speed things up
       if (typedBuildCounter < Config.TYPED_COMPILE_INTERVAL) {
         isFullCompile = false;
-        tsProject = makeTsProject({ isolatedModules: true });
+        tsProject = makeTsProject({isolatedModules: true});
         projectFiles = projectFiles.pipe(plugins.cached());
         util.log('Performing typeless TypeScript compile of specs.');
       } else {
@@ -68,4 +68,4 @@ export =
         //    }))
         .pipe(gulp.dest(Config.APP_DEST));
     }
-  };
+};

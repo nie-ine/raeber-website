@@ -2,13 +2,14 @@ import 'reflect-metadata';
 import * as ts from 'typescript';
 import { argv } from 'yargs';
 import { join } from 'path';
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
-import { CodeGenerator, main, NgcCliOptions } from '@angular/compiler-cli';
+import { writeFileSync, readFileSync, readdirSync } from 'fs';
+import { CodeGenerator, AngularCompilerOptions, NgcCliOptions, main } from '@angular/compiler-cli';
 
 import Config from '../../config';
 
-function codegen(ngOptions: AngularCompilerOptions, cliOptions: NgcCliOptions, program: ts.Program,
-                 host: ts.CompilerHost) {
+function codegen(
+  ngOptions: AngularCompilerOptions, cliOptions: NgcCliOptions, program: ts.Program,
+  host: ts.CompilerHost) {
   return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
 }
 
@@ -25,8 +26,8 @@ export = (done: any) => {
     parsed.files = parsed.files || [];
     parsed.files = parsed.files.concat(
       readdirSync(path)
-        .filter(f => f.endsWith('d.ts'))
-        .map(f => join(path, f)));
+      .filter(f => f.endsWith('d.ts'))
+      .map(f => join(path, f)));
     parsed.files = parsed.files.filter((f: string, i: number) => parsed.files.indexOf(f) === i);
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
     return JSON.stringify(parsed, null, 2);
@@ -35,9 +36,9 @@ export = (done: any) => {
 
   // If a translation, tell the compiler
   if (args.lang) {
-    args[ 'i18nFile' ] = `${Config.LOCALE_DEST}/messages.${args.lang}.xlf`;
-    args[ 'locale' ] = args.lang;
-    args[ 'i18nFormat' ] = 'xlf';
+    args['i18nFile'] = `${Config.LOCALE_DEST}/messages.${args.lang}.xlf`;
+    args['locale'] = args.lang;
+    args['i18nFormat'] = 'xlf';
   }
 
   const cliOptions = new NgcCliOptions(args);

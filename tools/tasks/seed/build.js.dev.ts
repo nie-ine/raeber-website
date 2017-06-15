@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
-import { join } from 'path';
+import { join/*, sep, relative*/ } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
@@ -37,7 +37,7 @@ export =
       // Only do a typed build every X builds, otherwise do a typeless build to speed things up
       if (typedBuildCounter < Config.TYPED_COMPILE_INTERVAL) {
         isFullCompile = false;
-        tsProject = makeTsProject({ isolatedModules: true });
+        tsProject = makeTsProject({isolatedModules: true});
         projectFiles = projectFiles.pipe(plugins.cached());
         util.log('Performing typeless TypeScript compile.');
       } else {
@@ -70,6 +70,6 @@ export =
         //    }))
         .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
         .pipe(gulp.dest(Config.APP_DEST));
-    }
+      }
   };
 

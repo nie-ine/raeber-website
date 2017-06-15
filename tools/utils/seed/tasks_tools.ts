@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, readdirSync, readFileSync } from 'fs';
+import { existsSync, lstatSync, readFileSync, readdirSync } from 'fs';
 import * as runSequence from 'run-sequence';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
@@ -21,22 +21,19 @@ export function loadTasks(path: string): void {
 function validateTasks(tasks: any) {
   return Object.keys(tasks)
     .map((taskName: string) => {
-      if (!tasks[ taskName ] ||
-        !Array.isArray(tasks[ taskName ]) ||
-        tasks[ taskName ].some((t: any) => typeof t !== 'string')) {
-        return taskName;
-      }
-      return null;
+       if (!tasks[taskName] ||
+        !Array.isArray(tasks[taskName]) ||
+        tasks[taskName].some((t: any) => typeof t !== 'string')) {
+         return taskName;
+       }
+       return null;
     }).filter((taskName: string) => !!taskName);
 }
 
 function registerTasks(tasks: any) {
   Object.keys(tasks)
     .forEach((t: string) => {
-      gulp.task(t, (done: any) => runSequence.apply(null, [
-        ...tasks[ t ],
-        done
-      ]));
+      gulp.task(t, (done: any) => runSequence.apply(null, [...tasks[t], done]));
     });
 }
 
@@ -91,17 +88,8 @@ export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: stri
     util.log('Cannot load the task configuration files: ' + e.toString());
     return;
   }
-  [
-    [
-      seedTasks,
-      seedTasksFile
-    ],
-    [
-      projectTasks,
-      projectTasksFile
-    ]
-  ]
-    .forEach(([ tasks, file ]: [ string, string ]) => {
+  [[seedTasks, seedTasksFile], [projectTasks, projectTasksFile]]
+    .forEach(([tasks, file]: [string, string]) => {
       const invalid = validateTasks(tasks);
       if (invalid.length) {
         const errorMessage = getInvalidTaskErrorMessage(invalid, file);
@@ -181,7 +169,7 @@ function readDir(root: string, cb: (taskname: string) => void) {
   function walk(path: string) {
     let files = readdirSync(path);
     for (let i = 0; i < files.length; i += 1) {
-      let file = files[ i ];
+      let file = files[i];
       let curPath = join(path, file);
       if (lstatSync(curPath).isFile() && /\.ts$/.test(file)) {
         let taskname = file.replace(/\.ts$/, '');

@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import { join, normalize, sep } from 'path';
+import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
@@ -25,10 +25,10 @@ export = () => {
  * @param {Array<string>} files - The files to be injected.
  */
 function inject(...files: Array<string>) {
-  return plugins.inject(gulp.src(files, { read: false }), {
-    files,
-    transform: transformPath()
-  });
+    return plugins.inject(gulp.src(files, { read: false }), {
+        files,
+        transform: transformPath()
+    });
 }
 
 /**
@@ -50,7 +50,7 @@ function injectCss() {
  * environment.
  */
 function transformPath() {
-  return function (filepath: string) {
+  return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
     let slice_after = path.indexOf(Config.APP_DEST);
     if (slice_after > -1) {
@@ -58,10 +58,10 @@ function transformPath() {
     } else {
       slice_after = 3;
     }
-    arguments[ 0 ] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
+    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
     const queryString = Config.QUERY_STRING_GENERATOR();
     if (queryString) {
-      arguments[ 0 ] += `?${queryString}`;
+      arguments[0] += `?${queryString}`;
     }
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };

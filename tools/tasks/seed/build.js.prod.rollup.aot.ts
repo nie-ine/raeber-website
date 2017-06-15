@@ -24,12 +24,12 @@ export = () => {
   const result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(tsProject())
-    .once('error', function (e: any) {
+    .once('error', function(e: any) {
       this.once('finish', () => process.exit(1));
     });
 
   return result.js
-    .pipe(plugins.template(new TemplateLocalsBuilder().build(), { interpolate: /<%=([\s\S]+?)%>/g }))
+    .pipe(plugins.template(new TemplateLocalsBuilder().build(), {interpolate: /<%=([\s\S]+?)%>/g}))
     .pipe(gulp.dest(Config.TMP_DIR))
     .on('error', (e: any) => {
       console.log(e);

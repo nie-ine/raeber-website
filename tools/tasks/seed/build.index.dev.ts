@@ -38,7 +38,7 @@ function inject(name?: string) {
  */
 function getInjectablesDependenciesRef(name?: string) {
   return Config.DEPENDENCIES
-    .filter(dep => dep[ 'inject' ] && dep[ 'inject' ] === (name || true))
+    .filter(dep => dep['inject'] && dep['inject'] === (name || true))
     .map(mapPath);
 }
 
@@ -65,10 +65,10 @@ function transformPath() {
     if (filepath.startsWith(`/${Config.APP_DEST}`)) {
       filepath = filepath.replace(`/${Config.APP_DEST}`, '');
     }
-    arguments[ 0 ] = join(Config.APP_BASE, filepath);
+    arguments[0] = join(Config.APP_BASE, filepath);
     const queryString = Config.QUERY_STRING_GENERATOR();
     if (queryString) {
-      arguments[ 0 ] += `?${queryString}`;
+      arguments[0] += `?${queryString}`;
     }
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };

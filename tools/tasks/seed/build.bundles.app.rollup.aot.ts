@@ -15,14 +15,9 @@ const config = {
   plugins: [
     includePaths({
       include: {},
-      paths: [ join(Config.TMP_DIR, 'app') ],
+      paths: [join(Config.TMP_DIR, 'app')],
       external: [],
-      extensions: [
-        '.js',
-        '.json',
-        '.html',
-        '.ts'
-      ]
+      extensions: ['.js', '.json', '.html', '.ts']
     }),
     nodeResolve({
       jsnext: true, main: true, module: true

@@ -4,20 +4,19 @@ import { join } from 'path';
 import * as runSequence from 'run-sequence';
 
 import Config from '../../config';
-import { notifyLiveReload } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
+
+import { notifyLiveReload } from '../../utils';
 
 function watchAppFiles(path: string, fileChangeCallback: (e: any, done: () => void) => void) {
 
   let paths: string[] = [
     join(Config.APP_SRC, path)
-  ].concat(Config.TEMP_FILES.map((p) => {
-    return '!' + p;
-  }));
+  ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
-  let busyWithCall: boolean = false;
-  let changesWaiting: any = null;
+  let busyWithCall : boolean = false;
+  let changesWaiting : any = null;
   let afterCall = () => {
     busyWithCall = false;
     if (changesWaiting) {
@@ -38,10 +37,7 @@ function watchAppFiles(path: string, fileChangeCallback: (e: any, done: () => vo
 
 gulp.task('watch.while_deving', function () {
   watchAppFiles('**/!(*.ts)', (e: any, done: any) =>
-    runSequence('build.assets.dev', 'build.html_css', 'build.index.dev', () => {
-      notifyLiveReload(e);
-      done();
-    }));
+    runSequence('build.assets.dev', 'build.html_css', 'build.index.dev', () => { notifyLiveReload(e); done(); }));
   watchAppFiles('**/(*.ts)', (e: any, done: any) =>
     runSequence('build.js.dev', 'build.index.dev', () => {
       notifyLiveReload(e);

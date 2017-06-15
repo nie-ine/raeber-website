@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject } from '../../utils';
+import { makeTsProject,  } from '../../utils';
 import { TemplateLocalsBuilder } from '../../utils/seed/template_locals';
 
 const plugins = <any>gulpLoadPlugins();
@@ -23,7 +23,7 @@ export = () => {
   const result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(tsProject())
-    .once('error', function (e: any) {
+    .once('error', function(e: any) {
       this.once('finish', () => process.exit(1));
     });
 

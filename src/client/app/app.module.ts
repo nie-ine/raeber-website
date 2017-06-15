@@ -24,7 +24,6 @@ import { BriefeComponent } from './konvolute/briefe/briefe.component';
 import { SucheComponent } from './suche/suche.component';
 import { RegisterComponent } from './suche/register.component';
 import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
-import { AppMaterialModule } from './app-material.module';
 
 
 @NgModule({
@@ -32,7 +31,6 @@ import { AppMaterialModule } from './app-material.module';
     BrowserModule,
     HttpModule,
     KonvolutModule,
-    AppMaterialModule,
     AppRoutingModule
   ],
   declarations: [

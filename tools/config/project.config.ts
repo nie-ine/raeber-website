@@ -24,7 +24,7 @@ export class ProjectConfig extends SeedConfig {
       ...this.NPM_DEPENDENCIES,
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
-      { src: '@angular/material/prebuilt-themes/indigo-pink.css', inject: true }
+      //{ src: '@angular/material/prebuilt-themes/indigo-pink.css', inject: true }
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
@@ -60,7 +60,7 @@ export class ProjectConfig extends SeedConfig {
     /* Add to or override NPM module configurations: */
     // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
 
-    this.addPackageBundles({
+/*    this.addPackageBundles({
       name: '@angular/material',
       path: 'node_modules/@angular/material/bundles/material.umd.js',
       packageMeta: {
@@ -68,7 +68,7 @@ export class ProjectConfig extends SeedConfig {
         //main: 'index.js',
         defaultExtension: 'js'
       }
-    });
+    });*/
   }
 
 }

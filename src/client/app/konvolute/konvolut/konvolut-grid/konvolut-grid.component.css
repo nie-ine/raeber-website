@@ -1,0 +1,9 @@
+md-card {
+  width: 100%;
+  height: 100%;
+}
+
+.rae-poem {
+  resize: vertical;
+  overflow: scroll;
+}

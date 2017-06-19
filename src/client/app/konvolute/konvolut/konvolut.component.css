@@ -1,0 +1,21 @@
+rae-konvolut-register {
+  right: 0;
+  width: 20%;
+}
+
+.konvolut-info {
+  display: flex;
+}
+
+.konvolut-info rae-konvolut-steckbrief {
+  float: left;
+  width: 80%;
+  overflow: hidden;
+}
+.konvolut-info rae-konvolut-register {
+  float: left;
+  width: 20%;
+  overflow: scroll;
+  overflow-y: hidden;
+  min-height: 50px;
+}

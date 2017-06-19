@@ -1824,7 +1824,8 @@ a {
   display: block;
   height: 46px;
   margin: 0;
-  width: 112px;
+  /* width: 112px;*/
+  background: url(../assets/jpg/logo.jpg) 50% 0 no-repeat !important;
 }
 
 #rt-top-surround {

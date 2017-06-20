@@ -11,6 +11,7 @@ import {Component, Input} from '@angular/core';
 })
 export class KonvolutRegisterComponent {
   selectedRow: number;
+  sortingType: string;
 
   constructor() {
 

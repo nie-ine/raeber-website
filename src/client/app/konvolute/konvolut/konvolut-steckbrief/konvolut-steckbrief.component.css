@@ -1,11 +1,12 @@
-div.convolute-description {
-  background-color: aliceblue;
+div.convolute-description md-card {
+  background-color: #F7FAFE;
   border: darkgrey;
 }
 
 div.convolute-description p {
   margin-top:0;
   margin-bottom:0;
+  color: #6e6e6e;
 }
 
 span.emphase {

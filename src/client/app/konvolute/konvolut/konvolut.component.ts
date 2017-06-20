@@ -11,14 +11,13 @@ import 'rxjs/add/operator/map';
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html',
-  styleUrls: ['konvolut.component.css']
+  templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
 
   selectedView: string = 'list';
 
-  result: Array<Object>;// = [{'title':'Baum'},{'title':'Einleitung'}];
+  result: Array<Object>;
 
   viewOptions = [
     {

@@ -7,7 +7,10 @@ import { NgModule } from '@angular/core';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutComponent } from './konvolut.component';
 import {KonvolutSteckbriefComponent} from './konvolut-steckbrief/konvolut-steckbrief.component';
-import {MdButtonToggleModule, MdCardModule, MdGridListModule, MdListModule} from '@angular/material';
+import {
+  MdButtonToggleModule, MdCardModule, MdGridListModule,
+  MdListModule
+} from '@angular/material';
 import {KonvolutGridComponent} from './konvolut-grid/konvolut-grid.component';
 import {KonvolutRegisterComponent} from './konvolut-register/konvolut-register.component';
 

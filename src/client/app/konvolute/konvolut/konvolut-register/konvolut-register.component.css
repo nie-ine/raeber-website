@@ -1,0 +1,5 @@
+.rae-konvolut-list md-list {
+  min-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

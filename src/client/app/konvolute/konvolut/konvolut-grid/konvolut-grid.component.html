@@ -1,10 +1,17 @@
-<md-grid-list class="rae-grid-list" cols="2" rowHeight="320px" gutterSize="5px">
-
-  <md-grid-tile>
-    <md-card>
+<div>
+  Filtern: <input #filter autocomplete="off" type="search" placeholder="Suchbegriff"/>
+  <md-button-toggle-group value="dashboard">
+    <md-button-toggle (click)=toGrid() value="dashboard">Übersicht</md-button-toggle>
+    <md-button-toggle (click)=toCols() value="columns">Nebeneinander</md-button-toggle>
+  </md-button-toggle-group>
+</div>
+<hr/>
+<div [ngClass]="{'rae-poem-list-grid': showGrid, 'rae-poem-list-cols': showCols}">
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>[Entwürfe zur Einführung]</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           <!-- TODO: replace this with a text-with-standoff component -->
           <p>Diese Gedichte, die ersten nach einer Pause von siebzehn Jahren, sind Reduktionen: Erfahrung der Natur,
@@ -18,15 +25,15 @@
           </p>
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer></md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-  <md-grid-tile>
-    <md-card>
+  </div>
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>[Einführung]</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           <!-- TODO: replace this with a text-with-standoff component -->
           <p>
@@ -42,15 +49,15 @@
           </p>
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer></md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-  <md-grid-tile>
-    <md-card>
+  </div>
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>WORTE</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           <!-- TODO: replace this with a text-with-standoff component -->
           Worte sind Reste. Danach <br/>
@@ -58,6 +65,7 @@
           gleissend im Schweigen.
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer>
         <div class="catItemTagsBlock">
           <span>Synopse:</span>
@@ -67,21 +75,22 @@
         </div>
       </md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-  <md-grid-tile>
-    <md-card>
+  </div>
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>MITTAG</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           <!-- TODO: replace this with a text-with-standoff component -->
           Die Kronen der Bäume schwarz <br/>
           über den Schläfern und vom Geschrei in den Gräsern <br/>
           unberührt brüten <br/>
           den panischen Traum aus.
+          <br/>.<br/>.<br/>testtest
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer>
         <div class="catItemTagsBlock">
           <span>Synopse:</span>
@@ -91,26 +100,25 @@
         </div>
       </md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-  <md-grid-tile>
-    <md-card>
+  </div>
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>INSEL</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           Glockengeläut. Eine alte <br />Insel. Und kein <br />Flugplatz kein Hafen. <br />Doch nahe doch nahe.
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer></md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-  <md-grid-tile>
-    <md-card>
+  </div>
+  <div class="rae-poem-container">
+    <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle>Datum hier ergänzen</md-card-subtitle>
       <md-card-title>BAUM</md-card-title>
-      <md-card-content>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem">
           <!-- TODO: replace this with a text-with-standoff component -->
           Der grosse Baum. Schwarz <br/>
@@ -120,6 +128,7 @@
           die Flucht nach Ägypten.
         </div>
       </md-card-content>
+      <br/>
       <md-card-footer>
         <div class="catItemTagsBlock">
           <span>Synopse:</span>
@@ -129,6 +138,5 @@
         </div>
       </md-card-footer>
     </md-card>
-  </md-grid-tile>
-
-</md-grid-list>
+  </div>
+</div>

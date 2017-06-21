@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 19.06.17.
  */
-import {Component, Input} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -11,9 +11,9 @@ import {Component, Input} from '@angular/core';
 })
 export class KonvolutRegisterComponent {
   selectedRow: number;
-  sortingType: string;
+  sortingType: string = 'alphabetic';
 
   constructor() {
-
+    // tbf
   }
 }

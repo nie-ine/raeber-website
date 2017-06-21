@@ -1,5 +1,9 @@
 .rae-konvolut-list md-list {
   min-height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+}
+
+.rae-konvolut-list md-list md-list-item p {
+  text-overflow: ellipsis;
 }

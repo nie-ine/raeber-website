@@ -1,35 +1,44 @@
-md-grid-tile {
-  overflow: visible;
-  z-index: 1;
-  position: absolute;
+.rae-poem-list-cols {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
-md-card {
-  width: 90%;
-  height: 90%;
+.rae-poem-list-grid {
+  width: 100%;
+}
+
+.rae-poem-container {
+  display: inline-block;
+  vertical-align: top;
+  width: 460px;
+  padding: 5px;
+  white-space: normal;
+}
+
+.rae-poem-card-cols {
+  height: initial;
+  width: 95%;
   padding: 12px;
-  overflow: visible;
-  z-index: 2;
-  position: relative;
 }
 
-md-card-subtitle, md-card-title, md-card-footer {
-  z-index: 3;
-  position: relative;
+.rae-poem-card-grid {
+  height: 90%;
+  width: 95%;
+  padding: 12px;
 }
-md-card-footer {
-  z-index: 3;
-  position: absolute;
+
+.rae-poem-card-content-cols {
+  overflow-y: auto;
+  overflow-x: auto;
+  height: auto !important;
 }
-md-card-content {
-  overflow-y: scroll;
+
+.rae-poem-card-content-grid {
+  overflow-y: auto;
   overflow-x: auto;
   resize: vertical;
   height: 150px;
-  z-index: 4;
-}
-
-.rae-poem {
-  z-index: 5;
-  background-color: white;
 }

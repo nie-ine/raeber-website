@@ -1,8 +1,8 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import {Component, OnInit} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Component, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -14,8 +14,6 @@ import 'rxjs/add/operator/map';
   templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
-
-  selectedView: string = 'list';
 
   result: Array<Object>;
 
@@ -38,13 +36,13 @@ export class KonvolutComponent implements OnInit {
   resource: string = undefined;
 
   constructor(http: Http) {
-    http.get('http://test-02.salsah.org/api/resources/2659076')
-      .map(res => res.json())
-      .subscribe(poems => this.result = poems);
+    //http.get('http://test-02.salsah.org/api/resources/2659076')
+    //  .map(res => res.json())
+    //  .subscribe(poems => this.result = poems);
   }
 
   ngOnInit() {
-
+    // tbf
   }
 
   openResource($event) {

@@ -1,7 +1,8 @@
 /**
- * Created by retobaumgartner on 19.06.17.
+ * Created by retobaumgartner on 21.06.17.
  */
-import {Component, Input} from '@angular/core';
+
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,10 +11,22 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['konvolut-grid.component.css']
 })
 export class KonvolutGridComponent {
-  selectedRow: number;
-  cols: number;
+
+  showGrid = true;
+  showCols = false;
 
   constructor() {
-
+    // tbf
   }
+
+  toGrid() {
+    this.showGrid = true;
+    this.showCols = false;
+  }
+
+  toCols() {
+    this.showGrid = false;
+    this.showCols = true;
+  }
+
 }

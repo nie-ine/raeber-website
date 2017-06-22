@@ -20,14 +20,12 @@
 
 .rae-poem-card-cols {
   height: initial;
-  width: 95%;
-  padding: 12px;
+  width: 90%;
 }
 
 .rae-poem-card-grid {
   height: 90%;
-  width: 95%;
-  padding: 12px;
+  width: 90%;
 }
 
 .rae-poem-card-content-cols {
@@ -37,8 +35,11 @@
 }
 
 .rae-poem-card-content-grid {
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: auto;
   resize: vertical;
-  height: 150px;
+  height: 140px;
+  border-bottom-color: silver;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }

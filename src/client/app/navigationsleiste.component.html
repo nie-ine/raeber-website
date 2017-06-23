@@ -1,3 +1,4 @@
+<!-- TODO: Links überprüfen (v.a. auf statische Seiten); JavaScript-Blöcke auf oberster Ebene Navigationsleiste entfernen -->
 <div class="rt-block menu-block">
   <ul class="gf-menu l1 ">
     <li class="item133 parent">
@@ -370,12 +371,12 @@
                 <div class="column col1" style="width:180px;">
                   <ul class="l3">
                     <li class="item166">
-                      <a class="item icon" [routerLink]="['material/pdf-dateien/notizbuecher']"
+                      <a class="item icon" [routerLink]="['notizbuecher']"
                          routerLinkActive="active">
                         <i class="icon-star">Notizbücher</i> </a>
                     </li>
                     <li class="item441">
-                      <a class="item icon" [routerLink]="['material/pdf-dateien/synopsen']" routerLinkActive="active">
+                      <a class="item icon" [routerLink]="['synopsen']" routerLinkActive="active">
                         <i class="icon-star">Synopsen</i> </a>
                     </li>
                   </ul>
@@ -406,18 +407,18 @@
                 <i class="icon-star">Werkliste</i> </a>
             </li>
             <li class="item173 parent">
-              <a class="item icon" [routerLink]="['ationen/archiv']" routerLinkActive="active">
+              <a class="item icon" [routerLink]="['signaturen']" routerLinkActive="active">
                 <i class="icon-star">Archiv</i> <span class="border-fixer"></span>
               </a>
               <div class="dropdown flyout columns-1 " style="width:180px;">
                 <div class="column col1" style="width:180px;">
                   <ul class="l3">
                     <li class="item291">
-                      <a class="item icon" [routerLink]="['archiv/signaturen']" routerLinkActive="active">
+                      <a class="item icon" [routerLink]="['signaturen']" routerLinkActive="active">
                         <i class="icon-star">Signaturen</i> </a>
                     </li>
                     <li class="item293">
-                      <a class="item" [routerLink]="['/lyrik/infos/bildsignaturen.pdf']" routerLinkActive="active"
+                      <a class="item" href="../assets/pdf/bildsignaturen.pdf" routerLinkActive="active"
                          onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">
                         Bild-Signaturen (pdf) </a>
                     </li>

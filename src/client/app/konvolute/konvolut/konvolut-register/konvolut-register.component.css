@@ -1,0 +1,20 @@
+.rae-konvolut-list md-list {
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border-color: silver;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.rae-konvolut-list md-list md-list-item {
+  border-bottom-color: silver;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.rae-konvolut-list md-list md-list-item p {
+  text-overflow: ellipsis;
+}

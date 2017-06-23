@@ -5,6 +5,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-werkliste',
   template: '<h1>Werkliste</h1>'
 })

@@ -5,6 +5,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-werkausgabe',
   template: '<h1>Werkausgabe</h1>'
 })

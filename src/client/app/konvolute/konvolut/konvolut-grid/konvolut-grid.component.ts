@@ -2,7 +2,7 @@
  * Created by retobaumgartner on 21.06.17.
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -12,11 +12,12 @@ import { Component } from '@angular/core';
 })
 export class KonvolutGridComponent {
 
+  @Input() poems_in_grid: Array<any>;
+
   showGrid = true;
   showCols = false;
 
   constructor() {
-    // tbf
   }
 
   toGrid() {

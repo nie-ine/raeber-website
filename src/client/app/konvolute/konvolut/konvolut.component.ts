@@ -2,9 +2,8 @@
  * Created by retobaumgartner on 06.06.17.
  */
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -15,55 +14,34 @@ import 'rxjs/add/operator/map';
 })
 export class KonvolutComponent implements OnInit {
 
-  result: Array<Object>;
+  poems: Array<any>;
 
-  viewOptions = [
-    {
-      name: 'list',
-      title: 'List',
-      isDisabled: false,
-      icon: 'view_headline'
-    },
-    {
-      name: 'grid',
-      title: 'Grid',
-      isDisabled: false,
-      icon: 'view_module'
-    }
-  ];
+  // for testings
+  searchQuery: string = '';
 
-  cols: number = 3;
-  resource: string = undefined;
-
-  constructor(http: Http) {
-    //http.get('http://test-02.salsah.org/api/resources/2659076')
-    //  .map(res => res.json())
-    //  .subscribe(poems => this.result = poems);
+  constructor(private http:Http) {
+    // TODO to replace with dynamical requests
+    this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&filter_by_restype=nie-ine:doctor&property_id=nie-ine:hasName')
+      .map(response => response.json().subjects)
+      .subscribe(res => this.poems = res);
   }
 
   ngOnInit() {
-    // tbf
   }
 
-  openResource($event) {
-    this.resource = $event.id;
+  // for testings
+  searchForDoctor(drName: string) {
+    this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id=nie-ine:hasName&compop=EQ&searchval=' + drName)
+      .map(response => response.json().subjects)
+      .subscribe(res => this.poems = res);
+    console.log('/search/?searchtype=extended&property_id=nie-ine:hasName&compop=EQ&searchval' + drName);
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || { };
-  }
-  private handleError (error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+  // for testings
+  freeSearch() {
+    this.http.get('http://test-02.salsah.org/api/search/' + this.searchQuery)
+      .map(response => response.json().subjects)
+      .subscribe(res => this.poems = res);
+    console.log('/search/' + this.searchQuery);
   }
 }

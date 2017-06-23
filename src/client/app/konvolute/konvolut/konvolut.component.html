@@ -13,7 +13,7 @@
                   <div class="itemHeader">
                     <!-- Item title -->
                     <h2 class="itemTitle" style="padding-left: 30px">
-                      Typoskripte 1979
+                      ⟨Konvoluttitel⟩
                     </h2>
                   </div>
                   <div class="itemBody">
@@ -21,7 +21,20 @@
                       <rae-konvolut-steckbrief></rae-konvolut-steckbrief>
                     </div>
                     <br/>
-                    <rae-konvolut-grid></rae-konvolut-grid>
+                    <div style="background-color: #f8b9b7">
+                      <h3>Suchfunktion für Testzwecke</h3>
+                      Statt dem Konvolutinhalt werden unten vorübergehend die Suchresultate angezeigt.
+                      <br/>
+                      <button md-raised-button (click)="searchForDoctor('Dr. Dre')">Suche "Dr. Dre"</button>
+                      <br/>
+                      <button md-raised-button (click)="searchForDoctor('Dr. Schiwago')">Suche "Dr. Schiwago"</button>
+                      <br/>
+                      .../search/
+                      <input mdInput #filter (input)="searchQuery" autocomplete="off" type="search" placeholder="freie Suche"/>
+                      <button md-raised-button (click)="freeSearch()">Suchen</button>
+                    </div>
+                    <br/>
+                    <rae-konvolut-grid [poems_in_grid]="poems"></rae-konvolut-grid>
                   </div>
                   <div class="itemBackToTop">
                     <a class="k2Anchor" href="/lyrik/index.php#startOfPageId23">
@@ -40,7 +53,7 @@
                   <h2 class="title">Register</h2>
                 </div>
                 <div class="module-content">
-                  <rae-konvolut-register></rae-konvolut-register>
+                  <rae-konvolut-register [poems_in_register]="poems"></rae-konvolut-register>
                 </div>
               </div>
             </div>

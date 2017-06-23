@@ -1,0 +1,35 @@
+md-grid-tile {
+  overflow: visible;
+  z-index: 1;
+  position: absolute;
+}
+
+md-card {
+  width: 90%;
+  height: 90%;
+  padding: 12px;
+  overflow: visible;
+  z-index: 2;
+  position: relative;
+}
+
+md-card-subtitle, md-card-title, md-card-footer {
+  z-index: 3;
+  position: relative;
+}
+md-card-footer {
+  z-index: 3;
+  position: absolute;
+}
+md-card-content {
+  overflow-y: scroll;
+  overflow-x: auto;
+  resize: vertical;
+  height: 150px;
+  z-index: 4;
+}
+
+.rae-poem {
+  z-index: 5;
+  background-color: white;
+}

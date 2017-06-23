@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 19.06.17.
  */
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,10 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['konvolut-register.component.css']
 })
 export class KonvolutRegisterComponent {
+
+  @Input() poems_in_register: Array<any>;
+
   selectedRow: number;
   sortingType: string = 'alphabetic';
 
   constructor() {
-    // tbf
   }
 }

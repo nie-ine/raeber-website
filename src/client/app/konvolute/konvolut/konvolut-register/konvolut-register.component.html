@@ -4,29 +4,9 @@
     <md-button-toggle value="chronologic">Folge</md-button-toggle>
   </md-button-toggle-group>
   <md-list dense class="rae-konvolut-list">
-    <md-list-item>
-      <h5 md-line>[Entwürfe zur Einführung]</h5>
-      <p md-line>Diese Gedichte, die ersten nach ...</p>
-    </md-list-item>
-    <md-list-item>
-      <h5 md-line>[Einführung]</h5>
-      <p md-line>Wenn isch in vielen frühen ...</p>
-    </md-list-item>
-    <md-list-item>
-      <h5 md-line>WORTE</h5>
-      <p md-line>Worte sind Reste. Danach ...</p>
-    </md-list-item>
-    <md-list-item>
-      <h5 md-line>MITTAG</h5>
-      <p md-line>Die Kronen der Bäume ...</p>
-    </md-list-item>
-    <md-list-item>
-      <h5 md-line>INSEL</h5>
-      <p md-line>Glockengeläut. Eine alte ...</p>
-    </md-list-item>
-    <md-list-item>
-      <h5 md-line>BAUM</h5>
-      <p md-line>Der grosse Baum. Schwarz ...</p>
+    <md-list-item *ngFor="let p of poems_in_register; let i = index">
+      <h5 md-line>{{p.obj_id}}</h5>
+      <p md-line>{{p.value[1]}}</p>
     </md-list-item>
   </md-list>
 </div>

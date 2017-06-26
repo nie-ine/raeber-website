@@ -25,12 +25,12 @@
                       <h3>Suchfunktion für Testzwecke</h3>
                       Statt dem Konvolutinhalt werden unten vorübergehend die Suchresultate angezeigt.
                       <br/>
-                      <button md-raised-button (click)="searchForDoctor('Dr. Dre')">Suche "Dr. Dre"</button>
+                      <button md-raised-button (click)="searchForDoctor('morgen')">Suche "morgen"</button>
                       <br/>
-                      <button md-raised-button (click)="searchForDoctor('Dr. Schiwago')">Suche "Dr. Schiwago"</button>
+                      <button md-raised-button (click)="searchForDoctor('baum')">Suche "baum"</button>
                       <br/>
                       .../search/
-                      <input mdInput #filter (input)="searchQuery" autocomplete="off" type="search" placeholder="freie Suche"/>
+                      <input mdInput #filter [(ngModel)]="searchQuery" autocomplete="off" type="search" placeholder="freie Suche"/>
                       <button md-raised-button (click)="freeSearch()">Suchen</button>
                     </div>
                     <br/>

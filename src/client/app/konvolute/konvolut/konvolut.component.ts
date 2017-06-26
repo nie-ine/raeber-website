@@ -33,34 +33,29 @@ export class KonvolutComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[0].path;
 
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://172.23.135.247:3333/v1/search/schlaf?searchtype=fulltext'))
+      .switchMap((params: Params) => this.http.get('http://172.23.135.247:3333/v1/search/?searchtype=extended&filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Convolute&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle&compop=!EQ&searchval=%20&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasDescription&compop=!EQ&searchval=%20&show_nrows=500'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.poems = res);
 
     this.konvolut_type = this.route.snapshot.url[0].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params['id'];
-
-      // In a real app: dispatch action to load the details here.
     });
-/*
-    // TODO to replace with dynamical requests
-    this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&filter_by_restype=nie-ine:doctor&property_id=nie-ine:hasName')
-      .map(response => response.json().subjects)
-      .subscribe(res => this.poems = res);*/
+
+    console.log('search/schlaf?searchtype=fulltext');
   }
 
   // for testings
-  searchForDoctor(drName: string) {
-    this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id=nie-ine:hasName&compop=EQ&searchval=' + drName)
+  searchForDoctor(fulltextQuery: string) {
+    this.http.get('http://172.23.135.247:3333/v1/search/' + fulltextQuery + '?searchtype=fulltext')
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
-    console.log('/search/?searchtype=extended&property_id=nie-ine:hasName&compop=EQ&searchval' + drName);
+    console.log('/search/' + fulltextQuery + '?searchtype=fulltext');
   }
 
   // for testings
   freeSearch() {
-    this.http.get('http://test-02.salsah.org/api/search/' + this.searchQuery)
+    this.http.get('http://172.23.135.247:3333/v1/search/' + this.searchQuery)
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + this.searchQuery);

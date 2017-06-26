@@ -15,6 +15,7 @@ import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
 import { KonvolutRegisterComponent } from './konvolut-register/konvolut-register.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     HttpModule,
     MdButtonModule,
-    MdInputModule
+    MdInputModule,
+    FormsModule
   ],
   declarations: [
     KonvolutComponent,

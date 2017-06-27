@@ -12,9 +12,9 @@ import {
   MdButtonToggleModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdListModule
 } from '@angular/material';
 import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
-import { KonvolutRegisterComponent } from './konvolut-register/konvolut-register.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 
 @NgModule({
   imports: [
@@ -27,13 +27,13 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     HttpModule,
     MdButtonModule,
-    MdInputModule
+    MdInputModule,
+    RegisterspalteModule
   ],
   declarations: [
     KonvolutComponent,
     KonvolutSteckbriefComponent,
-    KonvolutGridComponent,
-    KonvolutRegisterComponent
+    KonvolutGridComponent
   ],
   exports: [ KonvolutComponent ],
   providers: []

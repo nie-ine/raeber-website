@@ -1,0 +1,17 @@
+<div class="rae-registerspalte-list">
+  <md-button-toggle-group ngModel="sortingType" value="alphabetic">
+    <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
+    <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
+  </md-button-toggle-group>
+  <md-list dense>
+    <md-list-item *ngFor="let p of rsEntry; let i = index">
+      <h5 md-line>
+        <a class="item" [routerLink]="['item/id']" routerLinkActive="active">
+          {{p.value[2]}}
+        </a>
+      </h5>
+      <p md-line>{{p.value[1]}}
+      </p>
+    </md-list-item>
+  </md-list>
+</div>

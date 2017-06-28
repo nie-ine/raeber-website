@@ -9,7 +9,12 @@ import { KonvolutComponent } from './konvolut.component';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdListModule
+  MdButtonToggleModule,
+  MdCardModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule
 } from '@angular/material';
 import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
 import { KonvolutRegisterComponent } from './konvolut-register/konvolut-register.component';

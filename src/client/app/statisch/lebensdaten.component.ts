@@ -5,8 +5,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-lebensdaten',
-  template: '<h1>Lebensdaten</h1>'
+  templateUrl: 'lebensdaten.component.html'
 })
 export class LebensdatenComponent {
 }

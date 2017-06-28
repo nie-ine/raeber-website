@@ -5,8 +5,10 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-notizbuecher',
-  template: '<h1>Notizbücher</h1>'
+  templateUrl: 'notizbuecher.component.html'
 })
 export class NotizbuecherComponent {
 }
+

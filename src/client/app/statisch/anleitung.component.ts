@@ -5,8 +5,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-anleitung',
-  template: '<h1>Anleitung</h1>'
+  templateUrl: 'anleitung.component.html'
 })
 export class AnleitungComponent {
 }

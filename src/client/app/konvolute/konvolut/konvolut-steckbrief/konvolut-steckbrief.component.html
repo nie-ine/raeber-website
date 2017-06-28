@@ -1,6 +1,7 @@
 <div class="convolute-description">
   <md-card>
     (bisher nur ein Platzhalter. Kann parallel zum Import der Properties der Konvolute ergänzt und dynamisiet werden.)
+    {{id}}
   <p>
     <span class="emphase">Inhalt:</span>
     Typoskripte zu 101 Gedichten
@@ -19,7 +20,7 @@
   </p>
   <p>
     <span class="emphase">Publikation:</span>
-    <a href="/lyrik/index.php/drucke/reduktionen" class="titel">Reduktionen</a> (101)
+    <a class="titel" [routerLink]="['/drucke/reduktionen']" routerLinkActive="active">Reduktionen</a> (101)
   </p>
   <p>
     <span class="emphase">Herkunft:</span>
@@ -37,11 +38,11 @@
     Dossier 2: Einführungstexte
   </p>
   <p>
-    Dossiers 3-12 mit je 10 Gedichten; + <a href="/lyrik/images/typos/typos1979_inhalt.jpg" class="jcepopup" data-mediabox-width="800" target="_blank">Gedichtliste</a>
+    Dossiers 3-12 mit je 10 Gedichten; + <a [routerLink]="['/images/typos/typos1979_inhalt.jpg']" routerLinkActive="active" class="jcepopup" data-mediabox-width="800" target="_blank">Gedichtliste</a>
   </p>
   <p>
     <span class="emphase">Vorstufen:</span>
-    <a href="/lyrik/index.php/notizbuecher/notizbuch-1979">Notizbuch 1979</a>, <a href="/lyrik/index.php/manuskripte/manuskripte-1979">Manuskripte 1979</a>
+    <a [routerLink]="['/notizbuecher/notizbuch-1979']" routerLinkActive="active">Notizbuch 1979</a>, <a  [routerLink]="['/manuskripte/manuskripte-1979']" routerLinkActive="active">Manuskripte 1979</a>
   </p>
   </md-card>
 </div>

@@ -11,7 +11,11 @@
   <div class="rae-poem-container" *ngFor="let p of poems_in_grid; let i = index">
     <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
-      <md-card-title>{{p.value[2]}}</md-card-title>
+      <md-card-title>
+        <a class="item" [routerLink]="['item/id']" routerLinkActive="active">
+          {{p.value[2]}}
+        </a>
+      </md-card-title>
       <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem" [innerHtml]="p.value[1]"></div>
       </md-card-content>
@@ -21,7 +25,9 @@
           <span>Synopse:</span>
           <ul class="catItemTags">
             <li *ngFor="let s of p.valuelabel; let j = index">
-              {{s}}
+              <a class="item" [routerLink]="['itemlist/tag/' + s]" routerLinkActive="active">
+                {{s}}
+              </a>
             </li>
           </ul>
         </div>

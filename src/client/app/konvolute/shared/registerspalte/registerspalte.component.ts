@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'registerspalte.component.html',
   styleUrls: ['registerspalte.component.css']
 })
-export class RegisterspalteComponent {
+export class RegisterspalteComponent implements OnInit {
 
   rsEntry: Array<any>;
 
@@ -25,6 +25,25 @@ export class RegisterspalteComponent {
   konvolut_id: string;
   konvolut_type: string;
   private sub: any;
+
+  static alphabeticalSortKey(key: string) {
+    // replace special characters of Latin-1 by base letter and append original string for internal sorting
+    return key
+      .toLowerCase()
+      .replace(/[àáâãäå]/gi, 'a')
+      .replace(/[æ]/gi, 'ae')
+      .replace(/[ç]/gi, 'c')
+      .replace(/[ð]/gi, 'd')
+      .replace(/[èéêë]/gi, 'e')
+      .replace(/[ìíîï]/gi, 'i')
+      .replace(/[òóôõöø]/gi, 'o')
+      .replace(/[ñ]/gi, 'n')
+      .replace(/[ß]/gi, 'ss')
+      .replace(/[ùúûü]/gi, 'u')
+      .replace(/[ýÿ]/gi, 'y')
+      .replace(/[^a-z ]/gi, '')
+      .concat('\t', key.toLowerCase(), '\t', key);
+  }
 
   constructor(private http:Http, private route: ActivatedRoute, private router: Router,) {
   }
@@ -43,10 +62,12 @@ export class RegisterspalteComponent {
     });
   }
 
+  // TODO: Sort alphabetically after init. How?
+
   sortAlphabetically() {
-    var sortedArray: Array<any> = this.rsEntry.sort((n1,n2) => {
-      const k1 = n1.value[2].toLowerCase().replace(/ä/gi, 'a').replace(/ö/gi, 'o').replace(/ü/gi, 'u');
-      const k2 = n2.value[2].toLowerCase().replace(/ä/gi, 'a').replace(/ö/gi, 'o').replace(/ü/gi, 'u');
+    this.rsEntry = this.rsEntry.sort((n1,n2) => {
+      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[2]);
+      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[2]);
       if (k1 > k2) {
         return 1;
       }
@@ -57,11 +78,22 @@ export class RegisterspalteComponent {
 
       return 0;
     });
-
-    this.rsEntry = sortedArray;
   }
 
   sortChronologically() {
+    // Sortiere nach obj_id bis eine interne Nummerierung da ist
+    this.rsEntry = this.rsEntry.sort((n1,n2) => {
+      const k1 = n1.obj_id;
+      const k2 = n2.obj_id;
+      if (k1 > k2) {
+        return 1;
+      }
 
+      if (k1 < k2) {
+        return -1;
+      }
+
+      return 0;
+    });
   }
 }

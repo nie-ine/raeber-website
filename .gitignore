@@ -60,3 +60,4 @@ package-lock.json
 
 # Sensitive files
 src/client/assets/pdf
+src/client/assets/jpg

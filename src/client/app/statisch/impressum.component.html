@@ -2,249 +2,121 @@
   <div id="rt-main" class="mb12">
     <div class="rt-container">
       <div class="rt-grid-12 ">
+        <div id="rt-content-top">
+          <div class="rt-grid-12 rt-alpha rt-omega">
+            <div class="rt-block ">
+              <div class="module-surround">
+                <div class="module-content">
+                  <!-- FIXME: Braucht es folgenden Navigationsblock? -->
+                  <!-- <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                    <li>
+                      Aktuelle Seite: &nbsp;
+                    </li>
+
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                                    <span itemprop="name">
+                        Material                    </span>
+
+                      <span class="divider">
+                        <img src="/lyrik/media/system/images/arrow.png" alt="">                    </span>
+                      <meta itemprop="position" content="1">
+                    </li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                                    <span itemprop="name">
+                        pdf-Dateien                    </span>
+
+                      <meta itemprop="position" content="2">
+                    </li>
+                  </ul>-->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
         <div class="rt-block">
           <div id="rt-mainbody">
             <div class="component-content">
-              <!-- FIXME: Braucht es den folgenden JQuery-Block? -->
-              <!-- Zusatz wm
-              <!-- <script src="/lyrik/media/eorisis-jquery/ui/1.11.4/jquery-ui.min.js"></script>
-              <script type="text/javascript">
+              <!-- FIXME: Braucht es folgenden JavaScript-Block? -->
+              <!-- Zusatz wm -->
 
-                function Neuladen() {
-                  location.reload();
-                }
-
-                function Hilfe() {
-                  hilfefenster = window.open("/lyrik/infos/hilfe/Hilfe-Textseite.htm", "Hilfe", "scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
-                  hilfefenster.window.focus();
-                }
-
-                function Erste_Hilfe() {
-                  hilfefenster = window.open("infos/hilfe/Hilfe-Kurz.htm", "Hilfe", "scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
-                  hilfefenster.window.focus();
-                }
-
-                jQuery(document).ready(function () {
-                  if (window.name != "printWindow") {
-
-                    jQuery(".spezial").hide();
-
-                    jQuery(".itemTitle").css("padding-left", "30px");
-                    jQuery(".edtext").addClass("scrollen").css("padding-left", "25px");
-                    jQuery("#mjsp-menu-select").remove().clone().appendTo(".itemTitle").css({
-                      "float": "right",
-                      "margin-left": "5px"
-                    });
-                    jQuery("#mjsp-menu-select select").css({"width": "100px"});
-                    jQuery("#Button_Scroll").click(
-                      function () {
-                        jQuery(".edtext").toggleClass("scrollen", "false");
-                      });
-
-                    jQuery(".schicht-0_button").attr("title", "Anfangszustand ohne Auszeichnung");
-                    jQuery(".schicht-1_button").attr("title", "Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet");
-                    jQuery(".schicht-2_button").attr("title", "Texteinfügung entgegen dem linearen Verlauf der Niederschrift");
-                    jQuery(".schicht-3_button").attr("title", "Endschicht (Basis für edierten Text)");
-                    jQuery(".move_button").attr("title", "Umschrift verschiebbar machen");
-                    jQuery(".transkription").find("*").css({"font-weight": "normal", "color": "#6e6e6e"});
-                    jQuery(".zeile").css("color", "red");
-                    jQuery(".markierung").css("color", "#d00501;");
-                    jQuery(".herausgeber").css("color", "#d00501;");
-                    jQuery(".ersetzung").css("font-weight", "bold");
-                    jQuery(".streichung_typo").css("color", "darkgray");
-                    jQuery(".streichung_typo").find("*").css("color", "darkgray");
-                    jQuery(".icon-delete").attr("title", "Bild + Umschrift aus-/einschalten");
-                    jQuery(".icon-zoom-out").attr("title", "Bild verkleinern");
-                    jQuery(".icon-zoom-in").attr("title", "Bild vergrössern (+ Register ausschalten)");
-                    jQuery(".bildnummer").attr("title", "Archivalische Bildsignatur");
-
-                    jQuery(".schicht-0_button").click(function () {
-                        jQuery(".transkription").css("color", "#6e6e6e");
-                        jQuery(".transkription").find("*").css("color", "#6e6e6e");
-                        jQuery(".zeile").css("color", "red");
-                        jQuery(".markierung").css("color", "#d00501");
-                        jQuery(".herausgeber").css("color", "#d00501");
-                        jQuery(".streichung_typo").css("color", "darkgray");
-                        jQuery(".streichung_typo").find("*").css("color", "darkgray");
-                      }
-                    )
-
-                    jQuery(".schicht-1_button").click(function () {
-                        jQuery(".transkription").css("color", "gray");
-                        jQuery(".transkription").find("*").css("color", "gray");
-                        jQuery(".schicht1").css({"font-weight": "normal", "color": "maroon"});
-                        jQuery(".schicht1 span").css({"font-weight": "normal", "color": "maroon"});
-                      }
-                    )
-
-                    jQuery(".schicht-2_button").click(function () {
-                        jQuery(".transkription").css("color", "#6e6e6e");
-                        jQuery(".transkription").find("*").css("color", "#6e6e6e");
-                        jQuery(".einfuegung").css("color", "#007FFF").contents().css("color", "#007FFF");
-                        jQuery(".einfuegung_typo").css("color", "steelblue").contents().css("color", "steelblue");
-                        jQuery(".einfuegung_gestr_typo").css("color", "steelblue").contents().css("color", "steelblue");
-                        jQuery(".streichung_typo").css("color", "darkgray");
-                        jQuery(".streichung_typo").find("*").css("color", "darkgray");
-                        jQuery(".einfuegung_gestr").css("color", "#007FFF").contents().css("color", "#007FFF");
-                        jQuery(".markierung").css("color", "#d00501");
-                        jQuery(".zeile").css("color", "red");
-                      }
-                    )
-
-                    jQuery(".schicht-3_button").click(function () {
-                        jQuery(".transkription").css("color", "red");
-                        jQuery(".transkription").find("*").css("color", "red");
-                        jQuery(".einfuegung_gestr").css("color", "#6e6e6e");
-                        jQuery(".einfuegung_gestr").find("*").css("color", "#6e6e6e");
-                        jQuery(".unsicher_gestr").css("color", "#6e6e6e");
-                        jQuery(".streichung").css("color", "#6e6e6e");
-                        jQuery(".streichung").find("*").css("color", "#6e6e6e")
-                        jQuery(".streichung_typo").css("color", "darkgray");
-                        jQuery(".streichung_typo").find("*").css("color", "darkgray");
-                        jQuery(".ueberschrieben").css("color", "#6e6e6e");
-                        jQuery(".streichung_doppel").css("color", "#6e6e6e");
-                        jQuery(".blocktilgung").css("color", "#6e6e6e");
-                        jQuery(".blocktilgung").find("*").css("color", "#6e6e6e");
-                      }
-                    )
-
-                    jQuery("#Button_Register").toggle(function () {
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        Neuladen();
-                      }
-                    )
-
-                    jQuery(".move_button").toggle(function () {
-                        jQuery(".umschrift").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                        jQuery(".umschrift2").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                        jQuery(".umschrift_typo").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                      },
-                      function () {
-                        jQuery(".umschrift").draggable({disabled: true}).css({cursor: "auto"});
-                        jQuery(".umschrift2").draggable({disabled: true}).css({cursor: "auto"});
-                        jQuery(".umschrift_typo").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                      }
-                    )
-
-                    jQuery(".icon-delete").toggle(function () {
-                        jQuery(this).nextAll().hide();
-                      },
-                      function () {
-                        jQuery(this).nextAll().show();
-                        jQuery(this).parent().find(".spezial").hide();
-                      }
-                    )
-
-                    jQuery(".icon-zoom-in1").toggle(function () {
-                        jQuery(this).next().css({"width": "800px", "height": "500px"});
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        jQuery(this).next().css("width", "460px");
-                        jQuery(".rt-grid-9").css({width: "82%"});
-                        jQuery(".rt-grid-3").show();
-                      }
-                    )
-
-
-                    jQuery(".icon-zoom-in2").toggle(function () {
-                        jQuery(this).parent().find(".diplom_bild").css({"width": "1200px", "height": "500px"});
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        jQuery(this).next().css("width", "460px");
-                        jQuery(".rt-grid-9").css({width: "82%"});
-                        jQuery(".rt-grid-3").show();
-                      }
-                    )
-
-
-                    jQuery(".icon-zoom-in").click(function () {
-                      breit = jQuery(this).parent().find("div").eq(0).css("width");
-                      breit1 = String(Number(breit.substr(0, 3)) + 200) + "px";
-                      jQuery(this).parent().find("div").eq(0).css({"width": breit1});
-                      jQuery(".rt-grid-3").hide();
-                      jQuery(".rt-grid-9").css({width: "100%"});
-                    })
-
-                    jQuery(".icon-zoom-out").click(function () {
-                      breit = jQuery(this).parent().find("div").eq(0).css("width");
-                      breit1 = String(Number(breit.substr(0, 3)) - 200) + "px";
-                      jQuery(this).parent().find("div").eq(0).css({"width": breit1});
-                      jQuery(".rt-grid-3").show();
-                      jQuery(".rt-grid-9").css({width: "82%"});
-                    })
-
-                    jQuery(".pagina").click(function () {
-                        var nr = $(this).text();
-                        alert(nr);
-                        $("img:contains(nr)").delete;
-                      }
-                    )
-                  }
-                  ;
-                })
-              </script>-->
+              <!-- Item navigation I, wm -->
+              <!-- FIXME: Wird diese Navigationsleiste benötigt? -->
+              <!--              <div id="nav_buttons">
+                              <button type="button" class="icon-help" title="Hilfe" onclick="Hilfe()"> </button>                    <a href="/lyrik/index.php/material/pdf-dateien/notizbuecher/item/6224-pdf">
+                              <button type="button" class="vor_rueck icon-forward" title="nächster Text"></button>            </a>
+                              <a href="/lyrik/index.php/material/pdf-dateien/notizbuecher/item/6224-pdf?showall=1">
+                                <button type="button" class="icon-arrow-right-3 vor_rueck" title="nächster Text + Bild/Umschrift"><span class="button_text">dipl</span></button>            </a>
+                              <button type="button" id="Button_Reset" title="neu laden" onclick="Neuladen()">Reset</button>            <button type="button" id="Button_Scroll" title="Texte separat scrollen aus-/einschalten">- /+ Rahmen</button>
+                              <button id="Button_Register" type="button" class="vor_rueck" title="Registerspalte aus-/einschalten">- /+ Register</button>    </div>-->
               <span id="startOfPageId5784"></span>
               <div id="k2Container" class="itemView">
-                <div class="itemTagsBlock" style="float:right">
-                </div>
+
+                <!-- Plugins: BeforeDisplay -->
+                <!-- K2 Plugins: K2BeforeDisplay -->
+
+                <!-- einfügung Synopse wm (vgl. unten) -->
+                <div class="itemTagsBlock" style='float:right'></div>
                 <div class="itemHeader">
-                  <h2 class="itemTitle" style="padding-left: 30px;">
-                    Impressum
-                  </h2>
+                  <!-- Item title -->
+                  <h2 class="itemTitle">Impressum</h2>
                 </div>
+
+                <!-- Plugins: AfterDisplayTitle -->
+                <!-- K2 Plugins: K2AfterDisplayTitle -->
+
+
                 <div class="itemBody">
+
+                  <!-- Plugins: BeforeDisplayContent -->
+                  <!-- K2 Plugins: K2BeforeDisplayContent -->
+
+                  <!-- Item text -->
                   <div class="itemFullText">
-                    <p class="markierung" style="color: rgb(208, 5, 1);">Verantwortlich:</p>
-                    <p>Walter Morgenthaler<br>Postfach 402<br>CH-4005 Basel</p>
-                    <p><span id="cloak1708"><a href="mailto:info@wmorgenthaler.ch">info@wmorgenthaler.ch</a></span>
-                      <!-- FIXME: Die vermutlich intendierte Funktion des folgenden JavaScript-Blocks - die E-Mail-Adresse verschleiern - funktioniert in meinem Browser (Firefox 54.0) nicht. Entweder Reimplementierung oder weglassen -->
-                      <!--                      <script type="text/javascript">
-                                              //&lt;!&#45;&#45;
-                                              document.getElementById('cloak1708').innerHTML = '';
-                                              var prefix = '&amp;#109;a' + 'i&amp;#108;' + '&amp;#116;o';
-                                              var path = 'hr' + 'ef' + '=';
-                                              var addy1708 = '&amp;#105;nf&amp;#111;' + '&amp;#64;';
-                                              addy1708 = addy1708 + 'wm&amp;#111;rg&amp;#101;nth&amp;#97;l&amp;#101;r' + '&amp;#46;' + 'ch';
-                                              var addy_text1708 = '&amp;#105;nf&amp;#111;' + '&amp;#64;' + 'wm&amp;#111;rg&amp;#101;nth&amp;#97;l&amp;#101;r' + '&amp;#46;' + 'ch';
-                                              document.getElementById('cloak1708').innerHTML += '&lt;a ' + path + '\'' + prefix + ':' + addy1708 + '\'&gt;' + addy_text1708 + '&lt;\/a&gt;';
-                                              //&#45;&#45;&gt;
-                                            </script>-->
-                      <br><a href="http://www.wmorgenthaler.ch">www.wmorgenthaler.ch</a></p>
-                    <p class="markierung" style="color: rgb(208, 5, 1);">Mitherausgeber:</p>
-                    <p>Thomas Binder<br><span id="cloak86865"><a href="mailto:thomas_binder@hispeed.ch">thomas_binder@hispeed.ch</a></span>
-                      <!-- FIXME: Die vermutlich intendierte Funktion des folgenden JavaScript-Blocks - die E-Mail-Adresse verschleiern - funktioniert in meinem Browser (Firefox 54.0) nicht. Entweder Reimplementierung oder weglassen -->
-                      <!--                      <script type="text/javascript">
-                                              //&lt;!&#45;&#45;
-                                              document.getElementById('cloak86865').innerHTML = '';
-                                              var prefix = '&amp;#109;a' + 'i&amp;#108;' + '&amp;#116;o';
-                                              var path = 'hr' + 'ef' + '=';
-                                              var addy86865 = 'th&amp;#111;m&amp;#97;s_b&amp;#105;nd&amp;#101;r' + '&amp;#64;';
-                                              addy86865 = addy86865 + 'h&amp;#105;sp&amp;#101;&amp;#101;d' + '&amp;#46;' + 'ch';
-                                              var addy_text86865 = 'th&amp;#111;m&amp;#97;s_b&amp;#105;nd&amp;#101;r' + '&amp;#64;' + 'h&amp;#105;sp&amp;#101;&amp;#101;d' + '&amp;#46;' + 'ch';
-                                              document.getElementById('cloak86865').innerHTML += '&lt;a ' + path + '\'' + prefix + ':' + addy86865 + '\'&gt;' + addy_text86865 + '&lt;\/a&gt;';
-                                              //&#45;&#45;&gt;
-                                            </script>-->
+                    <p class="markierung">Verantwortlich:</p>
+                    <p>Walter Morgenthaler<br/>Postfach 402<br/>CH-4005 Basel</p>
+                    <p><span id="cloak97580">Diese E-Mail-Adresse ist vor Spambots geschützt! Zur Anzeige muss JavaScript eingeschaltet sein!</span>
+                      <script type='text/javascript'>
+                        //<!--
+                        document.getElementById('cloak97580').innerHTML = '';
+                        var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+                        var path = 'hr' + 'ef' + '=';
+                        var addy97580 = '&#105;nf&#111;' + '&#64;';
+                        addy97580 = addy97580 + 'wm&#111;rg&#101;nth&#97;l&#101;r' + '&#46;' + 'ch';
+                        var addy_text97580 = '&#105;nf&#111;' + '&#64;' + 'wm&#111;rg&#101;nth&#97;l&#101;r' + '&#46;' + 'ch';
+                        document.getElementById('cloak97580').innerHTML += '<a ' + path + '\'' + prefix + ':' + addy97580 + '\'>' + addy_text97580 + '<\/a>';
+                        //-->
+                      </script>
+                      <br/>
+                      <a href="http://www.wmorgenthaler.ch">www.wmorgenthaler.ch</a>
                     </p>
-                    <p><span class="markierung"
-                             style="color: rgb(208, 5, 1);">Nachlassbetreuung und Reproduktionen:</span></p>
+                    <p class="markierung">Mitherausgeber:</p>
+                    <p>Thomas Binder<br/>
+                      <span id="cloak1713">Diese E-Mail-Adresse ist vor Spambots geschützt! Zur Anzeige muss JavaScript eingeschaltet sein!</span>
+                      <script type='text/javascript'>
+                        //<!--
+                        document.getElementById('cloak1713').innerHTML = '';
+                        var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+                        var path = 'hr' + 'ef' + '=';
+                        var addy1713 = 'th&#111;m&#97;s_b&#105;nd&#101;r' + '&#64;';
+                        addy1713 = addy1713 + 'h&#105;sp&#101;&#101;d' + '&#46;' + 'ch';
+                        var addy_text1713 = 'th&#111;m&#97;s_b&#105;nd&#101;r' + '&#64;' + 'h&#105;sp&#101;&#101;d' + '&#46;' + 'ch';
+                        document.getElementById('cloak1713').innerHTML += '<a ' + path + '\'' + prefix + ':' + addy1713 + '\'>' + addy_text1713 + '<\/a>';
+                        //-->
+                      </script>
+                    </p>
+                    <p><span class="markierung">Nachlassbetreuung und Reproduktionen:</span></p>
                     <p>Schweizerisches Literaturarchiv, Bern</p>
-                    <p><span class="markierung" style="color: rgb(208, 5, 1);">Rechteinhaber</span>:</p>
+                    <p><span class="markierung">Rechteinhaber</span>:</p>
                     <p>Private Nachlasserben</p>
-                    <p><span class="markierung" style="color: rgb(208, 5, 1);">Längerfristige Datensicherung und Programmpflege</span>:
-                    </p>
-                    <p><a href="http://www.NIE-INE.ch" target="_blank">NIE-INE</a> <br>(Nationale Infrastruktur für
-                      Editionen <br>&nbsp;- Infrastructure nationale pour les éditions)</p>
-                    <p class="markierung" style="color: rgb(208, 5, 1);">Das Projekt wird unterstützt durch:</p>
+                    <p><span class="markierung">Längerfristige Datensicherung und Programmpflege</span>:</p>
+                    <p><a href="http://www.NIE-INE.ch" target="_blank">NIE-INE</a> <br/>(Nationale Infrastruktur für
+                      Editionen <br/>&nbsp;- Infrastructure nationale pour les éditions)</p>
+                    <p class="markierung">Das Projekt wird unterstützt durch:</p>
                     <p class="grau"><span style="font-size: 14pt;">Christoph Geiser Stiftung</span></p>
-                    <p><img alt="LandisGyrStiftung Logo" src="../../assets/jpg/LandisGyrStiftung_Logo.jpg"
-                            width="200" height="13"></p></div>
+                    <p><img alt="LandisGyrStiftung Logo" src="/assets/jpg/LandisGyrStiftung_Logo.jpg" width="200"
+                            height="13"/></p>
+                  </div>
                   <!-- nächste Zeilen neu wm -->
                   <div class="clr"></div>
                   <div class="clr"></div>
@@ -260,3 +132,4 @@
     </div>
   </div>
 </div>
+

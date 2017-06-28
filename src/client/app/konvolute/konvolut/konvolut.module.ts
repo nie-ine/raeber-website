@@ -11,17 +11,15 @@ import {
   MdCardModule,
   MdGridListModule,
   MdIconModule,
-  MdInputModule,
-  MdListModule
+  MdInputModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { KonvolutComponent } from './konvolut.component';
 import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
-import { KonvolutRegisterComponent } from './konvolut-register/konvolut-register.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
-
+import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 
 @NgModule({
   imports: [
@@ -35,12 +33,11 @@ import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-stec
     MdGridListModule,
     MdIconModule,
     MdInputModule,
-    MdListModule
+    RegisterspalteModule
   ],
   declarations: [
     KonvolutComponent,
     KonvolutGridComponent,
-    KonvolutRegisterComponent,
     KonvolutSteckbriefComponent
   ],
   exports: [ KonvolutComponent ],

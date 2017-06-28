@@ -1,4 +1,4 @@
-.rae-konvolut-list md-list {
+.rae-registerspalte-list md-list {
   min-height: 200px;
   max-height: 400px;
   overflow-y: auto;
@@ -9,12 +9,12 @@
   border-width: 1px;
 }
 
-.rae-konvolut-list md-list md-list-item {
+.rae-registerspalte-list md-list md-list-item {
   border-bottom-color: silver;
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
 
-.rae-konvolut-list md-list md-list-item p {
+.rae-registerspalte-list md-list md-list-item p {
   text-overflow: ellipsis;
 }

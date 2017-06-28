@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import {Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,6 +10,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['konvolut-steckbrief.component.css']
 })
 export class KonvolutSteckbriefComponent implements OnInit {
+
+  @Input() id: string;
+
   ngOnInit() {
 
   }

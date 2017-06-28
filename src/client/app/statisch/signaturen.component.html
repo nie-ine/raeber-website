@@ -1,0 +1,753 @@
+<div class="rt-container">
+  <div id="rt-main" class="mb12">
+    <div class="rt-container">
+      <div class="rt-grid-12 ">
+        <div class="rt-block">
+          <div id="rt-mainbody">
+            <div class="component-content">
+              <!-- FIXME: Braucht es den folgenden JavaScript-Block? -->
+              <!-- Zusatz wm -->
+              <!--              <script src="/lyrik/media/eorisis-jquery/ui/1.11.4/jquery-ui.min.js"></script>
+                            <script type="text/javascript">
+
+                              function Neuladen() {
+                                location.reload();
+                              }
+
+                              function Hilfe() {
+                                hilfefenster=window.open("/lyrik/infos/hilfe/Hilfe-Textseite.htm","Hilfe","scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
+                                hilfefenster.window.focus();
+                              }
+
+                              function Erste_Hilfe() {
+                                hilfefenster=window.open("infos/hilfe/Hilfe-Kurz.htm","Hilfe","scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
+                                hilfefenster.window.focus();
+                              }
+
+                              jQuery(document).ready(function(){
+                                if (window.name != "printWindow") {
+
+                                  jQuery(".spezial").hide();
+
+                                  jQuery(".itemTitle").css("padding-left","30px");
+                                  jQuery(".edtext").addClass("scrollen").css("padding-left","25px");
+                                  jQuery("#mjsp-menu-select").remove().clone().appendTo(".itemTitle").css({"float":"right","margin-left":"5px"});
+                                  jQuery("#mjsp-menu-select select").css({"width":"100px"});
+                                  jQuery("#Button_Scroll").click(
+
+                                    function() {
+                                      jQuery(".edtext").toggleClass("scrollen","false");
+                                    });
+
+                                  jQuery(".schicht-0_button").attr("title","Anfangszustand ohne Auszeichnung");
+                                  jQuery(".schicht-1_button").attr("title","Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet");
+                                  jQuery(".schicht-2_button").attr("title","Texteinfügung entgegen dem linearen Verlauf der Niederschrift");
+                                  jQuery(".schicht-3_button").attr("title","Endschicht (Basis für edierten Text)");
+                                  jQuery(".move_button").attr("title","Umschrift verschiebbar machen");
+                                  jQuery(".transkription").find("*").css({"font-weight":"normal","color":"#6e6e6e"});
+                                  jQuery(".zeile").css("color","red");
+                                  jQuery(".markierung").css("color","#d00501;");
+                                  jQuery(".herausgeber").css("color","#d00501;");
+                                  jQuery(".ersetzung").css("font-weight","bold");
+                                  jQuery(".streichung_typo").css("color","darkgray");
+                                  jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                  jQuery(".icon-delete").attr("title","Bild + Umschrift aus-/einschalten");
+                                  jQuery(".icon-zoom-out").attr("title","Bild verkleinern");
+                                  jQuery(".icon-zoom-in").attr("title","Bild vergrössern (+ Register ausschalten)");
+                                  jQuery(".bildnummer").attr("title","Archivalische Bildsignatur");
+
+                                  jQuery(".schicht-0_button").click(function() {
+                                      jQuery(".transkription").css("color","#6e6e6e");
+                                      jQuery(".transkription").find("*").css("color","#6e6e6e");
+                                      jQuery(".zeile").css("color","red");
+                                      jQuery(".markierung").css("color","#d00501");
+                                      jQuery(".herausgeber").css("color","#d00501");
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                    }
+                                  )
+
+                                  jQuery(".schicht-1_button").click(function() {
+                                      jQuery(".transkription").css("color","gray");
+                                      jQuery(".transkription").find("*").css("color","gray");
+                                      jQuery(".schicht1").css({"font-weight":"normal","color":"maroon"});
+                                      jQuery(".schicht1 span").css({"font-weight":"normal","color":"maroon"});
+                                    }
+                                  )
+
+                                  jQuery(".schicht-2_button").click(function() {
+                                      jQuery(".transkription").css("color","#6e6e6e");
+                                      jQuery(".transkription").find("*").css("color","#6e6e6e");
+                                      jQuery(".einfuegung").css("color","#007FFF").contents().css("color","#007FFF");
+                                      jQuery(".einfuegung_typo").css("color","steelblue").contents().css("color","steelblue");
+                                      jQuery(".einfuegung_gestr_typo").css("color","steelblue").contents().css("color","steelblue");
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                      jQuery(".einfuegung_gestr").css("color","#007FFF").contents().css("color","#007FFF");
+                                      jQuery(".markierung").css("color","#d00501");
+                                      jQuery(".zeile").css("color","red");
+                                    }
+                                  )
+
+                                  jQuery(".schicht-3_button").click(function() {
+                                      jQuery(".transkription").css("color","red");
+                                      jQuery(".transkription").find("*").css("color","red");
+                                      jQuery(".einfuegung_gestr").css("color","#6e6e6e");
+                                      jQuery(".einfuegung_gestr").find("*").css("color","#6e6e6e");
+                                      jQuery(".unsicher_gestr").css("color","#6e6e6e");
+                                      jQuery(".streichung").css("color","#6e6e6e");
+                                      jQuery(".streichung").find("*").css("color","#6e6e6e")
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                      jQuery(".ueberschrieben").css("color","#6e6e6e");
+                                      jQuery(".streichung_doppel").css("color","#6e6e6e");
+                                      jQuery(".blocktilgung").css("color","#6e6e6e");
+                                      jQuery(".blocktilgung").find("*").css("color","#6e6e6e");
+                                    }
+                                  )
+
+                                  jQuery("#Button_Register").toggle(function() {
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      Neuladen();
+                                    }
+                                  )
+
+                                  jQuery(".move_button").toggle(function() {
+                                      jQuery(".umschrift").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                      jQuery(".umschrift2").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                      jQuery(".umschrift_typo").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                    },
+                                    function() {
+                                      jQuery(".umschrift").draggable({disabled: true}).css( {cursor:"auto"});
+                                      jQuery(".umschrift2").draggable({disabled: true}).css( {cursor:"auto"});
+                                      jQuery(".umschrift_typo").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                    }
+                                  )
+
+                                  jQuery(".icon-delete").toggle(function() {
+                                      jQuery(this).nextAll().hide();
+                                    },
+                                    function() {
+                                      jQuery(this).nextAll().show();
+                                      jQuery(this).parent().find(".spezial").hide();
+                                    }
+                                  )
+
+                                  jQuery(".icon-zoom-in1").toggle(function() {
+                                      jQuery(this) .next().css({"width":"800px","height":"500px"});
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      jQuery(this) .next().css("width","460px");
+                                      jQuery(".rt-grid-9").css( {width:"82%"});
+                                      jQuery(".rt-grid-3").show();
+                                    }
+                                  )
+
+
+                                  jQuery(".icon-zoom-in2").toggle(function() {
+                                      jQuery(this).parent().find(".diplom_bild").css({"width":"1200px","height":"500px"});
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      jQuery(this) .next().css("width","460px");
+                                      jQuery(".rt-grid-9").css( {width:"82%"});
+                                      jQuery(".rt-grid-3").show();
+                                    }
+                                  )
+
+
+                                  jQuery(".icon-zoom-in").click(function() {
+                                    breit = jQuery(this).parent().find("div").eq(0).css("width");
+                                    breit1 = String(Number(breit.substr(0,3))+200)+"px";
+                                    jQuery(this).parent().find("div").eq(0).css({"width":breit1});
+                                    jQuery(".rt-grid-3").hide();
+                                    jQuery(".rt-grid-9").css( {width:"100%"});
+                                  })
+
+                                  jQuery(".icon-zoom-out").click(function() {
+                                    breit = jQuery(this).parent().find("div").eq(0).css("width");
+                                    breit1 = String(Number(breit.substr(0,3))-200)+"px";
+                                    jQuery(this).parent().find("div").eq(0).css({"width":breit1});
+                                    jQuery(".rt-grid-3").show();
+                                    jQuery(".rt-grid-9").css( {width:"82%"});
+                                  })
+
+                                  jQuery(".pagina").click(function() {
+                                      var nr= $(this).text();
+                                      alert(nr);
+                                      $("img:contains(nr)").delete;
+                                    }
+                                  )
+                                };
+                              })
+                            </script>-->
+              <span id="startOfPageId714"></span>
+              <div id="k2Container" class="itemView">
+                <!-- einfügung Synopse wm (vgl. unten) -->
+                <div class="itemTagsBlock" style="float:right">
+                </div>
+                <div class="itemHeader">
+                  <h2 class="itemTitle" style="padding-left: 30px;">
+                    Der Lyrik-Nachlass (Übersicht)
+                  </h2>
+                </div>
+                <div class="itemBody">
+                  <div class="itemFullText">
+                    <table>
+                      <tbody>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1944-1950</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="emphase"></span></td>
+                      </tr>
+                      <tr>
+                        <td><em>Schachtel &nbsp; &nbsp;&nbsp; </em></td>
+                        <td><em>Signatur &nbsp; &nbsp; &nbsp; &nbsp; </em></td>
+                        <td><em>Typus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                          <br></em></td>
+                        <td><em>Datum&nbsp; </em></td>
+                        <td>&nbsp;Werkkontext</td>
+                      </tr>
+                      <tr>
+                        <td>30</td>
+                        <td>A-5-b/01</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1943-1946']">Typoskripte</a></td>
+                        <td>1943-1946</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>146</td>
+                        <td>E-02-A-01</td>
+                        <!-- FIXME: Gegebenenfalls Link korrigieren -->
+                        <td><a [routerLink]="['../typoskripte/typoskripte-sammlungen/sammlung-hochstrasser']">Typoskripte</a>
+                          (Hochstrasser)&nbsp;
+                        </td>
+                        <td>1943-1946</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>79</em></td>
+                        <td><em>C-2-b/01</em></td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1948-1949']">Notizbuch</a></td>
+                        <td>1948-1949</td>
+                        <td>&nbsp;<span class="emphase">Gesicht im Mittag</span></td>
+                      </tr>
+                      <tr>
+                        <td><em>79</em></td>
+                        <td><em>C-2-b/02</em></td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1949']">Notizbuch</a></td>
+                        <td>1949</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>79</em></td>
+                        <td><em>C-2-b/03</em></td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1950']">Notizbuch</a></td>
+                        <td>(1949)-1950</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>30/31</td>
+                        <td><a target="_blank" href="https://www.helveticarchives.ch/detail.aspx?id=615069">A-5-b/02</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1948-1951']">Manuskripte</a></td>
+                        <td>1948-1951</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>32</td>
+                        <td>A-5-b/03</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1948-1950']">Typoskripte</a></td>
+                        <td>1948-1950</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>33</td>
+                        <td>A-5-b/04</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1945-1950']">Typoskripte</a></td>
+                        <td>1945-1950</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><span class="emphase">Gedichte 1951-1956</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="emphase"></span></td>
+                      </tr>
+                      <tr>
+                        <td><em>79</em></td>
+                        <td><em>C-2-b/04</em></td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1950-1951']"><em>Notizbuch</em></a></td>
+                        <td>1950-1951</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>147</td>
+                        <td>E-03-A-01/a</td>
+                        <!-- FIXME: Gegebenenfalls Link korrigieren -->
+                        <td><a [routerLink]="['../typoskripte/typoskripte-sammlungen/sammlung-kutter']">Typoskripte</a>
+                          (Kutter)
+                        </td>
+                        <td>1950/1951</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>34</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=619207">A-5-c/01</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1951']">Manuskripte</a></td>
+                        <td>1951</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>34</td>
+                        <td>A-5-c/02</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1951']">Typoskripte</a></td>
+                        <td>1951</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>79</td>
+                        <td><em>C-2-b/05</em></td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1952-1954']">Notizbuch</a></td>
+                        <td>1952-1954</td>
+                        <td>&nbsp;<span class="emphase">Die verwandelten Schiffe</span></td>
+                      </tr>
+                      <tr>
+                        <td>34</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623029">A-5-c/03</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1952']">Manuskripte</a></td>
+                        <td>1952</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>34</td>
+                        <td>A-5-c/04</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1952']">Typoskripte</a></td>
+                        <td>1952</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>35</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623133">A-5-c/05</a>
+                        </td>
+                        <td><a href="http://www.helveticarchives.ch/detail.aspx?ID=623133">Manuskripte</a></td>
+                        <td>1953</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>35</td>
+                        <td>A-5-c/06</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1953']">Typoskripte</a></td>
+                        <td>1953</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-c/07</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1954-1955']">Notizbuch</a></td>
+                        <td>1954-1955</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>35</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623136">A-5-c/08</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1954']">Manuskripte</a></td>
+                        <td>1954</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>35</td>
+                        <td>A-5-c/09</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1954']">Typoskripte</a></td>
+                        <td>1954</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-c/10</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1955-1957']">Notizbuch</a></td>
+                        <td>1955-1957</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>36</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623345">A-5-c/11</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1955']">Manuskripte</a></td>
+                        <td>1955</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>36</td>
+                        <td>A-5-c/12</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1955']">Typoskripte</a></td>
+                        <td>1955</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>36</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623566">A-5-c/13</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1956']">Manuskripte</a></td>
+                        <td>1956</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>36</td>
+                        <td>A-5-c/14</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1956']">Typoskripte</a></td>
+                        <td>1956</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1957-1958</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;<span class="emphase">GEDICHTE</span></td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-d/01</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1957-1958']">Notizbuch</a></td>
+                        <td>1957-1958</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>37</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623599">A-5-d/02</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1957']">Manuskripte</a></td>
+                        <td>1957</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>37</td>
+                        <td><a target="_blank" [routerLink]="['../typoskripte/typoskripte-1957']">A-5-d/03</a></td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1957']">Typoskripte</a></td>
+                        <td>1957</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-d/04</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1958-1961']">Notizbuch</a></td>
+                        <td>1958-1961</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>36</em></td>
+                        <td><em>A-5-c/15</em></td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1958-1959']">Manuskripte</a></td>
+                        <td>1958-1959</td>
+                        <td>&nbsp;---</td>
+                      </tr>
+                      <tr>
+                        <td>37</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=623775">A-5-d/05</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1958']">Manuskripte</a></td>
+                        <td>1958</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>37</td>
+                        <td>A-5-d/06</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte1958']">Typoskripte</a></td>
+                        <td>1958</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1959-1962</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=626884">A-5-e/01</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1959-1960']">Manuskripte</a></td>
+                        <td>1959-1960</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td>A-5-e/02</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte1959']">Typoskripte</a></td>
+                        <td>1959</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td>A-5-e/03</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1960']">Typoskripte</a></td>
+                        <td>1960</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627107">A-5-e/04</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1961']">Manuskripte</a></td>
+                        <td>1961</td>
+                        <td>&nbsp;<span class="emphase">FLUSSUFER</span></td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td>A-5-e/05</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1961']">Typoskripte</a></td>
+                        <td>1961</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-e/06</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1961-1965']">Notizbuch</a></td>
+                        <td>1961-1965</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>39</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627133">A-5-e/07</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1962']">Manuskripte</a></td>
+                        <td>1962</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>39</td>
+                        <td>A-5-e/08</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1962']">Typoskripte</a></td>
+                        <td>1962</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>39</td>
+                        <td>A-5-e/09</td>
+                        <td>Drucke</td>
+                        <td>(1968)</td>
+                        <td>&nbsp;Übersetzungen</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1963-1965</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>40</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627276">A-5-f/01</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1963']">Manuskripte</a></td>
+                        <td>1963</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>40</td>
+                        <td>A-5-f/02</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1963']">Typoskripte</a></td>
+                        <td>1963</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>40</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627334">A-5-f/03</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1964-1965']">Manuskripte</a></td>
+                        <td>1964-1965</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>40</td>
+                        <td>A-5-f/04</td>
+                        <td><a [routerLink]="['../typoskripte/typoskripte-1965']">Typoskripte</a></td>
+                        <td>1965</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1979</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="emphase">Reduktionen</span></td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-g/01</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1979']">Notizbuch</a></td>
+                        <td>1979</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>41</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627463">A-5-g/02</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1979']">Manuskripte</a></td>
+                        <td>1979</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>41</td>
+                        <td>A-5-g/03</td>
+                        <td>Typoskripte</td>
+                        <td>1979</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Gedichte 1979-1983</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="emphase">Abgewandt Zugewandt</span></td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-h/01</td>
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-1979-1982']">Notizbuch</a></td>
+                        <td>1979-1982</td>
+                        <td>Mundartgedichte</td>
+                      </tr>
+                      <tr>
+                        <td><em>29</em></td>
+                        <td>A-5-h/02</td>
+                        <!-- FIXME: Link korrigieren -->
+                        <td class="markierung" style="color: rgb(208, 5, 1);"><a
+                          [routerLink]="['../notizbuecher/notizbuch-divers/itemlist/category/26']">Notizbuch</a></td>
+                        <td>1980-<em>1988</em></td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>42</td>
+                        <td><a target="_blank" href="http://www.helveticarchives.ch/detail.aspx?ID=627663">A-5-h/03</a>
+                        </td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-1979-1983']">Manuskripte</a></td>
+                        <td>1979-1983</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>43</td>
+                        <td>A-5-h/05</td>
+                        <td>Typoskripte</td>
+                        <td>1983</td>
+                        <td>Druckvorbereitung</td>
+                      </tr>
+                      <tr>
+                        <td>44</td>
+                        <td>&nbsp;</td>
+                        <td>Druckvorlagen</td>
+                        <td>1983</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td class="emphase" colspan="2">Weitere Vorkommnisse</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>17</td>
+                        <td>A-3-c, f, g</td>
+                        <td><a [routerLink]="['../manuskripte/manuskripte-divers']">Manuskripte</a></td>
+                        <td>1950, 1955, 1956</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><em>18</em></td>
+                        <td>A-4-a/06</td>
+                        <td><a [routerLink]="['../notizbuecher/notizbuch-divers']">Notizbuch</a></td>
+                        <td>1965-1980</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <p>&nbsp;<span class="emphase"></span></p>
+                    <hr>
+                    <p>Auszug aus dem Werkverzeichnis Kuno Raeber im Schweizerischen Literaturarchiv:</p>
+                    <p>&nbsp;</p>
+                    <p><a href="../../assets/pdf/gedichtverzeichnis.pdf" target="_blank" class="wf_file"><span
+                      class="wf_file_text">gedichtverzeichnis.pdf</span></a></p></div>
+                  <!-- nächste Zeilen neu wm -->
+                  <div class="clr"></div>
+                  <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div class="clr"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+

@@ -41,7 +41,7 @@ export class RegisterspalteComponent implements OnInit {
       .replace(/[ß]/gi, 'ss')
       .replace(/[ùúûü]/gi, 'u')
       .replace(/[ýÿ]/gi, 'y')
-      .replace(/[^a-z ]/gi, '')
+      .replace(/[^a-z0-9 ]/gi, '')
       .concat('\t', key.toLowerCase(), '\t', key);
   }
 
@@ -52,7 +52,7 @@ export class RegisterspalteComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[0].path;
 
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://172.23.135.247:3333/v1/search/?searchtype=extended&filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Convolute&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle&compop=!EQ&searchval=%20&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasDescription&compop=!EQ&searchval=%20&show_nrows=500'))
+      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/baum?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
 
@@ -66,8 +66,8 @@ export class RegisterspalteComponent implements OnInit {
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1,n2) => {
-      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[2]);
-      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[2]);
+      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[0]);
+      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[0]);
       if (k1 > k2) {
         return 1;
       }

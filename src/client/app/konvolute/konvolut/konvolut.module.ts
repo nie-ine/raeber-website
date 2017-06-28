@@ -3,37 +3,42 @@
  */
 
 import { NgModule } from '@angular/core';
-
-import { KonvolutRoutingModule } from './konvolut-routing.module';
-import { KonvolutComponent } from './konvolut.component';
-import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdListModule
+  MdButtonToggleModule,
+  MdCardModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule
 } from '@angular/material';
-import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+
+import { KonvolutComponent } from './konvolut.component';
+import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
+import { KonvolutRoutingModule } from './konvolut-routing.module';
+import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 
 @NgModule({
   imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
     KonvolutRoutingModule,
+    MdButtonModule,
+    MdButtonToggleModule,
     MdCardModule,
     MdGridListModule,
-    MdButtonToggleModule,
-    MdListModule ,
     MdIconModule,
-    BrowserModule,
-    HttpModule,
-    MdButtonModule,
     MdInputModule,
     RegisterspalteModule
   ],
   declarations: [
     KonvolutComponent,
-    KonvolutSteckbriefComponent,
-    KonvolutGridComponent
+    KonvolutGridComponent,
+    KonvolutSteckbriefComponent
   ],
   exports: [ KonvolutComponent ],
   providers: []

@@ -5,8 +5,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-impressum',
-  template: '<h1>Impressum</h1>'
+  templateUrl: 'impressum.component.html'
 })
 export class ImpressumComponent {
 }

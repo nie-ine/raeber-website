@@ -5,8 +5,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-signaturen',
-  template: '<h1>Signaturen</h1>'
+  templateUrl: 'signaturen.component.html'
 })
 export class SignaturenComponent {
 }

@@ -1,0 +1,373 @@
+<div class="rt-container">
+  <div id="rt-main" class="mb12">
+    <div class="rt-container">
+      <div class="rt-grid-12 ">
+        <div class="rt-block">
+          <div id="rt-mainbody">
+            <div class="component-content">
+              <!-- FIXME: Braucht es den folgenden JavaScript-Block? -->
+              <!-- Zusatz wm -->
+              <!--              <script src="/lyrik/media/eorisis-jquery/ui/1.11.4/jquery-ui.min.js"></script>
+                            <script type="text/javascript">
+
+                              function Neuladen() {
+                                location.reload();
+                              }
+
+                              function Hilfe() {
+                                hilfefenster=window.open("/lyrik/infos/hilfe/Hilfe-Textseite.htm","Hilfe","scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
+                                hilfefenster.window.focus();
+                              }
+
+                              function Erste_Hilfe() {
+                                hilfefenster=window.open("infos/hilfe/Hilfe-Kurz.htm","Hilfe","scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
+                                hilfefenster.window.focus();
+                              }
+
+                              jQuery(document).ready(function(){
+                                if (window.name != "printWindow") {
+
+                                  jQuery(".spezial").hide();
+
+                                  jQuery(".itemTitle").css("padding-left","30px");
+                                  jQuery(".edtext").addClass("scrollen").css("padding-left","25px");
+                                  jQuery("#mjsp-menu-select").remove().clone().appendTo(".itemTitle").css({"float":"right","margin-left":"5px"});
+                                  jQuery("#mjsp-menu-select select").css({"width":"100px"});
+                                  jQuery("#Button_Scroll").click(
+
+                                    function() {
+                                      jQuery(".edtext").toggleClass("scrollen","false");
+                                    });
+
+                                  jQuery(".schicht-0_button").attr("title","Anfangszustand ohne Auszeichnung");
+                                  jQuery(".schicht-1_button").attr("title","Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet");
+                                  jQuery(".schicht-2_button").attr("title","Texteinfügung entgegen dem linearen Verlauf der Niederschrift");
+                                  jQuery(".schicht-3_button").attr("title","Endschicht (Basis für edierten Text)");
+                                  jQuery(".move_button").attr("title","Umschrift verschiebbar machen");
+                                  jQuery(".transkription").find("*").css({"font-weight":"normal","color":"#6e6e6e"});
+                                  jQuery(".zeile").css("color","red");
+                                  jQuery(".markierung").css("color","#d00501;");
+                                  jQuery(".herausgeber").css("color","#d00501;");
+                                  jQuery(".ersetzung").css("font-weight","bold");
+                                  jQuery(".streichung_typo").css("color","darkgray");
+                                  jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                  jQuery(".icon-delete").attr("title","Bild + Umschrift aus-/einschalten");
+                                  jQuery(".icon-zoom-out").attr("title","Bild verkleinern");
+                                  jQuery(".icon-zoom-in").attr("title","Bild vergrössern (+ Register ausschalten)");
+                                  jQuery(".bildnummer").attr("title","Archivalische Bildsignatur");
+
+                                  jQuery(".schicht-0_button").click(function() {
+                                      jQuery(".transkription").css("color","#6e6e6e");
+                                      jQuery(".transkription").find("*").css("color","#6e6e6e");
+                                      jQuery(".zeile").css("color","red");
+                                      jQuery(".markierung").css("color","#d00501");
+                                      jQuery(".herausgeber").css("color","#d00501");
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                    }
+                                  )
+
+                                  jQuery(".schicht-1_button").click(function() {
+                                      jQuery(".transkription").css("color","gray");
+                                      jQuery(".transkription").find("*").css("color","gray");
+                                      jQuery(".schicht1").css({"font-weight":"normal","color":"maroon"});
+                                      jQuery(".schicht1 span").css({"font-weight":"normal","color":"maroon"});
+                                    }
+                                  )
+
+                                  jQuery(".schicht-2_button").click(function() {
+                                      jQuery(".transkription").css("color","#6e6e6e");
+                                      jQuery(".transkription").find("*").css("color","#6e6e6e");
+                                      jQuery(".einfuegung").css("color","#007FFF").contents().css("color","#007FFF");
+                                      jQuery(".einfuegung_typo").css("color","steelblue").contents().css("color","steelblue");
+                                      jQuery(".einfuegung_gestr_typo").css("color","steelblue").contents().css("color","steelblue");
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                      jQuery(".einfuegung_gestr").css("color","#007FFF").contents().css("color","#007FFF");
+                                      jQuery(".markierung").css("color","#d00501");
+                                      jQuery(".zeile").css("color","red");
+                                    }
+                                  )
+
+                                  jQuery(".schicht-3_button").click(function() {
+                                      jQuery(".transkription").css("color","red");
+                                      jQuery(".transkription").find("*").css("color","red");
+                                      jQuery(".einfuegung_gestr").css("color","#6e6e6e");
+                                      jQuery(".einfuegung_gestr").find("*").css("color","#6e6e6e");
+                                      jQuery(".unsicher_gestr").css("color","#6e6e6e");
+                                      jQuery(".streichung").css("color","#6e6e6e");
+                                      jQuery(".streichung").find("*").css("color","#6e6e6e")
+                                      jQuery(".streichung_typo").css("color","darkgray");
+                                      jQuery(".streichung_typo").find("*").css("color","darkgray");
+                                      jQuery(".ueberschrieben").css("color","#6e6e6e");
+                                      jQuery(".streichung_doppel").css("color","#6e6e6e");
+                                      jQuery(".blocktilgung").css("color","#6e6e6e");
+                                      jQuery(".blocktilgung").find("*").css("color","#6e6e6e");
+                                    }
+                                  )
+
+                                  jQuery("#Button_Register").toggle(function() {
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      Neuladen();
+                                    }
+                                  )
+
+                                  jQuery(".move_button").toggle(function() {
+                                      jQuery(".umschrift").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                      jQuery(".umschrift2").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                      jQuery(".umschrift_typo").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                    },
+                                    function() {
+                                      jQuery(".umschrift").draggable({disabled: true}).css( {cursor:"auto"});
+                                      jQuery(".umschrift2").draggable({disabled: true}).css( {cursor:"auto"});
+                                      jQuery(".umschrift_typo").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+                                    }
+                                  )
+
+                                  jQuery(".icon-delete").toggle(function() {
+                                      jQuery(this).nextAll().hide();
+                                    },
+                                    function() {
+                                      jQuery(this).nextAll().show();
+                                      jQuery(this).parent().find(".spezial").hide();
+                                    }
+                                  )
+
+                                  jQuery(".icon-zoom-in1").toggle(function() {
+                                      jQuery(this) .next().css({"width":"800px","height":"500px"});
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      jQuery(this) .next().css("width","460px");
+                                      jQuery(".rt-grid-9").css( {width:"82%"});
+                                      jQuery(".rt-grid-3").show();
+                                    }
+                                  )
+
+
+                                  jQuery(".icon-zoom-in2").toggle(function() {
+                                      jQuery(this).parent().find(".diplom_bild").css({"width":"1200px","height":"500px"});
+                                      jQuery(".rt-grid-3").hide();
+                                      jQuery(".rt-grid-9").css( {width:"100%"});
+                                    },
+                                    function() {
+                                      jQuery(this) .next().css("width","460px");
+                                      jQuery(".rt-grid-9").css( {width:"82%"});
+                                      jQuery(".rt-grid-3").show();
+                                    }
+                                  )
+
+
+                                  jQuery(".icon-zoom-in").click(function() {
+                                    breit = jQuery(this).parent().find("div").eq(0).css("width");
+                                    breit1 = String(Number(breit.substr(0,3))+200)+"px";
+                                    jQuery(this).parent().find("div").eq(0).css({"width":breit1});
+                                    jQuery(".rt-grid-3").hide();
+                                    jQuery(".rt-grid-9").css( {width:"100%"});
+                                  })
+
+                                  jQuery(".icon-zoom-out").click(function() {
+                                    breit = jQuery(this).parent().find("div").eq(0).css("width");
+                                    breit1 = String(Number(breit.substr(0,3))-200)+"px";
+                                    jQuery(this).parent().find("div").eq(0).css({"width":breit1});
+                                    jQuery(".rt-grid-3").show();
+                                    jQuery(".rt-grid-9").css( {width:"82%"});
+                                  })
+
+                                  jQuery(".pagina").click(function() {
+                                      var nr= $(this).text();
+                                      alert(nr);
+                                      $("img:contains(nr)").delete;
+                                    }
+                                  )
+                                };
+                              })
+                            </script>-->
+              <span id="startOfPageId2697"></span>
+              <div id="k2Container" class="itemView">
+                <div class="itemTagsBlock" style="float:right">
+                </div>
+                <div class="itemHeader">
+                  <h2 class="itemTitle" style="padding-left: 30px;">
+                    Lebensdaten
+                  </h2>
+                </div>
+                <div class="itemBody">
+                  <div class="itemFullText">
+                    <table>
+                      <tbody>
+                      <tr>
+                        <td style="vertical-align: top;">1922 &nbsp;</td>
+                        <td>geboren in Klingnau (AG)</td>
+                        <td>&nbsp;</td>
+                        <td>(Familienname (Zehnder)</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">ab 1926</td>
+                        <td>Kindheit in Luzern</td>
+                        <td>&nbsp;</td>
+                        <td>großväterlicher Betrieb des Verlags Räber</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1935</td>
+                        <td>Kantonsschule Luzern</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1943</td>
+                        <td>Studium in Basel (Geschichte, Philosophie)</td>
+                        <td>&nbsp;</td>
+                        <td>Einfluss von Hans Urs von Balthasar</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1945</td>
+                        <td>Noviziat in Balzers (LI)</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1946</td>
+                        <td>Viermonatiger Aufenthalt in Paris</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">&nbsp;</td>
+                        <td>Studium Geschichte und Philosophie in Basel</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1950</td>
+                        <td>Promotion bei Werner Kaegi über Sebastian Franck</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">&nbsp;</td>
+                        <td>Heirat mit Mareile Georgi</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1951</td>
+                        <td>Leitung der Schweizer Schule in Rom</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1952-1955</td>
+                        <td>Assistent für Geschichte am Leibniz Kolleg, Universität Tübingen</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1955-1957</td>
+                        <td>Tutor am Europa-Kolleg, Hamburg</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">ab 1958</td>
+                        <td>Als freier Schriftsteller in München</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1959</td>
+                        <td>Scheidung</td>
+                        <td>&nbsp;</td>
+                        <td>Bekenntnis zur Homosexualität</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1963</td>
+                        <td>sechsmonatiger Aufenthalt in Griechenland</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1967</td>
+                        <td>Poet in residence am Oberlin College, Ohio</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1969</td>
+                        <td>Ehrengabe der Bayerischen Aademie der Schönen Künste</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1973</td>
+                        <td>Tukan-Preis der Landeshauptstadt München</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1977</td>
+                        <td>Stipendiat des Istituto Svizzero in Rom</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1988</td>
+                        <td>Werkpreis der Luzerner Literaturförderung</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">&nbsp;</td>
+                        <td>Reise nach Ägypten</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1989</td>
+                        <td>Preis der Schweizerischen Schillerstiftung</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1991</td>
+                        <td>Kunstpreis der Stadt Luzern</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1990-1992</td>
+                        <td>Pflegeheim für Aids-Kranke in Basel</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: top;">1992</td>
+                        <td>gestorben in Basel</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <p><br>Detaillierte biographische Informationen, Tagebuchauszüge und Briefstellen finden sich in
+                      <br>Bd. 7 der <a href="/lyrik/index.php/informationen/nachweise-2">Werkausgabe</a> von Christiane
+                      Wyrwa und Matthias Klein.</p></div>
+                  <!-- nächste Zeilen neu wm -->
+                  <div class="clr"></div>
+                  <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div class="clr"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+

@@ -7,7 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdListModule
+  MdButtonToggleModule,
+  MdCardModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 

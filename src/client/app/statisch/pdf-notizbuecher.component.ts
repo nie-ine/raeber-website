@@ -5,8 +5,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rae-tagebuecher',
-  template: '<h1>Tagebücher</h1>'
+  moduleId: module.id,
+  selector: 'rae-pdf-notizbuecher',
+  templateUrl: 'pdf-notizbuecher.component.html'
 })
-export class TagebuecherComponent {
+export class PdfNotizbuecherComponent {
 }
+

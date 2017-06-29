@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-notizbuecher',
-  templateUrl: 'notizbuecher.component.html'
+  selector: 'rae-pdf-synopsen',
+  templateUrl: 'pdf-synopsen.component.html'
 })
-export class NotizbuecherComponent {
+export class PdfSynopsenComponent {
 }
 

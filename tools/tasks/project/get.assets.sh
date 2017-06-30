@@ -6,7 +6,7 @@ ASSETS="$(pwd)/src/client/assets"
 BASEURL="http://kunoraeber.ch/lyrik"
 WGET="wget --no-verbose --no-clobber"
 
-mkdir -p ${ASSETS}/{jpg,pdf/notizbuecher,png,fonts}
+mkdir -p ${ASSETS}/{jpg,pdf/{notizbuecher,synopsen},png,fonts}
 
 cd ${ASSETS}/jpg
 $WGET $BASEURL/images/abgewandt.jpg
@@ -42,6 +42,11 @@ $WGET $BASEURL/images/pdf/A-5-g_01.pdf
 $WGET $BASEURL/images/pdf/A-5-h_01.pdf
 $WGET $BASEURL/images/pdf/A-5-h_02.pdf
 $WGET $BASEURL/images/pdf/C-2-b_01.pdf
+
+cd ${ASSETS}/pdf/synopsen
+$WGET $BASEURL/images/pdf/synopsen/Chraebs-Bll.pdf
+$WGET $BASEURL/images/pdf/synopsen/Chraebs.pdf
+$WGET $BASEURL/images/pdf/synopsen/Er_habe.pdf
 
 cd ${ASSETS}/png
 $WGET $BASEURL/templates/gantry/images/patterns/noise.png

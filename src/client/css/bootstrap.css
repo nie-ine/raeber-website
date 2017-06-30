@@ -4705,7 +4705,7 @@ a.label:hover, a.badge:hover {
   font-family: "IcoMoon";
   font-style: normal;
   font-weight: normal;
-  src: url("../../../libraries/gantry/assets/jui/fonts/IcoMoon.eot?#iefix") format("embedded-opentype"), url("../../../libraries/gantry/assets/jui/fonts/IcoMoon.svg#IcoMoon") format("svg"), url("../../../libraries/gantry/assets/jui/fonts/IcoMoon.woff") format("woff"), url("../../../libraries/gantry/assets/jui/fonts/IcoMoon.ttf") format("truetype");
+  src: url("../assets/fonts/IcoMoon.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/IcoMoon.svg#IcoMoon") format("svg"), url("../assets/fonts/IcoMoon.woff") format("woff"), url("../assets/fonts/IcoMoon.ttf") format("truetype");
 }
 
 [data-icon]::before {

@@ -2097,13 +2097,13 @@ a, ul.menu li .separator {
 }
 
 #rt-maintop {
-  background: #f0f0f0 url("../images/patterns/noise.png") repeat scroll 0 0;
+  background: #f0f0f0 url("../assets/png/noise.png") repeat scroll 0 0;
   border-bottom: 1px solid #ffffff;
   box-shadow: 0 1px 0 #cecece, 0 2px 4px 0 rgba(0, 0, 0, 0.1) inset;
 }
 
 #rt-footer {
-  background: #eeeeee url("../images/patterns/noise.png") repeat scroll 0 0;
+  background: #eeeeee url("../assets/png/noise.png") repeat scroll 0 0;
   border-top: 1px solid #afafaf;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.13) inset;
   color: #6e6e6e;
@@ -2127,7 +2127,7 @@ a, ul.menu li .separator {
 }
 
 .title2 .title {
-  background: #eeeeee url("../images/patterns/noise.png") repeat scroll 0 0;
+  background: #eeeeee url("../assets/png/noise.png") repeat scroll 0 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.13) inset;
   color: #303030;
 }
@@ -2142,7 +2142,7 @@ a, ul.menu li .separator {
 }
 
 .box2 {
-  background: #eeeeee url("../images/patterns/noise.png") repeat scroll 0 0;
+  background: #eeeeee url("../assets/png/noise.png") repeat scroll 0 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.13) inset;
   color: #303030;
 }
@@ -2902,7 +2902,7 @@ body #k2Container select, body #k2Container input[type="file"] {
 }
 
 #rt-top-surround::after {
-  background: rgba(0, 0, 0, 0) url("../images/patterns/noise.png") repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) url("../assets/png/noise.png") repeat scroll 0 0;
 }
 
 #rt-showcase {
@@ -2998,7 +2998,7 @@ body #k2Container select, body #k2Container input[type="file"] {
   font-family: "FontAwesome";
   font-style: normal;
   font-weight: normal;
-  src: url("../../../libraries/gantry/assets/jui/fonts/fontawesome-webfont.eot?#iefix&v=3.2.1") format("embedded-opentype"), url("../../../libraries/gantry/assets/jui/fonts/fontawesome-webfont.woff?v=3.2.1") format("woff"), url("../../../libraries/gantry/assets/jui/fonts/fontawesome-webfont.ttf?v=3.2.1") format("truetype"), url("../../../libraries/gantry/assets/jui/fonts/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1") format("svg");
+  src: url("../assets/fonts/fontawesome-webfont.eot?#iefix&v=3.2.1") format("embedded-opentype"), url("../assets/fonts/fontawesome-webfont.woff?v=3.2.1") format("woff"), url("../assets/fonts/fontawesome-webfont.ttf?v=3.2.1") format("truetype"), url("../assets/fonts/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1") format("svg");
 }
 
 [class^="icon-"], [class*=" icon-"] {

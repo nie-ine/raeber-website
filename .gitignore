@@ -59,5 +59,4 @@ src/client/app/shared/config/env.config.js.map
 package-lock.json
 
 # Sensitive files
-src/client/assets/pdf
-src/client/assets/jpg
+src/client/assets

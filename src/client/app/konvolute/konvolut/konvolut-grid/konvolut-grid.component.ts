@@ -17,9 +17,6 @@ export class KonvolutGridComponent {
   showGrid = true;
   showCols = false;
 
-  constructor() {
-  }
-
   toGrid() {
     this.showGrid = true;
     this.showCols = false;

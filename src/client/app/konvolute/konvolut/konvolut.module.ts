@@ -20,7 +20,7 @@ import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
-import {SuperKonvolutComponent} from "./super-konvolut.component";
+import { SuperKonvolutComponent } from './super-konvolut.component';
 
 @NgModule({
   imports: [

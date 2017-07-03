@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
   moduleId: module.id,
   selector: 'rae-registerspalte',
   templateUrl: 'registerspalte.component.html',
-  styleUrls: ['registerspalte.component.css']
+  styleUrls: [ 'registerspalte.component.css' ]
 })
 export class RegisterspalteComponent implements OnInit {
 
@@ -45,29 +45,29 @@ export class RegisterspalteComponent implements OnInit {
       .concat('\t', key.toLowerCase(), '\t', key);
   }
 
-  constructor(private http:Http, private route: ActivatedRoute, private router: Router,) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.konvolut_type = this.route.snapshot.url[0].path;
+    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
     this.route.params
       .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
 
-    this.konvolut_type = this.route.snapshot.url[0].path;
+    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params['id'];
+      this.konvolut_id = params[ 'id' ];
     });
   }
 
   // TODO: Sort alphabetically after init. How?
 
   sortAlphabetically() {
-    this.rsEntry = this.rsEntry.sort((n1,n2) => {
-      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[0]);
-      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[0]);
+    this.rsEntry = this.rsEntry.sort((n1, n2) => {
+      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[ 0 ]);
+      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[ 0 ]);
       if (k1 > k2) {
         return 1;
       }
@@ -82,7 +82,7 @@ export class RegisterspalteComponent implements OnInit {
 
   sortChronologically() {
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
-    this.rsEntry = this.rsEntry.sort((n1,n2) => {
+    this.rsEntry = this.rsEntry.sort((n1, n2) => {
       const k1 = n1.obj_id;
       const k2 = n2.obj_id;
       if (k1 > k2) {

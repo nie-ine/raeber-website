@@ -11,7 +11,13 @@ import { RouterModule } from '@angular/router';
 import { RegisterspalteComponent } from './registerspalte.component';
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, MdButtonToggleModule, MdListModule, RouterModule ],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    MdButtonToggleModule,
+    MdListModule,
+    RouterModule
+  ],
   declarations: [ RegisterspalteComponent ],
   exports: [ RegisterspalteComponent ],
   providers: []

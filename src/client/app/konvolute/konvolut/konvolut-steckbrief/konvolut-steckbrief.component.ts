@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   moduleId: module.id,
   selector: 'rae-konvolut-steckbrief',
   templateUrl: 'konvolut-steckbrief.component.html',
-  styleUrls: ['konvolut-steckbrief.component.css']
+  styleUrls: [ 'konvolut-steckbrief.component.css' ]
 })
 export class KonvolutSteckbriefComponent implements OnInit {
 

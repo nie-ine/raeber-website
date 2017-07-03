@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
   moduleId: module.id,
   selector: 'rae-konvolut-grid',
   templateUrl: 'konvolut-grid.component.html',
-  styleUrls: ['konvolut-grid.component.css']
+  styleUrls: [ 'konvolut-grid.component.css' ]
 })
 export class KonvolutGridComponent {
 

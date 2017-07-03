@@ -1201,19 +1201,6 @@ div.k2ReportCommentFormContainer form .formLogLoading {
   background: url(../images/system/loading.gif) no-repeat left center;
 }
 
-/* Back to top link */
-div.itemBackToTop {
-  text-align: right;
-}
-
-div.itemBackToTop a {
-  text-decoration: underline;
-}
-
-div.itemBackToTop a:hover {
-  text-decoration: underline;
-}
-
 /*----------------------------------------------------------------------
 	Component: Itemlist view (category)
 ----------------------------------------------------------------------*/

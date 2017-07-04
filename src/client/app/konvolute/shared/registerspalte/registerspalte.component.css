@@ -1,4 +1,4 @@
-.rae-registerspalte-list md-list {
+.rae-registerspalte-list md-nav-list {
   min-height: 200px;
   max-height: 400px;
   overflow-y: auto;
@@ -9,12 +9,12 @@
   border-width: 1px;
 }
 
-.rae-registerspalte-list md-list md-list-item {
+.rae-registerspalte-list md-nav-list a {
   border-bottom-color: silver;
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
 
-.rae-registerspalte-list md-list md-list-item p {
+.rae-registerspalte-list md-nav-list a p {
   text-overflow: ellipsis;
 }

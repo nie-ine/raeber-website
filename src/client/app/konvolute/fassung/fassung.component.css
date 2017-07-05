@@ -1,0 +1,16 @@
+.rae-fassung-resizable {
+  resize: vertical;
+  overflow-y: hidden;
+  border-bottom-color: silver;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.rae-fassung-nonresizable {
+
+}
+
+div.itemFullText md-card md-card-footer button {
+  width: 100%;
+  text-align: left;
+}

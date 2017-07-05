@@ -1,0 +1,39 @@
+<div>
+  <button md-raised-button title="Registerspalte aus-/einschalten"
+          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">- /+ Register</button>
+
+  <button md-raised-button title="Texte separat scrollen aus-/einschalten"
+          (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">- /+ Rahmen</button>
+
+  <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
+
+  <button md-raised-button title="vorangehender Text"
+          [routerLink]="['../219-brunnen']">
+    <md-icon>navigate_before</md-icon>
+  </button>
+
+  <button md-raised-button title="nächster Text"
+          [routerLink]="['../221-baum']">
+    <md-icon>navigate_next</md-icon>
+  </button>
+
+  <button md-raised-button title="Hilfe" (click)="hilfe()">
+    <md-icon>help</md-icon>
+  </button>
+
+<!--
+Scheint mir unnoetig, da beim Blaettern die Ansicht bleibt
+  <button md-raised-button title="nächster Text + Bild/Umschrift"
+          [routerLink]="['../221-baum', { showall: '1'}]">
+    <md-icon>chevron right</md-icon>
+    <span class="button_text">dipl</span>
+  </button>
+
+  <button md-raised-button title="vorangehender Text + Bild/Umschrift"
+          [routerLink]="['../219-brunnen', { showall: '1'}]">
+    <md-icon>chevron left</md-icon>
+    <span class="button_text">dipl</span>
+  </button>
+-->
+
+</div>

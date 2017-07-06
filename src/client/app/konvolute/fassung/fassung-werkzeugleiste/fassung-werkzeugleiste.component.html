@@ -1,9 +1,11 @@
 <div>
   <button md-raised-button title="Registerspalte aus-/einschalten"
-          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">- /+ Register</button>
+          [ngClass]="{'button-is-active': showRegister}"
+          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">Register</button>
 
   <button md-raised-button title="Texte separat scrollen aus-/einschalten"
-          (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">- /+ Rahmen</button>
+          [ngClass]="{'button-is-active': poemResizable}"
+          (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">Rahmen</button>
 
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
 

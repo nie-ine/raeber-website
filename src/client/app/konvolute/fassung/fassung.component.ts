@@ -8,22 +8,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung',
   templateUrl: 'fassung.component.html',
-  styleUrls: ['fassung.component.css'],
-  directives: [FassungWerkzeugleisteComponent]
+  styleUrls: ['fassung.component.css']
 })
 export class FassungComponent implements OnInit {
   zeigeKonstituiert: boolean = true;
   zeigeDiplomatisch: boolean = false;
 
   fassung_tag: Array<string> = ['Sonne', 'Wind', 'Wasser'];
-  weitere_fassungen: Array<any> = [{'id': 'brunnen', 'text': 'gedicht'}, {'id': 'bruecke', 'text': 'fluss'}];
-
 
   poems: Array<any>;
 

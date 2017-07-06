@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +19,7 @@ export class FassungWerkzeugleisteComponent implements OnInit {
 
   neuladen() {
     // TODO
-    console.log('Neuladen ergaenzen');
+    window.location.reload();
   }
 
   hilfe() {

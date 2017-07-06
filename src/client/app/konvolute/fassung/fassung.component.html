@@ -32,7 +32,7 @@
                           <meta itemprop="position" content="1">
                         </li>
                         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                          <a itemprop="item" [routerLink]="[ konvolut_type + '/' + konvolut_id ]" routerLinkActive="active" class="pathway">
+                          <a itemprop="item" [routerLink]="['../..']" routerLinkActive="active" class="pathway">
                             <span itemprop="name">{{konvolut_id}}</span>
                           </a>
 
@@ -53,7 +53,9 @@
 
                   <!-- Item navigation I, wm -->
                   <div id="nav_buttons">
-                    <rae-fassung-werkzeugleiste [(showRegister)]="show_register" [(poemResizable)]="poem_resizable"></rae-fassung-werkzeugleiste>
+                    <rae-fassung-werkzeugleiste
+                      [(showRegister)]="show_register"
+                      [(poemResizable)]="poem_resizable"></rae-fassung-werkzeugleiste>
                   </div>
 
                   <!-- Start K2 Item Layout -->
@@ -65,7 +67,11 @@
                       <!-- Item tags -->
                       <!--  wm  -->
                       <ul class="itemTags">
-                        <a [routerLink]="['../../itemlist/tag/Wolke']" routerLinkActive="active">Synopse&nbsp;&nbsp;</a>
+                        <a *ngFor="let t of fassung_tag"
+                           [routerLink]="['../../itemlist/tag/' + t]" r
+                           outerLinkActive="active">
+                          Synopse&nbsp;{{t}} &nbsp;
+                        </a>
                       </ul>
                       <div class="clr"></div>
                     </div>
@@ -88,7 +94,9 @@
                       <div class="itemFullText">
 
                         <md-card>
-                          <md-card-content *ngIf="zeigeKonstituiert" [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
+                          <md-card-content
+                            *ngIf="zeigeKonstituiert"
+                            [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
 
                             <!-- TODO -->
                             TODO: ersetzen
@@ -149,13 +157,7 @@
 
                     <!-- Related items by tag -->
                     <div class="itemRelated">
-                      <h3>Weitere Fassungen</h3>
-                      <md-nav-list dense>
-                        <a md-list-item *ngFor="let p of weitere_fassungen; let i = index" [routerLink]="['../id']" routerLinkActive="active">
-                          <h5 md-line>{{p.id}}</h5>
-                          <p md-line>in: {{p.text}}</p>
-                        </a>
-                      </md-nav-list>
+                      <rae-fassung-weitere [synopsenTags]="fassung_tag"></rae-fassung-weitere>
                     </div>
 
                     <div class="clr"></div>
@@ -165,8 +167,11 @@
                         <span style='font-size:0.8em;'>Änderung: 			Samstag, 13 Mai 2017			</span>
                         <!-- Print Button -->
                         <li>
-                          <a class="itemPrintLink" rel="nofollow" href="/lyrik/index.php/notizbuecher/notizbuch-1979/item/220-wolke?tmpl=component&amp;print=1" routerLinkActive="active" onclick="window.open(this.href,'printWindow','width=900,height=600,location=no,menubar=no,resizable=yes,scrollbars=yes'); return false;">
-                            <span>Drucken</span>
+                          <a class="itemPrintLink" rel="nofollow"
+                             href="/lyrik/index.php/notizbuecher/notizbuch-1979/item/220-wolke?tmpl=component&amp;print=1"
+                             routerLinkActive="active"
+                             onclick="window.open(this.href,'printWindow','width=900,height=600,location=no,menubar=no,resizable=yes,scrollbars=yes'); return false;">
+                            <span>Drucken</span><!-- TODO -->
                           </a>
                         </li>
                       </ul>
@@ -189,8 +194,8 @@
 
               <div class="moduletable">
                 <h6>Suchen: Notizbuch 1979</h6>
-                <p>Nach Suchbegriff</p>
-                <p>Nach Seite oder Blatt</p>
+                <p>Nach Suchbegriff</p><!-- TODO -->
+                <p>Nach Seite oder Blatt</p><!-- TODO -->
               </div>
             </div>
           </div>

@@ -10,5 +10,7 @@ import { Component } from '@angular/core';
   templateUrl: 'pdf-synopsen.component.html'
 })
 export class PdfSynopsenComponent {
+  title = 'pdf-Dateien (Synopsen)';
+  creationDate = 'Donnerstag, 16 Februar 2017';
 }
 

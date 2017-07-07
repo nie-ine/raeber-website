@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'lebensdaten.component.html'
 })
 export class LebensdatenComponent {
+  title = 'Lebensdaten';
 }

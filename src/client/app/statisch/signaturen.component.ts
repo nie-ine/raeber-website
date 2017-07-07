@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'signaturen.component.html'
 })
 export class SignaturenComponent {
+  title = 'Der Lyrik-Nachlass (Übersicht)';
 }

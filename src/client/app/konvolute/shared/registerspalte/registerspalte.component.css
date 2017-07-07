@@ -18,3 +18,13 @@
 .rae-registerspalte-list md-nav-list a p {
   text-overflow: ellipsis;
 }
+
+md-button-toggle-group {
+  width: 100%;
+}
+
+md-button-toggle {
+  width: 50%;
+  height: 36px;
+  font-size: 80%;
+}

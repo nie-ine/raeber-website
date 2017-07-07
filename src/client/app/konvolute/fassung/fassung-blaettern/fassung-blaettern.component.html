@@ -1,7 +1,15 @@
 <div>
-  <span class="itemNavigationTitle">Blättern zurück / vor:</span>
+  <span class="itemNavigationTitle">Im Konvolut blättern:</span>
 
-  <a class="itemPrevious" [routerLink]="['../219-brunnen']"> &laquo; Brunnen		</a>
+  <button md-button title="vorangehender Text"
+          [routerLink]="['../219-brunnen']">
+    <md-icon>navigate_before</md-icon>
+    Brunnen
+  </button>
 
-  <a class="itemNext" [routerLink]="['../221-baum']"> Baum &raquo; </a>
+  <button md-button title="nächster Text"
+          [routerLink]="['../221-baum']">
+    <md-icon>navigate_next</md-icon>
+    Baum
+  </button>
 </div>

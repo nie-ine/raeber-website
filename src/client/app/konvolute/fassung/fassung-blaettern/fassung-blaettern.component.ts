@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-blaettern',
-  templateUrl: 'fassung-blaettern.component.html'
+  templateUrl: 'fassung-blaettern.component.html',
+  styleUrls: ['fassung-blaettern.component.css']
 })
 export class FassungBlaetternComponent {
 

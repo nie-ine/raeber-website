@@ -10,7 +10,6 @@ import { LebensdatenComponent } from './statisch/lebensdaten.component';
 import { AnleitungComponent } from './statisch/anleitung.component';
 import { WerkausgabeComponent } from './statisch/werkausgabe.component';
 import { SucheComponent } from './suche/suche.component';
-import { RegisterComponent } from './suche/register.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { PdfNotizbuecherComponent } from './statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
@@ -26,7 +25,6 @@ import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'suche', component: SucheComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
       { path: 'start', component: HomepageComponent },
       { path: '', redirectTo: '/start', pathMatch: 'full' },

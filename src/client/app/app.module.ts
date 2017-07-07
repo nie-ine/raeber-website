@@ -21,8 +21,8 @@ import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { FassungComponent } from './konvolute/fassung/fassung.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { SucheComponent } from './suche/suche.component';
-import { RegisterComponent } from './suche/register.component';
 import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
+import { RegisterModule } from './suche/register/register.module';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
     BrowserModule,
     HttpModule,
     KonvolutModule,
+    RegisterModule,
     AppRoutingModule
   ],
   declarations: [
@@ -45,7 +46,6 @@ import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
     PageNotFoundComponent,
     PdfNotizbuecherComponent,
     PdfSynopsenComponent,
-    RegisterComponent,
     SignaturenComponent,
     SucheComponent,
     SynopseComponent,

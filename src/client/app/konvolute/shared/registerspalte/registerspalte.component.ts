@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 export class RegisterspalteComponent implements OnInit {
 
   rsEntry: Array<any>;
+  nHits: number;
 
   // for testings
   searchQuery: string;
@@ -55,6 +56,11 @@ export class RegisterspalteComponent implements OnInit {
       .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
+
+    this.route.params
+      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+      .map(response => response.json().nhits)
+      .subscribe((res: number) => this.nHits = res);
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {

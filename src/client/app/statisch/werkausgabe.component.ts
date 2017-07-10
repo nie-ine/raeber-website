@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'werkausgabe.component.html'
 })
 export class WerkausgabeComponent {
+  title = 'Kuno Raeber. Werke in 7 Bänden';
 }

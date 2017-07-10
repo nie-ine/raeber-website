@@ -34,5 +34,5 @@
 * `/suche` Erweiterte Suche
 * `/suche?<parameter>` Ergebnisseite für Suche mit spezfischen Parametern
 * `/register` Übersichtsseite Register
-* `/register/<zeitraum>` Register einer Zeitraum
+* `/register/:zeitraum` Register einer Zeitraum
 

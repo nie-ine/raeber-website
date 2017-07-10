@@ -10,7 +10,7 @@ import { RegisterComponent } from './register.component';
   imports: [
     RouterModule.forChild([
       { path: 'register', component: RegisterComponent },
-      { path: 'register/:id', component: RegisterComponent }
+      { path: 'register/:zeitraum', component: RegisterComponent }
     ])
   ],
   exports: [ RouterModule ]

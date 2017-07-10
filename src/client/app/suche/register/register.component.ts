@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {
-      this.selectedTab = params[ 'id' ];
+      this.selectedTab = params[ 'zeitraum' ];
     });
 
     console.log('search/schlaf?searchtype=fulltext');

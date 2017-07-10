@@ -17,8 +17,10 @@ export class FassungWerkzeugleisteComponent implements OnInit {
   @Output() poemResizableChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showRegisterChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Input() idOfPrev: string;
+  @Input() idOfNext: string;
+
   neuladen() {
-    // TODO
     window.location.reload();
   }
 

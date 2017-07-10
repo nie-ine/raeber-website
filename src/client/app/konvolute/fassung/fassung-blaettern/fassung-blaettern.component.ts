@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -11,5 +11,12 @@ import { Component } from '@angular/core';
   styleUrls: ['fassung-blaettern.component.css']
 })
 export class FassungBlaetternComponent {
+  @Input() idOfPrev: string;
+  @Input() idOfNext: string;
+
+
+  titleOfPrev = 'Baum'; //TODO
+  titleOfNext = 'Brunnen'; //TODO
+
 
 }

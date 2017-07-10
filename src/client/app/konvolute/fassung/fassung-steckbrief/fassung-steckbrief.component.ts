@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'fassung-steckbrief.component.html'
 })
 export class FassungSteckbriefComponent {
-
+// TODO: dynamisieren
 }

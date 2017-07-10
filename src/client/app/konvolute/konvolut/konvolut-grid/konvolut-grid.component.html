@@ -12,7 +12,7 @@
     <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
       <md-card-title>
-        <a class="item" [routerLink]="['item/id']" routerLinkActive="active">
+        <a class="item" [routerLink]="['item/' + p.value[0]]" routerLinkActive="active">
           {{p.value[2]}}
         </a>
       </md-card-title>
@@ -25,7 +25,7 @@
           <span>Synopse:</span>
           <ul class="catItemTags">
             <li *ngFor="let s of p.valuelabel; let j = index">
-              <a class="item" [routerLink]="['itemlist/tag/' + s]" routerLinkActive="active">
+              <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
                 {{s}}
               </a>
             </li>

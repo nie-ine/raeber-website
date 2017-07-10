@@ -15,6 +15,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
+  title = 'Titelregister';
 
   selectedTab: string;
 

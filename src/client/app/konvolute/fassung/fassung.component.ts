@@ -16,6 +16,9 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['fassung.component.css']
 })
 export class FassungComponent implements OnInit {
+  creationDate = 'Freitag, 01 Juni 1979';
+  modificationDate = 'Samstag, 13 Mai 2017';
+
   zeigeKonstituiert: boolean = true;
   zeigeDiplomatisch: boolean = false;
 
@@ -29,6 +32,9 @@ export class FassungComponent implements OnInit {
   poem_id: string;
   konvolut_id: string;
   konvolut_type: string;
+
+  nextPoem: string = '219-brunnen'; // TODO
+  prevPoem: string = '221-baum'; // TODO
 
   poem_resizable: boolean;
   show_register: boolean;
@@ -44,6 +50,8 @@ export class FassungComponent implements OnInit {
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
+    // TODO dynamisieren
+
     this.route.params
       .switchMap((params: Params) =>
         this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
@@ -53,7 +61,7 @@ export class FassungComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
-      this.poem_id = params[ 'id' ];
+      this.poem_id = params[ 'fassung' ];
     });
   }
 }

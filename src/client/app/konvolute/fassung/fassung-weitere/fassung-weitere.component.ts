@@ -11,7 +11,7 @@ import {Component, Input} from '@angular/core';
 })
 export class FassungWeitereComponent {
   @Input() synopsenTags: Array<string>;
-  weitereFassungen: Array<any> = [{'id': 'brunnen', 'text': 'gedicht'}, {'id': 'bruecke', 'text': 'fluss'}];
+  weitereFassungen: Array<any> = [{'id': 'wolke 2', 'text': 'manu'}, {'id': 'wolke 3', 'text': 'typo'}]; // TODO
 
 
 }

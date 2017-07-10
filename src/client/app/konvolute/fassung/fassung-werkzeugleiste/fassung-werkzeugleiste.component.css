@@ -10,3 +10,7 @@ button {
 .button-is-active {
   background-color: silver;
 }
+
+.button-without-link {
+  color: silver;
+}

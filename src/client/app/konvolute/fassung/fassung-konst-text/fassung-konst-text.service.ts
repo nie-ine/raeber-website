@@ -7,6 +7,8 @@ import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Config } from '../../../shared/config/env.config';
 
+import { KnoraAPIParams } from './knora-api-params';
+
 @Injectable()
 export class FassungKonstTextService {
 
@@ -30,21 +32,13 @@ export class FassungKonstTextService {
     return Observable.throw(errMsg);
   }
 
-  private static _constrQueryString(params: { [key: string]: string }): string {
-    let encParams: string = '?';
-    for (let k in params) {
-      encParams += k + '=' + encodeURIComponent(params[ k ]) + '&';
-    }
-    return encParams;
-  }
-
   constructor(private http: Http, private jsonp: Jsonp) {
   }
 
 
-  getText(params: { [key: string]: string }): Observable<Array<any>> {
+  getText(params: KnoraAPIParams): Observable<Array<any>> {
     return this.http
-      .get(this._knoraUrl + FassungKonstTextService._constrQueryString(params))
+      .get(params.createURI())
       //.map(response => <string[]> response.json()[1])
       //.map(FassungKonstTextService._extractData)
       //.catch(FassungKonstTextService._handleError);

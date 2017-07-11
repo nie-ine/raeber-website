@@ -54,7 +54,7 @@ export class FassungComponent implements OnInit {
 
     this.route.params
       .switchMap((params: Params) =>
-        this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+        this.http.get('http://knora.nie-ine.ch/v1/search/e?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.poems = res);
 

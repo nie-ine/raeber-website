@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import {
   MdButtonModule,
   MdButtonToggleModule,
@@ -23,7 +23,8 @@ import { FassungComponent } from './fassung.component';
 import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern.component';
 import { FassungSteckbriefComponent } from './fassung-steckbrief/fassung-steckbrief.component';
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
-import {FassungWeitereComponent} from "./fassung-weitere/fassung-weitere.component";
+import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.component';
+import { FassungKonstTextComponent } from './fassung-konst-text/fassung-konst-text.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import {FassungWeitereComponent} from "./fassung-weitere/fassung-weitere.compone
     FassungRoutingModule,
     FormsModule,
     HttpModule,
+    JsonpModule, // TODO: Maybe optional
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
@@ -45,7 +47,8 @@ import {FassungWeitereComponent} from "./fassung-weitere/fassung-weitere.compone
     FassungComponent,
     FassungSteckbriefComponent,
     FassungWeitereComponent,
-    FassungWerkzeugleisteComponent
+    FassungWerkzeugleisteComponent,
+    FassungKonstTextComponent
   ],
   exports: [ FassungComponent ],
   providers: []

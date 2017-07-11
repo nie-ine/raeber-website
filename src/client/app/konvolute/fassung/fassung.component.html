@@ -52,13 +52,9 @@
                           <md-card-content
                             *ngIf="zeigeKonstituiert"
                             [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
-
-                            <!-- TODO -->
-                            TODO: ersetzen durch Modul für Text
                             <section class="edtext edtext_hs">
-                              <p>War doch da nur eine Wolke.<br />Aber der Mond stürzt<br />schwarz und donnernd hindurch.<br />Wo, wo, wenn er nach seiner Ankunft <br /> <span class="zeile">05 </span>da liegt geborsten und farblos, <br />blieb der lämmerweidende Schimmer? <br />Nur eine Wolke.</p>
+                              <rae-fassung-konsttext></rae-fassung-konsttext>
                             </section>
-
                           </md-card-content>
                           <md-card-footer>
                             <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">

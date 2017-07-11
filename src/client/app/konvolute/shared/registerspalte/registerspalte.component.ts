@@ -64,7 +64,7 @@ export class RegisterspalteComponent implements OnInit {
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'id' ];
+      this.konvolut_id = params[ 'konvolut' ];
     });
   }
 

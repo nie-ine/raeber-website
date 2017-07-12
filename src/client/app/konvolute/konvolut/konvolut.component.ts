@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -30,7 +30,20 @@ export class KonvolutComponent implements OnInit {
 
   private _req = new ExtendedSearch();
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging, lc: NgZone) {
+    window.onscroll = () => {
+      let status = 'not reached';
+      let windowHeight = 'innerHeight' in window ? window.innerHeight
+        : document.documentElement.offsetHeight;
+      let body = document.body, html = document.documentElement;
+      let docHeight = Math.max(body.scrollHeight,
+        body.offsetHeight, html.clientHeight,
+        html.scrollHeight, html.offsetHeight);
+      let windowBottom = windowHeight + window.pageYOffset;
+      if (windowBottom >= docHeight) {
+        this.loadMore();
+      }
+    };
   }
 
   ngOnInit() {

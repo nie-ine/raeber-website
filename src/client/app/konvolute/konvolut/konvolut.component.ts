@@ -3,16 +3,19 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { DynamicPaging } from '../shared/dynamic-paging';
+import { ExtendedSearch, PropertyParams } from '../shared/knora-api-params';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html'
+  templateUrl: 'konvolut.component.html',
+  providers: [ DynamicPaging ]
 })
 export class KonvolutComponent implements OnInit {
 
@@ -25,20 +28,19 @@ export class KonvolutComponent implements OnInit {
   konvolut_type: string;
   private sub: any;
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  private _req = new ExtendedSearch();
+
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging) {
   }
 
   ngOnInit() {
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-
-    this.route.params
-      .switchMap((params: Params) =>
-        this.http.get('http://localhost:3333/v1/search/?searchtype=extended&' +
-          'filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Convolute&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle&compop=!EQ&searchval=%20&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasDescription&compop=!EQ&searchval=%20&show_nrows=500'))
-      .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => this.poems = res);
+    this._req.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    this._req.property = new PropertyParams('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    this._req.property = new PropertyParams('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    this.dp.size = 10;
+    this.dp.loadMore(this._req).subscribe(
+      konstText => this.poems = konstText
+    );
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
@@ -50,7 +52,7 @@ export class KonvolutComponent implements OnInit {
 
   // for testings
   searchForDoctor(fulltextQuery: string) {
-    this.http.get('http://localhost:3333/v1/search/' + fulltextQuery + '?searchtype=fulltext')
+    this.http.get('http://knora.nie-ine.ch/v1/search/' + fulltextQuery + '?searchtype=fulltext')
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + fulltextQuery + '?searchtype=fulltext');
@@ -58,9 +60,15 @@ export class KonvolutComponent implements OnInit {
 
   // for testings
   freeSearch() {
-    this.http.get('http://localhost:3333/v1/search/' + this.searchQuery)
+    this.http.get('http://knora.nie-ine.ch/v1/search/' + this.searchQuery)
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + this.searchQuery);
+  }
+
+  loadMore() {
+    this.dp.loadMore(this._req).subscribe(
+      konstText => this.poems = this.poems.concat(konstText)
+    );
   }
 }

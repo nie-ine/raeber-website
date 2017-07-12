@@ -1,44 +1,17 @@
-import { Config } from '../../../shared/config/env.config';
+import { Config } from '../../shared/config/env.config';
 /**
  * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/11/17.
  */
 
-export interface KnoraAPIParams {
-  _host: string;
-  _searchtype: string;
-  _filterByRestype: string;
-  _filterByProject: string;
-  _showNRows: number;
-  _startAt: number;
-  createURI: () => string;
-}
+export abstract class KnoraAPIParams {
+  protected _host = Config.API;
+  protected abstract _searchtype: string;
+  protected abstract _filterByRestype: string;
+  protected abstract _filterByProject: string;
+  protected abstract _showNRows: number;
+  protected abstract _startAt: number;
 
-export class PropertyParams {
-
-  public createURI = 'property_id=' + encodeURIComponent(this._propertyId) +
-    '&compop=' + encodeURIComponent(this._compop) +
-    '&searchval=' + encodeURIComponent(this._searchval);
-
-  private _propertyId: string;
-  private _compop: string;
-  private _searchval: string;
-
-  constructor(readonly propertyId: string, readonly compop: string, readonly searchval: string) {
-    this._propertyId = propertyId;
-    this._compop = compop;
-    this._searchval = searchval;
-  }
-
-}
-
-export class FulltextSearch implements KnoraAPIParams {
-  set searchstring(v: string) {
-    this._searchstring = v;
-  }
-
-  set searchtype(v: string) {
-    this._searchtype = v;
-  }
+  public abstract createURI(): string;
 
   set filterByRestype(v: string) {
     this._filterByRestype = v;
@@ -55,14 +28,39 @@ export class FulltextSearch implements KnoraAPIParams {
   set startAt(v: number) {
     this._startAt = v;
   }
+}
 
-  private _host = Config.API;
-  private _searchstring: string = '';
-  private _searchtype = 'fulltext';
-  private _filterByRestype: string = '';
-  private _filterByProject: string = '';
-  private _showNRows: number = 0;
-  private _startAt: number = 0;
+export class PropertyParams {
+
+  private _propertyId: string;
+  private _compop: string;
+  private _searchval: string;
+
+  public createURI() {
+    return 'property_id=' + encodeURIComponent(this._propertyId) +
+      '&compop=' + encodeURIComponent(this._compop) +
+      '&searchval=' + encodeURIComponent(this._searchval);
+  }
+
+  constructor(readonly propertyId: string, readonly compop: string, readonly searchval: string) {
+    this._propertyId = propertyId;
+    this._compop = compop;
+    this._searchval = searchval;
+  }
+
+}
+
+export class FulltextSearch extends KnoraAPIParams {
+  set searchstring(v: string) {
+    this._searchstring = v;
+  }
+
+  protected _searchstring: string = '';
+  protected _searchtype = 'fulltext';
+  protected _filterByRestype: string = '';
+  protected _filterByProject: string = '';
+  protected _showNRows: number = 0;
+  protected _startAt: number = 0;
 
   public createURI() {
     return this._host + this._searchstring +
@@ -74,15 +72,7 @@ export class FulltextSearch implements KnoraAPIParams {
   }
 }
 
-export class ExtendedSearch implements KnoraAPIParams {
-
-  set filterByRestype(v: string) {
-    this._filterByRestype = v;
-  }
-
-  set filterByProject(v: string) {
-    this._filterByProject = v;
-  }
+export class ExtendedSearch extends KnoraAPIParams {
 
   set filterByOwner(v: string) {
     this._filterByOwner = v;
@@ -92,29 +82,20 @@ export class ExtendedSearch implements KnoraAPIParams {
     this._property.push(v);
   }
 
-  set showNRows(v: number) {
-    this._showNRows = v;
-  }
-
-  set startAt(v: number) {
-    this._startAt = v;
-  }
-
-  private _host = Config.API;
-  private _searchtype = 'extended';
-  private _filterByRestype: string = '';
-  private _filterByProject: string = '';
-  private _filterByOwner: string = '';
-  private _property: Array<PropertyParams> = [];
-  private _showNRows: number = 0;
-  private _startAt: number = 0;
+  protected _searchtype = 'extended';
+  protected _filterByRestype: string = '';
+  protected _filterByProject: string = '';
+  protected _filterByOwner: string = '';
+  protected _property: Array<PropertyParams> = [];
+  protected _showNRows: number = 0;
+  protected _startAt: number = 0;
 
   public createURI() {
     let propString: string = '';
     if (this._property.length > 0) {
       for (let e of this._property) {
         propString += '&';
-        propString += encodeURIComponent(e.createURI);
+        propString += e.createURI();
       }
     }
     return this._host +

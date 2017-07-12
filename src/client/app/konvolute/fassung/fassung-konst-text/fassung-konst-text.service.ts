@@ -7,7 +7,7 @@ import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Config } from '../../../shared/config/env.config';
 
-import { KnoraAPIParams } from './knora-api-params';
+import { KnoraAPIParams } from '../../shared/knora-api-params';
 
 @Injectable()
 export class FassungKonstTextService {

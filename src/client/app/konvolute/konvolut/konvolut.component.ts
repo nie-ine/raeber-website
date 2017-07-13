@@ -18,6 +18,7 @@ export class KonvolutComponent implements OnInit {
 
   poems: Array<any>;
 
+
   // for testings
   searchQuery: string;
 
@@ -50,7 +51,7 @@ export class KonvolutComponent implements OnInit {
 
   // for testings
   searchForDoctor(fulltextQuery: string) {
-    this.http.get('http://localhost:3333/v1/search/' + fulltextQuery + '?searchtype=fulltext')
+    this.http.get('http://130.60.24.65:3333/v1/search/' + fulltextQuery + '?searchtype=fulltext')
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + fulltextQuery + '?searchtype=fulltext');
@@ -63,4 +64,6 @@ export class KonvolutComponent implements OnInit {
       .subscribe(res => this.poems = res);
     console.log('/search/' + this.searchQuery);
   }
+
+
 }

@@ -1,0 +1,10 @@
+<br>
+<p>The Image Grid component</p>
+<br>
+<button md-raised-button (click)="searchForDoctor()">Search Resource with Image Example</button>
+<br/>
+<div class="rae-poem-container" *ngFor="let image of myImages; let i = index">
+      {{ image.value[0] }}
+      <img src="http://test-02.salsah.org/core/sendlocdata.php?res={{ image.obj_id }}" width="21%">
+</div>
+

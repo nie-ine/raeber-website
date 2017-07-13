@@ -9,17 +9,23 @@
 <div [ngClass]="{'rae-poem-list-grid': showGrid, 'rae-poem-list-cols': showCols}">
 
   <div class="rae-poem-container" *ngFor="let p of poems_in_grid; let i = index">
+
     <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
+
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
+
       <md-card-title>
         <a class="item" [routerLink]="['item/id']" routerLinkActive="active">
           {{p.value[2]}}
         </a>
       </md-card-title>
+
       <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
         <div class="rae-poem" [innerHtml]="p.value[1]"></div>
       </md-card-content>
+
       <br/>
+
       <md-card-footer>
         <div class="catItemTagsBlock">
           <span>Synopse:</span>

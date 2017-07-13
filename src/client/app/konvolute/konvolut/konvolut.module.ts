@@ -20,6 +20,7 @@ import { KonvolutGridComponent } from './konvolut-grid/konvolut-grid.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
+import { ImageGridModule } from '../shared/image-grid/image-grid.module';
 import { SuperKonvolutComponent } from './super-konvolut.component';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SuperKonvolutComponent } from './super-konvolut.component';
     MdGridListModule,
     MdIconModule,
     MdInputModule,
-    RegisterspalteModule
+    RegisterspalteModule,
+    ImageGridModule
   ],
   declarations: [
     KonvolutComponent,

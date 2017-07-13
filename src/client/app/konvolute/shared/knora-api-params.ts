@@ -3,7 +3,10 @@ import { Config } from '../../shared/config/env.config';
  * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/11/17.
  */
 
-export abstract class KnoraAPIParams {
+/**
+ * Base abstract class for configuring a request to Knora API
+ */
+export abstract class KnoraRequest {
   protected _host = Config.API;
   protected abstract _searchtype: string;
   protected abstract _filterByRestype: string;
@@ -11,7 +14,10 @@ export abstract class KnoraAPIParams {
   protected abstract _showNRows: number;
   protected abstract _startAt: number;
 
-  public abstract createURI(): string;
+  /**
+   * Serialises string
+   */
+  public abstract toString(): string;
 
   set filterByRestype(v: string) {
     this._filterByRestype = v;
@@ -28,15 +34,26 @@ export abstract class KnoraAPIParams {
   set startAt(v: number) {
     this._startAt = v;
   }
+
+  set host(v: string) {
+    this._host = v;
+  }
 }
 
-export class PropertyParams {
+/**
+ * Helper class for defining a property triple as requested by Knora API
+ */
+export class KnoraProperty {
 
   private _propertyId: string;
   private _compop: string;
   private _searchval: string;
 
-  public createURI() {
+  /**
+   * Serialises property
+   * @returns {string} Formatted string
+   */
+  public toString() {
     return 'property_id=' + encodeURIComponent(this._propertyId) +
       '&compop=' + encodeURIComponent(this._compop) +
       '&searchval=' + encodeURIComponent(this._searchval);
@@ -50,7 +67,10 @@ export class PropertyParams {
 
 }
 
-export class FulltextSearch extends KnoraAPIParams {
+/**
+ * Helper class for configuring a fulltext search request to Knora API
+ */
+export class FulltextSearch extends KnoraRequest {
   set searchstring(v: string) {
     this._searchstring = v;
   }
@@ -62,7 +82,11 @@ export class FulltextSearch extends KnoraAPIParams {
   protected _showNRows: number = 0;
   protected _startAt: number = 0;
 
-  public createURI() {
+  /**
+   * Serialises request
+   * @returns {string} Formatted string
+   */
+  public toString() {
     return this._host + this._searchstring +
       '?searchtype=' + this._searchtype +
       (this._filterByRestype.length > 0 ? '&filter_by_restype=' + encodeURIComponent(this._filterByRestype) : '') +
@@ -72,13 +96,16 @@ export class FulltextSearch extends KnoraAPIParams {
   }
 }
 
-export class ExtendedSearch extends KnoraAPIParams {
+/**
+ * Helper class configuring an extended search request to Knora API.
+ */
+export class ExtendedSearch extends KnoraRequest {
 
   set filterByOwner(v: string) {
     this._filterByOwner = v;
   }
 
-  set property(v: PropertyParams) {
+  set property(v: KnoraProperty) {
     this._property.push(v);
   }
 
@@ -86,16 +113,20 @@ export class ExtendedSearch extends KnoraAPIParams {
   protected _filterByRestype: string = '';
   protected _filterByProject: string = '';
   protected _filterByOwner: string = '';
-  protected _property: Array<PropertyParams> = [];
+  protected _property: Array<KnoraProperty> = [];
   protected _showNRows: number = 0;
   protected _startAt: number = 0;
 
-  public createURI() {
+  /**
+   * Serialises request
+   * @returns {string} Formatted string
+   */
+  public toString() {
     let propString: string = '';
     if (this._property.length > 0) {
       for (let e of this._property) {
         propString += '&';
-        propString += e.createURI();
+        propString += e.toString();
       }
     }
     return this._host +

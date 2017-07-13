@@ -8,8 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { DynamicPaging } from '../shared/dynamic-paging';
-import { ExtendedSearch, PropertyParams } from '../shared/knora-api-params';
+import { DynamicPaging } from '../shared/paging';
+import { ExtendedSearch, KnoraProperty } from '../shared/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -48,10 +48,10 @@ export class KonvolutComponent implements OnInit {
 
   ngOnInit() {
     this._req.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    this._req.property = new PropertyParams('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    this._req.property = new PropertyParams('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     this.dp.size = 10;
-    this.dp.loadMore(this._req).subscribe(
+    this.dp.loadText(this._req).subscribe(
       konstText => this.poems = konstText
     );
 
@@ -80,7 +80,7 @@ export class KonvolutComponent implements OnInit {
   }
 
   loadMore() {
-    this.dp.loadMore(this._req).subscribe(
+    this.dp.loadText(this._req).subscribe(
       konstText => this.poems = this.poems.concat(konstText)
     );
   }

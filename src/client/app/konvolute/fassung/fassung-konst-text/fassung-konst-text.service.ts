@@ -7,7 +7,7 @@ import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Config } from '../../../shared/config/env.config';
 
-import { KnoraAPIParams } from '../../shared/knora-api-params';
+import { KnoraRequest } from '../../shared/knora-api-params';
 
 @Injectable()
 export class FassungKonstTextService {
@@ -36,9 +36,9 @@ export class FassungKonstTextService {
   }
 
 
-  getText(params: KnoraAPIParams): Observable<Array<any>> {
+  getText(params: KnoraRequest): Observable<Array<any>> {
     return this.http
-      .get(params.createURI())
+      .get(params.toString())
       //.map(response => <string[]> response.json()[1])
       //.map(FassungKonstTextService._extractData)
       //.catch(FassungKonstTextService._handleError);

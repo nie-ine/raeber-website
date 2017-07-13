@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { KnoraAPIParams } from './knora-api-params';
+import { KnoraRequest } from './knora-api-params';
 import { Observable } from 'rxjs/Observable';
 import { Http, Jsonp } from '@angular/http';
 
@@ -23,21 +23,17 @@ export class DynamicPaging {
     return this._size;
   }
 
-  loadMore(req: KnoraAPIParams): Observable<Array<any>> {
+  loadText(req: KnoraRequest): Observable<Array<any>> {
     req.showNRows = this._size;
     req.startAt = this._offset;
     this._offset = this._offset + this._size;
     return this.getText(req);
   }
 
-  getText(params: KnoraAPIParams): Observable<Array<any>> {
+  getText(params: KnoraRequest): Observable<Array<any>> {
     return this.http
-      .get(params.createURI())
-      //.map(response => <string[]> response.json()[1])
-      //.map(FassungKonstTextService._extractData)
-      //.catch(FassungKonstTextService._handleError);
+      .get(params.toString())
       .map(response => response.json().subjects);
-    //.subscribe((res: Array<any>) => this.poems = res);
   }
 
 }

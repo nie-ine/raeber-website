@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FassungKonstTextService } from './fassung-konst-text.service';
 import { ActivatedRoute } from '@angular/router';
-import { ExtendedSearch, PropertyParams } from '../../shared/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../../shared/knora-api-params';
 
 const _expressions: { [key: string]: string } = {
   'notizbuecher': 'http://www.knora.org/ontology/text#Note',
@@ -31,8 +31,8 @@ export class FassungKonstTextComponent implements OnInit {
   ngOnInit() {
     let searchParams = new ExtendedSearch;
     searchParams.filterByRestype = _expressions[ this.route.snapshot.url[ 0 ].path ];
-    searchParams.property = new PropertyParams('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    searchParams.property = new PropertyParams('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     searchParams.showNRows = 500;
 
     this.route.snapshot.paramMap.get('fassung');

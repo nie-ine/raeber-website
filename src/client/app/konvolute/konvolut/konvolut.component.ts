@@ -28,7 +28,7 @@ export class KonvolutComponent implements OnInit {
   konvolut_type: string;
   private sub: any;
 
-  private _req = new ExtendedSearch();
+  private _esearch = new ExtendedSearch();
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging, lc: NgZone) {
     window.onscroll = () => {
@@ -47,11 +47,11 @@ export class KonvolutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._req.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     this.dp.size = 10;
-    this.dp.loadText(this._req).subscribe(
+    this.dp.loadText(this._esearch).subscribe(
       konstText => this.poems = konstText
     );
 
@@ -80,7 +80,7 @@ export class KonvolutComponent implements OnInit {
   }
 
   loadMore() {
-    this.dp.loadText(this._req).subscribe(
+    this.dp.loadText(this._esearch).subscribe(
       konstText => this.poems = this.poems.concat(konstText)
     );
   }

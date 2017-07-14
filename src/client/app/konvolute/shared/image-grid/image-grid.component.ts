@@ -19,6 +19,7 @@ export class ImageGridComponent implements OnInit {
   @Input() images_in_grid: Array<any>;
 
   myImages: Array<any>;
+  zoomfactor = 5;
 
   // for testings
   searchQuery: string;
@@ -37,23 +38,34 @@ export class ImageGridComponent implements OnInit {
   searchForDoctor() {
     return this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id%5B%5D=439&compop%5B%5D=!EQ&searchval%5B%5D=&show_nrows=25&start_at=0&progvalfile=prog_63047.salsah&filter_by_restype=100')
       .map(
-        (response: Response) => {
-          const data = response.json();
+        (lambda: Response) => {
+          const data = lambda.json();
           console.log(data);
           //console.log(JSON.stringify(data.subjects, null, 4));
-          var i = 0;
-          var len = data.subjects.length;
-          for (; i < len;) {
-            //console.log(data.subjects[i].obj_id);
-            i++;
-          }
           return data.subjects;
       }
       )
       .subscribe(response => this.myImages = response);
   }
 
+  increaseSize(){
+    if(this.zoomfactor > 2) {
+      this.zoomfactor -= 1;
+    }
+    else{
+      window.alert("Picture reached maximum size");
+    }
+  }
 
 
+
+   reduceSize(){
+    if(this.zoomfactor < 5){
+    this.zoomfactor += 1;
+    }
+    else{
+    window.alert("Picture reached minimum size");
+    }
+  }
 
 }

@@ -3,8 +3,18 @@
 <br>
 <button md-raised-button (click)="searchForDoctor()">Search Resource with Image Example</button>
 <br/>
+<button md-raised-button (click)="examplePictureZoomingIn()">Example Picture for zooming in</button>
+<br/>
 <div class="rae-poem-container" *ngFor="let image of myImages; let i = index">
       {{ image.value[0] }}
-      <img src="http://test-02.salsah.org/core/sendlocdata.php?res={{ image.obj_id }}" width="21%">
+      <img src="http://test-02.salsah.org/core/sendlocdata.php?res={{ image.obj_id }}&reduce={{ zoomfactor }}" width="21%">
+      <button md-raised-button (click)="increaseSize()">Increase size</button>
+      <button md-raised-button (click)="reduceSize()">Reduce size</button>
 </div>
+<div>
+  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}" >
+  <button md-raised-button (click)="increaseSize()">Increase size</button>
+  <button md-raised-button (click)="reduceSize()">Reduce size</button>
+</div>
+
 

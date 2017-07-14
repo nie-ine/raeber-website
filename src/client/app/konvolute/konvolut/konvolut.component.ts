@@ -22,6 +22,7 @@ export class KonvolutComponent implements OnInit {
   // for testings
   searchQuery: string;
 
+
   konvolut_id: string;
   konvolut_type: string;
   private sub: any;

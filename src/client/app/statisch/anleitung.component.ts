@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'anleitung.component.html'
 })
 export class AnleitungComponent {
+  title = 'Anleitung zur Online-Edition Kuno Raeber';
 }

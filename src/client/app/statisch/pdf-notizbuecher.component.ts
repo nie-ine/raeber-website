@@ -10,5 +10,7 @@ import { Component } from '@angular/core';
   templateUrl: 'pdf-notizbuecher.component.html'
 })
 export class PdfNotizbuecherComponent {
+  title = 'pdf-Dateien (Notizbuecher)';
+  creationDate = 'Donnerstag, 16 Februar 2017';
 }
 

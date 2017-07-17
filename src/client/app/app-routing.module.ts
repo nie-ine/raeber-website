@@ -13,10 +13,12 @@ import { SucheComponent } from './suche/suche.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { PdfNotizbuecherComponent } from './statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
+import { RegisterModule } from './suche/register/register.module';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
+      RegisterModule,
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
       { path: 'anleitung', component: AnleitungComponent },

@@ -22,7 +22,6 @@ import { FassungComponent } from './konvolute/fassung/fassung.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { SucheComponent } from './suche/suche.component';
 import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
-import { RegisterModule } from './suche/register/register.module';
 
 
 @NgModule({
@@ -30,7 +29,6 @@ import { RegisterModule } from './suche/register/register.module';
     BrowserModule,
     HttpModule,
     KonvolutModule,
-    RegisterModule,
     AppRoutingModule
   ],
   declarations: [

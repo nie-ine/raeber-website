@@ -52,7 +52,7 @@ export class RegisterspalteComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+      .switchMap((params: Params) => this.http.get('http://knora.nie-ine.ch/v1/search/e?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
 

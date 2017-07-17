@@ -11,14 +11,14 @@ import { SuperKonvolutComponent } from './super-konvolut.component';
   imports: [
     RouterModule.forChild([
       { path: 'drucke/abgewandt-zugewandt', component: SuperKonvolutComponent },
-      { path: 'drucke/abgewandt-zugewandt/:id', component: KonvolutComponent },
-      { path: 'drucke/:id', component: KonvolutComponent },
-      { path: 'manuskripte/:id', component: KonvolutComponent },
-      { path: 'notizbuecher/notizbuch-divers/:id', component: KonvolutComponent },
-      { path: 'notizbuecher/:id', component: KonvolutComponent },
-      { path: 'typoskripte/typoskripte-sammlungen/:id', component: KonvolutComponent },
-      { path: 'typoskripte/:id', component: KonvolutComponent },
-      { path: 'material/:id', component: KonvolutComponent },
+      { path: 'drucke/abgewandt-zugewandt/:konvolut', component: KonvolutComponent },
+      { path: 'drucke/:konvolut', component: KonvolutComponent },
+      { path: 'manuskripte/:konvolut', component: KonvolutComponent },
+      { path: 'notizbuecher/notizbuch-divers/:konvolut', component: KonvolutComponent },
+      { path: 'notizbuecher/:konvolut', component: KonvolutComponent },
+      { path: 'typoskripte/typoskripte-sammlungen/:konvolut', component: KonvolutComponent },
+      { path: 'typoskripte/:konvolut', component: KonvolutComponent },
+      { path: 'material/:konvolut', component: KonvolutComponent },
       { path: 'test', component: KonvolutComponent }
     ])
   ],

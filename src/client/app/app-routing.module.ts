@@ -10,13 +10,16 @@ import { LebensdatenComponent } from './statisch/lebensdaten.component';
 import { AnleitungComponent } from './statisch/anleitung.component';
 import { WerkausgabeComponent } from './statisch/werkausgabe.component';
 import { SucheComponent } from './suche/suche.component';
-import { SynopseComponent } from './konvolute/synopse/synopse.component';
+import { RegisterComponent } from './suche/register.component';
 import { PdfNotizbuecherComponent } from './statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
-import { RegisterModule } from './suche/register/register.module';
+import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
+import { FassungModule } from './konvolute/fassung/fassung.module';
 
 @NgModule({
   imports: [
+    KonvolutModule,
+    FassungModule,
     RouterModule.forRoot([
       RegisterModule,
       { path: 'werkausgabe', component: WerkausgabeComponent },

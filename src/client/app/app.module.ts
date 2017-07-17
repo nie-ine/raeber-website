@@ -20,13 +20,12 @@ import { KopfzeileComponent } from './kopfzeile.component';
 import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { SucheComponent } from './suche/suche.component';
-import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
+import { RegisterComponent } from './suche/register.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
-    KonvolutModule,
     AppRoutingModule
   ],
   declarations: [

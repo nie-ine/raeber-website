@@ -11,12 +11,15 @@ import { AnleitungComponent } from './statisch/anleitung.component';
 import { WerkausgabeComponent } from './statisch/werkausgabe.component';
 import { SucheComponent } from './suche/suche.component';
 import { RegisterComponent } from './suche/register.component';
-import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { PdfNotizbuecherComponent } from './statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
+import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
+import { FassungModule } from './konvolute/fassung/fassung.module';
 
 @NgModule({
   imports: [
+    KonvolutModule,
+    FassungModule,
     RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },

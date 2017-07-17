@@ -6,16 +6,17 @@
 
 ## Konvolutansichten
 
+Dynamische Pfadelemente sind jeweils mit Doppelpunkt eingeleitet.
+
 * `/notizbuecher` Konvolutübersicht Notizbuecher
-* `/notizbuecher/<zeitraum>` Konvolutansicht einer Zeitraum
-* `/notizbuecher/<zeitraum>/<eintrag>?<parameter>` Ansicht Texteintrag (mit Parameter Steuerung der Detailansicht) 
+* `/notizbuecher/:konvolut` Konvolutansicht eines Zeitraums
+* `/notizbuecher/:konvolut/item/:fassung` Ansicht Texteintrag (mit Parameter Steuerung der Detailansicht)  
+  `/notizbuecher/:konvolut/:fassung` funktioniert wegen übergeordneten Modulen nicht.  
+  Parameter können ergänzt werden, wenn sie nötig scheinen.
 * `/manuskripte`, `/typoskripte` und `/drucke` analog
+* `/material/tagebuecher` und `/material/briefe` analog
 
-
-* `/tagebuecher` Tagebuchübersicht
-* `/tagebuecher/<eintrag>` Tagebucheintrag
-* `/briefe` analog
-
+Parameter `<gedicht>` noch ersetzen:
 
 * `/synopsen/<gedicht>` Synopse von Gedicht
 

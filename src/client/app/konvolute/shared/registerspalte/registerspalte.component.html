@@ -4,7 +4,7 @@
     <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
   </md-button-toggle-group>
   <md-nav-list dense>
-    <a md-list-item *ngFor="let p of rsEntry; let i = index" [routerLink]="['item/id']" routerLinkActive="active">
+    <a md-list-item *ngFor="let p of rsEntry; let i = index" [routerLink]="[p.value[0]]" routerLinkActive="active">
       <h5 md-line>{{p.value[0]}}</h5>
       <p md-line>{{p.value[1]}}</p>
     </a>

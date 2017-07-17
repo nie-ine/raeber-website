@@ -18,24 +18,19 @@ import { ImpressumComponent } from './statisch/impressum.component';
 import { FusszeileComponent } from './fusszeile.component';
 import { KopfzeileComponent } from './kopfzeile.component';
 import { NavigationsleisteComponent } from './navigationsleiste.component';
-import { FassungComponent } from './konvolute/fassung/fassung.component';
 import { SynopseComponent } from './konvolute/synopse/synopse.component';
 import { SucheComponent } from './suche/suche.component';
 import { RegisterComponent } from './suche/register.component';
-import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
-
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
-    KonvolutModule,
     AppRoutingModule
   ],
   declarations: [
     AnleitungComponent,
     AppComponent,
-    FassungComponent,
     FusszeileComponent,
     HomepageComponent,
     ImpressumComponent,

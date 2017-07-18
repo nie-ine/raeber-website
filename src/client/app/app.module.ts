@@ -40,7 +40,6 @@ import { RegisterComponent } from './suche/register.component';
     PageNotFoundComponent,
     PdfNotizbuecherComponent,
     PdfSynopsenComponent,
-    RegisterComponent,
     SignaturenComponent,
     SucheComponent,
     SynopseComponent,

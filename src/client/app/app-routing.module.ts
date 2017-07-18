@@ -10,16 +10,17 @@ import { LebensdatenComponent } from './statisch/lebensdaten.component';
 import { AnleitungComponent } from './statisch/anleitung.component';
 import { WerkausgabeComponent } from './statisch/werkausgabe.component';
 import { SucheComponent } from './suche/suche.component';
-import { RegisterComponent } from './suche/register.component';
 import { PdfNotizbuecherComponent } from './statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './statisch/pdf-synopsen.component';
 import { KonvolutModule } from './konvolute/konvolut/konvolut.module';
 import { FassungModule } from './konvolute/fassung/fassung.module';
+import { RegisterModule } from  './suche/register/register.module';
 
 @NgModule({
   imports: [
     KonvolutModule,
     FassungModule,
+    RegisterModule,
     RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
@@ -29,7 +30,6 @@ import { FassungModule } from './konvolute/fassung/fassung.module';
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'suche', component: SucheComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
       { path: 'start', component: HomepageComponent },
       { path: '', redirectTo: '/start', pathMatch: 'full' },

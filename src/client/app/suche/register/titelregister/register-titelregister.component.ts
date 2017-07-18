@@ -1,8 +1,8 @@
 /**
- * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
+ * Created by Reto Baumgartner (rfbaumgartner) on 07.07.17.
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -11,20 +11,16 @@ import 'rxjs/add/operator/map';
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-registerspalte',
-  templateUrl: 'registerspalte.component.html',
-  styleUrls: [ 'registerspalte.component.css' ]
+  selector: 'rae-register-titelregister',
+  templateUrl: 'register-titelregister.component.html',
+  styleUrls: [ 'register-titelregister.component.css' ]
 })
-export class RegisterspalteComponent implements OnInit {
+export class RegisterTitelregisterComponent implements OnInit {
 
   rsEntry: Array<any>;
+  nHits: number;
 
-  // for testings
-  searchQuery: string;
-
-  konvolut_id: string;
-  konvolut_type: string;
-  private sub: any;
+  @Input() selectedTab: string;
 
   static alphabeticalSortKey(key: string) {
     // replace special characters of Latin-1 by base letter and append original string for internal sorting
@@ -49,25 +45,22 @@ export class RegisterspalteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://knora.nie-ine.ch/v1/search/e?searchtype=fulltext'))
+      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
-
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-    this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
-    });
+    this.route.params
+      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+      .map(response => response.json().nhits)
+      .subscribe((res: number) => { this.nHits = res; this.sortAlphabetically() });
   }
 
   // TODO: Sort alphabetically after init. How?
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[ 0 ]);
-      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[ 0 ]);
+      const k1 = RegisterTitelregisterComponent.alphabeticalSortKey(n1.value[ 0 ]);
+      const k2 = RegisterTitelregisterComponent.alphabeticalSortKey(n2.value[ 0 ]);
       if (k1 > k2) {
         return 1;
       }

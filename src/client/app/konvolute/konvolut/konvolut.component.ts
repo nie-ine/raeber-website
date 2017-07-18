@@ -1,21 +1,19 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { DynamicPaging } from '../../shared/utilities/paging';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html',
-  providers: [ DynamicPaging ]
+  templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
 
@@ -28,36 +26,27 @@ export class KonvolutComponent implements OnInit {
   konvolut_type: string;
   private sub: any;
 
-  private _req = new ExtendedSearch();
-
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging, lc: NgZone) {
-    window.onscroll = () => {
-      let status = 'not reached';
-      let windowHeight = 'innerHeight' in window ? window.innerHeight
-        : document.documentElement.offsetHeight;
-      let body = document.body, html = document.documentElement;
-      let docHeight = Math.max(body.scrollHeight,
-        body.offsetHeight, html.clientHeight,
-        html.scrollHeight, html.offsetHeight);
-      let windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        this.loadMore();
-      }
-    };
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this._req.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    this._req.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    this.dp.size = 10;
-    this.dp.loadText(this._req).subscribe(
-      konstText => this.poems = konstText
-    );
+    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+
+    let searchParams = new ExtendedSearch();
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    searchParams.showNRows = 500;
+
+    this.route.params
+      .switchMap((params: Params) =>
+        this.http.get(searchParams.toString()))
+      .map(response => response.json().subjects)
+      .subscribe((res: Array<any>) => this.poems = res);
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'id' ];
+      this.konvolut_id = params[ 'konvolut' ];
     });
 
     console.log('search/schlaf?searchtype=fulltext');
@@ -79,11 +68,5 @@ export class KonvolutComponent implements OnInit {
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + this.searchQuery);
-  }
-
-  loadMore() {
-    this.dp.loadText(this._req).subscribe(
-      konstText => this.poems = this.poems.concat(konstText)
-    );
   }
 }

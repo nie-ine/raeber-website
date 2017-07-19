@@ -11,7 +11,8 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   moduleId: module.id,
   selector: 'rae-image-grid',
-  templateUrl: 'image-grid.component.html'
+  templateUrl: 'image-grid.component.html',
+  styleUrls: [ 'image-grid.component.css' ]
 })
 
 export class ImageGridComponent implements OnInit {
@@ -20,6 +21,7 @@ export class ImageGridComponent implements OnInit {
 
   myImages: Array<any>;
   zoomfactor = 5;
+  width = '100%';
 
   // for testings
   searchQuery: string;
@@ -51,20 +53,22 @@ export class ImageGridComponent implements OnInit {
   increaseSize(){
     if(this.zoomfactor > 2) {
       this.zoomfactor -= 1;
+      this.width = '100%';
     }
     else{
-      window.alert("Picture reached maximum size");
+      window.alert('Picture reached maximum size');
     }
   }
 
 
 
    reduceSize(){
-    if(this.zoomfactor < 5){
+    if(this.zoomfactor < 5) {
     this.zoomfactor += 1;
+      this.width = '100%';
     }
     else{
-    window.alert("Picture reached minimum size");
+    window.alert('Picture reached minimum size');
     }
   }
 

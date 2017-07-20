@@ -60,7 +60,7 @@ export class ImageGridComponent implements OnInit {
       this.zoomfactor -= 1;
     }
     else {
-      window.alert('Picture reached maximum size');
+      window.alert('Picture reached maximum quality');
     }
   }
 
@@ -70,7 +70,7 @@ export class ImageGridComponent implements OnInit {
       this.zoomfactor += 1;
     }
     else {
-      window.alert('Picture reached minimum size');
+      window.alert('Picture reached minimum quality');
     }
   }
 

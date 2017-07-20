@@ -22,11 +22,11 @@ export class ImageGridComponent implements OnInit {
   myImages: Array<any>;
   zoomfactor = 5;
   heightAndWidth = 100;
-  height = 30;
-  width = 30;
+  height = 200;
+  width = 200;
   overflow = 'auto';
   resize = 'both';
-  percentSign = '%';
+  px = 'px';
 
   // for testings
   searchQuery: string;
@@ -75,18 +75,18 @@ export class ImageGridComponent implements OnInit {
   }
 
   increaseFrameSize() {
-    this.height *= 1.5;
-    this.width *= 1.5;
+    this.height += 200;
+    this.width += 200;
   }
 
   reduceFrameSize() {
-    this.height *= 0.5;
-    this.width *= 0.5;
+    this.height -= 200;
+    this.width -= 200;
   }
 
   resetSize() {
-    this.height = 30;
-    this.width = 30;
+    this.height = 200;
+    this.width = 200;
     this.zoomfactor = 5;
   }
 

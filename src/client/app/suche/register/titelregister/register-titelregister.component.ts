@@ -1,30 +1,27 @@
 /**
- * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
+ * Created by Reto Baumgartner (rfbaumgartner) on 07.07.17.
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { ExtendedSearch, KnoraProperty } from '../../../shared/utilities/knora-api-params';
+import { FulltextSearch } from '../../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-registerspalte',
-  templateUrl: 'registerspalte.component.html',
-  styleUrls: [ 'registerspalte.component.css' ]
+  selector: 'rae-register-titelregister',
+  templateUrl: 'register-titelregister.component.html',
+  styleUrls: [ 'register-titelregister.component.css' ]
 })
-export class RegisterspalteComponent implements OnInit {
+export class RegisterTitelregisterComponent implements OnInit {
 
   rsEntry: Array<any>;
   nHits: number;
 
-  konvolut_id: string;
-  konvolut_type: string;
-  sortingType: string;
-  private sub: any;
+  @Input() selectedTab: string;
 
   static alphabeticalSortKey(key: string) {
     // replace special characters of Latin-1 by base letter and append original string for internal sorting
@@ -49,45 +46,25 @@ export class RegisterspalteComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
-
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-
-    let searchParams = new ExtendedSearch();
-    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    searchParams.showNRows = 500;
+    let searchParams = new FulltextSearch;
+    searchParams.searchstring = 'e';
 
     this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
+      .switchMap((params: Params) => this.http.get(searchParams.toString()))
       .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => {
-        this.rsEntry = res;
-        this.sortAlphabetically();
-        this.sortingType = 'alphabetic';
-      });
-
+      .subscribe((res: Array<any>) => this.rsEntry = res);
     this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
+      .switchMap((params: Params) => this.http.get(searchParams.toString()))
       .map(response => response.json().nhits)
-      .subscribe((res: number) => this.nHits = res);
-
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-    this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
-    });
+      .subscribe((res: number) => { this.nHits = res; this.sortAlphabetically() });
   }
 
   // TODO: Sort alphabetically after init. How?
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[ 0 ]);
-      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[ 0 ]);
+      const k1 = RegisterTitelregisterComponent.alphabeticalSortKey(n1.value[ 0 ]);
+      const k2 = RegisterTitelregisterComponent.alphabeticalSortKey(n2.value[ 0 ]);
       if (k1 > k2) {
         return 1;
       }
@@ -102,7 +79,6 @@ export class RegisterspalteComponent implements OnInit {
 
   sortChronologically() {
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
-    // TODO passe an entsprechende Datentypen der Felder an
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
       const k1 = n1.obj_id;
       const k2 = n2.obj_id;

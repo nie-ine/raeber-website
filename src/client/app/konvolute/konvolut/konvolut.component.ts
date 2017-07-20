@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -31,34 +32,37 @@ export class KonvolutComponent implements OnInit {
   ngOnInit() {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
+    let searchParams = new ExtendedSearch();
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    searchParams.showNRows = 500;
+
     this.route.params
       .switchMap((params: Params) =>
-        this.http.get('http://localhost:3333/v1/search/?searchtype=extended&' +
-          'filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Convolute&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle&compop=!EQ&searchval=%20&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasDescription&compop=!EQ&searchval=%20&show_nrows=500'))
+        this.http.get(searchParams.toString()))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.poems = res);
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'id' ];
+      this.konvolut_id = params[ 'konvolut' ];
     });
-
-    console.log('search/schlaf?searchtype=fulltext');
   }
 
   // for testings
   searchForDoctor(fulltextQuery: string) {
-    this.http.get('http://localhost:3333/v1/search/' + fulltextQuery + '?searchtype=fulltext')
+    let searchParams = new FulltextSearch;
+    searchParams.searchstring = fulltextQuery;
+    this.http.get(searchParams.toString())
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
-    console.log('/search/' + fulltextQuery + '?searchtype=fulltext');
+    console.log(searchParams.toString());
   }
 
   // for testings
   freeSearch() {
-    this.http.get('http://localhost:3333/v1/search/' + this.searchQuery)
+    this.http.get('http://knora.nie-ine.ch/v1/search/' + this.searchQuery)
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
     console.log('/search/' + this.searchQuery);

@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { ExtendedSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -32,12 +33,15 @@ export class SuperKonvolutComponent implements OnInit {
   ngOnInit() {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
+    let searchParams = new ExtendedSearch;
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    searchParams.showNRows = 500;
+
     this.route.params
       .switchMap((params: Params) =>
-        this.http.get('http://localhost:3333/v1/search/?searchtype=extended&' +
-          'filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Convolute&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle&compop=!EQ&searchval=%20&' +
-          'property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasDescription&compop=!EQ&searchval=%20&show_nrows=500'))
+        this.http.get(searchParams.toString()))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.poems = res);
 

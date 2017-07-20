@@ -8,12 +8,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { FulltextSearch } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung',
   templateUrl: 'fassung.component.html',
-  styleUrls: ['fassung.component.css']
+  styleUrls: [ 'fassung.component.css' ]
 })
 export class FassungComponent implements OnInit {
   creationDate = 'Freitag, 01 Juni 1979';
@@ -22,7 +23,11 @@ export class FassungComponent implements OnInit {
   zeigeKonstituiert: boolean = true;
   zeigeDiplomatisch: boolean = false;
 
-  fassung_tag: Array<string> = ['Sonne', 'Wind', 'Wasser'];
+  fassung_tag: Array<string> = [
+    'Sonne',
+    'Wind',
+    'Wasser'
+  ];
 
   poems: Array<any>;
 
@@ -50,11 +55,14 @@ export class FassungComponent implements OnInit {
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
+    let searchParams = new FulltextSearch;
+    searchParams.searchstring = 'e';
+
     // TODO dynamisieren
 
     this.route.params
       .switchMap((params: Params) =>
-        this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+        this.http.get(searchParams.toString()))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.poems = res);
 

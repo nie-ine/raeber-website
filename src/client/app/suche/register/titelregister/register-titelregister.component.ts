@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { FulltextSearch } from '../../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -45,12 +46,15 @@ export class RegisterTitelregisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    let searchParams = new FulltextSearch;
+    searchParams.searchstring = 'e';
+
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+      .switchMap((params: Params) => this.http.get(searchParams.toString()))
       .map(response => response.json().subjects)
       .subscribe((res: Array<any>) => this.rsEntry = res);
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://localhost:3333/v1/search/e?searchtype=fulltext'))
+      .switchMap((params: Params) => this.http.get(searchParams.toString()))
       .map(response => response.json().nhits)
       .subscribe((res: number) => { this.nHits = res; this.sortAlphabetically() });
   }

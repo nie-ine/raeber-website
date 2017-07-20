@@ -8,7 +8,24 @@ import './operators';
 @Component({
   moduleId: module.id,
   selector: 'rae-app',
-  templateUrl: 'app.component.html'
+  template: `
+    <header id="rt-top-surround">
+      <rae-kopfzeile></rae-kopfzeile>
+    </header>
+    <main id='rt-mainbody-surround'>
+      <rae-haupttext></rae-haupttext>
+    </main>
+    <footer id='rt-footer-surround'>
+      <rae-fusszeile></rae-fusszeile>
+    </footer>
+  `,
+  styles: [
+      `:host {
+      flex: 1 1 100%;
+      display: flex;
+      flex-flow: column;
+    }`
+  ]
 })
 export class AppComponent {
   constructor() {

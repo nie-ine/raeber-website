@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-fusszeile',
-  templateUrl: 'fusszeile.component.html'
+  templateUrl: './fusszeile.component.html'
 })
 export class FusszeileComponent {
 }

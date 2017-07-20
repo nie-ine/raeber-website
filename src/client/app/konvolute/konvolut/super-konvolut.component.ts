@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { ExtendedSearch, KnoraProperty } from '../shared/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -19,6 +19,9 @@ import { ExtendedSearch, KnoraProperty } from '../shared/knora-api-params';
 export class SuperKonvolutComponent implements OnInit {
 
   poems: Array<any>;
+
+  // for testings
+  searchQuery: string;
 
   konvolut_id: string;
   konvolut_type: string;

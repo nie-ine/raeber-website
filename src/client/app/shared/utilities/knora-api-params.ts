@@ -1,4 +1,4 @@
-import { Config } from '../../shared/config/env.config';
+import { Config } from '../config/env.config';
 /**
  * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/11/17.
  */

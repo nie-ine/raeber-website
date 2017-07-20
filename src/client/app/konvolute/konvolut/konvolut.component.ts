@@ -3,13 +3,13 @@
  */
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/paging';
-import { ExtendedSearch, KnoraProperty } from '../shared/knora-api-params';
+import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -65,10 +65,12 @@ export class KonvolutComponent implements OnInit {
 
   // for testings
   searchForDoctor(fulltextQuery: string) {
-    this.http.get('http://knora.nie-ine.ch/v1/search/' + fulltextQuery + '?searchtype=fulltext')
+    let searchParams = new FulltextSearch;
+    searchParams.searchstring = fulltextQuery;
+    this.http.get(searchParams.toString())
       .map(response => response.json().subjects)
       .subscribe(res => this.poems = res);
-    console.log('/search/' + fulltextQuery + '?searchtype=fulltext');
+    console.log(searchParams.toString());
   }
 
   // for testings

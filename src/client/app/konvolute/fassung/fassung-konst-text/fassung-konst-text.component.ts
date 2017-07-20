@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FassungKonstTextService } from './fassung-konst-text.service';
 import { ActivatedRoute } from '@angular/router';
-import { ExtendedSearch, KnoraProperty } from '../../shared/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../../../shared/utilities/knora-api-params';
 
 const _expressions: { [key: string]: string } = {
   'notizbuecher': 'http://www.knora.org/ontology/text#Note',

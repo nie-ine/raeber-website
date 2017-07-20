@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 07.07.17.
  */
 
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 

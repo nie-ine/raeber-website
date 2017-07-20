@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Config } from '../../../shared/config/env.config';
+import { KnoraRequest } from '../../../shared/utilities/knora-api-params';
 
-import { KnoraRequest } from '../../shared/knora-api-params';
 
 @Injectable()
 export class FassungKonstTextService {

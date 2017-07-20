@@ -21,7 +21,12 @@ export class ImageGridComponent implements OnInit {
 
   myImages: Array<any>;
   zoomfactor = 5;
-  width = '100%';
+  heightAndWidth = 100;
+  height = 30;
+  width = 30;
+  overflow = 'auto';
+  resize = 'both';
+  percentSign = '%';
 
   // for testings
   searchQuery: string;
@@ -35,7 +40,7 @@ export class ImageGridComponent implements OnInit {
 
   ngOnInit() {
     this.konvolut_type = this.route.snapshot.url[0].path;
-    }
+  }
 
   searchForDoctor() {
     return this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id%5B%5D=439&compop%5B%5D=!EQ&searchval%5B%5D=&show_nrows=25&start_at=0&progvalfile=prog_63047.salsah&filter_by_restype=100')
@@ -45,31 +50,45 @@ export class ImageGridComponent implements OnInit {
           console.log(data);
           //console.log(JSON.stringify(data.subjects, null, 4));
           return data.subjects;
-      }
+        }
       )
       .subscribe(response => this.myImages = response);
   }
 
-  increaseSize(){
-    if(this.zoomfactor > 2) {
+  increaseSize() {
+    if (this.zoomfactor > 2) {
       this.zoomfactor -= 1;
-      this.width = '100%';
     }
-    else{
+    else {
       window.alert('Picture reached maximum size');
     }
   }
 
 
-
-   reduceSize(){
-    if(this.zoomfactor < 5) {
-    this.zoomfactor += 1;
-      this.width = '100%';
+  reduceSize() {
+    if (this.zoomfactor < 5) {
+      this.zoomfactor += 1;
     }
-    else{
-    window.alert('Picture reached minimum size');
+    else {
+      window.alert('Picture reached minimum size');
     }
   }
+
+  increaseFrameSize() {
+    this.height *= 1.5;
+    this.width *= 1.5;
+  }
+
+  reduceFrameSize() {
+    this.height *= 0.5;
+    this.width *= 0.5;
+  }
+
+  resetSize() {
+    this.height = 30;
+    this.width = 30;
+    this.zoomfactor = 5;
+  }
+
 
 }

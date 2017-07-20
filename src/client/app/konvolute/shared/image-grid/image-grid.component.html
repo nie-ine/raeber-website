@@ -3,7 +3,6 @@
 <br>
 <button md-raised-button (click)="searchForDoctor()">Search Resource with Image Example</button>
 <br/>
-<button md-raised-button (click)="examplePictureZoomingIn()">Example Picture for zooming in</button>
 <br/>
 <div class="rae-poem-container" *ngFor="let image of myImages; let i = index">
       {{ image.value[0] }}
@@ -16,9 +15,9 @@
 
 <div >
   <md-card>
-    <md-card-content *ngIf="zeigeKonstituiert" >
+    <md-card-content *ngIf="ausgeklappt" >
 
-      <div style="height: 200px; width: 200px; overflow-y: auto; resize: both;">
+      <div [ngStyle]="{'height': height + percentSign, 'width': width + percentSign, 'overflow-y': overflow, 'resize': resize}">
       <p><img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}" class="rae-image_resizeable"></p>
       </div>
 
@@ -27,29 +26,57 @@
     </md-card-content>
 
       <md-card-footer>
-        <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
-          <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
-          <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
-          <span *ngIf="zeigeKonstituiert">Bild verbergen</span>
-          <span *ngIf="!zeigeKonstituiert">Bild anzeigen</span>
+        <button md-button (click)="ausgeklappt = !ausgeklappt">
+          <md-icon *ngIf="ausgeklappt">expand_less</md-icon>
+          <md-icon *ngIf="!ausgeklappt">expand_more</md-icon>
+          <span *ngIf="ausgeklappt">Bild verbergen</span>
+          <span *ngIf="!ausgeklappt">Bild anzeigen</span>
         </button>
 
-        <button md-button (click)="increaseSize()">
-          <md-icon *ngIf="zeigeKonstituiert">zoom_in</md-icon>
-        </button>
 
+
+
+
+
+
+        <button md-button [mdMenuTriggerFor]="menu">
+          <md-icon *ngIf="ausgeklappt">wallpaper</md-icon>
+          </button>
+        <md-menu #menu="mdMenu" yPosition="above">
+
+          <button md-button (click)="increaseSize()">
+            <md-icon *ngIf="ausgeklappt">zoom_in</md-icon>
+            Erhöhe Bildqualität
+          </button>
 
 
           <button md-button (click)="reduceSize()">
-            <md-icon *ngIf="zeigeKonstituiert">zoom_out</md-icon>
+            <md-icon *ngIf="ausgeklappt">zoom_out</md-icon>
+            Niedrigere Bildqualität
           </button>
 
+          <button md-button (click)="increaseFrameSize()">
+            <md-icon *ngIf="ausgeklappt">flip_to_front</md-icon>
+            Bild vergrössern
+          </button>
+
+          <button md-button (click)="reduceFrameSize()">
+            <md-icon *ngIf="ausgeklappt">flip_to_back</md-icon>
+            Bild verkleinern
+          </button>
+
+          <br>
+
+          <button md-button (click)="resetSize()">
+            <md-icon *ngIf="ausgeklappt">cached</md-icon>
+            Reset
+          </button>
+
+
+        </md-menu>
 
 
         </md-card-footer>
   </md-card>
 
 </div>
-
-
-

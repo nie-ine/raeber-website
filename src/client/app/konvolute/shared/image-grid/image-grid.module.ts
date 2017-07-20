@@ -5,6 +5,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
@@ -14,7 +15,8 @@ import {
   MdIconModule,
   MdInputModule,
   MdListModule,
-  MdSliderModule
+  MdSliderModule,
+  MdMenuModule
 } from '@angular/material';
 
 import { ImageGridComponent } from './image-grid.component';
@@ -31,7 +33,9 @@ import { ImageGridComponent } from './image-grid.component';
     MdIconModule,
     MdInputModule,
     MdButtonModule,
-    MdSliderModule
+    MdSliderModule,
+    MdMenuModule,
+    BrowserAnimationsModule
   ],
   declarations: [ ImageGridComponent ],
   exports: [ ImageGridComponent ],

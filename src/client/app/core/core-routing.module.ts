@@ -15,13 +15,14 @@ import { RegisterComponent } from '../suche/register/register.component';
 import { KonvolutModule } from '../konvolute/konvolut/konvolut.module';
 import { FassungModule } from '../konvolute/fassung/fassung.module';
 import { RegisterModule } from '../suche/register/register.module';
+import { PageNotFoundComponent } from './404.component';
 
 @NgModule({
   imports: [
     KonvolutModule,
     FassungModule,
     RegisterModule,
-    RouterModule.forChild([
+    RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
       { path: 'anleitung', component: AnleitungComponent },
@@ -33,7 +34,8 @@ import { RegisterModule } from '../suche/register/register.module';
       { path: 'suche', component: SucheComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
       { path: 'start', component: HomepageComponent },
-      { path: '', redirectTo: '/start', pathMatch: 'full' }
+      { path: '', redirectTo: '/start', pathMatch: 'full' },
+      { path: '**', component: PageNotFoundComponent }
     ])
   ],
   exports: [ RouterModule ]
@@ -46,6 +48,7 @@ export const routingComponents = [
   HomepageComponent,
   ImpressumComponent,
   LebensdatenComponent,
+  PageNotFoundComponent,
   PdfNotizbuecherComponent,
   PdfSynopsenComponent,
   SignaturenComponent,

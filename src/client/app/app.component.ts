@@ -18,7 +18,14 @@ import './operators';
     <footer id='rt-footer-surround'>
       <rae-fusszeile></rae-fusszeile>
     </footer>
-  `
+  `,
+  styles: [
+      `:host {
+      flex: 1 1 100%;
+      display: flex;
+      flex-flow: column;
+    }`
+  ]
 })
 export class AppComponent {
   constructor() {

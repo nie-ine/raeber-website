@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { ExtendedSearch, KnoraProperty } from '../../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -18,12 +19,10 @@ import 'rxjs/add/operator/map';
 export class RegisterspalteComponent implements OnInit {
 
   rsEntry: Array<any>;
-
-  // for testings
-  searchQuery: string;
-
-  konvolut_id: string;
-  konvolut_type: string;
+  nHits: number;
+  konvolutId: string;
+  konvolutType: string;
+  sortingType: string;
   private sub: any;
 
   static alphabeticalSortKey(key: string) {
@@ -49,16 +48,27 @@ export class RegisterspalteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+
+    let searchParams = new ExtendedSearch();
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    searchParams.showNRows = 500;
 
     this.route.params
-      .switchMap((params: Params) => this.http.get('http://knora.nie-ine.ch/v1/search/e?searchtype=fulltext'))
-      .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => this.rsEntry = res);
+      .switchMap((params: Params) =>
+        this.http.get(searchParams.toString()))
+      .map(response => response.json())
+      .subscribe((res: any) => {
+        this.rsEntry = res.subjects;
+        this.nHits = res.nhits;
+        this.sortAlphabetically();
+        this.sortingType = 'alphabetic';
+      });
 
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+    this.konvolutType = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
+      this.konvolutId = params[ 'konvolut' ];
     });
   }
 
@@ -82,9 +92,17 @@ export class RegisterspalteComponent implements OnInit {
 
   sortChronologically() {
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
+    // TODO passe an entsprechende Datentypen der Felder an
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = n1.obj_id;
-      const k2 = n2.obj_id;
+      let k1;
+      let k2;
+      if (this.konvolutType === 'notizbuecher' || this.konvolutType === 'manuskripte') {
+        k1 = n1.obj_id;
+        k2 = n2.obj_id;
+      } else {
+        k1 = n1.obj_id;
+        k2 = n2.obj_id;
+      }
       if (k1 > k2) {
         return 1;
       }

@@ -11,10 +11,10 @@ import { WerkausgabeComponent } from '../statisch/werkausgabe.component';
 import { SucheComponent } from '../suche/suche.component';
 import { PdfNotizbuecherComponent } from '../statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from '../statisch/pdf-synopsen.component';
-import { RegisterComponent } from '../suche/register/register.component';
-import { KonvolutModule } from '../konvolute/konvolut/konvolut.module';
-import { FassungModule } from '../konvolute/fassung/fassung.module';
-import { RegisterModule } from '../suche/register/register.module';
+import { RegisterComponent } from '../register/register.component';
+import { KonvolutModule } from '../konvolut/konvolut.module';
+import { FassungModule } from '../fassung/fassung.module';
+import { RegisterModule } from '../register/register.module';
 import { PageNotFoundComponent } from './404.component';
 
 @NgModule({

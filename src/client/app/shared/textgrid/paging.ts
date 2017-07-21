@@ -3,24 +3,24 @@
  */
 
 import { Injectable } from '@angular/core';
-import { KnoraRequest } from './knora-api-params';
 import { Observable } from 'rxjs/Observable';
-import { Http, Jsonp } from '@angular/http';
+import { Http } from '@angular/http';
+import { KnoraRequest } from '../utilities/knora-api-params';
 
 @Injectable()
 export class DynamicPaging {
   private _offset = 0;
   private _size = 20;
 
-  constructor(private http: Http, private jsonp: Jsonp) {
-  }
-
-  set size(v: number) {
-    this._size = v;
+  constructor(private http: Http) {
   }
 
   get size(): number {
     return this._size;
+  }
+
+  set size(v: number) {
+    this._size = v;
   }
 
   loadText(req: KnoraRequest): Observable<Array<any>> {

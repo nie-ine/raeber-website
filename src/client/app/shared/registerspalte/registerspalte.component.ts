@@ -8,7 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { ExtendedSearch, KnoraProperty } from '../../../shared/utilities/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,

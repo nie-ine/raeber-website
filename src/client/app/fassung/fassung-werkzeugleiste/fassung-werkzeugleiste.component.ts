@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   moduleId: module.id,
   selector: 'rae-fassung-werkzeugleiste',
   templateUrl: 'fassung-werkzeugleiste.component.html',
-  styleUrls: ['fassung-werkzeugleiste.component.css']
+  styleUrls: [ 'fassung-werkzeugleiste.component.css' ]
 })
 export class FassungWerkzeugleisteComponent implements OnInit {
 

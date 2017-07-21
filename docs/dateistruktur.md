@@ -1,45 +1,62 @@
 # Dateistruktur
-Module werden **fett**, Komponenten in `Blocksatz` dargestellt. Der
-Name des Moduls entspricht dem Namen des Verzeichnisses, in dem die
-Modul-Klasse liegt. Gibt es Unterverzeichnisse in einem Modul-
-Verzeichnis, werden diese mit *Kursivschrift* ausgezeichnet. Da in
-der Regel jedes Modul von einer Routing-Definition begleitet wird, ist
-letzteres nicht separat erwähnt.
+Module werden **fett**, Services sowie Hilfsklassen in Blocksatz 
+und Verzeichnisse *kursiv* dargestellt. Komponenten sind nicht
+ausgezeichnet. Ein Modul ist immer auch ein Verzeichnis. 
+Routing-Definitionen sowie Klassen, die nicht projekt-spezifisch sind 
+(Konfigurationen etc.), werden nicht aufgeführt.
 
-* `app`
-  * **core**
-    * `404`
-    * `fusszeile`
-    * `haupttext`
-    * `kopfzeile`
-    * `navigationsleiste`
-  * **konvolute**
-    * **briefe**
-      * `briefe`
-    * **fassung**
-      * `fassung`
-    * **konvolut**
-      * `konvolut`
-    * **shared**
-      * **registerspalte**
-      * `konstituierter-text`
-    * **synopse**
-      * `synopse`
-    * **tagebuecher**
-      * `tagebuecher`
-  * **shared**
-    * **text**
-    * **textgrid**
-    * **utilities** (?)
-  * **statisch**
-    * `anleitung`
-    * `homepage`
-    * `impressum`
-    * `lebensdaten`
-    * `notizbuecher`
-    * `signaturen`
-    * `werkausgabe`
-    * `werkliste`
-  * **suche**
-    * `suche`
-    * `register`
+* app
+* **core**
+  * 404
+  * fusszeile
+  * haupttext
+  * kopfzeile
+  * navigationsleiste
+* **fassung**
+  * fassung
+  * *fassung-blaettern*
+    * fassung-blaettern
+  * *fassung-steckbrief*
+    * fassung-steckbrief
+  * *fassung-weitere*
+    * fassung-weitere
+  * *fassung-werkzeugleiste*
+    * fassung-werkzeugleiste
+* **konvolut**
+  * konvolut
+  * super-konvolut
+  * *konvolut-grid*
+    * konvolut-grid
+  * *konvolut-steckbrief*
+    * konvolut-steckbrief
+* **register**
+  * register
+  * *register-beschreibung*
+    * register-beschreibung
+  * *register-navigation*
+    * register-navigation
+  * *titelregister*
+    * titelregister
+* *shared*
+  * **registerspalte**
+    * registerspalte
+  * **text**
+    * fassung-konst-text (?)
+  * *textgrid* <!-- TODO: Als Modul refaktorieren! -->
+    * `paging`
+  * **utilities** <!-- TODO: Services ev. auf andere Module verteilen -->
+    * `knora-api-params`
+* *statisch* <!-- TODO: Aus Konsistenzgründen als Modul refaktorieren! -->
+  * anleitung
+  * homepage
+  * impressum
+  * lebensdaten
+  * pdf-notizbuecher
+  * pdf-synopsen
+  * signaturen
+  * werkausgabe
+  * werkliste
+* *suche* <!-- TODO: Als Modul refaktorieren! -->
+  * suche
+* *synopse* <!-- TODO: Als Modul refaktorieren! -->
+  * synopse

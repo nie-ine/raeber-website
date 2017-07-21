@@ -2,7 +2,7 @@
  * Created by retobaumgartner on 06.07.17.
  */
 
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,

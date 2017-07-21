@@ -5,8 +5,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Config } from '../../../shared/config/env.config';
-import { KnoraRequest } from '../../../shared/utilities/knora-api-params';
+import { Config } from '../config/env.config';
+import { KnoraRequest } from '../utilities/knora-api-params';
 
 
 @Injectable()

@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { DynamicPaging } from '../../shared/utilities/paging';
-import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
+import { DynamicPaging } from '../shared/textgrid/paging';
+import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,

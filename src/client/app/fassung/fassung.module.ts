@@ -24,7 +24,7 @@ import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern
 import { FassungSteckbriefComponent } from './fassung-steckbrief/fassung-steckbrief.component';
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.component';
-import { FassungKonstTextComponent } from './fassung-konst-text/fassung-konst-text.component';
+import { FassungKonstTextComponent } from '../shared/text/fassung-konst-text.component';
 
 @NgModule({
   imports: [

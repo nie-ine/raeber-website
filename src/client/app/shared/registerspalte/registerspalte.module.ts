@@ -10,10 +10,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { RegisterspalteComponent } from './registerspalte.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpModule,
     MdButtonToggleModule,

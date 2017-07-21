@@ -6,13 +6,16 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-konvolut-grid',
-  templateUrl: 'konvolut-grid.component.html',
-  styleUrls: [ 'konvolut-grid.component.css' ]
+  selector: 'rae-textgrid',
+  templateUrl: 'textgrid.component.html',
+  styleUrls: [ 'textgrid.component.css' ]
 })
-export class KonvolutGridComponent implements OnChanges {
+export class TextgridComponent implements OnChanges {
 
   @Input() poems_in_grid: Array<any>;
+
+  showGrid = true;
+  showCols = false;
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
@@ -27,9 +30,6 @@ export class KonvolutGridComponent implements OnChanges {
      }*/
     // changes.prop contains the old and the new value...
   }
-
-  showGrid = true;
-  showCols = false;
 
   toGrid() {
     this.showGrid = true;

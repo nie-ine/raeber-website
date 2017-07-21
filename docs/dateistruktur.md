@@ -25,8 +25,6 @@ Routing-Definitionen sowie Klassen, die nicht projekt-spezifisch sind
 * **konvolut**
   * konvolut
   * super-konvolut
-  * *konvolut-grid*
-    * konvolut-grid
   * *konvolut-steckbrief*
     * konvolut-steckbrief
 * **register**
@@ -42,11 +40,12 @@ Routing-Definitionen sowie Klassen, die nicht projekt-spezifisch sind
     * registerspalte
   * **text**
     * fassung-konst-text (?)
-  * *textgrid* <!-- TODO: Als Modul refaktorieren! -->
+  * **textgrid**
     * `paging`
+    * textgrid
   * **utilities** <!-- TODO: Services ev. auf andere Module verteilen -->
     * `knora-api-params`
-* *statisch* <!-- TODO: Aus Konsistenzgründen als Modul refaktorieren! -->
+* **statisch**
   * anleitung
   * homepage
   * impressum
@@ -56,7 +55,7 @@ Routing-Definitionen sowie Klassen, die nicht projekt-spezifisch sind
   * signaturen
   * werkausgabe
   * werkliste
-* *suche* <!-- TODO: Als Modul refaktorieren! -->
+* **suche**
   * suche
-* *synopse* <!-- TODO: Als Modul refaktorieren! -->
+* **synopse**
   * synopse

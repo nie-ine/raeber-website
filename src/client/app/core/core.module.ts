@@ -8,20 +8,37 @@ import { FusszeileComponent } from './fusszeile.component';
 import { KopfzeileComponent } from './kopfzeile.component';
 import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { CommonModule } from '@angular/common';
-import { CoreRoutingModule, routingComponents } from './core-routing.module';
 import { HaupttextComponent } from './haupttext.component';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './404.component';
+import { KonvolutModule } from '../konvolut/konvolut.module';
+import { FassungModule } from '../fassung/fassung.module';
+import { RegisterModule } from '../register/register.module';
+import { StatischModule } from '../statisch/statisch.module';
+import { SucheModule } from '../suche/suche.module';
+import { SynopseModule } from '../synopse/synopse.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    CoreRoutingModule
+    // Order of imports is important!
+    KonvolutModule,
+    FassungModule,
+    RegisterModule,
+    SucheModule,
+    SynopseModule,
+    StatischModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: '/start', pathMatch: 'full' },
+      { path: '**', component: PageNotFoundComponent }
+    ])
   ],
   declarations: [
     FusszeileComponent,
     KopfzeileComponent,
     HaupttextComponent,
     NavigationsleisteComponent,
-    routingComponents
+    PageNotFoundComponent
   ],
   exports: [
     KopfzeileComponent,

@@ -3,14 +3,14 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, Jsonp, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Config } from '../config/env.config';
 import { KnoraRequest } from '../utilities/knora-api-params';
 
 
 @Injectable()
-export class FassungKonstTextService {
+export class TextService {
 
   private _knoraUrl = Config.API;
 
@@ -32,7 +32,7 @@ export class FassungKonstTextService {
     return Observable.throw(errMsg);
   }
 
-  constructor(private http: Http, private jsonp: Jsonp) {
+  constructor(private http: Http) {
   }
 
 

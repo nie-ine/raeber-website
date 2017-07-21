@@ -7,10 +7,10 @@ import { HttpModule } from '@angular/http';
 import { MdButtonModule, MdListModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { RegisterComponent } from './register.component';
-import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterNavigationComponent } from './register-navigation/register-navigation.component';
 import { RegisterBeschreibungComponent } from './register-beschreibung/register-beschreibung.component';
 import { RegisterTitelregisterComponent } from './titelregister/register-titelregister.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,7 +19,10 @@ import { RegisterTitelregisterComponent } from './titelregister/register-titelre
     HttpModule,
     MdButtonModule,
     MdListModule,
-    RegisterRoutingModule
+    RouterModule.forChild([
+      { path: 'register', component: RegisterComponent },
+      { path: 'register/:zeitraum', component: RegisterComponent }
+    ])
   ],
   declarations: [
     RegisterBeschreibungComponent,

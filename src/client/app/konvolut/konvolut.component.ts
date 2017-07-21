@@ -8,14 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { DynamicPaging } from '../shared/textgrid/paging';
+import { DynamicPaging } from '../shared/textgrid/paging.service';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html',
-  providers: [ DynamicPaging ]
+  templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
 

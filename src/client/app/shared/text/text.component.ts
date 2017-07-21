@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { FassungKonstTextService } from './fassung-konst-text.service';
+import { TextService } from './text.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 
@@ -16,16 +16,16 @@ const _expressions: { [key: string]: string } = {
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-fassung-konsttext',
-  templateUrl: 'fassung-konst-text.component.html',
-  providers: [ FassungKonstTextService ]
+  selector: 'rae-text',
+  templateUrl: './text.component.html',
+  providers: [ TextService ]
 })
-export class FassungKonstTextComponent implements OnInit {
+export class TextComponent implements OnInit {
 
   text: Array<any>;
   errorMsg: any;
 
-  constructor(private konstTextService: FassungKonstTextService, private route: ActivatedRoute) {
+  constructor(private konstTextService: TextService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {

@@ -20,9 +20,8 @@ export class RegisterspalteComponent implements OnInit {
 
   rsEntry: Array<any>;
   nHits: number;
-
-  konvolut_id: string;
-  konvolut_type: string;
+  konvolutId: string;
+  konvolutType: string;
   sortingType: string;
   private sub: any;
 
@@ -50,10 +49,6 @@ export class RegisterspalteComponent implements OnInit {
 
   ngOnInit() {
 
-
-
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-
     let searchParams = new ExtendedSearch();
     searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
@@ -63,22 +58,17 @@ export class RegisterspalteComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) =>
         this.http.get(searchParams.toString()))
-      .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => {
-        this.rsEntry = res;
+      .map(response => response.json())
+      .subscribe((res: any) => {
+        this.rsEntry = res.subjects;
+        this.nHits = res.nhits;
         this.sortAlphabetically();
         this.sortingType = 'alphabetic';
       });
 
-    this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
-      .map(response => response.json().nhits)
-      .subscribe((res: number) => this.nHits = res);
-
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+    this.konvolutType = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
+      this.konvolutId = params[ 'konvolut' ];
     });
   }
 
@@ -104,8 +94,15 @@ export class RegisterspalteComponent implements OnInit {
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
     // TODO passe an entsprechende Datentypen der Felder an
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = n1.obj_id;
-      const k2 = n2.obj_id;
+      let k1;
+      let k2;
+      if (this.konvolutType === 'notizbuecher' || this.konvolutType === 'manuskripte') {
+        k1 = n1.obj_id;
+        k2 = n2.obj_id;
+      } else {
+        k1 = n1.obj_id;
+        k2 = n2.obj_id;
+      }
       if (k1 > k2) {
         return 1;
       }

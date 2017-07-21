@@ -59,8 +59,6 @@ export class KonvolutComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
     });
-
-    console.log('search/schlaf?searchtype=fulltext');
   }
 
   // for testings

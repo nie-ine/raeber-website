@@ -1,14 +1,14 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { DynamicPaging } from '../shared/paging';
+import { DynamicPaging } from '../../shared/utilities/paging';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
@@ -30,9 +30,8 @@ export class KonvolutComponent implements OnInit {
 
   private _esearch = new ExtendedSearch();
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private dp: DynamicPaging, lc: NgZone) {
+  constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     window.onscroll = () => {
-      let status = 'not reached';
       let windowHeight = 'innerHeight' in window ? window.innerHeight
         : document.documentElement.offsetHeight;
       let body = document.body, html = document.documentElement;

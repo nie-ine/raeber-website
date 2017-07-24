@@ -35,12 +35,12 @@ export class RegisterTitelregisterComponent implements OnInit {
 
     this.route.params
       .switchMap((params: Params) => this.http.get(searchParams.toString()))
-      .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => this.rsEntry = res);
-    this.route.params
-      .switchMap((params: Params) => this.http.get(searchParams.toString()))
-      .map(response => response.json().nhits)
-      .subscribe((res: number) => { this.nHits = res; this.sortAlphabetically() });
+      .map(response => response.json())
+      .subscribe((res: any) => {
+      this.rsEntry = res.subjects;
+      this.nHits = res.nhits;
+      this.sortAlphabetically();
+    });
   }
 
   // TODO: Sort alphabetically after init. How?

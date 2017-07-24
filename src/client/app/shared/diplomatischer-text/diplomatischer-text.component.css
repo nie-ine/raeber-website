@@ -1,0 +1,9 @@
+md-button-toggle-group {
+  width: 80%;
+}
+
+md-button-toggle {
+  width: 50%;
+  height: 36px;
+  font-size: 80%;
+}

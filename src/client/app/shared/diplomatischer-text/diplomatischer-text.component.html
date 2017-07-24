@@ -1,0 +1,21 @@
+<div>
+  <md-toolbar>
+    <md-button-toggle-group [(ngModel)]="defaultView">
+      <md-button-toggle [ngStyle]="{'color': farbeNeutral}"
+                        title="Anfangsschicht ohne Auszeichnung"
+                        (click)="zeigeSchicht0()" value="schicht0">0</md-button-toggle>
+      <md-button-toggle [ngStyle]="{'color': farbeErste}"
+                        title="Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet"
+                        (click)="zeigeSchicht1()" value="schicht1">1</md-button-toggle>
+      <md-button-toggle [ngStyle]="{'color': farbeEinfuegung}"
+                        title="Texteinfügung entgegen dem linearen Verlauf der Niederschrift"
+                        (click)="zeigeSchicht2()" value="schicht2">2</md-button-toggle>
+      <md-button-toggle [ngStyle]="{'color': farbeLetzte}"
+                        title="Endschicht (Basis für edierten Text"
+                        (click)="zeigeSchicht3()" value="schicht3">3</md-button-toggle>
+    </md-button-toggle-group>
+    <md-button-toggle [(ngModel)]="textIsMovable"
+                      title="Umschrift verschiebbar machen">↔</md-button-toggle>
+  </md-toolbar>
+  <div class="umschrift edtext edtext_hs" [innerHtml]="text"></div>
+</div>

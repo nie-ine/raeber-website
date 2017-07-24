@@ -1,0 +1,9 @@
+<div *ngFor="let p of pages">
+  <h5>{{p}}</h5>
+  <div style="display: inline-block; vertical-align: top">
+    <div style="background-color: blue; width: 350px; height: 600px"></div>
+  </div>
+  <div style="display: inline-block; vertical-align: top">
+    <rae-diplomatischer-text [page]="p"></rae-diplomatischer-text>
+  </div>
+</div>

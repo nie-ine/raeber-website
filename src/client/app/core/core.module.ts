@@ -22,12 +22,12 @@ import { SynopseModule } from '../synopse/synopse.module';
   imports: [
     CommonModule,
     // Order of imports is important!
+    StatischModule,
     KonvolutModule,
     FassungModule,
     RegisterModule,
     SucheModule,
     SynopseModule,
-    StatischModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/start', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

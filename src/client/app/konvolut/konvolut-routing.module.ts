@@ -18,8 +18,7 @@ import { SuperKonvolutComponent } from './super-konvolut.component';
       { path: 'notizbuecher/:konvolut', component: KonvolutComponent },
       { path: 'typoskripte/typoskripte-sammlungen/:konvolut', component: KonvolutComponent },
       { path: 'typoskripte/:konvolut', component: KonvolutComponent },
-      { path: 'material/:konvolut', component: KonvolutComponent },
-      { path: 'test', component: KonvolutComponent }
+      { path: 'material/:konvolut', component: KonvolutComponent }
     ])
   ],
   exports: [ RouterModule ]

@@ -9,12 +9,14 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
+import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-registerspalte',
   templateUrl: 'registerspalte.component.html',
-  styleUrls: [ 'registerspalte.component.css' ]
+  styleUrls: [ 'registerspalte.component.css' ],
+  providers: [ AlphabeticalSortingService ]
 })
 export class RegisterspalteComponent implements OnInit {
 
@@ -25,30 +27,11 @@ export class RegisterspalteComponent implements OnInit {
   sortingType: string;
   private sub: any;
 
-  static alphabeticalSortKey(key: string) {
-    // replace special characters of Latin-1 by base letter and append original string for internal sorting
-    return key
-      .toLowerCase()
-      .replace(/[àáâãäå]/gi, 'a')
-      .replace(/[æ]/gi, 'ae')
-      .replace(/[ç]/gi, 'c')
-      .replace(/[ð]/gi, 'd')
-      .replace(/[èéêë]/gi, 'e')
-      .replace(/[ìíîï]/gi, 'i')
-      .replace(/[òóôõöø]/gi, 'o')
-      .replace(/[ñ]/gi, 'n')
-      .replace(/[ß]/gi, 'ss')
-      .replace(/[ùúûü]/gi, 'u')
-      .replace(/[ýÿ]/gi, 'y')
-      .replace(/[^a-z0-9 ]/gi, '')
-      .concat('\t', key.toLowerCase(), '\t', key);
-  }
-
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router,
+              private sortingService: AlphabeticalSortingService) {
   }
 
   ngOnInit() {
-
     let searchParams = new ExtendedSearch();
     searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
@@ -76,8 +59,8 @@ export class RegisterspalteComponent implements OnInit {
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = RegisterspalteComponent.alphabeticalSortKey(n1.value[ 0 ]);
-      const k2 = RegisterspalteComponent.alphabeticalSortKey(n2.value[ 0 ]);
+      const k1 = this.sortingService.germanAlphabeticalSortKey(n1.value[ 0 ]);
+      const k2 = this.sortingService.germanAlphabeticalSortKey(n2.value[ 0 ]);
       if (k1 > k2) {
         return 1;
       }

@@ -9,12 +9,14 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { FulltextSearch } from '../../shared/utilities/knora-api-params';
+import { AlphabeticalSortingService } from '../../shared/utilities/alphabetical-sorting.service';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-register-titelregister',
   templateUrl: 'register-titelregister.component.html',
-  styleUrls: [ 'register-titelregister.component.css' ]
+  styleUrls: [ 'register-titelregister.component.css' ],
+  providers: [ AlphabeticalSortingService ]
 })
 export class RegisterTitelregisterComponent implements OnInit {
 
@@ -23,26 +25,8 @@ export class RegisterTitelregisterComponent implements OnInit {
 
   @Input() selectedTab: string;
 
-  static alphabeticalSortKey(key: string) {
-    // replace special characters of Latin-1 by base letter and append original string for internal sorting
-    return key
-      .toLowerCase()
-      .replace(/[àáâãäå]/gi, 'a')
-      .replace(/[æ]/gi, 'ae')
-      .replace(/[ç]/gi, 'c')
-      .replace(/[ð]/gi, 'd')
-      .replace(/[èéêë]/gi, 'e')
-      .replace(/[ìíîï]/gi, 'i')
-      .replace(/[òóôõöø]/gi, 'o')
-      .replace(/[ñ]/gi, 'n')
-      .replace(/[ß]/gi, 'ss')
-      .replace(/[ùúûü]/gi, 'u')
-      .replace(/[ýÿ]/gi, 'y')
-      .replace(/[^a-z0-9 ]/gi, '')
-      .concat('\t', key.toLowerCase(), '\t', key);
-  }
-
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router,
+              private sortingService: AlphabeticalSortingService) {
   }
 
   ngOnInit() {
@@ -63,8 +47,8 @@ export class RegisterTitelregisterComponent implements OnInit {
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = RegisterTitelregisterComponent.alphabeticalSortKey(n1.value[ 0 ]);
-      const k2 = RegisterTitelregisterComponent.alphabeticalSortKey(n2.value[ 0 ]);
+      const k1 = this.sortingService.germanAlphabeticalSortKey(n1.value[ 0 ]);
+      const k2 = this.sortingService.germanAlphabeticalSortKey(n2.value[ 0 ]);
       if (k1 > k2) {
         return 1;
       }

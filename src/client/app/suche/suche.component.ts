@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { globalSearchVariableService } from './globalSearchVariablesService';
 
 
 @Component({
@@ -15,15 +16,32 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SucheComponent implements OnInit{
   vocabulary: 'http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext';
-  resourceTypesPath: 'http://130.60.24.65:3333/v1/resourcetypes?vocabulary=';
+
   myResources: Array<any>;
   myProperties: Array<any>;
+  searchResult: Array<any>;
   selectedResource: string;
   selectedProperty: string;
   firstInput: string;
   secondInput: string;
   concatenatedString: string;
   boolOperator: string;
+  encodedURL: string;
+  searchForVal: string;
+  query: string;
+  availableboolOperators = [
+    {name: 'equal to', operator: 'EQ'},
+    {name: 'not equal to', operator: '!EQ'},
+    {name: 'greater than', operator: 'GT'},
+    {name: 'greater or equal', operator: 'GT_EQ'},
+    {name: 'lower than', operator: 'LT'},
+    {name: 'lower or equal than', operator: 'LT_EQ'},
+    {name: 'exists', operator: 'EXISTS'},
+    {name: 'match', operator: 'MATCH'},
+    {name: 'like', operator: 'LIKE'},
+    {name: '!like', operator: '!LIKE'},
+    {name: 'match_boolean', operator: 'MATCH_BOOLEAN'}
+  ];
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
@@ -31,25 +49,16 @@ export class SucheComponent implements OnInit{
   ngOnInit() {
     console.log(this.vocabulary);
     this.initialQuery(this.vocabulary, this.resourceTypesPath);
-    this.concatenate('OneAnd','TwoAnd');
   }
-
-  concatenate(firstInput: string, secondInput: string) {
-    console.log(this.firstInput);
-    const myOutput = this.firstInput + this.secondInput;
-    console.log(myOutput);
-    return myOutput;
-}
 
   initialQuery(firstInput: string, secondInput: string) {
     this.concatenatedString = this.firstInput + this.secondInput;
     console.log(this.concatenatedString);
-    return this.http.get('http://130.60.24.65:3333/v1/resourcetypes?vocabulary=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext')
+    return this.http.get(globalSearchVariableService.API_URL +  globalSearchVariableService.resourceTypesPath + globalSearchVariableService.initialVocabulary)
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          //console.log(JSON.stringify(data.subjects, null, 4));
           return data.resourcetypes;
         }
       )
@@ -58,20 +67,51 @@ export class SucheComponent implements OnInit{
 
   propertyQuery() {
     if (this.selectedResource !== undefined) {
-      console.log(this.selectedResource);
+
+      console.log('Path to request property:' + globalSearchVariableService.propertyListsQuery);
+      this.encodedURL = encodeURIComponent(this.selectedResource);
+      console.log('Selected resource:' + this.encodedURL);
+
+
       console.log('Funktion wird ausgeführt');
        // TODO: Encode URL that arrives here
-      return this.http.get('http://130.60.24.65:3333/v1/propertylists?restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23Manuscript')
+      return this.http.get(globalSearchVariableService.API_URL + globalSearchVariableService.propertyListsQuery + this.encodedURL)
         .map(
           (lambda: Response) => {
             const data = lambda.json();
             console.log(data);
-            //console.log(JSON.stringify(data.subjects, null, 4));
             return data.properties;
           }
         )
         .subscribe(response => this.myProperties = response);
     }
+  }
+
+
+  finalQuery() {
+    this.query = globalSearchVariableService.API_URL +
+          globalSearchVariableService.extendedSearch +
+          encodeURIComponent(this.selectedResource) +
+          globalSearchVariableService.extendedProperty +
+          encodeURIComponent(this.selectedProperty) +
+          globalSearchVariableService.compareOperator +
+          this.boolOperator +
+          globalSearchVariableService.searchval +
+          this.searchForVal;
+    // Es wird hier nicht angezeigt wegen der Raute
+    console.log(
+      'Final extended search URl: ' + this.query);
+    return this.http.get(this.query)
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data;
+        }
+      )
+      .subscribe(response => this.searchResult = response);
+
+
   }
 
 }

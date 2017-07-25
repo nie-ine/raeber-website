@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdCardModule } from '@angular/material';
+import { MdButtonToggleModule, MdCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { DynamicPaging } from './paging.service';
@@ -13,6 +13,7 @@ import { TextgridComponent } from './textgrid.component';
 @NgModule({
   imports: [
     CommonModule,
+    MdButtonToggleModule,
     MdCardModule,
     RouterModule
   ],

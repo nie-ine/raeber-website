@@ -8,7 +8,7 @@ import { WerklisteComponent } from '../statisch/werkliste.component';
 import { LebensdatenComponent } from '../statisch/lebensdaten.component';
 import { AnleitungComponent } from '../statisch/anleitung.component';
 import { WerkausgabeComponent } from '../statisch/werkausgabe.component';
-import { SucheComponent } from '../suche/suche.component';
+import { SucheModule } from '../suche/suche.module';
 import { PdfNotizbuecherComponent } from '../statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from '../statisch/pdf-synopsen.component';
 import { RegisterComponent } from '../suche/register/register.component';
@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './404.component';
     KonvolutModule,
     FassungModule,
     RegisterModule,
+    SucheModule,
     RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
@@ -31,7 +32,6 @@ import { PageNotFoundComponent } from './404.component';
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'suche', component: SucheComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
       { path: 'start', component: HomepageComponent },
       { path: '', redirectTo: '/start', pathMatch: 'full' },
@@ -52,7 +52,6 @@ export const routingComponents = [
   PdfNotizbuecherComponent,
   PdfSynopsenComponent,
   SignaturenComponent,
-  SucheComponent,
   WerkausgabeComponent,
   WerklisteComponent
 ];

@@ -1,0 +1,49 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<h1>Suche</h1>
+
+<br>
+
+
+
+<div style="padding:20px;" ng-init="myResources=initialQuery()">
+
+    <md-select placeholder="Select Resource" [(ngModel)]="selectedResource" name="resource" >
+      <md-option *ngFor="let resource of myResources" [value]="resource.id" (click)="propertyQuery()">
+        {{resource.label}}
+      </md-option>
+    </md-select>
+
+    <md-select placeholder="Select Property" [(ngModel)]="selectedProperty" name="resource">
+      <md-option *ngFor="let property of myProperties" [value]="property.label">
+        {{property.label}}
+      </md-option>
+    </md-select>
+
+    <md-select placeholder="Select logical Operator" [(ngModel)]="boolOperator" name="bool">
+      <md-option> equal to </md-option>
+      <md-option> not equal to </md-option>
+      <md-option> ... </md-option>
+    </md-select>
+
+    <md-input-container>
+      <input mdInput placeholder="Search for this word">
+    </md-input-container>
+
+  <button md-button>
+    <md-icon >search</md-icon>
+  </button>
+
+
+  <button md-button>
+    <md-icon >note_add</md-icon>
+  </button>
+
+  <p></p>
+
+  <button md-button>
+    <md-icon >note_add</md-icon>
+  </button>
+
+
+</div>

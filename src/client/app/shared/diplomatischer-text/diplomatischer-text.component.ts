@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,9 +10,12 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/cor
   templateUrl: 'diplomatischer-text.component.html',
   styleUrls: [ 'diplomatischer-text.component.css' ]
 })
-export class DimplomatischerTextComponent implements OnInit, AfterViewInit, OnChanges {
+export class DimplomatischerTextComponent implements OnInit, DoCheck {
 
-  @Input() page;
+  @Input() page: any;
+  @Input() gewaehlteSchicht: string;
+  @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();
+
 
   farbeNeutral = '#6e6e6e';
   farbeMarkierung = '#d00501';
@@ -21,7 +24,6 @@ export class DimplomatischerTextComponent implements OnInit, AfterViewInit, OnCh
   farbeLetzte = '#F00000';
   farbeErste = '#800000';
 
-  defaultView = 'schicht0';
   textIsMovable: boolean = false;
   // TODO: herausfinden wie das geht
 
@@ -29,13 +31,31 @@ export class DimplomatischerTextComponent implements OnInit, AfterViewInit, OnCh
 // TODO: dynamisieren
 
   ngOnInit() {
-    this.zeigeSchicht0();
+    this.updateSchichten();
   }
-  ngOnChanges() {
-    this.zeigeSchicht0();
+
+  ngDoCheck() {
+    this.updateSchichten();
   }
-  ngAfterViewInit() {
-    this.zeigeSchicht0();
+
+  updateSchichten() {
+    switch (this.gewaehlteSchicht) {
+      case 'schicht0':
+        this.zeigeSchicht0();
+        break;
+      case 'schicht1':
+        this.zeigeSchicht1();
+        break;
+      case 'schicht2':
+        this.zeigeSchicht2();
+        break;
+      case 'schicht3':
+        this.zeigeSchicht3();
+        break;
+      default:
+        this.zeigeSchicht0();
+        break;
+    }
   }
 
   zeigeSchicht0() {

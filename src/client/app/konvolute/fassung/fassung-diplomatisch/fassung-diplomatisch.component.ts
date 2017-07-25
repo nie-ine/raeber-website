@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 })
 export class FassungDiplomatischComponent {
 
-  @Input() pages;
+  @Input() pages: any;
+  gewaehlteSchicht: string = 'schicht0';
 
 }

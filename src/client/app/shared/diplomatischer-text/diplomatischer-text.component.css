@@ -3,7 +3,15 @@ md-button-toggle-group {
 }
 
 md-button-toggle {
-  width: 50%;
+  width: 25%;
   height: 36px;
   font-size: 80%;
+}
+
+.rae-diplomatic-movable {
+  cursor: move;
+}
+
+.rae-diplomatic-in-place {
+  cursor: auto;
 }

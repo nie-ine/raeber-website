@@ -3,18 +3,15 @@
  */
 
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule, MdToolbarModule
+  MdButtonToggleModule, MdCheckboxModule,
+  MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { DimplomatischerTextComponent } from './diplomatischer-text.component';
 
 @NgModule({
@@ -24,12 +21,9 @@ import { DimplomatischerTextComponent } from './diplomatischer-text.component';
     HttpModule,
     MdButtonModule,
     MdButtonToggleModule,
-    MdCardModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdToolbarModule
+    MdCheckboxModule,
+    MdToolbarModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DimplomatischerTextComponent

@@ -23,12 +23,13 @@
         3
       </md-button-toggle>
     </md-button-toggle-group>
+
+    <!-- TODO replace with better layout. Now as checkbox because button toggle is broken -->
     <md-checkbox [(ngModel)]="textIsMovable"
-                        title="Umschrift verschiebbar machen">↔</md-checkbox> <!-- as checkbox because button toggle is broken -->
+                        title="Umschrift verschiebbar machen">↔</md-checkbox>
 
   </md-toolbar>
   <div class="umschrift edtext edtext_hs"
        [innerHtml]="text"
        [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}"></div>
-  <p *ngIf="textIsMovable">movable</p><p *ngIf="!textIsMovable">in place</p><p>{{gewaehlteSchicht}}</p>
 </div>

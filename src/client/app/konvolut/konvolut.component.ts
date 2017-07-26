@@ -20,9 +20,6 @@ export class KonvolutComponent implements OnInit {
 
   poems: Array<any>;
 
-  // for testings
-  searchQuery: string;
-
   viewMode: string;
 
   konvolut_id: string;
@@ -61,24 +58,6 @@ export class KonvolutComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
     });
-  }
-
-  // for testings
-  searchForDoctor(fulltextQuery: string) {
-    let searchParams = new FulltextSearch;
-    searchParams.searchstring = fulltextQuery;
-    this.http.get(searchParams.toString())
-      .map(response => response.json().subjects)
-      .subscribe(res => this.poems = res);
-    console.log(searchParams.toString());
-  }
-
-  // for testings
-  freeSearch() {
-    this.http.get('http://knora.nie-ine.ch/v1/search/' + this.searchQuery)
-      .map(response => response.json().subjects)
-      .subscribe(res => this.poems = res);
-    console.log('/search/' + this.searchQuery);
   }
 
   loadMore() {

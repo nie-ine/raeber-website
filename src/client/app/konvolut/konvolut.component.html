@@ -21,20 +21,6 @@
                       <rae-konvolut-steckbrief [id]="konvolut_id"></rae-konvolut-steckbrief>
                     </div>
                     <br/>
-                    <div style="background-color: #f8b9b7">
-                      <h3>Suchfunktion für Testzwecke</h3>
-                      Statt dem Konvolutinhalt werden unten vorübergehend die Suchresultate angezeigt.
-                      <br/>
-                      <button md-raised-button (click)="searchForDoctor('morgen')">Suche "morgen"</button>
-                      <br/>
-                      <button md-raised-button (click)="searchForDoctor('baum')">Suche "baum"</button>
-                      <br/>
-                      .../search/
-                      <input mdInput #filter [(ngModel)]="searchQuery" autocomplete="off" type="search"
-                             placeholder="freie Suche"/>
-                      <button md-raised-button (click)="freeSearch()">Suchen</button>
-                    </div>
-                    <br/>
                     <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"></rae-konvolut-werkzeugleiste>
                     <rae-textgrid [poemsInGrid]="poems"
                                   [viewMode]="viewMode"

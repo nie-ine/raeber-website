@@ -35,7 +35,7 @@
   </button>
 
 
-  <button md-button>
+  <button md-button (click)="increaseArrayElement()" >
     <md-icon >note_add</md-icon>
   </button>
 
@@ -49,3 +49,23 @@
 </div>
 
 <rae-textgrid [poems_in_grid]="searchResult"></rae-textgrid>
+
+
+
+
+<div *ngFor="let i of array" style="display: inline-block">
+
+  <div>
+     <!--  Die folgende Variable kommt als Input in eine resourceSearchComponent, jede resourceSearchComponent hat eine Menge an constraintComponents-->
+    ComponentSearch Nr: {{ i }}
+    <button md-button (click)="increaseArrayElement()">
+      <md-icon >note_add</md-icon>
+    </button>
+    <p></p>
+    <button md-button >
+      <md-icon >note_add</md-icon>
+    </button>
+  </div>
+
+</div>
+

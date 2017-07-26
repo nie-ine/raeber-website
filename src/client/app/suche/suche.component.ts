@@ -3,9 +3,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './globalSearchVariablesService';
 
 
@@ -15,8 +13,10 @@ import { globalSearchVariableService } from './globalSearchVariablesService';
   selector: 'rae-suche',
   templateUrl: 'suche.component.html'
 })
-export class SucheComponent implements OnInit{
+export class SucheComponent implements OnInit {
   vocabulary: 'http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext';
+  numberOfComponents = 1;
+
 
   myResources: Array<any>;
   myProperties: Array<any>;
@@ -43,8 +43,12 @@ export class SucheComponent implements OnInit{
     {name: '!like', operator: '!LIKE'},
     {name: 'match_boolean', operator: 'MATCH_BOOLEAN'}
   ];
+  arraySize: number;
+  array = [
+  1
+  ];
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  constructor(private http: Http) {
   }
 
   ngOnInit() {
@@ -80,7 +84,6 @@ export class SucheComponent implements OnInit{
 
 
       console.log('Funktion wird ausgeführt');
-       // TODO: Encode URL that arrives here
       return this.http.get(globalSearchVariableService.API_URL + globalSearchVariableService.propertyListsQuery + this.encodedURL)
         .map(
           (lambda: Response) => {
@@ -116,8 +119,20 @@ export class SucheComponent implements OnInit{
         }
       )
       .subscribe(response => this.searchResult = response);
-
-
   }
+
+  increaseNumberOfComponents() {
+    this.numberOfComponents += 1;
+    console.log(this.numberOfComponents);
+    console.log(typeof this.arraySize);
+  }
+
+  increaseArrayElement() {
+    this.arraySize = this.array[this.array.length - 1 ];
+    this.arraySize += 1;
+    this.array.push(this.arraySize);
+    console.log(this.arraySize);
+  }
+
 
 }

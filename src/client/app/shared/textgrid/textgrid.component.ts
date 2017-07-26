@@ -12,9 +12,9 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class TextgridComponent implements OnChanges {
 
-  @Input() contentType: string; // synopse OR konvolut OR suche
-  @Input() viewMode: string;
-  @Input() showText: boolean;
+  @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
+  @Input() viewMode: string = 'grid';
+  @Input() showText: boolean = true;
 
   @Input() poemsInGrid: Array<any>;
 

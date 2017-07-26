@@ -23,6 +23,8 @@ export class KonvolutComponent implements OnInit {
   // for testings
   searchQuery: string;
 
+  viewMode: string;
+
   konvolut_id: string;
   konvolut_type: string;
   private sub: any;
@@ -30,6 +32,8 @@ export class KonvolutComponent implements OnInit {
   private _esearch = new ExtendedSearch();
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
+    this.viewMode = 'grid';
+
     window.onscroll = () => {
       let windowHeight = 'innerHeight' in window ? window.innerHeight
         : document.documentElement.offsetHeight;

@@ -12,15 +12,16 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class TextgridComponent implements OnChanges {
 
-  @Input() poems_in_grid: Array<any>;
+  @Input() contentType: string; // synopse OR konvolut OR suche
+  @Input() viewMode: string;
+  @Input() showText: boolean;
 
-  showGrid = true;
-  showCols = false;
+  @Input() poemsInGrid: Array<any>;
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       let chng = changes[ propName ];
-      this.poems_in_grid = chng.currentValue;
+      this.poemsInGrid = chng.currentValue;
     }
     /*    for (let propName in changes) {
      let chng = changes[propName];
@@ -30,15 +31,4 @@ export class TextgridComponent implements OnChanges {
      }*/
     // changes.prop contains the old and the new value...
   }
-
-  toGrid() {
-    this.showGrid = true;
-    this.showCols = false;
-  }
-
-  toCols() {
-    this.showGrid = false;
-    this.showCols = true;
-  }
-
 }

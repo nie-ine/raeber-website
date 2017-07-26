@@ -20,8 +20,10 @@ export class TextgridComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
-      let chng = changes[ propName ];
-      this.poemsInGrid = chng.currentValue;
+      if (propName === 'poemsInGrid') {
+        let chng = changes[ propName ];
+        this.poemsInGrid = chng.currentValue;
+      }
     }
     /*    for (let propName in changes) {
      let chng = changes[propName];

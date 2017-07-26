@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { globalSearchVariableService } from './globalSearchVariablesService';
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'rae-suche',
@@ -54,7 +55,12 @@ export class SucheComponent implements OnInit{
   initialQuery(firstInput: string, secondInput: string) {
     this.concatenatedString = this.firstInput + this.secondInput;
     console.log(this.concatenatedString);
-    return this.http.get(globalSearchVariableService.API_URL +  globalSearchVariableService.resourceTypesPath + globalSearchVariableService.initialVocabulary)
+    return this.http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
@@ -106,7 +112,7 @@ export class SucheComponent implements OnInit{
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          return data;
+          return data.subjects;
         }
       )
       .subscribe(response => this.searchResult = response);

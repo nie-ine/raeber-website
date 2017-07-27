@@ -51,21 +51,22 @@
 <rae-textgrid [poems_in_grid]="searchResult"></rae-textgrid>
 
 
+<div>
 
+  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top">
 
-<div *ngFor="let i of array" style="display: inline-block">
+    <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
 
-  <div>
-     <!--  Die folgende Variable kommt als Input in eine resourceSearchComponent, jede resourceSearchComponent hat eine Menge an constraintComponents-->
-    ComponentSearch Nr: {{ i }}
-    <button md-button (click)="increaseArrayElement()">
-      <md-icon >note_add</md-icon>
-    </button>
-    <p></p>
-    <button md-button >
-      <md-icon >note_add</md-icon>
-    </button>
+      Resource {{ i }}
+
+      <rae-search-for-one-resource [nthResourceSearch]="i" ></rae-search-for-one-resource>
+
+    </div>
+
   </div>
 
-</div>
+  <button md-button (click)="increaseArrayElement()">
+    <md-icon >note_add</md-icon>
+  </button>
 
+</div>

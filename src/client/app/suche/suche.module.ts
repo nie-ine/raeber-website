@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SucheRoutingModule } from './suche-routing.module';
 import { SucheComponent } from './suche.component';
 import { TextgridModule } from './textgrid/textgrid.module';
+import { SearchForOneResourceModule } from './searchForOneResourceComponent/searchForOneResource.module';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { TextgridModule } from './textgrid/textgrid.module';
     MdCheckboxModule,
     BrowserAnimationsModule,
     MdSelectModule,
-    TextgridModule
+    TextgridModule,
+    SearchForOneResourceModule
   ],
   declarations: [
     SucheComponent

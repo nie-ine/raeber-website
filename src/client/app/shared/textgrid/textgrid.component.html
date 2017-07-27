@@ -1,0 +1,33 @@
+<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid', 'rae-poem-list-cols': viewMode == 'cols'}">
+
+  <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index">
+    <md-card [ngClass]="{'rae-poem-card-grid': viewMode == 'grid', 'rae-poem-card-cols': viewMode == 'cols'}">
+      <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
+      <md-card-title>
+        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
+          {{p.value[2]}}
+        </a>
+      </md-card-title>
+      <md-card-content *ngIf="showText"
+                       [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}">
+        <div class="rae-poem" [innerHtml]="p.value[1]"></div>
+      </md-card-content>
+      <br/>
+      <md-card-footer>
+        <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
+          <span>Synopse:</span>
+          <ul class="catItemTags">
+            <li *ngFor="let s of p.valuelabel; let j = index">
+              <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
+                {{s}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="catItemTagsBlock" *ngIf="contentType == 'synopse'">
+          <span>Link zu Konvolut</span><!-- TODO link von Synopse zu Konvolut -->
+        </div>
+      </md-card-footer>
+    </md-card>
+  </div>
+</div>

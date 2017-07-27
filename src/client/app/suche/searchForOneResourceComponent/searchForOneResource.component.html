@@ -1,7 +1,24 @@
 <div >
+
+
+
   <div *ngFor="let i of array" >
 
-    Constraint {{ i }}
+    <md-select placeholder="Select Property" >
+      <md-option *ngFor="let property of myProperties" [value]="property.id">
+        {{ property.label }}
+      </md-option>
+    </md-select>
+
+    <md-select placeholder="Select logical Operator" >
+      <md-option *ngFor="let operator of availableboolOperators" [value]="operator.operator">
+        {{ operator.name }}
+      </md-option>
+    </md-select>
+
+    <md-input-container>
+      <input mdInput placeholder="Search for this word" >
+    </md-input-container>
     <p></p>
 
 

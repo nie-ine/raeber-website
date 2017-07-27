@@ -53,11 +53,20 @@
 
 <div>
 
-  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top">
+
+
+  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
+
+    <span *ngIf="i > 1" > OR</span>
 
     <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
 
-      Resource {{ i }}
+      <!-- Warning, do not use the following md-select, if you continue to work here, replace it with the above working version and adjust variable handling -->
+      <md-select placeholder="Select Resource"  name="resource" >
+        <md-option *ngFor="let resource of myResources" [value]="resource.id" >
+          {{ resource.label }}
+        </md-option>
+      </md-select>
 
       <rae-search-for-one-resource [nthResourceSearch]="i" ></rae-search-for-one-resource>
 

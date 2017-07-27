@@ -28,8 +28,10 @@ export class FassungComponent implements OnInit {
     'Wind',
     'Wasser'
   ];
+  // TODO dynamisieren
 
-  poems: Array<any>;
+  pages: Array<any> = ['page1', 'page2'];
+  // TODO dynamisieren
 
   // for testings
   searchQuery: string;
@@ -57,14 +59,6 @@ export class FassungComponent implements OnInit {
 
     let searchParams = new FulltextSearch;
     searchParams.searchstring = 'e';
-
-    // TODO dynamisieren
-
-    this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
-      .map(response => response.json().subjects)
-      .subscribe((res: Array<any>) => this.poems = res);
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {

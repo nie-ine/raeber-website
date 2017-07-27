@@ -61,12 +61,9 @@
                           </md-card-footer>
                         </md-card>
 
-                        <md-card>
+                        <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
                           <md-card-content *ngIf="zeigeDiplomatisch">
-
-                            <!-- TODO -->
-                            TODO: Modul für Bild und diplomatische Umschrift einfügen
-
+                            <rae-fassung-diplomatisch [pages]="pages"></rae-fassung-diplomatisch>
                           </md-card-content>
                           <md-card-footer>
                             <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">

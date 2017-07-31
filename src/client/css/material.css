@@ -1,16 +1,16 @@
-md-sidenav-container {
-  z-index: -1;
-}
-
 md-sidenav {
   width: 200px;
   padding: 0 10px;
 }
 
+.component-content {
+  padding: 0 5px;
+}
+
 .rae-button {
   min-width: 10px !important;
   height: 30px;
-  line-height: normal;
+  line-height: normal !important;
   padding: 5px;
   font-size: 80%;
   vertical-align: middle;

@@ -1,0 +1,35 @@
+<div>
+  <md-toolbar>
+    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{page}}"
+                            (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
+      <md-button-toggle value="schicht0"
+                        [ngStyle]="{'color': farbeNeutral}"
+                        title="Anfangsschicht ohne Auszeichnung">
+        0
+      </md-button-toggle>
+      <md-button-toggle value="schicht1"
+                        [ngStyle]="{'color': farbeErste}"
+                        title="Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet">
+        1
+      </md-button-toggle>
+      <md-button-toggle value="schicht2"
+                        [ngStyle]="{'color': farbeEinfuegung}"
+                        title="Texteinfügung entgegen dem linearen Verlauf der Niederschrift">
+        2
+      </md-button-toggle>
+      <md-button-toggle value="schicht3"
+                        [ngStyle]="{'color': farbeLetzte}"
+                        title="Endschicht (Basis für edierten Text)">
+        3
+      </md-button-toggle>
+    </md-button-toggle-group>
+
+    <!-- TODO replace with better layout. Now as checkbox because button toggle is broken -->
+    <md-checkbox [(ngModel)]="textIsMovable"
+                        title="Umschrift verschiebbar machen">↔</md-checkbox>
+
+  </md-toolbar>
+  <div class="umschrift edtext edtext_hs"
+       [innerHtml]="text"
+       [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}"></div>
+</div>

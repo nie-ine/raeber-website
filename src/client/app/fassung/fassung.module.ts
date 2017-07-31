@@ -16,19 +16,24 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
+import { DiplomatischerTextModule } from '../shared/diplomatischer-text/diplomatischer-text.module';
 import { FassungRoutingModule } from './fassung-routing.module';
+import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 
-import { FassungComponent } from './fassung.component';
 import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern.component';
+import { FassungComponent } from './fassung.component';
+import { FassungDiplomatischComponent } from './fassung-diplomatisch/fassung-diplomatisch.component';
 import { FassungSteckbriefComponent } from './fassung-steckbrief/fassung-steckbrief.component';
-import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.component';
+import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { TextComponent } from '../shared/text/text.component';
+
 
 @NgModule({
   imports: [
     BrowserModule,
+    DiplomatischerTextModule,
+    FassungRoutingModule,
     FormsModule,
     HttpModule,
     MdButtonModule,
@@ -45,6 +50,7 @@ import { TextComponent } from '../shared/text/text.component';
   declarations: [
     FassungBlaetternComponent,
     FassungComponent,
+    FassungDiplomatischComponent,
     FassungSteckbriefComponent,
     FassungWeitereComponent,
     FassungWerkzeugleisteComponent,

@@ -4,9 +4,11 @@
     <md-card [ngClass]="{'rae-poem-card-grid': viewMode == 'grid', 'rae-poem-card-cols': viewMode == 'cols'}">
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
       <md-card-title>
+        <h4>
         <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
           {{p.value[2]}}
         </a>
+        </h4>
       </md-card-title>
       <md-card-content *ngIf="showText"
                        [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}">

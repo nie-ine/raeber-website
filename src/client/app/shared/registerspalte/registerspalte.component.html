@@ -1,5 +1,5 @@
 <div class="rae-registerspalte-list">
-  <h5>{{konvolutId}}<br/>(Total: {{nHits}})</h5>
+  <h3>{{konvolutId}}<br/>(Total: {{nHits}})</h3>
   <md-button-toggle-group [(ngModel)]=sortingType>
     <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
     <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
@@ -8,7 +8,7 @@
     <a md-list-item *ngFor="let p of rsEntry; let i = index"
        [routerLink]="['/' + konvolutType + '/' + konvolutId + '/' + p.value[0]]" routerLinkActive="active">
       <!-- TODO: geht nicht fuer zugewandt-abgewandt u. ae. -->
-      <h5 md-line>{{p.value[0]}}</h5>
+      <h4 md-line>{{p.value[0]}}</h4>
       <p *ngIf="sortingType=='alphabetic'"
          md-line>
         <!-- incipit -->
@@ -16,11 +16,11 @@
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
-        [Datum] {{p.value[0]}}
+        <time>[Datum] {{p.value[0]}}</time>
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
-        [Datum] {{p.value[0]}}
+        <time>[Datum] {{p.value[0]}}</time>
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>

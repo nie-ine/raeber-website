@@ -1,6 +1,6 @@
-<div id="rae-fassung-view" style="width: 90%; margin: auto;">
+<div class="rt-container">
   <md-sidenav-container>
-    <div style="padding: 0 10px;">
+    <div class="component-content normal">
       <div id="rae-toolbar">
         <rae-fassung-werkzeugleiste
           [(showRegister)]="show_register"
@@ -23,7 +23,7 @@
 
         <div class="itemHeader">
           <!-- Date created -->
-          <span class="itemDateCreated">{{creationDate}}</span>
+          <time class="itemDateCreated">{{creationDate}}</time>
           <!-- Item title -->
           <h2 class="itemTitle">
             {{poem_id}}
@@ -101,7 +101,7 @@
               style="font-size: 0.8em; float: left"
               [idOfPrev]="prevPoem"
               [idOfNext]="nextPoem"></rae-fassung-blaettern>
-            <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
+            <time style='font-size:0.8em;'>Änderung: {{modificationDate}}</time>
             <!-- Print Button -->
           </ul>
         </div>
@@ -110,7 +110,7 @@
     <md-sidenav mode="side" align="end" [opened]=show_register style="width: 200px; padding: 0 10px;">
       <rae-registerspalte></rae-registerspalte>
       <div class="moduletable">
-        <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
+        <h3>Suchen: {{konvolut_id}}</h3><!-- TODO: Variable ersetzen -->
         <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
         <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
       </div>

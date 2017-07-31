@@ -10,8 +10,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   moduleId: module.id,
   selector: 'rae-register-navigation',
-  templateUrl: 'register-navigation.component.html',
-  styleUrls: [ 'register-navigation.component.css' ]
+  templateUrl: 'register-navigation.component.html'
 })
 export class RegisterNavigationComponent {
 

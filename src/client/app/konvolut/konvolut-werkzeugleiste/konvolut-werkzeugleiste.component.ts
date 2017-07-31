@@ -7,8 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut-werkzeugleiste',
-  templateUrl: 'konvolut-werkzeugleiste.component.html',
-  styleUrls: [ 'konvolut-werkzeugleiste.component.css' ]
+  templateUrl: 'konvolut-werkzeugleiste.component.html'
 })
 export class KonvolutWerkzeugleisteComponent implements OnInit {
 

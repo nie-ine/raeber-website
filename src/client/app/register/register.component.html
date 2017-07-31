@@ -1,29 +1,14 @@
-  <div id="rt-mainbody-surround">
-    <div class="rt-container">
-
-      <div id="rt-main" class="mb9-sa3">
-        <div class="rt-container">
-          <div class="rt-grid-9 ">
-            <div id="rt-content-top">
-              <div class="rt-grid-5 rt-alpha">
-                <div class="rt-block ">
-                  <div class="module-surround">
-                    <div class="module-title">
-                      <h2 class="title">{{title}}</h2>
-                    </div>
-                    <div class="module-content">
-                      <rae-register-navigation [selectedTab]="selectedTab"></rae-register-navigation>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="rt-grid-4 rt-omega">
-                <div class="rt-block ">
-                  <div class="module-surround">
-                    <div class="module-content">
-
-
+<div class="rt-container">
+  <md-sidenav-container style="min-height: 35em">
+    <md-sidenav mode="side" align="start" opened="true">
+      <div class="module-title">
+        <h2 class="title">{{title}}</h2>
+      </div>
+      <div class="module-content">
+        <rae-register-navigation [selectedTab]="selectedTab"></rae-register-navigation>
+      </div>
+    </md-sidenav>
+    <div class="component-content normal">
                       <div class="custom"  >
                         <p>&nbsp;</p>
                         <p>Die Menü-Optionen ermöglichen die Anzeige verschiedener chronologischer Titelregister, die
@@ -39,41 +24,19 @@
                         <p>Nachlassgedichte nach <strong>Werkphasen</strong>: Titel aller Gedichtfassungen eines
                           bestimmten Zeitraums. Die Phasen orientieren sich an der Publikation der Gedichtsammlungen.
                         </p>
-                        <p>&nbsp;</p></div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <div class="rt-block">
-              <div id="rt-mainbody">
-                <div class="component-content">
-                  <!-- Zusatz wm -->
-
-                  <!-- Start K2 Item Layout -->
-                  <span id="startOfPageId5604"></span>
-
+                      </div>
                   <div id="k2Container" class="itemView">
                     <rae-register-beschreibung [selectedTab]="selectedTab">
                     </rae-register-beschreibung>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rt-grid-3 ">
-            <div id="rt-sidebar-a">
-              <div class="moduletableregister_nachlass">
+    </div>
+    <md-sidenav mode="side" align="end" opened="true">
                 <rae-register-titelregister [selectedTab]="selectedTab"
                                             *ngIf="selectedTab=='publizierte-gedichte'
                                                || selectedTab=='unpublizierte-gedichte'
                                                || selectedTab=='nachlass-1979'
                                                || selectedTab=='nachlass-1979-1988'"></rae-register-titelregister>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </md-sidenav>
+  </md-sidenav-container>
+</div>
+

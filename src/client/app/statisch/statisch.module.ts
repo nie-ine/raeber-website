@@ -4,12 +4,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MdSidenavModule } from '@angular/material';
 
 import { routingComponents, StatischRoutingModule } from './statisch-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    MdSidenavModule,
     StatischRoutingModule
   ],
   declarations: [

@@ -11,7 +11,7 @@ import {
   MdCardModule,
   MdGridListModule,
   MdIconModule,
-  MdInputModule, MdToolbarModule
+  MdInputModule, MdSidenavModule, MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -34,6 +34,7 @@ import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvo
     MdGridListModule,
     MdIconModule,
     MdInputModule,
+    MdSidenavModule,
     MdToolbarModule,
     RegisterspalteModule,
     TextgridModule,

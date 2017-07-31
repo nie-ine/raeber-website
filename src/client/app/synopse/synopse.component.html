@@ -1,29 +1,13 @@
-<div id="rt-transition">
-  <div id="rt-mainbody-surround">
-    <div class="rt-container">
-      <div id="rt-main" class="mb9-sa3">
-        <div class="rt-container">
-          <div class="rt-grid-9 ">
-            <div class="rt-block">
-              <div id="rt-mainbody">
-                <div class="component-content">
-                  <h1>Synopse ({{nHits}})</h1>
-                  <rae-synopse-werkzeugleiste [(viewMode)]="viewMode"
-                                              [(showText)]="showText">
-                  </rae-synopse-werkzeugleiste>
-                  <rae-textgrid [(viewMode)]="viewMode"
-                                [showText]="showText"
-                                [poemsInGrid]="poemsInSynopse"
-                                contentType="synopse">
-                  </rae-textgrid>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rt-grid-3 ">
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="rt-container">
+  <div class="component-content normal">
+    <h2>Synopse ({{nHits}})</h2>
+    <rae-synopse-werkzeugleiste [(viewMode)]="viewMode"
+                                [(showText)]="showText">
+    </rae-synopse-werkzeugleiste>
+    <rae-textgrid [(viewMode)]="viewMode"
+                  [showText]="showText"
+                  [poemsInGrid]="poemsInSynopse"
+                  contentType="synopse">
+    </rae-textgrid>
   </div>
 </div>

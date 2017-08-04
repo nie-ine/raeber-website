@@ -2,7 +2,7 @@
 
   <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index">
     <md-card [ngClass]="{'rae-poem-card-grid': viewMode == 'grid', 'rae-poem-card-cols': viewMode == 'cols'}">
-      <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
+      <md-card-subtitle *ngIf="p.date"><time>{{p.date}}</time></md-card-subtitle>
       <md-card-title>
         <h4>
           <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">

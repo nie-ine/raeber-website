@@ -6,6 +6,7 @@ md-sidenav-container {
   z-index: 1;
   min-height: 100vh;
   display: flex;
+  align-items: stretch;
 }
 
 md-sidenav {
@@ -17,6 +18,9 @@ md-sidenav {
 .component-content {
   padding: 0 5px;
   z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .rae-button {

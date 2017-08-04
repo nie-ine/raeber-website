@@ -4,6 +4,8 @@ header {
 
 md-sidenav-container {
   z-index: 1;
+  min-height: 100vh;
+  display: flex;
 }
 
 md-sidenav {

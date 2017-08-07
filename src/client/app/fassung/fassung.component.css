@@ -18,3 +18,15 @@ div.itemFullText md-card md-card-footer button {
 #rae-toolbar {
   text-align: right;
 }
+
+@media only screen and (max-width: 767px) {
+  .rae-fassung-seitenregister {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .rae-fassung-bodenregister {
+    display: none;
+  }
+}

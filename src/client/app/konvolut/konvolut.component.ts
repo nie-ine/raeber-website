@@ -14,7 +14,8 @@ import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utiliti
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html'
+  templateUrl: 'konvolut.component.html',
+  styleUrls: ['konvolut.component.css']
 })
 export class KonvolutComponent implements OnInit {
 

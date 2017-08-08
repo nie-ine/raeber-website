@@ -1,0 +1,17 @@
+md-button-toggle-group {
+  width: 80%;
+}
+
+md-button-toggle {
+  width: 25%;
+  height: 36px;
+  font-size: 80%;
+}
+
+.rae-diplomatic-movable {
+  cursor: move;
+}
+
+.rae-diplomatic-in-place {
+  cursor: auto;
+}

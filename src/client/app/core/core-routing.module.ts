@@ -11,17 +11,10 @@ import { WerkausgabeComponent } from '../statisch/werkausgabe.component';
 import { SucheModule } from '../suche/suche.module';
 import { PdfNotizbuecherComponent } from '../statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from '../statisch/pdf-synopsen.component';
-import { RegisterComponent } from '../suche/register/register.component';
-import { KonvolutModule } from '../konvolute/konvolut/konvolut.module';
-import { FassungModule } from '../konvolute/fassung/fassung.module';
-import { RegisterModule } from '../suche/register/register.module';
 import { PageNotFoundComponent } from './404.component';
 
 @NgModule({
   imports: [
-    KonvolutModule,
-    FassungModule,
-    RegisterModule,
     SucheModule,
     RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
@@ -31,7 +24,6 @@ import { PageNotFoundComponent } from './404.component';
       { path: 'werkliste', component: WerklisteComponent },
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
       { path: 'start', component: HomepageComponent },
       { path: '', redirectTo: '/start', pathMatch: 'full' },

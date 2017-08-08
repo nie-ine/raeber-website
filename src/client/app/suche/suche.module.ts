@@ -1,4 +1,10 @@
+/**
+ * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/21/17.
+ */
+
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +31,10 @@ import { SearchForOneResourceModule } from './searchForOneResourceComponent/sear
     BrowserModule,
     FormsModule,
     HttpModule,
+    CommonModule,
+    RouterModule.forChild([
+      { path: 'suche', component: SucheComponent }
+    ]),
     SucheRoutingModule,
     MdButtonModule,
     MdButtonToggleModule,

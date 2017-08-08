@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-homepage',
-  templateUrl: './homepage.component.html'
+  templateUrl: 'homepage.component.html'
 })
 export class HomepageComponent {
   title = 'Historisch-kritische Online-Edition';

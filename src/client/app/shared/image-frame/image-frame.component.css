@@ -1,0 +1,14 @@
+.rae-image-container {
+  display: inline-block;
+  vertical-align: top;
+  width: 460px;
+  padding: 5px;
+  white-space: normal;
+}
+
+.rae-image_resizeable {
+  width: 100%;
+  resize: both;
+  overflow: auto;
+}
+

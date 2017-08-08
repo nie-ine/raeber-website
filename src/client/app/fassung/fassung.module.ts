@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { DiplomatischerTextModule } from '../shared/diplomatischer-text/diplomatischer-text.module';
 import { FassungRoutingModule } from './fassung-routing.module';
+import { ImageFrameModule } from '../shared/image-frame/image-frame.module';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 
 import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern.component';
@@ -36,6 +37,7 @@ import { TextComponent } from '../shared/text/text.component';
     FassungRoutingModule,
     FormsModule,
     HttpModule,
+    ImageFrameModule,
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,

@@ -60,6 +60,13 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     });
+    this.addPackageBundles({
+      name: '@angular/cdk',
+      path: 'node_modules/@angular/cdk/bundles/cdk.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

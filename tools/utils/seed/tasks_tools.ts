@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, readFileSync, readdirSync } from 'fs';
+import { existsSync, lstatSync, readdirSync, readFileSync } from 'fs';
 import * as runSequence from 'run-sequence';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
@@ -11,7 +11,7 @@ import { Task } from '../../tasks/task';
 
 /**
  * Loads the tasks within the given path.
- * @param {string} path - The path to load the tasks from.
+ * @param {string} path - The path to loadText the tasks from.
  */
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', util.colors.yellow(path));
@@ -85,7 +85,7 @@ export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: stri
     seedTasks = JSON.parse(readFileSync(seedTasksFile).toString());
     projectTasks = JSON.parse(readFileSync(projectTasksFile).toString());
   } catch (e) {
-    util.log('Cannot load the task configuration files: ' + e.toString());
+    util.log('Cannot loadText the task configuration files: ' + e.toString());
     return;
   }
   [[seedTasks, seedTasksFile], [projectTasks, projectTasksFile]]

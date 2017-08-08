@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
   templateUrl: 'werkliste.component.html'
 })
 export class WerklisteComponent {
+  title = 'Werke';
 }

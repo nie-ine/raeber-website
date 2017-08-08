@@ -1,0 +1,39 @@
+<div class="rae-registerspalte-list">
+  <h5>{{konvolutId}}<br/>(Total: {{nHits}})</h5>
+  <md-button-toggle-group [(ngModel)]=sortingType>
+    <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
+    <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
+  </md-button-toggle-group>
+  <md-nav-list dense>
+    <a md-list-item *ngFor="let p of rsEntry; let i = index"
+       [routerLink]="['/' + konvolutType + '/' + konvolutId + '/' + p.value[0]]" routerLinkActive="active">
+      <!-- TODO: geht nicht fuer zugewandt-abgewandt u. ae. -->
+      <h5 md-line>{{p.value[0]}}</h5>
+      <p *ngIf="sortingType=='alphabetic'"
+         md-line>
+        <!-- incipit -->
+        {{p.value[1]}}
+      </p>
+      <p *ngIf="sortingType=='chronologic' && konvolutType=='notizbuecher'"
+         md-line>
+        [Datum] {{p.value[0]}}
+      </p>
+      <p *ngIf="sortingType=='chronologic' && konvolutType=='manuskripte'"
+         md-line>
+        [Datum] {{p.value[0]}}
+      </p>
+      <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
+         md-line>
+        {{p.value[1]}}
+      </p>
+      <p *ngIf="sortingType=='chronologic' && konvolutType=='drucke'"
+         md-line>
+        {{p.value[1]}}
+      </p>
+      <p *ngIf="sortingType=='chronologic' && konvolutType=='tagebuecher'"
+         md-line>
+        {{p.value[1]}}
+      </p>
+    </a>
+  </md-nav-list>
+</div>

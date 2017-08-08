@@ -5,216 +5,30 @@
         <div class="rt-block">
           <div id="rt-mainbody">
             <div class="component-content">
-              <!-- Zusatz wm -->
-              <script src="/lyrik/media/eorisis-jquery/ui/1.11.4/jquery-ui.min.js"></script>
-              <script type="text/javascript">
-
-                function Neuladen() {
-                  location.reload();
-                }
-
-                function Hilfe() {
-                  hilfefenster = window.open("/lyrik/infos/hilfe/Hilfe-Textseite.htm", "Hilfe", "scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
-                  hilfefenster.window.focus();
-                }
-
-                function Erste_Hilfe() {
-                  hilfefenster = window.open("infos/hilfe/Hilfe-Kurz.htm", "Hilfe", "scrollbars=yes,width=600,height=400,resizable=yes,location=no,menubar=no,status=no,toolbar=no,left=0,top=0");
-                  hilfefenster.window.focus();
-                }
-
-                jQuery(document).ready(function () {
-                  if (window.name != "printWindow") {
-
-                    jQuery(".spezial").hide();
-
-                    jQuery(".itemTitle").css("padding-left", "30px");
-                    jQuery(".edtext").addClass("scrollen").css("padding-left", "25px");
-                    jQuery("#mjsp-menu-select").remove().clone().appendTo(".itemTitle").css({
-                      "float": "right",
-                      "margin-left": "5px"
-                    });
-                    jQuery("#mjsp-menu-select select").css({"width": "100px"});
-                    jQuery("#Button_Scroll").click(
-                      function () {
-                        jQuery(".edtext").toggleClass("scrollen", "false");
-                      });
-
-                    jQuery(".schicht-0_button").attr("title", "Anfangszustand ohne Auszeichnung");
-                    jQuery(".schicht-1_button").attr("title", "Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet");
-                    jQuery(".schicht-2_button").attr("title", "Texteinfügung entgegen dem linearen Verlauf der Niederschrift");
-                    jQuery(".schicht-3_button").attr("title", "Endschicht (Basis für edierten Text)");
-                    jQuery(".move_button").attr("title", "Umschrift verschiebbar machen");
-                    jQuery(".transkription").find("*").css({"font-weight": "normal", "color": "#6e6e6e"});
-                    jQuery(".zeile").css("color", "red");
-                    jQuery(".markierung").css("color", "#d00501;");
-                    jQuery(".herausgeber").css("color", "#d00501;");
-                    jQuery(".ersetzung").css("font-weight", "bold");
-                    jQuery(".icon-delete").attr("title", "Bild + Umschrift aus-/einschalten");
-                    jQuery(".icon-zoom-out").attr("title", "Bild verkleinern");
-                    jQuery(".icon-zoom-in").attr("title", "Bild vergrössern (+ Register ausschalten)");
-                    jQuery(".bildnummer").attr("title", "Archivalische Bildsignatur");
-
-                    jQuery(".schicht-0_button").click(function () {
-                        jQuery(".transkription").css("color", "#6e6e6e");
-                        jQuery(".transkription").find("*").css("color", "#6e6e6e");
-                        jQuery(".zeile").css("color", "red");
-                        jQuery(".markierung").css("color", "#d00501");
-                        jQuery(".herausgeber").css("color", "#d00501");
-                      }
-                    );
-
-                    jQuery(".schicht-1_button").click(function () {
-                        jQuery(".transkription").css("color", "gray");
-                        jQuery(".transkription").find("*").css("color", "gray");
-                        jQuery(".schicht1").css({"font-weight": "normal", "color": "maroon"});
-                        jQuery(".schicht1 span").css({"font-weight": "normal", "color": "maroon"});
-                      }
-                    );
-
-                    jQuery(".schicht-2_button").click(function () {
-                        jQuery(".transkription").css("color", "#6e6e6e");
-                        jQuery(".transkription").find("*").css("color", "#6e6e6e");
-                        jQuery(".einfuegung").css("color", "#007FFF").contents().css("color", "#007FFF");
-                        jQuery(".einfuegung_gestr").css("color", "#007FFF").contents().css("color", "#007FFF");
-                        jQuery(".markierung").css("color", "#d00501");
-                        jQuery(".zeile").css("color", "red");
-                      }
-                    );
-
-                    jQuery(".schicht-3_button").click(function () {
-                        jQuery(".transkription").css("color", "red");
-                        jQuery(".transkription").find("*").css("color", "red");
-                        jQuery(".einfuegung_gestr").css("color", "#6e6e6e");
-                        jQuery(".einfuegung_gestr").find("*").css("color", "#6e6e6e");
-                        jQuery(".unsicher_gestr").css("color", "#6e6e6e");
-                        jQuery(".streichung").css("color", "#6e6e6e");
-                        jQuery(".streichung").find("*").css("color", "#6e6e6e");
-                        jQuery(".ueberschrieben").css("color", "#6e6e6e");
-                        jQuery(".streichung_doppel").css("color", "#6e6e6e");
-                        jQuery(".blocktilgung").css("color", "#6e6e6e");
-                        jQuery(".blocktilgung").find("*").css("color", "#6e6e6e");
-                      }
-                    );
-
-                    jQuery("#Button_Register").toggle(function () {
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        Neuladen();
-                      }
-                    );
-
-                    jQuery(".move_button").toggle(function () {
-                        jQuery(".umschrift").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                        jQuery(".umschrift2").draggable({disabled: false, cursor: "move"}).css({cursor: "move"});
-                      },
-                      function () {
-                        jQuery(".umschrift").draggable({disabled: true}).css({cursor: "auto"});
-                        jQuery(".umschrift2").draggable({disabled: true}).css({cursor: "auto"});
-                      }
-                    );
-
-                    jQuery(".icon-delete").toggle(function () {
-                        jQuery(this).nextAll().hide();
-                      },
-                      function () {
-                        jQuery(this).nextAll().show();
-                        jQuery(this).parent().find(".spezial").hide();
-                      }
-                    );
-
-                    jQuery(".icon-zoom-in1").toggle(function () {
-                        jQuery(this).next().css({"width": "800px", "height": "500px"});
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        jQuery(this).next().css("width", "460px");
-                        jQuery(".rt-grid-9").css({width: "82%"});
-                        jQuery(".rt-grid-3").show();
-                      }
-                    );
-
-                    jQuery(".icon-zoom-in2").toggle(function () {
-                        jQuery(this).parent().find(".diplom_bild").css({"width": "1200px", "height": "500px"});
-                        jQuery(".rt-grid-3").hide();
-                        jQuery(".rt-grid-9").css({width: "100%"});
-                      },
-                      function () {
-                        jQuery(this).next().css("width", "460px");
-                        jQuery(".rt-grid-9").css({width: "82%"});
-                        jQuery(".rt-grid-3").show();
-                      }
-                    );
-
-                    jQuery(".icon-zoom-in").click(function () {
-                      breit = jQuery(this).parent().find("div").eq(0).css("width");
-                      breit1 = String(Number(breit.substr(0, 3)) + 200) + "px";
-                      jQuery(this).parent().find("div").eq(0).css({"width": breit1});
-                      jQuery(".rt-grid-3").hide();
-                      jQuery(".rt-grid-9").css({width: "100%"});
-                    });
-
-                    jQuery(".icon-zoom-out").click(function () {
-                      breit = jQuery(this).parent().find("div").eq(0).css("width");
-                      breit1 = String(Number(breit.substr(0, 3)) - 200) + "px";
-                      jQuery(this).parent().find("div").eq(0).css({"width": breit1});
-                      jQuery(".rt-grid-3").show();
-                      jQuery(".rt-grid-9").css({width: "82%"});
-                    });
-
-                    jQuery(".pagina").click(function () {
-                        var nr = $(this).text();
-                        alert(nr);
-                        $("img:contains(nr)").delete;
-                      }
-                    )
-                  }
-                })
-              </script>
-
-              <!-- Start K2 Item Layout -->
               <span id="startOfPageId23"></span>
-
               <div id="k2Container" class="itemView">
-
-                <!-- Plugins: BeforeDisplay -->
-                <!-- K2 Plugins: K2BeforeDisplay -->
-
-                <!-- einfügung Synopse wm (vgl. unten) -->
                 <div class="itemTagsBlock" style="float:right">
                 </div>
-
                 <div class="itemHeader">
-                  <!-- Item title -->
                   <h2 class="itemTitle" style="padding-left: 30px;">
-                    Historisch-kritische Online-Edition
+                    {{title}}
                   </h2>
                 </div>
-
-                <!-- Plugins: AfterDisplayTitle -->
-                <!-- K2 Plugins: K2AfterDisplayTitle -->
-
                 <div class="itemBody">
-
-                  <!-- Plugins: BeforeDisplayContent -->
-                  <!-- K2 Plugins: K2BeforeDisplayContent -->
-
-                  <!-- Item text -->
                   <div class="itemFullText">
                     <p style="text-align: right;"><a
-                      [routerLink]="['/drucke/abgewandt-zugewandt/hochdeutsche-gedichte']" routerLinkActive="active"><img
+                      [routerLink]="['/drucke/abgewandt-zugewandt/hochdeutsche-gedichte']"
+                      routerLinkActive="active"><img
                       style="margin: 20px 20px 10px 0px; float: left;" title="Abgewandt Zugewandt,1985" alt="abgewandt"
                       src="http://test-02.salsah.org/core/sendlocdata.php?res=2659161" width="21%"></a><span class="markierung"
-                                                                                 onclick="Hilfe_Basis()"
-                                                                                 style="color: rgb(208, 5, 1);"><button
-                      type="button" class="icon-help" title="Hilfe" style="margin-top: -50px;" onclick="Erste_Hilfe()"> Erste Hilfe</button> <br><a
-                      [routerLink]="['/drucke/gesicht-im-mittag']" routerLinkActive="active"><img src="../../assets/jpg/gesicht.jpg"
-                                                                            alt="gesicht"
-                                                                            style="margin: 0px 10px 10px; float: right;"
-                                                                            title="GESICHT IM MITTAG, 1950" width="21%"></a></span>
+                                                                                 style="color: rgb(208, 5, 1);"><a
+                      [routerLink]="['/anleitung']" target="_blank"><button
+                      type="button" class="icon-help" title="Hilfe" style="margin-top: -50px;"> Erste Hilfe</button></a> <br><a
+                      [routerLink]="['/drucke/gesicht-im-mittag']" routerLinkActive="active"><img
+                      src="../../assets/jpg/gesicht.jpg"
+                      alt="gesicht"
+                      style="margin: 0px 10px 10px; float: right;"
+                      title="GESICHT IM MITTAG, 1950" width="21%"></a></span>
                     </p>
                     <p style="padding-left: 200px; padding-right: 20px; margin-top: -10px;"><span
                       style="font-size: 11pt; font-weight: bold;">Das Portal enthält sämtliche Gedichte des Autors mit den Textvorstufen&nbsp;aus dem Nachlass. Durch Handschriften-Reproduktionen, diplomatische Umschriften und synoptische Darstellungen lässt sich die Textgeschichte jedes Gedichtes im Detail verfolgen.<br></span>
@@ -224,7 +38,8 @@
                     </p>
                     <p style="padding-left: 200px; padding-right: 20px;"><strong><span style="color: #ff0000;">Für die Richtigkeit der Transkriptionen wird bis zur definitiven Freigabe nicht garantiert. Insbesondere die diplomatischen Umschriften haben provisorischen Status.</span></strong>
                     </p>
-                    <p style="clear: both;"><a [routerLink]="['/drucke/die-verwandelten-schiffe']" routerLinkActive="active"><img
+                    <p style="clear: both;"><a [routerLink]="['/drucke/die-verwandelten-schiffe']"
+                                               routerLinkActive="active"><img
                       style="margin-top: 10px; margin-right: 2%; margin-left: 0; width: 23%; float: left;" alt="schiffe"
                       title="Die verwandelten Schiffe, 1957" src=""></a> <a
                       [routerLink]="['/drucke/gedichte']" routerLinkActive="active"><img
@@ -243,25 +58,14 @@
                   </div>
                   <!-- nächste Zeilen neu wm -->
                   <div class="clr"></div>
-
-                  <!-- Plugins: AfterDisplayContent -->
-                  <!-- K2 Plugins: K2AfterDisplayContent -->
-
                   <div class="clr"></div>
                 </div>
-
                 <div class="itemLinks">
                   <div class="clr"></div>
                 </div>
-
                 <div class="clr"></div>
-
-                <!-- Plugins: AfterDisplay -->
-                <!-- K2 Plugins: K2AfterDisplay -->
-
                 <div class="clr"></div>
               </div>
-              <!-- End K2 Item Layout -->
             </div>
           </div>
         </div>

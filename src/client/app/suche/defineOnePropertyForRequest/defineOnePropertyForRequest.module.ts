@@ -16,9 +16,7 @@ import {
   MdSelectModule
 } from '@angular/material';
 
-import { SearchForOneResourceComponent } from './searchForOneResource.component';
-import { DefineOnePropertyForRequestModule } from '../defineOnePropertyForRequest/defineOnePropertyForRequest.module';
-
+import { DefineOnePropertyForRequestComponent } from './defineOnePropertyForRequest.component';
 
 @NgModule({
   imports: [
@@ -37,15 +35,15 @@ import { DefineOnePropertyForRequestModule } from '../defineOnePropertyForReques
     MdSelectModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule,
-    DefineOnePropertyForRequestModule
+    BrowserModule
   ],
   declarations: [
-    SearchForOneResourceComponent
+    DefineOnePropertyForRequestComponent
   ],
   exports: [
-    SearchForOneResourceComponent
+    DefineOnePropertyForRequestComponent
   ]
 })
-export class SearchForOneResourceModule {
+export class DefineOnePropertyForRequestModule {
 }
+

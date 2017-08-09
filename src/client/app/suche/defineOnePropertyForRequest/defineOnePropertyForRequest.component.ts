@@ -7,7 +7,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
   styleUrls: [ 'defineOnePropertyForRequest.component.css' ]
 })
 export class DefineOnePropertyForRequestComponent implements OnInit {
-  @Input() nthProperty: number;
+  @Input() nthProperty: string;
   @Input() array: Array<any>;
   @Input() myProperties: Array<any>;
   @Input() availableboolOperators: Array<any>;
@@ -22,28 +22,32 @@ export class DefineOnePropertyForRequestComponent implements OnInit {
 
   public updatePropertyTriple() {
     // Updating Property
-    this.propertyTriple[0] = this.selectedProperty;
+    this.propertyTriple[0] = this.nthResourceSearch;
 
     if ( this.propertyTriple[1] === 'undefined' ) {
-      this.propertyTriple.push(this.selectedBoolOperator);
+      this.propertyTriple.push(this.nthProperty);
     } else {
-      this.propertyTriple[1] = this.selectedBoolOperator;
+      this.propertyTriple[1] = this.nthProperty;
     }
 
     if ( this.propertyTriple[2] === 'undefined' ) {
-      this.propertyTriple.push(this.searchForVal);
+      this.propertyTriple.push(this.selectedProperty);
     } else {
-      this.propertyTriple[2] = this.searchForVal;
+      this.propertyTriple[2] = this.selectedProperty;
     }
 
     if ( this.propertyTriple[3] === 'undefined' ) {
-      this.propertyTriple.push(this.nthResourceSearch);
+      this.propertyTriple.push(this.selectedBoolOperator);
     } else {
-      this.propertyTriple[3] = this.nthResourceSearch;
+      this.propertyTriple[3] = this.selectedBoolOperator;
     }
 
+    if ( this.propertyTriple[4] === 'undefined' ) {
+      this.propertyTriple.push(this.searchForVal);
+    } else {
+      this.propertyTriple[4] = this.searchForVal;
+    }
     //console.log('PropertyTriple is: ' + this.propertyTriple);
-
     this.sendPropertyTripleBack.emit(this.propertyTriple);
   }
 

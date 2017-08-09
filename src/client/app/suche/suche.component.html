@@ -69,7 +69,12 @@
 
     <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
 
-      <rae-search-for-one-resource [nthResourceSearch]="i" [myResources]="myResources" ></rae-search-for-one-resource>
+      <rae-search-for-one-resource
+        [nthResourceSearch]="i"
+        [myResources]="myResources"
+        (sendPropertyTripleBack)="updateQuerySet($event)" >
+
+      </rae-search-for-one-resource>
 
     </div>
 

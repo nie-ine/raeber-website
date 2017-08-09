@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './../globalSearchVariablesService';
 
@@ -46,10 +46,10 @@ export class SearchForOneResourceComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('This is resource Search nr: ' + this.nthResourceSearch);
-    if( typeof this.myResources !== 'undefined') {
-      console.log('ResourceArray: ' + this.myResources[0].label);
-    }
+    //console.log('This is resource Search nr: ' + this.nthResourceSearch);
+    //if( typeof this.myResources !== 'undefined') {
+      //console.log('ResourceArray: ' + this.myResources[0].label);
+    //}
 
   }
 
@@ -57,26 +57,23 @@ export class SearchForOneResourceComponent implements OnInit {
     this.arraySize = this.array[this.array.length - 1 ];
     this.arraySize += 1;
     this.array.push(this.arraySize);
-    console.log('ResourceSearch: ' + this.nthResourceSearch + 'Constraint: ' + this.arraySize);
+    //console.log('ResourceSearch: ' + this.nthResourceSearch + 'Constraint: ' + this.arraySize);
   }
 
 
 
   propertyQuery() {
-    console.log('Property Query for Resource: ' + this.selectedResource);
+    //console.log('Property Query for Resource: ' + this.selectedResource);
     if (this.selectedResource !== undefined) {
 
-      console.log('Path to request property:' + globalSearchVariableService.propertyListsQuery);
+      //console.log('Path to request property:' + globalSearchVariableService.propertyListsQuery);
       this.encodedURL = encodeURIComponent(this.selectedResource);
-      console.log('Selected resource:' + this.encodedURL);
-
-
-      console.log('Funktion wird ausgeführt');
+      //console.log('Selected resource:' + this.encodedURL);
       return this.http.get(globalSearchVariableService.API_URL + globalSearchVariableService.propertyListsQuery + this.encodedURL)
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
+            //console.log(data);
             return data.properties;
           }
         )
@@ -85,10 +82,13 @@ export class SearchForOneResourceComponent implements OnInit {
   }
 
   chooseProperty() {
-    console.log('SearchInstance ' + this.nthResourceSearch + ' chooses property ' + this.selectedProperty);
+    //console.log('SearchInstance ' + this.nthResourceSearch + ' chooses property ' + this.selectedProperty);
   }
 
   updateQuerySet(propertyTriple: Array<any>) {
-    console.log('Event has triggered this function in parent component! Propertytriple: ' + propertyTriple);
+    //console.log('Event has triggered this function in parent component! Propertytriple: ' + propertyTriple);
+    this.sendPropertyTripleBack.emit(propertyTriple);
   }
+
+  @Output() sendPropertyTripleBack: EventEmitter<any> = new EventEmitter<any>();
 }

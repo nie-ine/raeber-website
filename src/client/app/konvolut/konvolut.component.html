@@ -1,61 +1,50 @@
-<div class="rae-convolute-view">
-  <div class="rt-container">
-    <div id="rt-main" class="mb9-sa3">
-      <div class="rt-container">
-        <div class="rt-grid-9 ">
-          <div class="rt-block">
-            <div id="rt-mainbody">
-              <div class="component-content">
-                <span id="startOfPageId23"></span>
-                <div id="k2Container" class="itemView">
-                  <div class="itemTagsBlock" style="float:right">
-                  </div>
-                  <div class="itemHeader">
-                    <!-- Item title -->
-                    <h2 class="itemTitle" style="padding-left: 30px">
-                      {{konvolut_id}}
-                    </h2>
-                  </div>
-                  <div class="itemBody">
-                    <div class="konvolut-info">
-                      <rae-konvolut-steckbrief [id]="konvolut_id"></rae-konvolut-steckbrief>
-                    </div>
-                    <br/>
-                    <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"></rae-konvolut-werkzeugleiste>
-                    <rae-textgrid [poemsInGrid]="poems"
-                                  [viewMode]="viewMode"
-                                  [showText]=true
-                                  [contentType]="'konvolut'">
-                    </rae-textgrid>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<div class="rt-container">
+  <md-sidenav-container>
+    <div class="component-content normal">
+      <div id="k2Container" class="itemView">
+        <div class="itemTagsBlock" style="float:right">
         </div>
-        <div class="rt-grid-3 ">
-          <div id="rt-sidebar-a">
-            <div class="rt-block ">
-              <div class="module-surround">
-                <div class="module-title">
-                  <h2 class="title">Register</h2>
-                </div>
-                <div class="module-content">
-                  <rae-registerspalte></rae-registerspalte>
-
-                  <div class="moduletable">
-                    <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
-                    <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-                    <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="itemHeader">
+          <!-- Item title -->
+          <h2 class="itemTitle" style="padding-left: 30px">
+            {{konvolut_id}}
+          </h2>
         </div>
-        <div class="clear"></div>
+        <div class="itemBody">
+          <div class="konvolut-info">
+            <rae-konvolut-steckbrief [id]="konvolut_id"></rae-konvolut-steckbrief>
+          </div>
+          <br/>
+          <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"></rae-konvolut-werkzeugleiste>
+          <rae-textgrid [poemsInGrid]="poems"
+                        [viewMode]="viewMode"
+                        [showText]=true
+                        [contentType]="'konvolut'">
+          </rae-textgrid>
+        </div>
       </div>
     </div>
-  </div>
+    <md-sidenav mode="side" align="end" opened="true" class="rae-konvolut-seitenregister">
+      <aside>
+        <rae-registerspalte></rae-registerspalte>
+        <div class="moduletable">
+          <h3>Suchen: {{konvolut_id}}</h3><!-- TODO: Variable ersetzen -->
+          <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
+          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
+        </div>
+      </aside>
+    </md-sidenav>
+    <div class="rae-konvolut-bodenregister">
+      <aside>
+        <rae-registerspalte></rae-registerspalte>
+        <div class="moduletable">
+         <h3>Suchen: {{konvolut_id}}</h3><!-- TODO: Variable ersetzen -->
+         <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
+         <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
+        </div>
+      </aside>
+    </div>
+  </md-sidenav-container>
 </div>
+
 

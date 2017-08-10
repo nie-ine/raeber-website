@@ -2,5 +2,7 @@
 // depending on your app specific config.
 export interface EnvConfig {
   API?: string;
+  RELEASEURL?: string;
+  RELEASEVERSION?: string;
   ENV?: string;
 }

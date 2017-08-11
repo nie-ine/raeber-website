@@ -63,7 +63,10 @@
 
                         <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
                           <md-card-content *ngIf="zeigeDiplomatisch">
-                            <rae-fassung-diplomatisch [pages]="pages"></rae-fassung-diplomatisch>
+                            <rae-fassung-diplomatisch [pages]="pages"
+                                                      (pictureReduced)="show_register = true;"
+                                                      (pictureIncreased)="show_register = false;">
+                            </rae-fassung-diplomatisch>
                           </md-card-content>
                           <md-card-footer>
                             <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">

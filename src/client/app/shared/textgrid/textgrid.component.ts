@@ -18,6 +18,8 @@ export class TextgridComponent implements OnChanges {
 
   @Input() poemsInGrid: Array<any>;
 
+  gridTextHeight: number = 10;
+
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
@@ -32,5 +34,15 @@ export class TextgridComponent implements OnChanges {
      this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
      }*/
     // changes.prop contains the old and the new value...
+  }
+
+  vergroessereFeld() {
+    this.gridTextHeight += 2;
+  }
+
+  verkleinereFeld() {
+    if (this.gridTextHeight > 3) {
+      this.gridTextHeight -= 2;
+    }
   }
 }

@@ -13,6 +13,8 @@ export class KonvolutWerkzeugleisteComponent implements OnInit {
 
   @Input() viewMode: string;
   @Output() viewModeChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input() showRegister: boolean;
+  @Output() showRegisterChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   hilfe() {
     // TODO

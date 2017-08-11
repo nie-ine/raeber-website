@@ -1,4 +1,8 @@
 <md-toolbar>
+  <button md-raised-button class="rae-button" title="Registerspalte aus-/einschalten"
+          [ngClass]="{'rae-button-is-active': showRegister}"
+          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">Register</button>
+
   <md-button-toggle-group [(ngModel)]="viewMode" (ngModelChange)="viewModeChange.emit(viewMode)" name="View Mode">
     <md-button-toggle class="rae-button" value="grid" title="Zeige die Gedichte im Raster">Raster</md-button-toggle>
     <md-button-toggle class="rae-button" value="cols" title="Zeige die Gedichte horizontal scrollbar">Spalten</md-button-toggle>

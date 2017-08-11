@@ -104,17 +104,8 @@
         </div>
       </div>
     </div>
-    <md-sidenav mode="side" align="end" [opened]=show_register class="rae-fassung-seitenregister">
-      <aside>
-        <rae-registerspalte></rae-registerspalte>
-        <div class="moduletable">
-          <h3>Suchen: {{konvolut_id}}</h3><!-- TODO: Variable ersetzen -->
-          <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-        </div>
-      </aside>
-    </md-sidenav>
-    <div *ngIf=show_register class="rae-fassung-bodenregister">
+
+    <md-sidenav mode="side" align="end" [opened]=show_register>
       <aside>
        <rae-registerspalte></rae-registerspalte>
         <div class="moduletable">
@@ -123,6 +114,6 @@
          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
         </div>
       </aside>
-    </div>
+    </md-sidenav>
   </md-sidenav-container>
 </div>

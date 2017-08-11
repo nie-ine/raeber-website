@@ -22,6 +22,7 @@ export class KonvolutComponent implements OnInit {
   poems: Array<any>;
 
   viewMode: string;
+  show_register: boolean;
 
   konvolut_id: string;
   konvolut_type: string;
@@ -31,6 +32,7 @@ export class KonvolutComponent implements OnInit {
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     this.viewMode = 'grid';
+    this.show_register = true;
 
     window.onscroll = () => {
       let windowHeight = 'innerHeight' in window ? window.innerHeight

@@ -15,7 +15,8 @@
             <rae-konvolut-steckbrief [id]="konvolut_id"></rae-konvolut-steckbrief>
           </div>
           <br/>
-          <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"></rae-konvolut-werkzeugleiste>
+          <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"
+                                       [(showRegister)]="show_register"></rae-konvolut-werkzeugleiste>
           <rae-textgrid [poemsInGrid]="poems"
                         [viewMode]="viewMode"
                         [showText]=true
@@ -24,17 +25,8 @@
         </div>
       </div>
     </div>
-    <md-sidenav mode="side" align="end" opened="true" class="rae-konvolut-seitenregister">
-      <aside>
-        <rae-registerspalte></rae-registerspalte>
-        <div class="moduletable">
-          <h3>Suchen: {{konvolut_id}}</h3><!-- TODO: Variable ersetzen -->
-          <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-        </div>
-      </aside>
-    </md-sidenav>
-    <div class="rae-konvolut-bodenregister">
+
+    <md-sidenav mode="over" align="end" [opened]="show_register">
       <aside>
         <rae-registerspalte></rae-registerspalte>
         <div class="moduletable">
@@ -43,7 +35,7 @@
          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
         </div>
       </aside>
-    </div>
+    </md-sidenav>
   </md-sidenav-container>
 </div>
 

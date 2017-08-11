@@ -46,11 +46,12 @@ export class SucheComponent implements OnInit {
     1
   ];
   i: number;
+  j: number;
+  k: number;
   isAlreadyInArray = 0;
   //setOfAllQueries: Array<any>; //{numberOfSearchBox: '', numberOfProperty: '', propertyIRI: '', logicalOperator: '', searchVal: ''}
-  setOfAllQueries: any[][];
+  setOfAllQueries: any[];
   count = 0;
-  numberOfParams: number;
 
   constructor(private http: Http) {
   }
@@ -135,35 +136,43 @@ export class SucheComponent implements OnInit {
 
   updateQuerySet(propertyTriple: Array<any>) {
     // Case: setOfAllQueries it totally empty:
-    this.numberOfParams = propertyTriple.length;
-    if ( this.count === 0) {
-      this.setOfAllQueries = propertyTriple;
-      this.count += 1;
+    console.log('PropertyTriple: ' + propertyTriple);
+    if ( this.setOfAllQueries === undefined) {
+      console.log('Set first Entry');
+      this.setOfAllQueries=propertyTriple;
     } else {
-      for( this.i = 0; this.i < this.numberOfParams; this.i++ ){
-        this.setOfAllQueries.push(propertyTriple[ this.i ]);
-      }
-      this.setOfAllQueries.push(propertyTriple);
-      /*for (this.i = 0; this.i < this.setOfAllQueries.length; this.i++) {
+      this.isAlreadyInArray = 0;
+      for (this.i = 0; this.i < this.setOfAllQueries.length; this.i += propertyTriple.length) {
             // Check if entry exists for respective searchox
             if ( this.setOfAllQueries[this.i] === propertyTriple[0]) {
+              console.log('Update Query');
               this.isAlreadyInArray = 1;
-              this.setOfAllQueries[this.i] = propertyTriple;
-              console.log('Is already in Set of Searchboxes');
+              this.k = 0;
+              for(this.j = this.i; this.j < this.i + propertyTriple.length; this.j++) {
+                this.setOfAllQueries[this.j] = propertyTriple[this.k];
+                this.k++;
+              }
+              this.setOfAllQueries.concat(propertyTriple);
+              console.log('Searchbox is already in setOfQueires');
             }
-            if( this.i ===  this.setOfAllQueries.length && this.isAlreadyInArray === 0) {
-              this.setOfAllQueries.push(propertyTriple);
-            }
-          }*/
+          }
+      if (this.isAlreadyInArray === 0) {
+        console.log('Add new query');
+        console.log('setOfAllQueries before adding: ' + this.setOfAllQueries);
+        for(this.i = 0; this.i < propertyTriple.length; this.i++) {
+          this.setOfAllQueries.push(propertyTriple[this.i]);
+        }
+        console.log('setOfAllQueries after adding: ' + this.setOfAllQueries);
+      }
     }
     console.log('----------');
-    for (this.i = 0; this.i < this.setOfAllQueries.length; this.i += this.numberOfParams) {
+    for (this.i = 0; this.i < this.setOfAllQueries.length; this.i += propertyTriple.length) {
       console.log(
-        'SearchBox Number: '   + this.setOfAllQueries[ this.i ]      + '\n'
+          'SearchBox Number: ' + this.setOfAllQueries[ this.i ]      + '\n'
         + 'Property Number: '  + this.setOfAllQueries[ this.i + 1 ]  + '\n'
         + 'Property IRI: '     + this.setOfAllQueries[ this.i + 2 ]  + '\n'
         + 'Compare Operator: ' + this.setOfAllQueries[ this.i + 3 ]  + '\n'
-        + 'Search Value: ' + this.setOfAllQueries[ this.i + 4 ]  + '\n'
+        + 'Search Value: '     + this.setOfAllQueries[ this.i + 4 ]  + '\n'
         + '\n\n' );
     }
     console.log('----------');

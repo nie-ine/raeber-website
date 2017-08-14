@@ -22,6 +22,7 @@ export class DefineOnePropertyForRequestComponent implements OnInit {
 
   public updatePropertyTriple() {
     // Updating Property
+    this.propertyTriple = [''];
     this.propertyTriple[0] = this.nthResourceSearch;
 
     if ( this.propertyTriple[1] === 'undefined' ) {

@@ -50,8 +50,17 @@ export class SucheComponent implements OnInit {
   k: number;
   isAlreadyInArray = 0;
   //setOfAllQueries: Array<any>; //{numberOfSearchBox: '', numberOfProperty: '', propertyIRI: '', logicalOperator: '', searchVal: ''}
-  setOfAllQueries: any[];
+  helperMap = new Map();
+  setOfAllQueries = {
+    searchBox: '',
+    propertyNumber: '',
+      property: '',
+      compOp: '',
+      value: ''
+  };
   count = 0;
+  numberOfPropertiesInSearchBox = '';
+  str: string;
 
   constructor(private http: Http) {
   }
@@ -137,7 +146,29 @@ export class SucheComponent implements OnInit {
   updateQuerySet(propertyTriple: Array<any>) {
     // Case: setOfAllQueries it totally empty:
     console.log('PropertyTriple: ' + propertyTriple);
-    if ( this.setOfAllQueries === undefined) {
+    this.helperMap.set(
+      propertyTriple[0].toString() + propertyTriple[1].toString(), [
+          propertyTriple[2], [
+            propertyTriple[3], propertyTriple[4]
+            ]
+      ]
+    );
+    this.str = JSON.stringify(this.helperMap, null, 4);
+    console.log(this.str);
+
+    /*this.helperMap.searchBox = propertyTriple[0];
+    this.helperMap.propertyNumber = propertyTriple[1];
+    this.helperMap.property = propertyTriple[2];
+    this.helperMap.compOp = propertyTriple[3];
+    this.helperMap.value = propertyTriple[4];
+    this.setOfAllQueries.push(this.helperMap);
+    this.str = JSON.stringify(this.setOfAllQueries, null, 4);
+    console.log(this.str);*/
+    /* if ( this.setOfAllQueries === undefined) {
+      this.setOfAllQueries[0].propertyTriple[0] = propertyTriple[0];
+      this.setOfAllQueries[0].numberOfPropertiesInSearchBox = '1';
+      this.setOfAllQueries[0].
+      this.setOfAllQueries[0].propertyIRI = propertyTriple[2]
       console.log('Set first Entry');
       this.setOfAllQueries=propertyTriple;
     } else {
@@ -147,12 +178,18 @@ export class SucheComponent implements OnInit {
             if ( this.setOfAllQueries[this.i] === propertyTriple[0]) {
               console.log('Update Query');
               this.isAlreadyInArray = 1;
+              //Check if it's a new property or if the old one is updated
+              if( this.setOfAllQueries[ this.i+ 1 ]  === propertyTriple[1]) {
+                console.log('Update Property');
               this.k = 0;
               for(this.j = this.i; this.j < this.i + propertyTriple.length; this.j++) {
                 this.setOfAllQueries[this.j] = propertyTriple[this.k];
                 this.k++;
               }
-              this.setOfAllQueries.concat(propertyTriple);
+              } else {
+                console.log('Add Property');
+              }
+              //this.setOfAllQueries.concat(propertyTriple);
               console.log('Searchbox is already in setOfQueires');
             }
           }
@@ -165,6 +202,7 @@ export class SucheComponent implements OnInit {
         console.log('setOfAllQueries after adding: ' + this.setOfAllQueries);
       }
     }
+    console.log('setOfAllQueries: ' + this.setOfAllQueries + 'Length: ' + this.setOfAllQueries.length);
     console.log('----------');
     for (this.i = 0; this.i < this.setOfAllQueries.length; this.i += propertyTriple.length) {
       console.log(
@@ -175,9 +213,7 @@ export class SucheComponent implements OnInit {
         + 'Search Value: '     + this.setOfAllQueries[ this.i + 4 ]  + '\n'
         + '\n\n' );
     }
-    console.log('----------');
-
-    //console.log('Event has triggered this function in Root Suche Component. Propertytriple: ' + propertyTriple);
+    console.log('----------');*/
   }
 
 

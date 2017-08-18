@@ -59,6 +59,8 @@ export class SucheComponent implements OnInit {
   value: string;
   keys: Array<any>;
   finalQueryArray= [''];
+  currentSearchBox = '1';
+  allSearchResults = [''];
 
   constructor(private http: Http) {
   }
@@ -145,6 +147,7 @@ export class SucheComponent implements OnInit {
     this.k = 0;
     // Case: setOfAllQueries it totally empty:
     console.log('PropertyTriple: ' + propertyTriple);
+    console.log('Resource: ' + this.selectedResource);
     this.mapOfAllQueries.set(
       propertyTriple[0].toString() + propertyTriple[1].toString(), [
         propertyTriple[2], [
@@ -159,8 +162,28 @@ export class SucheComponent implements OnInit {
     console.log(this.keys);
     this.mapOfAllQueries.forEach(
       value => {
-        this.finalQueryArray[this.k] = this.keys[this.k];
-        console.log('Key: ' + this.finalQueryArray[this.k]);
+        if(this.keys[this.k][1] === '1') {
+          console.log('Add first property');
+          this.finalQueryArray[this.keys[this.k][0] - 1] =
+            globalSearchVariableService.API_URL
+            + globalSearchVariableService.extendedSearch
+            + encodeURIComponent(propertyTriple[5])
+            + globalSearchVariableService.extendedProperty
+            + encodeURIComponent(value[0])
+            + globalSearchVariableService.compareOperator
+            + value[1][0]
+            + globalSearchVariableService.searchval
+            + value[1][1];
+        } else {
+          console.log('Add additional property');
+          this.finalQueryArray[this.keys[this.k][0] - 1]
+            += globalSearchVariableService.extendedProperty
+            + encodeURIComponent(value[0])
+            + globalSearchVariableService.compareOperator
+            + value[1][0]
+            + globalSearchVariableService.searchval
+            + value[1][1];
+        }
         this.k++;
         console.log(value[0]);
         for(this.i = 0; this.i < value[1].length; this.i++) {
@@ -169,6 +192,22 @@ export class SucheComponent implements OnInit {
       }
     );
 
+  }
+
+  executeFinalQueries() {
+    console.log(this.finalQueryArray);
+    for(this.i = 0; this.i < this.finalQueryArray.length; this.i ++) {
+      console.log(this.finalQueryArray[this.i]);
+      return this.http.get(this.finalQueryArray[this.i])
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            console.log(data);
+            return data.subjects;
+          }
+        )
+        .subscribe(response => this.searchResult = response);
+    }
   }
 
 }

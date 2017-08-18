@@ -5,60 +5,12 @@
 <br>
 
 
-
-<div style="padding:20px;" ng-init="myResources=initialQuery()">
-
-    <md-select placeholder="Select Resource" [(ngModel)]="selectedResource" name="resource" >
-      <md-option *ngFor="let resource of myResources" [value]="resource.id" (click)="propertyQuery()">
-        {{ resource.label }}
-      </md-option>
-    </md-select>
-
-    <md-select placeholder="Select Property" [(ngModel)]="selectedProperty" name="resource">
-      <md-option *ngFor="let property of myProperties" [value]="property.id">
-        {{ property.label }}
-      </md-option>
-    </md-select>
-
-    <md-select placeholder="Select logical Operator" [(ngModel)]="boolOperator" name="bool">
-      <md-option *ngFor="let operator of availableboolOperators" [value]="operator.operator">
-        {{ operator.name }}
-      </md-option>
-    </md-select>
-
-    <md-input-container>
-      <input mdInput placeholder="Search for this word" [(ngModel)]="searchForVal">
-    </md-input-container>
-
-  <button md-button (click)="finalQuery()" >
-    <md-icon >search</md-icon>
-  </button>
-
-
-  <button md-button (click)="increaseArrayElement()" >
-    <md-icon >note_add</md-icon>
-  </button>
-
-  <p></p>
-
-  <button md-button >
-    <md-icon >note_add</md-icon>
-  </button>
-
-
-</div>
-
-<rae-textgrid [poems_in_grid]="searchResult"></rae-textgrid>
-
-
-<div>
+<div ng-init="myResources=initialQuery()">
 
 
   <!--
    array: Length of this is the number of Search Blocks that the user wants to combine
    i: i-th search block
-
-
    -->
 
   <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
@@ -89,7 +41,7 @@
   </button>
 
 
-  <button md-button >
+  <button md-button (click)="executeFinalQueries()">
 
     <md-icon >search</md-icon>
 
@@ -97,3 +49,14 @@
 
 
 </div>
+
+Final Queries:
+<div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
+  <span style="word-wrap: break-word; word-break: break-all;">
+    Query number: {{ i }}
+    <br>
+    {{ query }}
+  </span>
+</div>
+
+<rae-textgrid [poems_in_grid]="searchResult"></rae-textgrid>

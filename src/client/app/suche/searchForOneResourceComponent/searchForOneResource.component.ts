@@ -87,6 +87,7 @@ export class SearchForOneResourceComponent implements OnInit {
 
   updateQuerySet(propertyTriple: Array<any>) {
     //console.log('Event has triggered this function in parent component! Propertytriple: ' + propertyTriple);
+    propertyTriple.push(this.selectedResource);
     this.sendPropertyTripleBack.emit(propertyTriple);
   }
 

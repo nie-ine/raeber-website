@@ -4,12 +4,14 @@
 
     <md-card class="rae-poem-card">
 
-      <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
+      <md-card-subtitle *ngIf="p.date"><time>{{p.date}}</time></md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
-          {{p.value[2]}}
-        </a>
+        <h4>
+          <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
+            {{p.value[2]}}
+          </a>
+        </h4>
       </md-card-title>
 
       <md-card-content *ngIf="showText"

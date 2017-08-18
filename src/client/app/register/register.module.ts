@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { MdButtonModule, MdListModule } from '@angular/material';
+import { MdButtonModule, MdListModule, MdSidenavModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { RegisterComponent } from './register.component';
 import { RegisterNavigationComponent } from './register-navigation/register-navigation.component';
@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
     HttpModule,
     MdButtonModule,
     MdListModule,
+    MdSidenavModule,
     RouterModule.forChild([
       { path: 'register', component: RegisterComponent },
       { path: 'register/:zeitraum', component: RegisterComponent }

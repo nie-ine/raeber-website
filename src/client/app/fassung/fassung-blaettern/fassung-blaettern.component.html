@@ -1,15 +1,15 @@
 <div>
   <span class="itemNavigationTitle">Im Konvolut blättern:</span>
 
-  <button md-button title="vorangehender Text" *ngIf="idOfPrev"
+  <a md-button class="rae-button-paging" title="vorangehender Text" *ngIf="idOfPrev"
           [routerLink]="['../' + idOfPrev]">
     <md-icon>navigate_before</md-icon>
     {{titleOfPrev}}
-  </button>
+  </a>
 
-  <button md-button title="nächster Text" *ngIf="idOfNext"
+  <a md-button class="rae-button-paging" title="nächster Text" *ngIf="idOfNext"
           [routerLink]="['../' + idOfNext]">
     <md-icon>navigate_next</md-icon>
     {{titleOfNext}}
-  </button>
+  </a>
 </div>

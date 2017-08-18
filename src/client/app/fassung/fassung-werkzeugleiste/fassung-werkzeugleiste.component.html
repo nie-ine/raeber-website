@@ -1,31 +1,31 @@
 <div>
-  <button md-raised-button title="Registerspalte aus-/einschalten"
-          [ngClass]="{'button-is-active': showRegister}"
+  <button md-raised-button class="rae-button" title="Registerspalte aus-/einschalten"
+          [ngClass]="{'rae-button-is-active': showRegister}"
           (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">Register</button>
 
-  <button md-raised-button title="Texte separat scrollen aus-/einschalten"
-          [ngClass]="{'button-is-active': poemResizable}"
+  <button md-raised-button class="rae-button" title="Texte separat scrollen aus-/einschalten"
+          [ngClass]="{'rae-button-is-active': poemResizable}"
           (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">Rahmen</button>
 
-  <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
+  <button md-raised-button class="rae-button" title="neu laden" (click)="neuladen()">Reset</button>
 
-  <button md-raised-button title="vorangehender Text" *ngIf="idOfPrev"
+  <a md-raised-button class="rae-button" title="vorangehender Text" *ngIf="idOfPrev"
           [routerLink]="['../' + idOfPrev]">
     <md-icon>navigate_before</md-icon>
-  </button>
-  <button md-raised-button title="kein vorangehender Text" *ngIf="!idOfPrev" >
-    <md-icon class="button-without-link">navigate_before</md-icon>
-  </button>
+  </a>
+  <a md-raised-button class="rae-button" title="kein vorangehender Text" *ngIf="!idOfPrev" >
+    <md-icon class="rae-button-without-link">navigate_before</md-icon>
+  </a>
 
-  <button md-raised-button title="nächster Text" *ngIf="idOfNext"
+  <a md-raised-button class="rae-button" title="nächster Text" *ngIf="idOfNext"
           [routerLink]="['../' + idOfNext]">
     <md-icon>navigate_next</md-icon>
-  </button>
-  <button md-raised-button title="kein nächster Text" *ngIf="!idOfNext" >
-    <md-icon class="button-without-link">navigate_next</md-icon>
-  </button>
+  </a>
+  <a md-raised-button class="rae-button" title="kein nächster Text" *ngIf="!idOfNext" >
+    <md-icon class="rae-button-without-link">navigate_next</md-icon>
+  </a>
 
-  <button md-raised-button title="Hilfe" (click)="hilfe()">
+  <button md-raised-button class="rae-button" title="Hilfe" (click)="hilfe()">
     <md-icon>help</md-icon>
   </button>
 </div>

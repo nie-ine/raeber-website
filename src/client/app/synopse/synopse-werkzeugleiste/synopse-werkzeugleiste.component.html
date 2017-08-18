@@ -6,8 +6,8 @@
   <md-button-toggle-group [(ngModel)]="viewMode"
                           (ngModelChange)="viewModeChange.emit(viewMode)"
                           name="View Mode">
-    <md-button-toggle value="grid" title="Zeige die Gedichte im Raster">Raster</md-button-toggle>
-    <md-button-toggle value="cols" title="Zeige die Gedichte horizontal scrollbar">Spalten</md-button-toggle>
+    <md-button-toggle class="rae-button" value="grid" title="Zeige die Gedichte im Raster">Raster</md-button-toggle>
+    <md-button-toggle class="rae-button" value="cols" title="Zeige die Gedichte horizontal scrollbar">Spalten</md-button-toggle>
   </md-button-toggle-group>
   <md-checkbox [(ngModel)]="showText"
                (ngModelChange)="showTextChange.emit(showText)"
@@ -21,4 +21,7 @@
 
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
 
+  <button md-raised-button class="rae-button" title="Hilfe" (click)="hilfe()">
+    <md-icon>help</md-icon>
+  </button>
 </md-toolbar>

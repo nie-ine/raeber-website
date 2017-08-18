@@ -14,13 +14,15 @@ import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utiliti
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
-  templateUrl: 'konvolut.component.html'
+  templateUrl: 'konvolut.component.html',
+  styleUrls: ['konvolut.component.css']
 })
 export class KonvolutComponent implements OnInit {
 
   poems: Array<any>;
 
   viewMode: string;
+  show_register: boolean;
 
   konvolut_id: string;
   konvolut_type: string;
@@ -30,6 +32,7 @@ export class KonvolutComponent implements OnInit {
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     this.viewMode = 'grid';
+    this.show_register = true;
 
     window.onscroll = () => {
       let windowHeight = 'innerHeight' in window ? window.innerHeight

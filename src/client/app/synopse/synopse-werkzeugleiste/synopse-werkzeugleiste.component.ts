@@ -7,8 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-synopse-werkzeugleiste',
-  templateUrl: 'synopse-werkzeugleiste.component.html',
-  styleUrls: [ 'synopse-werkzeugleiste.component.css' ]
+  templateUrl: 'synopse-werkzeugleiste.component.html'
 })
 export class SynopseWerkzeugleisteComponent implements OnInit {
 

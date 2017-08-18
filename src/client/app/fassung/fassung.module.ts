@@ -12,7 +12,7 @@ import {
   MdGridListModule,
   MdIconModule,
   MdInputModule,
-  MdListModule
+  MdListModule, MdSidenavModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -45,6 +45,7 @@ import { TextComponent } from '../shared/text/text.component';
     MdIconModule,
     MdInputModule,
     MdListModule,
+    MdSidenavModule,
     RegisterspalteModule,
     FassungRoutingModule
   ],

@@ -60,7 +60,7 @@ export class SucheComponent implements OnInit {
   keys: Array<any>;
   finalQueryArray= [''];
   currentSearchBox = '1';
-  allSearchResults = [''];
+  allSearchResults: Array<any>;
 
   constructor(private http: Http) {
   }
@@ -197,17 +197,27 @@ export class SucheComponent implements OnInit {
   executeFinalQueries() {
     console.log(this.finalQueryArray);
     for(this.i = 0; this.i < this.finalQueryArray.length; this.i ++) {
-      console.log(this.finalQueryArray[this.i]);
-      return this.http.get(this.finalQueryArray[this.i])
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            console.log(data);
-            return data.subjects;
-          }
-        )
-        .subscribe(response => this.searchResult = response);
+      this.performQuery(this.finalQueryArray[this.i]);
     }
+  }
+  performQuery(query: string) {
+    return this.http.get(query)
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          //console.log(data);
+          this.k = 0;
+          if(data.subjects !== undefined) {
+            if(this.allSearchResults === undefined) {
+              this.allSearchResults = [];
+            }
+            this.allSearchResults.push.apply(this.allSearchResults,data.subjects);
+          }
+          console.log(this.allSearchResults);
+          return data.subjects;
+        }
+      )
+      .subscribe(response => this.searchResult = response);
   }
 
 }

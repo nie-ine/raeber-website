@@ -13,7 +13,8 @@ import {forEach} from "@angular/router/src/utils/collection";
 @Component({
   moduleId: module.id,
   selector: 'rae-suche',
-  templateUrl: 'suche.component.html'
+  templateUrl: 'suche.component.html',
+  styleUrls: [ 'suche.component.css' ]
 })
 export class SucheComponent implements OnInit {
   vocabulary: 'http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext';
@@ -61,6 +62,29 @@ export class SucheComponent implements OnInit {
   finalQueryArray= [''];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
+  notizBuecher = [
+    {id: '1', name: 'Notizbücher'},
+    {id: '2', name: 'Notizbuch 1948-49'},
+    {id: '3', name: 'Notizbuch 1949'},
+    {id: '4', name: 'Notizbuch 1950'},
+    {id: '5', name: 'Notizbuch 1950-51'},
+    {id: '6', name: 'Notizbuch 1952-54'},
+    {id: '7', name: 'Notizbuch 1954-55'},
+    {id: '8', name: 'Notizbuch 1955-57'},
+    {id: '9', name: 'Notizbuch 1957-58'},
+    {id: '10', name: 'Notizbuch 1958-61'},
+    {id: '11', name: 'Notizbuch 1961-65'},
+    {id: '12', name: 'Notizbuch 1979'},
+    {id: '13', name: 'Notizbuch 1979-82'},
+    {id: '14', name: 'Notizbuch divers'},
+    {id: '15', name: 'Notizbuch 1965-80'}
+  ];
+  selectedNotizbuch: string;
+  notizbuchDisabled = false;
+  manuskriptDisabled = false;
+  typoscriptDisabled = false;
+  druckDisabled = false;
+  materialDisabled = false;
 
   constructor(private http: Http) {
   }
@@ -116,7 +140,7 @@ export class SucheComponent implements OnInit {
           globalSearchVariableService.compareOperator +
           this.boolOperator +
           globalSearchVariableService.searchval +
-          this.searchForVal;
+          encodeURIComponent(this.searchForVal);
     //console.log(
       //'Final extended search URl: ' + this.query);
     return this.http.get(this.query)
@@ -182,7 +206,7 @@ export class SucheComponent implements OnInit {
             + globalSearchVariableService.compareOperator
             + value[1][0]
             + globalSearchVariableService.searchval
-            + value[1][1];
+            + encodeURIComponent(value[1][1]);
         }
         this.k++;
         console.log(value[0]);

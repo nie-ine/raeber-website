@@ -17,7 +17,8 @@ import {
   MdInputModule,
   MdMenuModule,
   MdCheckboxModule,
-  MdSelectModule
+  MdSelectModule,
+  MdSlideToggleModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -47,7 +48,8 @@ import { SearchForOneResourceModule } from './searchForOneResourceComponent/sear
     BrowserAnimationsModule,
     MdSelectModule,
     TextgridModule,
-    SearchForOneResourceModule
+    SearchForOneResourceModule,
+    MdSlideToggleModule
   ],
   declarations: [
     SucheComponent

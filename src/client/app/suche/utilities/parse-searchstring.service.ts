@@ -1,6 +1,11 @@
 /**
  * Created by Reto Baumgartner (rfbaumgartner) on 16.08.17.
  */
+
+/**
+ * NOW IN parser Module!, This version has not been used anymore! Written by Jan Clemens Stoffregen
+ */
+/
 import { Injectable } from '@angular/core';
 
 @Injectable()

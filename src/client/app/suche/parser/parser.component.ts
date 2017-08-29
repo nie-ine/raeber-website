@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 
 
 @Component({
@@ -12,15 +12,11 @@ export class ParserComponent implements OnChanges {
 
   @Input() inputSearchStringToBeParsed: string;
   queries: Array<Array<any>> = [];
-  str: string;
   ngOnChanges(changes: SimpleChanges) {
-    //console.log(this.vocabulary);
-    console.log('String to parse: ' + this.inputSearchStringToBeParsed);
     if(this.inputSearchStringToBeParsed !== undefined) {
       this.queries = this.parseSearchString(this.inputSearchStringToBeParsed);
     }
-    this.str = JSON.stringify(this.queries, null, 4);
-    console.log(this.str);
+    this.returnQueries.emit(this.queries);
   }
 
   parseSearchString(unparsedSearch: string) {
@@ -94,4 +90,6 @@ export class ParserComponent implements OnChanges {
     queries.push(queryEntry);
     return queries;
   }
+
+  @Output() returnQueries: EventEmitter<any> = new EventEmitter<any>();
 }

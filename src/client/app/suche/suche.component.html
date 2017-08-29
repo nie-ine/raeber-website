@@ -21,7 +21,8 @@
     <input
       mdInput placeholder="Geben Sie hier Ihre Suche ein"
       style="margin-bottom: 2px;"
-      [(ngModel)]="inputSearchStringToBeParsed">
+      [(ngModel)]="inputSearchStringToBeParsed"
+      (sendPropertyTripleBack)="updateQuerySet($event)">
 
   </md-input-container>
 
@@ -57,7 +58,8 @@
 
 
 <rae-parser
-  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed">
+  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
+  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
 
 </rae-parser>
 

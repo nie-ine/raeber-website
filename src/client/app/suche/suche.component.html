@@ -18,7 +18,10 @@
 
   <md-input-container style="width: 500px;">
 
-    <input mdInput placeholder="Geben Sie hier Ihre Suche ein" style="margin-bottom: 2px;">
+    <input
+      mdInput placeholder="Geben Sie hier Ihre Suche ein"
+      style="margin-bottom: 2px;"
+      [(ngModel)]="inputSearchStringToBeParsed">
 
   </md-input-container>
 
@@ -51,6 +54,12 @@
 <div></div>
 <br/>
 <br/>
+
+<rae-parser
+  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed">
+
+</rae-parser>
+
 <h2 >Konvolute<sup>?</sup> </h2>
 
 
@@ -166,6 +175,10 @@
 
 </div>
 
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -174,7 +187,7 @@
 
 
 
-
+<!--
 <br>
 <br>
 <br>
@@ -183,10 +196,7 @@
 <div ng-init="myResources=initialQuery()">
 
 
-  <!--
-   array: Length of this is the number of Search Blocks that the user wants to combine
-   i: i-th search block
-   -->
+
 
   <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
 
@@ -235,3 +245,6 @@ Final Queries:
 </div>
 
 <rae-textgrid [poems_in_grid]="allSearchResults"></rae-textgrid>
+
+
+-->

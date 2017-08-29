@@ -85,6 +85,7 @@ export class SucheComponent implements OnInit {
   typoscriptDisabled = false;
   druckDisabled = false;
   materialDisabled = false;
+  inputSearchStringToBeParsed: string;
 
   constructor(private http: Http) {
   }

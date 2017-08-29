@@ -26,6 +26,7 @@ import { SucheRoutingModule } from './suche-routing.module';
 import { SucheComponent } from './suche.component';
 import { TextgridModule } from './textgrid/textgrid.module';
 import { SearchForOneResourceModule } from './searchForOneResourceComponent/searchForOneResource.module';
+import { ParserModule } from './parser/parser.module';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { SearchForOneResourceModule } from './searchForOneResourceComponent/sear
     MdSelectModule,
     TextgridModule,
     SearchForOneResourceModule,
-    MdSlideToggleModule
+    MdSlideToggleModule,
+    ParserModule
   ],
   declarations: [
     SucheComponent

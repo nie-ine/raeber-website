@@ -252,11 +252,11 @@ export class SucheComponent implements OnInit {
     this.numberOfQueries = 0;
     for(this.i = 0; this.i < queries.length; this.i++) {
       if(this.i !== 0 ) {
-        console.log('And merge with');
+        console.log('And merge with?');
       }
       for(this.j = 0; this.j < queries[this.i].length; this.j++) {
         if(this.j !== 0 ) {
-          console.log('And merge with');
+          console.log('And merge with?');
         }
         this.numberOfQueries += 1;
         console.log('Request Nr.: '

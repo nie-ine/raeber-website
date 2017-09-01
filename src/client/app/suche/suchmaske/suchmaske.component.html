@@ -22,8 +22,8 @@
             <ul formGroupName="notizbuchForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showNotizbuecher=!showNotizbuecher">
-                  <md-icon>{{showNotizbuecher ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.notizbuecher=!catHidden.notizbuecher">
+                  <md-icon>{{catHidden.notizbuecher ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="notizbuchAll"
                              [class.green]="childElemsAreChecked('notizbuchForm', 'notizbuchAll')"
@@ -34,129 +34,143 @@
                              (change)="setValueForChildElems('notizbuchForm', 'notizbuchForm.notizbuchAll')">
                   Notizbuch
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('notizbuchForm', 'notizbuchForm.notizbuchAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleGroupDisabled('notizbuchForm', 'notizbuchForm.notizbuchAll'); catDisabled.notizbuecher = !catDisabled.notizbuecher">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch4849">Notizbuch 1948-49
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch4849')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch4849')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch49">Notizbuch 1949
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch49')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch49')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch50">Notizbuch 1950
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch50')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch50')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5051">Notizbuch 1950-51
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5051')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5051')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5254">Notizbuch 1952-54
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5254')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5254')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5455">Notizbuch 1954-55
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5455')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5455')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5557">Notizbuch 1955-57
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5557')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5557')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5758">Notizbuch 1957-58
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5758')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5758')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch5861">Notizbuch 1958-61
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch5861')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch5861')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch6165">Notizbuch 1961-65
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch6165')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch6165')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch79">Notizbuch 1979
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch79')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch79')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch7982">Notizbuch 1979-82
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch7982')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch7982')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch8088">Notizbuch 1980-88
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch8088')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch8088')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showNotizbuecher">
+              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
                              formControlName="notizbuch6580">Notizbuch 1965-80
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('notizbuchForm.notizbuch6580')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.notizbuecher"
+                                 (change)="toggleDisabled('notizbuchForm.notizbuch6580')">
+
+                </md-slide-toggle>
               </li>
             </ul>
             <ul formGroupName="manuskriptForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showManuskripte=!showManuskripte">
-                  <md-icon>{{showManuskripte ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.manuskripte=!catHidden.manuskripte">
+                  <md-icon>{{catHidden.manuskripte ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="manuskriptAll"
                              [class.green]="childElemsAreChecked('manuskriptForm', 'manuskriptAll')"
@@ -167,170 +181,189 @@
                              (change)="setValueForChildElems('manuskriptForm', 'manuskriptForm.manuskriptAll')">
                   Manuskripte
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('manuskriptForm', 'manuskriptForm.manuskriptAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleGroupDisabled('manuskriptForm', 'manuskriptForm.manuskriptAll'); catDisabled.manuskripte = !catDisabled.manuskripte">
+
+                </md-slide-toggle>
               </li>
 
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript4851"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1948-51
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript4851')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript4851')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript51"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1951
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript51')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript51')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript52"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1952
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript52')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript52')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript53"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1953
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript53')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript53')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript54"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1954
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript54')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript54')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript55"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1955
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript55')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript55')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript56"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1956
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript56')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript56')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript57"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1957
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript57')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript57')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript58"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1958
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript58')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript58')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript5859"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1958-59
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript5859')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript5859')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript5960"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1959-60
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript5960')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript5960')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript61"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1961
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript61')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript61')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript62"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1962
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript62')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript62')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript63"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1963
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript63')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript63')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript6465"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1964-65
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript6465')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript6465')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript79"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1979
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript79')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript79')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript7983"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1979-83
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskript7983')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskript7983')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskriptKarten"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Karten 1984
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskriptKarten')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskriptKarten')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showManuskripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskriptDivers"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte divers
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('manuskriptForm.manuskriptDivers')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.manuskripte"
+                                 (change)="toggleDisabled('manuskriptForm.manuskriptDivers')">
+
+                </md-slide-toggle>
               </li>
             </ul>
             <ul formGroupName="typoskriptForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showTyposkripte=!showTyposkripte">
-                  <md-icon>{{showTyposkripte ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.typoskripte=!catHidden.typoskripte">
+                  <md-icon>{{catHidden.typoskripte ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="typoskriptAll"
                              [class.green]="childElemsAreChecked('typoskriptForm', 'typoskriptAll')"
@@ -341,223 +374,244 @@
                              (change)="setValueForChildElems('typoskriptForm', 'typoskriptForm.typoskriptAll')">
                   Typoskripte
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('typoskriptForm', 'typoskriptForm.typoskriptAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleGroupDisabled('typoskriptForm', 'typoskriptForm.typoskriptAll'); catDisabled.typoskripte = !catDisabled.typoskripte">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript4346"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1943-46
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript4346')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript4346')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript4550"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1945-50
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript4550')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript4550')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript4850"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1948-50
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript4850')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript4850')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript51"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1951
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript51')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript51')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript52"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1952
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript52')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript52')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript53"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1953
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript53')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript53')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript54"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1954
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript54')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript54')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript55"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1955
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript55')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript55')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript56"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1956
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript56')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript56')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript57"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1957
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript57')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript57')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript58"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1958
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript58')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript58')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript59"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1959
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript59')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript59')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript60"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1960
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript60')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript60')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript61"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1961
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript61')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript61')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript62"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1962
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript62')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript62')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript63"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1963
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript63')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript63')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript65"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1965
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript65')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript65')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript79"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1979
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript79')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript79')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript79Spez"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1979-spez
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript79Spez')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript79Spez')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript83"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1983
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript83')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript83')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript83Spez"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte 1983 spez.
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('typoskriptForm.typoskript83Spez')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskript83Spez')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskriptSpezialKutter"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">
                   Typoskripte Kutter
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('typoskriptForm.typoskriptSpezialKutter')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskriptSpezialKutter')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskriptSpezialHochstrasser"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte Hochstrasser
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('typoskriptForm.typoskriptSpezialHochstrasser')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskriptSpezialHochstrasser')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskriptSpezialTRaeber"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte Thomas
                   Raeber
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('typoskriptForm.typoskriptSpezialTRaeber')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskriptSpezialTRaeber')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showTyposkripte">
+              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskriptSpezialDivers"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value">Typoskripte divers
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('typoskriptForm.typoskriptSpezialDivers')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.typoskripte"
+                                 (change)="toggleDisabled('typoskriptForm.typoskriptSpezialDivers')">
+
+                </md-slide-toggle>
               </li>
             </ul>
             <ul formGroupName="druckForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showSelbPub=!showSelbPub">
-                  <md-icon>{{showSelbPub ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.drucke=!catHidden.drucke">
+                  <md-icon>{{catHidden.drucke ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="druckAll"
                              [class.green]="childElemsAreChecked('druckForm', 'druckAll')"
@@ -568,53 +622,58 @@
                              (change)="setValueForChildElems('druckForm', 'druckForm.druckAll')">
                   Selbständige Publikationen
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('druckForm', 'druckForm.druckAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleGroupDisabled('druckForm', 'druckForm.druckAll'); catDisabled.drucke = !catDisabled.drucke">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                 <md-checkbox formControlName="druckGesicht" [checked]="suchmenuForm.get('druckForm.druckAll').value">
                   GESICHT IM MITTAG 1950
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckGesicht')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckGesicht')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                 <md-checkbox formControlName="druckSchiffe" [checked]="suchmenuForm.get('druckForm.druckAll').value">Die
                   verwandelten Schiffe 1957
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckSchiffe')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckSchiffe')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                 <md-checkbox formControlName="druckGedichte" [checked]="suchmenuForm.get('druckForm.druckAll').value">
                   GEDICHTE 1960
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckGedichte')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckGedichte')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                 <md-checkbox formControlName="druckFlussufer" [checked]="suchmenuForm.get('druckForm.druckAll').value">
                   FLUSSUFER 1963
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckFlussufer')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckFlussufer')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                 <md-checkbox formControlName="druckReduktionen"
                              [checked]="suchmenuForm.get('druckForm.druckAll').value">Reduktionen 1981
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckReduktionen')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckReduktionen')">
+
+                </md-slide-toggle>
               </li>
               <!--<span formGroupName="druckAbgewandt">-->
-                <li class="cb-l2" [class.hidden]="!showSelbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.drucke">
                   <!--                <md-checkbox formControlName="druckAbgewandtAll"
                                                [class.green]="childElemsAreChecked('druckForm.druckAbgewandt', 'druckAbgewandtAll')"
                                                [class.red]="childElemsAreChecked('druckForm.druckAbgewandt', 'druckAbgewandtAll', true)"
@@ -626,36 +685,37 @@
                                [checked]="suchmenuForm.get('druckForm.druckAll').value">
                     Abgewandt Zugewandt 1985
                   </md-checkbox>
-                  <md-button-toggle class="disableButton" (change)="toggleDisabled('druckForm.druckAbgewandtAll')">
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
+                                 (change)="toggleDisabled('druckForm.druckAbgewandtAll')">
                     <!--(change)="toggleGroupDisabled('druckForm.druckAbgewandt', 'druckForm.druckAbgewandt.druckAbgewandtAll')">-->
-                    <md-icon>block</md-icon>
-                  </md-button-toggle>
+
+                </md-slide-toggle>
                 </li>
-              <!--                <li class="cb-l3" [class.hidden]="!showSelbPub">
+              <!--                <li class="cb-l3" [class.hidden]="!catHidden.drucke">
                                 <md-checkbox formControlName="druckAbgewandtHochdeutsch"
                                              [checked]="suchmenuForm.get('druckForm.druckAll').value">Hochdeutsche Gedichte 1985
                                 </md-checkbox>
-                              <md-button-toggle class="disableButton"
+                              <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
                                                 (change)="toggleDisabled('druckForm.druckAbgewandt.druckAbgewandtHochdeutsch')">
-                                <md-icon>block</md-icon>
-                              </md-button-toggle>
+
+                              </md-slide-toggle>
                               </li>
-                              <li class="cb-l3" [class.hidden]="!showSelbPub">
+                              <li class="cb-l3" [class.hidden]="!catHidden.drucke">
                                 <md-checkbox formControlName="druckAbgewandtAlemannisch"
                                              [checked]="suchmenuForm.get('druckForm.druckAll').value">Alemannische Gedichte 1985
                                 </md-checkbox>
-                              <md-button-toggle class="disableButton"
+                              <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
                                                 (change)="toggleDisabled('druckForm.druckAbgewandt.druckAbgewandtAlemannisch')">
-                                <md-icon>block</md-icon>
-                              </md-button-toggle>
+
+                              </md-slide-toggle>
                               </li>-->
               <!--</span>-->
             </ul>
             <ul formGroupName="zeitschriftForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showUnselbPub=!showUnselbPub">
-                  <md-icon>{{showUnselbPub ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.zeitschriften=!catHidden.zeitschriften">
+                  <md-icon>{{catHidden.zeitschriften ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="zeitschriftAll"
                              [class.green]="childElemsAreChecked('zeitschriftForm', 'zeitschriftAll')"
@@ -666,233 +726,232 @@
                              (change)="setValueForChildElems('zeitschriftForm', 'zeitschriftForm.zeitschriftAll')">
                   Unselbständige Publikationen
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('zeitschriftForm', 'zeitschriftForm.zeitschriftAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton"
+                                 (change)="toggleGroupDisabled('zeitschriftForm', 'zeitschriftForm.zeitschriftAll'); catDisabled.zeitschriften = !catDisabled.zeitschriften"></md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftAkzente"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Akzente
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftAkzente')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftAkzente')"></md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftBlaetter"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">blätter + bilder
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftBlaetter')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftBlaetter')"></md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftSchoenste"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Das Schönste
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftSchoenste')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftSchoenste')"></md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftTag"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Der Tag
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftTag')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftTag')">
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftLandschaft"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Die skeptische
                   Landschaft
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
                                   (change)="toggleDisabled('zeitschriftForm.zeitschriftLandschaft')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftTat"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Die Tat
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftTat')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftTat')">
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftZeit"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">DIE ZEIT
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftZeit')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftZeit')">
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftEnsemble"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">ensemble
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftEnsemble')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftEnsemble')"></md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftGegengewichte"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Gegengewichte
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftGegengewichte')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftGegengewichte')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftHortulus"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">hortulus
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftHortulus')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftHortulus')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftJahresring"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Jahresring
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftJahresring')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftJahresring')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftKonturen"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Konturen
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftKonturen')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftKonturen')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftLNN"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Luzerner Neueste
                   Nachrichten
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftLNN')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftLNN')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftLadZ"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Lyrik aus dieser Zeit
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftLadZ')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftLadZ')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftLuZ"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Lyrik unserer Zeit
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftLuZ')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftLuZ')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftMerkur"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Merkur
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftMerkur')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftMerkur')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftDeutscheHefte"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Deutsche Hefte
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftDeutscheHefte')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftDeutscheHefte')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftNZN"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Zürcher
                   Nachrichten
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftNZN')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftNZN')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftNZZ"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Zürcher Zeitung
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftNZZ')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftNZZ')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftRenaissance"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Renaissance
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftRenaissance')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftRenaissance')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftRundschau"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Schweizer Rundschau
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftRundschau')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftRundschau')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftSonntagsblatt"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Sonntagsblatt
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftSonntagsblatt')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftSonntagsblatt')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftSueddeutsche"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Süddeutsche Zeitung
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('zeitschriftForm.zeitschriftSueddeutsche')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftSueddeutsche')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftTA"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Tages-Anzeiger
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftTA')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftTA')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showUnselbPub">
+              <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftWortTat"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Wort und Tat
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zeitschriftForm.zeitschriftWortTat')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.zeitschriften"
+                                 (change)="toggleDisabled('zeitschriftForm.zeitschriftWortTat')">
+
+                </md-slide-toggle>
               </li>
             </ul>
             <ul formGroupName="materialienForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
-                        (click)="showMaterialien=!showMaterialien">
-                  <md-icon>{{showMaterialien ? 'expand_less' : 'expand_more'}}</md-icon>
+                        (click)="catHidden.materialien=!catHidden.materialien">
+                  <md-icon>{{catHidden.materialien ? 'expand_less' : 'expand_more'}}</md-icon>
                 </button>
                 <md-checkbox formControlName="materialienAll"
                              [class.green]="childElemsAreChecked('materialienForm', 'materialienAll')"
@@ -903,27 +962,28 @@
                              (change)="setValueForChildElems('materialienForm', 'materialienForm.materialienAll')">
                   Materialien
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleGroupDisabled('materialienForm', 'materialienForm.materialienAll')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.materialien"
+                                 (change)="toggleGroupDisabled('materialienForm', 'materialienForm.materialienAll'); catDisabled.materialien = !catDisabled.materialien">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showMaterialien">
+              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
                 <md-checkbox formControlName="materialienTagebuch"
                              [checked]="suchmenuForm.get('materialienForm.materialienAll').value">Tagebuch
                 </md-checkbox>
-                <md-button-toggle class="disableButton"
-                                  (change)="toggleDisabled('materialienForm.materialienTagebuch')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.materialien"
+                                 (change)="toggleDisabled('materialienForm.materialienTagebuch')">
+
+                </md-slide-toggle>
               </li>
-              <li class="cb-l2" [class.hidden]="!showMaterialien">
+              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
                 <md-checkbox formControlName="materialienBrief"
                              [checked]="suchmenuForm.get('materialienForm.materialienAll').value">Brief
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('materialienForm.materialienBrief')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" [checked]="catDisabled.materialien"
+                                 (change)="toggleDisabled('materialienForm.materialienBrief')">
+
+                </md-slide-toggle>
               </li>
             </ul>
           </ng-template>
@@ -934,37 +994,37 @@
               <li class="cb-l1" [class.hidden]="!showTextarten">
                 <md-checkbox formControlName="textartFreieVerse">Freie Verse
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartFreieVerse')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartFreieVerse')">
+
+                </md-slide-toggle>
               </li>
               <li class="cb-l1" [class.hidden]="!showTextarten">
                 <md-checkbox formControlName="textartGereimteVerse">Gereimte Verse
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartGereimteVerse')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartGereimteVerse')">
+
+                </md-slide-toggle>
               </li>
               <li class="cb-l1" [class.hidden]="!showTextarten">
                 <md-checkbox formControlName="textartProsa">Rhythmische Prosa
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartProsa')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartProsa')">
+
+                </md-slide-toggle>
               </li>
               <li class="cb-l1" [class.hidden]="!showTextarten">
                 <md-checkbox formControlName="textartProsanotat">Prosanotat
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartProsanotat')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartProsanotat')">
+
+                </md-slide-toggle>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="textartBriefentwurf">Briefentwurf
                 </md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartBriefentwurf')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('textartForm.textartBriefentwurf')">
+
+                </md-slide-toggle>
               </li>
             </ul>
           </ng-template>
@@ -987,9 +1047,9 @@
           <ng-template ngbPanelContent>
             <li class="cb-l1">
               <md-checkbox formControlName="endfassung" class="cb-l1">Endfassung</md-checkbox>
-              <md-button-toggle class="disableButton" (change)="toggleDisabled('endfassung')">
-                <md-icon>block</md-icon>
-              </md-button-toggle>
+              <md-slide-toggle class="disableButton" (change)="toggleDisabled('endfassung')">
+
+              </md-slide-toggle>
             </li>
           </ng-template>
         </ngb-panel>
@@ -998,9 +1058,9 @@
             <ul>
               <li class="cb-l1">
                 <md-checkbox formControlName="strophen" class="cb-l1">Strophen</md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('strophen')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('strophen')">
+
+                </md-slide-toggle>
               </li>
             </ul>
           </ng-template>
@@ -1010,9 +1070,9 @@
             <ul>
               <li class="cb-l1">
                 <md-checkbox formControlName="mundart" class="cb-l1">Mundart</md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('mundart')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('mundart')">
+
+                </md-slide-toggle>
               </li>
             </ul>
           </ng-template>
@@ -1022,9 +1082,9 @@
             <ul>
               <li class="cb-l1">
                 <md-checkbox formControlName="zyklus" class="cb-l1">Zyklus</md-checkbox>
-                <md-button-toggle class="disableButton" (change)="toggleDisabled('zyklus')">
-                  <md-icon>block</md-icon>
-                </md-button-toggle>
+                <md-slide-toggle class="disableButton" (change)="toggleDisabled('zyklus')">
+
+                </md-slide-toggle>
               </li>
             </ul>
           </ng-template>

@@ -68,3 +68,7 @@ md-checkbox {
   position: absolute;
   left: 0;
 }
+
+.disableButton .material-icons {
+  font-size: 14px;
+}

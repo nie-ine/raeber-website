@@ -11,7 +11,7 @@ export class Suche {
   endfassung = false;
   strophen = false;
   mundart = false;
-  mehrteilig = false;
+  zyklus = false;
 }
 
 export class Suchwort {
@@ -97,14 +97,15 @@ export class Druck {
   druckGedichte = false;
   druckFlussufer = false;
   druckReduktionen = false;
-  druckAbgewandt: DruckAbgewandt;
+  druckAbgewandtAll = false;
+  // druckAbgewandt: DruckAbgewandt;
 }
 
-export class DruckAbgewandt {
+/*export class DruckAbgewandt {
   druckAbgewandtAll = false;
   druckAbgewandtHochdeutsch = false;
   druckAbgewandtAlemannisch = false;
-}
+}*/
 
 export class Zeitschrift {
   zeitschriftAll = false;

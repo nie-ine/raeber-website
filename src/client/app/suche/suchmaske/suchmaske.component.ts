@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
-  DruckAbgewandt,
+  Druck,
   Manuskript,
   Materialien,
   Notizbuch,
@@ -124,15 +124,16 @@ export class SuchmaskeComponent implements OnInit {
       notizbuchForm: this.fb.group(new Notizbuch()),
       manuskriptForm: this.fb.group(new Manuskript()),
       typoskriptForm: this.fb.group(new Typoskript()),
-      druckForm: this.fb.group({
-        druckAll: false,
-        druckGesicht: false,
-        druckSchiffe: false,
-        druckGedichte: false,
-        druckFlussufer: false,
-        druckReduktionen: false,
-        druckAbgewandt: this.fb.group(new DruckAbgewandt())
-      }),
+      druckForm: this.fb.group(new Druck()),
+      /*      druckForm: this.fb.group({
+              druckAll: false,
+              druckGesicht: false,
+              druckSchiffe: false,
+              druckGedichte: false,
+              druckFlussufer: false,
+              druckReduktionen: false,
+              druckAbgewandt: this.fb.group(new DruckAbgewandt())
+            }),*/
       zeitschriftForm: this.fb.group(new Zeitschrift()),
       materialienForm: this.fb.group(new Materialien()),
       textartForm: this.fb.group(new Textart()),
@@ -140,7 +141,7 @@ export class SuchmaskeComponent implements OnInit {
       endfassung: false,
       strophen: false,
       mundart: false,
-      mehrteilig: false
+      zyklus: false
     });
   }
 

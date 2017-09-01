@@ -1,25 +1,18 @@
-/**
- * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 6/7/17.
- */
-
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './globalSearchVariablesService';
-import {isUndefined} from "util";
-import {forEach} from "@angular/router/src/utils/collection";
-
+import { AbstractControl } from '@angular/forms';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-suche',
   templateUrl: 'suche.component.html',
-  styleUrls: [ 'suche.component.css' ]
+  styleUrls: ['suche.component.css']
 })
 export class SucheComponent implements OnInit {
   vocabulary: 'http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext';
   numberOfComponents = 1;
-
 
   myResources: Array<any>;
   myProperties: Array<any>;
@@ -31,17 +24,17 @@ export class SucheComponent implements OnInit {
   searchForVal: string;
   query: string;
   availableboolOperators = [
-    {name: 'equal to', operator: 'EQ'},
-    {name: 'not equal to', operator: '!EQ'},
-    {name: 'greater than', operator: 'GT'},
-    {name: 'greater or equal', operator: 'GT_EQ'},
-    {name: 'lower than', operator: 'LT'},
-    {name: 'lower or equal than', operator: 'LT_EQ'},
-    {name: 'exists', operator: 'EXISTS'},
-    {name: 'match', operator: 'MATCH'},
-    {name: 'like', operator: 'LIKE'},
-    {name: '!like', operator: '!LIKE'},
-    {name: 'match_boolean', operator: 'MATCH_BOOLEAN'}
+    { name: 'equal to', operator: 'EQ' },
+    { name: 'not equal to', operator: '!EQ' },
+    { name: 'greater than', operator: 'GT' },
+    { name: 'greater or equal', operator: 'GT_EQ' },
+    { name: 'lower than', operator: 'LT' },
+    { name: 'lower or equal than', operator: 'LT_EQ' },
+    { name: 'exists', operator: 'EXISTS' },
+    { name: 'match', operator: 'MATCH' },
+    { name: 'like', operator: 'LIKE' },
+    { name: '!like', operator: '!LIKE' },
+    { name: 'match_boolean', operator: 'MATCH_BOOLEAN' }
   ];
   arraySize: number;
   array = [
@@ -59,25 +52,25 @@ export class SucheComponent implements OnInit {
   str: string;
   value: string;
   keys: Array<any>;
-  finalQueryArray= [''];
+  finalQueryArray = [''];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
   notizBuecher = [
-    {id: '1', name: 'Notizbücher'},
-    {id: '2', name: 'Notizbuch 1948-49'},
-    {id: '3', name: 'Notizbuch 1949'},
-    {id: '4', name: 'Notizbuch 1950'},
-    {id: '5', name: 'Notizbuch 1950-51'},
-    {id: '6', name: 'Notizbuch 1952-54'},
-    {id: '7', name: 'Notizbuch 1954-55'},
-    {id: '8', name: 'Notizbuch 1955-57'},
-    {id: '9', name: 'Notizbuch 1957-58'},
-    {id: '10', name: 'Notizbuch 1958-61'},
-    {id: '11', name: 'Notizbuch 1961-65'},
-    {id: '12', name: 'Notizbuch 1979'},
-    {id: '13', name: 'Notizbuch 1979-82'},
-    {id: '14', name: 'Notizbuch divers'},
-    {id: '15', name: 'Notizbuch 1965-80'}
+    { id: '1', name: 'Notizbücher' },
+    { id: '2', name: 'Notizbuch 1948-49' },
+    { id: '3', name: 'Notizbuch 1949' },
+    { id: '4', name: 'Notizbuch 1950' },
+    { id: '5', name: 'Notizbuch 1950-51' },
+    { id: '6', name: 'Notizbuch 1952-54' },
+    { id: '7', name: 'Notizbuch 1954-55' },
+    { id: '8', name: 'Notizbuch 1955-57' },
+    { id: '9', name: 'Notizbuch 1957-58' },
+    { id: '10', name: 'Notizbuch 1958-61' },
+    { id: '11', name: 'Notizbuch 1961-65' },
+    { id: '12', name: 'Notizbuch 1979' },
+    { id: '13', name: 'Notizbuch 1979-82' },
+    { id: '14', name: 'Notizbuch divers' },
+    { id: '15', name: 'Notizbuch 1965-80' }
   ];
   selectedNotizbuch: string;
   notizbuchDisabled = false;
@@ -86,7 +79,14 @@ export class SucheComponent implements OnInit {
   druckDisabled = false;
   materialDisabled = false;
   inputSearchStringToBeParsed: string;
-  numberOfQueries= 0;
+  numberOfQueries = 0;
+
+  /*
+  TODO: Perform a meaningful search request
+   */
+  handleSearchEvent(arg: AbstractControl) {
+    console.log(arg);
+  }
 
   constructor(private http: Http) {
   }
@@ -135,16 +135,16 @@ export class SucheComponent implements OnInit {
 
   finalQuery() {
     this.query = globalSearchVariableService.API_URL +
-          globalSearchVariableService.extendedSearch +
-          encodeURIComponent(this.selectedResource) +
-          globalSearchVariableService.extendedProperty +
-          encodeURIComponent(this.selectedProperty) +
-          globalSearchVariableService.compareOperator +
-          this.boolOperator +
-          globalSearchVariableService.searchval +
-          encodeURIComponent(this.searchForVal);
+      globalSearchVariableService.extendedSearch +
+      encodeURIComponent(this.selectedResource) +
+      globalSearchVariableService.extendedProperty +
+      encodeURIComponent(this.selectedProperty) +
+      globalSearchVariableService.compareOperator +
+      this.boolOperator +
+      globalSearchVariableService.searchval +
+      encodeURIComponent(this.searchForVal);
     //console.log(
-      //'Final extended search URl: ' + this.query);
+    //'Final extended search URl: ' + this.query);
     return this.http.get(this.query)
       .map(
         (lambda: Response) => {
@@ -163,7 +163,7 @@ export class SucheComponent implements OnInit {
   }
 
   increaseArrayElement() {
-    this.arraySize = this.array[this.array.length - 1 ];
+    this.arraySize = this.array[this.array.length - 1];
     this.arraySize += 1;
     this.array.push(this.arraySize);
     console.log(this.arraySize);
@@ -188,7 +188,7 @@ export class SucheComponent implements OnInit {
     console.log(this.keys);
     this.mapOfAllQueries.forEach(
       value => {
-        if(this.keys[this.k][1] === '1') {
+        if (this.keys[this.k][1] === '1') {
           console.log('Add first property');
           this.finalQueryArray[this.keys[this.k][0] - 1] =
             globalSearchVariableService.API_URL
@@ -212,7 +212,7 @@ export class SucheComponent implements OnInit {
         }
         this.k++;
         console.log(value[0]);
-        for(this.i = 0; this.i < value[1].length; this.i++) {
+        for (this.i = 0; this.i < value[1].length; this.i++) {
           console.log(value[1][this.i]);
         }
       }
@@ -222,10 +222,11 @@ export class SucheComponent implements OnInit {
 
   executeFinalQueries() {
     console.log(this.finalQueryArray);
-    for(this.i = 0; this.i < this.finalQueryArray.length; this.i ++) {
+    for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
       this.performQuery(this.finalQueryArray[this.i]);
     }
   }
+
   performQuery(query: string) {
     return this.http.get(query)
       .map(
@@ -233,11 +234,11 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           //console.log(data);
           this.k = 0;
-          if(data.subjects !== undefined) {
-            if(this.allSearchResults === undefined) {
+          if (data.subjects !== undefined) {
+            if (this.allSearchResults === undefined) {
               this.allSearchResults = [];
             }
-            this.allSearchResults.push.apply(this.allSearchResults,data.subjects);
+            this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
           }
           console.log(this.allSearchResults);
           return data.subjects;
@@ -250,12 +251,12 @@ export class SucheComponent implements OnInit {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
     this.numberOfQueries = 0;
-    for(this.i = 0; this.i < queries.length; this.i++) {
-      if(this.i !== 0 ) {
+    for (this.i = 0; this.i < queries.length; this.i++) {
+      if (this.i !== 0) {
         console.log('And merge with');
       }
-      for(this.j = 0; this.j < queries[this.i].length; this.j++) {
-        if(this.j !== 0 ) {
+      for (this.j = 0; this.j < queries[this.i].length; this.j++) {
+        if (this.j !== 0) {
           console.log('And merge with');
         }
         this.numberOfQueries += 1;

@@ -1,255 +1,266 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div id="rae-fassung-view">
+  <div class="rt-container">
+    <div id="rt-main" class="mb9-sa3">
+      <div class="rt-container">
+        <div class="rt-grid-9 ">
+          <div class="rt-block">
+            <div id="rt-mainbody">
+              <div class="component-content">
 
+                <h1>Suche</h1>
 
 
-<h1>Suche</h1>
+                <br>
 
+                <rae-suchmaske (suchEvents)="handleSearchEvent($event)"></rae-suchmaske>
 
 
-<br>
+                <!-- Start Raeber Suche -->
 
+                <h2 style="display: inline">Suchwort<sup>?</sup></h2>
 
 
-<!-- Start Raeber Suche -->
+                <md-input-container style="width: 500px;">
 
-<h2 style="display: inline">Suchwort<sup>?</sup> </h2>
+                  <input
+                    mdInput placeholder="Geben Sie hier Ihre Suche ein"
+                    style="margin-bottom: 2px;"
+                    [(ngModel)]="inputSearchStringToBeParsed"
+                    (sendPropertyTripleBack)="updateQuerySet($event)">
 
+                </md-input-container>
 
 
-  <md-input-container style="width: 500px;">
+                <md-select placeholder="in Text oder Titel" style="width: 200px;">
 
-    <input
-      mdInput placeholder="Geben Sie hier Ihre Suche ein"
-      style="margin-bottom: 2px;"
-      [(ngModel)]="inputSearchStringToBeParsed"
-      (sendPropertyTripleBack)="updateQuerySet($event)">
+                  <md-option>
 
-  </md-input-container>
+                    in Text oder Titel
 
+                  </md-option>
 
+                  <md-option>
 
-  <md-select placeholder="in Text oder Titel" style="width: 200px;">
+                    in Text
 
-    <md-option >
+                  </md-option>
 
-      in Text oder Titel
+                  <md-option>
 
-    </md-option>
+                    in Titel
 
-    <md-option >
+                  </md-option>
 
-      in Text
 
-    </md-option>
+                </md-select>
 
-    <md-option >
 
-      in Titel
+                <div></div>
+                <br/>
+                <br/>
 
-    </md-option>
 
+                <rae-parser
+                  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
+                  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
 
-  </md-select>
+                </rae-parser>
 
+                <!--
 
-<div></div>
-<br/>
-<br/>
+                <h2 >Konvolute<sup>?</sup> </h2>
 
 
-<rae-parser
-  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
-  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
+                <div class="box">
 
-</rae-parser>
 
-<!--
+                  <md-select multiple [(ngModel)]="selectedNotizbuch" placeholder="Notizbücher" [disabled]="notizbuchDisabled" >
 
-<h2 >Konvolute<sup>?</sup> </h2>
+                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
 
+                      {{ notizbuch.name }}
 
-<div class="box">
+                    </md-option>
 
+                  </md-select>
 
-  <md-select multiple [(ngModel)]="selectedNotizbuch" placeholder="Notizbücher" [disabled]="notizbuchDisabled" >
 
-    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
+                  <br>
 
-      {{ notizbuch.name }}
+                  <md-slide-toggle [(ngModel)]="notizbuchDisabled">Keine Notizbücher</md-slide-toggle>
 
-    </md-option>
 
-  </md-select>
+                </div>
 
 
-  <br>
 
-  <md-slide-toggle [(ngModel)]="notizbuchDisabled">Keine Notizbücher</md-slide-toggle>
+                <div class="box">
 
 
-</div>
+                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Manuskripte" [disabled]="manuskriptDisabled" >
 
+                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
 
+                      {{ notizbuch.name }}
 
-<div class="box">
+                    </md-option>
 
+                  </md-select>
 
-  <md-select multiple [(ngModel)]="selectedVal" placeholder="Manuskripte" [disabled]="manuskriptDisabled" >
 
-    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
+                  <br>
 
-      {{ notizbuch.name }}
+                  <md-slide-toggle [(ngModel)]="manuskriptDisabled">Keine Notizbücher</md-slide-toggle>
 
-    </md-option>
 
-  </md-select>
+                </div>
 
 
-  <br>
+                <div class="box">
 
-  <md-slide-toggle [(ngModel)]="manuskriptDisabled">Keine Notizbücher</md-slide-toggle>
 
+                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Typoskripte" [disabled]="typoscriptDisabled" >
 
-</div>
+                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
 
+                      {{ notizbuch.name }}
 
-<div class="box">
+                    </md-option>
 
+                  </md-select>
 
-  <md-select multiple [(ngModel)]="selectedVal" placeholder="Typoskripte" [disabled]="typoscriptDisabled" >
 
-    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
+                  <br>
 
-      {{ notizbuch.name }}
+                  <md-slide-toggle [(ngModel)]="typoscriptDisabled">Keine Notizbücher</md-slide-toggle>
 
-    </md-option>
 
-  </md-select>
+                </div>
 
 
-  <br>
 
-  <md-slide-toggle [(ngModel)]="typoscriptDisabled">Keine Notizbücher</md-slide-toggle>
+                <div class="box">
 
 
-</div>
+                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Drucke" [disabled]="druckDisabled" >
 
+                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
 
+                      {{ notizbuch.name }}
 
-<div class="box">
+                    </md-option>
 
+                  </md-select>
 
-  <md-select multiple [(ngModel)]="selectedVal" placeholder="Drucke" [disabled]="druckDisabled" >
 
-    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
+                  <br>
 
-      {{ notizbuch.name }}
+                  <md-slide-toggle [(ngModel)]="druckDisabled">Keine Notizbücher</md-slide-toggle>
 
-    </md-option>
 
-  </md-select>
+                </div>
 
 
-  <br>
 
-  <md-slide-toggle [(ngModel)]="druckDisabled">Keine Notizbücher</md-slide-toggle>
+                <div class="box">
 
 
-</div>
+                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Materialien" [disabled]="materialDisabled" >
 
+                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
 
+                      {{ notizbuch.name }}
 
-<div class="box">
+                    </md-option>
 
+                  </md-select>
 
-  <md-select multiple [(ngModel)]="selectedVal" placeholder="Materialien" [disabled]="materialDisabled" >
 
-    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
+                  <br>
 
-      {{ notizbuch.name }}
+                  <md-slide-toggle [(ngModel)]="materialDisabled">Keine Notizbücher</md-slide-toggle>
 
-    </md-option>
 
-  </md-select>
+                </div>
 
+                <br>
+                <br>
+                <br>
+                <br>
 
-  <br>
+                -->
 
-  <md-slide-toggle [(ngModel)]="materialDisabled">Keine Notizbücher</md-slide-toggle>
+                <!-- Ende Raeber Suche
 
 
-</div>
 
-<br>
-<br>
-<br>
-<br>
 
--->
 
-<!-- Ende Raeber Suche
+                <br>
+                <br>
+                <br>
+                <br>
 
+                <div ng-init="myResources=initialQuery()">
 
 
 
 
-<br>
-<br>
-<br>
-<br>
+                  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
 
-<div ng-init="myResources=initialQuery()">
 
+                    <span *ngIf="i > 1" > OR</span>
 
 
+                    <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
 
-  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
+                      <rae-search-for-one-resource
+                        [nthResourceSearch]="i"
+                        [myResources]="myResources"
+                        (sendPropertyTripleBack)="updateQuerySet($event)" >
 
+                      </rae-search-for-one-resource>
 
-    <span *ngIf="i > 1" > OR</span>
+                    </div>
 
 
-    <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
+                  </div>
 
-      <rae-search-for-one-resource
-        [nthResourceSearch]="i"
-        [myResources]="myResources"
-        (sendPropertyTripleBack)="updateQuerySet($event)" >
 
-      </rae-search-for-one-resource>
+                  <button md-button (click)="increaseArrayElement()">
 
+                    <md-icon >add_box</md-icon>
+
+                  </button>
+
+
+                  <button md-button (click)="executeFinalQueries()">
+
+                    <md-icon >search</md-icon>
+
+                  </button>
+
+
+                </div>
+
+                Final Queries:
+                <div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
+                  <span style="word-wrap: break-word; word-break: break-all;">
+                    Query number: {{ i }}
+                    <br>
+                    {{ query }}
+                  </span>
+                </div>
+
+                <rae-textgrid [poems_in_grid]="allSearchResults"></rae-textgrid>
+
+                -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
   </div>
-
-
-  <button md-button (click)="increaseArrayElement()">
-
-    <md-icon >add_box</md-icon>
-
-  </button>
-
-
-  <button md-button (click)="executeFinalQueries()">
-
-    <md-icon >search</md-icon>
-
-  </button>
-
-
 </div>
-
-Final Queries:
-<div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
-  <span style="word-wrap: break-word; word-break: break-all;">
-    Query number: {{ i }}
-    <br>
-    {{ query }}
-  </span>
-</div>
-
-<rae-textgrid [poems_in_grid]="allSearchResults"></rae-textgrid>
-
--->
-

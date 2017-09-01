@@ -5,19 +5,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
+  MdCheckboxModule,
   MdGridListModule,
   MdIconModule,
   MdInputModule,
   MdMenuModule,
-  MdCheckboxModule,
   MdSelectModule,
+  MdSidenavModule,
   MdSlideToggleModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +29,7 @@ import { SucheComponent } from './suche.component';
 import { TextgridModule } from './textgrid/textgrid.module';
 import { SearchForOneResourceModule } from './searchForOneResourceComponent/searchForOneResource.module';
 import { ParserModule } from './parser/parser.module';
+import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
 
 @NgModule({
   imports: [
@@ -34,9 +37,8 @@ import { ParserModule } from './parser/parser.module';
     FormsModule,
     HttpModule,
     CommonModule,
-    RouterModule.forChild([
-      { path: 'suche', component: SucheComponent }
-    ]),
+    ReactiveFormsModule,
+    NgbModule,
     SucheRoutingModule,
     MdButtonModule,
     MdButtonToggleModule,
@@ -48,13 +50,18 @@ import { ParserModule } from './parser/parser.module';
     MdCheckboxModule,
     BrowserAnimationsModule,
     MdSelectModule,
+    MdSidenavModule,
     TextgridModule,
     SearchForOneResourceModule,
     MdSlideToggleModule,
-    ParserModule
+    ParserModule,
+    RouterModule.forChild([
+      { path: 'suche', component: SucheComponent }
+    ]),
   ],
   declarations: [
-    SucheComponent
+    SucheComponent,
+    SuchmaskeComponent
   ],
   exports: [ SucheComponent ],
   providers: []

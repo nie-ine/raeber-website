@@ -1,0 +1,70 @@
+ul, li {
+  list-style-type: none;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  font-size: 11pt;
+}
+
+.suchmenu-container {
+  width: 900px;
+  height: 900px;
+  min-height: 100%;
+}
+
+.suchmenu-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.suchmenu {
+  padding: 20px;
+}
+
+.cb-l1 {
+  padding-left: 15px;
+}
+
+.cb-l2 {
+  padding-left: 30px;
+}
+
+.cb-l3 {
+  padding-left: 45px;
+}
+
+.ip-epoche {
+  width: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+md-checkbox {
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.disableButton {
+  position: absolute;
+  right: 10px;
+}
+
+.showMoreButton {
+  position: absolute;
+  left: 0;
+}

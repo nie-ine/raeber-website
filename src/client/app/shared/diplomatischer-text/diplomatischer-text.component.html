@@ -1,4 +1,4 @@
-<div>
+<div [ng2-draggable]="{'true': textIsMovable, 'false': !textIsMovable}">
   <md-toolbar>
     <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{page}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
@@ -27,7 +27,6 @@
     <!-- TODO replace with better layout. Now as checkbox because button toggle is broken -->
     <md-checkbox [(ngModel)]="textIsMovable"
                         title="Umschrift verschiebbar machen">↔</md-checkbox>
-
   </md-toolbar>
   <div class="umschrift edtext edtext_hs"
        [innerHtml]="text"

@@ -13,6 +13,7 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 
 import { DimplomatischerTextComponent } from './diplomatischer-text.component';
+import { Draggable } from './draggable.directive';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DimplomatischerTextComponent } from './diplomatischer-text.component';
     ReactiveFormsModule
   ],
   declarations: [
-    DimplomatischerTextComponent
+    DimplomatischerTextComponent,
+    Draggable
   ],
   exports: [ DimplomatischerTextComponent ],
   providers: []

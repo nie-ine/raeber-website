@@ -72,19 +72,20 @@ export class SuchmaskeComponent implements OnInit {
    */
   childElemsHaveSameValues(formGroupPath: string, parentFormControlName: string) {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
+    let res: boolean = true;
     let b: boolean;
     for (const v in children) {
+      console.log(v + ': ' + children[v].value);
       if (v !== parentFormControlName) {
-        if (b === null) {
+        if (b == null || children[v].value === b) {
           b = children[v].value;
         } else {
-          if (children[v].value !== b) {
-            return false;
-          }
+          res = false;
         }
       }
     }
-    return true;
+    console.log(res);
+    return res;
   }
 
   /**

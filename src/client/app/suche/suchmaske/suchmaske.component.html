@@ -1033,7 +1033,7 @@
                              [class.red]="childElemsAreChecked('materialienForm', 'materialienAll', true)"
                              [class.blue]="!childElemsHaveSameValues('materialienForm', 'materialienAll')"
                              [checked]="childElemsAreChecked('materialienForm', 'materialienAll')"
-                             [indeterminate]="!childElemsHaveSameValues('materialienForm', 'materialienAll')"
+                             [indeterminate]="suchmenuForm.get('materialienForm').pristine ? false :  !childElemsHaveSameValues('materialienForm', 'materialienAll')"
                              (change)="setValueForChildElems('materialienForm', 'materialienForm.materialienAll')">
                   Materialien
                 </md-checkbox>
@@ -1171,6 +1171,4 @@
   </md-sidenav>
 </md-sidenav-container>
 <!--<div *ngFor="let filter of filterChangeLog">{{filter}}</div>-->
-<p>{{suchmenuForm.pristine}}</p>
-<p>{{suchmenuForm.get('suchwortForm.suchwortInput').value}}</p>
-<p>{{ suchmenuForm.getstatus | json }}</p>
+<p>{{childElemsHaveSameValues('notizbuchForm', 'notizbuchAll')}}</p>

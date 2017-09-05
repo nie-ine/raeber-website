@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
   Manuskript,
@@ -161,6 +161,7 @@ export class SuchmaskeComponent implements OnInit {
     }
   }
 
+
   /**
    * Creates form model
    */
@@ -183,7 +184,11 @@ export class SuchmaskeComponent implements OnInit {
       zeitschriftForm: this.fb.group(new Zeitschrift()),
       materialienForm: this.fb.group(new Materialien()),
       textartForm: this.fb.group(new Textart()),
-      zeitraumForm: this.fb.group(new Zeitraum()),
+      zeitraumForm: this.fb.group(new Zeitraum, [
+        Validators.maxLength(4),
+        Validators.minLength(4),
+        Validators.pattern('[0-9]{4}')
+      ]),
       endfassung: false,
       strophen: false,
       mundart: false,

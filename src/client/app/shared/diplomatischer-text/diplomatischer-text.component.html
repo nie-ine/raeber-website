@@ -1,4 +1,4 @@
-<div [ng2-draggable]="{'true': textIsMovable, 'false': !textIsMovable}">
+<div [raeDraggable]="textIsMovable">
   <md-toolbar>
     <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{page}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">

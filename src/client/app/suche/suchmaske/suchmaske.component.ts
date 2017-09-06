@@ -75,7 +75,6 @@ export class SuchmaskeComponent implements OnInit {
     let res: boolean = true;
     let b: boolean;
     for (const v in children) {
-      console.log(v + ': ' + children[v].value);
       if (v !== parentFormControlName) {
         if (b == null || children[v].value === b) {
           b = children[v].value;
@@ -84,8 +83,16 @@ export class SuchmaskeComponent implements OnInit {
         }
       }
     }
-    console.log(res);
     return res;
+  }
+
+  pristineConvolutes() {
+    return this.suchmenuForm.get('notizbuchForm').pristine &&
+      this.suchmenuForm.get('manuskriptForm').pristine &&
+      this.suchmenuForm.get('typoskriptForm').pristine &&
+      this.suchmenuForm.get('druckForm').pristine &&
+      this.suchmenuForm.get('zeitschriftForm').pristine &&
+      this.suchmenuForm.get('materialienForm').pristine;
   }
 
   /**

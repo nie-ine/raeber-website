@@ -47,17 +47,7 @@ export class SuchmaskeComponent implements OnInit {
     materialien: false
   };
 
-  /*
-  Tracks if convolute category elements are disabled
-   */
-  catDisabled = {
-    notizbuecher: false,
-    manuskripte: false,
-    typoskripte: false,
-    drucke: false,
-    zeitschriften: false,
-    materialien: false
-  };
+  allConvolutesSelected: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -95,6 +85,17 @@ export class SuchmaskeComponent implements OnInit {
       this.suchmenuForm.get('materialienForm').pristine;
   }
 
+  selectAllConvolutes() {
+    this.allConvolutesSelected = !this.allConvolutesSelected;
+    this.toggleGroupDisabled('notizbuchForm', 'notizbuchAll');
+    this.toggleGroupDisabled('manuskriptForm', 'manuskriptAll');
+    this.toggleGroupDisabled('typoskriptForm', 'typoskriptAll');
+    this.toggleGroupDisabled('druckForm', 'druckAll');
+    this.toggleGroupDisabled('zeitschriftForm', 'zeitschriftAll');
+    this.toggleGroupDisabled('materialienForm', 'materialienAll');
+    console.log('allConvolutesSelected: ' + this.allConvolutesSelected);
+  }
+
   /**
    * Toggles disabled/enabled state of element
    * @param {string} formControlPath Path to `FormControl`
@@ -108,19 +109,16 @@ export class SuchmaskeComponent implements OnInit {
   }
 
   /**
-   * Toggles disabled/enabled state of child elements
+   * Toggles value of child elements
    * @param {string} formGroupPath Path to respective `FormGroup`
    * @param {string} parentFormControlName Path to respective parent `FormControl`
    */
   toggleGroupDisabled(formGroupPath: string, parentFormControlName: string) {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    if ((this.suchmenuForm.get(parentFormControlName) as FormControl).disabled) {
-      for (const c in children) {
-        children[c].enable();
-      }
-    } else {
-      for (const c in children) {
-        children[c].disable();
+    for (const c in children) {
+      children[c].setValue(this.allConvolutesSelected);
+      if (this.suchmenuForm.get(formGroupPath).pristine) {
+        this.suchmenuForm.get(formGroupPath).markAsDirty();
       }
     }
   }
@@ -169,7 +167,6 @@ export class SuchmaskeComponent implements OnInit {
     }
   }
 
-
   /**
    * Creates form model
    */
@@ -205,9 +202,6 @@ export class SuchmaskeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.route.paramMap
-      .switchMap((params: ParamMap) => console.log(params.keys))
-      .subscribe(x => ) */
   }
 
 }

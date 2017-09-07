@@ -5,14 +5,14 @@
     <md-card [ngClass]="{'rae-poem-card-grid': showGrid, 'rae-poem-card-cols': showCols}">
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
       <md-card-title>
-        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
-          {{p.value[0]}}
+        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active" [innerHTML]="highlight(p.value[0],searchTerm)">
+
         </a>
       </md-card-title>
 
 
-      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}">
-        <div class="rae-poem" [innerHtml]="p.value[1]"></div>
+      <md-card-content [ngClass]="{'rae-poem-card-content-grid': showGrid, 'rae-poem-card-content-cols': showCols}" >
+        <div class="rae-poem" [innerHTML]="highlight(p.value[0],searchTerm)"></div>
       </md-card-content>
 
       <br/>
@@ -21,7 +21,7 @@
         <div class="catItemTagsBlock">
           <span>Metadata:</span>
           <ul class="catItemTags">
-            <li *ngFor="let s of p.valuelabel; let j = index">
+            <li *ngFor="let s of p.valuelabel; let j = index" >
               <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
                 {{s}}
               </a>
@@ -31,5 +31,18 @@
       </md-card-footer>
 
     </md-card>
+
   </div>
+
+
 </div>
+
+<!--
+<h1> NGX Highlight Text Example</h1>
+<div>
+  <div>
+    <input type="text" [(ngModel)]="query" placeholder="Query..." />
+  </div>
+  <p [innerHTML]="highlight(content,query)"></p>
+</div>
+-->

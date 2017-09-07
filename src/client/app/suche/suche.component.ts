@@ -81,13 +81,11 @@ export class SucheComponent implements OnInit {
   inputSearchStringToBeParsed: string;
   numberOfQueries = 0;
   input: Array<any>;
+  searchTerm: string;
 
 
   handleSearchEvent(arg: AbstractControl) {
-    console.log('Ausgabe in suche.component.ts: \n');
-    console.log(arg);
-    console.log('Suchwort: \n');
-    console.log(arg.get('suchwortForm').value.suchwortInput);
+    //console.log(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
   }
@@ -193,6 +191,7 @@ export class SucheComponent implements OnInit {
     this.mapOfAllQueries.forEach(
       value => {
         if (this.keys[this.k][1] === '1') {
+          this.searchTerm = value[1][1];
           console.log('Add first property');
           this.finalQueryArray[this.keys[this.k][0] - 1] =
             globalSearchVariableService.API_URL
@@ -203,7 +202,7 @@ export class SucheComponent implements OnInit {
             + globalSearchVariableService.compareOperator
             + value[1][0]
             + globalSearchVariableService.searchval
-            + value[1][1];
+            + encodeURIComponent(value[1][1]);
         } else {
           console.log('Add additional property');
           this.finalQueryArray[this.keys[this.k][0] - 1]
@@ -271,7 +270,7 @@ export class SucheComponent implements OnInit {
           + ' in: ' + queries[this.i][this.j].where);
       }
     }
-    console.log('Number of Knora Queries: ' + this.numberOfQueries);
+    console.log( 'Query Object:')
     console.log(queries);
   }
 

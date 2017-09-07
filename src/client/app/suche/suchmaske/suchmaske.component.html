@@ -9,11 +9,10 @@
       <div formGroupName="suchwortForm">
         <md-input-container>
           <input mdInput [placeholder]="suchmenuForm.get('suchwortForm.suchwortSuchraum').value"
-                 formControlName="suchwortInput"/>
+                 formControlName="suchwortInput"
+                 style="width: 350px"
+          />
         </md-input-container>
-        <md-select placeholder="Suchraum" formControlName="suchwortSuchraum" floatPlaceholder="never">
-          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{raum.viewValue}}</md-option>
-        </md-select>
       </div>
       <ngb-accordion #acc="ngbAccordion">
         <ngb-panel>

@@ -80,12 +80,16 @@ export class SucheComponent implements OnInit {
   materialDisabled = false;
   inputSearchStringToBeParsed: string;
   numberOfQueries = 0;
+  input: Array<any>;
 
-  /*
-  TODO: Perform a meaningful search request
-   */
+
   handleSearchEvent(arg: AbstractControl) {
+    console.log('Ausgabe in suche.component.ts: \n');
     console.log(arg);
+    console.log('Suchwort: \n');
+    console.log(arg.get('suchwortForm').value.suchwortInput);
+    //Send String to Parser:
+    this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
   }
 
   constructor(private http: Http) {

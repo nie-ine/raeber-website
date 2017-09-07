@@ -10,13 +10,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
+import { DateFormatService } from '../utilities/date-format.service';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-registerspalte',
   templateUrl: 'registerspalte.component.html',
   styleUrls: [ 'registerspalte.component.css' ],
-  providers: [ AlphabeticalSortingService ]
+  providers: [ AlphabeticalSortingService, DateFormatService ]
 })
 export class RegisterspalteComponent implements OnInit {
 
@@ -28,7 +29,7 @@ export class RegisterspalteComponent implements OnInit {
   private sub: any;
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router,
-              private sortingService: AlphabeticalSortingService) {
+              private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
   }
 
   ngOnInit() {
@@ -96,5 +97,9 @@ export class RegisterspalteComponent implements OnInit {
 
       return 0;
     });
+  }
+
+  formatDate(date: string) {
+    return this.dateFormatService.germanLongDate(date);
   }
 }

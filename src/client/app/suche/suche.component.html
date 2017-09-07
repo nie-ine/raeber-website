@@ -12,11 +12,19 @@
 
                 <br>
 
-                <rae-suchmaske (suchEvents)="handleSearchEvent($event)"></rae-suchmaske>
+                <rae-suchmaske
+                  (suchEvents)="handleSearchEvent($event)">
 
+                </rae-suchmaske>
+
+                <rae-parser
+                  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
+                  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
+
+                </rae-parser>
 
                 <!-- Start Raeber Suche -->
-
+<!--
                 <h2 style="display: inline">Suchwort<sup>?</sup></h2>
 
 
@@ -65,7 +73,7 @@
                   (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
 
                 </rae-parser>
-
+-->
                 <!--
 
                 <h2 >Konvolute<sup>?</sup> </h2>

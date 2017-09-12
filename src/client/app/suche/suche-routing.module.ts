@@ -5,7 +5,8 @@ import { SucheComponent } from './suche.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'suche', component: SucheComponent }
+      { path: 'suche', component: SucheComponent },
+      { path: 'suche/:queryParameters', component: SucheComponent }
     ])
   ],
   exports: [ RouterModule ]

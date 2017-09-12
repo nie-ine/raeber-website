@@ -4,15 +4,17 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdButtonToggleModule,
-  MdCardModule,
-  MdInputModule,
+import {
   MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdCheckboxModule,
   MdGridListModule,
   MdIconModule,
+  MdInputModule,
   MdMenuModule,
-  MdCheckboxModule,
-  MdSelectModule} from '@angular/material';
+  MdSelectModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';

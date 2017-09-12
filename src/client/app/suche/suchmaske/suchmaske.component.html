@@ -10,9 +10,14 @@
         <md-input-container>
           <input mdInput [placeholder]="suchmenuForm.get('suchwortForm.suchwortSuchraum').value"
                  formControlName="suchwortInput"
-                 style="width: 350px"
-          />
+                 style="width: 250px"/>
         </md-input-container>
+        <md-select placeholder="Suchraum" formControlName="suchwortSuchraum" floatPlaceholder="never">
+          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{raum.viewValue}}</md-option>
+        </md-select>
+        <button md-button>
+          <md-icon>arrow_forward</md-icon>
+        </button>
       </div>
       <div class="accordionSubtitle">Korpusauswahl</div>
       <ngb-accordion #acc="ngbAccordion">

@@ -78,3 +78,10 @@ md-checkbox {
   margin-top: 1.7em;
   margin-bottom: 0.5em;
 }
+
+.suchmenu-button {
+  position: fixed;
+  left: 5px;
+  top: 10px;
+}
+

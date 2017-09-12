@@ -1,5 +1,7 @@
-<form class="example-form">
-  <md-input-container>
-    <input mdInput placeholder="Suche">
-  </md-input-container>
+<form class="example-form" [hidden]="showSearchfield">
+  <input class="basic-search" #searchfield
+         [value]="searchfieldText">
 </form>
+<button md-icon-button (click)="showSearchfield = !showSearchfield">
+  <md-icon>search</md-icon>
+</button>

@@ -1092,7 +1092,10 @@
     </form>
   </md-sidenav>
 </md-sidenav-container>
-<!--<div *ngFor="let filter of filterChangeLog">{{filter}}</div>-->
+
+
+<div *ngFor="let filter of filterChangeLog">{{filter}}
 <p>{{suchmenuForm.pristine}}</p>
 <p>{{suchmenuForm.get('suchwortForm.suchwortInput').value}}</p>
 <p>{{ suchmenuForm.value | json }}</p>
+</div>

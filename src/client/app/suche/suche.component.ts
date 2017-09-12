@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './globalSearchVariablesService';
 import { AbstractControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -85,17 +87,23 @@ export class SucheComponent implements OnInit {
 
 
   handleSearchEvent(arg: AbstractControl) {
-    //console.log(arg);
+    console.log(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
+    this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
   }
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
+    this.route.params.subscribe( params => console.log(params) );
   }
 
   ngOnInit() {
     //console.log(this.vocabulary);
     this.initialQuery(this.vocabulary, this.resourceTypesPath);
+    if ( !this.inputSearchStringToBeParsed ){
+      this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
+      console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
+    }
   }
 
   initialQuery() {

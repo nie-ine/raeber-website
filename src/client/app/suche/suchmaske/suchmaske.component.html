@@ -4,7 +4,7 @@
       <md-icon>dehaze</md-icon>
     </button>
   </div>
-  <md-sidenav #suchmenu class="suchmenu" position="right">
+  <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened">
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>

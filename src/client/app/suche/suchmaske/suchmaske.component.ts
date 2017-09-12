@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
@@ -25,6 +25,7 @@ export class SuchmaskeComponent implements OnInit {
   @Output() public suchEvents: EventEmitter<AbstractControl> = new EventEmitter<AbstractControl>();
   // Form model which contains all search parameters
   suchmenuForm: FormGroup;
+  @Input() sidenavOpened: boolean;
 
   /*
   Options for extension of fulltext search

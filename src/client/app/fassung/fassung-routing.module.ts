@@ -9,7 +9,6 @@ import { FassungComponent } from './fassung.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'drucke/abgewandt-zugewandt/:konvolut/:fassung', component: FassungComponent },
       { path: 'drucke/:konvolut/:fassung', component: FassungComponent },
       { path: 'manuskripte/:konvolut/:fassung', component: FassungComponent },
       { path: 'notizbuecher/notizbuch-divers/:konvolut/:fassung', component: FassungComponent },

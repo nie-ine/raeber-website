@@ -12,7 +12,6 @@ import { FassungComponent } from './fassung.component';
       { path: 'drucke/:konvolut/:fassung', component: FassungComponent },
       { path: 'manuskripte/:konvolut/:fassung', component: FassungComponent },
       { path: 'notizbuecher/:konvolut/:fassung', component: FassungComponent },
-      { path: 'typoskripte/typoskripte-sammlungen/:konvolut/:fassung', component: FassungComponent },
       { path: 'typoskripte/:konvolut/:fassung', component: FassungComponent },
       { path: 'material/:konvolut/:fassung', component: FassungComponent }
     ])

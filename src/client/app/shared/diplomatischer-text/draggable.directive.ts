@@ -78,7 +78,7 @@ export class DraggableDirective implements OnInit{
     event.stopPropagation();
   }
 
-  @Input('ng2-draggable')
+  @Input('raeDraggable')
   set allowDrag(value:boolean) {
     this._allowDrag = value;
   }

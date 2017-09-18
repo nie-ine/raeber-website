@@ -46,7 +46,6 @@ export class SucheComponent implements OnInit {
   j: number;
   k: number;
   isAlreadyInArray = 0;
-  //setOfAllQueries: Array<any>; //{numberOfSearchBox: '', numberOfProperty: '', propertyIRI: '', logicalOperator: '', searchVal: ''}
   helperMap = new Map();
   mapOfAllQueries = new Map();
   count = 0;
@@ -57,24 +56,6 @@ export class SucheComponent implements OnInit {
   finalQueryArray = [''];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
-  notizBuecher = [
-    { id: '1', name: 'Notizbücher' },
-    { id: '2', name: 'Notizbuch 1948-49' },
-    { id: '3', name: 'Notizbuch 1949' },
-    { id: '4', name: 'Notizbuch 1950' },
-    { id: '5', name: 'Notizbuch 1950-51' },
-    { id: '6', name: 'Notizbuch 1952-54' },
-    { id: '7', name: 'Notizbuch 1954-55' },
-    { id: '8', name: 'Notizbuch 1955-57' },
-    { id: '9', name: 'Notizbuch 1957-58' },
-    { id: '10', name: 'Notizbuch 1958-61' },
-    { id: '11', name: 'Notizbuch 1961-65' },
-    { id: '12', name: 'Notizbuch 1979' },
-    { id: '13', name: 'Notizbuch 1979-82' },
-    { id: '14', name: 'Notizbuch divers' },
-    { id: '15', name: 'Notizbuch 1965-80' }
-  ];
-  selectedNotizbuch: string;
   notizbuchDisabled = false;
   manuskriptDisabled = false;
   typoscriptDisabled = false;

@@ -11,3 +11,7 @@
   padding-right: 5px;
   caret-color: #d8d8d8;
 }
+
+.basic-search:focus {
+  outline: none;
+}

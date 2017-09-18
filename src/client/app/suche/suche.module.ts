@@ -29,6 +29,7 @@ import { SucheComponent } from './suche.component';
 import { TextgridModule } from './textgrid/textgrid.module';
 import { SearchForOneResourceModule } from './searchForOneResourceComponent/searchForOneResource.module';
 import { ParserModule } from './parser/parser.module';
+
 import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
 
 @NgModule({
@@ -63,7 +64,9 @@ import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
     SucheComponent,
     SuchmaskeComponent
   ],
-  exports: [ SucheComponent ],
+  exports: [
+    SucheComponent
+  ],
   providers: []
 })
 export class SucheModule {

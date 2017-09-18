@@ -72,3 +72,16 @@ md-checkbox {
 .disableButton .material-icons {
   font-size: 14px;
 }
+
+.accordionSubtitle {
+  font-weight: 800;
+  margin-top: 1.7em;
+  margin-bottom: 0.5em;
+}
+
+.suchmenu-button {
+  position: fixed;
+  left: 5px;
+  top: 10px;
+}
+

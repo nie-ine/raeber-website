@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,21 +10,24 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { getKonvolutIRI  } from './getKonvolutIRI.service';
+
 
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut',
   templateUrl: 'konvolut.component.html'
 })
-export class KonvolutComponent implements OnInit {
+export class KonvolutComponent implements OnInit, OnChanges {
+  konvolut_id: string;
 
   poems: Array<any>;
+  responseArray: Array<any>;
 
   viewMode: string;
-
-  konvolut_id: string;
   konvolut_type: string;
   private sub: any;
+
 
   private _esearch = new ExtendedSearch();
 
@@ -43,6 +46,7 @@ export class KonvolutComponent implements OnInit {
         this.loadMore();
       }
     };
+
   }
 
   ngOnInit() {
@@ -57,8 +61,11 @@ export class KonvolutComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
+      getKonvolutIRI(this.konvolut_id, this.http, this.responseArray);
+      console.log('Konvolut ID: ' + this.konvolut_id);
     });
   }
+
 
   loadMore() {
     this.dp.loadText(this._esearch).subscribe(

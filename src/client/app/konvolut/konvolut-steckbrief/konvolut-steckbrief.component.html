@@ -1,7 +1,70 @@
 <div class="convolute-description">
   <md-card>
-    (bisher nur ein Platzhalter. Kann parallel zum Import der Properties der Konvolute ergänzt und dynamisiert werden.)
-    {{id}}
+    <div *ngIf="konvolutBild" style="float: left">
+      <img [src]="konvolutBild" />
+    </div>
+
+     <p *ngIf="publicationTitle">
+      <span class="emphase">Titel:</span>
+      {{publicationTitle}}
+    </p>
+    <p *ngIf="publisherDescription">
+      <span class="emphase">Verlag:</span>
+      {{publisherDescription}}
+    </p>
+    <p *ngIf="printerDescription">
+      <span class="emphase">Druck:</span>
+      {{printerDescription}}
+    </p>
+    <p *ngIf="convoluteDescription">
+      <span class="emphase">Inhalt:</span>
+      {{convoluteDescription}}
+    </p>
+    <p>
+      <span class="emphase">Datierung:</span>
+      ... TODO
+    </p>
+    <p *ngIf="carrierDescription">
+      <span class="emphase">Textträger:</span>
+      {{carrierDescription}}
+    </p>
+    <p *ngIf="convoluteSizeDescripton">
+      <span class="emphase">Umfang:</span>
+      {{convoluteSizeDescripton}}
+    </p>
+    <p>
+      <span class="emphase">Publikation:</span>
+      ... TODO
+    </p>
+    <p *ngIf="true">
+      <span class="emphase">Signatur:</span>
+      {{archiveSignature}}
+    </p>
+    <br/>
+    <p>
+      <span class="emphase">Bilder:</span>
+      ... TODO
+    </p>
+    <p>
+      <span class="emphase">Spätere Stufen:</span>
+      ... TODO
+    </p>
+    <p>
+      <span class="emphase">Vorstufen:</span>
+      ... TODO
+    </p>
+    <p *ngIf="comment">
+      <span class="emphase">Kommentar:</span>
+      {{comment}}
+    </p>
+    <p>
+      <span class="emphase">Wiedergabe:</span>
+      ... TODO
+    </p>
+
+
+    <!-- statisch below -->
+    <hr>
     <p>
       <span class="emphase">Inhalt:</span>
       Typoskripte zu 101 Gedichten

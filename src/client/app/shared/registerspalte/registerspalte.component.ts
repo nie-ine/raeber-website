@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
+import { konvolutIRI } from '../../konvolut/konvolutVariables';
 
 @Component({
   moduleId: module.id,
@@ -20,10 +21,14 @@ import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.se
 })
 export class RegisterspalteComponent implements OnInit {
 
+  @Input() konvolutIRI: string;
+
   rsEntry: Array<any>;
   nHits: number;
   konvolutId: string;
   konvolutType: string;
+  konvolutTypeMap = {'printed poem book publication': 'drucke', 'poem notebook': 'notizbuecher', 'poem typescript convolute': 'typoskripte', 'poem manuscript convolute': 'manuskripte'};
+  konvolutTitle: string;
   sortingType: string;
   private sub: any;
 
@@ -38,6 +43,13 @@ export class RegisterspalteComponent implements OnInit {
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     searchParams.showNRows = 500;
 
+    this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + this.konvolutIRI)
+      .map(response => response.json()).subscribe(res => {
+        this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
+        this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
+        this.konvolutType = res.resinfo.restype_label;
+      });
+
     this.route.params
       .switchMap((params: Params) =>
         this.http.get(searchParams.toString()))
@@ -49,10 +61,6 @@ export class RegisterspalteComponent implements OnInit {
         this.sortingType = 'alphabetic';
       });
 
-    this.konvolutType = this.route.snapshot.url[ 0 ].path;
-    this.sub = this.route.params.subscribe(params => {
-      this.konvolutId = params[ 'konvolut' ];
-    });
   }
 
   // TODO: Sort alphabetically after init. How?

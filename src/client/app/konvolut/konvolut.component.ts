@@ -24,6 +24,7 @@ import { Observable } from 'rxjs/Observable';
 export class KonvolutComponent implements OnInit {
   konvolut_id: string;
   konvolutTitle: string;
+  konvolutBild: string;
   IRI: string;
   output: Subscription;
   private data: Observable<Array<number>>;
@@ -76,8 +77,10 @@ export class KonvolutComponent implements OnInit {
           setTimeout(() => {
               this.konvolutTitle = konvolutVariables.konvolutTitel;
               this.IRI = konvolutVariables.konvolutIRI;
+              this.konvolutBild = konvolutVariables.konvolutBild;
               console.log('Konvolut - Titel: ' + this.konvolutTitle);
               console.log('IRI: ' + this.IRI);
+              console.log('Konvolutbild: ' + this.konvolutBild);
           },
             2000);
       });

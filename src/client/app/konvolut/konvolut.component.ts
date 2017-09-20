@@ -11,6 +11,9 @@ import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 import { getKonvolutIRI  } from './getKonvolutIRI.service';
+import { Subscription } from 'rxjs/Subscription';
+import * as konvolutVariables from './konvolutVariables';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -18,8 +21,12 @@ import { getKonvolutIRI  } from './getKonvolutIRI.service';
   selector: 'rae-konvolut',
   templateUrl: 'konvolut.component.html'
 })
-export class KonvolutComponent implements OnInit, OnChanges {
+export class KonvolutComponent implements OnInit {
   konvolut_id: string;
+  konvolutTitle: string;
+  IRI: string;
+  output: Subscription;
+  private data: Observable<Array<number>>;
 
   poems: Array<any>;
   responseArray: Array<any>;
@@ -61,9 +68,19 @@ export class KonvolutComponent implements OnInit, OnChanges {
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
-      getKonvolutIRI(this.konvolut_id, this.http, this.responseArray);
-      console.log('Konvolut ID: ' + this.konvolut_id);
-    });
+      getKonvolutIRI(
+          this.konvolut_id,
+          this.http,
+          this.responseArray,
+          this.konvolutTitle);
+          setTimeout(() => {
+              this.konvolutTitle = konvolutVariables.konvolutTitel;
+              this.IRI = konvolutVariables.konvolutIRI;
+              console.log('Konvolut - Titel: ' + this.konvolutTitle);
+              console.log('IRI: ' + this.IRI);
+          },
+            2000);
+      });
   }
 
 

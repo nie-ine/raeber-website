@@ -1,7 +1,16 @@
 import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
 import { Http, Response } from '@angular/http';
+import { Subscription } from 'rxjs/Subscription';
+import * as konvolutVariables from './konvolutVariables';
 
-export function getKonvolutIRI(konvolut_id: string, http: Http, responseArray: Array<any>) {
+export function checkIfReponseHasArrived() {
+  console.log('data has arrived');
+}
+
+export function getKonvolutIRI(konvolut_id: string,
+                               http: Http,
+                               responseArray: Array<any>,
+                               konvolutTitle: string) : Subscription {
   //**
   // Notizbuch 1979
   // TODO: Steckbrief etc.
@@ -245,4 +254,175 @@ export function getKonvolutIRI(konvolut_id: string, http: Http, responseArray: A
       )
       .subscribe(response => responseArray = response);
   }
+  // Gedichte
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'gedichte') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // Flussufer
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'flussufer') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // Reduktionen
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'reduktionen') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // abgewandt-zugewandt-hochdeutsche-gedichte
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'abgewandt-zugewandt-hochdeutsche-gedichte') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // abgewandt-zugewandt-alemannische-gedichte
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'abgewandt-zugewandt-alemannische-gedichte') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Alemannische%20Gedichte%201985'
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log('data: ');
+          console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // abgewandt-zugewandt-nachwort
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'abgewandt-zugewandt-nachwort') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // tagebuecher
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'tagebuecher') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // tagebuecher-2
+  // TODO: Steckbrief etc.
+  // */
+  if(konvolut_id === 'tagebuecher-2') {
+    console.log('Klicked on Menu: ' + konvolut_id);
+    return http.get
+    (
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.resourceTypesPath +
+      globalSearchVariableService.initialVocabulary
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => responseArray = response);
+  }
+  // PDF - Dateien
+  // TODO: Steckbrief etc.
+  // */
+
 }

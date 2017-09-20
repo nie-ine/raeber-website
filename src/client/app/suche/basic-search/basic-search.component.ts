@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,8 +12,12 @@ export class BasicSearchComponent {
   hideSearchfield: boolean = true;
   searchfieldText: string = 'Suche...';
 
+  constructor(private router: Router) {
+  }
+
   sendRequest(values: any) {
     console.log(values);
+    this.router.navigateByUrl('/suche',);
   }
 
 

@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./basic-search.component.css']
 })
 export class BasicSearchComponent {
-  showSearchfield: boolean = true;
+
+  hideSearchfield: boolean = true;
   searchfieldText: string = 'Suche...';
+
+  sendRequest(values: any) {
+    console.log(values);
+  }
+
 
 }

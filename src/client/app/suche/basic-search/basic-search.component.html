@@ -1,7 +1,11 @@
-<form class="example-form" [hidden]="showSearchfield">
-  <input class="basic-search" #searchfield
-         [value]="searchfieldText">
+<form class="example-form" #form="ngForm" (ngSubmit)="sendRequest(basicsearch.value)" novalidate>
+  <input class="basic-search" #searchfield [value]="searchfieldText" [hidden]="hideSearchfield"
+         (focus)="searchfieldText = ''" (keyup.enter)="sendRequest(basicsearch.value)" [(ngModel)]="searchfieldText"
+         name="basicsearch"
+         #basicsearch="ngModel">
+  <button md-icon-button [type]="hideSearchfield ? 'reset' : 'submit'"
+          (click)="hideSearchfield ? hideSearchfield = false : sendRequest(basicsearch.value)">
+    <md-icon>search</md-icon>
+  </button>
 </form>
-<button md-icon-button (click)="showSearchfield = !showSearchfield">
-  <md-icon>search</md-icon>
-</button>
+

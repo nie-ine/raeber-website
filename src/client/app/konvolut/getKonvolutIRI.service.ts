@@ -217,13 +217,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PoemTypescriptConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=EQ' +
+      '&searchval=Typoskripte%201979-spez'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -237,13 +244,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PoemTypescriptConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=EQ' +
+      '&searchval=Typoskripte%201983'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )

@@ -7,7 +7,7 @@
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]="convoluteRoute + p.value[0]" routerLinkActive="active">
+        <a class="item" [routerLink]="router.url + '/' + p.value[0]" routerLinkActive="active">
           {{p.value[2]}}
         </a>
       </md-card-title>

@@ -3,12 +3,6 @@
  */
 
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import 'rxjs/add/operator/switchMap';
-
-export class Konvolut {
-  id: number;
-  name: string;
-}
 
 @Component({
   moduleId: module.id,

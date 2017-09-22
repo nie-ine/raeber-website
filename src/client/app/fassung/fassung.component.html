@@ -2,7 +2,7 @@
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
         <div class="rt-container">
-          <div class="rt-grid-9 ">
+          <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
             <div class="rt-block">
               <div id="rt-mainbody">
                 <div class="component-content">

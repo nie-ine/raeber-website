@@ -66,24 +66,29 @@ export class KonvolutComponent implements OnInit {
       konstText => this.poems = konstText
     );
 
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+
+    this.konvolut_type = this.route.snapshot.url[0].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
+      this.konvolut_id = params['konvolut'];
       getKonvolutIRI(
-          this.konvolut_id,
-          this.http,
-          this.responseArray,
-          this.konvolutTitle);
-          setTimeout(() => {
-              this.konvolutTitle = konvolutVariables.konvolutTitel;
-              this.IRI = konvolutVariables.konvolutIRI;
-              this.konvolutBild = konvolutVariables.konvolutBild;
-              console.log('Konvolut - Titel: ' + this.konvolutTitle);
-              console.log('IRI: ' + this.IRI);
-              console.log('Konvolutbild: ' + this.konvolutBild);
-          },
-            2000);
-      });
+        this.konvolut_id,
+        this.http,
+        this.responseArray,
+        this.konvolutTitle);
+      setTimeout(() => {
+          this.konvolutTitle = konvolutVariables.konvolutTitel;
+          this.IRI = konvolutVariables.konvolutIRI;
+          this.konvolutBild = konvolutVariables.konvolutBild;
+          console.log('Konvolut - Titel: ' + this.konvolutTitle);
+          console.log('IRI: ' + this.IRI);
+          console.log('Konvolutbild: ' + this.konvolutBild);
+        },
+        2000);
+    });
+    setTimeout(() => {
+        console.log(this.poems);
+      },
+      5000);
   }
 
 

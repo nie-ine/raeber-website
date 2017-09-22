@@ -19,6 +19,7 @@ export class TextgridComponent implements OnChanges {
   @Input() poemsInGrid: Array<any>;
 
   gridTextHeight: number = 10;
+  i: number;
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {

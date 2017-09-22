@@ -17,7 +17,7 @@ export class BasicSearchComponent {
 
   sendRequest(values: any) {
     console.log(values);
-    this.router.navigateByUrl('/suche',);
+    this.router.navigateByUrl('/suche/' + encodeURIComponent(values),);
   }
 
 

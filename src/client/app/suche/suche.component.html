@@ -23,192 +23,12 @@
 
                 </rae-parser>
 
-                <!-- Start Raeber Suche -->
+                <rae-textgrid
+                  [poems_in_grid]="allSearchResults"
+                  [searchTerm]="searchTerm"
+                ></rae-textgrid>
+
                 <!--
-                                <h2 style="display: inline">Suchwort<sup>?</sup></h2>
-
-
-                                <md-input-container style="width: 500px;">
-
-                                  <input
-                                    mdInput placeholder="Geben Sie hier Ihre Suche ein"
-                                    style="margin-bottom: 2px;"
-                                    [(ngModel)]="inputSearchStringToBeParsed"
-                                    (sendPropertyTripleBack)="updateQuerySet($event)">
-
-                                </md-input-container>
-
-
-                                <md-select placeholder="in Text oder Titel" style="width: 200px;">
-
-                                  <md-option>
-
-                                    in Text oder Titel
-
-                                  </md-option>
-
-                                  <md-option>
-
-                                    in Text
-
-                                  </md-option>
-
-                                  <md-option>
-
-                                    in Titel
-
-                                  </md-option>
-
-
-                                </md-select>
-
-
-                                <div></div>
-                                <br/>
-                                <br/>
-
-
-                                <rae-parser
-                                  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
-                                  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
-
-                                </rae-parser>
-
-
-
-                                <h2 >Konvolute<sup>?</sup> </h2>
-
-
-                                <div class="box">
-
-
-                                  <md-select multiple [(ngModel)]="selectedNotizbuch" placeholder="Notizbücher" [disabled]="notizbuchDisabled" >
-
-                                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
-
-                                      {{ notizbuch.name }}
-
-                                    </md-option>
-
-                                  </md-select>
-
-
-                                  <br>
-
-                                  <md-slide-toggle [(ngModel)]="notizbuchDisabled">Keine Notizbücher</md-slide-toggle>
-
-
-                                </div>
-
-
-
-                                <div class="box">
-
-
-                                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Manuskripte" [disabled]="manuskriptDisabled" >
-
-                                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
-
-                                      {{ notizbuch.name }}
-
-                                    </md-option>
-
-                                  </md-select>
-
-
-                                  <br>
-
-                                  <md-slide-toggle [(ngModel)]="manuskriptDisabled">Keine Notizbücher</md-slide-toggle>
-
-
-                                </div>
-
-
-                                <div class="box">
-
-
-                                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Typoskripte" [disabled]="typoscriptDisabled" >
-
-                                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
-
-                                      {{ notizbuch.name }}
-
-                                    </md-option>
-
-                                  </md-select>
-
-
-                                  <br>
-
-                                  <md-slide-toggle [(ngModel)]="typoscriptDisabled">Keine Notizbücher</md-slide-toggle>
-
-
-                                </div>
-
-
-
-                                <div class="box">
-
-
-                                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Drucke" [disabled]="druckDisabled" >
-
-                                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
-
-                                      {{ notizbuch.name }}
-
-                                    </md-option>
-
-                                  </md-select>
-
-
-                                  <br>
-
-                                  <md-slide-toggle [(ngModel)]="druckDisabled">Keine Notizbücher</md-slide-toggle>
-
-
-                                </div>
-
-
-
-                                <div class="box">
-
-
-                                  <md-select multiple [(ngModel)]="selectedVal" placeholder="Materialien" [disabled]="materialDisabled" >
-
-                                    <md-option *ngFor="let notizbuch of notizBuecher" [value]="notizbuch.id" >
-
-                                      {{ notizbuch.name }}
-
-                                    </md-option>
-
-                                  </md-select>
-
-
-                                  <br>
-
-                                  <md-slide-toggle [(ngModel)]="materialDisabled">Keine Notizbücher</md-slide-toggle>
-
-
-                                </div>
-
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-
-
-
-                                 Ende Raeber Suche -->
-
-
-
-
-
-                <br>
-                <br>
-                <br>
-                <br>
-
                 <div ng-init="myResources=initialQuery()">
 
 
@@ -250,6 +70,7 @@
 
 
                 </div>
+                -->
                 <!--
                 Final Queries:
                 <div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
@@ -260,13 +81,6 @@
                   </span>
                 </div>
                 -->
-                <rae-textgrid
-                  [poems_in_grid]="allSearchResults"
-                  [searchTerm]="searchTerm"
-                ></rae-textgrid>
-
-
-
               </div>
             </div>
           </div>

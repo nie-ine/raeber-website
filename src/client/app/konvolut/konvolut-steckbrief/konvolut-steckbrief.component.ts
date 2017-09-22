@@ -3,12 +3,15 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
+import { DateFormatService } from '../../shared/utilities/date-format.service';
+
 
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolut-steckbrief',
   templateUrl: 'konvolut-steckbrief.component.html',
-  styleUrls: [ 'konvolut-steckbrief.component.css' ]
+  styleUrls: [ 'konvolut-steckbrief.component.css' ],
+  providers: [ DateFormatService ]
 })
 export class KonvolutSteckbriefComponent implements OnChanges {
 
@@ -31,64 +34,79 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   creatingPeriodStart: string;
   creatingPeriodEnd: string;
   private sub: any;
+  private sub2: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private dateFormatService: DateFormatService) {}
 
-  ngOnChanges() {
-    if(this.IRI) {
+  ngOnChanges(){
+    if (this.IRI) {
       this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.IRI))
-        .map(response => response.json()).subscribe(res => {
+        .map(response => response.json()).subscribe(res =>{
 
           try {
             this.publicationTitle = res.props[ 'http://www.knora.org/ontology/work#hasPublicationDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
-          this.publisherDescription = res.props[ 'http://www.knora.org/ontology/work#hasPublisherDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.publisherDescription = res.props[ 'http://www.knora.org/ontology/work#hasPublisherDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+          }
 
           try {
-          this.printerDescription = res.props[ 'http://www.knora.org/ontology/work#hasPrinterDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.printerDescription = res.props[ 'http://www.knora.org/ontology/work#hasPrinterDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+          }
 
           try {
-          this.convoluteDescription = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.convoluteDescription = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+          }
 
           try {
-          this.carrierDescription = res.props[ 'http://www.knora.org/ontology/text#hasCarrierDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.carrierDescription = res.props[ 'http://www.knora.org/ontology/text#hasCarrierDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+          }
 
           try {
-          this.comment = res.props[ 'http://www.knora.org/ontology/text#hasComment' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.comment = res.props[ 'http://www.knora.org/ontology/text#hasComment' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+          }
 
           try {
             this.archiveSignature = res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
             this.archiveSignature = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteSizeDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
             this.convoluteContentRepresentation = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteContentRepresentation' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
             this.convoluteOriginDescription = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteOriginDescription' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
-            this.creatingPeriod = res.props[ 'http://www.knora.org/ontology/human#CreatingPeriod' ].values[ 0 ].utf8str;
-          } catch (TypeError) {}
+            this.creatingPeriod = res.props[ 'http://www.knora.org/ontology/human#hasCreatingPeriod' ].values[ 0 ];
+          } catch (TypeError) {
+          }
 
         });
 
     }
+  }
 
+/*
+TODO: make this work with waiting for the iri of craeting period
     if(this.creatingPeriod) {
-      this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.creatingPeriod))
+      this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.creatingPeriod))
         .map(response => response.json()).subscribe(res => {
 
           try {
@@ -101,5 +119,10 @@ export class KonvolutSteckbriefComponent implements OnChanges {
         });
 
     }
+
+*/
+
+  formatDate(date: string) {
+    return this.dateFormatService.germanLongDate(date);
   }
 }

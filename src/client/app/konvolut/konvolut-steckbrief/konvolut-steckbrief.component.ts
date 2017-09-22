@@ -101,28 +101,28 @@ export class KonvolutSteckbriefComponent implements OnChanges {
         });
 
     }
-  }
-
-/*
-TODO: make this work with waiting for the iri of craeting period
-    if(this.creatingPeriod) {
-      this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.creatingPeriod))
-        .map(response => response.json()).subscribe(res => {
+    if (true) {
+      this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent('http://rdfh.ch/human/YNOD3dS_RJas5Oj0XjA51w'
+    ))
+        .map(response => response.json()).subscribe(res =>{
 
           try {
             this.creatingPeriodStart = res.props[ 'http://www.knora.org/ontology/event#hasStartDate' ].values[ 0 ].dateval1;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
 
           try {
             this.creatingPeriodEnd = res.props[ 'http://www.knora.org/ontology/event#hasEndDate' ].values[ 0 ].dateval1;
-          } catch (TypeError) {}
+          } catch (TypeError) {
+          }
         });
 
     }
+  }
 
-*/
+
 
   formatDate(date: string) {
-    return this.dateFormatService.germanLongDate(date);
+    return this.dateFormatService.germanNumericDate(date);
   }
 }

@@ -20,13 +20,11 @@
       <span class="emphase">Inhalt:</span>
       {{convoluteDescription}}
     </p>
-    {{creatingPeriod}}
     <p *ngIf="creatingPeriodStart || creatingPeriodEnd">
       <span class="emphase">Datierung:</span>
-      {{creatingPeriod}}
       <span *ngIf="creatingPeriodStart">{{formatDate(creatingPeriodStart)}}</span>
+      –
       <span *ngIf="creatingPeriodEnd">{{formatDate(creatingPeriodEnd)}}</span>
-      ... TODO
     </p>
     <p *ngIf="carrierDescription">
       <span class="emphase">Textträger:</span>

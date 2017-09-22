@@ -2,16 +2,28 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #ddd;
   background-color: transparent;
-  font-size: 12px;
-  color: #d8d8d8;
+  font-size: 13px;
+  color: #ddd;
   width: 150px;
   padding-left: 5px;
   padding-right: 5px;
-  caret-color: #d8d8d8;
+  caret-color: #ddd;
+  opacity: 0.8;
+}
+
+.search-button {
+  opacity: 0.7;
 }
 
 .basic-search:focus {
   outline: none;
+}
+
+.search-region:hover .basic-search,
+.basic-search:focus,
+.search-region:hover .search-button,
+.basic-search:focus + .search-button {
+  opacity: 1;
 }

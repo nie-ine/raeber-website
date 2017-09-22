@@ -13,6 +13,10 @@ export class BasicSearchComponent {
   placeholder = 'Suche...';
 
   constructor(private router: Router) {
+    router.events.subscribe(changes => {
+      this.hideSearchfield = true;
+      this.placeholder = 'Suche...';
+    });
   }
 
   sendRequest(values: any) {

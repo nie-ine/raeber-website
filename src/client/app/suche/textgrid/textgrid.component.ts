@@ -13,15 +13,26 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class TextgridComponent implements OnChanges {
 
   @Input() poems_in_grid: Array<any>;
+  @Input() searchTerm: Array<any>;
 
   showGrid = true;
   showCols = false;
+  public query: string;
+  private content: string;
+
+  public constructor() {
+    this.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+      'Praesent a quam ornare, bibendum ligula a, rhoncus ligula. Etiam aliquet, ' +
+      'justo sollicitudin imperdiet luctus, nulla justo sodales mi, sit amet semper ' +
+      'nisl velit vel massa. In hac habitasse platea dictumst.';
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       let chng = changes[ propName ];
       this.poems_in_grid = chng.currentValue;
     }
+
     /*    for (let propName in changes) {
      let chng = changes[propName];
      let cur  = JSON.stringify(chng.currentValue);
@@ -39,6 +50,15 @@ export class TextgridComponent implements OnChanges {
   toCols() {
     this.showGrid = false;
     this.showCols = true;
+  }
+
+  highlight(textToHighlight: string, searchTerm: string) {
+    if (searchTerm === undefined) {
+      return textToHighlight;
+    }
+    return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+      return '<span class="highlightText">' + match + '</span>';
+    });
   }
 
 }

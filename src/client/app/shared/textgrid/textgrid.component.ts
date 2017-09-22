@@ -20,8 +20,6 @@ export class TextgridComponent implements OnChanges {
 
   gridTextHeight: number = 10;
 
-  convoluteRoute: string = '';
-
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {

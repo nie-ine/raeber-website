@@ -3,6 +3,7 @@
  */
 
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,12 @@ export class TextgridComponent implements OnChanges {
   @Input() poemsInGrid: Array<any>;
 
   gridTextHeight: number = 10;
+
+  router: Router;
+
+  constructor(r: Router) {
+    this.router = r;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {

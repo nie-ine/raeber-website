@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class BasicSearchComponent {
 
   hideSearchfield: boolean = true;
-  searchfieldText: string = 'Suche...';
+  placeholder = 'Suche...';
 
   constructor(private router: Router) {
   }

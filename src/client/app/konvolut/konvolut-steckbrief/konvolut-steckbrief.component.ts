@@ -13,7 +13,7 @@ import { Http } from '@angular/http';
 export class KonvolutSteckbriefComponent implements OnChanges {
 
   @Input() id: string;
-  @Input() konvulutTitle: string;
+  @Input() konvolutTitle: string;
   @Input() IRI: string;
   @Input() konvolutBild: string;
 
@@ -25,6 +25,11 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   comment: string;
   archiveSignature: string;
   convoluteSizeDescripton: string;
+  convoluteContentRepresentation: string;
+  convoluteOriginDescription: string;
+  creatingPeriod: string;
+  creatingPeriodStart: string;
+  creatingPeriodEnd: string;
   private sub: any;
 
   constructor(private http: Http) {}
@@ -66,7 +71,35 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             this.archiveSignature = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteSizeDescription' ].values[ 0 ].utf8str;
           } catch (TypeError) {}
 
+          try {
+            this.convoluteContentRepresentation = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteContentRepresentation' ].values[ 0 ].utf8str;
+          } catch (TypeError) {}
+
+          try {
+            this.convoluteOriginDescription = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteOriginDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {}
+
+          try {
+            this.creatingPeriod = res.props[ 'http://www.knora.org/ontology/human#CreatingPeriod' ].values[ 0 ].utf8str;
+          } catch (TypeError) {}
+
         });
+
+    }
+
+    if(this.creatingPeriod) {
+      this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.creatingPeriod))
+        .map(response => response.json()).subscribe(res => {
+
+          try {
+            this.creatingPeriodStart = res.props[ 'http://www.knora.org/ontology/event#hasStartDate' ].values[ 0 ].dateval1;
+          } catch (TypeError) {}
+
+          try {
+            this.creatingPeriodEnd = res.props[ 'http://www.knora.org/ontology/event#hasEndDate' ].values[ 0 ].dateval1;
+          } catch (TypeError) {}
+        });
+
     }
   }
 }

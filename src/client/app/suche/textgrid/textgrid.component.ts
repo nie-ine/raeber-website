@@ -53,7 +53,7 @@ export class TextgridComponent implements OnChanges {
   }
 
   highlight(textToHighlight: string, searchTerm: string) {
-    if(searchTerm === undefined) {
+    if (searchTerm === undefined) {
       return textToHighlight;
     }
     return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {

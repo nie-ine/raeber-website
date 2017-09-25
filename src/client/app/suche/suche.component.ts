@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './globalSearchVariablesService';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -67,6 +67,9 @@ export class SucheComponent implements OnInit {
   searchTerm: string;
   numberOfSearchResults: number;
 
+  constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
+    this.route.params.subscribe(params => console.log(params));
+  }
 
   handleSearchEvent(arg: AbstractControl) {
     console.log(arg);
@@ -75,14 +78,10 @@ export class SucheComponent implements OnInit {
     this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
   }
 
-  constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
-    this.route.params.subscribe( params => console.log(params) );
-  }
-
   ngOnInit() {
     //console.log(this.vocabulary);
     this.initialQuery(this.vocabulary, this.resourceTypesPath);
-    if ( !this.inputSearchStringToBeParsed ){
+    if (!this.inputSearchStringToBeParsed) {
       this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
       console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
     }
@@ -271,7 +270,7 @@ export class SucheComponent implements OnInit {
           + ' in: ' + queries[this.i][this.j].where);
       }
     }
-    console.log( 'Query Object:')
+    console.log('Query Object:');
     console.log(queries);
   }
 

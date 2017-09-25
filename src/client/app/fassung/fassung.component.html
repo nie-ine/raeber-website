@@ -2,7 +2,7 @@
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
         <div class="rt-container">
-          <div class="rt-grid-9 ">
+          <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
             <div class="rt-block">
               <div id="rt-mainbody">
                 <div class="component-content">
@@ -63,7 +63,10 @@
 
                         <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
                           <md-card-content *ngIf="zeigeDiplomatisch">
-                            <rae-fassung-diplomatisch [pages]="pages"></rae-fassung-diplomatisch>
+                            <rae-fassung-diplomatisch [pages]="pages"
+                                                      (pictureReduced)="show_register = true;"
+                                                      (pictureIncreased)="show_register = false;">
+                            </rae-fassung-diplomatisch>
                           </md-card-content>
                           <md-card-footer>
                             <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">

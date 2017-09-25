@@ -24,6 +24,7 @@ import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
 import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/konvolut-steckbrief-publikation.component';
 import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
+import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolu
   declarations: [
     KonvolutComponent,
     KonvolutSteckbriefComponent,
+    KonvolutSteckbriefDatierungComponent,
     KonvolutSteckbriefPublikationComponent,
     KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,

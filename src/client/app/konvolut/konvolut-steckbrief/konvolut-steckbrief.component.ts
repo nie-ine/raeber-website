@@ -31,8 +31,6 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   convoluteContentRepresentation: string;
   convoluteOriginDescription: string;
   creatingPeriod: string;
-  creatingPeriodStart: string;
-  creatingPeriodEnd: string;
   containsEarlierStagesOfPublicationIRI: string;
   earlierStagesIRIs: Array<string>;
   laterStagesIRIs: Array<string>;

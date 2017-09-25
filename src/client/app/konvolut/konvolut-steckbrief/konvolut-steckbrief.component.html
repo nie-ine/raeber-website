@@ -24,11 +24,9 @@
       <span [innerHtml]="convoluteDescription"></span>
     </p>
 
-    <p *ngIf="creatingPeriodStart || creatingPeriodEnd">
+    <p *ngIf="creatingPeriod">
       <span class="emphase">Datierung:</span>
-      <span *ngIf="creatingPeriodStart">{{formatDate(creatingPeriodStart)}}</span>
-      –
-      <span *ngIf="creatingPeriodEnd">{{formatDate(creatingPeriodEnd)}}</span>
+      <rae-konvolut-steckbrief-datierung [dateIRI]="creatingPeriod"></rae-konvolut-steckbrief-datierung>
     </p>
 
     <p *ngIf="carrierDescription">

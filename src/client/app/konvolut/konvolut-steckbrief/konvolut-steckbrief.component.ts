@@ -33,8 +33,10 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   creatingPeriod: string;
   creatingPeriodStart: string;
   creatingPeriodEnd: string;
+  containsEarlierStagesOfPublicationIRI: string;
+  earlierStagesIRIs: Array<string>;
+  laterStagesIRIs: Array<string>;
   private sub: any;
-  private sub2: any;
 
   constructor(private http: Http, private dateFormatService: DateFormatService) {}
 
@@ -109,27 +111,39 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             this.creatingPeriod = null;
           }
 
-        });
-
-    }
-    if (true) {
-      this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent('http://rdfh.ch/human/YNOD3dS_RJas5Oj0XjA51w'
-    ))
-        .map(response => response.json()).subscribe(res => {
-
           try {
-            this.creatingPeriodStart = res.props[ 'http://www.knora.org/ontology/event#hasStartDate' ].values[ 0 ].dateval1;
+            this.containsEarlierStagesOfPublicationIRI = res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values[ 0 ];
           } catch (TypeError) {
-            this.creatingPeriodStart = null;
+            this.containsEarlierStagesOfPublicationIRI = null;
           }
 
           try {
-            this.creatingPeriodEnd = res.props[ 'http://www.knora.org/ontology/event#hasEndDate' ].values[ 0 ].dateval1;
+            this.laterStagesIRIs = [];
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfManuscriptConvolute' ].values.length; i++) {
+              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfManuscriptConvolute' ].values[i].utf8str);
+            }
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfTyposcriptConvolute' ].values.length; i++) {
+              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfTyposcriptConvolute' ].values[i].utf8str);
+            }
           } catch (TypeError) {
-            this.creatingPeriodEnd = null;
+            this.laterStagesIRIs = null;
+          }
+
+          try {
+            this.earlierStagesIRIs = [];
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfNotebook' ].values.length; i++) {
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfNotebook' ].values[i].utf8str);
+            }
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfManuscriptConvolute' ].values.length; i++) {
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfManuscriptConvolute' ].values[i].utf8str);
+            }
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfTyposcriptConvolute' ].values.length; i++) {
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfTyposcriptConvolute' ].values[i].utf8str);
+            }
+          } catch (TypeError) {
+            this.earlierStagesIRIs = null;
           }
         });
-
     }
   }
 

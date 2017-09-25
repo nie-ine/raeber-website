@@ -8,65 +8,77 @@
       <span class="emphase">Titel:</span>
       {{publicationTitle}}
     </p>
+
     <p *ngIf="publisherDescription">
       <span class="emphase">Verlag:</span>
       {{publisherDescription}}
     </p>
+
     <p *ngIf="printerDescription">
       <span class="emphase">Druck:</span>
       {{printerDescription}}
     </p>
+
     <p *ngIf="convoluteDescription">
       <span class="emphase">Inhalt:</span>
       <span [innerHtml]="convoluteDescription"></span>
     </p>
+
     <p *ngIf="creatingPeriodStart || creatingPeriodEnd">
       <span class="emphase">Datierung:</span>
       <span *ngIf="creatingPeriodStart">{{formatDate(creatingPeriodStart)}}</span>
       –
       <span *ngIf="creatingPeriodEnd">{{formatDate(creatingPeriodEnd)}}</span>
     </p>
+
     <p *ngIf="carrierDescription">
       <span class="emphase">Textträger:</span>
       {{carrierDescription}}
     </p>
+
     <p *ngIf="convoluteSizeDescripton">
       <span class="emphase">Umfang:</span>
       {{convoluteSizeDescripton}}
     </p>
-    <p>
+
+    <p *ngIf="containsEarlierStagesOfPublicationIRI">
       <span class="emphase">Publikation:</span>
-      ... TODO
+      <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRI"></rae-konvolut-steckbrief-publikation>
     </p>
-    <p *ngIf="true">
+
+    <p *ngIf="archiveSignature">
       <span class="emphase">Signatur:</span>
       {{archiveSignature}}
     </p>
+
     <p *ngIf="convoluteOriginDescription">
       <span class="emphase">Herkunft:</span>
       <span [innerHtml]="convoluteOriginDescription"></span>
     </p>
+
     <br/>
-    <p>
-      <span class="emphase">Stufen:</span>
-      ... TODO (nur für manuskripte)
-    </p>
-    <p>
+
+    <p *ngIf="earlierStagesIRIs && earlierStagesIRIs != []">
       <span class="emphase">Vorstufen:</span>
-      ... TODO (nur für typoskripte und drucke)
+      <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
     </p>
+
+    <p *ngIf="laterStagesIRIs && laterStagesIRIs != []">
+      <span class="emphase">Spätere Stufen:</span>
+      <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
+    </p>
+
     <p>
       <span class="emphase">Bilder:</span>
+      <!-- TODO: hier Link zu PDF einfuegen -->
       ... TODO
     </p>
+
     <p *ngIf="comment">
       <span class="emphase">Kommentar:</span>
       <span [innerHtml]="comment"></span>
     </p>
-    <p>
-      <span class="emphase">Spätere Stufen:</span>
-      ... TODO (nur für notizbücher)
-    </p>
+
     <p *ngIf="convoluteContentRepresentation">
       <span class="emphase">Wiedergabe:</span>
       <span [innerHtml]="convoluteContentRepresentation"></span>

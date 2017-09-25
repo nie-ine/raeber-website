@@ -1,0 +1,3 @@
+<span *ngFor="let k of konvolutTitel; let i = index">
+  <a [routerLink]="[k]">{{k}}</a><span *ngIf="i+1 < konvolutTitel.length">,</span>
+</span>

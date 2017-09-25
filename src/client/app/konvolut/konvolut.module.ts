@@ -9,6 +9,7 @@ import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
+  MdDialogModule,
   MdGridListModule,
   MdIconModule,
   MdInputModule,
@@ -23,6 +24,7 @@ import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.mo
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
 import { SteckbriefVariables } from './konvolutVariables';
+import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { SteckbriefVariables } from './konvolutVariables';
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdDialogModule,
     MdGridListModule,
     MdIconModule,
     MdInputModule,
@@ -42,8 +45,12 @@ import { SteckbriefVariables } from './konvolutVariables';
   ],
   declarations: [
     KonvolutComponent,
+    KonvolutKommentarComponent,
     KonvolutSteckbriefComponent,
-    KonvolutWerkzeugleisteComponent,
+    KonvolutWerkzeugleisteComponent
+  ],
+  entryComponents: [
+    KonvolutKommentarComponent
   ],
   exports: [ KonvolutComponent ]
 })

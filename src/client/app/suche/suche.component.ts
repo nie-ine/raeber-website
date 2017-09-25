@@ -65,6 +65,7 @@ export class SucheComponent implements OnInit {
   numberOfQueries = 0;
   input: Array<any>;
   searchTerm: string;
+  numberOfSearchResults: number;
 
 
   handleSearchEvent(arg: AbstractControl) {
@@ -84,6 +85,11 @@ export class SucheComponent implements OnInit {
     if ( !this.inputSearchStringToBeParsed ){
       this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
       console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
+    }
+    if(this.allSearchResults === undefined) {
+      this.numberOfSearchResults = 0;
+    } else {
+      this.numberOfSearchResults = this.allSearchResults.length;
     }
   }
 
@@ -213,6 +219,7 @@ export class SucheComponent implements OnInit {
   }
 
   executeFinalQueries() {
+    this.allSearchResults = [];
     console.log(this.finalQueryArray);
     for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
       this.performQuery(this.finalQueryArray[this.i]);
@@ -231,6 +238,11 @@ export class SucheComponent implements OnInit {
               this.allSearchResults = [];
             }
             this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
+            if(this.allSearchResults === undefined) {
+              this.numberOfSearchResults = 0;
+            } else {
+              this.numberOfSearchResults = this.allSearchResults.length;
+            }
           }
           console.log(this.allSearchResults);
           return data.subjects;

@@ -23,12 +23,9 @@
 
                 </rae-parser>
 
-                <rae-textgrid
-                  [poems_in_grid]="allSearchResults"
-                  [searchTerm]="searchTerm"
-                ></rae-textgrid>
 
-                <!--
+
+
                 <div ng-init="myResources=initialQuery()">
 
 
@@ -70,8 +67,12 @@
 
 
                 </div>
-                -->
-                <!--
+
+                Number of Results: {{ numberOfSearchResults }}
+
+
+
+
                 Final Queries:
                 <div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
                   <span style="word-wrap: break-word; word-break: break-all;">
@@ -80,7 +81,12 @@
                     {{ query }}
                   </span>
                 </div>
-                -->
+
+                <rae-textgrid
+                  [poems_in_grid]="allSearchResults"
+                  [searchTerm]="searchTerm"
+                ></rae-textgrid>
+
               </div>
             </div>
           </div>

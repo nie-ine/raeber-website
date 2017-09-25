@@ -36,7 +36,8 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   laterStagesIRIs: Array<string>;
   private sub: any;
 
-  constructor(private http: Http, private dateFormatService: DateFormatService) {}
+  constructor(private http: Http, private dateFormatService: DateFormatService){
+  }
 
   ngOnChanges(){
     if (this.IRI) {
@@ -118,10 +119,10 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           try {
             this.laterStagesIRIs = [];
             for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfManuscriptConvolute' ].values.length; i++) {
-              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfManuscriptConvolute' ].values[i].utf8str);
+              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfManuscriptConvolute' ].values[ i ].utf8str);
             }
             for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfTyposcriptConvolute' ].values.length; i++) {
-              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfTyposcriptConvolute' ].values[i].utf8str);
+              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfTyposcriptConvolute' ].values[ i ].utf8str);
             }
           } catch (TypeError) {
             this.laterStagesIRIs = null;
@@ -130,24 +131,38 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           try {
             this.earlierStagesIRIs = [];
             for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfNotebook' ].values.length; i++) {
-              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfNotebook' ].values[i].utf8str);
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfNotebook' ].values[ i ].utf8str);
             }
             for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfManuscriptConvolute' ].values.length; i++) {
-              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfManuscriptConvolute' ].values[i].utf8str);
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfManuscriptConvolute' ].values[ i ].utf8str);
             }
             for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfTyposcriptConvolute' ].values.length; i++) {
-              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfTyposcriptConvolute' ].values[i].utf8str);
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsLaterStagesOfTyposcriptConvolute' ].values[ i ].utf8str);
             }
           } catch (TypeError) {
             this.earlierStagesIRIs = null;
           }
         });
+    } else {
+      this.publicationTitle = null;
+      this.publisherDescription = null;
+      this.printerDescription = null;
+      this.convoluteDescription = null;
+      this.carrierDescription = null;
+      this.comment = null;
+      this.archiveSignature = null;
+      this.convoluteSizeDescripton = null;
+      this.convoluteContentRepresentation = null;
+      this.convoluteOriginDescription = null;
+      this.creatingPeriod = null;
+      this.containsEarlierStagesOfPublicationIRI = null;
+      this.earlierStagesIRIs = null;
+      this.laterStagesIRIs = null;
     }
   }
 
 
-
-  formatDate(date: string) {
+  formatDate(date: string){
     return this.dateFormatService.germanNumericDate(date);
   }
 }

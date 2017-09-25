@@ -18,7 +18,7 @@
     </p>
     <p *ngIf="convoluteDescription">
       <span class="emphase">Inhalt:</span>
-      {{convoluteDescription}}
+      <span [innerHtml]="convoluteDescription"></span>
     </p>
     <p *ngIf="creatingPeriodStart || creatingPeriodEnd">
       <span class="emphase">Datierung:</span>

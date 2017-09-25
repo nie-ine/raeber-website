@@ -7,7 +7,7 @@
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]=" p.value[1] + '-' + p.obj_id.split('/')[4]" routerLinkActive="active">
+        <a class="item" [routerLink]="p.obj_id" routerLinkActive="active">
           {{p.value[2]}}
         </a>
       </md-card-title>

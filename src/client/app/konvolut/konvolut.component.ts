@@ -83,7 +83,7 @@ export class KonvolutComponent implements OnInit {
           console.log('IRI: ' + this.IRI);
           console.log('Konvolutbild: ' + this.konvolutBild);
         },
-        2000);
+        3000);
     });
     setTimeout(() => {
         console.log(this.poems);

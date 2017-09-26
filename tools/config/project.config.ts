@@ -67,6 +67,104 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     });
+    this.addPackageBundles({
+      name: '@angular/cdk/a11y',
+      path: 'node_modules/@angular/cdk/bundles/cdk-a11y.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/bidi',
+      path: 'node_modules/@angular/cdk/bundles/cdk-bidi.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/coercion',
+      path: 'node_modules/@angular/cdk/bundles/cdk-coercion.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/collections',
+      path: 'node_modules/@angular/cdk/bundles/cdk-collections.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/keycodes',
+      path: 'node_modules/@angular/cdk/bundles/cdk-keycodes.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/observers',
+      path: 'node_modules/@angular/cdk/bundles/cdk-observers.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/overlay',
+      path: 'node_modules/@angular/cdk/bundles/cdk-overlay.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/platform',
+      path: 'node_modules/@angular/cdk/bundles/cdk-platform.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/portal',
+      path: 'node_modules/@angular/cdk/bundles/cdk-portal.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/rxjs',
+      path: 'node_modules/@angular/cdk/bundles/cdk-rxjs.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/scrolling',
+      path: 'node_modules/@angular/cdk/bundles/cdk-scrolling.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/stepper',
+      path: 'node_modules/@angular/cdk/bundles/cdk-stepper.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@angular/cdk/table',
+      path: 'node_modules/@angular/cdk/bundles/cdk-table.umd.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: 'hammerjs',
+      path: 'node_modules/hammerjs/hammer.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

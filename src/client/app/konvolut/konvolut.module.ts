@@ -23,6 +23,7 @@ import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.mo
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
 import { SteckbriefVariables } from './konvolutVariables';
+import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { SteckbriefVariables } from './konvolutVariables';
     KonvolutComponent,
     KonvolutSteckbriefComponent,
     KonvolutWerkzeugleisteComponent,
+    GetKonvolutIRIComponent,
   ],
   exports: [ KonvolutComponent ]
 })

@@ -12,34 +12,6 @@ export function getKonvolutIRI(konvolut_id: string,
                                responseArray: Array<any>,
                                konvolutTitle: string) : Subscription {
   //**
-  // Notizbuch 1979
-  // TODO: Steckbrief etc.
-  // */
-  if(konvolut_id === 'notizbuch-1979') {
-    console.log('Klicked on Menu: ' + konvolut_id);
-    return http.get
-    (
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      globalSearchVariableService.initialVocabulary +
-      '%23PoemNotebook' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-      '&compop=EQ' +
-      '&searchval=Notizbuch%201979'
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          console.log(data);
-          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
-          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
-          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
-          return data.resourcetypes;
-        }
-      )
-      .subscribe(response => responseArray = response);
-  }
-  //**
   // Notizbuch 1979-1982
   // TODO: Steckbrief etc.
   // */

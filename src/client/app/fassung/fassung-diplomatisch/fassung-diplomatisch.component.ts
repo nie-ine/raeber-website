@@ -1,7 +1,7 @@
 /**
  * Created by Reto Baumgartner (rfbaumgartner) on 24.07.17.
  */
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +11,10 @@ import { Component, Input } from '@angular/core';
 export class FassungDiplomatischComponent {
 
   @Input() pages: any;
+
+  @Output() pictureReduced = new EventEmitter();
+  @Output() pictureIncreased = new EventEmitter();
+
   gewaehlteSchicht: string = 'schicht0';
 
 }

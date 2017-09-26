@@ -5,13 +5,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { KonvolutComponent } from './konvolut.component';
-import { SuperKonvolutComponent } from './super-konvolut.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'drucke/abgewandt-zugewandt', component: SuperKonvolutComponent },
-      { path: 'drucke/abgewandt-zugewandt/:konvolut', component: KonvolutComponent },
       { path: 'drucke/:konvolut', component: KonvolutComponent },
       { path: 'manuskripte/:konvolut', component: KonvolutComponent },
       { path: 'notizbuecher/notizbuch-divers/:konvolut', component: KonvolutComponent },
@@ -21,7 +18,7 @@ import { SuperKonvolutComponent } from './super-konvolut.component';
       { path: 'material/:konvolut', component: KonvolutComponent }
     ])
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule]
 })
 export class KonvolutRoutingModule {
 }

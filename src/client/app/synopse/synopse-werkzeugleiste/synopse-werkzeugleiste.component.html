@@ -1,4 +1,8 @@
 <md-toolbar>
+  <button md-raised-button title="Hilfe" (click)="hilfe()">
+    <md-icon>help</md-icon>
+  </button>
+
   <md-button-toggle-group [(ngModel)]="viewMode"
                           (ngModelChange)="viewModeChange.emit(viewMode)"
                           name="View Mode">
@@ -11,9 +15,10 @@
     Text anzeigen
   </md-checkbox>
 
+  <button md-raised-button title="Kartenformat schrittweise vergrößern" (click)="textVergroessern()">+ Format</button>
+
+  <button md-raised-button title="Kartenformat schrittweise verkleinern" (click)="textVerkleinern()">- Format</button>
+
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
 
-  <button md-raised-button title="Hilfe" (click)="hilfe()">
-    <md-icon>help</md-icon>
-  </button>
 </md-toolbar>

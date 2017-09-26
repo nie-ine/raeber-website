@@ -11,7 +11,8 @@ import {
   MdCardModule,
   MdGridListModule,
   MdIconModule,
-  MdInputModule, MdToolbarModule
+  MdInputModule,
+  MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,7 +20,6 @@ import { KonvolutComponent } from './konvolut.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
-import { SuperKonvolutComponent } from './super-konvolut.component';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
 
@@ -43,7 +43,6 @@ import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvo
     KonvolutComponent,
     KonvolutSteckbriefComponent,
     KonvolutWerkzeugleisteComponent,
-    SuperKonvolutComponent
   ],
   exports: [ KonvolutComponent ]
 })

@@ -18,27 +18,19 @@
   white-space: normal;
 }
 
-.rae-poem-card-cols {
-  height: initial;
-  width: 90%;
-}
-
-.rae-poem-card-grid {
-  height: 90%;
+.rae-poem-card {
   width: 90%;
 }
 
 .rae-poem-card-content-cols {
   overflow-y: auto;
   overflow-x: auto;
-  height: auto !important;
 }
 
 .rae-poem-card-content-grid {
   overflow-y: hidden;
   overflow-x: auto;
   resize: vertical;
-  height: 140px;
   border-bottom-color: silver;
   border-bottom-style: solid;
   border-bottom-width: 1px;

@@ -20,7 +20,6 @@ export class SynopseComponent implements OnInit {
   synopseTag: string;
 
   showText: boolean;
-  viewMode: string;
 
   columns: string;
 
@@ -28,7 +27,6 @@ export class SynopseComponent implements OnInit {
 
   constructor(private http: Http, private route: ActivatedRoute) {
     this.showText = true;
-    this.viewMode = 'grid';
   }
 
   ngOnInit() {

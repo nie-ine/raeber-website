@@ -12,8 +12,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SynopseWerkzeugleisteComponent {
 
-  @Input() viewMode: string;
-  @Output() viewModeChange: EventEmitter<string> = new EventEmitter<string>();
   @Input() showText: boolean;
   @Output() showTextChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

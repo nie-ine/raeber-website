@@ -11,12 +11,14 @@
                   <rae-synopse-werkzeugleiste [(viewMode)]="viewMode"
                                               [(showText)]="showText"
                                               (vergroessereText)="textgrid.vergroessereFeld()"
-                                              (verkleinereText)="textgrid.verkleinereFeld()">
+                                              (verkleinereText)="textgrid.verkleinereFeld()"
+                                              (cols)="setColumns($event)">
                   </rae-synopse-werkzeugleiste>
                   <rae-textgrid #textgrid
                                 [(viewMode)]="viewMode"
                                 [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"
+                                [columns]="columns"
                                 contentType="synopse">
                   </rae-textgrid>
                 </div>

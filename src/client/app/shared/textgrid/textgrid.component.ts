@@ -15,6 +15,7 @@ export class TextgridComponent implements OnChanges {
   @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
   @Input() viewMode: string = 'grid';
   @Input() showText: boolean = true;
+  @Input() columns: string = '43%';
 
   @Input() poemsInGrid: Array<any>;
 
@@ -48,5 +49,9 @@ export class TextgridComponent implements OnChanges {
     if (this.gridTextHeight > 3) {
       this.gridTextHeight -= 2;
     }
+  }
+
+  setColumns(columns: number) {
+
   }
 }

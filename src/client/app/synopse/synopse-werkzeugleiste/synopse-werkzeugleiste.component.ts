@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: 'synopse-werkzeugleiste.component.html',
   styleUrls: [ 'synopse-werkzeugleiste.component.css' ]
 })
-export class SynopseWerkzeugleisteComponent implements OnInit {
+export class SynopseWerkzeugleisteComponent {
 
   @Input() viewMode: string;
   @Output() viewModeChange: EventEmitter<string> = new EventEmitter<string>();
@@ -19,8 +19,9 @@ export class SynopseWerkzeugleisteComponent implements OnInit {
 
   @Output() vergroessereText = new EventEmitter();
   @Output() verkleinereText = new EventEmitter();
+  @Output() cols: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit() {}
+  columns: number = 2;
 
   neuladen() {
     window.location.reload();
@@ -38,5 +39,6 @@ export class SynopseWerkzeugleisteComponent implements OnInit {
   textVerkleinern() {
     this.verkleinereText.emit(null);
   }
+
 
 }

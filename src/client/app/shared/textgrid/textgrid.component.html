@@ -1,6 +1,6 @@
 <div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid', 'rae-poem-list-cols': viewMode == 'cols'}">
 
-  <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index">
+  <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index" [ngStyle]="{ 'width': columns }">
 
     <md-card class="rae-poem-card">
 

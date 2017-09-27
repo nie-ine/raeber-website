@@ -15,6 +15,10 @@
     Text anzeigen
   </md-checkbox>
 
+  <button md-raised-button title="Spaltenanzahl" (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
+    3) + 1}} Spalten
+  </button>
+
   <button md-raised-button title="Kartenformat schrittweise vergrößern" (click)="textVergroessern()">+ Format</button>
 
   <button md-raised-button title="Kartenformat schrittweise verkleinern" (click)="textVerkleinern()">- Format</button>

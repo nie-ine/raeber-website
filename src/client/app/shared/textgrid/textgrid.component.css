@@ -13,8 +13,9 @@
 .rae-poem-container {
   display: inline-block;
   vertical-align: top;
-  width: 460px;
+  width: 43%;
   padding: 5px;
+  margin: 16px;
   white-space: normal;
 }
 

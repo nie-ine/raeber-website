@@ -3,6 +3,8 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
+import { ExtendedSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
+import { ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
   konvolutSize: string;
   private sub: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private route: ActivatedRoute) {}
 
   ngOnChanges() {
     if (this.konvolutIRI) {
@@ -32,7 +34,17 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
           }
 
           try {
-            this.konvolutSize = res.props[ 'http://www.knora.org/ontology/work#hasPublisherDescription' ].values[ 0 ].utf8str;
+            let searchParams = new ExtendedSearch();
+            searchParams.property = new KnoraProperty('http://www.knora.org/ontology/work#isPublishedIn', '!EQ', this.konvolutIRI);
+            searchParams.showNRows = 500;
+
+            this.route.params
+              .switchMap((params: Params) =>
+                this.http.get(searchParams.toString()))
+              .map(response => response.json())
+              .subscribe((res: any) => {
+                this.konvolutSize = res.subjects.length;
+              });
           } catch (TypeError) {
             this.konvolutSize = null;
           }

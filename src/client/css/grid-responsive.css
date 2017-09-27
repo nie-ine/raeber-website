@@ -33,6 +33,10 @@ body [class*="rt-grid"] {
   width: 250px;
 }
 
+.rt-grid-3-5{
+  width: 300px;
+}
+
 .rt-grid-4 {
   width: 400px;
 }
@@ -43,6 +47,10 @@ body [class*="rt-grid"] {
 
 .rt-grid-6 {
   width: 600px;
+}
+
+.rt-grid-6-5 {
+  width: 700px;
 }
 
 .rt-grid-7 {

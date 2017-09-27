@@ -1,4 +1,8 @@
-<get-konvolut-iri [konvolut_id]="konvolut_id">
+<get-konvolut-iri
+  [konvolut_id]="konvolut_id"
+  (sendKonvolutTitleBack)="updateKonvolutTitle($event)"
+  (sendKonvolutIRIBack)="updateKonvolutIRI($event)"
+  (sendKonvolutBildBack)="updateKonvolutBild($event)">
 
 </get-konvolut-iri>
 

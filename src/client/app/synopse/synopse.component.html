@@ -13,9 +13,7 @@
                                               (verkleinereText)="textgrid.verkleinereFeld()"
                                               (cols)="setColumns($event)">
                   </rae-synopse-werkzeugleiste>
-                  <rae-textgrid #textgrid
-                                [(viewMode)]="viewMode"
-                                [showText]="showText"
+                  <rae-textgrid #textgrid [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"
                                 [columns]="columns"
                                 contentType="synopse">

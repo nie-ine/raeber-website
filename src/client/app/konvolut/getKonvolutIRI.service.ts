@@ -21,12 +21,19 @@ export function getKonvolutIRI(konvolut_id: string,
     (
       globalSearchVariableService.API_URL +
       globalSearchVariableService.extendedSearch +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.initialVocabulary +
+      '%23PoemNotebook' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=EQ' +
+      '&searchval=Notizbuch%201979'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -150,13 +157,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PoemManuscriptConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Manuskripte%201979-83'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -170,13 +184,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PoemManuscriptConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Karten%201984'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -271,13 +292,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=gesicht'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -291,13 +319,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Schiffe'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -311,13 +346,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=GEDICHTE%201960'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -331,13 +373,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Flussufer'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -351,13 +400,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Reduktionen'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -371,13 +427,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PrintedPoemBookPublication' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Hochdeutsche'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -397,12 +460,11 @@ export function getKonvolutIRI(konvolut_id: string,
       '%23PrintedPoemBookPublication' +
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
       '&compop=LIKE' +
-      '&searchval=Alemannische%20Gedichte%201985'
+      '&searchval=Alemannische'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log('data: ');
           console.log(data);
           konvolutVariables.konvolutTitel = data.subjects[0].value[1];
           konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
@@ -415,18 +477,25 @@ export function getKonvolutIRI(konvolut_id: string,
   // abgewandt-zugewandt-nachwort
   // TODO: Steckbrief etc.
   // */
-  if(konvolut_id === 'abgewandt-zugewandt-nachwort') {
+  if(konvolut_id === 'verstreutes') {
     console.log('Klicked on Menu: ' + konvolut_id);
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23PolyAuthorPublicationConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Verstreutes'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )
@@ -440,13 +509,20 @@ export function getKonvolutIRI(konvolut_id: string,
     return http.get
     (
       globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
+      globalSearchVariableService.extendedSearch +
+      globalSearchVariableService.initialVocabulary +
+      '%23DiaryConvolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=Tagebuch'
     )
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
+          konvolutVariables.konvolutTitel = data.subjects[0].value[1];
+          konvolutVariables.konvolutIRI = data.subjects[0].obj_id;
+          konvolutVariables.konvolutBild = data.subjects[0].preview_path;
           return data.resourcetypes;
         }
       )

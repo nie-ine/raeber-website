@@ -39,6 +39,7 @@ export class FassungComponent implements OnInit {
   poem_id: string;
   konvolut_id: string;
   konvolut_type: string;
+  konvolutIRI = 'http://rdfh.ch/kuno-raeber/UP1rlPeKR26d8YZPnTo1IQ'
 
   nextPoem: string = '219-brunnen'; // TODO
   prevPoem: string = '221-baum'; // TODO

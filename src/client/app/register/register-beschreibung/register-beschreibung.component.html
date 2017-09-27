@@ -1,5 +1,25 @@
 <div>
 
+  <!-- Publizierte Gedichte -->
+  <div *ngIf="selectedTab=='publizierte-gedichte'">
+    <div class="itemHeader">
+      <h2 class="itemTitle">
+        Publizierte Gedichte
+      </h2>
+    </div>
+  </div>
+
+
+  <!-- Unpublizierte Gedichte -->
+  <div *ngIf="selectedTab=='unpublizierte-gedichte'">
+    <div class="itemHeader">
+      <h2 class="itemTitle">
+        Unpublizierte Gedichte
+      </h2>
+    </div>
+  </div>
+
+
   <!-- Nachlass 1943-50 -->
   <div *ngIf="selectedTab=='nachlass-1943-1950'">
     <div class="itemHeader">

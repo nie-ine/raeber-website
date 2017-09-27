@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,6 +10,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { getKonvolutIRI  } from './getKonvolutIRI.service';
+import { Subscription } from 'rxjs/Subscription';
+import * as konvolutVariables from './konvolutVariables';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   moduleId: module.id,
@@ -17,14 +22,20 @@ import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utiliti
   templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
+  konvolut_id: string;
+  konvolutTitle: string;
+  konvolutBild: string;
+  IRI: string;
+  output: Subscription;
+  private data: Observable<Array<number>>;
 
   poems: Array<any>;
+  responseArray: Array<any>;
 
   viewMode: string;
-
-  konvolut_id: string;
   konvolut_type: string;
   private sub: any;
+
 
   private _esearch = new ExtendedSearch();
 
@@ -43,6 +54,7 @@ export class KonvolutComponent implements OnInit {
         this.loadMore();
       }
     };
+
   }
 
   ngOnInit() {
@@ -54,11 +66,31 @@ export class KonvolutComponent implements OnInit {
       konstText => this.poems = konstText
     );
 
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
+
+    this.konvolut_type = this.route.snapshot.url[0].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
+      this.konvolut_id = params['konvolut'];
+      getKonvolutIRI(
+        this.konvolut_id,
+        this.http,
+        this.responseArray,
+        this.konvolutTitle);
+      setTimeout(() => {
+          this.konvolutTitle = konvolutVariables.konvolutTitel;
+          this.IRI = konvolutVariables.konvolutIRI;
+          this.konvolutBild = konvolutVariables.konvolutBild;
+          console.log('Konvolut - Titel: ' + this.konvolutTitle);
+          console.log('IRI: ' + this.IRI);
+          console.log('Konvolutbild: ' + this.konvolutBild);
+        },
+        3000);
     });
+    setTimeout(() => {
+        console.log(this.poems);
+      },
+      5000);
   }
+
 
   loadMore() {
     this.dp.loadText(this._esearch).subscribe(

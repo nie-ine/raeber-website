@@ -1,9 +1,5 @@
 <md-sidenav-container class="suchmenu-container">
-  <div class="suchmenu-content">
-    <button md-mini-fab class="suchmenu-button" (click)="suchmenu.open()">
-      <md-icon>dehaze</md-icon>
-    </button>
-  </div>
+
   <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened">
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
@@ -12,10 +8,7 @@
                  formControlName="suchwortInput"
                  style="width: 250px"/>
         </md-input-container>
-        <md-select placeholder="Suchraum" formControlName="suchwortSuchraum" floatPlaceholder="never">
-          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{raum.viewValue}}</md-option>
-        </md-select>
-        <button md-button>
+        <button md-button (click)="startTheSearch()" >
           <md-icon>arrow_forward</md-icon>
         </button>
       </div>
@@ -945,4 +938,22 @@
       </ngb-accordion>
     </form>
   </md-sidenav>
+
+
+  <div class="suchmenu-content">
+    <button md-mini-fab class="suchmenu-button" (click)="suchmenu.open()">
+      <md-icon>dehaze</md-icon>
+    </button>
+
+    <div style="margin-top: 70px;">
+      <rae-textgrid
+        [searchTerm]="searchTerm"
+        [poemsInGrid]="poemsInGrid">
+      </rae-textgrid>
+    </div>
+
+
+
+  </div>
+
 </md-sidenav-container>

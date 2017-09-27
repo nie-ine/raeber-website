@@ -218,10 +218,18 @@ export class SucheComponent implements OnInit {
   }
 
   executeFinalQueries() {
-    this.allSearchResults = [];
-    console.log(this.finalQueryArray);
-    for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
-      this.performQuery(this.finalQueryArray[this.i]);
+    //Old generic Search:
+    /*/
+    if(this.finalQueryArray) {
+      this.allSearchResults = [];
+      console.log(this.finalQueryArray);
+      for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
+        this.performQuery(this.finalQueryArray[this.i]);
+      }
+    }
+    */
+    if(this.searchTerm) {
+      console.log('execute simple full text search');
     }
   }
 
@@ -268,6 +276,7 @@ export class SucheComponent implements OnInit {
           + '; Search for: '
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
+        this.searchTerm = queries[this.i][this.j].searchString;
       }
     }
     console.log('Query Object:');

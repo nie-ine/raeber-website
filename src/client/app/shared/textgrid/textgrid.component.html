@@ -7,15 +7,15 @@
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
-          {{p.value[2]}}
+        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active"
+           [innerHTML]="highlight(p.value[0],searchTerm)">
         </a>
       </md-card-title>
 
       <md-card-content *ngIf="showText"
                        [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}"
                        [ngStyle]="{'height': viewMode == 'grid' ? gridTextHeight +'em' : 'initial'}">
-        <div class="rae-poem" [innerHtml]="p.value[1]"></div>
+        <div class="rae-poem" [innerHTML]="highlight(p.value[1],searchTerm)"></div>
       </md-card-content>
 
       <br/>

@@ -17,6 +17,7 @@ export class TextgridComponent implements OnChanges {
   @Input() showText: boolean = true;
 
   @Input() poemsInGrid: Array<any>;
+  @Input() searchTerm: Array<any>;
 
   gridTextHeight: number = 10;
 
@@ -44,5 +45,13 @@ export class TextgridComponent implements OnChanges {
     if (this.gridTextHeight > 3) {
       this.gridTextHeight -= 2;
     }
+  }
+  highlight(textToHighlight: string, searchTerm: string) {
+    if (searchTerm === undefined) {
+      return textToHighlight;
+    }
+    return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+      return '<span class="highlightText">' + match + '</span>';
+    });
   }
 }

@@ -13,7 +13,7 @@
 .rae-poem-container {
   display: inline-block;
   vertical-align: top;
-  width: 460px;
+  width: 400px;
   padding: 5px;
   white-space: normal;
 }
@@ -34,4 +34,13 @@
   border-bottom-color: silver;
   border-bottom-style: solid;
   border-bottom-width: 1px;
+}
+
+.rae-poem-card-grid {
+  height: 90%;
+  width: 90%;
+}
+
+.highlightText {
+  background: yellow;
 }

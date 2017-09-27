@@ -9,9 +9,12 @@
                 <div class="component-content">
                   <h1>Synopse ({{nHits}})</h1>
                   <rae-synopse-werkzeugleiste [(viewMode)]="viewMode"
-                                              [(showText)]="showText">
+                                              [(showText)]="showText"
+                                              (vergroessereText)="textgrid.vergroessereFeld()"
+                                              (verkleinereText)="textgrid.verkleinereFeld()">
                   </rae-synopse-werkzeugleiste>
-                  <rae-textgrid [(viewMode)]="viewMode"
+                  <rae-textgrid #textgrid
+                                [(viewMode)]="viewMode"
                                 [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"
                                 contentType="synopse">

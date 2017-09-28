@@ -45,6 +45,8 @@ export class SucheComponent implements OnInit {
   i: number;
   j: number;
   k: number;
+  l: number;
+  m: number;
   isAlreadyInArray = 0;
   helperMap = new Map();
   mapOfAllQueries = new Map();
@@ -69,6 +71,8 @@ export class SucheComponent implements OnInit {
   queries: Array<any>;
   partOfAllSearchResults: Array<any>;
   trueIfDuplicate = false;
+  temporarySearchResults: Array<any>;
+  finalTemporaryResults: Array<any>;
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
@@ -112,6 +116,7 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myResources = response);
   }
 
+  /*
   propertyQuery() {
     if (this.selectedResource !== undefined) {
 
@@ -130,6 +135,7 @@ export class SucheComponent implements OnInit {
         .subscribe(response => this.myProperties = response);
     }
   }
+  */
 
 
   finalQuery() {
@@ -239,6 +245,7 @@ export class SucheComponent implements OnInit {
     }
   }
 
+  /*
   performQuery(query: string) {
     return this.http.get(query)
       .map(
@@ -263,26 +270,27 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.searchResult = response);
   }
+  */
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
     this.numberOfQueries = 0;
     for (this.i = 0; this.i < queries.length; this.i++) {
-      if (this.i !== 0) {
-        console.log('And merge with?');
-      }
+      console.log('Request Group nr: ' + this.i);
+      this.finalTemporaryResults = undefined;
+      this.temporarySearchResults = undefined;
       for (this.j = 0; this.j < queries[this.i].length; this.j++) {
         if (this.j !== 0) {
           console.log('And merge with?');
         }
         this.numberOfQueries += 1;
-        console.log('Request Nr.: '
-          + this.numberOfQueries
-          + '; Search for: '
+        console.log('Search for: '
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
         this.searchTerm = queries[this.i][this.j].searchString;
+        //push in the following function to temporary query array
+        //TODO: hier OR berücksichtigen
         this.performQuery(this.searchTerm, queries[this.i][this.j].where);
       }
     }
@@ -308,38 +316,75 @@ export class SucheComponent implements OnInit {
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
       '&compop=LIKE' +
       '&searchval=' +
-      encodeURIComponent(this.searchTerm))
+      encodeURIComponent(searchTerm))
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          this.addToFinalSearchResultArray(data.subjects);
+          this.addToTemporarySearchResultArray(data.subjects);
           return data.properties;
         }
       )
       .subscribe(response => this.myProperties = response);
   }
 
+  // For more statements between the ORs
+  // Scenarios: 2 times the same word, one word without output
+  addToTemporarySearchResultArray(searchResults: Array<any>) {
+    console.log('Add to temporary Search Results and only take one of the duplicates');
+    console.log(searchResults);
+    console.log(this.temporarySearchResults);
+    if (searchResults !== undefined) {
+      if (this.temporarySearchResults === undefined) {
+        this.temporarySearchResults = [];
+        this.temporarySearchResults.push.apply(this.temporarySearchResults, searchResults);
+      } else {
+        for (this.l = 0; this.l < searchResults.length; this.l++) {
+          for (this.m = 0; this.m < this.temporarySearchResults.length; this.m ++) {
+            if(searchResults[this.l].obj_id === this.temporarySearchResults[this.m].obj_id) {
+              console.log('found duplicate in temporary array');
+              if(this.finalTemporaryResults === undefined) {
+                this.finalTemporaryResults = [];
+              }
+                this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+            }
+          }
+        }
+      }
+      //TODO: consider more than 2 searchTerms between ORs
+      //Following statement for one search without output
+      if(searchResults.length === 0 && this.temporarySearchResults !== undefined) {
+        this.addToFinalSearchResultArray(this.temporarySearchResults);
+      }
+      console.log('Final Temporary Search Results: ');
+      console.log(this.finalTemporaryResults);
+      this.addToFinalSearchResultArray(this.finalTemporaryResults);
+    }
+  }
+
   addToFinalSearchResultArray(searchResults: Array<any>) {
-    console.log('Add to final Search Results')
+    console.log('Add to final Search Results');
     console.log(searchResults);
     console.log(this.allSearchResults);
     if (searchResults !== undefined) {
-      if (this.allSearchResults === undefined) {
+      if (this.allSearchResults === undefined)  {
         this.allSearchResults = [];
-        this.allSearchResults.push.apply(this.allSearchResults, searchResults);
+        this.allSearchResults = searchResults;
+        console.log('All Search Results: ');
+        console.log(this.allSearchResults);
       } else {
         for (this.k = 0; this.k < searchResults.length; this.k++) {
           for (this.i = 0; this.i < this.allSearchResults.length; this.i ++) {
             if(searchResults[this.k].obj_id === this.allSearchResults[this.i].obj_id) {
-              console.log('found duplicate');
+              console.log('found duplicate in final array');
               this.trueIfDuplicate = true;
             }
           }
           if (this.trueIfDuplicate === false) {
             console.log('append to search Results');
-            this.allSearchResults[this.allSearchResults.length]=searchResults[this.k];
             this.allSearchResults.push.apply(this.allSearchResults, searchResults[this.k]);
+            console.log('allSearchResults after appending: ');
+            console.log(this.allSearchResults);
           } else {
             this.trueIfDuplicate = false;
           }

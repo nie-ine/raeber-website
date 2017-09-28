@@ -20,6 +20,7 @@ export class SynopseWerkzeugleisteComponent {
   @Output() cols: EventEmitter<number> = new EventEmitter<number>();
 
   columns: number = 2;
+  rahmen: boolean = true;
 
   neuladen() {
     window.location.reload();
@@ -36,6 +37,10 @@ export class SynopseWerkzeugleisteComponent {
 
   textVerkleinern() {
     this.verkleinereText.emit(null);
+  }
+
+  toggleFrame() {
+    this.rahmen = !this.rahmen;
   }
 
 

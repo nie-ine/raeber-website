@@ -6,7 +6,7 @@
 
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
-      <md-card-title>
+      <md-card-title #poemTitle>
         <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
           {{p.value[2]}}
         </a>
@@ -14,8 +14,8 @@
 
       <md-card-content *ngIf="showText"
                        [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}"
-                       [ngStyle]="{'height': viewMode == 'grid' ? gridTextHeight +'em' : 'initial'}">
-        <div class="rae-poem" [innerHtml]="p.value[1]"></div>
+                       [ngStyle]="{'height': rahmen ? 'calc(20em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' : poemText.offsetHeight+'px', 'overflow-y': rahmen ? 'auto' : 'visible'}">
+        <div class="rae-poem" [innerHtml]="p.value[1]" #poemText></div>
       </md-card-content>
 
       <br/>

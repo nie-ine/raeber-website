@@ -13,9 +13,16 @@
     3) + 1}} Spalten
   </button>
 
-  <button md-raised-button title="Kartenformat schrittweise vergrößern" (click)="textVergroessern()">+ Format</button>
+  <button md-raised-button [disabled]="!rahmen" title="Kartenformat schrittweise vergrößern"
+          (click)="textVergroessern()">+ Format
+  </button>
 
-  <button md-raised-button title="Kartenformat schrittweise verkleinern" (click)="textVerkleinern()">- Format</button>
+  <button md-raised-button [disabled]="!rahmen" title="Kartenformat schrittweise verkleinern"
+          (click)="textVerkleinern()">- Format
+  </button>
+
+  <button md-raised-button title="Rahmen anzeigen" (click)="toggleFrame()">{{rahmen ? 'Rahmenlos' : 'Rahmen'}}
+  </button>
 
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
 

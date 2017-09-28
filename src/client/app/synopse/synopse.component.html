@@ -8,7 +8,7 @@
               <div id="rt-mainbody">
                 <div class="component-content">
                   <h1>Synopse ({{nHits}})</h1>
-                  <rae-synopse-werkzeugleiste [(showText)]="showText"
+                  <rae-synopse-werkzeugleiste #werkzeugleiste [(showText)]="showText"
                                               (vergroessereText)="textgrid.vergroessereFeld()"
                                               (verkleinereText)="textgrid.verkleinereFeld()"
                                               (cols)="setColumns($event)">
@@ -16,7 +16,8 @@
                   <rae-textgrid #textgrid [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"
                                 [columns]="columns"
-                                contentType="synopse">
+                                contentType="synopse"
+                                [rahmen]="werkzeugleiste.rahmen">
                   </rae-textgrid>
                 </div>
               </div>

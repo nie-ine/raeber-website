@@ -2,30 +2,33 @@
  * Created by retobaumgartner on 21.06.17.
  */
 
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: [ 'textgrid.component.css' ]
+  styleUrls: ['textgrid.component.css']
 })
-export class TextgridComponent implements OnChanges {
+export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
   @Input() viewMode: string = 'grid';
   @Input() showText: boolean = true;
   @Input() columns: string = '43%';
-
+  @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
 
-  gridTextHeight: number = 10;
+  gridTextHeight: number = 0;
   i: number;
+
+  constructor(private cdr: ChangeDetectorRef) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
-        let chng = changes[ propName ];
+        let chng = changes[propName];
         this.poemsInGrid = chng.currentValue;
         for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
           this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
@@ -41,17 +44,18 @@ export class TextgridComponent implements OnChanges {
     // changes.prop contains the old and the new value...
   }
 
+  ngAfterViewChecked(): void {
+    this.cdr.detectChanges();
+  }
+
   vergroessereFeld() {
     this.gridTextHeight += 2;
   }
 
   verkleinereFeld() {
-    if (this.gridTextHeight > 3) {
+    if (this.gridTextHeight > 0) {
       this.gridTextHeight -= 2;
     }
   }
 
-  setColumns(columns: number) {
-
-  }
 }

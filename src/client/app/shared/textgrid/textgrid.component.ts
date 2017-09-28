@@ -53,9 +53,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   verkleinereFeld() {
-    if (this.gridTextHeight > 0) {
-      this.gridTextHeight -= 2;
-    }
+    this.gridTextHeight -= 2;
   }
 
 }

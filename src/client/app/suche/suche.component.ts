@@ -66,6 +66,9 @@ export class SucheComponent implements OnInit {
   input: Array<any>;
   searchTerm: string;
   numberOfSearchResults: number;
+  queries: Array<any>;
+  partOfAllSearchResults: Array<any>;
+  trueIfDuplicate = false;
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
@@ -227,9 +230,12 @@ export class SucheComponent implements OnInit {
         this.performQuery(this.finalQueryArray[this.i]);
       }
     }
-    */
-    if(this.searchTerm) {
+    */if(!this.queries) {
+        console.log('No query defined');
+    } else {
+      this.allSearchResults = undefined;
       console.log('execute simple full text search');
+      this.translateQueriesReturnedFromParserToKnoraRequests(this.queries);
     }
   }
 
@@ -277,10 +283,74 @@ export class SucheComponent implements OnInit {
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
         this.searchTerm = queries[this.i][this.j].searchString;
+        this.performQuery(this.searchTerm, queries[this.i][this.j].where);
       }
     }
-    console.log('Query Object:');
-    console.log(queries);
+  }
+
+  getQueries(queries: Array<any>) {
+    this.queries = queries;
+  }
+
+  performQuery(searchTerm: string, location: string) {
+    console.log('Perform search for ' + searchTerm + ' in ' + location);
+    if(location === 'anywhere') {
+      console.log('Perform Search in Title and Text');
+      this.performSearchInTitle(this.searchTerm);
+    }
+  }
+
+  performSearchInTitle(searchTerm: string) {
+    return this.http.get(
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23Convolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=' +
+      encodeURIComponent(this.searchTerm))
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          this.addToFinalSearchResultArray(data.subjects);
+          return data.properties;
+        }
+      )
+      .subscribe(response => this.myProperties = response);
+  }
+
+  addToFinalSearchResultArray(searchResults: Array<any>) {
+    console.log('Add to final Search Results')
+    console.log(searchResults);
+    console.log(this.allSearchResults);
+    if (searchResults !== undefined) {
+      if (this.allSearchResults === undefined) {
+        this.allSearchResults = [];
+        this.allSearchResults.push.apply(this.allSearchResults, searchResults);
+      } else {
+        for (this.k = 0; this.k < searchResults.length; this.k++) {
+          for (this.i = 0; this.i < this.allSearchResults.length; this.i ++) {
+            if(searchResults[this.k].obj_id === this.allSearchResults[this.i].obj_id) {
+              console.log('found duplicate');
+              this.trueIfDuplicate = true;
+            }
+          }
+          if (this.trueIfDuplicate === false) {
+            console.log('append to search Results');
+            this.allSearchResults[this.allSearchResults.length]=searchResults[this.k];
+            this.allSearchResults.push.apply(this.allSearchResults, searchResults[this.k]);
+          } else {
+            this.trueIfDuplicate = false;
+          }
+        }
+      }
+      if(this.allSearchResults === undefined) {
+        this.numberOfSearchResults = 0;
+      } else {
+        this.numberOfSearchResults = this.allSearchResults.length;
+      }
+    }
   }
 
 }

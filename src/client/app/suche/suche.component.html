@@ -16,13 +16,14 @@
                 <rae-suchmaske [sidenavOpened]="false"
                                (suchEvents)="handleSearchEvent($event)"
                                [poemsInGrid]="allSearchResults"
-                               (startSearch)="executeFinalQueries()">
+                               (startSearch)="executeFinalQueries()"
+                               [searchTerm]="searchTerm">
 
                 </rae-suchmaske>
 
                 <rae-parser
                   [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
-                  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
+                  (returnQueries)="getQueries($event)">
 
                 </rae-parser>
 

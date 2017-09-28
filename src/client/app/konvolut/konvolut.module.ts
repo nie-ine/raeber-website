@@ -22,8 +22,8 @@ import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-stec
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
-import { SteckbriefVariables } from './konvolutVariables';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -39,6 +39,7 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
     MdToolbarModule,
     RegisterspalteModule,
     TextgridModule,
+    NgbModule,
     KonvolutRoutingModule
   ],
   declarations: [

@@ -51,12 +51,26 @@
                   <h2 class="title">Register</h2>
                 </div>
                 <div class="module-content">
-                  <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
-                  <div class="moduletable">
-                    <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
-                    <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-                    <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-                  </div>
+                  <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Register">
+                      <ng-template ngbPanelContent>
+                        <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="Suche in {{konvolutTitle}}">
+                      <ng-template ngbPanelContent>
+                        <div class="moduletable">
+                          <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
+                          <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
+                          <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="Darstellungsoptionen">
+                      <ng-template ngbPanelContent>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
                 </div>
               </div>
             </div>

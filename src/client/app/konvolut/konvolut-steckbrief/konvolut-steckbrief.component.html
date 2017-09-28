@@ -36,9 +36,9 @@
         {{convoluteSizeDescripton}}
       </p>
 
-      <p *ngIf="containsEarlierStagesOfPublicationIRI">
+      <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs != []">
         <span class="emphase">Publikation:</span>
-        <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRI"></rae-konvolut-steckbrief-publikation>
+        <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
       </p>
 
       <p *ngIf="archiveSignature">

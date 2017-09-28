@@ -31,7 +31,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   convoluteContentRepresentation: string;
   convoluteOriginDescription: string;
   creatingPeriod: string;
-  containsEarlierStagesOfPublicationIRI: string;
+  containsEarlierStagesOfPublicationIRIs: Array<string>;
   earlierStagesIRIs: Array<string>;
   laterStagesIRIs: Array<string>;
   private sub: any;
@@ -111,9 +111,12 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           }
 
           try {
-            this.containsEarlierStagesOfPublicationIRI = res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values[ 0 ];
+            this.containsEarlierStagesOfPublicationIRIs = [];
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values.length; i++) {
+              this.containsEarlierStagesOfPublicationIRIs.push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values[ i ]);
+            }
           } catch (TypeError) {
-            this.containsEarlierStagesOfPublicationIRI = null;
+              this.containsEarlierStagesOfPublicationIRIs = null;
           }
 
           try {
@@ -155,7 +158,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
       this.convoluteContentRepresentation = null;
       this.convoluteOriginDescription = null;
       this.creatingPeriod = null;
-      this.containsEarlierStagesOfPublicationIRI = null;
+      this.containsEarlierStagesOfPublicationIRIs = null;
       this.earlierStagesIRIs = null;
       this.laterStagesIRIs = null;
     }

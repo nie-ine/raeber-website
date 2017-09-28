@@ -10,10 +10,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
 import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
-import { getKonvolutIRI  } from './getKonvolutIRI.service';
 import { Subscription } from 'rxjs/Subscription';
-import * as konvolutVariables from './konvolutVariables';
 import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
@@ -70,25 +69,7 @@ export class KonvolutComponent implements OnInit {
     this.konvolut_type = this.route.snapshot.url[0].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params['konvolut'];
-      getKonvolutIRI(
-        this.konvolut_id,
-        this.http,
-        this.responseArray,
-        this.konvolutTitle);
-      setTimeout(() => {
-          this.konvolutTitle = konvolutVariables.konvolutTitel;
-          this.IRI = konvolutVariables.konvolutIRI;
-          this.konvolutBild = konvolutVariables.konvolutBild;
-          console.log('Konvolut - Titel: ' + this.konvolutTitle);
-          console.log('IRI: ' + this.IRI);
-          console.log('Konvolutbild: ' + this.konvolutBild);
-        },
-        3000);
     });
-    setTimeout(() => {
-        console.log(this.poems);
-      },
-      5000);
   }
 
 
@@ -97,4 +78,20 @@ export class KonvolutComponent implements OnInit {
       konstText => this.poems = this.poems.concat(konstText)
     );
   }
+
+  updateKonvolutTitle(konvolutTitle: string) {
+    this.konvolutTitle = konvolutTitle;
+    console.log('Konvolut - Titel: ' + this.konvolutTitle);
+  }
+
+  updateKonvolutIRI(konvolutIRI: string) {
+    this.IRI = konvolutIRI;
+    console.log('IRI: ' + this.IRI);
+  }
+
+  updateKonvolutBild(konvolutBild: string) {
+    this.konvolutBild = konvolutBild;
+    console.log('Konvolutbild: ' + this.konvolutBild);
+  }
+
 }

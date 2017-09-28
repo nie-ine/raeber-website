@@ -11,9 +11,14 @@ import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { SynopseWerkzeugleisteComponent } from './synopse-werkzeugleiste/synopse-werkzeugleiste.component';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCheckboxModule, MdIconModule, MdToolbarModule
+  MdButtonToggleModule,
+  MdCheckboxModule,
+  MdDialogModule,
+  MdIconModule,
+  MdToolbarModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { SynopseHilfeComponent } from './synopse-hilfe/synopse-hilfe.component';
 
 @NgModule({
   imports: [
@@ -24,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     MdCheckboxModule,
     MdIconModule,
     MdToolbarModule,
+    MdDialogModule,
     RouterModule.forChild([
       { path: 'synopsen/:synopse', component: SynopseComponent }
     ]),
@@ -31,10 +37,14 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [
     SynopseComponent,
-    SynopseWerkzeugleisteComponent
+    SynopseWerkzeugleisteComponent,
+    SynopseHilfeComponent
   ],
   exports: [
     SynopseComponent
+  ],
+  entryComponents: [
+    SynopseHilfeComponent
   ]
 })
 export class SynopseModule {

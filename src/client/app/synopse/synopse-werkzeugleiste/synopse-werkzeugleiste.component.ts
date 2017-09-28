@@ -3,12 +3,14 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SynopseHilfeComponent } from '../synopse-hilfe/synopse-hilfe.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-synopse-werkzeugleiste',
   templateUrl: 'synopse-werkzeugleiste.component.html',
-  styleUrls: [ 'synopse-werkzeugleiste.component.css' ]
+  styleUrls: ['synopse-werkzeugleiste.component.css']
 })
 export class SynopseWerkzeugleisteComponent {
 
@@ -22,13 +24,11 @@ export class SynopseWerkzeugleisteComponent {
   columns: number = 2;
   rahmen: boolean = true;
 
-  neuladen() {
-    window.location.reload();
+  constructor(public dialog: MdDialog) {
   }
 
-  hilfe() {
-    // TODO
-    console.log('Hilfetext ergaenzen');
+  neuladen() {
+    window.location.reload();
   }
 
   textVergroessern() {
@@ -41,6 +41,13 @@ export class SynopseWerkzeugleisteComponent {
 
   toggleFrame() {
     this.rahmen = !this.rahmen;
+  }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(SynopseHilfeComponent, {
+        width: '500px'
+      });
   }
 
 

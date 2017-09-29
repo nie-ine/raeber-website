@@ -162,9 +162,6 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           } catch (TypeError) {
             // skip if there is no typoscript preceding this publication
           }
-
-          console.log('earlier');
-          console.log(this.earlierStagesIRIs);
         });
     } else {
       this.publicationTitle = null;

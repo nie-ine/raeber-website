@@ -2,7 +2,7 @@
  * Created by retobaumgartner on 21.06.17.
  */
 
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,16 +10,20 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: 'textgrid.component.html',
   styleUrls: [ 'textgrid.component.css' ]
 })
-export class TextgridComponent implements OnChanges {
+export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
   @Input() viewMode: string = 'grid';
   @Input() showText: boolean = true;
-
+  @Input() columns: string = '43%';
+  @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
 
-  gridTextHeight: number = 10;
+  gridTextHeight: number = 0;
   i: number;
+
+  constructor(private cdr: ChangeDetectorRef) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
@@ -42,13 +46,15 @@ export class TextgridComponent implements OnChanges {
     // changes.prop contains the old and the new value...
   }
 
+  ngAfterViewChecked(): void {
+    this.cdr.detectChanges();
+  }
+
   vergroessereFeld() {
     this.gridTextHeight += 2;
   }
 
   verkleinereFeld() {
-    if (this.gridTextHeight > 3) {
-      this.gridTextHeight -= 2;
-    }
+    this.gridTextHeight -= 2;
   }
 }

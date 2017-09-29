@@ -47,6 +47,7 @@ export class SucheComponent implements OnInit {
   k: number;
   l: number;
   m: number;
+  o: number;
   isAlreadyInArray = 0;
   helperMap = new Map();
   mapOfAllQueries = new Map();
@@ -73,6 +74,7 @@ export class SucheComponent implements OnInit {
   trueIfDuplicate = false;
   temporarySearchResults: Array<any>;
   finalTemporaryResults: Array<any>;
+  firstTermAfterOr = true;
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
@@ -276,7 +278,9 @@ export class SucheComponent implements OnInit {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
     this.numberOfQueries = 0;
+    this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
+      this.firstTermAfterOr = true;
       console.log('Request Group nr: ' + this.i);
       this.finalTemporaryResults = undefined;
       this.temporarySearchResults = undefined;
@@ -289,9 +293,8 @@ export class SucheComponent implements OnInit {
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
         this.searchTerm = queries[this.i][this.j].searchString;
-        //push in the following function to temporary query array
-        //TODO: hier OR berücksichtigen
-        this.performQuery(this.searchTerm, queries[this.i][this.j].where);
+        this.performQuery(this.searchTerm, queries[this.i][this.j].where, this.firstTermAfterOr, this.i, queries[this.i].length);
+        this.firstTermAfterOr = false;
       }
     }
   }
@@ -300,15 +303,13 @@ export class SucheComponent implements OnInit {
     this.queries = queries;
   }
 
-  performQuery(searchTerm: string, location: string) {
-    console.log('Perform search for ' + searchTerm + ' in ' + location);
+  performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup:number, numberOfTermsInSearchGroup: number) {
     if(location === 'anywhere') {
-      console.log('Perform Search in Title and Text');
-      this.performSearchInTitle(this.searchTerm);
+      this.performSearchInTitle(searchTerm, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
     }
   }
 
-  performSearchInTitle(searchTerm: string) {
+  performSearchInTitle(searchTerm: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
     return this.http.get(
       globalSearchVariableService.API_URL +
       globalSearchVariableService.extendedSearch +
@@ -321,7 +322,7 @@ export class SucheComponent implements OnInit {
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          this.addToTemporarySearchResultArray(data.subjects);
+          this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
           return data.properties;
         }
       )
@@ -330,18 +331,27 @@ export class SucheComponent implements OnInit {
 
   // For more statements between the ORs
   // Scenarios: 2 times the same word, one word without output
-  addToTemporarySearchResultArray(searchResults: Array<any>) {
+  addToTemporarySearchResultArray(searchResults: Array<any>,
+                                  firstTermAfterOr: boolean,
+                                  searchGroup: number,
+                                  numberOfTermsInSearchGroup: number) {
     console.log('Add to temporary Search Results and only take one of the duplicates');
+    console.log('firstTermAfterOr: ' + firstTermAfterOr);
     console.log(searchResults);
     console.log(this.temporarySearchResults);
     if (searchResults !== undefined) {
-      if (this.temporarySearchResults === undefined) {
+      if(this.temporarySearchResults === undefined) {
         this.temporarySearchResults = [];
-        this.temporarySearchResults.push.apply(this.temporarySearchResults, searchResults);
+        this.temporarySearchResults[searchGroup]=searchResults;
+      }
+      if (this.temporarySearchResults[searchGroup] === undefined) {
+        this.temporarySearchResults[searchGroup]=searchResults;
+        console.log(this.temporarySearchResults);
       } else {
         for (this.l = 0; this.l < searchResults.length; this.l++) {
-          for (this.m = 0; this.m < this.temporarySearchResults.length; this.m ++) {
-            if(searchResults[this.l].obj_id === this.temporarySearchResults[this.m].obj_id) {
+          console.log('SearchGroup:' + searchGroup);
+          for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m ++) {
+            if(searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
               console.log('found duplicate in temporary array');
               if(this.finalTemporaryResults === undefined) {
                 this.finalTemporaryResults = [];
@@ -359,6 +369,10 @@ export class SucheComponent implements OnInit {
       console.log('Final Temporary Search Results: ');
       console.log(this.finalTemporaryResults);
       this.addToFinalSearchResultArray(this.finalTemporaryResults);
+      console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
+      if(numberOfTermsInSearchGroup === 1) {
+        this.addToFinalSearchResultArray(searchResults);
+      }
     }
   }
 
@@ -370,19 +384,16 @@ export class SucheComponent implements OnInit {
       if (this.allSearchResults === undefined)  {
         this.allSearchResults = [];
         this.allSearchResults = searchResults;
-        console.log('All Search Results: ');
-        console.log(this.allSearchResults);
       } else {
         for (this.k = 0; this.k < searchResults.length; this.k++) {
-          for (this.i = 0; this.i < this.allSearchResults.length; this.i ++) {
-            if(searchResults[this.k].obj_id === this.allSearchResults[this.i].obj_id) {
+          for (this.o = 0; this.o < this.allSearchResults.length; this.o ++) {
+            if(searchResults[this.k].obj_id === this.allSearchResults[this.o].obj_id) {
               console.log('found duplicate in final array');
               this.trueIfDuplicate = true;
             }
           }
           if (this.trueIfDuplicate === false) {
-            console.log('append to search Results');
-            this.allSearchResults.push.apply(this.allSearchResults, searchResults[this.k]);
+            this.allSearchResults[this.allSearchResults.length] = searchResults[this.k];
             console.log('allSearchResults after appending: ');
             console.log(this.allSearchResults);
           } else {

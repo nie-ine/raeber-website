@@ -25,6 +25,7 @@ import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvo
 import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/konvolut-steckbrief-publikation.component';
 import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
 import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
+import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konv
     KonvolutSteckbriefPublikationComponent,
     KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,
+    GetKonvolutIRIComponent,
   ],
   exports: [ KonvolutComponent ]
 })

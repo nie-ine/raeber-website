@@ -1,19 +1,19 @@
 <div class="convolute-description">
   <md-card>
-    <div style="display: inline-block; vertical-align: text-top;">
-        <p *ngIf="publicationTitle">
+    <div>
+      <p *ngIf="publicationTitle">
         <span class="emphase">Titel:</span>
-        {{publicationTitle}}
+        <span [innerHtml]="publicationTitle"></span>
       </p>
 
       <p *ngIf="publisherDescription">
         <span class="emphase">Verlag:</span>
-        {{publisherDescription}}
+        <span [innerHtml]="publisherDescription"></span>
       </p>
 
       <p *ngIf="printerDescription">
         <span class="emphase">Druck:</span>
-        {{printerDescription}}
+        <span [innerHtml]="printerDescription"></span>
       </p>
 
       <p *ngIf="convoluteDescription">
@@ -28,22 +28,22 @@
 
       <p *ngIf="carrierDescription">
         <span class="emphase">Textträger:</span>
-        {{carrierDescription}}
+        <span [innerHtml]="carrierDescription"></span>
       </p>
 
       <p *ngIf="convoluteSizeDescripton">
         <span class="emphase">Umfang:</span>
-        {{convoluteSizeDescripton}}
+        <span [innerHtml]="convoluteSizeDescripton"></span>
       </p>
 
-      <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs != []">
+      <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs.length > 0">
         <span class="emphase">Publikation:</span>
         <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
       </p>
 
       <p *ngIf="archiveSignature">
         <span class="emphase">Signatur:</span>
-        {{archiveSignature}}
+        <span [innerHtml]="archiveSignature"></span>
       </p>
 
       <p *ngIf="convoluteOriginDescription">
@@ -53,25 +53,32 @@
 
       <br/>
 
-      <p *ngIf="earlierStagesIRIs && earlierStagesIRIs != []">
+      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && (earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0)">
+        <span class="emphase">Stufen:</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen><span
+        *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
+      </p>
+
+      <p *ngIf="konvoluttyp != 'poem manuscript convolute' && earlierStagesIRIs && earlierStagesIRIs.length > 0">
         <span class="emphase">Vorstufen:</span>
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
-      <p *ngIf="laterStagesIRIs && laterStagesIRIs != []">
-        <span class="emphase">Spätere Stufen:</span>
-        <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
-      </p>
-
-      <p>
+      <p *ngIf=false>
         <span class="emphase">Bilder:</span>
-        <!-- TODO: hier Link zu PDF einfuegen -->
-        ... TODO
+        <!-- TODO: hier Link zu PDF einfuegen und *ngIf anpassen-->
+        TODO
       </p>
 
       <p *ngIf="comment">
         <span class="emphase">Kommentar:</span>
         <span [innerHtml]="comment"></span>
+      </p>
+
+      <p *ngIf="konvoluttyp != 'poem manuscript convolute' && laterStagesIRIs && laterStagesIRIs.length > 0">
+        <span class="emphase">Spätere Stufen:</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
       <p *ngIf="convoluteContentRepresentation">
@@ -80,7 +87,7 @@
       </p>
     </div>
 
-    <div *ngIf="konvolutBild" style="display: inline-block; vertical-align: text-top;">
+    <div *ngIf="konvolutBild" style="position: absolute; top: 20px; right: 20px;">
       <img [src]="konvolutBild" />
     </div>
   </md-card>

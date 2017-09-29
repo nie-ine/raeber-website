@@ -133,8 +133,8 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             // skip if there is no manuscript of this notebook
           }
           try {
-            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTyposcriptConvolute' ].values.length; i++) {
-              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTyposcriptConvolute' ].values[ i ]);
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTypescriptConvolute' ].values.length; i++) {
+              this.laterStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTypescriptConvolute' ].values[ i ]);
             }
           } catch (TypeError) {
             // skip if there is no typescript of this notebook or manuscript
@@ -156,8 +156,8 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             // skip if there is no manuscript preceding this typescript or publication
           }
           try {
-            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTyposcriptConvolute' ].values.length; i++) {
-              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTyposcriptConvolute' ].values[ i ]);
+            for (let i = 0; i < res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTypescriptConvolute' ].values.length; i++) {
+              this.earlierStagesIRIs.push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTypescriptConvolute' ].values[ i ]);
             }
           } catch (TypeError) {
             // skip if there is no typoscript preceding this publication

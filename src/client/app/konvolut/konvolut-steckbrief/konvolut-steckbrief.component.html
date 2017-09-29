@@ -53,7 +53,7 @@
 
       <br/>
 
-      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && (earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0)">
+      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
         <span class="emphase">Stufen:</span>
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen><span
         *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>

@@ -15,15 +15,17 @@ import {
   MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DarstellungsoptionenModule } from '../shared/darstellungsoptionen/darstellungsoptionen.module';
+import { KonvolutsucheModule } from '../shared/konvolutsuche/konvolutsuche.module';
 
 import { KonvolutComponent } from './konvolut.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
-import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
 
 @NgModule({
   imports: [
@@ -40,13 +42,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterspalteModule,
     TextgridModule,
     NgbModule,
+    DarstellungsoptionenModule,
+    KonvolutsucheModule,
     KonvolutRoutingModule
   ],
   declarations: [
     KonvolutComponent,
     KonvolutSteckbriefComponent,
-    KonvolutWerkzeugleisteComponent,
     GetKonvolutIRIComponent,
+    KonvolutTrefferleisteComponent
   ],
   exports: [ KonvolutComponent ]
 })

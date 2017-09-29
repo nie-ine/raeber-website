@@ -1,0 +1,26 @@
+<form [formGroup]="layoutSettingsForm">
+  <div>
+    <md-slider min="1" max="10" step="1" thumb-label="true" formControlName="frameSizeSetter"></md-slider>
+    Textrahmengrösse
+  </div>
+  <hr/>
+  <div>
+    <md-slide-toggle formControlName="frameToggler">{{showFrame ? 'Rahmen' : 'Rahmenlos'}}</md-slide-toggle>
+  </div>
+  <hr/>
+  <div>
+    <md-slide-toggle formControlName="textToggler">{{showText ? 'Text' : 'Kein Text'}}</md-slide-toggle>
+  </div>
+  <hr/>
+  <div>
+    <md-select placeholder="Spalten" formControlName="colsSetter">
+      <md-option value="1">1</md-option>
+      <md-option value="2">2</md-option>
+      <md-option value="3">3</md-option>
+    </md-select>
+  </div>
+  <hr/>
+  <div>
+    <button md-button (click)="resetLayout()">Zurücksetzen</button>
+  </div>
+</form>

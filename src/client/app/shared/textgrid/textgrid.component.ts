@@ -20,12 +20,16 @@ export class TextgridComponent implements OnChanges {
   @Input() searchTerm: Array<any>;
 
   gridTextHeight: number = 10;
+  i: number;
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         this.poemsInGrid = chng.currentValue;
+        for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+          this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+        }
       }
     }
     /*    for (let propName in changes) {

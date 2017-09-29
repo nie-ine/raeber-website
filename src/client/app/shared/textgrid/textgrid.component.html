@@ -7,8 +7,8 @@
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]="[p.value[1]]" routerLinkActive="active"
-           [innerHTML]="highlight(p.value[1],searchTerm)">
+        <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
+          {{p.value[2]}}
         </a>
       </md-card-title>
 

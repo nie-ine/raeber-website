@@ -22,7 +22,9 @@ import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-stec
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
-import { SteckbriefVariables } from './konvolutVariables';
+import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/konvolut-steckbrief-publikation.component';
+import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
+import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
 
 @NgModule({
@@ -44,6 +46,9 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
   declarations: [
     KonvolutComponent,
     KonvolutSteckbriefComponent,
+    KonvolutSteckbriefDatierungComponent,
+    KonvolutSteckbriefPublikationComponent,
+    KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,
     GetKonvolutIRIComponent,
   ],

@@ -10,12 +10,14 @@ import { AnleitungComponent } from './anleitung.component';
 import { WerkausgabeComponent } from './werkausgabe.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
+import { AbgewandtZugewandtNachwortComponent } from './abgewandt-zugewandt-nachwort.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
+      { path: 'drucke/abgewandt-zugewandt-nachwort', component: AbgewandtZugewandtNachwortComponent },
       { path: 'anleitung', component: AnleitungComponent },
       { path: 'lebensdaten', component: LebensdatenComponent },
       { path: 'werkliste', component: WerklisteComponent },
@@ -25,12 +27,13 @@ import { PdfSynopsenComponent } from './pdf-synopsen.component';
       { path: 'start', component: HomepageComponent }
     ])
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule]
 })
 export class StatischRoutingModule {
 }
 
 export const routingComponents = [
+  AbgewandtZugewandtNachwortComponent,
   AnleitungComponent,
   HomepageComponent,
   ImpressumComponent,

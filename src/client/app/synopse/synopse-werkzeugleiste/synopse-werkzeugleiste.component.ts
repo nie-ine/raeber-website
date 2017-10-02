@@ -17,6 +17,11 @@ export class SynopseWerkzeugleisteComponent implements OnInit {
   @Input() showText: boolean;
   @Output() showTextChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output() vergroessereText = new EventEmitter();
+  @Output() verkleinereText = new EventEmitter();
+
+  ngOnInit() {}
+
   neuladen() {
     window.location.reload();
   }
@@ -26,5 +31,12 @@ export class SynopseWerkzeugleisteComponent implements OnInit {
     console.log('Hilfetext ergaenzen');
   }
 
-  ngOnInit() {}
+  textVergroessern() {
+    this.vergroessereText.emit(null);
+  }
+
+  textVerkleinern() {
+    this.verkleinereText.emit(null);
+  }
+
 }

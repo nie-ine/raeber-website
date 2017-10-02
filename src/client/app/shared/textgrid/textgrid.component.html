@@ -2,18 +2,19 @@
 
   <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index">
 
-    <md-card [ngClass]="{'rae-poem-card-grid': viewMode == 'grid', 'rae-poem-card-cols': viewMode == 'cols'}">
+    <md-card class="rae-poem-card">
 
       <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
 
       <md-card-title>
-        <a class="item" [routerLink]="[p.value[0]]" routerLinkActive="active">
+        <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
           {{p.value[2]}}
         </a>
       </md-card-title>
 
       <md-card-content *ngIf="showText"
-                       [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}">
+                       [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}"
+                       [ngStyle]="{'height': viewMode == 'grid' ? gridTextHeight +'em' : 'initial'}">
         <div class="rae-poem" [innerHtml]="p.value[1]"></div>
       </md-card-content>
 

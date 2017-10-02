@@ -1,4 +1,4 @@
-<!-- TODO: Links überprüfen (v.a. auf statische Seiten); JavaScript-Blöcke auf oberster Ebene Navigationsleiste entfernen -->
+<!-- TODO: Links überprüfen (v.a. auf statische Seiten)-->
 <div class="rt-block menu-block">
   <ul class="gf-menu l1 ">
     <li class="item133 parent">
@@ -315,24 +315,24 @@
                 <i class="icon-star">Reduktionen (1981)</i> </a>
             </li>
             <li class="item107 parent">
-              <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt']" routerLinkActive="active">
-                <i class="icon-star">Abgewandt Zugewandt </i> <span class="border-fixer"></span>
-              </a>
+              <span class="item">
+                Abgewandt Zugewandt <span class="border-fixer"></span>
+              </span>
               <div class="dropdown flyout columns-1 " style="width:200px;">
                 <div class="column col1" style="width:200px;">
                   <ul class="l3">
                     <li class="item138">
-                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt/hochdeutsche-gedichte']"
+                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt-hochdeutsche-gedichte']"
                          routerLinkActive="active">
                         <i class="icon-star">Hochdeutsche Ged.</i> </a>
                     </li>
                     <li class="item137">
-                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt/alemannische-gedichte']"
+                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt-alemannische-gedichte']"
                          routerLinkActive="active">
                         <i class="icon-star">Alemannische Ged.</i> </a>
                     </li>
                     <li class="item235">
-                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt/nachwort']"
+                      <a class="item icon" [routerLink]="['drucke/abgewandt-zugewandt-nachwort']"
                          routerLinkActive="active">
                         <i class="icon-star">Nachwort </i> </a>
                     </li>
@@ -442,24 +442,48 @@
         </div>
       </div>
     </li>
-    <li class="item132 parent">
+    <li class ="item131 parent">
       <span class="item">
-        Suche <span class="border-fixer"></span>
+        Register <span class="border-fixer"></span>
       </span>
       <div class="dropdown columns-1 " style="width:200px;">
         <div class="column col1" style="width:200px;">
           <ul class="l2">
-            <li class="item258">
-              <a class="item icon" [routerLink]="['suche']" routerLinkActive="active">
-                <i class="icon-star">Recherche</i> </a>
+            <li class="item251">
+              <a class="item icon" [routerLink]="['/register/publizierte-gedichte']" routerLinkActive="active">
+                <i class="icon-star">Publizierte Gedichte</i> </a>
+            </li>
+            <li class="item252">
+              <a class="item icon" [routerLink]="['/register/unpublizierte-gedichte']" routerLinkActive="active">
+                <i class="icon-star">Unpublizierte Gedichte</i> </a>
+            </li>
+            <li class="item253">
+              <a class="item icon" [routerLink]="['/register/nachlass-1943-1950']" routerLinkActive="active">
+                <i class="icon-star">Nachlass 1943-50</i> </a>
+            </li>
+            <li class="item254">
+              <a class="item icon" [routerLink]="['/register/nachlass-1951-1956']" routerLinkActive="active">
+                <i class="icon-star">Nachlass 1951-56</i> </a>
+            </li>
+            <li class="item255">
+              <a class="item icon" [routerLink]="['/register/nachlass-1957-1965']" routerLinkActive="active">
+                <i class="icon-star">Nachlass 1957-65</i> </a>
+            </li>
+            <li class="item256">
+              <a class="item icon" [routerLink]="['/register/nachlass-1979']" routerLinkActive="active">
+                <i class="icon-star">Nachlass 1979</i> </a>
             </li>
             <li class="item257">
-              <a class="item icon" [routerLink]="['register']" routerLinkActive="active">
-                <i class="icon-star">Register</i> </a>
+              <a class="item icon" [routerLink]="['/register/nachlass-1979-1988']" routerLinkActive="active">
+                <i class="icon-star">Nachlass 1979-88</i> </a>
             </li>
           </ul>
         </div>
       </div>
+    </li>
+    <li class="item133">
+      <a class="item icon" [routerLink]="['suche']" routerLinkActive="active">
+        Suche <span class="border-fixer"></span></a>
     </li>
   </ul>
 </div>

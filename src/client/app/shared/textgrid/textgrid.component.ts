@@ -18,11 +18,19 @@ export class TextgridComponent implements OnChanges {
 
   @Input() poemsInGrid: Array<any>;
 
+  gridTextHeight: number = 10;
+  i: number;
+
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
-        this.poemsInGrid = chng.currentValue;
+        if (!chng.isFirstChange()) {
+          this.poemsInGrid = chng.currentValue;
+          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+            this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+          }
+        }
       }
     }
     /*    for (let propName in changes) {
@@ -32,5 +40,15 @@ export class TextgridComponent implements OnChanges {
      this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
      }*/
     // changes.prop contains the old and the new value...
+  }
+
+  vergroessereFeld() {
+    this.gridTextHeight += 2;
+  }
+
+  verkleinereFeld() {
+    if (this.gridTextHeight > 3) {
+      this.gridTextHeight -= 2;
+    }
   }
 }

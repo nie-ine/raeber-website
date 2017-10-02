@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -18,6 +18,9 @@ import 'rxjs/add/operator/switchMap';
 export class ImageFrameComponent implements OnInit {
 
   @Input() images_in_grid: Array<any>;
+
+  @Output() pictureReduced = new EventEmitter();
+  @Output() pictureIncreased = new EventEmitter();
 
   myImages: Array<any>;
   zoomfactor = 5;
@@ -79,11 +82,13 @@ export class ImageFrameComponent implements OnInit {
   increaseFrameSize() {
     this.height += 200;
     this.width += 200;
+    this.pictureIncreased.emit(null);
   }
 
   reduceFrameSize() {
     this.height -= 200;
     this.width -= 200;
+    this.pictureReduced.emit(null);
   }
 
   resetSize() {

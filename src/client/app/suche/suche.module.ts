@@ -31,6 +31,7 @@ import { SearchForOneResourceModule } from './searchForOneResourceComponent/sear
 import { ParserModule } from './parser/parser.module';
 
 import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
+import { BasicSearchComponent } from './basic-search/basic-search.component';
 
 @NgModule({
   imports: [
@@ -63,11 +64,11 @@ import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
   declarations: [
     SucheComponent,
     SuchmaskeComponent,
-    //BasicSearchComponent
+    BasicSearchComponent
   ],
   exports: [
     SucheComponent,
-    //BasicSearchComponent
+    BasicSearchComponent
   ],
   providers: []
 })

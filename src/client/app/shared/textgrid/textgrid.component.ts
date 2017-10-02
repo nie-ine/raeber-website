@@ -8,7 +8,7 @@ import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, Simpl
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: ['textgrid.component.css']
+  styleUrls: [ 'textgrid.component.css' ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -28,10 +28,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
-        let chng = changes[propName];
-        this.poemsInGrid = chng.currentValue;
-        for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-          this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+        let chng = changes[ propName ];
+        if (!chng.isFirstChange()) {
+          this.poemsInGrid = chng.currentValue;
+          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+            this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+          }
         }
       }
     }
@@ -55,5 +57,4 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   verkleinereFeld() {
     this.gridTextHeight -= 2;
   }
-
 }

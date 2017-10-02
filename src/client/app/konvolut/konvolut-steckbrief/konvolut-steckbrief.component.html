@@ -1,75 +1,94 @@
 <div class="convolute-description">
   <md-card>
-    <div *ngIf="konvolutBild" style="float: left">
-      <img [src]="konvolutBild" />
+    <div>
+      <p *ngIf="publicationTitle">
+        <span class="emphase">Titel:</span>
+        <span [innerHtml]="publicationTitle"></span>
+      </p>
+
+      <p *ngIf="publisherDescription">
+        <span class="emphase">Verlag:</span>
+        <span [innerHtml]="publisherDescription"></span>
+      </p>
+
+      <p *ngIf="printerDescription">
+        <span class="emphase">Druck:</span>
+        <span [innerHtml]="printerDescription"></span>
+      </p>
+
+      <p *ngIf="convoluteDescription">
+        <span class="emphase">Inhalt:</span>
+        <span [innerHtml]="convoluteDescription"></span>
+      </p>
+
+      <p *ngIf="creatingPeriod">
+        <span class="emphase">Datierung:</span>
+        <rae-konvolut-steckbrief-datierung [dateIRI]="creatingPeriod"></rae-konvolut-steckbrief-datierung>
+      </p>
+
+      <p *ngIf="carrierDescription">
+        <span class="emphase">Textträger:</span>
+        <span [innerHtml]="carrierDescription"></span>
+      </p>
+
+      <p *ngIf="convoluteSizeDescripton">
+        <span class="emphase">Umfang:</span>
+        <span [innerHtml]="convoluteSizeDescripton"></span>
+      </p>
+
+      <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs.length > 0">
+        <span class="emphase">Publikation:</span>
+        <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
+      </p>
+
+      <p *ngIf="archiveSignature">
+        <span class="emphase">Signatur:</span>
+        <span [innerHtml]="archiveSignature"></span>
+      </p>
+
+      <p *ngIf="convoluteOriginDescription">
+        <span class="emphase">Herkunft:</span>
+        <span [innerHtml]="convoluteOriginDescription"></span>
+      </p>
+
+      <br/>
+
+      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
+        <span class="emphase">Stufen:</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen><span
+        *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
+      </p>
+
+      <p *ngIf="konvoluttyp != 'poem manuscript convolute' && earlierStagesIRIs && earlierStagesIRIs.length > 0">
+        <span class="emphase">Vorstufen:</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
+      </p>
+
+      <p *ngIf=false>
+        <span class="emphase">Bilder:</span>
+        <!-- TODO: hier Link zu PDF einfuegen und *ngIf anpassen-->
+        TODO
+      </p>
+
+      <p *ngIf="comment">
+        <span class="emphase">Kommentar:</span>
+        <span [innerHtml]="comment"></span>
+      </p>
+
+      <p *ngIf="konvoluttyp != 'poem manuscript convolute' && laterStagesIRIs && laterStagesIRIs.length > 0">
+        <span class="emphase">Spätere Stufen:</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
+      </p>
+
+      <p *ngIf="convoluteContentRepresentation">
+        <span class="emphase">Wiedergabe:</span>
+        <span [innerHtml]="convoluteContentRepresentation"></span>
+      </p>
     </div>
 
-    <p *ngIf="publicationTitle">
-      <span class="emphase">Titel:</span>
-      {{publicationTitle}}
-    </p>
-    <p *ngIf="publisherDescription">
-      <span class="emphase">Verlag:</span>
-      {{publisherDescription}}
-    </p>
-    <p *ngIf="printerDescription">
-      <span class="emphase">Druck:</span>
-      {{printerDescription}}
-    </p>
-    <p *ngIf="convoluteDescription">
-      <span class="emphase">Inhalt:</span>
-      {{convoluteDescription}}
-    </p>
-    <p *ngIf="creatingPeriodStart || creatingPeriodEnd">
-      <span class="emphase">Datierung:</span>
-      <span *ngIf="creatingPeriodStart">{{formatDate(creatingPeriodStart)}}</span>
-      –
-      <span *ngIf="creatingPeriodEnd">{{formatDate(creatingPeriodEnd)}}</span>
-    </p>
-    <p *ngIf="carrierDescription">
-      <span class="emphase">Textträger:</span>
-      {{carrierDescription}}
-    </p>
-    <p *ngIf="convoluteSizeDescripton">
-      <span class="emphase">Umfang:</span>
-      {{convoluteSizeDescripton}}
-    </p>
-    <p>
-      <span class="emphase">Publikation:</span>
-      ... TODO
-    </p>
-    <p *ngIf="true">
-      <span class="emphase">Signatur:</span>
-      {{archiveSignature}}
-    </p>
-    <p *ngIf="convoluteOriginDescription">
-      <span class="emphase">Herkunft:</span>
-      <span [innerHtml]="convoluteOriginDescription"></span>
-    </p>
-    <br/>
-    <p>
-      <span class="emphase">Stufen:</span>
-      ... TODO (nur für manuskripte)
-    </p>
-    <p>
-      <span class="emphase">Vorstufen:</span>
-      ... TODO (nur für typoskripte und drucke)
-    </p>
-    <p>
-      <span class="emphase">Bilder:</span>
-      ... TODO
-    </p>
-    <p *ngIf="comment">
-      <span class="emphase">Kommentar:</span>
-      <span [innerHtml]="comment"></span>
-    </p>
-    <p>
-      <span class="emphase">Spätere Stufen:</span>
-      ... TODO (nur für notizbücher)
-    </p>
-    <p *ngIf="convoluteContentRepresentation">
-      <span class="emphase">Wiedergabe:</span>
-      <span [innerHtml]="convoluteContentRepresentation"></span>
-    </p>
+    <div *ngIf="konvolutBild" style="position: absolute; top: 20px; right: 20px;">
+      <img [src]="konvolutBild" />
+    </div>
   </md-card>
 </div>

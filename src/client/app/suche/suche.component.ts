@@ -45,6 +45,9 @@ export class SucheComponent implements OnInit {
   i: number;
   j: number;
   k: number;
+  l: number;
+  m: number;
+  o: number;
   isAlreadyInArray = 0;
   helperMap = new Map();
   mapOfAllQueries = new Map();
@@ -65,6 +68,13 @@ export class SucheComponent implements OnInit {
   numberOfQueries = 0;
   input: Array<any>;
   searchTerm: string;
+  numberOfSearchResults: number;
+  queries: Array<any>;
+  partOfAllSearchResults: Array<any>;
+  trueIfDuplicate = false;
+  temporarySearchResults: Array<any>;
+  finalTemporaryResults: Array<any>;
+  firstTermAfterOr = true;
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
@@ -83,6 +93,11 @@ export class SucheComponent implements OnInit {
     if (!this.inputSearchStringToBeParsed) {
       this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
       console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
+    }
+    if(this.allSearchResults === undefined) {
+      this.numberOfSearchResults = 0;
+    } else {
+      this.numberOfSearchResults = this.allSearchResults.length;
     }
   }
 
@@ -103,6 +118,7 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myResources = response);
   }
 
+  /*
   propertyQuery() {
     if (this.selectedResource !== undefined) {
 
@@ -121,6 +137,7 @@ export class SucheComponent implements OnInit {
         .subscribe(response => this.myProperties = response);
     }
   }
+  */
 
 
   finalQuery() {
@@ -212,12 +229,25 @@ export class SucheComponent implements OnInit {
   }
 
   executeFinalQueries() {
-    console.log(this.finalQueryArray);
-    for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
-      this.performQuery(this.finalQueryArray[this.i]);
+    //Old generic Search:
+    /*/
+    if(this.finalQueryArray) {
+      this.allSearchResults = [];
+      console.log(this.finalQueryArray);
+      for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
+        this.performQuery(this.finalQueryArray[this.i]);
+      }
+    }
+    */if(!this.queries) {
+        console.log('No query defined');
+    } else {
+      this.allSearchResults = undefined;
+      console.log('execute simple full text search');
+      this.translateQueriesReturnedFromParserToKnoraRequests(this.queries);
     }
   }
 
+  /*
   performQuery(query: string) {
     return this.http.get(query)
       .map(
@@ -230,6 +260,11 @@ export class SucheComponent implements OnInit {
               this.allSearchResults = [];
             }
             this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
+            if(this.allSearchResults === undefined) {
+              this.numberOfSearchResults = 0;
+            } else {
+              this.numberOfSearchResults = this.allSearchResults.length;
+            }
           }
           console.log(this.allSearchResults);
           return data.subjects;
@@ -237,29 +272,141 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.searchResult = response);
   }
+  */
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
     this.numberOfQueries = 0;
+    this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
-      if (this.i !== 0) {
-        console.log('And merge with?');
-      }
+      this.firstTermAfterOr = true;
+      console.log('Request Group nr: ' + this.i);
+      this.finalTemporaryResults = undefined;
+      this.temporarySearchResults = undefined;
       for (this.j = 0; this.j < queries[this.i].length; this.j++) {
         if (this.j !== 0) {
           console.log('And merge with?');
         }
         this.numberOfQueries += 1;
-        console.log('Request Nr.: '
-          + this.numberOfQueries
-          + '; Search for: '
+        console.log('Search for: '
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
+        this.searchTerm = queries[this.i][this.j].searchString;
+        this.performQuery(this.searchTerm, queries[this.i][this.j].where, this.firstTermAfterOr, this.i, queries[this.i].length);
+        this.firstTermAfterOr = false;
       }
     }
-    console.log('Query Object:');
-    console.log(queries);
+  }
+
+  getQueries(queries: Array<any>) {
+    this.queries = queries;
+  }
+
+  performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup:number, numberOfTermsInSearchGroup: number) {
+    if(location === 'anywhere') {
+      this.performSearchInTitle(searchTerm, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+    }
+  }
+
+  performSearchInTitle(searchTerm: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
+    return this.http.get(
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23Convolute' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
+      '&compop=LIKE' +
+      '&searchval=' +
+      encodeURIComponent(searchTerm))
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+          return data.properties;
+        }
+      )
+      .subscribe(response => this.myProperties = response);
+  }
+
+  // For more statements between the ORs
+  // Scenarios: 2 times the same word, one word without output
+  addToTemporarySearchResultArray(searchResults: Array<any>,
+                                  firstTermAfterOr: boolean,
+                                  searchGroup: number,
+                                  numberOfTermsInSearchGroup: number) {
+    console.log('Add to temporary Search Results and only take one of the duplicates');
+    console.log('firstTermAfterOr: ' + firstTermAfterOr);
+    console.log(searchResults);
+    console.log(this.temporarySearchResults);
+    if (searchResults !== undefined) {
+      if(this.temporarySearchResults === undefined) {
+        this.temporarySearchResults = [];
+        this.temporarySearchResults[searchGroup]=searchResults;
+      }
+      if (this.temporarySearchResults[searchGroup] === undefined) {
+        this.temporarySearchResults[searchGroup]=searchResults;
+        console.log(this.temporarySearchResults);
+      } else {
+        for (this.l = 0; this.l < searchResults.length; this.l++) {
+          console.log('SearchGroup:' + searchGroup);
+          for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m ++) {
+            if(searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
+              console.log('found duplicate in temporary array');
+              if(this.finalTemporaryResults === undefined) {
+                this.finalTemporaryResults = [];
+              }
+                this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+            }
+          }
+        }
+      }
+      //TODO: consider more than 2 searchTerms between ORs
+      //Following statement for one search without output
+      if(searchResults.length === 0 && this.temporarySearchResults !== undefined) {
+        this.addToFinalSearchResultArray(this.temporarySearchResults);
+      }
+      console.log('Final Temporary Search Results: ');
+      console.log(this.finalTemporaryResults);
+      this.addToFinalSearchResultArray(this.finalTemporaryResults);
+      console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
+      if(numberOfTermsInSearchGroup === 1) {
+        this.addToFinalSearchResultArray(searchResults);
+      }
+    }
+  }
+
+  addToFinalSearchResultArray(searchResults: Array<any>) {
+    console.log('Add to final Search Results');
+    console.log(searchResults);
+    console.log(this.allSearchResults);
+    if (searchResults !== undefined) {
+      if (this.allSearchResults === undefined)  {
+        this.allSearchResults = [];
+        this.allSearchResults = searchResults;
+      } else {
+        for (this.k = 0; this.k < searchResults.length; this.k++) {
+          for (this.o = 0; this.o < this.allSearchResults.length; this.o ++) {
+            if(searchResults[this.k].obj_id === this.allSearchResults[this.o].obj_id) {
+              console.log('found duplicate in final array');
+              this.trueIfDuplicate = true;
+            }
+          }
+          if (this.trueIfDuplicate === false) {
+            this.allSearchResults[this.allSearchResults.length] = searchResults[this.k];
+            console.log('allSearchResults after appending: ');
+            console.log(this.allSearchResults);
+          } else {
+            this.trueIfDuplicate = false;
+          }
+        }
+      }
+      if(this.allSearchResults === undefined) {
+        this.numberOfSearchResults = 0;
+      } else {
+        this.numberOfSearchResults = this.allSearchResults.length;
+      }
+    }
   }
 
 }

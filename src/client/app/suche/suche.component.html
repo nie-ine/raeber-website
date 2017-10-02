@@ -2,33 +2,32 @@
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
       <div class="rt-container">
-        <div class="rt-grid-9 ">
+        <div class="rt-grid-12 ">
           <div class="rt-block">
             <div id="rt-mainbody">
               <div class="component-content">
 
                 <h1>Suche</h1>
+                Number of Results: {{ numberOfSearchResults }}
 
 
                 <br>
 
                 <rae-suchmaske [sidenavOpened]="false"
-                               (suchEvents)="handleSearchEvent($event)">
+                               (suchEvents)="handleSearchEvent($event)"
+                               [poemsInGrid]="allSearchResults"
+                               (startSearch)="executeFinalQueries()"
+                               [searchTerm]="searchTerm">
 
                 </rae-suchmaske>
 
                 <rae-parser
                   [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
-                  (returnQueries)="translateQueriesReturnedFromParserToKnoraRequests($event)">
+                  (returnQueries)="getQueries($event)">
 
                 </rae-parser>
 
-                <rae-textgrid
-                  [poems_in_grid]="allSearchResults"
-                  [searchTerm]="searchTerm"
-                ></rae-textgrid>
 
-                <!--
                 <div ng-init="myResources=initialQuery()">
 
 
@@ -70,8 +69,10 @@
 
 
                 </div>
-                -->
-                <!--
+
+                Number of Results: {{ numberOfSearchResults }}
+
+
                 Final Queries:
                 <div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
                   <span style="word-wrap: break-word; word-break: break-all;">
@@ -80,6 +81,12 @@
                     {{ query }}
                   </span>
                 </div>
+                <!--
+
+                <rae-textgrid
+                  [poemsInGrid]="allSearchResults"
+                  [searchTerm]="searchTerm"
+                ></rae-textgrid>
                 -->
               </div>
             </div>

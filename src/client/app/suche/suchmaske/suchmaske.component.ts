@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
@@ -19,13 +19,16 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './suchmaske.component.html',
   styleUrls: ['./suchmaske.component.css']
 })
-export class SuchmaskeComponent implements OnInit {
+export class SuchmaskeComponent implements OnInit, OnChanges {
 
   // Emits changes of search parameters
   @Output() public suchEvents: EventEmitter<AbstractControl> = new EventEmitter<AbstractControl>();
+  @Output() startSearch: EventEmitter<any> = new EventEmitter<any>();
   // Form model which contains all search parameters
   suchmenuForm: FormGroup;
   @Input() sidenavOpened: boolean;
+  @Input() searchTerm: string;
+  @Input() poemsInGrid: string;
 
   /*
   Options for extension of fulltext search
@@ -50,9 +53,14 @@ export class SuchmaskeComponent implements OnInit {
 
   allConvolutesSelected: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.createForm();
     this.onSearchParamsChange();
+  }
+  ngOnChanges() {
+    console.log('Data arrived back in Suchmaske: ');
+    console.log(this.poemsInGrid);
+    this.cdr.detectChanges();
   }
 
   /**
@@ -203,6 +211,11 @@ export class SuchmaskeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  startTheSearch(){
+    console.log('startTheSearch');
+    this.startSearch.emit();
   }
 
 }

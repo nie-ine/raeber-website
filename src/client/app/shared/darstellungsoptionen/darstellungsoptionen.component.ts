@@ -26,7 +26,6 @@ export class DarstellungsoptionenComponent {
   }
 
   resetLayout() {
-    this.layoutSettingsForm.get('frameSizeSetter').setValue(5);
     this.layoutSettingsForm.get('frameToggler').setValue(true);
     this.layoutSettingsForm.get('textToggler').setValue(true);
     this.layoutSettingsForm.get('colsSetter').setValue('2');

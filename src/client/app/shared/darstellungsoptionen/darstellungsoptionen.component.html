@@ -1,9 +1,11 @@
 <form [formGroup]="layoutSettingsForm">
-  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler') || gridHeight <= -18"
+  <button md-raised-button
+          [disabled]="!layoutSettingsForm.get('frameToggler').value || !layoutSettingsForm.get('textToggler').value || gridHeight <= -18"
           title="Kartenformat schrittweise verkleinern"
           (click)="textVerkleinern()">- Format
   </button>
-  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler') || gridHeight >= 18"
+  <button md-raised-button
+          [disabled]="!layoutSettingsForm.get('frameToggler').value || !layoutSettingsForm.get('textToggler').value || gridHeight >= 18"
           title="Kartenformat schrittweise vergrößern"
           (click)="textVergroessern()">+ Format
   </button>

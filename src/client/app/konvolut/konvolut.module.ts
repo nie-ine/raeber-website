@@ -24,6 +24,10 @@ import { KonvolutRoutingModule } from './konvolut-routing.module';
 import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-steckbrief.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
+import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
+import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/konvolut-steckbrief-publikation.component';
+import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
+import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
 import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
 
@@ -49,6 +53,10 @@ import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolu
   declarations: [
     KonvolutComponent,
     KonvolutSteckbriefComponent,
+    KonvolutSteckbriefDatierungComponent,
+    KonvolutSteckbriefPublikationComponent,
+    KonvolutSteckbriefStufenComponent,
+    KonvolutWerkzeugleisteComponent,
     GetKonvolutIRIComponent,
     KonvolutTrefferleisteComponent
   ],

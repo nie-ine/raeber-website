@@ -24,15 +24,17 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
     this.publications = [];
 
     for (let i = 0; i < this.konvolutIRI.length; i++) {
-      this.publications.push({'title': '', 'size': ''});
+      this.publications.push({'title': '', 'size': '', 'alias': ''});
 
       try {
         this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI[i]))
           .map(response => response.json()).subscribe(res => {
             this.publications[i]['title'] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
+            this.publications[i]['alias'] = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
           });
       } catch (TypeError) {
         this.publications[i]['title'] = null;
+        this.publications[i]['alias'] = null;
       }
 
       try {

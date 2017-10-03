@@ -118,7 +118,7 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myResources = response);
   }
 
-  /*
+
   propertyQuery() {
     if (this.selectedResource !== undefined) {
 
@@ -137,7 +137,7 @@ export class SucheComponent implements OnInit {
         .subscribe(response => this.myProperties = response);
     }
   }
-  */
+
 
 
   finalQuery() {
@@ -227,18 +227,21 @@ export class SucheComponent implements OnInit {
     );
 
   }
-
-  executeFinalQueries() {
+  executeFinalQueriesOld() {
     //Old generic Search:
-    /*/
+    console.log('Execute final query old');
+    this.allSearchResults = undefined;
     if(this.finalQueryArray) {
       this.allSearchResults = [];
       console.log(this.finalQueryArray);
       for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
-        this.performQuery(this.finalQueryArray[this.i]);
+        this.performQueryOld(this.finalQueryArray[this.i]);
       }
     }
-    */if(!this.queries) {
+  }
+  executeFinalQueries() {
+    this.executeFinalQueriesOld();
+    if(!this.queries) {
         console.log('No query defined');
     } else {
       this.allSearchResults = undefined;
@@ -247,19 +250,23 @@ export class SucheComponent implements OnInit {
     }
   }
 
-  /*
-  performQuery(query: string) {
+
+  performQueryOld(query: string) {
     return this.http.get(query)
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log(data);
+          console.log(data);
           this.k = 0;
           if (data.subjects !== undefined) {
             if (this.allSearchResults === undefined) {
               this.allSearchResults = [];
             }
-            this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
+            if(data.obj_id !== undefined) {
+              this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
+            } else {
+              console.log('Keine Treffer fuer diese Suchanzeige');
+            }
             if(this.allSearchResults === undefined) {
               this.numberOfSearchResults = 0;
             } else {
@@ -272,7 +279,7 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.searchResult = response);
   }
-  */
+
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
@@ -322,7 +329,11 @@ export class SucheComponent implements OnInit {
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+          if(data.subjects[0] !== undefined) {
+            this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+          } else {
+            console.log('Keine Treffer fuer diese Suche');
+          }
           return data.properties;
         }
       )
@@ -380,7 +391,7 @@ export class SucheComponent implements OnInit {
     console.log('Add to final Search Results');
     console.log(searchResults);
     console.log(this.allSearchResults);
-    if (searchResults !== undefined) {
+    if (searchResults !== undefined && searchResults.length !== 0) {
       if (this.allSearchResults === undefined)  {
         this.allSearchResults = [];
         this.allSearchResults = searchResults;

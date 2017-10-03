@@ -32,7 +32,8 @@ export class KonvolutComponent implements OnInit {
   searchResultsNo: number;
   searchTerm: string;
   columns: string;
-  rahmen: boolean;
+  rahmen: boolean = true;
+  showText: boolean = true;
 
   viewMode: string;
   konvolut_type: string;
@@ -107,9 +108,9 @@ export class KonvolutComponent implements OnInit {
     // TODO: Implement layout changes
     this.setColumns(fg.colsSetter);
     this.rahmen = fg.frameToggler;
+    this.showText = fg.textToggler;
 
     // TODO: Implement value for frameSizeSetter
-    // TODO: Implement value for textToggler
   }
 
   /**

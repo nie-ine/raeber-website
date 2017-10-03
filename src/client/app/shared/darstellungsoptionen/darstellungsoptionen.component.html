@@ -5,11 +5,15 @@
   </div>
   <hr/>
   <div>
-    <md-slide-toggle formControlName="frameToggler">{{showFrame ? 'Rahmen' : 'Rahmenlos'}}</md-slide-toggle>
+    <md-slide-toggle formControlName="frameToggler">{{layoutSettingsForm.get('frameToggler').value ? 'Rahmen' :
+      'Rahmenlos'}}
+    </md-slide-toggle>
   </div>
   <hr/>
   <div>
-    <md-slide-toggle formControlName="textToggler">{{showText ? 'Text' : 'Kein Text'}}</md-slide-toggle>
+    <md-slide-toggle formControlName="textToggler">{{layoutSettingsForm.get('textToggler').value ? 'Text' : 'Kein
+      Text'}}
+    </md-slide-toggle>
   </div>
   <hr/>
   <div>

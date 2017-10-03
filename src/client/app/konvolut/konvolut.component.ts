@@ -31,6 +31,8 @@ export class KonvolutComponent implements OnInit {
   searchContext: boolean = false;
   searchResultsNo: number;
   searchTerm: string;
+  columns: string;
+  rahmen: boolean;
 
   viewMode: string;
   konvolut_type: string;
@@ -103,7 +105,11 @@ export class KonvolutComponent implements OnInit {
    */
   setTextgridLayout(fg: FormGroup) {
     // TODO: Implement layout changes
-    console.log(fg);
+    this.setColumns(fg.colsSetter);
+    this.rahmen = fg.frameToggler;
+
+    // TODO: Implement value for frameSizeSetter
+    // TODO: Implement value for textToggler
   }
 
   /**
@@ -114,7 +120,6 @@ export class KonvolutComponent implements OnInit {
     // TODO: Implement real search query
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
     this.searchTerm = ''; // TODO: Variable takes search term
-    console.log(fg);
   }
 
   /**
@@ -124,6 +129,20 @@ export class KonvolutComponent implements OnInit {
   quitSearchMode(flag: boolean) {
     if (flag) {
       // TODO: Proceed to quit search mode
+    }
+  }
+
+  setColumns(cols: string) {
+    switch (cols) {
+      case '1':
+        this.columns = '93%';
+        break;
+      case '2':
+        this.columns = '43%';
+        break;
+      case '3':
+        this.columns = '26%';
+        break;
     }
   }
 

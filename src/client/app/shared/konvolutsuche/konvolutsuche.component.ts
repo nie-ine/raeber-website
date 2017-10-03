@@ -8,12 +8,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class KonvolutsucheComponent {
   @Output() suche = new EventEmitter<FormGroup>();
-  searchForm: FormGroup = new FormGroup({
-    searchTerm: new FormControl(),
-    page: new FormControl()
-  });
+  searchForm: FormGroup;
 
   constructor() {
+    this.searchForm = new FormGroup({
+      searchTerm: new FormControl(),
+      page: new FormControl()
+    });
     this.searchForm.valueChanges
       .debounceTime(500)
       .subscribe(suche => this.suche.emit(suche));

@@ -36,8 +36,10 @@
                                                 (reset)="quitSearchMode($event)"></rae-konvolut-trefferleiste>
                     <rae-textgrid [poemsInGrid]="poems"
                                   [viewMode]="viewMode"
+                                  [columns]="columns"
                                   [showText]=true
-                                  [contentType]="'konvolut'">
+                                  [contentType]="'konvolut'"
+                                  [rahmen]="rahmen">
                     </rae-textgrid>
                   </div>
                 </div>

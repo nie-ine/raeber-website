@@ -32,7 +32,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         if (!chng.isFirstChange()) {
           this.poemsInGrid = chng.currentValue;
           for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+            this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
           }
         }
       }

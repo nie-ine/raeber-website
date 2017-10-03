@@ -7,19 +7,20 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './darstellungsoptionen.component.html'
 })
 export class DarstellungsoptionenComponent {
-  @Output() darstellung = new EventEmitter<FormGroup>();
+  @Output() darstellung: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  layoutSettingsForm: FormGroup = new FormGroup({
-    frameSizeSetter: new FormControl(5),
-    frameToggler: new FormControl(true),
-    textToggler: new FormControl(true),
-    colsSetter: new FormControl('2')
-  });
+  layoutSettingsForm: FormGroup;
 
   constructor() {
+    this.layoutSettingsForm = new FormGroup({
+      frameSizeSetter: new FormControl(5),
+      frameToggler: new FormControl(true),
+      textToggler: new FormControl(true),
+      colsSetter: new FormControl('2')
+    });
     this.layoutSettingsForm.valueChanges
       .debounceTime(200)
-      .subscribe(darstellung => this.darstellung.emit(darstellung));
+      .subscribe((dars: FormGroup) => this.darstellung.emit(dars));
   }
 
   resetLayout() {

@@ -31,7 +31,7 @@ export class SynopseComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.synopseTag = params['synopse'];
+      this.synopseTag = params[ 'synopse' ];
     });
 
     // TODO Parameter anpassen

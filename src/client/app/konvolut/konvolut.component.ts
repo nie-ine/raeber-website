@@ -105,12 +105,9 @@ export class KonvolutComponent implements OnInit {
    * @param {FormGroup} fg Layout parameters
    */
   setTextgridLayout(fg: FormGroup) {
-    // TODO: Implement layout changes
     this.setColumns(fg.colsSetter);
     this.rahmen = fg.frameToggler;
     this.showText = fg.textToggler;
-
-    // TODO: Implement value for frameSizeSetter
   }
 
   /**

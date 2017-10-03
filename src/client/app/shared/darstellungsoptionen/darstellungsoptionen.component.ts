@@ -8,12 +8,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DarstellungsoptionenComponent {
   @Output() darstellung: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() vergroessereText = new EventEmitter();
+  @Output() verkleinereText = new EventEmitter();
 
   layoutSettingsForm: FormGroup;
 
   constructor() {
     this.layoutSettingsForm = new FormGroup({
-      frameSizeSetter: new FormControl(5),
       frameToggler: new FormControl(true),
       textToggler: new FormControl(true),
       colsSetter: new FormControl('2')
@@ -28,5 +29,13 @@ export class DarstellungsoptionenComponent {
     this.layoutSettingsForm.get('frameToggler').setValue(true);
     this.layoutSettingsForm.get('textToggler').setValue(true);
     this.layoutSettingsForm.get('colsSetter').setValue('2');
+  }
+
+  textVergroessern() {
+    this.vergroessereText.emit(null);
+  }
+
+  textVerkleinern() {
+    this.verkleinereText.emit(null);
   }
 }

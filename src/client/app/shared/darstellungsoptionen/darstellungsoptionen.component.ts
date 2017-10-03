@@ -10,6 +10,7 @@ export class DarstellungsoptionenComponent {
   @Output() darstellung: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() vergroessereText = new EventEmitter();
   @Output() verkleinereText = new EventEmitter();
+  @Output() resetHeight = new EventEmitter();
   @Input() gridHeight: number = 0;
 
   layoutSettingsForm: FormGroup;
@@ -29,6 +30,7 @@ export class DarstellungsoptionenComponent {
     this.layoutSettingsForm.get('frameToggler').setValue(true);
     this.layoutSettingsForm.get('textToggler').setValue(true);
     this.layoutSettingsForm.get('colsSetter').setValue('2');
+    this.resetHeight.emit();
   }
 
   textVergroessern() {

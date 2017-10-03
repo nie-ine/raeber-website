@@ -40,7 +40,7 @@
                                   [showText]=showText
                                   [contentType]="'konvolut'"
                                   [rahmen]="rahmen" #textgrid
-                                  (gridHeight)="setGridHeight($event)">
+                                  (gridHeight)="setGridHeight($event)" #textgrid>
                     </rae-textgrid>
                   </div>
                 </div>
@@ -72,7 +72,8 @@
                         <rae-darstellungsoptionen (darstellung)="setTextgridLayout($event)"
                                                   (vergroessereText)="textgrid.vergroessereFeld()"
                                                   (verkleinereText)="textgrid.verkleinereFeld()"
-                                                  [gridHeight]="gridHeight"></rae-darstellungsoptionen>
+                                                  [gridHeight]="gridHeight"
+                                                  (resetHeight)="textgrid.resetField()"></rae-darstellungsoptionen>
                       </ng-template>
                     </ngb-panel>
                   </ngb-accordion>

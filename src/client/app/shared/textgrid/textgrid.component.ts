@@ -74,4 +74,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       this.gridHeight.emit(this.gridTextHeight);
     }
   }
+
+  resetField() {
+    this.gridTextHeight = 0;
+    this.gridHeight.emit(this.gridTextHeight);
+  }
 }

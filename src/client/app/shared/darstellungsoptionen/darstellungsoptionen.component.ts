@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class DarstellungsoptionenComponent {
   @Output() darstellung: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() vergroessereText = new EventEmitter();
   @Output() verkleinereText = new EventEmitter();
+  @Input() gridHeight: number = 0;
 
   layoutSettingsForm: FormGroup;
 

@@ -34,6 +34,7 @@ export class KonvolutComponent implements OnInit {
   columns: string;
   rahmen: boolean = true;
   showText: boolean = true;
+  gridHeight: number = 0;
 
   viewMode: string;
   konvolut_type: string;
@@ -142,6 +143,10 @@ export class KonvolutComponent implements OnInit {
         this.columns = '26%';
         break;
     }
+  }
+
+  setGridHeight(height: number) {
+    this.gridHeight = height;
   }
 
 }

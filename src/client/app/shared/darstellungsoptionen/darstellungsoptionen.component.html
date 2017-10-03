@@ -1,22 +1,22 @@
 <form [formGroup]="layoutSettingsForm">
-  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler')"
+  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler') || gridHeight <= -18"
           title="Kartenformat schrittweise verkleinern"
           (click)="textVerkleinern()">- Format
   </button>
-  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler')"
+  <button md-raised-button [disabled]="!layoutSettingsForm.get('frameToggler') || gridHeight >= 18"
           title="Kartenformat schrittweise vergrößern"
           (click)="textVergroessern()">+ Format
   </button>
   <hr/>
   <div>
-    <md-slide-toggle formControlName="frameToggler">{{layoutSettingsForm.get('frameToggler').value ? 'Rahmen' :
-      'Rahmenlos'}}
+    <md-slide-toggle formControlName="frameToggler">
+      {{layoutSettingsForm.get('frameToggler').value ? 'Rahmen' : 'Rahmenlos'}}
     </md-slide-toggle>
   </div>
   <hr/>
   <div>
-    <md-slide-toggle formControlName="textToggler">{{layoutSettingsForm.get('textToggler').value ? 'Text' : 'Kein
-      Text'}}
+    <md-slide-toggle formControlName="textToggler">
+      {{layoutSettingsForm.get('textToggler').value ? 'Text' : 'Kein Text'}}
     </md-slide-toggle>
   </div>
   <hr/>

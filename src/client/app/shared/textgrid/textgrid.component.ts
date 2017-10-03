@@ -2,7 +2,16 @@
  * Created by retobaumgartner on 21.06.17.
  */
 
-import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -18,6 +27,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() columns: string = '43%';
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
+
+  @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
 
   gridTextHeight: number = 0;
   i: number;
@@ -51,10 +62,16 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   vergroessereFeld() {
-    this.gridTextHeight += 2;
+    if (this.gridTextHeight <= 18) {
+      this.gridTextHeight += 2;
+      this.gridHeight.emit(this.gridTextHeight);
+    }
   }
 
   verkleinereFeld() {
-    this.gridTextHeight -= 2;
+    if (this.gridTextHeight >= -18) {
+      this.gridTextHeight -= 2;
+      this.gridHeight.emit(this.gridTextHeight);
+    }
   }
 }

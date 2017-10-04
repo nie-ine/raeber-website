@@ -30,9 +30,9 @@ export class TextgridComponent implements OnChanges {
           this.poemsInGrid = chng.currentValue;
           for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
             this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+            }
           }
         }
-      }
     }
     /*    for (let propName in changes) {
      let chng = changes[propName];

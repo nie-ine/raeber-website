@@ -131,15 +131,15 @@ export class KonvolutComponent implements OnInit {
     }
   }
 
-  setColumns(cols: string) {
+  setColumns(cols: number) {
     switch (cols) {
-      case '1':
+      case 1:
         this.columns = '93%';
         break;
-      case '2':
+      case 2:
         this.columns = '43%';
         break;
-      case '3':
+      case 3:
         this.columns = '26%';
         break;
     }

@@ -10,7 +10,7 @@ import { MdDialog } from '@angular/material';
   moduleId: module.id,
   selector: 'rae-synopse-werkzeugleiste',
   templateUrl: 'synopse-werkzeugleiste.component.html',
-  styleUrls: ['synopse-werkzeugleiste.component.css']
+  styleUrls: [ 'synopse-werkzeugleiste.component.css' ]
 })
 export class SynopseWerkzeugleisteComponent {
 

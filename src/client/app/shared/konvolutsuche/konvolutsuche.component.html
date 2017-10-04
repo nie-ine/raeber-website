@@ -1,0 +1,12 @@
+<div class="suchfeld">
+  <form [formGroup]="searchForm">
+    <md-input-container style="width: 120px;">
+      <input mdInput type="text" placeholder="Suchbegriff" formControlName="searchTerm"
+             (keyup.enter)="suche.emit(searchForm)">
+    </md-input-container>
+    <md-input-container style="width:75px !important; display: block;">
+      <input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"
+             (keyup.enter)="suche.emit(searchForm)">
+    </md-input-container>
+  </form>
+</div>

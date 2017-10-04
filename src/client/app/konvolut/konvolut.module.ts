@@ -15,6 +15,9 @@ import {
   MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DarstellungsoptionenModule } from '../shared/darstellungsoptionen/darstellungsoptionen.module';
+import { KonvolutsucheModule } from '../shared/konvolutsuche/konvolutsuche.module';
 
 import { KonvolutComponent } from './konvolut.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
@@ -26,6 +29,7 @@ import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/ko
 import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
 import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
+import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
 
 @NgModule({
   imports: [
@@ -41,6 +45,9 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
     MdToolbarModule,
     RegisterspalteModule,
     TextgridModule,
+    NgbModule,
+    DarstellungsoptionenModule,
+    KonvolutsucheModule,
     KonvolutRoutingModule
   ],
   declarations: [
@@ -51,6 +58,7 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
     KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,
     GetKonvolutIRIComponent,
+    KonvolutTrefferleisteComponent
   ],
   exports: [ KonvolutComponent ]
 })

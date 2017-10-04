@@ -1,6 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
+
 // import { ExtendPackages } from './seed.config.interfaces';
 
 /**
@@ -161,6 +162,13 @@ export class ProjectConfig extends SeedConfig {
     this.addPackageBundles({
       name: 'hammerjs',
       path: 'node_modules/hammerjs/hammer.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
+    this.addPackageBundles({
+      name: '@ng-bootstrap/ng-bootstrap',
+      path: 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
       packageMeta: {
         defaultExtension: 'js'
       }

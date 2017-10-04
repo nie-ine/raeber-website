@@ -262,11 +262,13 @@ export class SucheComponent implements OnInit {
             if (this.allSearchResults === undefined) {
               this.allSearchResults = [];
             }
+            this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
+            /*
             if(data.obj_id !== undefined) {
               this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
             } else {
               console.log('Keine Treffer fuer diese Suchanzeige');
-            }
+            }*/
             if(this.allSearchResults === undefined) {
               this.numberOfSearchResults = 0;
             } else {

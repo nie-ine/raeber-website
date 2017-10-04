@@ -30,7 +30,6 @@ export class SuchmaskeComponent implements OnInit, OnChanges {
   @Input() searchTerm: string;
   @Input() poemsInGrid: string;
 
-
   /*
   Options for extension of fulltext search
    */

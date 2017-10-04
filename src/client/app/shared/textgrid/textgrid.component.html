@@ -8,14 +8,14 @@
 
       <md-card-title>
         <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
-          {{p.value[2]}}
+          {{p.value[1]}}
         </a>
       </md-card-title>
 
       <md-card-content *ngIf="showText"
                        [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols'}"
                        [ngStyle]="{'height': viewMode == 'grid' ? gridTextHeight +'em' : 'initial'}">
-        <div class="rae-poem" [innerHtml]="p.value[1]"></div>
+        <div class="rae-poem" [innerHTML]="highlight(p.iconlabel,searchTerm)"></div>
       </md-card-content>
 
       <br/>

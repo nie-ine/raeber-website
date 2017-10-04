@@ -12,28 +12,27 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class TextgridComponent implements OnChanges {
 
-  @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
-  @Input() viewMode: string = 'grid';
-  @Input() showText: boolean = true;
-
-  @Input() poemsInGrid: Array<any>;
+  @Input() poems_in_grid: Array<any>;
   @Input() searchTerm: Array<any>;
 
-  gridTextHeight: number = 10;
-  i: number;
+  showGrid = true;
+  showCols = false;
+  public query: string;
+  private content: string;
+
+  public constructor() {
+    this.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+      'Praesent a quam ornare, bibendum ligula a, rhoncus ligula. Etiam aliquet, ' +
+      'justo sollicitudin imperdiet luctus, nulla justo sodales mi, sit amet semper ' +
+      'nisl velit vel massa. In hac habitasse platea dictumst.';
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
-      if (propName === 'poemsInGrid') {
-        let chng = changes[ propName ];
-        if (!chng.isFirstChange()) {
-          this.poemsInGrid = chng.currentValue;
-          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
-            }
-          }
-        }
+      let chng = changes[ propName ];
+      this.poems_in_grid = chng.currentValue;
     }
+
     /*    for (let propName in changes) {
      let chng = changes[propName];
      let cur  = JSON.stringify(chng.currentValue);
@@ -43,15 +42,16 @@ export class TextgridComponent implements OnChanges {
     // changes.prop contains the old and the new value...
   }
 
-  vergroessereFeld() {
-    this.gridTextHeight += 2;
+  toGrid() {
+    this.showGrid = true;
+    this.showCols = false;
   }
 
-  verkleinereFeld() {
-    if (this.gridTextHeight > 3) {
-      this.gridTextHeight -= 2;
-    }
+  toCols() {
+    this.showGrid = false;
+    this.showCols = true;
   }
+
   highlight(textToHighlight: string, searchTerm: string) {
     if (searchTerm === undefined) {
       return textToHighlight;
@@ -60,4 +60,5 @@ export class TextgridComponent implements OnChanges {
       return '<span class="highlightText">' + match + '</span>';
     });
   }
+
 }

@@ -21,16 +21,19 @@
       {{layoutSettingsForm.get('textToggler').value ? 'Text' : 'Kein Text'}}
     </md-slide-toggle>
   </div>
-  <hr/>
+  <hr style="margin-bottom: 20px;">
   <div>
-    <md-select placeholder="Spalten" formControlName="colsSetter">
-      <md-option value="1">1</md-option>
-      <md-option value="2">2</md-option>
-      <md-option value="3">3</md-option>
-    </md-select>
+    <!--    <md-select placeholder="Spalten" formControlName="colsSetter">
+          <md-option value="1">1</md-option>
+          <md-option value="2">2</md-option>
+          <md-option value="3">3</md-option>
+        </md-select>-->
+    <md-input-container style="width:50px !important; display: block;">
+      <input mdInput type="number" class="pagefield" min="1" max="3" placeholder="Spalten" formControlName="colsSetter">
+    </md-input-container>
   </div>
   <hr/>
   <div>
-    <button md-button (click)="resetLayout()">Zurücksetzen</button>
+    <button md-raised-button (click)="resetLayout()">Zurücksetzen</button>
   </div>
 </form>

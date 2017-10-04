@@ -19,7 +19,7 @@ export class DarstellungsoptionenComponent {
     this.layoutSettingsForm = new FormGroup({
       frameToggler: new FormControl(true),
       textToggler: new FormControl(true),
-      colsSetter: new FormControl('2')
+      colsSetter: new FormControl(2)
     });
     this.layoutSettingsForm.valueChanges
       .debounceTime(200)
@@ -29,7 +29,7 @@ export class DarstellungsoptionenComponent {
   resetLayout() {
     this.layoutSettingsForm.get('frameToggler').setValue(true);
     this.layoutSettingsForm.get('textToggler').setValue(true);
-    this.layoutSettingsForm.get('colsSetter').setValue('2');
+    this.layoutSettingsForm.get('colsSetter').setValue(2);
     this.resetHeight.emit();
   }
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MdButtonModule, MdSelectModule, MdSliderModule, MdSlideToggleModule } from '@angular/material';
+import { MdButtonModule, MdInputModule, MdSelectModule, MdSliderModule, MdSlideToggleModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DarstellungsoptionenComponent } from './darstellungsoptionen.component';
@@ -7,6 +7,7 @@ import { DarstellungsoptionenComponent } from './darstellungsoptionen.component'
 @NgModule({
   imports: [
     MdButtonModule,
+    MdInputModule,
     MdSelectModule,
     MdSliderModule,
     MdSlideToggleModule,

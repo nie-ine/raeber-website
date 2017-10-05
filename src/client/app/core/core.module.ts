@@ -17,6 +17,7 @@ import { RegisterModule } from '../register/register.module';
 import { StatischModule } from '../statisch/statisch.module';
 import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { SynopseModule } from '../synopse/synopse.module';
     RegisterModule,
     SucheModule,
     SynopseModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/start', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

@@ -9,7 +9,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
-import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { FormGroup } from '@angular/forms';
+
 
 @Component({
   moduleId: module.id,
@@ -17,14 +21,27 @@ import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utiliti
   templateUrl: 'konvolut.component.html'
 })
 export class KonvolutComponent implements OnInit {
-
+  konvolut_id: string;
+  konvolutTitle: string;
+  konvolutBild: string;
+  IRI: string;
+  output: Subscription;
   poems: Array<any>;
+  responseArray: Array<any>;
+  searchContext: boolean = false;
+  searchResultsNo: number;
+  searchTerm: string;
+  columns: string;
+  rahmen: boolean = true;
+  showText: boolean = true;
+  gridHeight: number = 0;
 
   viewMode: string;
-
-  konvolut_id: string;
   konvolut_type: string;
+
+  private data: Observable<Array<number>>;
   private sub: any;
+
 
   private _esearch = new ExtendedSearch();
 
@@ -43,6 +60,7 @@ export class KonvolutComponent implements OnInit {
         this.loadMore();
       }
     };
+
   }
 
   ngOnInit() {
@@ -54,15 +72,81 @@ export class KonvolutComponent implements OnInit {
       konstText => this.poems = konstText
     );
 
+
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
     });
   }
 
+
   loadMore() {
     this.dp.loadText(this._esearch).subscribe(
       konstText => this.poems = this.poems.concat(konstText)
     );
   }
+
+  updateKonvolutTitle(konvolutTitle: string) {
+    this.konvolutTitle = konvolutTitle;
+    console.log('Konvolut - Titel: ' + this.konvolutTitle);
+  }
+
+  updateKonvolutIRI(konvolutIRI: string) {
+    this.IRI = konvolutIRI;
+    console.log('IRI: ' + this.IRI);
+  }
+
+  updateKonvolutBild(konvolutBild: string) {
+    this.konvolutBild = konvolutBild;
+    console.log('Konvolutbild: ' + this.konvolutBild);
+  }
+
+  /**
+   * Reset textgrid layout
+   * @param {FormGroup} fg Layout parameters
+   */
+  setTextgridLayout(fg: FormGroup) {
+    this.setColumns(fg.colsSetter);
+    this.rahmen = fg.frameToggler;
+    this.showText = fg.textToggler;
+  }
+
+  /**
+   * Start search in convolute and enter search result mode
+   * @param {FormGroup} fg Search parameters
+   */
+  searchInConvolute(fg: FormGroup) {
+    // TODO: Implement real search query
+    this.searchResultsNo = 0; // TODO: Variable takes number of search results
+    this.searchTerm = ''; // TODO: Variable takes search term
+  }
+
+  /**
+   * Quit search mode
+   * @param {boolean} flag Quit search mode
+   */
+  quitSearchMode(flag: boolean) {
+    if (flag) {
+      // TODO: Proceed to quit search mode
+    }
+  }
+
+  setColumns(cols: number) {
+    switch (cols) {
+      case 1:
+        this.columns = '93%';
+        break;
+      case 2:
+        this.columns = '43%';
+        break;
+      case 3:
+        this.columns = '26%';
+        break;
+    }
+  }
+
+  setGridHeight(height: number) {
+    this.gridHeight = height;
+  }
+
 }

@@ -20,13 +20,13 @@ export class SynopseComponent implements OnInit {
   synopseTag: string;
 
   showText: boolean;
-  viewMode: string;
+
+  columns: string;
 
   private sub: any;
 
   constructor(private http: Http, private route: ActivatedRoute) {
     this.showText = true;
-    this.viewMode = 'grid';
   }
 
   ngOnInit() {
@@ -37,7 +37,8 @@ export class SynopseComponent implements OnInit {
     // TODO Parameter anpassen
     let searchParams = new ExtendedSearch();
     searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', 'MATCH', this.synopseTag);
+    // searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', 'MATCH', this.synopseTag);
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     searchParams.showNRows = 500;
 
@@ -48,6 +49,21 @@ export class SynopseComponent implements OnInit {
       .subscribe((res: any) => {
         this.poemsInSynopse = res.subjects;
         this.nHits = res.nhits;
+        console.log(res.nhits);
       });
+  }
+
+  setColumns(cols: number) {
+    switch (cols) {
+      case 1:
+        this.columns = '93%';
+        break;
+      case 2:
+        this.columns = '43%';
+        break;
+      case 3:
+        this.columns = '26%';
+        break;
+    }
   }
 }

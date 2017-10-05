@@ -7,7 +7,6 @@ import { HttpModule } from '@angular/http';
 import { MdButtonModule, MdListModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { RegisterComponent } from './register.component';
-import { RegisterNavigationComponent } from './register-navigation/register-navigation.component';
 import { RegisterBeschreibungComponent } from './register-beschreibung/register-beschreibung.component';
 import { RegisterTitelregisterComponent } from './titelregister/register-titelregister.component';
 import { RouterModule } from '@angular/router';
@@ -27,7 +26,6 @@ import { RouterModule } from '@angular/router';
   declarations: [
     RegisterBeschreibungComponent,
     RegisterComponent,
-    RegisterNavigationComponent,
     RegisterTitelregisterComponent
   ],
   exports: [ RegisterComponent ],

@@ -10,11 +10,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FassungDiplomatischComponent {
 
-  @Input() pages: any;
+  @Input() pageIRIs: any;
 
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
 
   gewaehlteSchicht: string = 'schicht0';
+
+  oneTranscription = 'http://rdfh.ch/kuno-raeber/fURAeQjIQnuUI2j3yeQh2A';
+
+  // TODO: sort pages by seqnum, find picture id and transcription id per page.
 
 }

@@ -30,6 +30,7 @@
 
   </md-toolbar>
   <div class="umschrift edtext edtext_hs"
-       [innerHtml]="text"
-       [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}"></div>
+       [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}">
+    <div class="transkription" [innerHtml]="text"></div>
+  </div>
 </div>

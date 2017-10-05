@@ -1,4 +1,4 @@
-<div *ngFor="let p of pages">
+<div *ngFor="let p of pageIRIs">
   <h5>{{p}}</h5>
   <div style="display: inline-block; vertical-align: top">
     <!-- TODO: insert picture component here -->
@@ -7,6 +7,7 @@
       (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
   </div>
   <div style="display: inline-block; vertical-align: top">
-    <rae-diplomatischer-text [page]="p" [(gewaehlteSchicht)]="gewaehlteSchicht"></rae-diplomatischer-text>
+    <rae-diplomatischer-text [textIRI]="oneTranscription" [page]="p" [(gewaehlteSchicht)]="gewaehlteSchicht"></rae-diplomatischer-text>
   </div>
+  {{p}}
 </div>

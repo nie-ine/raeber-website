@@ -30,8 +30,7 @@ export class FassungComponent implements OnInit {
   ];
   // TODO dynamisieren
 
-  pages: Array<any> = ['page1', 'page2'];
-  // TODO dynamisieren
+  pageIRIs: Array<string>;
 
   // for testings
   searchQuery: string;
@@ -48,6 +47,7 @@ export class FassungComponent implements OnInit {
   show_register: boolean;
 
   private sub: any;
+  private sub2: any;
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
@@ -66,5 +66,21 @@ export class FassungComponent implements OnInit {
       this.konvolut_id = params[ 'konvolut' ];
       this.poem_id = params[ 'fassung' ];
     });
+
+
+    this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent('http://rdfh.ch/kuno-raeber/kM0xkOK0R7WOdj9_637NGw'))
+      .map(result => result.json())
+      .subscribe(res => {
+
+        try {
+          for (let i = 0; i < res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values; i++) {
+            this.pageIRIs.push('')
+            this.pageIRIs[i] = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values[i];
+          }
+        } catch (TypeError) {
+          this.pageIRIs = [];
+        }
+
+      });
   }
 }

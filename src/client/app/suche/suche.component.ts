@@ -118,7 +118,6 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myResources = response);
   }
 
-
   propertyQuery() {
     if (this.selectedResource !== undefined) {
 
@@ -137,7 +136,6 @@ export class SucheComponent implements OnInit {
         .subscribe(response => this.myProperties = response);
     }
   }
-
 
 
   finalQuery() {
@@ -281,7 +279,6 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.searchResult = response);
   }
-
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);

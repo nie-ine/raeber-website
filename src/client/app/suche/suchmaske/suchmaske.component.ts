@@ -19,6 +19,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './suchmaske.component.html',
   styleUrls: ['./suchmaske.component.css']
 })
+
 export class SuchmaskeComponent implements OnInit, OnChanges {
 
   // Emits changes of search parameters
@@ -217,5 +218,4 @@ export class SuchmaskeComponent implements OnInit, OnChanges {
     console.log('startTheSearch');
     this.startSearch.emit();
   }
-
 }

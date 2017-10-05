@@ -1,6 +1,6 @@
 <!-- TODO: Links überprüfen (v.a. auf statische Seiten)-->
 <div class="rt-block menu-block">
-  <ul class="gf-menu l1 ">
+  <ul class="gf-menu l1 " style="float: left;">
     <li class="item133 parent">
       <span class="item">
         Notizbuch <span class="border-fixer"></span>
@@ -348,7 +348,8 @@
         </div>
       </div>
     </li>
-    <li class="item391 parent" style="margin-left: 32px;">
+    <li id="bar" style="border-left: 1px #d8d8d8 solid; margin-left: 10px; margin-right: 3px;"><span class="item" style="margin-top: 7px;"></span></li>
+    <li class="item391 parent">
       <span class="item">
         Material <span class="border-fixer"></span>
       </span>
@@ -481,9 +482,6 @@
         </div>
       </div>
     </li>
-    <li class="item133">
-      <a class="item icon" [routerLink]="['suche']" routerLinkActive="active">
-        Suche <span class="border-fixer"></span></a>
-    </li>
   </ul>
+  <rae-basic-search></rae-basic-search>
 </div>

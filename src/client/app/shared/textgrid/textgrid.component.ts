@@ -35,13 +35,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   gridTextHeight: number = 0;
   i: number;
-
-  constructor(private cdr: ChangeDetectorRef) {
-  }
-
   router: Router;
 
-  constructor(r: Router) {
+  constructor(private cdr: ChangeDetectorRef, r: Router) {
     this.router = r;
   }
 
@@ -66,8 +62,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
      }*/
     // changes.prop contains the old and the new value...
   }
+  }
 
-  ngAfterViewChecked(): void {
+
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
 
@@ -98,4 +96,3 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
-}

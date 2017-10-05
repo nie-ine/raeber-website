@@ -13,7 +13,11 @@
 .rae-poem-container {
   display: inline-block;
   vertical-align: top;
+<<<<<<< HEAD
+  width: 400px;
+=======
   width: 43%;
+>>>>>>> origin/master
   padding: 5px;
   margin: 16px;
   white-space: normal;
@@ -37,15 +41,16 @@
   border-bottom-width: 1px;
 }
 
+<<<<<<< HEAD
 .rae-poem-card-grid {
   height: 90%;
   width: 90%;
 }
 
-.hidden {
-  display: none;
-}
-
 .highlightText {
   background: yellow;
+=======
+.hidden {
+  display: none;
+>>>>>>> origin/master
 }

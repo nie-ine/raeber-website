@@ -63,7 +63,11 @@ export class ProjectConfig extends SeedConfig {
     });
     this.addPackageBundles({
       name: '@angular/cdk',
-      path: 'node_modules/@angular/cdk/bundles/cdk.umd.js',
+      path: 'node_modules/@angular/cdk/bundles/cdk.umd.js'
+    });
+    this.addPackageBundles({
+      name: '@ng-bootstrap/ng-bootstrap',
+      path: 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
       packageMeta: {
         defaultExtension: 'js'
       }

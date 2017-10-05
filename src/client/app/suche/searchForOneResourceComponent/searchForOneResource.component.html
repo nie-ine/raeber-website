@@ -1,0 +1,53 @@
+<div >
+
+
+
+  <md-select placeholder="Select Resource"  [(ngModel)]="selectedResource" name="resource" >
+
+    <md-option *ngFor="let resource of myResources" [value]="resource.id" (click)="propertyQuery()">
+
+      {{ resource.label }}
+
+    </md-option>
+
+  </md-select>
+
+
+
+  <button md-button (click)="increaseArrayElement()">
+
+    <md-icon >add</md-icon>
+
+  </button>
+
+
+
+  <button md-button *ngIf="nthResourceSearch > 1">
+
+    <md-icon >close</md-icon>
+
+  </button>
+
+
+
+  <div *ngFor="let numberOfConstraints of array" >
+
+
+
+    <rae-search-define-property
+      [nthProperty]="numberOfConstraints"
+      [array]="array"
+      [myProperties]="myProperties"
+      [availableboolOperators]="availableboolOperators"
+      [nthResourceSearch]="nthResourceSearch"
+      (sendPropertyTripleBack)="updateQuerySet($event)" >
+
+    </rae-search-define-property>
+
+
+
+  </div>
+
+
+
+</div>

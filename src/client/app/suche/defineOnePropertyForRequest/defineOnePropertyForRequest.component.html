@@ -1,0 +1,39 @@
+<button  *ngIf="array.length > 1" md-button style="min-width: 1px;">
+
+  <md-icon >close</md-icon>
+
+</button>
+
+
+
+<md-select placeholder="All properties" [(ngModel)]="selectedProperty">
+
+  <md-option *ngFor="let property of myProperties" [value]="property.id" (click)="updatePropertyTriple()">
+
+    {{ property.label }}
+
+  </md-option>
+
+</md-select>
+
+
+
+<md-select placeholder="Select logical Operator" [(ngModel)]="selectedBoolOperator">
+
+  <md-option *ngFor="let operator of availableboolOperators" [value]="operator.operator" (click)="updatePropertyTriple()">
+
+    {{ operator.name }}
+
+  </md-option>
+
+</md-select>
+
+
+
+<md-input-container>
+
+  <input mdInput placeholder="Search for this word" (keyup)="updatePropertyTriple()" [(ngModel)]="searchForVal">
+
+</md-input-container>
+
+

@@ -12,13 +12,14 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: [ 'textgrid.component.css' ]
+  styleUrls: ['textgrid.component.css']
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -28,9 +29,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() columns: string = '43%';
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
+  @Input() searchTerm: Array<any>;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
-  @Input() searchTerm: Array<any>;
 
   gridTextHeight: number = 0;
   i: number;
@@ -38,16 +39,29 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   constructor(private cdr: ChangeDetectorRef) {
   }
 
+  router: Router;
+
+  constructor(r: Router) {
+    this.router = r;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         if (!chng.isFirstChange()) {
+<<<<<<< HEAD
           if(this.poemsInGrid) {
+            this.poemsInGrid = chng.currentValue;
+            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+              this.poemsInGrid[this.i].obj_id = encodeURIComponent(this.poemsInGrid[this.i].obj_id);
+            }
+          }
+=======
           this.poemsInGrid = chng.currentValue;
           for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
             this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
-            }
+>>>>>>> origin/master
           }
         }
     }
@@ -59,10 +73,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
      }*/
     // changes.prop contains the old and the new value...
   }
-  }
 
-
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.cdr.detectChanges();
   }
 
@@ -79,7 +91,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       this.gridHeight.emit(this.gridTextHeight);
     }
   }
-
+<<<<<<< HEAD
   highlight(textToHighlight: string, searchTerm: string) {
     if (searchTerm === undefined) {
       return textToHighlight;
@@ -87,9 +99,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
       return '<span class="highlightText">' + match + '</span>';
     });
-  }
+=======
 
   resetField() {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
+>>>>>>> origin/master
   }
+}

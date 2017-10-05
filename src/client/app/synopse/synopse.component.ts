@@ -22,6 +22,7 @@ export class SynopseComponent implements OnInit {
   showText: boolean;
 
   columns: string;
+  gridHeight: number = 0;
 
   private sub: any;
 
@@ -66,4 +67,9 @@ export class SynopseComponent implements OnInit {
         break;
     }
   }
+
+  setGridHeight(height: number) {
+    this.gridHeight = height;
+  }
+
 }

@@ -13,12 +13,12 @@
     3) + 1}} Spalten
   </button>
 
-  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText"
+  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText || gridHeight >= 18"
           title="Kartenformat schrittweise vergrößern"
           (click)="textVergroessern()">+ Format
   </button>
 
-  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText"
+  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText || gridHeight <= -18"
           title="Kartenformat schrittweise verkleinern"
           (click)="textVerkleinern()">- Format
   </button>

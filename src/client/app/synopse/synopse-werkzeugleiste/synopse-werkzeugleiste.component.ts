@@ -15,6 +15,7 @@ import { MdDialog } from '@angular/material';
 export class SynopseWerkzeugleisteComponent {
 
   @Input() showText: boolean = true;
+  @Input() gridHeight: number = 0;
   @Output() showTextChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() vergroessereText = new EventEmitter();

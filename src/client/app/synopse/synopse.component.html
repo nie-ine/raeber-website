@@ -11,7 +11,8 @@
                   <rae-synopse-werkzeugleiste #werkzeugleiste [(showText)]="showText"
                                               (vergroessereText)="textgrid.vergroessereFeld()"
                                               (verkleinereText)="textgrid.verkleinereFeld()"
-                                              (cols)="setColumns($event)">
+                                              (cols)="setColumns($event)"
+                                              (resetHeight)="textgrid.resetField()">
                   </rae-synopse-werkzeugleiste>
                   <rae-textgrid #textgrid [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"

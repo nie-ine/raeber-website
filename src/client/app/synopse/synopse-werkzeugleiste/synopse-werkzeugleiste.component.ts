@@ -19,6 +19,7 @@ export class SynopseWerkzeugleisteComponent {
 
   @Output() vergroessereText = new EventEmitter();
   @Output() verkleinereText = new EventEmitter();
+  @Output() resetHeight = new EventEmitter();
   @Output() cols: EventEmitter<number> = new EventEmitter<number>();
 
   columns: number = 2;
@@ -28,7 +29,10 @@ export class SynopseWerkzeugleisteComponent {
   }
 
   neuladen() {
-    window.location.reload();
+    this.rahmen = true;
+    this.columns = 2;
+    this.cols.emit(2);
+    this.resetHeight.emit();
   }
 
   textVergroessern() {

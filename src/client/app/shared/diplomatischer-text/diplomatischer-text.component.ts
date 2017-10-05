@@ -13,7 +13,6 @@ import { Http } from '@angular/http';
 })
 export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges {
 
-  @Input() page: any;
   @Input() gewaehlteSchicht: string;
   @Input() textIRI: string;
   @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();

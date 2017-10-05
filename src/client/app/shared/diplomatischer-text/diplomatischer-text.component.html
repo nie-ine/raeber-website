@@ -1,6 +1,6 @@
 <div>
   <md-toolbar>
-    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{page}}"
+    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{textIRI}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
       <md-button-toggle value="schicht0"
                         [ngStyle]="{'color': farbeNeutral}"

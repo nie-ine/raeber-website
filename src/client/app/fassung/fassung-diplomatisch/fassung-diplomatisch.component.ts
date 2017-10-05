@@ -19,15 +19,14 @@ export class FassungDiplomatischComponent implements OnChanges {
   pages: Array<any>;
   gewaehlteSchicht: string = 'schicht0';
 
-
-  oneTranscription = 'http://rdfh.ch/kuno-raeber/fURAeQjIQnuUI2j3yeQh2A';
-
   private sub: any;
 
   constructor(private http: Http) {}
 
-  ngOnChanges(){
+  ngOnChanges() {
+
     if (this.pageIRIs) {
+      console.log(this.pageIRIs.length);
 
       for (let i = 0; i < this.pageIRIs.length; i++) {
         this.pages.push({'diplIRI': '', 'pagenumber': '', 'picIRI': ''});

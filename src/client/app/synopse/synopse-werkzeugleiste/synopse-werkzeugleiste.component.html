@@ -3,11 +3,9 @@
     <md-icon>help</md-icon>
   </button>
 
-  <md-checkbox [(ngModel)]="showText"
-               (ngModelChange)="showTextChange.emit(showText)"
-               name="Text anzeigen">
-    Text anzeigen
-  </md-checkbox>
+  <button md-raised-button (click)="showText = !showText; showTextChange.emit(showText);">
+    {{showText ? 'Kein Text' : 'Text'}}
+  </button>
 
   <button md-raised-button title="Spaltenanzahl" (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
     3) + 1}} Spalten

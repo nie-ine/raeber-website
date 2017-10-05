@@ -23,7 +23,8 @@ export class DarstellungsoptionenComponent {
     });
     this.layoutSettingsForm.valueChanges
       .debounceTime(200)
-      .subscribe((dars: FormGroup) => this.darstellung.emit(dars));
+      .subscribe((dars: any) => this.darstellung.emit(dars)
+      );
   }
 
   resetLayout() {

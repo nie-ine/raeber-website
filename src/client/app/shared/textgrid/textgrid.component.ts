@@ -12,14 +12,13 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { Router } from '@angular/router';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: ['textgrid.component.css']
+  styleUrls: [ 'textgrid.component.css' ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -36,12 +35,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   i: number;
 
   constructor(private cdr: ChangeDetectorRef) {
-  }
-
-  router: Router;
-
-  constructor(r: Router) {
-    this.router = r;
   }
 
   ngOnChanges(changes: SimpleChanges) {

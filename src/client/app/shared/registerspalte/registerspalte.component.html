@@ -6,7 +6,8 @@
   </md-button-toggle-group>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of rsEntry; let i = index"
-       [routerLink]="['/' + konvolutTypeMap[konvolutType] + '/' + konvolutId + '/' + p.value[0]]" routerLinkActive="active">
+       [routerLink]="['/' + konvolutTypeMap[konvolutType] + '/' + konvolutId + '/' + p.value[0]]"
+       routerLinkActive="active">
       <!-- TODO: geht nicht fuer zugewandt-abgewandt u. ae. -->
       <h5 md-line>{{p.value[0]}}</h5>
       <p *ngIf="sortingType=='alphabetic'"

@@ -1,28 +1,33 @@
 <md-toolbar>
-  <button md-raised-button title="Hilfe" (click)="showHelp()">
+
+  <button md-raised-button title="Hilfe" (click)="showHelp()" style="margin-right:30px;">
     <md-icon>help</md-icon>
   </button>
 
-  <button md-raised-button (click)="showText = !showText; showTextChange.emit(showText);">
+  <button md-raised-button class="layoutbutton" (click)="showText = !showText; showTextChange.emit(showText);">
     {{showText ? 'Kein Text' : 'Text'}}
   </button>
 
-  <button md-raised-button title="Spaltenanzahl" (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
+  <button md-raised-button class="layoutbutton" title="Spaltenanzahl"
+          (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
     3) + 1}} Spalten
   </button>
 
-  <button md-raised-button [disabled]="!rahmen || !showText" title="Kartenformat schrittweise vergrößern"
+  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText"
+          title="Kartenformat schrittweise vergrößern"
           (click)="textVergroessern()">+ Format
   </button>
 
-  <button md-raised-button [disabled]="!rahmen || !showText" title="Kartenformat schrittweise verkleinern"
+  <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText"
+          title="Kartenformat schrittweise verkleinern"
           (click)="textVerkleinern()">- Format
   </button>
 
-  <button md-raised-button title="Rahmen anzeigen" [disabled]="!showText" (click)="toggleFrame()">{{rahmen ? 'Rahmenlos'
+  <button md-raised-button class="layoutbutton" title="Rahmen anzeigen" [disabled]="!showText" (click)="toggleFrame()">
+    {{rahmen ? 'Rahmenlos'
     : 'Rahmen'}}
   </button>
 
-  <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
+  <button md-raised-button class="layoutbutton" title="neu laden" (click)="neuladen()">Reset</button>
 
 </md-toolbar>

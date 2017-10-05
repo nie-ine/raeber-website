@@ -14,3 +14,10 @@ button {
 .button-without-link {
   color: silver;
 }
+
+.layoutbutton {
+  width: 80px;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: 13px;
+}

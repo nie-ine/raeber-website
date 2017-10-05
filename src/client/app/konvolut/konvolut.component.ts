@@ -1,7 +1,7 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,10 +9,10 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
-import { ExtendedSearch, FulltextSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -26,13 +26,20 @@ export class KonvolutComponent implements OnInit {
   konvolutBild: string;
   IRI: string;
   output: Subscription;
-  private data: Observable<Array<number>>;
-
   poems: Array<any>;
   responseArray: Array<any>;
+  searchContext: boolean = false;
+  searchResultsNo: number;
+  searchTerm: string;
+  columns: string;
+  rahmen: boolean = true;
+  showText: boolean = true;
+  gridHeight: number = 0;
 
   viewMode: string;
   konvolut_type: string;
+
+  private data: Observable<Array<number>>;
   private sub: any;
 
 
@@ -66,9 +73,9 @@ export class KonvolutComponent implements OnInit {
     );
 
 
-    this.konvolut_type = this.route.snapshot.url[0].path;
+    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params['konvolut'];
+      this.konvolut_id = params[ 'konvolut' ];
     });
   }
 
@@ -92,6 +99,54 @@ export class KonvolutComponent implements OnInit {
   updateKonvolutBild(konvolutBild: string) {
     this.konvolutBild = konvolutBild;
     console.log('Konvolutbild: ' + this.konvolutBild);
+  }
+
+  /**
+   * Reset textgrid layout
+   * @param {FormGroup} fg Layout parameters
+   */
+  setTextgridLayout(fg: FormGroup) {
+    this.setColumns(fg.colsSetter);
+    this.rahmen = fg.frameToggler;
+    this.showText = fg.textToggler;
+  }
+
+  /**
+   * Start search in convolute and enter search result mode
+   * @param {FormGroup} fg Search parameters
+   */
+  searchInConvolute(fg: FormGroup) {
+    // TODO: Implement real search query
+    this.searchResultsNo = 0; // TODO: Variable takes number of search results
+    this.searchTerm = ''; // TODO: Variable takes search term
+  }
+
+  /**
+   * Quit search mode
+   * @param {boolean} flag Quit search mode
+   */
+  quitSearchMode(flag: boolean) {
+    if (flag) {
+      // TODO: Proceed to quit search mode
+    }
+  }
+
+  setColumns(cols: number) {
+    switch (cols) {
+      case 1:
+        this.columns = '93%';
+        break;
+      case 2:
+        this.columns = '43%';
+        break;
+      case 3:
+        this.columns = '26%';
+        break;
+    }
+  }
+
+  setGridHeight(height: number) {
+    this.gridHeight = height;
   }
 
 }

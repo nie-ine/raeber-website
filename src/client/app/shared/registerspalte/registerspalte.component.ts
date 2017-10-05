@@ -32,25 +32,21 @@ export class RegisterspalteComponent implements OnChanges {
     'poem manuscript convolute': 'manuskripte',
     'poem typescript convolute': 'typoskripte',
     'printed poem book publication': 'drucke',
-    '??karten': 'manuskripte',
-    '??tagebucher': 'material',
-    '??briefe': 'material'
+    'poem postcard convolute': 'manuskripte',
+    'diary convolute': 'material',
+    'letter convolute': 'material'
   };
   konvolutTitle: string;
   sortingType: string;
   private sub: any;
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router,
-              private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
+  constructor(private http: Http, private sortingService: AlphabeticalSortingService,
+              private dateFormatService: DateFormatService) {
   }
 
   ngOnChanges() {
-    let searchParams = new ExtendedSearch();
-    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    searchParams.showNRows = 500;
 
+    // infos for title and routing
     this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI))
       .map(response => response.json()).subscribe(res => {
         this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
@@ -58,9 +54,12 @@ export class RegisterspalteComponent implements OnChanges {
         this.konvolutType = res.resinfo.restype_label;
       });
 
-    this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
+    // load poems
+    let searchParams = new ExtendedSearch();
+    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/work#isPartOf', 'EQ', this.konvolutIRI);
+    searchParams.showNRows = 500;
+
+    this.http.get(searchParams.toString())
       .map(response => response.json())
       .subscribe((res: any) => {
         this.rsEntry = res.subjects;
@@ -68,10 +67,7 @@ export class RegisterspalteComponent implements OnChanges {
         this.sortAlphabetically();
         this.sortingType = 'alphabetic';
       });
-
   }
-
-  // TODO: Sort alphabetically after init. How?
 
   sortAlphabetically() {
     this.rsEntry = this.rsEntry.sort((n1, n2) => {

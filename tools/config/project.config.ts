@@ -170,6 +170,13 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     });
+    this.addPackageBundles({
+      name: '@ng-bootstrap/ng-bootstrap',
+      path: 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
+    });
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

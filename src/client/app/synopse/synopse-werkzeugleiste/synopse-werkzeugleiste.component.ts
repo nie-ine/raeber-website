@@ -22,9 +22,11 @@ export class SynopseWerkzeugleisteComponent {
   @Output() verkleinereText = new EventEmitter();
   @Output() resetHeight = new EventEmitter();
   @Output() cols: EventEmitter<number> = new EventEmitter<number>();
+  @Output() firstLastState = new EventEmitter();
 
   columns: number = 2;
   rahmen: boolean = true;
+  firstLast: boolean = false;
 
   constructor(public dialog: MdDialog) {
   }
@@ -34,6 +36,9 @@ export class SynopseWerkzeugleisteComponent {
     this.columns = 2;
     this.cols.emit(2);
     this.resetHeight.emit();
+    if (this.firstLast) {
+      this.setFirstLast();
+    }
   }
 
   textVergroessern() {
@@ -53,6 +58,11 @@ export class SynopseWerkzeugleisteComponent {
       this.dialog.open(SynopseHilfeComponent, {
         width: '500px'
       });
+  }
+
+  setFirstLast() {
+    this.firstLast = !this.firstLast;
+    this.firstLastState.emit();
   }
 
 

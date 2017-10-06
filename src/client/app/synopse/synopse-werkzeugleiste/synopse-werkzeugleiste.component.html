@@ -28,6 +28,10 @@
     : 'Rahmen'}}
   </button>
 
+  <button md-raised-button class="layoutbutton" title="ErstLetzt" (click)="setFirstLast()">
+    {{firstLast ? 'Alle Zeugen' : 'Erst + Letzt'}}
+  </button>
+
   <button md-raised-button class="layoutbutton" title="neu laden" (click)="neuladen()">Reset</button>
 
 </md-toolbar>

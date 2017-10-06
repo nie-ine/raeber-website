@@ -37,6 +37,13 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   i: number;
   router: Router;
 
+  // Filter flags for synoptic view
+  @Input() filterFirstLastFlag = false;
+  @Input() filterDuplicatesFlag = false;
+  @Input() filterNotebookFlag = false;
+  @Input() filterManuscriptFlag = false;
+  @Input() filterTyposcriptFlag = false;
+
   /**
    * Orders an array by date (ascending)
    * @param {Array<any>} unsorted Array to be sorted
@@ -53,6 +60,39 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         }
       }
     );
+  }
+
+  /**
+   * Filters chronologically first and last element in array
+   * @param {Array<any>} x Unfiltered array
+   * @returns {Array<any>} Filtered array
+   */
+  private static filterFirstLast(x: Array<any>): Array<any> {
+    let firstLast: Array<any> = [];
+    firstLast.push(x[ 0 ]);
+    firstLast.push(x[ x.length - 1 ]);
+    return firstLast;
+  }
+
+  /**
+   * Filter duplicates
+   * @param x Element in array (a poem)
+   * @returns {boolean} Filtered
+   */
+  private static filterDuplicates(x: any): boolean {
+    // TODO: Real implementation
+    return true;
+  }
+
+  /**
+   * Filter by convolute type
+   * @param x Element in array (a poem)
+   * @param {string} type Convolute type
+   * @returns {boolean} Filtered
+   */
+  private static filterConvoluteTypes(x: any, type: string): boolean {
+    // TODO: Real implementation
+    return true;
   }
 
   constructor(private cdr: ChangeDetectorRef, r: Router) {
@@ -116,6 +156,23 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   resetField() {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
+  }
+
+  /**
+   * Apply filters for synoptic view
+   * @param {Array<any>} unfiltered Unfiltered poems array
+   * @returns {Array<any>} Filtered poems array
+   */
+  filterPoems(unfiltered: Array<any>): Array<any> {
+    if (unfiltered !== undefined) {
+      return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+        .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
+        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'notebook') : x)
+        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'manuscript') : x)
+        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'typoscript') : x);
+    } else {
+      return unfiltered;
+    }
   }
 
 }

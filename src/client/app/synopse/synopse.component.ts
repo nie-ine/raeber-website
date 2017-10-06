@@ -27,6 +27,8 @@ export class SynopseComponent implements OnInit {
 
   results: number;
 
+  filterFirstLastFlag = false;
+
   private sub: any;
 
   constructor(private http: Http, private route: ActivatedRoute, router: Router) {
@@ -49,17 +51,6 @@ export class SynopseComponent implements OnInit {
       .subscribe((res: any) => {
         this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
         this.results = this.poemsIri.length;
-        /*poemsIri.forEach(poemIri => {
-          console.log(searchParamsPrefix + encodeURIComponent(poemIri));
-          this.route.params
-            .switchMap((params: Params) =>
-              this.http.get(searchParamsPrefix + encodeURIComponent(poemIri)))
-            .map(response => response.json())
-            .subscribe((res: any) => {
-              // FIXME: res should probably be transformed in a form more suitable for textgrid
-              this.poemsInSynopse.push(res);
-            });
-         });*/
       });
   }
 
@@ -82,8 +73,11 @@ export class SynopseComponent implements OnInit {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    console.log("PoemsInformation:" + poemInformation);
     this.poems = poemInformation;
+  }
+
+  setFilterFirstLast() {
+    this.filterFirstLastFlag = !this.filterFirstLastFlag;
   }
 
 }

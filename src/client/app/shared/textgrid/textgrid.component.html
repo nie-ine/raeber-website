@@ -1,10 +1,11 @@
 <div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid', 'rae-poem-list-cols': viewMode == 'cols'}">
 
-  <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index" [ngStyle]="{ 'width': columns }">
+  <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
+       [ngStyle]="{ 'width': columns }">
 
     <md-card class="rae-poem-card">
 
-      <md-card-subtitle *ngIf="p[1]">{{p[1]}}</md-card-subtitle>
+      <md-card-subtitle *ngIf="p[1]">{{ p[1] }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
         <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">

@@ -17,8 +17,11 @@ import { RegisterModule } from '../register/register.module';
 import { StatischModule } from '../statisch/statisch.module';
 import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
 import { MdInputModule } from '@angular/material';
+=======
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+>>>>>>> origin/master
 
 @NgModule({
   imports: [
@@ -30,8 +33,11 @@ import { MdInputModule } from '@angular/material';
     RegisterModule,
     SucheModule,
     SynopseModule,
+<<<<<<< HEAD
     MdInputModule,
+=======
     NgbModule.forRoot(),
+>>>>>>> origin/master
     RouterModule.forRoot([
       { path: '', redirectTo: '/start', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

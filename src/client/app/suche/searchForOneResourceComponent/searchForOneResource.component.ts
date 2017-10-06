@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { globalSearchVariableService } from './../globalSearchVariablesService';
+import { globalSearchVariableService } from '../globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -78,6 +78,8 @@ export class SearchForOneResourceComponent implements OnInit {
           }
         )
         .subscribe(response => this.myProperties = response);
+    } else {
+      return null;
     }
   }
 

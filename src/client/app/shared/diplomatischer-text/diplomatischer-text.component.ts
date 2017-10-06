@@ -4,6 +4,7 @@
 
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Http } from '@angular/http';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -56,7 +57,7 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   }
 
   ngOnChanges() {
-    this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.textIRI))
+    this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
       .map(response => response.json())
       .subscribe( res => {
         this.text = res.props['http://www.knora.org/ontology/text#hasContent'].values[0].utf8str;

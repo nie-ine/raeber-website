@@ -3,6 +3,7 @@
  */
 import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -31,7 +32,7 @@ export class FassungDiplomatischComponent implements OnChanges {
       for (let i = 0; i < this.pageIRIs.length; i++) {
         this.pages.push({'diplIRI': '', 'pagenumber': '', 'picIRI': ''});
 
-        this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + this.pageIRIs[ i ])
+        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.pageIRIs[ i ]))
           .map(results => results.json())
           .subscribe(res =>{
             this.pages[ i ][ 'pagenumber' ] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;

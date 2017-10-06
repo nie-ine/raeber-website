@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { FulltextSearch } from '../shared/utilities/knora-api-params';
+import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -68,7 +69,7 @@ export class FassungComponent implements OnInit {
     });
 
 
-    this.sub2 = this.http.get('http://knora.nie-ine.ch/v1/resources/' +
+    this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
       encodeURIComponent('http://rdfh.ch/kuno-raeber/kM0xkOK0R7WOdj9_637NGw'))
       .map(result => result.json())
       .subscribe(res => {

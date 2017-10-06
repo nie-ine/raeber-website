@@ -31,7 +31,9 @@ export class RegisterspalteComponent implements OnChanges {
     'poem notebook': 'notizbuecher',
     'poem manuscript convolute': 'manuskripte',
     'poem typescript convolute': 'typoskripte',
+    'poem typescript convolute with image': 'typoskripte',
     'printed poem book publication': 'drucke',
+    'poly-author publication convolute': 'drucke',
     'poem postcard convolute': 'manuskripte',
     'diary convolute': 'material',
     'letter convolute': 'material'

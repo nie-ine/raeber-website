@@ -43,22 +43,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         if (!chng.isFirstChange()) {
-          if(this.poemsInGrid) {
-          this.poemsInGrid = chng.currentValue;
-          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
+          if (this.poemsInGrid) {
+            this.poemsInGrid = chng.currentValue;
+            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+              this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
             }
           }
         }
+      }
+      /*    for (let propName in changes) {
+       let chng = changes[propName];
+       let cur  = JSON.stringify(chng.currentValue);
+       let prev = JSON.stringify(chng.previousValue);
+       this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+       }*/
+      // changes.prop contains the old and the new value...
     }
-    /*    for (let propName in changes) {
-     let chng = changes[propName];
-     let cur  = JSON.stringify(chng.currentValue);
-     let prev = JSON.stringify(chng.previousValue);
-     this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-     }*/
-    // changes.prop contains the old and the new value...
-  }
   }
 
 
@@ -93,3 +93,4 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
+}

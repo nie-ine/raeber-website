@@ -4,11 +4,11 @@
 
     <md-card class="rae-poem-card">
 
-      <md-card-subtitle *ngIf="p.date">{{p.date}}</md-card-subtitle>
+      <md-card-subtitle *ngIf="p.date">{{ p.date }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
         <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
-          {{p.value[2]}}
+          {{ p.value[2] }}
         </a>
       </md-card-title>
 
@@ -26,7 +26,7 @@
           <ul class="catItemTags">
             <li *ngFor="let s of p.valuelabel; let j = index">
               <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
-                {{s}}
+                {{ s }}
               </a>
             </li>
           </ul>

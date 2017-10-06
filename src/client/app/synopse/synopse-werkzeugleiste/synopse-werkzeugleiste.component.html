@@ -9,8 +9,8 @@
     Text anzeigen
   </md-checkbox>
 
-  <button md-raised-button title="Spaltenanzahl" (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
-    3) + 1}} Spalten
+  <button md-raised-button title="Spaltenanzahl" (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{ (columns %
+    3) + 1 }} Spalten
   </button>
 
   <button md-raised-button [disabled]="!rahmen" title="Kartenformat schrittweise vergrößern"
@@ -21,7 +21,7 @@
           (click)="textVerkleinern()">- Format
   </button>
 
-  <button md-raised-button title="Rahmen anzeigen" (click)="toggleFrame()">{{rahmen ? 'Rahmenlos' : 'Rahmen'}}
+  <button md-raised-button title="Rahmen anzeigen" (click)="toggleFrame()">{{ rahmen ? 'Rahmenlos' : 'Rahmen' }}
   </button>
 
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>

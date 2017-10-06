@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -15,12 +15,15 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: [ 'image-frame.component.css' ]
 })
 
-export class ImageFrameComponent {
+export class ImageFrameComponent implements OnInit {
 
-  @Input() pictureID: string;
+  @Input() pictureData: any;
+  @Input() initWidth: number;
 
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
+
+  pictureIdBase: string;
 
   zoomfactor = 5;
   heightAndWidth = 100;
@@ -37,38 +40,26 @@ export class ImageFrameComponent {
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
 
-  increaseSize() {
-    if (this.zoomfactor > 2) {
-      this.zoomfactor -= 1;
-    } else {
-      window.alert('Picture reached maximum quality');
-    }
-  }
-
-  reduceSize() {
-    if (this.zoomfactor < 5) {
-      this.zoomfactor += 1;
-    } else {
-      window.alert('Picture reached minimum quality');
-    }
+  ngOnInit() {
+    this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[0];
+    this.width = this.initWidth;
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
   }
 
   increaseFrameSize() {
-    this.height += 200;
-    this.width += 200;
+    this.width += 40;
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
     this.pictureIncreased.emit(null);
   }
 
   reduceFrameSize() {
-    this.height -= 200;
-    this.width -= 200;
+    this.width -= 40;
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
     this.pictureReduced.emit(null);
   }
 
   resetSize() {
-    this.height = 200;
-    this.width = 200;
-    this.zoomfactor = 5;
+    this.ngOnInit();
   }
 
 

@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -49,7 +50,7 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
 
     // infos for title and routing
-    this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI))
+    this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
       .map(response => response.json()).subscribe(res => {
         this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
         this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;

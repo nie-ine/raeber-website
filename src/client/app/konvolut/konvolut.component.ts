@@ -35,6 +35,7 @@ export class KonvolutComponent implements OnInit {
   rahmen: boolean = true;
   showText: boolean = true;
   gridHeight: number = 0;
+  poemIRIArray = [''];
 
   viewMode: string;
   konvolut_type: string;
@@ -64,19 +65,23 @@ export class KonvolutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    this.dp.size = 10;
-    this.dp.loadText(this._esearch).subscribe(
-      konstText => this.poems = konstText
-    );
+    //this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    //this.dp.size = 10;
+    //this.dp.loadText(this._esearch).subscribe(
+    //  konstText => this.poems = konstText
+    //);
 
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
     });
+    this.poemIRIArray = [
+      'http://rdfh.ch/kuno-raeber/W2q8TZlxQN68U5ad66HjCg',
+      'http://rdfh.ch/kuno-raeber/WIb--KN7TfGeCaaJYY8iDg'
+    ];
   }
 
 
@@ -147,6 +152,12 @@ export class KonvolutComponent implements OnInit {
 
   setGridHeight(height: number) {
     this.gridHeight = height;
+  }
+
+  updatePoemInformation(poemInformation: Array<any>) {
+    console.log(poemInformation);
+    this.poems = poemInformation;
+    console.log(this.poems);
   }
 
 }

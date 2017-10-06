@@ -41,6 +41,7 @@ export class SearchForOneResourceComponent implements OnInit {
   ];
   @Input() nthResourceSearch: number;
   @Input() myResources: Array<any>;
+  @Output() sendPropertyTripleBack: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private http: Http) {
   }
@@ -93,5 +94,4 @@ export class SearchForOneResourceComponent implements OnInit {
     this.sendPropertyTripleBack.emit(propertyTriple);
   }
 
-  @Output() sendPropertyTripleBack: EventEmitter<any> = new EventEmitter<any>();
 }

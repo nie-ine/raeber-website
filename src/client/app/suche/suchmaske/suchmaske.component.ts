@@ -211,7 +211,7 @@ export class SuchmaskeComponent implements OnChanges {
     });
   }
 
-  startTheSearch(){
+  startTheSearch() {
     console.log('startTheSearch');
     this.startSearch.emit();
   }

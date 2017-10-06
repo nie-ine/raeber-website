@@ -35,6 +35,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
               this.properties['diplIRI'] = res.incoming[ j ].ext_res_id.id;
             }
           }
+          this.properties['picIRI'] = res.resinfo.locdata.path;
           this.propertiesReset.emit(this.properties);
         });
     }

@@ -7,6 +7,7 @@
   <div style="display: inline-block; vertical-align: top">
     <!-- TODO: insert picture component here -->
     <rae-image-frame
+      [pictureID]="p['picIRI']"
       (pictureIncreased)="pictureIncreased.emit(null)"
       (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
   </div>

@@ -21,8 +21,9 @@ For the kitchen sink
     <md-card-content *ngIf="ausgeklappt">
 
       <div [ngStyle]="{'height': height + px, 'width': width + px, 'overflow-y': overflow, 'resize': resize}">
-        <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
-             class="rae-image_resizeable">
+      <!--  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
+             class="rae-image_resizeable"> -->
+        <img [src]="pictureID" class="rae-image_resizeable">
       </div>
 
     </md-card-content>

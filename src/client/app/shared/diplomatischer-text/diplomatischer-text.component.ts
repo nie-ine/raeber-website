@@ -57,12 +57,14 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   }
 
   ngOnChanges() {
-    this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
-      .map(response => response.json())
-      .subscribe( res => {
-        this.text = res.props['http://www.knora.org/ontology/text#hasContent'].values[0].utf8str;
-        this.updateSchichten();
+    if(this.textIRI) {
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
+        .map(response => response.json())
+        .subscribe(res =>{
+          this.text = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+          this.updateSchichten();
         });
+    }
   }
 
   ngDoCheck() {

@@ -68,21 +68,11 @@ export class FassungComponent implements OnInit {
       this.poem_id = params[ 'fassung' ];
     });
 
-
     this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-      encodeURIComponent('http://rdfh.ch/kuno-raeber/kM0xkOK0R7WOdj9_637NGw'))
+      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
       .map(result => result.json())
       .subscribe(res => {
-
-        try {
-          for (let i = 0; i < res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values; i++) {
-            this.pageIRIs.push('');
-            this.pageIRIs[i] = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values[i];
-          }
-        } catch (TypeError) {
-          this.pageIRIs = [];
-        }
-
+        this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;
       });
   }
 }

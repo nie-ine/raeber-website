@@ -17,35 +17,35 @@ export class FassungDiplomatischComponent implements OnChanges {
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
 
-  pages: Array<any>;
+  pages: Array<any> = new Array();
   gewaehlteSchicht: string = 'schicht0';
 
   private sub: any;
 
-  constructor(private http: Http) {}
-
   ngOnChanges() {
+    this.pages = [];
+  }
 
-    if (this.pageIRIs) {
-      console.log(this.pageIRIs.length);
-
-      for (let i = 0; i < this.pageIRIs.length; i++) {
-        this.pages.push({'diplIRI': '', 'pagenumber': '', 'picIRI': ''});
-
-        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.pageIRIs[ i ]))
-          .map(results => results.json())
-          .subscribe(res =>{
-            this.pages[ i ][ 'pagenumber' ] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;
-            for (let j = 0; j < res.incoming.length; j++) {
-              if (res.incoming[ j ].ext_res_id.pid === 'http://www.knora.org/ontology/text#isDiplomaticTranscriptionOfTextOnPage') {
-                this.pages[ i ][ 'diplIRI' ] = res.incoming[ j ].ext_res_id.pid;
-              }
-            }
-          });
-      }
-    }
+  addPage(values: Array<string>) {
+    this.pages.push(values);
+    this.sortPages();
+    console.log(this.pages);
   }
 
   // TODO: sort pages by seqnum, find picture id and transcription id per page.
+  sortPages() {
+    this.pages = this.pages.sort((n1, n2) => {
+      const k1 = n1.value[ 'pagenumber' ];
+      const k2 = n2.value[ 'pagenumber' ];
+      if (k1 > k2) {
+        return 1;
+      }
 
+      if (k1 < k2) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
 }

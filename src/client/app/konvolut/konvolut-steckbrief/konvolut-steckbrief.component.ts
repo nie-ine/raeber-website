@@ -44,7 +44,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.IRI) {
-      this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.IRI))
+      this.sub = this.http.get('http://130.60.24.65:3333/v1/resources/' + encodeURIComponent(this.IRI))
         .map(response => response.json()).subscribe(res => {
 
           this.konvoluttyp = res.resinfo.restype_label;

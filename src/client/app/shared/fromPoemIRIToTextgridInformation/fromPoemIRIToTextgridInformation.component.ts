@@ -21,18 +21,18 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
 
   }
   ngOnChanges() {
-    console.log('Get Information for this poem IRI: ');
-    console.log(this.poemIRIArray);
+    //console.log('Get Information for this poem IRI: ');
+    //console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
     for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
-      console.log('get information for this poem:');
+      //console.log('get information for this poem:');
       this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
       this.poemInformation[this.i] = [];
     }
   }
   getTitleAndDate(IRI: string, i: number) {
-    console.log('get Title and Date' + IRI);
+    //console.log('get Title and Date' + IRI);
     this.performQuery(IRI, i);
   }
   performQuery(queryPart: string, i: number) {
@@ -45,7 +45,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           this.poemInformation[i][0] = data.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
           this.poemInformation[i][1] = data.props['http://www.knora.org/ontology/human#hasCreationDate'].values[0].dateval1;
           console.log(this.poemInformation[i][0]);
@@ -57,7 +57,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       .subscribe(response => this.responseArray = response);
   }
   performTextQuery(IRI: string, i: number) {
-    console.log('get Text: ' + IRI);
+    //console.log('get Text: ' + IRI);
     return this.http.get
     (
       globalSearchVariableService.API_URL +
@@ -67,9 +67,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           this.poemInformation[i][2] = data.props['http://www.knora.org/ontology/text#hasContent'].values[0].utf8str;
-          console.log(this.poemInformation[i][2]);
+          //console.log(this.poemInformation[i][2]);
           this.countRequests += 1;
           if (this.countRequests = this.poemIRIArray.length) {
             this.sendPoemInformationBack.emit(this.poemInformation);

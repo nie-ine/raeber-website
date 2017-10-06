@@ -27,7 +27,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
       this.publications.push({'title': '', 'size': '', 'alias': ''});
 
       try {
-        this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI[i]))
+        this.sub = this.http.get('http://130.60.24.65:3333/v1/resources/' + encodeURIComponent(this.konvolutIRI[i]))
           .map(response => response.json()).subscribe(res => {
             this.publications[i]['title'] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
             this.publications[i]['alias'] = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;

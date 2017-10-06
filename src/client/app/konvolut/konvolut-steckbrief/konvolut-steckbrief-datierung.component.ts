@@ -25,7 +25,7 @@ export class KonvolutSteckbriefDatierungComponent implements OnChanges {
   ngOnChanges() {
 
     if (this.dateIRI) {
-      this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.dateIRI))
+      this.sub = this.http.get('http://130.60.24.65:3333/v1/resources/' + encodeURIComponent(this.dateIRI))
         .map(response => response.json()).subscribe(res => {
 
           try {

@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: ['textgrid.component.css']
+  styleUrls: [ 'textgrid.component.css' ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -37,6 +37,24 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   i: number;
   router: Router;
 
+  /**
+   * Orders an array by date (ascending)
+   * @param {Array<any>} unsorted Array to be sorted
+   * @returns {Array<any>} Sorted array
+   */
+  private static sortByDate(unsorted: Array<any>): Array<any> {
+    return unsorted.sort((x, y) => {
+        if (x[ 1 ] > y[ 1 ]) {
+          return 1;
+        } else if (x[ 1 ] < [ 1 ]) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+    );
+  }
+
   constructor(private cdr: ChangeDetectorRef, r: Router) {
     this.router = r;
   }
@@ -46,24 +64,27 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         if (!chng.isFirstChange()) {
-          if(this.poemsInGrid) {
-          this.poemsInGrid = chng.currentValue;
-          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
+          if (this.poemsInGrid) {
+            this.poemsInGrid = chng.currentValue;
+            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+              this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
             }
           }
+          // TODO: Abklären, welche Ansichten die Sortierfunktion benötigen
+          this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
         }
-    }
-    /*    for (let propName in changes) {
-     let chng = changes[propName];
-     let cur  = JSON.stringify(chng.currentValue);
-     let prev = JSON.stringify(chng.previousValue);
-     this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-     }*/
-    // changes.prop contains the old and the new value...
-  }
-  }
+      }
 
+      /*    for (let propName in changes) {
+       let chng = changes[propName];
+       let cur  = JSON.stringify(chng.currentValue);
+       let prev = JSON.stringify(chng.previousValue);
+       this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+       }*/
+      // changes.prop contains the old and the new value...
+    }
+
+  }
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
@@ -96,3 +117,5 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
+
+}

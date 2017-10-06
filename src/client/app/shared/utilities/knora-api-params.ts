@@ -9,6 +9,7 @@ import { Config } from '../config/env.config';
  */
 export abstract class KnoraRequest {
   protected _host = Config.API;
+  protected _endpoint: string = 'search/';
   protected abstract _searchtype: string;
   protected abstract _filterByRestype: string;
   protected abstract _filterByProject: string;
@@ -88,7 +89,8 @@ export class FulltextSearch extends KnoraRequest {
    * @returns {string} Formatted string
    */
   public toString() {
-    return this._host + this._searchstring +
+    return this._host + this._endpoint +
+      this._searchstring +
       '?searchtype=' + this._searchtype +
       (this._filterByRestype.length > 0 ? '&filter_by_restype=' + encodeURIComponent(this._filterByRestype) : '') +
       (this._filterByProject.length > 0 ? '&filter_by_project=' + encodeURIComponent(this._filterByProject) : '') +
@@ -130,7 +132,7 @@ export class ExtendedSearch extends KnoraRequest {
         propString += e.toString();
       }
     }
-    return this._host +
+    return this._host + this._endpoint +
       '?searchtype=' + this._searchtype +
       (this._filterByRestype.length > 0 ? '&filter_by_restype=' + encodeURIComponent(this._filterByRestype) : '') +
       (this._filterByProject.length > 0 ? '&filter_by_project=' + encodeURIComponent(this._filterByProject) : '') +

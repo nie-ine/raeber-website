@@ -105,7 +105,7 @@ export class KonvolutComponent implements OnInit {
    * Reset textgrid layout
    * @param {FormGroup} fg Layout parameters
    */
-  setTextgridLayout(fg: FormGroup) {
+  setTextgridLayout(fg: any) {
     this.setColumns(fg.colsSetter);
     this.rahmen = fg.frameToggler;
     this.showText = fg.textToggler;

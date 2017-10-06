@@ -16,7 +16,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
 
   @Input() konvolutIRI: string;
 
-  private publications: Array<any>;
+  publications: Array<any>;
   private sub: any;
   constructor(private http: Http, private route: ActivatedRoute) {}
 

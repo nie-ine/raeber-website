@@ -3,7 +3,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -39,7 +39,7 @@ export class FassungComponent implements OnInit {
   poem_id: string;
   konvolut_id: string;
   konvolut_type: string;
-  konvolutIRI = 'http://rdfh.ch/kuno-raeber/UP1rlPeKR26d8YZPnTo1IQ'
+  konvolutIRI = 'http://rdfh.ch/kuno-raeber/UP1rlPeKR26d8YZPnTo1IQ';
 
   nextPoem: string = '219-brunnen'; // TODO
   prevPoem: string = '221-baum'; // TODO

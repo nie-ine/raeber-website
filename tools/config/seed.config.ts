@@ -76,13 +76,6 @@ export class SeedConfig {
    */
   BUILD_TYPE = getBuildType();
   /**
-   * The folder for the built files, corresponding to the current environment.
-   * @type {string}
-   */
-  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT
-    ? this.DEV_DEST
-    : this.PROD_DEST;
-  /**
    * The flag to determine preserving source maps on build or not.
    * The default value is `false`, which can be overriden by the `--preserve-source-maps` flag when running `npm start`.
    */
@@ -267,6 +260,14 @@ export class SeedConfig {
    * @type {string}
    */
   PROD_DEST = `${this.DIST_DIR}/prod`;
+
+  /**
+   * The folder for the built files, corresponding to the current environment.
+   * @type {string}
+   */
+  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT
+    ? this.DEV_DEST
+    : this.PROD_DEST;
 
   /**
    * The folder for the built files of the e2e-specs.

@@ -13,7 +13,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class SynopseComponent implements OnInit {
 
-  poemsInSynopse: Array<any> = [];
   nHits: number;
   synopseTag: string;
 
@@ -22,6 +21,9 @@ export class SynopseComponent implements OnInit {
   columns: string;
   gridHeight: number = 0;
   workIri: string;
+  poemsIri: string[] = [];
+
+  poems: Array<any>;
 
   results: number;
 
@@ -39,16 +41,15 @@ export class SynopseComponent implements OnInit {
 
     let searchParamsPrefix = 'http://knora.nie-ine.ch/v1/resources/';
     let searchParamsWork = searchParamsPrefix + encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIri);
-    let poemsIri: string[] = [];
 
     this.route.params
       .switchMap((params: Params) =>
         this.http.get(searchParamsWork))
       .map(response => response.json())
       .subscribe((res: any) => {
-        poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
-        this.results = poemsIri.length;
-        poemsIri.forEach(poemIri => {
+        this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
+        this.results = this.poemsIri.length;
+        /*poemsIri.forEach(poemIri => {
           console.log(searchParamsPrefix + encodeURIComponent(poemIri));
           this.route.params
             .switchMap((params: Params) =>
@@ -58,7 +59,7 @@ export class SynopseComponent implements OnInit {
               // FIXME: res should probably be transformed in a form more suitable for textgrid
               this.poemsInSynopse.push(res);
             });
-        });
+         });*/
       });
   }
 
@@ -78,6 +79,11 @@ export class SynopseComponent implements OnInit {
 
   setGridHeight(height: number) {
     this.gridHeight = height;
+  }
+
+  updatePoemInformation(poemInformation: Array<any>) {
+    console.log("PoemsInformation:" + poemInformation);
+    this.poems = poemInformation;
   }
 
 }

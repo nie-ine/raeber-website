@@ -16,8 +16,10 @@
                                               (cols)="setColumns($event)"
                                               (resetHeight)="textgrid.resetField()">
                   </rae-synopse-werkzeugleiste>
+                  <from-poem-iri-to-textgrid-information [poemIRIArray]="poemsIri"
+                                                         (sendPoemInformationBack)="updatePoemInformation($event)"></from-poem-iri-to-textgrid-information>
                   <rae-textgrid #textgrid
-                                [poemsInGrid]="poemsInSynopse"
+                                [poemsInGrid]="poems"
                                 [columns]="columns"
                                 [showText]="showText"
                                 contentType="synopse"

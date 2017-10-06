@@ -1,8 +1,6 @@
-import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
-import { Config } from '../../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +10,7 @@ import { Config } from '../../shared/config/env.config';
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() poemIRIArray: Array<any>;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
-  responseArray: Array<any>
+  responseArray: Array<any>;
   i: number;
   poemInformation: Array<any>;
 
@@ -21,7 +19,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
   ngOnChanges() {
     console.log('Get Information for this poem IRI: ');
-    console.log(this.poemIRIArray);
+    console.log("in fromPoem... " + this.poemIRIArray);
     this.poemInformation = [];
     for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
       console.log('get information for this poem:');

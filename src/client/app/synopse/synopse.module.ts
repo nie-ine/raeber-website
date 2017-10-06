@@ -5,6 +5,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { KonvolutModule } from '../konvolut/konvolut.module';
 
 import { SynopseComponent } from './synopse.component';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
@@ -30,10 +31,11 @@ import { SynopseHilfeComponent } from './synopse-hilfe/synopse-hilfe.component';
     MdIconModule,
     MdToolbarModule,
     MdDialogModule,
+    KonvolutModule,
+    TextgridModule,
     RouterModule.forChild([
       { path: 'synopsen/:synopse', component: SynopseComponent }
     ]),
-    TextgridModule
   ],
   declarations: [
     SynopseComponent,

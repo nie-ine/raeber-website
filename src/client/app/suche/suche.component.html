@@ -1,0 +1,94 @@
+<div id="rae-fassung-view">
+  <div class="rt-container">
+    <div id="rt-main" class="mb9-sa3">
+      <div class="rt-container">
+        <div class="rt-grid-12 ">
+          <div class="rt-block">
+            <div id="rt-mainbody">
+              <div class="component-content">
+
+                <h1>Suche</h1>
+                Number of Results: {{ numberOfSearchResults }}
+
+
+                <br>
+
+                <rae-suchmaske [sidenavOpened]="false"
+                               (suchEvents)="handleSearchEvent($event)"
+                               [poemsInGrid]="allSearchResults"
+                               (startSearch)="executeFinalQueries()"
+                               [searchTerm]="searchTerm">
+
+                </rae-suchmaske>
+
+                <rae-parser
+                  [inputSearchStringToBeParsed]="inputSearchStringToBeParsed"
+                  (returnQueries)="getQueries($event)">
+
+                </rae-parser>
+
+                <div ng-init="myResources=initialQuery()">
+
+
+
+
+                  <div *ngFor="let i of array" style="display: inline-block; vertical-align: top; border: thin solid #A9DAEF; margin: 2px 2px 2px 2px;">
+
+
+                    <span *ngIf="i > 1" > OR</span>
+
+
+                    <div style="display: inline-block; vertical-align: top; padding-left: 20px;">
+
+                      <rae-search-for-one-resource
+                        [nthResourceSearch]="i"
+                        [myResources]="myResources"
+                        (sendPropertyTripleBack)="updateQuerySet($event)" >
+
+                      </rae-search-for-one-resource>
+
+                    </div>
+
+
+                  </div>
+
+
+                  <button md-button (click)="increaseArrayElement()">
+
+                    <md-icon >add_box</md-icon>
+
+                  </button>
+
+
+                  <button md-button (click)="executeFinalQueries()">
+
+                    <md-icon >search</md-icon>
+
+                  </button>
+
+
+                </div>
+                Number of Results: {{ numberOfSearchResults }}
+                Final Queries:
+                <div *ngFor="let query of finalQueryArray; let i = index" style="width:50em;">
+                  <span style="word-wrap: break-word; word-break: break-all;">
+                    Query number: {{ i }}
+                    <br>
+                    {{ query }}
+                  </span>
+                </div>
+
+                <!--
+                <rae-textgrid
+                  [poemsInGrid]="allSearchResults"
+                  [searchTerm]="searchTerm"
+                ></rae-textgrid>
+                -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

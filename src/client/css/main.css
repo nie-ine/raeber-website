@@ -7,6 +7,11 @@
 .clearfix {
 }
 
+/* Wichtig fuer Raeber!! Fuer das hervorheben der Suchworte!! */
+.highlightText {
+  background: yellow;
+}
+
 .clearfix::before, .clearfix::after {
   content: "";
   display: table;

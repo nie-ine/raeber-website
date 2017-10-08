@@ -42,8 +42,8 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
               data.nodes[this.i].resourceClassIri.split('#')[1] === 'PublicationPoem'
             ) {
               this.poemIRIArray[this.poemIRIArray.length]=data.nodes[this.i].resourceIri;
-              console.log(data.nodes[this.i].resourceClassIri.split('#')[1];
-              console.log(data.nodes[this.i];
+              console.log(data.nodes[this.i].resourceClassIri.split('#')[1]);
+              console.log(data.nodes[this.i]);
             }
           }
           this.sendPoemIRIsBack.emit(this.poemIRIArray);

@@ -22,15 +22,19 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
   ngOnChanges() {
     //console.log('Get Information for this poem IRI: ');
+    console.log('PoemIRIArray: ');
     console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
-    if(this.poemIRIArray !== undefined) {
+    if(this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+      console.log('here');
       for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
-        //console.log('get information for this poem:');
         this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
         this.poemInformation[this.i] = [];
       }
+    } else {
+      console.log('Konvolut found but no Poems found');
+      this.sendPoemInformationBack.emit(this.poemInformation);
     }
   }
   getTitleAndDate(IRI: string, i: number) {

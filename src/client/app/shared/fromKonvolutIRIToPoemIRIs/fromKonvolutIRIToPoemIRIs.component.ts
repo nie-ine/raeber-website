@@ -64,9 +64,22 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
   getRightProperty(konvolutType: string) {
     console.log(konvolutType);
     if (konvolutType === 'poem notebook') {
-      console.log(konvolutType);
+      this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';
+      console.log('Right Property: ' + this.rightProperty);
     } else if (konvolutType === 'poem manuscript convolute') {
       this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#HandwrittenPoem';
+      console.log('Right Property: ' + this.rightProperty);
+    } else if (konvolutType === 'poem typescript convolute') {
+      this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
+      console.log('Right Property: ' + this.rightProperty);
+    } else if (konvolutType === 'poem typescript convolute with image') {
+      this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
+      console.log('Right Property: ' + this.rightProperty);
+    } else if (konvolutType === 'printed poem book publication') {
+      this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
+      console.log('Right Property: ' + this.rightProperty);
+    } else if (konvolutType === 'poly-author publication convolute') {
+      this.rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
       console.log('Right Property: ' + this.rightProperty);
     }
   }

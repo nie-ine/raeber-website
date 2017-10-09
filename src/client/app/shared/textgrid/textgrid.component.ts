@@ -12,7 +12,6 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,7 +34,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   gridTextHeight: number = 0;
   i: number;
-  router: Router;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -80,6 +78,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
+
     // TODO: Real implementation
     return true;
   }
@@ -95,8 +94,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return true;
   }
 
-  constructor(private cdr: ChangeDetectorRef, r: Router) {
-    this.router = r;
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -125,6 +123,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
 
   }
+  }
+
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
@@ -157,22 +157,3 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
-
-  /**
-   * Apply filters for synoptic view
-   * @param {Array<any>} unfiltered Unfiltered poems array
-   * @returns {Array<any>} Filtered poems array
-   */
-  filterPoems(unfiltered: Array<any>): Array<any> {
-    if (unfiltered !== undefined) {
-      return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
-        .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
-        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'notebook') : x)
-        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'manuscript') : x)
-        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'typoscript') : x);
-    } else {
-      return unfiltered;
-    }
-  }
-
-}

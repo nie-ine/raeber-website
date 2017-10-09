@@ -35,7 +35,7 @@ export class KonvolutComponent implements OnInit {
   rahmen: boolean = true;
   showText: boolean = true;
   gridHeight: number = 0;
-  poemIRIArray = [''];
+  poemIRIArray: Array<any>;
 
   viewMode: string;
   konvolut_type: string;
@@ -78,10 +78,6 @@ export class KonvolutComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
     });
-    this.poemIRIArray = [
-      'http://rdfh.ch/kuno-raeber/W2q8TZlxQN68U5ad66HjCg',
-      'http://rdfh.ch/kuno-raeber/WIb--KN7TfGeCaaJYY8iDg'
-    ];
   }
 
 
@@ -110,7 +106,7 @@ export class KonvolutComponent implements OnInit {
    * Reset textgrid layout
    * @param {FormGroup} fg Layout parameters
    */
-  setTextgridLayout(fg: FormGroup) {
+  setTextgridLayout(fg: any) {
     this.setColumns(fg.colsSetter);
     this.rahmen = fg.frameToggler;
     this.showText = fg.textToggler;
@@ -155,9 +151,13 @@ export class KonvolutComponent implements OnInit {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    console.log(poemInformation);
+    //console.log(poemInformation);
     this.poems = poemInformation;
-    console.log(this.poems);
+    //console.log(this.poems);
+  }
+
+  createPoemIRIList(poemIRIList: Array<any>) {
+    this.poemIRIArray = poemIRIList;
   }
 
 }

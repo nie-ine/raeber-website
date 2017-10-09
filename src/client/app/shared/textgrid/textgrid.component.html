@@ -8,7 +8,7 @@
       <md-card-subtitle *ngIf="p[1]">{{ p[1] }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
-        <a class="item" [routerLink]="p.obj_id.split('.ch')[1]" routerLinkActive="active">
+        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active">
           {{p[0]}}
         </a>
       </md-card-title>
@@ -28,7 +28,7 @@
           <ul class="catItemTags">
             <li *ngFor="let s of p.valuelabel; let j = index">
               <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
-                {{s}}
+                {{ s }}
               </a>
             </li>
           </ul>

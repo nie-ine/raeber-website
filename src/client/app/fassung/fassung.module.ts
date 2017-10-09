@@ -28,6 +28,7 @@ import { FassungSteckbriefComponent } from './fassung-steckbrief/fassung-steckbr
 import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.component';
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { TextComponent } from '../shared/text/text.component';
+import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassung-diplomatisch-seiten.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { TextComponent } from '../shared/text/text.component';
     FassungBlaetternComponent,
     FassungComponent,
     FassungDiplomatischComponent,
+    FassungDiplomatischSeitenComponent,
     FassungSteckbriefComponent,
     FassungWeitereComponent,
     FassungWerkzeugleisteComponent,

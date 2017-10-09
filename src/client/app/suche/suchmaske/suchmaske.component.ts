@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
@@ -20,7 +20,7 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./suchmaske.component.css']
 })
 
-export class SuchmaskeComponent implements OnInit, OnChanges {
+export class SuchmaskeComponent implements OnChanges {
 
   // Emits changes of search parameters
   @Output() public suchEvents: EventEmitter<AbstractControl> = new EventEmitter<AbstractControl>();
@@ -211,10 +211,7 @@ export class SuchmaskeComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnInit() {
-  }
-
-  startTheSearch(){
+  startTheSearch() {
     console.log('startTheSearch');
     this.startSearch.emit();
   }

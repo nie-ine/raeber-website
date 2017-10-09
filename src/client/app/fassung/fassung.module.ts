@@ -15,11 +15,11 @@ import {
   MdListModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { DiplomatischerTextModule } from '../shared/diplomatischer-text/diplomatischer-text.module';
 import { FassungRoutingModule } from './fassung-routing.module';
 import { ImageFrameModule } from '../shared/image-frame/image-frame.module';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern.component';
 import { FassungComponent } from './fassung.component';
@@ -29,6 +29,7 @@ import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.compo
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { TextComponent } from '../shared/text/text.component';
 import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassung-diplomatisch-seiten.component';
+import { KonvolutModule } from '../konvolut/konvolut.module';
 
 
 @NgModule({
@@ -46,7 +47,9 @@ import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassu
     MdIconModule,
     MdInputModule,
     MdListModule,
+    NgbModule,
     RegisterspalteModule,
+    KonvolutModule,
     FassungRoutingModule
   ],
   declarations: [

@@ -61,71 +61,92 @@
                         </md-card-footer>
                       </md-card>
 
-                        <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
-                          <md-card-content *ngIf="zeigeDiplomatisch">
-                            <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
-                                                      (pictureReduced)="show_register = true;"
-                                                      (pictureIncreased)="show_register = false;">
-                            </rae-fassung-diplomatisch>
-                          </md-card-content>
-                          <md-card-footer>
-                            <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
-                              <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
-                              <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
-                              <span *ngIf="zeigeDiplomatisch">Diplomatischen Text verbergen</span>
-                              <span *ngIf="!zeigeDiplomatisch">Diplomatischen Text anzeigen</span>
-                            </button>
-                          </md-card-footer>
-                        </md-card>
+                      <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
+                        <md-card-content *ngIf="zeigeDiplomatisch">
+                          <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
+                                                    (pictureReduced)="show_register = true;"
+                                                    (pictureIncreased)="show_register = false;">
+                          </rae-fassung-diplomatisch>
+                        </md-card-content>
+                        <md-card-footer>
+                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
+                            <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
+                            <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
+                            <span *ngIf="zeigeDiplomatisch">Diplomatischen Text verbergen</span>
+                            <span *ngIf="!zeigeDiplomatisch">Diplomatischen Text anzeigen</span>
+                          </button>
+                        </md-card-footer>
+                      </md-card>
 
-                      </div>
-                      <div class="itemExtraFields">
-                        <rae-fassung-steckbrief></rae-fassung-steckbrief>
-                      </div>
                     </div>
-
-                    <div class="itemLinks">
-                      <!-- Item tags -->
-                      <div class="itemTagsBlock">
-                        <span>Synopse:</span>
-                        <ul class="itemTags">
-                          <li *ngFor="let t of fassung_tag">
-                            <a [routerLink]="['/synopsen/', + t]" routerLinkActive="active">{{t}}</a>
-                          </li>
-                        </ul>
-                      </div>
+                    <div class="itemExtraFields">
+                      <rae-fassung-steckbrief></rae-fassung-steckbrief>
                     </div>
+                  </div>
 
-                    <!-- Related items by tag -->
-                    <div class="itemRelated">
-                      <rae-fassung-weitere [synopsenTags]="fassung_tag"></rae-fassung-weitere>
-                    </div>
-
-                    <div class="itemToolbar">
-                      <ul>
-                        <rae-fassung-blaettern
-                          style="font-size: 0.8em; float: left"
-                          [idOfPrev]="prevPoem"
-                          [idOfNext]="nextPoem"></rae-fassung-blaettern>
-                        <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
-                        <!-- Print Button -->
+                  <div class="itemLinks">
+                    <!-- Item tags -->
+                    <div class="itemTagsBlock">
+                      <span>Synopse:</span>
+                      <ul class="itemTags">
+                        <li *ngFor="let t of fassung_tag">
+                          <a [routerLink]="['/synopsen/', + t]" routerLinkActive="active">{{t}}</a>
+                        </li>
                       </ul>
                     </div>
+                  </div>
+
+                  <!-- Related items by tag -->
+                  <div class="itemRelated">
+                    <rae-fassung-weitere [synopsenTags]="fassung_tag"></rae-fassung-weitere>
+                  </div>
+
+                  <div class="itemToolbar">
+                    <ul>
+                      <rae-fassung-blaettern
+                        style="font-size: 0.8em; float: left"
+                        [idOfPrev]="prevPoem"
+                        [idOfNext]="nextPoem"></rae-fassung-blaettern>
+                      <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
+                      <!-- Print Button -->
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="rt-grid-3 " *ngIf="show_register">
-            <div id="rt-sidebar-a">
-              <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+        </div>
+        <div class="rt-grid-3 " *ngIf="show_register">
+          <div id="rt-sidebar-a" style="margin-top:4px;">
+            <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
+              <ngb-panel id="register" title="Register">
+                <ng-template ngbPanelContent>
+                  <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
+                <ng-template ngbPanelContent>
+                  <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                </ng-template>
+              </ngb-panel>
+              <!--           <ngb-panel id="darstellung" title="Darstellungsoptionen">
+                           <ng-template ngbPanelContent>
+                             <rae-darstellungsoptionen (darstellung)="setTextgridLayout($event)"
+                                                       (vergroessereText)="textgrid.vergroessereFeld()"
+                                                       (verkleinereText)="textgrid.verkleinereFeld()"
+                                                       [gridHeight]="gridHeight"
+                                                       (resetHeight)="textgrid.resetField()"></rae-darstellungsoptionen>
+                           </ng-template>
+                         </ngb-panel>-->
+            </ngb-accordion>
+            <!--<rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>-->
 
-              <div class="moduletable">
-                <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
-                <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-                <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-              </div>
-            </div>
+            <!--<div class="moduletable">-->
+            <!--<h6>Suchen: {{konvolut_id}}</h6>&lt;!&ndash; TODO: Variable ersetzen &ndash;&gt;-->
+            <!--<p>Nach Suchbegriff</p>&lt;!&ndash; TODO: ersetzen &ndash;&gt;-->
+            <!--<p>Nach Seite oder Blatt</p>&lt;!&ndash; TODO: ersetzen &ndash;&gt;-->
+            <!--</div>-->
+            <!--</div>-->
           </div>
         </div>
       </div>

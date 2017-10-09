@@ -24,6 +24,9 @@ export class RegisterspalteComponent implements OnChanges {
 
   @Input() konvolutIRI: string;
 
+  poems: Array<any>;
+  poemIRIArray: Array<any>;
+
   rsEntry: Array<any>;
   nHits: number;
   konvolutId: string;
@@ -115,5 +118,15 @@ export class RegisterspalteComponent implements OnChanges {
 
   formatDate(date: string) {
     return this.dateFormatService.germanLongDate(date);
+  }
+
+  updatePoemInformation(poemInformation: Array<any>) {
+    //console.log(poemInformation);
+    this.poems = poemInformation;
+    //console.log(this.poems);
+  }
+
+  createPoemIRIList(poemIRIList: Array<any>) {
+    this.poemIRIArray = poemIRIList;
   }
 }

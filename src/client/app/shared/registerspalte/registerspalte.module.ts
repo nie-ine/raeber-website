@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 
 import { RegisterspalteComponent } from './registerspalte.component';
 import { CommonModule } from '@angular/common';
+import { KonvolutModule } from '../../konvolut/konvolut.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     FormsModule,
     HttpModule,
+    KonvolutModule,
     MdButtonToggleModule,
     MdListModule,
     RouterModule

@@ -1,6 +1,6 @@
 <div>
   <md-toolbar>
-    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{page}}"
+    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{textIRI}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
       <md-button-toggle value="schicht0"
                         [ngStyle]="{'color': farbeNeutral}"
@@ -30,6 +30,7 @@
 
   </md-toolbar>
   <div class="umschrift edtext edtext_hs"
-       [innerHtml]="text"
-       [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}"></div>
+       [ngClass]="{'rae-diplomatic-movable': textIsMovable, 'rae-diplomatic-in-place': !textIsMovable}">
+    <div class="transkription" [innerHtml]="text"></div>
+  </div>
 </div>

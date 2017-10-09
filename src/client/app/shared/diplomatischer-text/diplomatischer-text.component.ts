@@ -2,7 +2,9 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Http } from '@angular/http';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -10,10 +12,10 @@ import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angula
   templateUrl: 'diplomatischer-text.component.html',
   styleUrls: [ 'diplomatischer-text.component.css' ]
 })
-export class DimplomatischerTextComponent implements OnInit, DoCheck {
+export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges {
 
-  @Input() page: any;
   @Input() gewaehlteSchicht: string;
+  @Input() textIRI: string;
   @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();
 
 
@@ -27,9 +29,7 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck {
   textIsMovable: boolean = false;
   // TODO: herausfinden wie das geht
 
-  text: string = '<div class="transkription"><p>Baum</p><p><span class="einfuegung">Durch die Zweige </span><span class="einfuegung_gestr">schaut es</span><br /><span class="streichung grundschicht">Durch die Zweige</span> 				</p> 				<span class="weiss">schauten die Augen</span><span class="einfuegung_gestr">hervor</span><br /> 				<span class="streichung"><span class="grundschicht">schau<span class="ueberschrieben">en</span></span><span class="einfuegung_gestr ersetzung">t </span><span class="grundschicht">die Augen <span class="ueberschrieben">hervor</span></span> </span><span class="ersetzung streichung einfuegung_gestr">voller</span><span class="grundschicht">,</span><br /><span class="weiss">schauten die</span><span class="streichung einfuegung">Trauer hervor.</span> 				<p class="grundschicht"> 					<span class="streichung">voller Trauer,</span> 				</p> 				<p> 					<span class="einfuegung">schaut es hervor und senkt</span><br /><span class="streichung grundschicht">aber das Licht</span> 				</p> 				<span class="streichung grundschicht">auf den Blättern</span>&nbsp;<span class="einfuegung_gestr">schwarz und tr</span><br /><span class="weiss">auf den Blät&nbsp; tern </span><span class="einfuegung">langsam die Lider,</span> 				<p> 					<span class="streichung grundschicht">ist wie ein Lächeln.</span><span class="einfuegung"> schwarz,&nbsp;voller&nbsp;Trauer</span> 				</p> 				<p> 					<span class="streichung">Durch die Zweige schaut es,&nbsp;</span><span class="einfuegung_gestr">die Wimpern<br /></span><span class="weiss">Durch die Zweige schaut es,&nbsp;</span><span class="einfuegung_gestr">hervor</span> 				</p> 				<p> 					<span class="streichung">die Wimp </span> 				</p> 				<p> 					<span class="streichung">[langsam senkend hervor </span> 				</p> 				<p> 					<span class="streichung">schwarz hervor und senkt</span> 				</p> 				<p> 					<span class="streichung">langsam die]</span> 				</p> 				<p> 					<span class="streichung">hervor und senkt</span>&nbsp;<span class="streichung">schaut es </span> 				</p> 				<p> 					<span class="streichung grundschicht">schwarz hervor und senkt</span> 				</p> 				<p> 					<span class="streichung grundschicht">langsam die Wimpern.</span><br /><span class="weiss">langsam voller Trauer die</span><span class="einfuegung_gestr">Lider</span>.<br /><span class="weiss">langsam</span><span class="streichung">voller Trauer die Wimpern</span>. // 				</p> 			</div>';
-// TODO: dynamisieren
-
+  text: string;
 
   // collection of elements
   blocktilgungElements = document.getElementsByClassName('blocktilgung') as HTMLCollectionOf<HTMLElement>;
@@ -48,8 +48,23 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck {
   unsicher_gestrElements = document.getElementsByClassName('unsicher_gestr') as HTMLCollectionOf<HTMLElement>;
   zeileElements = document.getElementsByClassName('zeile') as HTMLCollectionOf<HTMLElement>;
 
+  private sub: any;
+
+  constructor(private http: Http) {}
+
   ngOnInit() {
     this.updateSchichten();
+  }
+
+  ngOnChanges() {
+    if(this.textIRI) {
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
+        .map(response => response.json())
+        .subscribe(res =>{
+          this.text = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+          this.updateSchichten();
+        });
+    }
   }
 
   ngDoCheck() {

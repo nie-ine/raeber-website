@@ -12,14 +12,13 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { Router } from '@angular/router';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: ['textgrid.component.css']
+  styleUrls: [ 'textgrid.component.css' ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -35,10 +34,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   gridTextHeight: number = 0;
   i: number;
-  router: Router;
 
-  constructor(private cdr: ChangeDetectorRef, r: Router) {
-    this.router = r;
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -46,22 +43,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         if (!chng.isFirstChange()) {
-          if(this.poemsInGrid) {
-          this.poemsInGrid = chng.currentValue;
-          for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
+          if (this.poemsInGrid) {
+            this.poemsInGrid = chng.currentValue;
+            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+              this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
             }
           }
         }
+      }
+      /*    for (let propName in changes) {
+       let chng = changes[propName];
+       let cur  = JSON.stringify(chng.currentValue);
+       let prev = JSON.stringify(chng.previousValue);
+       this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+       }*/
+      // changes.prop contains the old and the new value...
     }
-    /*    for (let propName in changes) {
-     let chng = changes[propName];
-     let cur  = JSON.stringify(chng.currentValue);
-     let prev = JSON.stringify(chng.previousValue);
-     this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-     }*/
-    // changes.prop contains the old and the new value...
-  }
   }
 
 
@@ -96,3 +93,4 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
+}

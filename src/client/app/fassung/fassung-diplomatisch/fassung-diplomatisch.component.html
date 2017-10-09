@@ -1,5 +1,9 @@
+<ng-container *ngFor="let pageIRI of pageIRIs">
+  <rae-fassung-diplomatisch-seiten [pageIRI]="pageIRI" (propertiesReset)="addPage($event)"></rae-fassung-diplomatisch-seiten>
+</ng-container>
+
 <div *ngFor="let p of pages">
-  <h5>{{p}}</h5>
+  <h5>{{p['pagenumber']}}</h5>
   <div style="display: inline-block; vertical-align: top">
     <!-- TODO: insert picture component here -->
     <rae-image-frame
@@ -7,6 +11,6 @@
       (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
   </div>
   <div style="display: inline-block; vertical-align: top">
-    <rae-diplomatischer-text [page]="p" [(gewaehlteSchicht)]="gewaehlteSchicht"></rae-diplomatischer-text>
+    <rae-diplomatischer-text [textIRI]="p['diplIRI']" [(gewaehlteSchicht)]="gewaehlteSchicht"></rae-diplomatischer-text>
   </div>
 </div>

@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/Rx';
 
 import 'rxjs/add/operator/catch';
@@ -44,11 +43,12 @@ export class ImageFrameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.konvolut_type = this.route.snapshot.url[0].path;
+    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
   }
 
   searchForDoctor() {
-    return this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id%5B%5D=439&compop%5B%5D=!EQ&searchval%5B%5D=&show_nrows=25&start_at=0&progvalfile=prog_63047.salsah&filter_by_restype=100')
+    return this.http.get('http://test-02.salsah.org/api/search/?searchtype=extended&property_id%5B%5D=439&compop%5B%5D=!EQ&searchval%5B%5D=&show_nrows=25&' +
+      'start_at=0&progvalfile=prog_63047.salsah&filter_by_restype=100')
       .map(
         (lambda: Response) => {
           const data = lambda.json();
@@ -63,8 +63,7 @@ export class ImageFrameComponent implements OnInit {
   increaseSize() {
     if (this.zoomfactor > 2) {
       this.zoomfactor -= 1;
-    }
-    else {
+    } else {
       window.alert('Picture reached maximum quality');
     }
   }
@@ -73,8 +72,7 @@ export class ImageFrameComponent implements OnInit {
   reduceSize() {
     if (this.zoomfactor < 5) {
       this.zoomfactor += 1;
-    }
-    else {
+    } else {
       window.alert('Picture reached minimum quality');
     }
   }

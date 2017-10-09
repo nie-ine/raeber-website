@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { FulltextSearch } from '../shared/utilities/knora-api-params';
+import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -30,8 +31,7 @@ export class FassungComponent implements OnInit {
   ];
   // TODO dynamisieren
 
-  pages: Array<any> = ['page1', 'page2'];
-  // TODO dynamisieren
+  pageIRIs: Array<string>;
 
   // for testings
   searchQuery: string;
@@ -39,7 +39,7 @@ export class FassungComponent implements OnInit {
   poem_id: string;
   konvolut_id: string;
   konvolut_type: string;
-  konvolutIRI = 'http://rdfh.ch/kuno-raeber/UP1rlPeKR26d8YZPnTo1IQ'
+  konvolutIRI = 'http://rdfh.ch/kuno-raeber/34FIMLqvTZqHv4GUaaohKw';
 
   nextPoem: string = '219-brunnen'; // TODO
   prevPoem: string = '221-baum'; // TODO
@@ -48,6 +48,7 @@ export class FassungComponent implements OnInit {
   show_register: boolean;
 
   private sub: any;
+  private sub2: any;
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   }
@@ -66,5 +67,12 @@ export class FassungComponent implements OnInit {
       this.konvolut_id = params[ 'konvolut' ];
       this.poem_id = params[ 'fassung' ];
     });
+
+    this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
+      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
+      .map(result => result.json())
+      .subscribe(res => {
+        this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;
+      });
   }
 }

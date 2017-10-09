@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -12,6 +12,7 @@ export class DefineOnePropertyForRequestComponent implements OnInit {
   @Input() myProperties: Array<any>;
   @Input() availableboolOperators: Array<any>;
   @Input() nthResourceSearch: string;
+  @Output() sendPropertyTripleBack: EventEmitter<any> = new EventEmitter<any>();
   selectedProperty: string;
   propertyTriple = [''];
   selectedBoolOperator: string;
@@ -51,8 +52,5 @@ export class DefineOnePropertyForRequestComponent implements OnInit {
     //console.log('PropertyTriple is: ' + this.propertyTriple);
     this.sendPropertyTripleBack.emit(this.propertyTriple);
   }
-
-  @Output() sendPropertyTripleBack: EventEmitter<any> = new EventEmitter<any>();
-
 
 }

@@ -5,7 +5,7 @@
 /**
  * NOW IN parser Module!, This version has not been used anymore! Written by Jan Clemens Stoffregen
  */
-/
+
 import { Injectable } from '@angular/core';
 
 @Injectable()

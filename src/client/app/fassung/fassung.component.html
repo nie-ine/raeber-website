@@ -1,65 +1,65 @@
 <div id="rae-fassung-view">
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
-        <div class="rt-container">
-          <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
-            <div class="rt-block">
-              <div id="rt-mainbody">
-                <div class="component-content">
+      <div class="rt-container">
+        <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
+          <div class="rt-block">
+            <div id="rt-mainbody">
+              <div class="component-content">
 
-                  <div id="rae-toolbar">
-                    <rae-fassung-werkzeugleiste
-                      [(showRegister)]="show_register"
-                      [(poemResizable)]="poem_resizable"
-                      [idOfPrev]="prevPoem"
-                      [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                <div id="rae-toolbar">
+                  <rae-fassung-werkzeugleiste
+                    [(showRegister)]="show_register"
+                    [(poemResizable)]="poem_resizable"
+                    [idOfPrev]="prevPoem"
+                    [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                </div>
+
+                <div id="k2Container" class="itemView">
+
+                  <div class="itemTagsBlock" style='float:right'>
+                    <ul class="itemTags">
+                      <li *ngFor="let t of fassung_tag">
+                        <a [routerLink]="['/synopsen/' + t]" routerLinkActive="active">
+                          Synopse&nbsp;{{ t }} &nbsp;
+                        </a>
+                      </li>
+                    </ul>
                   </div>
 
-                  <div id="k2Container" class="itemView">
+                  <div class="itemHeader">
+                    <!-- Date created -->
+                    <span class="itemDateCreated">{{ creationDate }}</span>
+                    <!-- Item title -->
+                    <h2 class="itemTitle">
+                      {{ poem_id }}
+                      <!-- TODO -->
+                      Wolke
+                    </h2>
+                  </div>
 
-                    <div class="itemTagsBlock" style='float:right'>
-                      <ul class="itemTags">
-                        <li *ngFor="let t of fassung_tag">
-                          <a [routerLink]="['/synopsen/' + t]" routerLinkActive="active">
-                            Synopse&nbsp;{{t}} &nbsp;
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                  <div class="itemBody">
 
-                    <div class="itemHeader">
-                      <!-- Date created -->
-                      <span class="itemDateCreated">{{creationDate}}</span>
-                      <!-- Item title -->
-                      <h2 class="itemTitle">
-                        {{poem_id}}
-                        <!-- TODO -->
-                        Wolke
-                      </h2>
-                    </div>
+                    <!-- Item text -->
+                    <div class="itemFullText">
 
-                    <div class="itemBody">
-
-                      <!-- Item text -->
-                      <div class="itemFullText">
-
-                        <md-card>
-                          <md-card-content
-                            *ngIf="zeigeKonstituiert"
-                            [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
-                            <section class="edtext edtext_hs">
-                              <rae-text></rae-text>
-                            </section>
-                          </md-card-content>
-                          <md-card-footer>
-                            <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
-                              <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
-                              <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
-                              <span *ngIf="zeigeKonstituiert">Text verbergen</span>
-                              <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
-                            </button>
-                          </md-card-footer>
-                        </md-card>
+                      <md-card>
+                        <md-card-content
+                          *ngIf="zeigeKonstituiert"
+                          [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
+                          <section class="edtext edtext_hs">
+                            <rae-text></rae-text>
+                          </section>
+                        </md-card-content>
+                        <md-card-footer>
+                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
+                            <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
+                            <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
+                            <span *ngIf="zeigeKonstituiert">Text verbergen</span>
+                            <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
+                          </button>
+                        </md-card-footer>
+                      </md-card>
 
                         <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
                           <md-card-content *ngIf="zeigeDiplomatisch">

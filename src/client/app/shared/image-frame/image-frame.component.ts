@@ -1,7 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import 'rxjs/Rx';
 
 import 'rxjs/add/operator/catch';
@@ -34,11 +31,6 @@ export class ImageFrameComponent implements OnInit {
   px = 'px';
 
   ausgeklappt: boolean = true;
-
-  private sub: any;
-
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
-  }
 
   ngOnInit() {
     this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[0];

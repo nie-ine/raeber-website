@@ -8,7 +8,7 @@
                  style="width: 250px"/>
         </md-input-container>
         <md-select placeholder="Suchraum" formControlName="suchwortSuchraum" floatPlaceholder="never">
-          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{raum.viewValue}}</md-option>
+          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{ raum.viewValue }}</md-option>
         </md-select>
         <button md-button (click)="startTheSearch()" >
           <md-icon>arrow_forward</md-icon>
@@ -23,7 +23,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.notizbuecher=!catHidden.notizbuecher">
-                  <md-icon>{{catHidden.notizbuecher ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.notizbuecher ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox class="md-checkbox" formControlName="notizbuchAll"
                              [class.green]="childElemsAreChecked('notizbuchForm', 'notizbuchAll') || pristineConvolutes()"
@@ -138,7 +138,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.manuskripte=!catHidden.manuskripte">
-                  <md-icon>{{catHidden.manuskripte ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.manuskripte ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox formControlName="manuskriptAll"
                              [class.green]="childElemsAreChecked('manuskriptForm', 'manuskriptAll') || pristineConvolutes()"
@@ -289,7 +289,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.typoskripte=!catHidden.typoskripte">
-                  <md-icon>{{catHidden.typoskripte ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.typoskripte ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox formControlName="typoskriptAll"
                              [class.green]="childElemsAreChecked('typoskriptForm', 'typoskriptAll') || pristineConvolutes()"
@@ -507,7 +507,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.drucke=!catHidden.drucke">
-                  <md-icon>{{catHidden.drucke ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.drucke ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox formControlName="druckAll"
                              [class.green]="childElemsAreChecked('druckForm', 'druckAll') || pristineConvolutes()"
@@ -602,7 +602,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.zeitschriften=!catHidden.zeitschriften">
-                  <md-icon>{{catHidden.zeitschriften ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.zeitschriften ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox formControlName="zeitschriftAll"
                              [class.green]="childElemsAreChecked('zeitschriftForm', 'zeitschriftAll') || pristineConvolutes()"
@@ -797,7 +797,7 @@
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
                         (click)="catHidden.materialien=!catHidden.materialien">
-                  <md-icon>{{catHidden.materialien ? 'expand_less' : 'expand_more'}}</md-icon>
+                  <md-icon>{{ catHidden.materialien ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
                 <md-checkbox formControlName="materialienAll"
                              [class.green]="childElemsAreChecked('materialienForm', 'materialienAll') || pristineConvolutes()"
@@ -824,8 +824,8 @@
                 </md-checkbox>
               </li>
             </ul>
-            <button md-button (click)="selectAllConvolutes()">{{allConvolutesSelected ? 'Alle abwählen' : 'Alle
-              auswählen'}}
+            <button md-button (click)="selectAllConvolutes()">{{ allConvolutesSelected ? 'Alle abwählen' : 'Alle
+              auswählen' }}
             </button>
           </ng-template>
         </ngb-panel>

@@ -26,12 +26,11 @@ export class RegisterspalteComponent implements OnChanges {
 
   poems: Array<any>;
   poemIRIArray: Array<any>;
-
-  rsEntry: Array<any>;
-  nHits: number;
+  nrOfPoems: number;
   konvolutId: string;
   konvolutType: string;
-  konvolutTypeMap = {
+  knoraKonvolutType: string;
+  konvolutTypeMap: any = {
     'poem notebook': 'notizbuecher',
     'poem manuscript convolute': 'manuskripte',
     'poem typescript convolute': 'typoskripte',
@@ -57,28 +56,41 @@ export class RegisterspalteComponent implements OnChanges {
       .map(response => response.json()).subscribe(res => {
         this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
         this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
-        this.konvolutType = res.resinfo.restype_label;
-      });
-
-    // load poems
-    let searchParams = new ExtendedSearch();
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/work#isPartOf', 'EQ', this.konvolutIRI);
-    searchParams.showNRows = 500;
-
-    this.http.get(searchParams.toString())
-      .map(response => response.json())
-      .subscribe((res: any) => {
-        this.rsEntry = res.subjects;
-        this.nHits = res.nhits;
-        this.sortAlphabetically();
-        this.sortingType = 'alphabetic';
+        this.knoraKonvolutType = res.resinfo.restype_label;
+        this.konvolutType = this.konvolutTypeMap[this.knoraKonvolutType];
       });
   }
 
+  updatePoemInformation(poemInformation: Array<any>) {
+    this.poems = [];
+
+    for (let i = 0; i < poemInformation.length; i++) {
+      this.poems.push({
+        'title': poemInformation[ i ][ 0 ],
+        'textdate': this.formatDate(poemInformation[ i ][ 1 ]),
+        'date': poemInformation[ i ][ 1 ],
+        'text': this.removeHtml(poemInformation[ i ][ 2 ]),
+        'iri': poemInformation[ i ][ 3 ],
+        'reihe': poemInformation[ i ][ 3 ]
+      });
+
+      this.nrOfPoems = poemInformation.length;
+    }
+
+
+    this.sortingType = 'alphabetic';
+    this.sortAlphabetically();
+  }
+
+  createPoemIRIList(poemIRIList: Array<any>) {
+    this.poemIRIArray = poemIRIList;
+  }
+
   sortAlphabetically() {
-    this.rsEntry = this.rsEntry.sort((n1, n2) => {
-      const k1 = this.sortingService.germanAlphabeticalSortKey(n1.value[ 0 ]);
-      const k2 = this.sortingService.germanAlphabeticalSortKey(n2.value[ 0 ]);
+    this.sortingType = 'alphabetic';
+    this.poems = this.poems.sort((n1, n2) => {
+      const k1 = this.sortingService.germanAlphabeticalSortKey(n1.title);
+      const k2 = this.sortingService.germanAlphabeticalSortKey(n2.title);
       if (k1 > k2) {
         return 1;
       }
@@ -92,17 +104,18 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   sortChronologically() {
+    this.sortingType = 'chronologic';
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
     // TODO passe an entsprechende Datentypen der Felder an
-    this.rsEntry = this.rsEntry.sort((n1, n2) => {
+    this.poems = this.poems.sort((n1, n2) => {
       let k1;
       let k2;
       if (this.konvolutType === 'notizbuecher' || this.konvolutType === 'manuskripte') {
-        k1 = n1.obj_id;
-        k2 = n2.obj_id;
+        k1 = n1.date;
+        k2 = n2.date;
       } else {
-        k1 = n1.obj_id;
-        k2 = n2.obj_id;
+        k1 = n1.reihe;
+        k2 = n2.reihe;
       }
       if (k1 > k2) {
         return 1;
@@ -120,13 +133,16 @@ export class RegisterspalteComponent implements OnChanges {
     return this.dateFormatService.germanLongDate(date);
   }
 
-  updatePoemInformation(poemInformation: Array<any>) {
-    //console.log(poemInformation);
-    this.poems = poemInformation;
-    //console.log(this.poems);
+  produceFassungsLink(titel: string, iri: string) {
+   if(titel !== undefined && iri !== undefined) {
+      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
   }
 
-  createPoemIRIList(poemIRIList: Array<any>) {
-    this.poemIRIArray = poemIRIList;
+  removeHtml(content: string) {
+    return content.replace(/<[^>]+>/g, '');
   }
+
 }

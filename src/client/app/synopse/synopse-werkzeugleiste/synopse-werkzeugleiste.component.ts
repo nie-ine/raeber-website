@@ -26,6 +26,7 @@ export class SynopseWerkzeugleisteComponent {
   @Output() showNotebooksState = new EventEmitter();
   @Output() showManuscriptsState = new EventEmitter();
   @Output() showTyposcriptsState = new EventEmitter();
+  @Output() showDuplicatesState = new EventEmitter();
 
   columns: number = 2;
   rahmen: boolean = true;
@@ -33,7 +34,7 @@ export class SynopseWerkzeugleisteComponent {
   showNotebooks: boolean = true;
   showManuscripts: boolean = true;
   showTyposcripts: boolean = true;
-
+  showDuplicates: boolean = true;
 
   constructor(public dialog: MdDialog) {
   }
@@ -85,6 +86,11 @@ export class SynopseWerkzeugleisteComponent {
   toggleShowTyposcripts() {
     this.showTyposcripts = !this.showTyposcripts;
     this.showTyposcriptsState.emit();
+  }
+
+  toggleShowDuplicates() {
+    this.showDuplicates = !this.showDuplicates;
+    this.showDuplicatesState.emit();
   }
 
 }

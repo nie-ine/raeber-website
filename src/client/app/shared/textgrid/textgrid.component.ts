@@ -78,9 +78,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
-
-    // TODO: Real implementation
-    return true;
+    return !x[ 4 ];
   }
 
   /**

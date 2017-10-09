@@ -18,7 +18,8 @@
                                               (firstLastState)="setFilterFirstLast()"
                                               (showNotebooksState)="toggleShowNotebooks()"
                                               (showManuscriptsState)="toggleShowManuscripts()"
-                                              (showTyposcriptsState)="toggleShowTyposcripts()">
+                                              (showTyposcriptsState)="toggleShowTyposcripts()"
+                                              (showDuplicatesState)="toggleShowDuplicates()">
                   </rae-synopse-werkzeugleiste>
                   <from-poem-iri-to-textgrid-information [poemIRIArray]="poemsIri"
                                                          (sendPoemInformationBack)="updatePoemInformation($event)"></from-poem-iri-to-textgrid-information>
@@ -32,6 +33,7 @@
                                 [filterNotebookFlag]="!showNotebooks"
                                 [filterManuscriptFlag]="!showManuscripts"
                                 [filterTyposcriptFlag]="!showTyposcripts"
+                                [filterDuplicatesFlag]="!showDuplicates"
                                 (gridHeight)="setGridHeight($event)">
                   </rae-textgrid>
                 </div>

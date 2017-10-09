@@ -40,6 +40,9 @@
     <button md-raised-button class="layoutbutton" title="ErstLetzt" (click)="setFirstLast()">
       {{firstLast ? 'Alle Zeugen' : 'Erst + Letzt'}}
     </button>
+    <button md-raised-button class="layoutbutton" title="Duplikate anzeigen" (click)="toggleShowDuplicates()">
+      {{showDuplicates ? '- Duplikate' : '+ Duplikate'}}
+    </button>
     <button md-raised-button class="layoutbutton" title="Notizbücher anzeigen" (click)="toggleShowNotebooks()">
       {{showNotebooks ? '- Notizbücher' : '+ Notizbücher'}}
     </button>

@@ -31,6 +31,7 @@ export class SynopseComponent implements OnInit {
   showNotebooks = true;
   showManuscripts = true;
   showTyposcripts = true;
+  showDuplicates = true;
 
   private sub: any;
 
@@ -93,6 +94,10 @@ export class SynopseComponent implements OnInit {
 
   toggleShowTyposcripts() {
     this.showTyposcripts = !this.showTyposcripts;
+  }
+
+  toggleShowDuplicates() {
+    this.showDuplicates = !this.showDuplicates;
   }
 
 }

@@ -2,95 +2,147 @@
   <h3>Weitere Informationen</h3>
   <ul>
     <li *ngIf="specialDescription" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Besonderes:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="specialDescription"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Besonderes:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="specialDescription"></span>
+      </p>
     </li>
     <li *ngIf="detailDescription" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Details:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="detailDescription"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Details:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="detailDescription"></span>
+      </p>
     </li>
     <li *ngIf="lastAuthorizedPublication" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Letzter Druck:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="lastAuthorizedPublication"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
     <li *ngIf="publishingState === 'unpublished'" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Letzter Druck:</span>
-      <span class="itemExtraFieldsValue">Unpubliziert</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+        <span class="itemExtraFieldsValue">Unpubliziert</span>
+      </p>
     </li>
-    <li *ngIf="unauthorizedPublication === 'unpublished'" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Nachdruck:</span>
-      <span class="itemExtraFieldsValue">{{ unauthorizedPublication }}</span>
+    <li *ngIf="unauthorizedPublication" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Nachdruck:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
     <li *ngIf="publishedIn" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Zeitschrift:</span>
-      <span class="itemExtraFieldsValue">{{ publishedIn }}</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Zeitschrift:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
     <li *ngIf="nachlassPublicationDescription" class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Werke:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Werke:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
+      </p>
     </li>
     <li *ngIf="publicationNumber" class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Textnr.:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Textnr.:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+      </p>
     </li>
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Mehrteilig</span>
-      <span class="itemExtraFieldsValue">TODO</span><!-- TODO -->
+      <p>
+        <span class="itemExtraFieldsLabel">Mehrteilig</span>
+        <span class="itemExtraFieldsValue">TODO</span><!-- TODO -->
+      </p>
     </li>
     <li *ngIf="structure" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Textart:</span>
-      <span class="itemExtraFieldsValue">{{ textartMap[structure] }}</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Textart:</span>
+        <span class="itemExtraFieldsValue">{{ textartMap[structure] }}</span>
+      </p>
     </li>
     <li *ngIf="isFinalVersion" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Endfassung:</span>
-      <span class="itemExtraFieldsValue">ja</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Endfassung:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
     </li>
     <li *ngIf="hasStrophen" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Strophen:</span>
-      <span class="itemExtraFieldsValue">ja</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Strophen:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
     </li>
     <li *ngIf="isPartOfCycle" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Zyklus:</span>
-      <span class="itemExtraFieldsValue">ja</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Zyklus:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
     </li>
     <li *ngIf="isInDialect" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Mundart:</span>
-      <span class="itemExtraFieldsValue">ja</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Mundart:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
     </li>
     <!-- TODO bezugstext -->
     <li *ngIf="isWrittenWith" class="typeSelect group2">
-      <span class="itemExtraFieldsLabel">Schreibzeug:</span>
-      <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Schreibzeug:</span>
+        <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
+      </p>
     </li>
-     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Signatur:</span><!-- TODO  -->
-      <span class="itemExtraFieldsValue">A-5-g/01</span>
+    <li class="typeTextfield group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Signatur:</span><!-- TODO  -->
+        <span class="itemExtraFieldsValue">A-5-g/01 TODO</span>
+      </p>
     </li>
     <li *ngIf="pageNumberDescription" class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
-      <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
+      <p>
+        <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
+      </p>
     </li>
 
 
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Status Text:</span>
-      <span class="itemExtraFieldsValue">Kontrolliert</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Status Text:</span>
+        <span class="itemExtraFieldsValue">Kontrolliert</span>
+      </p>
     </li>
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Umschrift:</span>
-      <span class="itemExtraFieldsValue">Kontrolliert</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Umschrift:</span>
+        <span class="itemExtraFieldsValue">Kontrolliert</span>
+      </p>
     </li>
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Stufe</span>
-      <span class="itemExtraFieldsValue">002</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Stufe</span>
+        <span class="itemExtraFieldsValue">002</span>
+      </p>
     </li>
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Priorität:</span>
-      <span class="itemExtraFieldsValue">Hoch</span>
+      <p>
+        <span class="itemExtraFieldsLabel">Priorität:</span>
+        <span class="itemExtraFieldsValue">Hoch</span>
+      </p>
     </li>
     <li class="typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Identisch mit:</span>
-      <span class="itemExtraFieldsValue">{{ sameEditionAs }}</span><!-- TODO -->
+      <p>
+        <span class="itemExtraFieldsLabel">Identisch mit:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
   </ul>
 </div>

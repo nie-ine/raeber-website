@@ -1,36 +1,96 @@
 <div>
   <h3>Weitere Informationen</h3>
   <ul>
-    <!-- Besonderes: ... -->
-    <!-- Zeitschrift: ... -->
-    <li class="odd typeSelect group2">
-      <span class="itemExtraFieldsLabel">Druck:</span>
-      <span class="itemExtraFieldsValue">Reduktionen 1981</span>
+    <li *ngIf="specialDescription" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Besonderes:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="specialDescription"></span>
     </li>
-    <!-- Werke -->
-    <!-- Mehrteilig -->
-    <!-- Textart -->
-    <li class="even typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
-      <span class="itemExtraFieldsValue">002</span>
+    <li *ngIf="detailDescription" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Details:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="detailDescription"></span>
     </li>
-    <li class="odd typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Signatur:</span>
+    <li *ngIf="lastAuthorizedPublication" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="lastAuthorizedPublication"></span>
+    </li>
+    <li *ngIf="publishingState === 'unpublished'" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+      <span class="itemExtraFieldsValue">Unpubliziert</span>
+    </li>
+    <li *ngIf="unauthorizedPublication === 'unpublished'" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Nachdruck:</span>
+      <span class="itemExtraFieldsValue">{{ unauthorizedPublication }}</span>
+    </li>
+    <li *ngIf="publishedIn" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Zeitschrift:</span>
+      <span class="itemExtraFieldsValue">{{ publishedIn }}</span>
+    </li>
+    <li *ngIf="nachlassPublicationDescription" class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Werke:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
+    </li>
+    <li *ngIf="publicationNumber" class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Textnr.:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+    </li>
+    <li class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Mehrteilig</span>
+      <span class="itemExtraFieldsValue">TODO</span><!-- TODO -->
+    </li>
+    <li *ngIf="structure" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Textart:</span>
+      <span class="itemExtraFieldsValue">{{ textartMap[structure] }}</span>
+    </li>
+    <li *ngIf="isFinalVersion" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Endfassung:</span>
+      <span class="itemExtraFieldsValue">ja</span>
+    </li>
+    <li *ngIf="hasStrophen" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Strophen:</span>
+      <span class="itemExtraFieldsValue">ja</span>
+    </li>
+    <li *ngIf="isPartOfCycle" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Zyklus:</span>
+      <span class="itemExtraFieldsValue">ja</span>
+    </li>
+    <li *ngIf="isInDialect" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Mundart:</span>
+      <span class="itemExtraFieldsValue">ja</span>
+    </li>
+    <!-- TODO bezugstext -->
+    <li *ngIf="isWrittenWith" class="typeSelect group2">
+      <span class="itemExtraFieldsLabel">Schreibzeug:</span>
+      <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
+    </li>
+     <li class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Signatur:</span><!-- TODO  -->
       <span class="itemExtraFieldsValue">A-5-g/01</span>
     </li>
-    <li class="odd typeRadio group2">
+    <li *ngIf="pageNumberDescription" class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
+      <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
+    </li>
+
+
+    <li class="typeTextfield group2">
       <span class="itemExtraFieldsLabel">Status Text:</span>
       <span class="itemExtraFieldsValue">Kontrolliert</span>
     </li>
-    <li class="even typeRadio group2">
+    <li class="typeTextfield group2">
       <span class="itemExtraFieldsLabel">Umschrift:</span>
       <span class="itemExtraFieldsValue">Kontrolliert</span>
     </li>
-    <!-- Stufe -->
-    <li class="even typeRadio group2">
+    <li class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Stufe</span>
+      <span class="itemExtraFieldsValue">002</span>
+    </li>
+    <li class="typeTextfield group2">
       <span class="itemExtraFieldsLabel">Priorität:</span>
       <span class="itemExtraFieldsValue">Hoch</span>
     </li>
-    <!-- Identisch mit -->
+    <li class="typeTextfield group2">
+      <span class="itemExtraFieldsLabel">Identisch mit:</span>
+      <span class="itemExtraFieldsValue">{{ sameEditionAs }}</span><!-- TODO -->
+    </li>
   </ul>
 </div>

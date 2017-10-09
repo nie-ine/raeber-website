@@ -31,6 +31,7 @@ export class FassungComponent implements OnInit {
   ];
   // TODO dynamisieren
 
+  fassungIRI: string = 'http://rdfh.ch/kuno-raeber/IIBAaSB7SLWUHj90Nh581w';
   pageIRIs: Array<string>;
 
   // for testings
@@ -69,7 +70,7 @@ export class FassungComponent implements OnInit {
     });
 
     this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
+      encodeURIComponent(this.fassungIRI))
       .map(result => result.json())
       .subscribe(res => {
         this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;

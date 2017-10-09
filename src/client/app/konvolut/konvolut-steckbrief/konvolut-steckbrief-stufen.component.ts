@@ -3,6 +3,7 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class KonvolutSteckbriefStufenComponent implements OnChanges {
       this.publications.push({'title': '', 'type': '', 'alias': ''});
 
       try {
-        this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI[i]))
+        this.sub = this.http.get(globalSearchVariableService.API_URL
+          + '/resources/' + encodeURIComponent(this.konvolutIRI[i]))
           .map(response => response.json()).subscribe(res => {
             this.publications[i]['title'] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
             this.publications[i]['alias'] = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;

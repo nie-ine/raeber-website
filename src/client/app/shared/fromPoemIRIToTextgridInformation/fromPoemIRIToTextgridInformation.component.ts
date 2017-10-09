@@ -25,10 +25,12 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
     //console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
-    for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
-      //console.log('get information for this poem:');
-      this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
-      this.poemInformation[this.i] = [];
+    if(this.poemIRIArray !== undefined) {
+      for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
+        //console.log('get information for this poem:');
+        this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
+        this.poemInformation[this.i] = [];
+      }
     }
   }
   getTitleAndDate(IRI: string, i: number) {

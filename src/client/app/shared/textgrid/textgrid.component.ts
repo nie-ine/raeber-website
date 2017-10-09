@@ -93,4 +93,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
+
+  produceFassungsLink(titel: string, iri: string) {
+    if(titel !== undefined && iri != undefined) {
+      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
+  }
 }

@@ -28,6 +28,7 @@ export class KonvolutSteckbriefDatierungComponent implements OnChanges {
     if (this.dateIRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL
         + '/resources/' + encodeURIComponent(this.dateIRI))
+
         .map(response => response.json()).subscribe(res => {
 
           try {

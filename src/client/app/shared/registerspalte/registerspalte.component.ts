@@ -47,7 +47,7 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
 
     // infos for title and routing
-    this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.konvolutIRI))
+    this.sub = this.http.get('http://130.60.24.65:3333/v1/resources/' + encodeURIComponent(this.konvolutIRI))
       .map(response => response.json()).subscribe(res => {
         this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
         this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;

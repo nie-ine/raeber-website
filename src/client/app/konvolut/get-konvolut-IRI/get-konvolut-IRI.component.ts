@@ -13,6 +13,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
   @Output() sendKonvolutTitleBack: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendKonvolutIRIBack: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendKonvolutBildBack: EventEmitter<any> = new EventEmitter<any>();
+  @Output() sendKonvolutTypeBack: EventEmitter<any> = new EventEmitter<any>();
 
   responseArray: Array<any>;
   http: Http;
@@ -177,6 +178,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
             this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
             this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
             this.sendKonvolutBildBack.emit(data.subjects[ 0 ].preview_path);
+            this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);
           }
           return data.resourcetypes;
         }

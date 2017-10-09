@@ -76,6 +76,22 @@ export class SucheComponent implements OnInit {
   temporarySearchResults: Array<any>;
   finalTemporaryResults: Array<any>;
   firstTermAfterOr = true;
+  suchmaskeKonvolutIRIMapping = [
+    {'konvolut':  'notizbuch-1979', 'suchmaskeKonvolutName': 'notizbuch79', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'notizbuch-1979-1982', 'suchmaskeKonvolutName': 'notizbuch7982', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'notizbuch-1980-1988', 'suchmaskeKonvolutName': 'notizbuch8088', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'manuskripte-1979', 'suchmaskeKonvolutName': 'manuskript79', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'manuskripte-1979-1983', 'suchmaskeKonvolutName': 'manuskript7983', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'karten-1984', 'suchmaskeKonvolutName': 'manuskriptKarten', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'typoskripte-1979', 'suchmaskeKonvolutName': 'typoskript79', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'typoskripte-1979-spez', 'suchmaskeKonvolutName': 'typoskript79Spez', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'typoskripte-1983', 'suchmaskeKonvolutName': 'typoskript83', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'gesicht-im-mittag', 'suchmaskeKonvolutName': 'druckGesicht', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'die-verwandelten-schiffe', 'suchmaskeKonvolutName': 'druckSchiffe', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'gedichte', 'suchmaskeKonvolutName': 'druckGedichte', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'flussufer', 'suchmaskeKonvolutName': 'druckFlussufer', 'enabled': 'true', 'IRI': 'undefined'},
+    {'konvolut':  'reduktionen', 'suchmaskeKonvolutName': 'druckReduktionen', 'enabled': 'true', 'IRI': 'undefined'}
+  ];
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
@@ -83,6 +99,7 @@ export class SucheComponent implements OnInit {
 
   handleSearchEvent(arg: AbstractControl) {
     console.log(arg);
+    this.updatesuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
     this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
@@ -421,6 +438,28 @@ export class SucheComponent implements OnInit {
       } else {
         this.numberOfSearchResults = this.allSearchResults.length;
       }
+    }
+  }
+
+  updatesuchmaskeKonvolutIRIMapping(arg: AbstractControl ) {
+    console.log('update Parameter for each Konvolute');
+    if(arg.get('notizbuchForm').controls.notizbuchAll.untouched === true) {
+      console.log('alle Notizbuecher');
+    } else if (arg.get('notizbuchForm').controls.notizbuchAll.value === true) {
+      console.log('alle Notizbuecher');
+    } else {
+      console.log('gehe durch jedes Notizbuch');
+    }
+    if(arg.get('manuskriptForm').controls.manuskriptAll.untouched === true) {
+      console.log('alle Manuskripte');
+    } else if (arg.get('manuskriptForm').controls.manuskriptAll.value === true) {
+      console.log('alle Manuskripte');
+    } else {
+      console.log('gehe durch jedes Manuskript');
+    }
+    for (this.i = 0; this.i < this.suchmaskeKonvolutIRIMapping.length; this.i ++) {
+      //console.log(this.suchmaskeKonvolutIRIMapping[this.i].suchmaskeKonvolutName);
+      //console.log(arg.get('notizbuchForm').controls.notizbuch79.value);
     }
   }
 

@@ -22,15 +22,19 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
   ngOnChanges() {
     //console.log('Get Information for this poem IRI: ');
-    //console.log(this.poemIRIArray);
+    console.log('PoemIRIArray: ');
+    console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
-    if(this.poemIRIArray !== undefined) {
+    if(this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+      console.log('here');
       for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
-        //console.log('get information for this poem:');
         this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
         this.poemInformation[this.i] = [];
       }
+    } else {
+      console.log('Konvolut found but no Poems found');
+      this.sendPoemInformationBack.emit(this.poemInformation);
     }
   }
   getTitleAndDate(IRI: string, i: number) {
@@ -51,8 +55,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           this.poemInformation[i][0] = data.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
           this.poemInformation[i][1] = data.props['http://www.knora.org/ontology/human#hasCreationDate'].values[0].dateval1;
           this.poemInformation[i][3] = queryPart;
-          console.log(this.poemInformation[i][0]);
-          console.log(this.poemInformation[i][1]);
+          //console.log(this.poemInformation[i][0]);
+          //console.log(this.poemInformation[i][1]);
           this.performTextQuery(data.props['http://www.knora.org/ontology/kuno-raeber#hasEdition'].values[0], i);
           return data.resourcetypes;
         }

@@ -15,7 +15,10 @@
                                               (verkleinereText)="textgrid.verkleinereFeld()"
                                               (cols)="setColumns($event)"
                                               (resetHeight)="textgrid.resetField()"
-                                              (firstLastState)="setFilterFirstLast()">
+                                              (firstLastState)="setFilterFirstLast()"
+                                              (showNotebooksState)="toggleShowNotebooks()"
+                                              (showManuscriptsState)="toggleShowManuscripts()"
+                                              (showTyposcriptsState)="toggleShowTyposcripts()">
                   </rae-synopse-werkzeugleiste>
                   <from-poem-iri-to-textgrid-information [poemIRIArray]="poemsIri"
                                                          (sendPoemInformationBack)="updatePoemInformation($event)"></from-poem-iri-to-textgrid-information>
@@ -26,6 +29,9 @@
                                 contentType="synopse"
                                 [rahmen]="werkzeugleiste.rahmen"
                                 [filterFirstLastFlag]="filterFirstLastFlag"
+                                [filterNotebookFlag]="!showNotebooks"
+                                [filterManuscriptFlag]="!showManuscripts"
+                                [filterTyposcriptFlag]="!showTyposcripts"
                                 (gridHeight)="setGridHeight($event)">
                   </rae-textgrid>
                 </div>

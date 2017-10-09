@@ -28,6 +28,9 @@ export class SynopseComponent implements OnInit {
   results: number;
 
   filterFirstLastFlag = false;
+  showNotebooks = true;
+  showManuscripts = true;
+  showTyposcripts = true;
 
   private sub: any;
 
@@ -78,6 +81,18 @@ export class SynopseComponent implements OnInit {
 
   setFilterFirstLast() {
     this.filterFirstLastFlag = !this.filterFirstLastFlag;
+  }
+
+  toggleShowNotebooks() {
+    this.showNotebooks = !this.showNotebooks;
+  }
+
+  toggleShowManuscripts() {
+    this.showManuscripts = !this.showManuscripts;
+  }
+
+  toggleShowTyposcripts() {
+    this.showTyposcripts = !this.showTyposcripts;
   }
 
 }

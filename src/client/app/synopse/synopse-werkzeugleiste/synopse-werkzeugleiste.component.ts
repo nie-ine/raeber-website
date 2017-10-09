@@ -23,10 +23,17 @@ export class SynopseWerkzeugleisteComponent {
   @Output() resetHeight = new EventEmitter();
   @Output() cols: EventEmitter<number> = new EventEmitter<number>();
   @Output() firstLastState = new EventEmitter();
+  @Output() showNotebooksState = new EventEmitter();
+  @Output() showManuscriptsState = new EventEmitter();
+  @Output() showTyposcriptsState = new EventEmitter();
 
   columns: number = 2;
   rahmen: boolean = true;
   firstLast: boolean = false;
+  showNotebooks: boolean = true;
+  showManuscripts: boolean = true;
+  showTyposcripts: boolean = true;
+
 
   constructor(public dialog: MdDialog) {
   }
@@ -65,5 +72,19 @@ export class SynopseWerkzeugleisteComponent {
     this.firstLastState.emit();
   }
 
+  toggleShowNotebooks() {
+    this.showNotebooks = !this.showNotebooks;
+    this.showNotebooksState.emit();
+  }
+
+  toggleShowManuscripts() {
+    this.showManuscripts = !this.showManuscripts;
+    this.showManuscriptsState.emit();
+  }
+
+  toggleShowTyposcripts() {
+    this.showTyposcripts = !this.showTyposcripts;
+    this.showTyposcriptsState.emit();
+  }
 
 }

@@ -36,6 +36,22 @@
     <button md-raised-button class="layoutbutton" title="ErstLetzt" (click)="setFirstLast()">
       {{firstLast ? 'Alle Zeugen' : 'Erst + Letzt'}}
     </button>
+    <button md-raised-button class="layoutbutton" title="Notizbücher anzeigen" (click)="toggleShowNotebooks()">
+      {{showNotebooks ? '- Notizbücher' : '+ Notizbücher'}}
+    </button>
+    <button md-raised-button class="layoutbutton" title="Manuskripte anzeigen" (click)="toggleShowManuscripts()">
+      {{showManuscripts ? '- Manuskripte' : '+ Manuskripte'}}
+    </button>
+    <button md-raised-button class="layoutbutton" title="Typoskripte anzeigen" (click)="toggleShowTyposcripts()">
+      {{showTyposcripts ? '- Typoskripte' : '+ Typoskripte'}}
+    </button>
+    <!--    <form [formGroup]="showConvolutes">
+          <md-select placeholder="Konvoluttypen" multiple="true" formControlName="convolutes">
+            <md-option [selected]="showNotebooks">Notizbücher</md-option>
+            <md-option selected>Manuskripte</md-option>
+            <md-option selected>Typoskripte</md-option>
+          </md-select>
+        </form>-->
   </md-toolbar-row>
 
 </md-toolbar>

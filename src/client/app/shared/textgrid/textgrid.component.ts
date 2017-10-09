@@ -84,14 +84,13 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   /**
-   * Filter by convolute type
+   * Filter by convolute type.
    * @param x Element in array (a poem)
    * @param {string} type Convolute type
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
-    // TODO: Real implementation
-    return true;
+    return x[ 5 ] !== type;
   }
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -123,8 +122,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
 
   }
-  }
-
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
@@ -157,3 +154,30 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
   }
+
+  produceFassungsLink(titel: string, iri: string) {
+    if (titel !== undefined && iri != undefined) {
+      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
+  }
+
+  /**
+   * Apply filters for synoptic view
+   * @param {Array<any>} unfiltered Unfiltered poems array
+   * @returns {Array<any>} Filtered poems array
+   */
+  filterPoems(unfiltered: Array<any>): Array<any> {
+    if (unfiltered !== undefined) {
+      return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+        .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
+        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'PoemNote') : x)
+        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'HandwrittenPoem') : x)
+        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'TypewrittenPoem') : x);
+    } else {
+      return unfiltered;
+    }
+  }
+
+}

@@ -3,6 +3,7 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -15,11 +16,23 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
 
   fassung: Array<any>;
 
+  private sub: any;
 
   constructor(private http: Http) {}
 
   ngOnChanges() {
-    // TODO: fassungen verlinken
-    this.fassung = [{'konvolutTitle': 'hoffnung', 'title': 'stirbt_zuletzt', 'iri': this.fassungIRI}];
+    if (this.fassungIRI) {
+      for (let i = 0; i < this.fassungIRI.length; i++) {
+        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
+        encodeURIComponent(this.fassungIRI[i]))
+          .map(result => result.json())
+          .subscribe(res => {
+            let title = res.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
+            let iriPart = this.fassungIRI[i].split('raeber/')[1];
+            this.fassung.push({'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart});
+          });
+
+      }
+    }
   }
 }

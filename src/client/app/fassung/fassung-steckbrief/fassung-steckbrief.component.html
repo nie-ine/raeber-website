@@ -27,7 +27,7 @@
         <span class="itemExtraFieldsValue">Unpubliziert</span>
       </p>
     </li>
-    <li *ngIf="unauthorizedPublication" class="typeSelect group2">
+    <li *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Nachdruck:</span>
         <span class="itemExtraFieldsValue">
@@ -35,7 +35,7 @@
         </span>
       </p>
     </li>
-    <li *ngIf="publishedIn" class="typeSelect group2">
+    <li *ngIf="publishedIn && publishedIn.length > 0" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Zeitschrift:</span>
         <span class="itemExtraFieldsValue">
@@ -43,22 +43,22 @@
         </span>
       </p>
     </li>
-    <li *ngIf="nachlassPublicationDescription" class="typeTextfield group2">
+    <li *ngIf="nachlassPublicationDescription" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Werke:</span>
         <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
       </p>
     </li>
-    <li *ngIf="publicationNumber" class="typeTextfield group2">
+    <li *ngIf="pageNumberDescription" class="typeSelect group2">
       <p>
-        <span class="itemExtraFieldsLabel">Textnr.:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+        <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
       </p>
     </li>
-    <li class="typeTextfield group2">
+    <li *ngIf="archiveSignature" class="typeSelect group2">
       <p>
-        <span class="itemExtraFieldsLabel">Mehrteilig</span>
-        <span class="itemExtraFieldsValue">TODO</span><!-- TODO -->
+        <span class="itemExtraFieldsLabel">Signatur:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="archiveSignature"></span>
       </p>
     </li>
     <li *ngIf="structure" class="typeSelect group2">
@@ -73,6 +73,13 @@
         <span class="itemExtraFieldsValue">ja</span>
       </p>
     </li>
+    <li *ngIf="publicationNumber" class="typeTextfield group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Textnr.:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+      </p>
+    </li>
+
     <li *ngIf="hasStrophen" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Strophen:</span>
@@ -98,45 +105,7 @@
         <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
       </p>
     </li>
-    <li class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Signatur:</span><!-- TODO  -->
-        <span class="itemExtraFieldsValue">A-5-g/01 TODO</span>
-      </p>
-    </li>
-    <li *ngIf="pageNumberDescription" class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
-      </p>
-    </li>
-
-
-    <li class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Status Text:</span>
-        <span class="itemExtraFieldsValue">Kontrolliert</span>
-      </p>
-    </li>
-    <li class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Umschrift:</span>
-        <span class="itemExtraFieldsValue">Kontrolliert</span>
-      </p>
-    </li>
-    <li class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Stufe</span>
-        <span class="itemExtraFieldsValue">002</span>
-      </p>
-    </li>
-    <li class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Priorität:</span>
-        <span class="itemExtraFieldsValue">Hoch</span>
-      </p>
-    </li>
-    <li class="typeTextfield group2">
+    <li *ngIf="sameEditionAs && sameEditionAs.length > 0" class="typeTextfield group2">
       <p>
         <span class="itemExtraFieldsLabel">Identisch mit:</span>
         <span class="itemExtraFieldsValue">

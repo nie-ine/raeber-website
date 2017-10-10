@@ -98,7 +98,14 @@
         <span class="itemExtraFieldsValue">ja</span>
       </p>
     </li>
-    <!-- TODO bezugstext -->
+    <li *ngIf="referencePoemIRIs && referencePoemIRIs.length > 0" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Bezugstext:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRIs"></rae-fassung-steckbrief-fassung>
+        </span>
+      </p>
+    </li>
     <li *ngIf="isWrittenWith" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Schreibzeug:</span>

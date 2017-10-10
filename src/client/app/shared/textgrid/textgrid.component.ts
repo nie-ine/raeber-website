@@ -105,8 +105,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
               this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
             }
           }
-          // TODO: Abklären, welche Ansichten die Sortierfunktion benötigen
-          this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
         }
       }
 
@@ -122,6 +120,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    if (this.poemsInGrid !== undefined) {
+      this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
+    }
     this.cdr.detectChanges();
   }
 

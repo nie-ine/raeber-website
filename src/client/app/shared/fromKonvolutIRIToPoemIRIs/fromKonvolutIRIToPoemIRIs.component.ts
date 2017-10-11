@@ -40,7 +40,8 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
     (
       globalSearchVariableService.API_URL +
       '/graphdata/' +
-      encodeURIComponent(queryPart)
+      encodeURIComponent(queryPart) +
+      '?depth=2'
     )
       .map(
         (lambda: Response) => {

@@ -82,48 +82,113 @@ export class SucheComponent implements OnInit {
   setOfPerformedQueries = new Set();
   setOfKonvolutIRIsOld = new Set();
   setOfKonvolutQueries = new Set();
+  setOfPoemsNotizbuch79 = new Set();
+  setOfPoemsNotizbuch7982 = new Set();
+  setOfPoemsNotizbuch8088 = new Set();
+  setOfPoemsManuskript79 = new Set();
+  setOfPoemsManuskript7983 = new Set();
+  setOfPoemsManuskriptKarten = new Set();
+  setOfPoemsTyposkript79 = new Set();
+  setOfPoemsTyposkript79Spez = new Set();
+  setOfPoemsTyposkript83 = new Set();
+  setOfPoemsdruckGesicht = new Set();
+  setOfPoemsdruckSchiffe = new Set();
+  setOfPoemsdruckGedichte = new Set();
+  setOfPoemsdruckFlussufer = new Set();
+  setOfPoemsdruckReduktionen = new Set();
   arg: AbstractControl;
   rightProperty: string;
   suchmaskeKonvolutIRIMapping = [
-    {'konvolut': 'notizbuch-1979', 'suchmaskeKonvolutName': 'notizbuch79', 'enabled': 'true', 'IRI': 'undefined'},
+    {
+      'konvolut': 'notizbuch-1979',
+      'suchmaskeKonvolutName': 'notizbuch79',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsNotizbuch79
+    },
     {
       'konvolut': 'notizbuch-1979-1982',
       'suchmaskeKonvolutName': 'notizbuch7982',
       'enabled': 'true',
-      'IRI': 'undefined'
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsNotizbuch7982
     },
     {
       'konvolut': 'notizbuch-1980-1988',
       'suchmaskeKonvolutName': 'notizbuch8088',
       'enabled': 'true',
-      'IRI': 'undefined'
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsNotizbuch8088
     },
-    {'konvolut': 'manuskripte-1979', 'suchmaskeKonvolutName': 'manuskript79', 'enabled': 'true', 'IRI': 'undefined'},
+    {
+      'konvolut': 'manuskripte-1979',
+      'suchmaskeKonvolutName': 'manuskript79',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsManuskript79},
     {
       'konvolut': 'manuskripte-1979-1983',
       'suchmaskeKonvolutName': 'manuskript7983',
       'enabled': 'true',
-      'IRI': 'undefined'
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsManuskript7983
     },
-    {'konvolut': 'karten-1984', 'suchmaskeKonvolutName': 'manuskriptKarten', 'enabled': 'true', 'IRI': 'undefined'},
-    {'konvolut': 'typoskripte-1979', 'suchmaskeKonvolutName': 'typoskript79', 'enabled': 'true', 'IRI': 'undefined'},
+    {
+      'konvolut': 'karten-1984',
+      'suchmaskeKonvolutName': 'manuskriptKarten',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsManuskriptKarten},
+    {
+      'konvolut': 'typoskripte-1979',
+      'suchmaskeKonvolutName': 'typoskript79',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsTyposkript79},
     {
       'konvolut': 'typoskripte-1979-spez',
       'suchmaskeKonvolutName': 'typoskript79Spez',
       'enabled': 'true',
-      'IRI': 'undefined'
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsTyposkript79Spez
     },
-    {'konvolut': 'typoskripte-1983', 'suchmaskeKonvolutName': 'typoskript83', 'enabled': 'true', 'IRI': 'undefined'},
-    {'konvolut': 'gesicht-im-mittag', 'suchmaskeKonvolutName': 'druckGesicht', 'enabled': 'true', 'IRI': 'undefined'},
+    {
+      'konvolut': 'typoskripte-1983',
+      'suchmaskeKonvolutName': 'typoskript83',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsTyposkript83},
+    {
+      'konvolut': 'gesicht-im-mittag',
+      'suchmaskeKonvolutName': 'druckGesicht',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdruckGesicht},
     {
       'konvolut': 'die-verwandelten-schiffe',
       'suchmaskeKonvolutName': 'druckSchiffe',
       'enabled': 'true',
-      'IRI': 'undefined'
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdruckSchiffe
     },
-    {'konvolut': 'gedichte', 'suchmaskeKonvolutName': 'druckGedichte', 'enabled': 'true', 'IRI': 'undefined'},
-    {'konvolut': 'flussufer', 'suchmaskeKonvolutName': 'druckFlussufer', 'enabled': 'true', 'IRI': 'undefined'},
-    {'konvolut': 'reduktionen', 'suchmaskeKonvolutName': 'druckReduktionen', 'enabled': 'true', 'IRI': 'undefined'}
+    {
+      'konvolut': 'gedichte',
+      'suchmaskeKonvolutName': 'druckGedichte',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdruckGedichte},
+    {
+      'konvolut': 'flussufer',
+      'suchmaskeKonvolutName': 'druckFlussufer',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdruckFlussufer},
+    {
+      'konvolut': 'reduktionen',
+      'suchmaskeKonvolutName': 'druckReduktionen',
+      'enabled': 'true',
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdruckReduktionen}
   ];
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
@@ -137,10 +202,13 @@ export class SucheComponent implements OnInit {
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
     this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
+    console.log(this.suchmaskeKonvolutIRIMapping);
   }
 
   ngOnInit() {
-    //console.log(this.vocabulary);
+    for(this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
+      this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[this.o].konvolut, this.o);
+    }
     this.initialQuery();
     if (!this.inputSearchStringToBeParsed) {
       this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
@@ -503,16 +571,11 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[13].enabled = arg.get('druckForm').controls.druckReduktionen.value;
       for (this.k = 0; this.k < this.suchmaskeKonvolutIRIMapping.length; this.k++) {
         if (this.suchmaskeKonvolutIRIMapping[this.k].enabled) {
-          if (!this.setOfKonvolutQueries.has(this.suchmaskeKonvolutIRIMapping[this.k].konvolut)) {
-            this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[this.k].konvolut, this.k);
-            this.setOfKonvolutQueries.add(this.suchmaskeKonvolutIRIMapping[this.k].konvolut);
-          } else {
-            console.log('Query schon durchgefuehrt');
+            console.log('check if poems in result is in one set of allowed poems in: ' + this.suchmaskeKonvolutIRIMapping[this.k].konvolut);
           }
         }
       }
     }
-  }
 
 
 
@@ -670,7 +733,7 @@ export class SucheComponent implements OnInit {
             this.suchmaskeKonvolutIRIMapping[i].IRI = data.subjects[0].obj_id;
             console.log(this.suchmaskeKonvolutIRIMapping);
             this.rightProperty = '';
-            this.performQueryToGetAllowedPoems(data.subjects[0].obj_id,data.subjects[0].iconlabel, this.rightProperty);
+            this.performQueryToGetAllowedPoems(data.subjects[0].obj_id,data.subjects[0].iconlabel, this.rightProperty, i);
           }
           console.log('alle Konvolutinformationen');
           console.log(this.setOfKonvolutIRIs);
@@ -682,12 +745,13 @@ export class SucheComponent implements OnInit {
 
 
 
-  performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string) {
+  performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
     return this.http.get
     (
       globalSearchVariableService.API_URL +
       '/graphdata/' +
-      encodeURIComponent(queryPart)
+      encodeURIComponent(queryPart) +
+      '?depth=2'
     )
       .map(
         (lambda: Response) => {
@@ -716,10 +780,11 @@ export class SucheComponent implements OnInit {
             if(
               data.nodes[this.l].resourceClassIri === rightProperty
             ) {
-              this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
+              //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
+              this.suchmaskeKonvolutIRIMapping[i].memberPoems.add(data.nodes[this.l].resourceIri);
             }
           }
-          console.log(this.setOfAlowedPoemIRIs);
+          //console.log(this.setOfAlowedPoemIRIs);
           return null;
         }
       )

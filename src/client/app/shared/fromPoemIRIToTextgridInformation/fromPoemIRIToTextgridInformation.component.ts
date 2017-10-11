@@ -120,6 +120,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         break;
       case 'PublicationPoem':
         console.log(data);
+        // FIXME: Remove next two lines if data problem is solved!
+        this.poemInformation[ i ][ 6 ] = '';
+        this.poemInformation[ i ][ 7 ] = '';
       // FIXME: Data not available?
       //const publicationIri = data.props[ 'http://www.knora.org/ontology/work#isPublishedIn' ].values[ 0 ];
       //this.getConvoluteTitleAlias(publicationIri, 'drucke', i);

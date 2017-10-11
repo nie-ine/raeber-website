@@ -19,6 +19,7 @@ export class SucheComponent implements OnInit {
 
   myResources: Array<any>;
   myProperties: Array<any>;
+  responseArray: Array<any>;
   searchResult: Array<any>;
   selectedResource: string;
   selectedProperty: string;
@@ -555,20 +556,20 @@ export class SucheComponent implements OnInit {
       console.log('Perform Search in all convolutes');
     } else {
       console.log('Gehe durch jedes Konvolut');
-      this.suchmaskeKonvolutIRIMapping[0].enabled = arg.get('notizbuchForm').controls.notizbuch79.value;
-      this.suchmaskeKonvolutIRIMapping[1].enabled = arg.get('notizbuchForm').controls.notizbuch7982.value;
-      this.suchmaskeKonvolutIRIMapping[2].enabled = arg.get('notizbuchForm').controls.notizbuch8088.value;
-      this.suchmaskeKonvolutIRIMapping[3].enabled = arg.get('manuskriptForm').controls.manuskript79.value;
-      this.suchmaskeKonvolutIRIMapping[4].enabled = arg.get('manuskriptForm').controls.manuskript7983.value;
-      this.suchmaskeKonvolutIRIMapping[5].enabled = arg.get('manuskriptForm').controls.manuskriptKarten.value;
-      this.suchmaskeKonvolutIRIMapping[6].enabled = arg.get('typoskriptForm').controls.typoskript79.value;
-      this.suchmaskeKonvolutIRIMapping[7].enabled = arg.get('typoskriptForm').controls.typoskript79Spez.value;
-      this.suchmaskeKonvolutIRIMapping[8].enabled = arg.get('typoskriptForm').controls.typoskript83.value;
-      this.suchmaskeKonvolutIRIMapping[9].enabled = arg.get('druckForm').controls.druckGesicht.value;
-      this.suchmaskeKonvolutIRIMapping[10].enabled = arg.get('druckForm').controls.druckSchiffe.value;
-      this.suchmaskeKonvolutIRIMapping[11].enabled = arg.get('druckForm').controls.druckGedichte.value;
-      this.suchmaskeKonvolutIRIMapping[12].enabled = arg.get('druckForm').controls.druckFlussufer.value;
-      this.suchmaskeKonvolutIRIMapping[13].enabled = arg.get('druckForm').controls.druckReduktionen.value;
+      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
+      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled = arg.get('notizbuchForm.notizbuch7982').value;
+      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled = arg.get('notizbuchForm.notizbuch8088').value;
+      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled = arg.get('manuskriptForm.manuskript79').value;
+      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled = arg.get('manuskriptForm.manuskript7983').value;
+      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled = arg.get('manuskriptForm.manuskriptKarten').value;
+      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled = arg.get('typoskriptForm.manuskript79').value;
+      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled = arg.get('typoskriptForm.typoskript79Spez').value;
+      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled = arg.get('typoskriptForm.typoskript83').value;
+      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled = arg.get('druckForm.druckGesicht').value;
+      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled = arg.get('druckForm.druckSchiffe').value;
+      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled = arg.get('druckForm.druckGedichte').value;
+      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
+      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
       for (this.k = 0; this.k < this.suchmaskeKonvolutIRIMapping.length; this.k++) {
         if (this.suchmaskeKonvolutIRIMapping[this.k].enabled) {
             console.log('check if poems in result is in one set of allowed poems in: ' + this.suchmaskeKonvolutIRIMapping[this.k].konvolut);

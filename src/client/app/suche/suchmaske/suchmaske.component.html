@@ -7,9 +7,6 @@
                  formControlName="suchwortInput"
                  style="width: 250px"/>
         </md-input-container>
-        <md-select placeholder="Suchraum" formControlName="suchwortSuchraum" floatPlaceholder="never">
-          <md-option *ngFor="let raum of suchraumOptions" [value]="raum.value">{{ raum.viewValue }}</md-option>
-        </md-select>
         <button md-button (click)="startTheSearch()" >
           <md-icon>arrow_forward</md-icon>
         </button>
@@ -36,73 +33,63 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch4849').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch4849').value && !pristineConvolutes()"
-                             formControlName="notizbuch4849">Notizbuch 1948-49
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                             >Notizbuch 1948-49
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch49').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch49').value && !pristineConvolutes()"
-                             formControlName="notizbuch49">Notizbuch 1949
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1949
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch50').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch50').value && !pristineConvolutes()"
-                             formControlName="notizbuch50">Notizbuch 1950
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1950
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5051').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5051').value && !pristineConvolutes()"
-                             formControlName="notizbuch5051">Notizbuch 1950-51
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1950-51
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5254').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5254').value && !pristineConvolutes()"
-                             formControlName="notizbuch5254">Notizbuch 1952-54
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1952-54
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5455').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5455').value && !pristineConvolutes()"
-                             formControlName="notizbuch5455">Notizbuch 1954-55
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1954-55
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5557').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5557').value && !pristineConvolutes()"
-                             formControlName="notizbuch5557">Notizbuch 1955-57
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1955-57
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5758').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5758').value && !pristineConvolutes()"
-                             formControlName="notizbuch5758">Notizbuch 1957-58
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1957-58
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch5861').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch5861').value && !pristineConvolutes()"
-                             formControlName="notizbuch5861">Notizbuch 1958-61
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1958-61
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch6165').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch6165').value && !pristineConvolutes()"
-                             formControlName="notizbuch6165">Notizbuch 1961-65
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1961-65
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
@@ -127,10 +114,9 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch6580').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch6580').value && !pristineConvolutes()"
-                             formControlName="notizbuch6580">Notizbuch 1965-80
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Notizbuch 1965-80
                 </md-checkbox>
               </li>
             </ul>
@@ -152,108 +138,93 @@
               </li>
 
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript4851"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript4851').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript4851').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1948-51
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1948-51
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript51"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript51').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript51').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1951
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1951
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript52"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript52').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript52').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1952
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1952
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript53"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript53').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript53').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1953
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1953
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript54"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript54').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript54').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1954
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1954
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript55"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript55').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript55').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1955
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1955
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript56"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript56').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript56').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1956
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1956
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript57"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript57').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript57').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1957
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1957
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript58"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript58').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript58').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1958
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1958
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript5859"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript5859').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript5859').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1958-59
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1958-59
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript5960"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript5960').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript5960').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1959-60
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1959-60
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript61"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript61').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript61').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1961
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1961
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript62"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript62').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript62').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1962
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1962
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript63"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript63').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript63').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1963
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1963
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript6465"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript6465').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript6465').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1964-65
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte 1964-65
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
@@ -278,10 +249,9 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskriptDivers"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskriptDivers').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskriptDivers').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte divers
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >Manuskripte divers
                 </md-checkbox>
               </li>
             </ul>
@@ -302,138 +272,121 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript4346"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript4346').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript4346').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1943-46
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript4550"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript4550').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript4550').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1945-50
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript4850"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript4850').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript4850').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1948-50
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript51"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript51').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript51').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1951
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript52"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript52').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript52').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1952
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript53"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript53').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript53').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1953
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript54"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript54').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript54').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1954
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript55"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript55').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript55').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1955
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript56"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript56').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript56').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1956
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript57"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript57').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript57').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1957
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript58"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript58').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript58').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1958
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript59"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript59').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript59').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1959
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript60"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript60').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript60').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1960
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript61"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript61').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript61').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1961
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript62"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript62').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript62').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1962
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript63"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript63').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript63').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1963
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript65"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript65').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript65').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1965
                 </md-checkbox>
               </li>
@@ -462,43 +415,38 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript83Spez"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript83Spez').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript83Spez').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte 1983 spez.
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskriptSpezialKutter"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskriptSpezialKutter').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskriptSpezialKutter').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte Kutter
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskriptSpezialHochstrasser"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskriptSpezialHochstrasser').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskriptSpezialHochstrasser').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte Hochstrasser
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskriptSpezialTRaeber"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskriptSpezialTRaeber').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskriptSpezialTRaeber').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte Thomas
                   Raeber
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskriptSpezialDivers"
-                             [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskriptSpezialDivers').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskriptSpezialDivers').value && !pristineConvolutes()">
+                <md-checkbox [disabled]="true"
+                             [checked]="false"
+                              >
                   Typoskripte divers
                 </md-checkbox>
               </li>

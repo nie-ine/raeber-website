@@ -11,12 +11,16 @@ import { RouterModule } from '@angular/router';
 
 import { RegisterspalteComponent } from './registerspalte.component';
 import { CommonModule } from '@angular/common';
+import { FromKonvolutIRIToPoemIRIsModule } from '../fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
+import { FromPoemIRIToTextgridInformationModule } from '../fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    FromKonvolutIRIToPoemIRIsModule,
+    FromPoemIRIToTextgridInformationModule,
     HttpModule,
     MdButtonToggleModule,
     MdListModule,

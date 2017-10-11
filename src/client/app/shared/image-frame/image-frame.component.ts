@@ -21,6 +21,7 @@ export class ImageFrameComponent implements OnInit {
   @Output() pictureIncreased = new EventEmitter();
 
   pictureIdBase: string;
+  orignameWithoutPath: string;
 
   zoomfactor = 5;
   heightAndWidth = 100;
@@ -36,6 +37,7 @@ export class ImageFrameComponent implements OnInit {
     this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[0];
     this.width = this.initWidth;
     this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
+    this.orignameWithoutPath = this.pictureData.origname.split('/')[this.pictureData.origname.split('/').length - 1];
   }
 
   increaseFrameSize() {

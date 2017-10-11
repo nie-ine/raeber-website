@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Config } from '../config/env.config';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -15,7 +17,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   countRequests: number;
   poemInformation: Array<any>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
 
   }
 
@@ -52,9 +54,12 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
-          const sameEditionAs = data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasSameEditionAs' ];
-          this.poemInformation[ i ][ 4 ] = sameEditionAs.values !== undefined;
-          this.poemInformation[ i ][ 5 ] = data.resdata[ 'restype_name' ].split('#')[ 1 ];
+          if (this.router.url.split('/')[ 1 ] === 'synopsen') {
+            const sameEditionAs = data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasSameEditionAs' ];
+            this.poemInformation[ i ][ 4 ] = sameEditionAs.values !== undefined;
+            this.poemInformation[ i ][ 5 ] = data.resdata[ 'restype_name' ].split('#')[ 1 ];
+            this.getConvoluteIriName(this.poemInformation[ i ][ 5 ], data, i);
+          }
           console.log(data.resdata[ 'restype_name' ].split('#')[ 1 ]);
           console.log(data.resdata[ 'restype_name' ]);
           console.log(this.poemInformation[ i ][ 0 ]);
@@ -92,5 +97,68 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       )
       .subscribe(response => this.responseArray = response);
 
+  }
+
+  private getConvoluteIriName(res: string, data: any, i: number): void {
+    let convolute: string;
+    switch (res) {
+      case 'PoemNote':
+        console.log(data);
+        this.getConvoluteTitleAlias(data.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ 0 ],
+          'notizbuecher', i);
+        break;
+      case 'HandwrittenPoem':
+        const manuscriptIri = data.props[ 'http://www.knora.org/ontology/text#isInManuscript' ].values[ 0 ];
+        this.getConvoluteIri(manuscriptIri, 'manuskripte', i);
+        break;
+      case 'PostCardPoem':
+        this.getConvoluteIri(data.props[ 'http://www.knora.org/ontology/text#isOnPostcard' ].values[ 0 ], 'karten', i);
+        break;
+      case 'TypewrittenPoem':
+        const typescriptIri = data.props[ 'http://www.knora.org/ontology/text#isInTypescript' ].values[ 0 ];
+        this.getConvoluteIri(typescriptIri, 'typoskripte', i);
+        break;
+      case 'PublicationPoem':
+        console.log(data);
+      // FIXME: Data not available?
+      //const publicationIri = data.props[ 'http://www.knora.org/ontology/work#isPublishedIn' ].values[ 0 ];
+      //this.getConvoluteTitleAlias(publicationIri, 'drucke', i);
+    }
+  }
+
+  private getConvoluteIri(iri: string, convType: string, i: number): void {
+    let convoluteIri: string;
+    let convoluteLink: string;
+
+    this.http.get(Config.API + 'resources/' + encodeURIComponent(iri)).map((res: any) => res.json())
+      .subscribe((res: any) => {
+        switch (convType) {
+          case 'manuskripte':
+            convoluteIri = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isPartOfManuscriptConvolute' ].values[ 0 ];
+            break;
+          case 'karten':
+            convoluteIri = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isPartOfPostcardConvolute' ].values[ 0 ];
+            break;
+          case 'typoskripte':
+            convoluteIri = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isPartOfTypescriptConvolute' ].values[ 0 ];
+            break;
+        }
+        this.getConvoluteTitleAlias(convoluteIri, convType, i);
+      });
+  }
+
+  private getConvoluteTitleAlias(convoluteIri: string, convType: string, i: number): void {
+    this.http.get(Config.API + 'resources/' + encodeURIComponent(convoluteIri)).map((res: any) => res.json())
+      .subscribe((res: any) => {
+        if (convType === 'drucke') {
+          this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/text#hasPublicationTitle' ].values[ 0 ][ 'utf8str' ];
+        } else {
+          this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ][ 'utf8str' ];
+        }
+        // TODO: Check links!
+        this.poemInformation[ i ][ 6 ] =
+          '/' + convType + '/' + res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ][ 'utf8str' ];
+        console.log(this.poemInformation[ i ][ 6 ]);
+      });
   }
 }

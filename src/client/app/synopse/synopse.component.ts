@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Config } from '../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
@@ -45,7 +46,7 @@ export class SynopseComponent implements OnInit {
       this.synopseTag = params[ 'synopse' ];
     });
 
-    let searchParamsPrefix = 'http://knora.nie-ine.ch/v1/resources/';
+    let searchParamsPrefix = Config.API + 'resources/';
     let searchParamsWork = searchParamsPrefix + encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIri);
 
     this.route.params

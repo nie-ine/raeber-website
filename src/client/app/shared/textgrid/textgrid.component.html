@@ -9,7 +9,7 @@
 
       <md-card-title #poemTitle>
         <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active">
-          {{p[0]}}
+          {{p[0]}} - {{p[5]}}
         </a>
       </md-card-title>
 
@@ -34,7 +34,7 @@
           </ul>
         </div>
         <div class="catItemTagsBlock" *ngIf="contentType == 'synopse'">
-          <span>Link zu Konvolut</span><!-- TODO link von Synopse zu Konvolut -->
+          <a [routerLink]="p[6]" routerLinkActive="active">{{ p[7] }}</a>
         </div>
       </md-card-footer>
     </md-card>

@@ -44,7 +44,6 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
     console.log(this.pages);
   }
 
-  // TODO: sort pages by seqnum, find picture id and transcription id per page.
   sortPages() {
     this.pages = this.pages.sort((n1, n2) => {
       const k1 = n1.value[ 'pagenumber' ];

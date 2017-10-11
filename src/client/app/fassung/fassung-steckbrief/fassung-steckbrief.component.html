@@ -55,10 +55,12 @@
         <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
       </p>
     </li>
-    <li *ngIf="archiveSignature" class="typeSelect group2">
+    <li *ngIf="carrierIRIs && carrierIRIs.length > 0" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Signatur:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="archiveSignature"></span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-signatur [carrierIRIs]="carrierIRIs"></rae-fassung-steckbrief-signatur>
+        </span>
       </p>
     </li>
     <li *ngIf="structure" class="typeSelect group2">

@@ -8,7 +8,7 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief-fassung',
-  template: '<span></span>'
+  templateUrl: 'fassung-steckbrief-fassung.component.html'
 })
 export class FassungSteckbriefFassungComponent implements OnChanges {
 
@@ -29,6 +29,7 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
           .subscribe(res => {
             let title = res.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
             let iriPart = this.fassungIRI[i].split('raeber/')[1];
+            // TODO get convolute title for linking
             this.fassung.push({'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart});
           });
 

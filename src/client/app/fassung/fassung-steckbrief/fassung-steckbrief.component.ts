@@ -5,6 +5,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { ExtendedSearch, KnoraProperty } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -33,7 +34,7 @@ export class FassungSteckbriefComponent implements OnChanges {
   publishedIn: Array<string>;
   referencePoemIRIs: Array<string>;
 
-  archiveSignature: string;
+  carrierIRIs: Array<string>;
 
   schreibzeugMap = {
     'pencil': 'Bleistift',
@@ -50,7 +51,6 @@ export class FassungSteckbriefComponent implements OnChanges {
   };
 
   private sub: any;
-  private sub2: any;
 
   constructor(private http: Http) {
   }
@@ -190,19 +190,35 @@ export class FassungSteckbriefComponent implements OnChanges {
             // skip if there is no bezugstext
           }
 
-        });
-    }
-
-    if (this.konvolutIRI) {
-      this.sub2 = this.http.get(globalSearchVariableService.API_URL
-        + '/resources/' + encodeURIComponent(this.konvolutIRI))
-        .map(response => response.json()).subscribe(res => {
-
+          this.carrierIRIs = [];
           try {
-            this.archiveSignature = res.props['http://www.knora.org/ontology/work#hasArchiveSignature'].values[0].utf8str;
+            for (let i = 0; i <
+            res.props['http://www.knora.org/ontology/kuno-raeber#isInNotebook'].values.length; i++) {
+              this.carrierIRIs
+                .push(res.props['http://www.knora.org/ontology/kuno-raeber#isInNotebook'].values[i]);
+            }
           } catch (TypeError) {
-            this.archiveSignature = null;
+            // skip if there is no notebook
           }
+          try {
+            for (let i = 0; i <
+            res.props['http://www.knora.org/ontology/text#isInManuscript'].values.length; i++) {
+              this.carrierIRIs
+                .push(res.props['http://www.knora.org/ontology/text#isInManuscript'].values[i]);
+            }
+          } catch (TypeError) {
+            // skip if there is no manuscript
+          }
+          try {
+            for (let i = 0; i <
+            res.props['http://www.knora.org/ontology/text#isInTypescript'].values.length; i++) {
+              this.carrierIRIs
+                .push(res.props['http://www.knora.org/ontology/text#isInTypescript'].values[i]);
+            }
+          } catch (TypeError) {
+            // skip if there is no notebook
+          }
+
         });
     }
   }

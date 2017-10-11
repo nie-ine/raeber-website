@@ -71,7 +71,7 @@ export class RegisterspalteComponent implements OnChanges {
         'date': poemInformation[ i ][ 1 ],
         'text': this.removeHtml(poemInformation[ i ][ 2 ]),
         'iri': poemInformation[ i ][ 3 ],
-        'reihe': poemInformation[ i ][ 3 ]
+        'reihe': poemInformation[ i ][ 4 ]
       });
 
       this.nrOfPoems = poemInformation.length;

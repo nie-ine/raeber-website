@@ -74,9 +74,8 @@ export class RegisterspalteComponent implements OnChanges {
         'reihe': poemInformation[ i ][ 4 ]
       });
 
-      this.nrOfPoems = poemInformation.length;
     }
-
+    this.nrOfPoems = poemInformation.length;
 
     this.sortingType = 'alphabetic';
     this.sortAlphabetically();

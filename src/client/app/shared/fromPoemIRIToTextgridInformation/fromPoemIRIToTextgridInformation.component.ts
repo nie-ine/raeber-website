@@ -1,8 +1,6 @@
-import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
-import { Config } from '../../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +10,7 @@ import { Config } from '../../shared/config/env.config';
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() poemIRIArray: Array<any>;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
-  responseArray: Array<any>
+  responseArray: Array<any>;
   i: number;
   countRequests: number;
   poemInformation: Array<any>;
@@ -22,15 +20,19 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
   ngOnChanges() {
     //console.log('Get Information for this poem IRI: ');
-    //console.log(this.poemIRIArray);
+    console.log('PoemIRIArray: ');
+    console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
-    if(this.poemIRIArray !== undefined) {
+    if(this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+      console.log('here');
       for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
-        //console.log('get information for this poem:');
         this.getTitleAndDate(this.poemIRIArray[this.i],this.i);
         this.poemInformation[this.i] = [];
       }
+    } else {
+      console.log('Konvolut found but no Poems found');
+      this.sendPoemInformationBack.emit(this.poemInformation);
     }
   }
   getTitleAndDate(IRI: string, i: number) {
@@ -51,8 +53,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           this.poemInformation[i][0] = data.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
           this.poemInformation[i][1] = data.props['http://www.knora.org/ontology/human#hasCreationDate'].values[0].dateval1;
           this.poemInformation[i][3] = queryPart;
-          console.log(this.poemInformation[i][0]);
-          console.log(this.poemInformation[i][1]);
+          this.poemInformation[i][4] = data.props['http://www.knora.org/ontology/knora-base#seqnum'].values[0];
+          //console.log(this.poemInformation[i][0]);
+          //console.log(this.poemInformation[i][1]);
           this.performTextQuery(data.props['http://www.knora.org/ontology/kuno-raeber#hasEdition'].values[0], i);
           return data.resourcetypes;
         }

@@ -99,6 +99,14 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckReduktionen = new Set();
   setOfAllSearchResults = new Set();
   numberOfPerformedQueries = 0;
+  setOfResultsInSearchGroup = new Set();
+  setOfSearchTermsInSearchGroup = new Set();
+  arrayOfResultsInAllSearchGroups = [
+    {
+      'setOfSearchTermsInSearchGroup': new Set(),
+      'setOfResultsInSearchGroup': new Set()
+    }
+  ];
   arg: AbstractControl;
   rightProperty: string;
   responseArray: Array<any>;
@@ -235,6 +243,8 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.numberOfQueries = 0;
+    this.numberOfSearchResults = 0;
     this.allSearchResults = [];
     this.setOfAllSearchResults.clear();
     if (!this.queries) {
@@ -248,7 +258,6 @@ export class SucheComponent implements OnInit {
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
-    this.numberOfQueries = 0;
     this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
       this.firstTermAfterOr = true;
@@ -333,7 +342,7 @@ export class SucheComponent implements OnInit {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
+            //console.log(data);
             if (data.subjects[0] !== undefined) {
               this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
             } else {
@@ -415,44 +424,22 @@ export class SucheComponent implements OnInit {
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number) {
-    //console.log('Add to temporary Search Results and only take one of the duplicates');
-    //console.log('firstTermAfterOr: ' + firstTermAfterOr);
-    //console.log(searchResults);
-    //console.log(this.temporarySearchResults);
+    console.log(
+      'Only take searchresults from searchTerms if ' +
+      'they exists in the other searchresults from searchTerms same searchgroups'
+    );
+    console.log('Searchgroup: ' + searchGroup);
+    console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
+    console.log('First Term after OR ' + firstTermAfterOr);
+    this.arrayOfResultsInAllSearchGroups.push(this.arrayOfResultsInAllSearchGroups[0]);
+    console.log('Nur um zu schauen');
+    this.arrayOfResultsInAllSearchGroups[searchGroup].setOfSearchTermsInSearchGroup.add(numberOfTermsInSearchGroup);
+    console.log(this.arrayOfResultsInAllSearchGroups);
     if (searchResults !== undefined) {
-      //if (this.temporarySearchResults === undefined) {
-      //  this.temporarySearchResults = [];
-      //  this.temporarySearchResults[searchGroup] = searchResults;
-      //}
-      //if (this.temporarySearchResults[searchGroup] === undefined) {
-      //  this.temporarySearchResults[searchGroup] = searchResults;
-        //console.log(this.temporarySearchResults);
-     // } //else {
-        //for (this.l = 0; this.l < searchResults.length; this.l++) {
-          //console.log('SearchGroup:' + searchGroup);
-          //for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m++) {
-            //if (searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
-              //console.log('found duplicate in temporary array');
-              //if (this.finalTemporaryResults === undefined) {
-              //  this.finalTemporaryResults = [];
-              //}
-              //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
-            //}
-          //}
-        //}
-      //}
-      //TODO: consider more than 2 searchTerms between ORs
-      //Following statement for one search without output
-      //if (searchResults.length === 0 && this.temporarySearchResults !== undefined) {
-      //  this.addToFinalSearchResultArray(searchResults);
-      //}
-      //console.log('Final Temporary Search Results: ');
-      //console.log(this.finalTemporaryResults);
+
+
       this.addToFinalSearchResultArray(searchResults, undefined);
-      //console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
-      //if (numberOfTermsInSearchGroup === 1) {
-      //  this.addToFinalSearchResultArray(searchResults);
-      //}
+
     }
   }
 

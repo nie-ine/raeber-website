@@ -69,7 +69,7 @@ export class FassungComponent implements OnInit {
     });
 
     this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
+      encodeURIComponent('http://rdfh.ch/kuno-raeber/R-eJHE7NQnCXElwfZ5o95g'))
       .map(result => result.json())
       .subscribe(res => {
         this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;

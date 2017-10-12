@@ -98,6 +98,7 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
   setOfAllSearchResults = new Set();
+  numberOfPerformedQueries = 0;
   arg: AbstractControl;
   rightProperty: string;
   responseArray: Array<any>;
@@ -219,7 +220,6 @@ export class SucheComponent implements OnInit {
     for(this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[this.o].konvolut, this.o);
     }
-    this.initialQuery();
     if (!this.inputSearchStringToBeParsed) {
       this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
       console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
@@ -231,189 +231,18 @@ export class SucheComponent implements OnInit {
     }
   }
 
-  initialQuery() {
-    return this.http.get
-    (
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.resourceTypesPath +
-      globalSearchVariableService.initialVocabulary
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          console.log(data);
-          return data.resourcetypes;
-        }
-      )
-      .subscribe(response => this.myResources = response);
-  }
-
-  propertyQuery(): Subscription {
-    if (this.selectedResource !== undefined) {
-
-      //console.log('Path to request property:' + globalSearchVariableService.propertyListsQuery);
-      this.encodedURL = encodeURIComponent(this.selectedResource);
-      //console.log('Selected resource:' + this.encodedURL);
-
-      return this.http.get(globalSearchVariableService.API_URL + globalSearchVariableService.propertyListsQuery + this.encodedURL)
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            console.log(data);
-            return data.properties;
-          }
-        )
-        .subscribe(response => this.myProperties = response);
-    } else {
-      return null;
-    }
-  }
 
 
-  finalQuery() {
-    this.query = globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      encodeURIComponent(this.selectedResource) +
-      globalSearchVariableService.extendedProperty +
-      encodeURIComponent(this.selectedProperty) +
-      globalSearchVariableService.compareOperator +
-      this.boolOperator +
-      globalSearchVariableService.searchval +
-      encodeURIComponent(this.searchForVal);
-    //console.log(
-    //'Final extended search URl: ' + this.query);
-    return this.http.get(this.query)
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          console.log(data);
-          return data.subjects;
-        }
-      )
-      .subscribe(response => this.searchResult = response);
-  }
-
-  increaseNumberOfComponents() {
-    this.numberOfComponents += 1;
-    console.log(this.numberOfComponents);
-    console.log(typeof this.arraySize);
-  }
-
-  increaseArrayElement() {
-    this.arraySize = this.array[this.array.length - 1];
-    this.arraySize += 1;
-    this.array.push(this.arraySize);
-    console.log(this.arraySize);
-  }
-
-  updateQuerySet(propertyTriple: Array<any>) {
-    this.k = 0;
-    // Case: setOfAllQueries it totally empty:
-    console.log('PropertyTriple: ' + propertyTriple);
-    console.log('Resource: ' + this.selectedResource);
-    this.mapOfAllQueries.set(
-      propertyTriple[0].toString() + propertyTriple[1].toString(), [
-        propertyTriple[2], [
-          propertyTriple[3], propertyTriple[4]
-        ]
-      ]
-    );
-    this.str = JSON.stringify(this.mapOfAllQueries, null, 4);
-    console.log(this.str);
-    //Final list of Queries:
-    this.keys = Array.from(this.mapOfAllQueries.keys());
-    console.log(this.keys);
-    this.mapOfAllQueries.forEach(
-      value => {
-        if (this.keys[this.k][1] === '1') {
-          this.searchTerm = value[1][1];
-          console.log('Add first property');
-          this.finalQueryArray[this.keys[this.k][0] - 1] =
-            globalSearchVariableService.API_URL
-            + globalSearchVariableService.extendedSearch
-            + encodeURIComponent(propertyTriple[5])
-            + globalSearchVariableService.extendedProperty
-            + encodeURIComponent(value[0])
-            + globalSearchVariableService.compareOperator
-            + value[1][0]
-            + globalSearchVariableService.searchval
-            + encodeURIComponent(value[1][1]);
-        } else {
-          console.log('Add additional property');
-          this.finalQueryArray[this.keys[this.k][0] - 1]
-            += globalSearchVariableService.extendedProperty
-            + encodeURIComponent(value[0])
-            + globalSearchVariableService.compareOperator
-            + value[1][0]
-            + globalSearchVariableService.searchval
-            + encodeURIComponent(value[1][1]);
-        }
-        this.k++;
-        console.log(value[0]);
-        for (this.i = 0; this.i < value[1].length; this.i++) {
-          console.log(value[1][this.i]);
-        }
-      }
-    );
-
-  }
-
-  executeFinalQueriesOld() {
-    //Old generic Search:
-    console.log('Execute final query old');
-    this.allSearchResults = undefined;
-    if (this.finalQueryArray) {
-      this.allSearchResults = [];
-      console.log(this.finalQueryArray);
-      for (this.i = 0; this.i < this.finalQueryArray.length; this.i++) {
-        this.performQueryOld(this.finalQueryArray[this.i]);
-      }
-    }
-  }
 
   executeFinalQueries() {
-    //this.executeFinalQueriesOld();
     this.allSearchResults = [];
     this.setOfAllSearchResults.clear();
     if (!this.queries) {
       console.log('No query defined');
     } else {
       this.allSearchResults = undefined;
-      console.log('execute simple full text search');
       this.translateQueriesReturnedFromParserToKnoraRequests(this.queries);
     }
-  }
-
-
-  performQueryOld(query: string) {
-    return this.http.get(query)
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          console.log(data);
-          this.k = 0;
-          if (data.subjects !== undefined) {
-            if (this.allSearchResults === undefined) {
-              this.allSearchResults = [];
-            }
-            this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
-            /*
-             if(data.obj_id !== undefined) {
-             this.allSearchResults.push.apply(this.allSearchResults, data.subjects);
-             } else {
-             console.log('Keine Treffer fuer diese Suchanzeige');
-             }*/
-            if (this.allSearchResults === undefined) {
-              this.numberOfSearchResults = 0;
-            } else {
-              this.numberOfSearchResults = this.allSearchResults.length;
-            }
-          }
-          console.log(this.allSearchResults);
-          return data.subjects;
-        }
-      )
-      .subscribe(response => this.searchResult = response);
   }
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
@@ -446,9 +275,33 @@ export class SucheComponent implements OnInit {
   }
 
   performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
-    for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
-      if (location === 'anywhere') {
+    if (location === 'anywhere') {
+      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
         this.performSearchInTitle(
+          searchTerm,
+          firstTermAfterOr,
+          searchGroup,
+          numberOfTermsInSearchGroup,
+          this.poemResTypes[this.m]);
+        this.performSearchInText(
+          searchTerm,
+          firstTermAfterOr,
+          searchGroup,
+          numberOfTermsInSearchGroup,
+          this.poemResTypes[this.m]);
+      }
+    } else if (location === 'title') {
+      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+        this.performSearchInTitle(
+          searchTerm,
+          firstTermAfterOr,
+          searchGroup,
+          numberOfTermsInSearchGroup,
+          this.poemResTypes[this.m]);
+      }
+    } else if (location === 'text') {
+      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+        this.performSearchInText(
           searchTerm,
           firstTermAfterOr,
           searchGroup,
@@ -464,6 +317,7 @@ export class SucheComponent implements OnInit {
                        numberOfTermsInSearchGroup:
                          number,
                        poemResType: string) {
+    this.numberOfPerformedQueries += 1;
       return this.http.get(
         globalSearchVariableService.API_URL +
         globalSearchVariableService.extendedSearch +
@@ -489,6 +343,69 @@ export class SucheComponent implements OnInit {
           }
         )
         .subscribe(response => this.myProperties = response);
+
+  }
+  performSearchInText(searchTerm: string,
+                       firstTermAfterOr: boolean,
+                       searchGroup: number,
+                       numberOfTermsInSearchGroup:
+                         number,
+                       poemResType: string) {
+    this.numberOfPerformedQueries += 1;
+    return this.http.get(
+      'http://130.60.24.65:3333/v1/search/?searchtype=extended' +
+      '&filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23Edition' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasContent' +
+      '&compop=LIKE' +
+      '&searchval=' +
+      encodeURIComponent(searchTerm) + '&show_nrows=' + 2000)
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          if (data.subjects[0] !== undefined) {
+            for(let result of data.subjects) {
+              this.performSearchToGetPoemBelongingToEdition(
+                result.obj_id,
+                firstTermAfterOr,
+                searchGroup,
+                numberOfTermsInSearchGroup,
+                this.poemResTypes[this.m]);
+            }
+          } else {
+            console.log('Keine Treffer fuer diese Suche');
+          }
+          return data.properties;
+        }
+      )
+      .subscribe(response => this.myProperties = response);
+
+  }
+  performSearchToGetPoemBelongingToEdition(searchTerm: string,
+                      firstTermAfterOr: boolean,
+                      searchGroup: number,
+                      numberOfTermsInSearchGroup:
+                        number,
+                      poemResType: string) {
+    this.numberOfPerformedQueries += 1;
+    return this.http.get(
+      'http://130.60.24.65:3333/v1/resources/' +
+      encodeURIComponent(searchTerm))
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          //console.log(data);
+          if (data !== undefined) {
+              //console.log(data.incoming[0].ext_res_id.id);
+              this.addToFinalSearchResultArray(
+                undefined,
+                data.incoming[0].ext_res_id.id
+                );
+          }
+          return data.properties;
+        }
+      )
+      .subscribe(response => this.myProperties = response);
 
   }
 
@@ -531,7 +448,7 @@ export class SucheComponent implements OnInit {
       //}
       //console.log('Final Temporary Search Results: ');
       //console.log(this.finalTemporaryResults);
-      this.addToFinalSearchResultArray(searchResults);
+      this.addToFinalSearchResultArray(searchResults, undefined);
       //console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
       //if (numberOfTermsInSearchGroup === 1) {
       //  this.addToFinalSearchResultArray(searchResults);
@@ -539,20 +456,30 @@ export class SucheComponent implements OnInit {
     }
   }
 
-  addToFinalSearchResultArray(searchResults: Array<any>) {
+  addToFinalSearchResultArray(searchResults: Array<any>, searchResultString: string) {
     //console.log('Add to final Search Results');
-    //console.log(searchResults);
+    //console.log(searchResultString);
+    if(searchResultString !== undefined) {
+      if(this.allSearchResults === undefined) {
+        this.allSearchResults = [];
+      }
+      this.performPoemQuery(
+        searchResultString,
+        undefined,
+        undefined,
+        undefined);
+    }
     if (searchResults !== undefined && searchResults.length !== 0) {
         if(this.allSearchResults === undefined) {
           this.allSearchResults = [];
         }
-        for (let result of searchResults) {
-            this.performPoemQuery(
-              result.obj_id,
-              result.value[3],
-              result.value[1],
-              result.value[2]);
-          }
+          for (let result of searchResults) {
+          this.performPoemQuery(
+            result.obj_id,
+            result.value[3],
+            result.value[1],
+            result.value[2]);
+        }
     }
   }
 
@@ -726,6 +653,7 @@ export class SucheComponent implements OnInit {
   }
 
   performQueryToGetIRI(queryPart: string, i: number) {
+    this.numberOfPerformedQueries += 1;
     return this.http.get
     (
       globalSearchVariableService.API_URL +
@@ -759,6 +687,7 @@ export class SucheComponent implements OnInit {
 
 
   performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
+    this.numberOfPerformedQueries += 1;
     return this.http.get
     (
       globalSearchVariableService.API_URL +
@@ -806,6 +735,7 @@ export class SucheComponent implements OnInit {
   }
 
   performPoemQuery(poemIRI: string, titel: string, date: string, seqnum: string) {
+    this.numberOfPerformedQueries += 1;
     return this.http.get
     (
       globalSearchVariableService.API_URL +
@@ -815,10 +745,11 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
+          //console.log(data);
           this.performTextQuery(
             data.props['http://www.knora.org/ontology/kuno-raeber#hasEdition'].values[0],
             poemIRI,
-            titel,
+            data.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str,
             date,
             seqnum);
           return data.resourcetypes;
@@ -827,7 +758,7 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.responseArray = response);
   }
   performTextQuery(editionIRI: string, poemIRI: string, titel: string, date: string, seqnum: string) {
-    //console.log('get Text: ');
+    //console.log(editionIRI);
     return this.http.get
     (
       globalSearchVariableService.API_URL +

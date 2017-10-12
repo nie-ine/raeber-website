@@ -4,11 +4,9 @@
 
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { ExtendedSearch, KnoraProperty } from '../utilities/knora-api-params';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
@@ -144,6 +142,7 @@ export class RegisterspalteComponent implements OnChanges {
     if(content !== undefined) {
       return content.replace(/<[^>]+>/g, '');
     } else {
+      return undefined;
       //console.log('no value yet');
     }
   }

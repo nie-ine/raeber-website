@@ -84,6 +84,5 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         }
       )
       .subscribe(response => this.responseArray = response);
-
   }
 }

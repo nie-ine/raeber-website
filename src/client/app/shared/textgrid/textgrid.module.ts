@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 
 import { DynamicPaging } from './paging.service';
 import { TextgridComponent } from './textgrid.component';
+import { TextgridSynopsenlinkComponent } from './textgrid-synopsenlink/textgrid-synopsenlink.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { TextgridComponent } from './textgrid.component';
     RouterModule
   ],
   declarations: [
-    TextgridComponent
+    TextgridComponent,
+    TextgridSynopsenlinkComponent
   ],
   providers: [
     DynamicPaging

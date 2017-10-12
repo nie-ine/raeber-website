@@ -30,11 +30,15 @@ import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolu
 import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
 import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
 import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
+import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
+import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    FromKonvolutIRIToPoemIRIsModule,
+    FromPoemIRIToTextgridInformationModule,
     HttpModule,
     MdButtonModule,
     MdButtonToggleModule,

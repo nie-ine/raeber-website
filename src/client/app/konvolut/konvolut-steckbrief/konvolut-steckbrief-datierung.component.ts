@@ -4,6 +4,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class KonvolutSteckbriefDatierungComponent implements OnChanges {
   ngOnChanges() {
 
     if (this.dateIRI) {
-      this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.dateIRI))
+      this.sub = this.http.get(globalSearchVariableService.API_URL
+        + '/resources/' + encodeURIComponent(this.dateIRI))
+
         .map(response => response.json()).subscribe(res => {
 
           try {

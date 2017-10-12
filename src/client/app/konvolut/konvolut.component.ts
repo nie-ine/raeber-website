@@ -35,6 +35,9 @@ export class KonvolutComponent implements OnInit {
   rahmen: boolean = true;
   showText: boolean = true;
   gridHeight: number = 0;
+  poemIRIArray: Array<any>;
+  konvolutType: string;
+  resetPoems: string;
 
   viewMode: string;
   konvolut_type: string;
@@ -64,13 +67,13 @@ export class KonvolutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    this.dp.size = 10;
-    this.dp.loadText(this._esearch).subscribe(
-      konstText => this.poems = konstText
-    );
+    //this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
+    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
+    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
+    //this.dp.size = 10;
+    //this.dp.loadText(this._esearch).subscribe(
+    //  konstText => this.poems = konstText
+    //);
 
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
@@ -147,6 +150,27 @@ export class KonvolutComponent implements OnInit {
 
   setGridHeight(height: number) {
     this.gridHeight = height;
+  }
+
+  updatePoemInformation(poemInformation: Array<any>) {
+    //console.log(poemInformation);
+    this.poems = poemInformation;
+    this.resetPoems = undefined;
+    //console.log(this.poems);
+  }
+
+  createPoemIRIList(poemIRIList: Array<any>) {
+    this.poemIRIArray = poemIRIList;
+  }
+
+  updateKonvolutType(konvolutType: string) {
+    console.log('KonvolutType: ' + konvolutType);
+    this.konvolutType = konvolutType;
+  }
+
+  deletePoemsInCache(input: string) {
+    console.log('ResetPoemArray');
+    this.resetPoems = 'reset';
   }
 
 }

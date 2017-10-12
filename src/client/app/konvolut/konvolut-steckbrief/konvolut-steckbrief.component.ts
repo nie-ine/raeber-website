@@ -4,6 +4,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
+import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 
 @Component({
@@ -44,7 +45,8 @@ export class KonvolutSteckbriefComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.IRI) {
-      this.sub = this.http.get('http://knora.nie-ine.ch/v1/resources/' + encodeURIComponent(this.IRI))
+      this.sub = this.http.get(globalSearchVariableService.API_URL
+        + '/resources/' + encodeURIComponent(this.IRI))
         .map(response => response.json()).subscribe(res => {
 
           this.konvoluttyp = res.resinfo.restype_label;

@@ -49,9 +49,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         if (!chng.isFirstChange()) {
           if (this.poemsInGrid) {
             this.poemsInGrid = chng.currentValue;
-            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-              this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
-            }
+            //for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+            //  this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
+            //}
           }
         }
       }
@@ -88,9 +88,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (searchTerm === undefined) {
       return textToHighlight;
     }
-    return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-      return '<span class="highlightText">' + match + '</span>';
-    });
+    if(textToHighlight !== undefined ) {
+      return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+        return '<span class="highlightText">' + match + '</span>';
+      });
+    }
   }
 
   resetField() {

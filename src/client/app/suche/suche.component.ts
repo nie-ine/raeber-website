@@ -96,8 +96,10 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckGedichte = new Set();
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
+  setOfAllSearchResults = new Set();
   arg: AbstractControl;
   rightProperty: string;
+  responseArray: Array<any>;
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',
@@ -189,6 +191,13 @@ export class SucheComponent implements OnInit {
       'enabled': 'true',
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckReduktionen}
+  ];
+  poemResTypes = [
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PoemNote',
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PostCardPoem',
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23TypewrittenPoem',
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem'
   ];
 
   constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
@@ -362,7 +371,9 @@ export class SucheComponent implements OnInit {
   }
 
   executeFinalQueries() {
-    this.executeFinalQueriesOld();
+    //this.executeFinalQueriesOld();
+    this.allSearchResults = [];
+    this.setOfAllSearchResults.clear();
     if (!this.queries) {
       console.log('No query defined');
     } else {
@@ -434,33 +445,50 @@ export class SucheComponent implements OnInit {
   }
 
   performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
-    if (location === 'anywhere') {
-      this.performSearchInTitle(searchTerm, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+    for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+      if (location === 'anywhere') {
+        this.performSearchInTitle(
+          searchTerm,
+          firstTermAfterOr,
+          searchGroup,
+          numberOfTermsInSearchGroup,
+          this.poemResTypes[this.m]);
+      }
     }
   }
 
-  performSearchInTitle(searchTerm: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
-    return this.http.get(
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23Convolute' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-      '&compop=LIKE' +
-      '&searchval=' +
-      encodeURIComponent(searchTerm))
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          console.log(data);
-          if (data.subjects[0] !== undefined) {
-            this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
-          } else {
-            console.log('Keine Treffer fuer diese Suche');
+  performSearchInTitle(searchTerm: string,
+                       firstTermAfterOr: boolean,
+                       searchGroup: number,
+                       numberOfTermsInSearchGroup:
+                         number,
+                       poemResType: string) {
+      return this.http.get(
+        globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        poemResType +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
+        '&compop=LIKE' +
+        '&searchval=' +
+        encodeURIComponent(searchTerm) +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
+        '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+        '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            console.log(data);
+            if (data.subjects[0] !== undefined) {
+              this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+            } else {
+              console.log('Keine Treffer fuer diese Suche');
+            }
+            return data.properties;
           }
-          return data.properties;
-        }
-      )
-      .subscribe(response => this.myProperties = response);
+        )
+        .subscribe(response => this.myProperties = response);
+
   }
 
   // For more statements between the ORs
@@ -469,77 +497,61 @@ export class SucheComponent implements OnInit {
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number) {
-    console.log('Add to temporary Search Results and only take one of the duplicates');
-    console.log('firstTermAfterOr: ' + firstTermAfterOr);
-    console.log(searchResults);
-    console.log(this.temporarySearchResults);
+    //console.log('Add to temporary Search Results and only take one of the duplicates');
+    //console.log('firstTermAfterOr: ' + firstTermAfterOr);
+    //console.log(searchResults);
+    //console.log(this.temporarySearchResults);
     if (searchResults !== undefined) {
-      if (this.temporarySearchResults === undefined) {
-        this.temporarySearchResults = [];
-        this.temporarySearchResults[searchGroup] = searchResults;
-      }
-      if (this.temporarySearchResults[searchGroup] === undefined) {
-        this.temporarySearchResults[searchGroup] = searchResults;
-        console.log(this.temporarySearchResults);
-      } else {
-        for (this.l = 0; this.l < searchResults.length; this.l++) {
-          console.log('SearchGroup:' + searchGroup);
-          for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m++) {
-            if (searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
-              console.log('found duplicate in temporary array');
-              if (this.finalTemporaryResults === undefined) {
-                this.finalTemporaryResults = [];
-              }
-              this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
-            }
-          }
-        }
-      }
+      //if (this.temporarySearchResults === undefined) {
+      //  this.temporarySearchResults = [];
+      //  this.temporarySearchResults[searchGroup] = searchResults;
+      //}
+      //if (this.temporarySearchResults[searchGroup] === undefined) {
+      //  this.temporarySearchResults[searchGroup] = searchResults;
+        //console.log(this.temporarySearchResults);
+     // } //else {
+        //for (this.l = 0; this.l < searchResults.length; this.l++) {
+          //console.log('SearchGroup:' + searchGroup);
+          //for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m++) {
+            //if (searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
+              //console.log('found duplicate in temporary array');
+              //if (this.finalTemporaryResults === undefined) {
+              //  this.finalTemporaryResults = [];
+              //}
+              //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+            //}
+          //}
+        //}
+      //}
       //TODO: consider more than 2 searchTerms between ORs
       //Following statement for one search without output
-      if (searchResults.length === 0 && this.temporarySearchResults !== undefined) {
-        this.addToFinalSearchResultArray(this.temporarySearchResults);
-      }
-      console.log('Final Temporary Search Results: ');
-      console.log(this.finalTemporaryResults);
-      this.addToFinalSearchResultArray(this.finalTemporaryResults);
-      console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
-      if (numberOfTermsInSearchGroup === 1) {
-        this.addToFinalSearchResultArray(searchResults);
-      }
+      //if (searchResults.length === 0 && this.temporarySearchResults !== undefined) {
+      //  this.addToFinalSearchResultArray(searchResults);
+      //}
+      //console.log('Final Temporary Search Results: ');
+      //console.log(this.finalTemporaryResults);
+      this.addToFinalSearchResultArray(searchResults);
+      //console.log('Number of terms in searchgroup: ' + numberOfTermsInSearchGroup);
+      //if (numberOfTermsInSearchGroup === 1) {
+      //  this.addToFinalSearchResultArray(searchResults);
+      //}
     }
   }
 
   addToFinalSearchResultArray(searchResults: Array<any>) {
-    console.log('Add to final Search Results');
-    console.log(searchResults);
-    console.log(this.allSearchResults);
+    //console.log('Add to final Search Results');
+    //console.log(searchResults);
     if (searchResults !== undefined && searchResults.length !== 0) {
-      if (this.allSearchResults === undefined) {
-        this.allSearchResults = [];
-        this.allSearchResults = searchResults;
-      } else {
-        for (this.k = 0; this.k < searchResults.length; this.k++) {
-          for (this.o = 0; this.o < this.allSearchResults.length; this.o++) {
-            if (searchResults[this.k].obj_id === this.allSearchResults[this.o].obj_id) {
-              console.log('found duplicate in final array');
-              this.trueIfDuplicate = true;
-            }
-          }
-          if (this.trueIfDuplicate === false) {
-            this.allSearchResults[this.allSearchResults.length] = searchResults[this.k];
-            console.log('allSearchResults after appending: ');
-            console.log(this.allSearchResults);
-          } else {
-            this.trueIfDuplicate = false;
-          }
+        if(this.allSearchResults === undefined) {
+          this.allSearchResults = [];
         }
-      }
-      if (this.allSearchResults === undefined) {
-        this.numberOfSearchResults = 0;
-      } else {
-        this.numberOfSearchResults = this.allSearchResults.length;
-      }
+        for (let result of searchResults) {
+            this.performPoemQuery(
+              result.obj_id,
+              result.value[3],
+              result.value[1],
+              result.value[2]);
+          }
     }
   }
 
@@ -790,6 +802,57 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.responseArray = response);
 
+  }
+
+  performPoemQuery(poemIRI: string, titel: string, date: string, seqnum: string) {
+    return this.http.get
+    (
+      globalSearchVariableService.API_URL +
+      '/resources/' +
+      encodeURIComponent(poemIRI)
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          this.performTextQuery(
+            data.props['http://www.knora.org/ontology/kuno-raeber#hasEdition'].values[0],
+            poemIRI,
+            titel,
+            date,
+            seqnum);
+          return data.resourcetypes;
+        }
+      )
+      .subscribe(response => this.responseArray = response);
+  }
+  performTextQuery(editionIRI: string, poemIRI: string, titel: string, date: string, seqnum: string) {
+    //console.log('get Text: ');
+    return this.http.get
+    (
+      globalSearchVariableService.API_URL +
+      '/resources/' +
+      encodeURIComponent(editionIRI)
+    )
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          if(!this.setOfAllSearchResults.has(poemIRI)) {
+            this.setOfAllSearchResults.add(poemIRI);
+            if (this.allSearchResults[this.allSearchResults.length] === undefined) {
+              this.allSearchResults[this.allSearchResults.length] = [];
+              this.allSearchResults[this.allSearchResults.length - 1][0] = titel;
+              this.allSearchResults[this.allSearchResults.length - 1][1] = date;
+              this.allSearchResults[this.allSearchResults.length - 1][2]
+                = data.props['http://www.knora.org/ontology/text#hasContent'].values[0].utf8str;
+              this.allSearchResults[this.allSearchResults.length - 1][3] = poemIRI;
+              this.allSearchResults[this.allSearchResults.length - 1][4] = seqnum;
+              this.numberOfSearchResults += 1;
+            }
+          }
+          return null;
+        }
+      )
+      .subscribe(response => this.responseArray = response);
   }
 
 }

@@ -12,13 +12,15 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
+import { DateFormatService } from '../utilities/date-format.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: [ 'textgrid.component.css' ]
+  styleUrls: [ 'textgrid.component.css' ],
+  providers: [ DateFormatService ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -36,7 +38,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   gridTextHeight: number = 0;
   i: number;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -106,5 +108,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     } else {
       return 'Linkinformation has not arrived yet';
     }
+  }
+
+  formatDate(date: string) {
+    return this.dateFormatService.germanLongDate(date);
   }
 }

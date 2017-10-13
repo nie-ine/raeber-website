@@ -31,6 +31,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
   @Input() resetPoems: string;
+  @Input() konvolutTitle: string;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTerm: Array<any>;
@@ -104,7 +105,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   produceFassungsLink(titel: string, iri: string) {
     if(titel !== undefined && iri !== undefined) {
-      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+      if(this.konvolutTitle === undefined) {
+        this.konvolutTitle = 'noKonvolutTitelDefined';
+      }
+      return '/' + this.konvolutTitle + '/' + titel.split('/')[0] + '---' + iri.split('raeber/')[1];
     } else {
       return 'Linkinformation has not arrived yet';
     }

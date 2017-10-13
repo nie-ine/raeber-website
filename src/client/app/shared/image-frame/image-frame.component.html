@@ -19,6 +19,7 @@ For the kitchen sink
 <div>
   <md-card>
     <md-card-content *ngIf="ausgeklappt">
+      <span>{{ orignameWithoutPath }}</span>
 
       <div [ngStyle]="{'height': height + px, 'width': width + px, 'overflow-y': overflow, 'resize': resize}" #picFrame>
       <!--  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
@@ -26,6 +27,10 @@ For the kitchen sink
         <img src="{{ pictureIdBase }}{{ width }},/0/default.jpg" class="rae-image_resizeable">
       </div>
 
+    </md-card-content>
+
+    <md-card-content *ngIf="!ausgeklappt">
+      <div [ngStyle]="{'width': width + px}" #emptyPicFrame></div>
     </md-card-content>
 
     <md-card-footer>
@@ -36,32 +41,17 @@ For the kitchen sink
         <span *ngIf="!ausgeklappt">Bild anzeigen</span>
       </button>
 
-      <span>{{ orignameWithoutPath }}</span>
-
-      <button md-button [mdMenuTriggerFor]="menu">
-        <md-icon *ngIf="ausgeklappt">wallpaper</md-icon>
+      <button md-button class="rae-image-small-button" (click)="increaseFrameSize()" title="Bild vergrössern">
+        <md-icon *ngIf="ausgeklappt">zoom_in</md-icon>
       </button>
 
-      <md-menu #menu="mdMenu" yPosition="above">
+      <button md-button class="rae-image-small-button" (click)="reduceFrameSize()" title="Bild verkleinern">
+        <md-icon *ngIf="ausgeklappt">zoom_out</md-icon>
+      </button>
 
-         <button md-button (click)="increaseFrameSize()">
-          <md-icon *ngIf="ausgeklappt">flip_to_front</md-icon>
-          Bild vergrössern
-        </button>
-
-        <button md-button (click)="reduceFrameSize()">
-          <md-icon *ngIf="ausgeklappt">flip_to_back</md-icon>
-          Bild verkleinern
-        </button>
-
-        <br>
-
-        <button md-button (click)="resetSize()">
-          <md-icon *ngIf="ausgeklappt">cached</md-icon>
-          Reset
-        </button>
-
-      </md-menu>
+      <button md-button class="rae-image-small-button" (click)="resetSize()" title="Neu laden">
+        <md-icon *ngIf="ausgeklappt">cached</md-icon>
+      </button>
 
     </md-card-footer>
   </md-card>

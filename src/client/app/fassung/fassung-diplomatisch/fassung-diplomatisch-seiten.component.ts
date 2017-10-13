@@ -16,7 +16,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
 
   @Output() propertiesReset = new EventEmitter();
 
-  properties = {'diplIRI': '', 'pagenumber': '', 'picIRI': ''};
+  properties = {'diplIRI': '', 'pagenumber': '', 'picData': ''};
 
   private sub: any;
 
@@ -35,6 +35,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
               this.properties['diplIRI'] = res.incoming[ j ].ext_res_id.id;
             }
           }
+          this.properties['picData'] = res.resinfo.locdata;
           this.propertiesReset.emit(this.properties);
         });
     }

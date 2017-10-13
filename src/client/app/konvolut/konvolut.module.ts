@@ -64,7 +64,10 @@ import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToT
     GetKonvolutIRIComponent,
     KonvolutTrefferleisteComponent
   ],
-  exports: [ KonvolutComponent ]
+  exports: [
+    KonvolutComponent,
+    KonvolutsucheModule
+  ]
 })
 export class KonvolutModule {
 }

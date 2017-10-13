@@ -5,11 +5,10 @@
     <md-card class="rae-poem-card">
 
 
-      <md-card-subtitle *ngIf="p[1]">{{p[1]}}</md-card-subtitle>
+      <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
-        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active">
-          {{p[0]}}
+        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active" [innerHTML]="highlight(p[0],searchTerm)">
         </a>
       </md-card-title>
 
@@ -26,10 +25,8 @@
         <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
           <span>Synopse:</span>
           <ul class="catItemTags">
-            <li *ngFor="let s of p.valuelabel; let j = index">
-              <a class="item" [routerLink]="['/synopsen/' + s]" routerLinkActive="active">
-                {{ s }}
-              </a>
+            <li *ngFor="let s of p[5]; let j = index">
+              <rae-textgrid-synopsenlink [workIRI]="s"></rae-textgrid-synopsenlink>
             </li>
           </ul>
         </div>

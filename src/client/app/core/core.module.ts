@@ -26,10 +26,10 @@ import { MdInputModule } from '@angular/material';
     // Order of imports is important!
     StatischModule,
     KonvolutModule,
-    FassungModule,
     RegisterModule,
     SucheModule,
     SynopseModule,
+    FassungModule,
     MdInputModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([

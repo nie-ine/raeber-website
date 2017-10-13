@@ -2,7 +2,8 @@
   [konvolut_id]="konvolut_id"
   (sendKonvolutTitleBack)="updateKonvolutTitle($event)"
   (sendKonvolutIRIBack)="updateKonvolutIRI($event)"
-  (sendKonvolutBildBack)="updateKonvolutBild($event)">
+  (sendKonvolutBildBack)="updateKonvolutBild($event)"
+  (sendKonvolutTypeBack)="updateKonvolutType($event)">
 
 </get-konvolut-iri>
 
@@ -34,7 +35,9 @@
                     <rae-konvolut-trefferleiste *ngIf="searchContext" [results]="searchResultsNo"
                                                 [searchTerm]="searchTerm"
                                                 (reset)="quitSearchMode($event)"></rae-konvolut-trefferleiste>
-                    <rae-textgrid [poemsInGrid]="poems"
+                    <rae-textgrid [konvolutTitle]="konvolutTitle"
+                                  [resetPoems]="resetPoems"
+                                  [poemsInGrid]="poems"
                                   [viewMode]="viewMode"
                                   [columns]="columns"
                                   [showText]=showText
@@ -88,3 +91,14 @@
   </div>
 </div>
 
+<from-poem-iri-to-textgrid-information
+  [poemIRIArray]="poemIRIArray"
+  (sendPoemInformationBack)="updatePoemInformation($event)"
+></from-poem-iri-to-textgrid-information>
+
+<from-konvolut-iri-to-poem-iris
+  [konvolutIRI]="IRI"
+  [konvolutType]="konvolutType"
+  (sendPoemIRIsBack)="createPoemIRIList($event)"
+  (signalizeThatNoRequestDefined)="deletePoemsInCache($event)"
+></from-konvolut-iri-to-poem-iris>

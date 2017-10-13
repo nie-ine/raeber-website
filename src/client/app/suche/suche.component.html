@@ -8,7 +8,7 @@
               <div class="component-content">
 
                 <h1>Suche</h1>
-                Number of Results: {{ numberOfSearchResults }}
+                Number of Results: {{ numberOfSearchResults }} <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
 
 
                 <br>
@@ -26,6 +26,8 @@
                   (returnQueries)="getQueries($event)">
 
                 </rae-parser>
+
+                <!--
 
                 <div ng-init="myResources=initialQuery()">
 
@@ -77,13 +79,15 @@
                     {{ query }}
                   </span>
                 </div>
-
+-->
                 <!--
                 <rae-textgrid
                   [poemsInGrid]="allSearchResults"
                   [searchTerm]="searchTerm"
                 ></rae-textgrid>
                 -->
+
+
               </div>
             </div>
           </div>

@@ -12,13 +12,15 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
+import { DateFormatService } from '../utilities/date-format.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-textgrid',
   templateUrl: 'textgrid.component.html',
-  styleUrls: [ 'textgrid.component.css' ]
+  styleUrls: [ 'textgrid.component.css' ],
+  providers: [ DateFormatService ]
 })
 export class TextgridComponent implements OnChanges, AfterViewChecked {
 
@@ -28,6 +30,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() columns: string = '43%';
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
+  @Input() resetPoems: string;
+  @Input() konvolutTitle: string;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTerm: Array<any>;
@@ -35,19 +39,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   gridTextHeight: number = 0;
   i: number;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if(this.resetPoems === 'reset') {
+      this.poemsInGrid = [];
+    }
     for (let propName in changes) {
       if (propName === 'poemsInGrid') {
         let chng = changes[ propName ];
         if (!chng.isFirstChange()) {
           if (this.poemsInGrid) {
             this.poemsInGrid = chng.currentValue;
-            for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-              this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
-            }
+            //for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
+            //  this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
+            //}
           }
         }
       }
@@ -84,13 +91,30 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (searchTerm === undefined) {
       return textToHighlight;
     }
-    return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-      return '<span class="highlightText">' + match + '</span>';
-    });
+    if(textToHighlight !== undefined ) {
+      return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+        return '<span class="highlightText">' + match + '</span>';
+      });
+    }
   }
 
   resetField() {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
+  }
+
+  produceFassungsLink(titel: string, iri: string) {
+    if(titel !== undefined && iri !== undefined) {
+      if(this.konvolutTitle === undefined) {
+        this.konvolutTitle = 'noKonvolutTitelDefined';
+      }
+      return '/' + this.konvolutTitle + '/' + titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
+  }
+
+  formatDate(date: string) {
+    return this.dateFormatService.germanLongDate(date);
   }
 }

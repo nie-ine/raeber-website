@@ -34,6 +34,7 @@ import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolu
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
 import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrief/konvolut-steckbrief-miniaturansicht.component';
+import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
 
 @NgModule({
   imports: [

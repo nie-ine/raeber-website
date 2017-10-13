@@ -163,12 +163,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   private getPrevNextPoems(poemSeqnum: number) {
     let searchParamsPrev = new ExtendedSearch();
     searchParamsPrev.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
-    // TODO Check for boundaries!
     searchParamsPrev.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum - 1).toString());
     searchParamsPrev.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
     let searchParamsNext = new ExtendedSearch();
     searchParamsNext.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
-    // TODO: Check for boundaries!
     searchParamsNext.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum + 1).toString());
     searchParamsNext.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
     console.log(searchParamsPrev.toString());

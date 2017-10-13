@@ -32,6 +32,7 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
 import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
+import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrief/konvolut-steckbrief-miniaturansicht.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToT
     KonvolutComponent,
     KonvolutSteckbriefComponent,
     KonvolutSteckbriefDatierungComponent,
+    KonvolutSteckbriefMiniaturansichtComponent,
     KonvolutSteckbriefPublikationComponent,
     KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,

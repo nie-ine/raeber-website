@@ -12,3 +12,12 @@ div.convolute-description p {
 span.emphase {
   font-weight: bold;
 }
+
+md-card div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.rae-konvolutbild{
+  padding-right: 10px;
+}

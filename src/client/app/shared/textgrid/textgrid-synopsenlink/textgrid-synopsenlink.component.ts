@@ -19,18 +19,18 @@ export class TextgridSynopsenlinkComponent implements OnChanges {
   constructor(private http: Http) {}
 
   ngOnChanges() {
-    if(this.workIRI) {
+    if (this.workIRI) {
       this.http.get(globalSearchVariableService.API_URL + /resources/ + encodeURIComponent(this.workIRI))
         .map(result => result.json())
-        .subscribe( res => {
-            try {
-              this.synopsenTitel = res.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
-            } catch (TypeError) {
-              this.synopsenTitel = '';
-            }
-          });
+        .subscribe(res => {
+          try {
+            this.synopsenTitel = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+            this.synopsenTitel = '';
+          }
+        });
 
-      this.partialIRI = this.workIRI.split('raeber/')[1];
+      this.partialIRI = this.workIRI.split('raeber/')[ 1 ];
     }
   }
 }

@@ -80,41 +80,31 @@ export class SeedConfig {
    * The default value is `false`, which can be overriden by the `--preserve-source-maps` flag when running `npm start`.
    */
   PRESERVE_SOURCE_MAPS = argv[ 'preserve-source-maps' ] || false;
+  COVERAGE_TS_DIR = 'coverage';
   /**
    * The current source-map-explorer output format.
    * The default value is `html`, which can be overriden by the `--sme-out-format html|json|tsv` flag when running `npm
    * run sme`.
    */
   SME_OUT_FORMAT = getSmeOutFormat();
-
   /**
    * The flag for the debug option of the application.
    * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
    * @type {boolean}
    */
   DEBUG = argv[ 'debug' ] || false;
-
   /**
    * The port where the documentation application will run.
    * The default docs port is `4003`, which can be overriden by the `--docs-port` flag when running `npm start`.
    * @type {number}
    */
   DOCS_PORT = argv[ 'docs-port' ] || 4003;
-
   /**
    * The port where the unit test coverage report application will run.
    * The default coverage port is `4004`, which can by overriden by the `--coverage-port` flag when running `npm start`.
    * @type {number}
    */
   COVERAGE_PORT = argv[ 'coverage-port' ] || 4004;
-
-  /**
-   * The path to the coverage output
-   * NB: this must match what is configured in ./karma.conf.js
-   */
-  COVERAGE_DIR = 'coverage_js';
-  COVERAGE_TS_DIR = 'coverage';
-
   /**
    * The path for the base of the application at runtime.
    * The default path is based on the environment '/',
@@ -122,6 +112,11 @@ export class SeedConfig {
    * @type {string}
    */
   APP_BASE = argv[ 'base' ] || '/';
+  /**
+   * The path to the coverage output
+   * NB: this must match what is configured in ./karma.conf.js
+   */
+  COVERAGE_DIR = 'coverage_js';
 
   /**
    * The base path of node modules.
@@ -139,20 +134,14 @@ export class SeedConfig {
    * @type {number}
    */
   TYPED_COMPILE_INTERVAL = 0;
-
+  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this
+    .NG_FACTORY_FILE}`;
   /**
    * The directory where the bootstrap file is located.
    * The default directory is `app`.
    * @type {string}
    */
   BOOTSTRAP_DIR = argv[ 'app' ] || 'app';
-
-  /**
-   * The directory where the client files are located.
-   * The default directory is `client`.
-   * @type {string}
-   */
-  APP_CLIENT = argv[ 'client' ] || 'client';
 
   /**
    * The bootstrap file to be used to boot the application.
@@ -164,9 +153,10 @@ export class SeedConfig {
 
   NG_FACTORY_FILE = 'main-prod';
   /**
-   * The current source-map-explorer output folder.
+   * The destination folder for the generated documentation.
+   * @type {string}
    */
-  SME_DIR = 'sme';
+  DOCS_DEST = 'docs';
   /**
    * The default title of the application as used in the `<title>` tag of the
    * `index.html`.
@@ -225,235 +215,6 @@ export class SeedConfig {
    * The directory of the tasks provided by the seed.
    */
   SEED_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
-  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this
-    .NG_FACTORY_FILE}`;
-  /**
-   * Seed tasks which are composition of other tasks.
-   */
-  SEED_COMPOSITE_TASKS = join(
-    process.cwd(),
-    this.TOOLS_DIR,
-    'config',
-    'seed.tasks.json'
-  );
-
-  /**
-   * The destination folder for the generated documentation.
-   * @type {string}
-   */
-  DOCS_DEST = 'docs';
-
-  /**
-   * The base folder for built files.
-   * @type {string}
-   */
-  DIST_DIR = 'dist';
-
-  /**
-   * The folder for built files in the `dev` environment.
-   * @type {string}
-   */
-  DEV_DEST = `${this.DIST_DIR}/dev`;
-
-  /**
-   * The folder for the built files in the `prod` environment.
-   * @type {string}
-   */
-  PROD_DEST = `${this.DIST_DIR}/prod`;
-
-  /**
-   * The folder for the built files, corresponding to the current environment.
-   * @type {string}
-   */
-  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT
-    ? this.DEV_DEST
-    : this.PROD_DEST;
-
-  /**
-   * The folder for the built files of the e2e-specs.
-   * @type {string}
-   */
-  E2E_DEST = `${this.DIST_DIR}/e2e`;
-
-  /**
-   * The folder for the built translation file.
-   * @type {string}
-   */
-  LOCALE_DEST = `${this.DIST_DIR}/locale`;
-
-  /**
-   * The folder for temporary files.
-   * @type {string}
-   */
-  TMP_DIR = `${this.DIST_DIR}/tmp`;
-  /**
-   * Project tasks which are composition of other tasks
-   * and aim to override the tasks defined in
-   * SEED_COMPOSITE_TASKS.
-   */
-  PROJECT_COMPOSITE_TASKS = join(
-    process.cwd(),
-    this.TOOLS_DIR,
-    'config',
-    'project.tasks.json'
-  );
-
-  /**
-   * The folder for the built CSS files.
-   * @type {strings}
-   */
-  CSS_DEST = `${this.APP_DEST}/css`;
-
-  /**
-   * The folder for the built JavaScript files.
-   * @type {string}
-   */
-  JS_DEST = `${this.APP_DEST}/js`;
-
-  /**
-   * The version of the application as defined in the `package.json`.
-   */
-  VERSION = appVersion();
-
-  /**
-   * The name of the bundle file to includes all CSS files.
-   * @type {string}
-   */
-  CSS_BUNDLE_NAME = 'main';
-
-  /**
-   * The name of the bundle file to include all JavaScript shims.
-   * @type {string}
-   */
-  JS_PROD_SHIMS_BUNDLE = 'shims.js';
-
-  /**
-   * The name of the bundle file to include all JavaScript application files.
-   * @type {string}
-   */
-  JS_PROD_APP_BUNDLE = 'app.js';
-
-  /**
-   * The required NPM version to run the application.
-   * @type {string}
-   */
-  VERSION_NPM = '2.14.2';
-
-  /**
-   * The required NodeJS version to run the application.
-   * @type {string}
-   */
-  VERSION_NODE = '4.0.0';
-  /**
-   * Enable SCSS stylesheet compilation.
-   * Set ENABLE_SCSS environment variable to 'true' or '1'
-   * @type {boolean}
-   */
-  ENABLE_SCSS = [ 'true', '1' ].indexOf(
-    `${process.env.ENABLE_SCSS}`.toLowerCase()
-    ) !== -1 ||
-    argv[ 'scss' ] ||
-    false;
-
-  /**
-   * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
-   * @type {boolean}
-   */
-  FORCE_TSLINT_EMIT_ERROR = !!process.env.FORCE_TSLINT_EMIT_ERROR;
-
-  /**
-   * Extra paths for the gulp process to watch for to trigger compilation.
-   * @type {string[]}
-   */
-  EXTRA_WATCH_PATHS: string[] = [];
-
-  /**
-   * Defines the template config.
-   */
-  TEMPLATE_CONFIG = {
-    /**
-     * Used to detect `data` property values to be HTML-escaped.
-     *
-     * @memberOf _.templateSettings
-     * @type {RegExp}
-     */
-    escape: /<%-([\s\S]+?)%>/g,
-
-    /**
-     * Used to detect code to be evaluated.
-     *
-     * @memberOf _.templateSettings
-     * @type {RegExp}
-     */
-    evaluate: /<%([\s\S]+?)%>/g,
-
-    /**
-     * Used to detect `data` property values to inject.
-     *
-     * @memberOf _.templateSettings
-     * @type {RegExp}
-     */
-    interpolate: /<%=([\s\S]+?)%>/g,
-
-    /**
-     * Used to reference the data object in the template text.
-     *
-     * @memberOf _.templateSettings
-     * @type {string}
-     */
-    variable: ''
-  };
-
-  /**
-   * The list of NPM dependcies to be injected in the `index.html`.
-   * @type {InjectableDependency[]}
-   */
-  NPM_DEPENDENCIES: InjectableDependency[] = [
-    { src: 'core-js/client/shim.min.js', inject: 'shims' },
-    { src: 'zone.js/dist/zone.js', inject: 'libs' },
-    {
-      src: 'zone.js/dist/long-stack-trace-zone.js',
-      inject: 'libs',
-      buildType: BUILD_TYPES.DEVELOPMENT
-    },
-    { src: 'intl/dist/Intl.min.js', inject: 'shims' },
-    {
-      src: 'systemjs/dist/system.src.js',
-      inject: 'shims',
-      buildType: BUILD_TYPES.DEVELOPMENT
-    },
-    // Temporary fix. See https://github.com/angular/angular/issues/9359
-    {
-      src: '.tmp/Rx.min.js',
-      inject: 'libs',
-      buildType: BUILD_TYPES.DEVELOPMENT
-    }
-  ];
-
-  /**
-   * The list of local files to be injected in the `index.html`.
-   * @type {InjectableDependency[]}
-   */
-  APP_ASSETS: InjectableDependency[] = [];
-
-  /**
-   * The list of editor temporary files to ignore in watcher and asset builder.
-   * @type {string[]}
-   */
-  TEMP_FILES: string[] = [ '**/*___jb_tmp___', '**/*~' ];
-
-  /**
-   * List of directories to include in commonjs
-   * @type {string[]}
-   */
-  ROLLUP_INCLUDE_DIR: string[] = [ 'node_modules/**' ];
-
-  /**
-   * List of named export Object key value pairs
-   * key: dependencie file
-   * value: exported Objects
-   */
-  ROLLUP_NAMED_EXPORTS: any[] = [];
   /**
    * The configuration of SystemJS for the `dev` environment.
    * @type {any}
@@ -506,12 +267,6 @@ export class SeedConfig {
       }
     }
   };
-  /**
-   * The configuration of SystemJS of the application.
-   * Per default, the configuration of the `dev` environment will be used.
-   * @type {any}
-   */
-  SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
   /**
    * The system builder configuration of the application.
    * @type {any}
@@ -594,6 +349,228 @@ export class SeedConfig {
     }
   };
   /**
+   * The base folder for built files.
+   * @type {string}
+   */
+  DIST_DIR = 'dist';
+  /**
+   * The folder for built files in the `dev` environment.
+   * @type {string}
+   */
+  DEV_DEST = `${this.DIST_DIR}/dev`;
+  /**
+   * The folder for the built files in the `prod` environment.
+   * @type {string}
+   */
+  PROD_DEST = `${this.DIST_DIR}/prod`;
+  /**
+   * The folder for the built files, corresponding to the current environment.
+   * @type {string}
+   */
+  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT
+    ? this.DEV_DEST
+    : this.PROD_DEST;
+  /**
+   * The folder for the built CSS files.
+   * @type {strings}
+   */
+  CSS_DEST = `${this.APP_DEST}/css`;
+  /**
+   * The folder for the built JavaScript files.
+   * @type {string}
+   */
+  JS_DEST = `${this.APP_DEST}/js`;
+  /**
+   * The folder for the built files of the e2e-specs.
+   * @type {string}
+   */
+  E2E_DEST = `${this.DIST_DIR}/e2e`;
+  /**
+   * The folder for the built translation file.
+   * @type {string}
+   */
+  LOCALE_DEST = `${this.DIST_DIR}/locale`;
+  /**
+   * The folder for temporary files.
+   * @type {string}
+   */
+  TMP_DIR = `${this.DIST_DIR}/tmp`;
+  /**
+   * The directory where the client files are located.
+   * The default directory is `client`.
+   * @type {string}
+   */
+  APP_CLIENT = argv[ 'client' ] || 'client';
+  /**
+   * The current source-map-explorer output folder.
+   */
+  SME_DIR = 'sme';
+  /**
+   * The version of the application as defined in the `package.json`.
+   */
+  VERSION = appVersion();
+
+  /**
+   * The name of the bundle file to includes all CSS files.
+   * @type {string}
+   */
+  CSS_BUNDLE_NAME = 'main';
+
+  /**
+   * The name of the bundle file to include all JavaScript shims.
+   * @type {string}
+   */
+  JS_PROD_SHIMS_BUNDLE = 'shims.js';
+
+  /**
+   * The name of the bundle file to include all JavaScript application files.
+   * @type {string}
+   */
+  JS_PROD_APP_BUNDLE = 'app.js';
+
+  /**
+   * The required NPM version to run the application.
+   * @type {string}
+   */
+  VERSION_NPM = '2.14.2';
+
+  /**
+   * The required NodeJS version to run the application.
+   * @type {string}
+   */
+  VERSION_NODE = '4.0.0';
+  /**
+   * Seed tasks which are composition of other tasks.
+   */
+  SEED_COMPOSITE_TASKS = join(
+    process.cwd(),
+    this.TOOLS_DIR,
+    'config',
+    'seed.tasks.json'
+  );
+
+  /**
+   * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
+   * @type {boolean}
+   */
+  FORCE_TSLINT_EMIT_ERROR = !!process.env.FORCE_TSLINT_EMIT_ERROR;
+
+  /**
+   * Extra paths for the gulp process to watch for to trigger compilation.
+   * @type {string[]}
+   */
+  EXTRA_WATCH_PATHS: string[] = [];
+  /**
+   * Project tasks which are composition of other tasks
+   * and aim to override the tasks defined in
+   * SEED_COMPOSITE_TASKS.
+   */
+  PROJECT_COMPOSITE_TASKS = join(
+    process.cwd(),
+    this.TOOLS_DIR,
+    'config',
+    'project.tasks.json'
+  );
+  /**
+   * Enable SCSS stylesheet compilation.
+   * Set ENABLE_SCSS environment variable to 'true' or '1'
+   * @type {boolean}
+   */
+  ENABLE_SCSS = [ 'true', '1' ].indexOf(
+    `${process.env.ENABLE_SCSS}`.toLowerCase()
+    ) !== -1 ||
+    argv[ 'scss' ] ||
+    false;
+
+  /**
+   * The list of local files to be injected in the `index.html`.
+   * @type {InjectableDependency[]}
+   */
+  APP_ASSETS: InjectableDependency[] = [];
+  /**
+   * Defines the template config.
+   */
+  TEMPLATE_CONFIG = {
+    /**
+     * Used to detect `data` property values to be HTML-escaped.
+     *
+     * @memberOf _.templateSettings
+     * @type {RegExp}
+     */
+    escape: /<%-([\s\S]+?)%>/g,
+
+    /**
+     * Used to detect code to be evaluated.
+     *
+     * @memberOf _.templateSettings
+     * @type {RegExp}
+     */
+    evaluate: /<%([\s\S]+?)%>/g,
+
+    /**
+     * Used to detect `data` property values to inject.
+     *
+     * @memberOf _.templateSettings
+     * @type {RegExp}
+     */
+    interpolate: /<%=([\s\S]+?)%>/g,
+
+    /**
+     * Used to reference the data object in the template text.
+     *
+     * @memberOf _.templateSettings
+     * @type {string}
+     */
+    variable: ''
+  };
+  /**
+   * The list of NPM dependcies to be injected in the `index.html`.
+   * @type {InjectableDependency[]}
+   */
+  NPM_DEPENDENCIES: InjectableDependency[] = [
+    { src: 'core-js/client/shim.min.js', inject: 'shims' },
+    { src: 'zone.js/dist/zone.js', inject: 'libs' },
+    {
+      src: 'zone.js/dist/long-stack-trace-zone.js',
+      inject: 'libs',
+      buildType: BUILD_TYPES.DEVELOPMENT
+    },
+    { src: 'intl/dist/Intl.min.js', inject: 'shims' },
+    {
+      src: 'systemjs/dist/system.src.js',
+      inject: 'shims',
+      buildType: BUILD_TYPES.DEVELOPMENT
+    },
+    // Temporary fix. See https://github.com/angular/angular/issues/9359
+    {
+      src: '.tmp/Rx.min.js',
+      inject: 'libs',
+      buildType: BUILD_TYPES.DEVELOPMENT
+    }
+  ];
+  /**
+   * The list of editor temporary files to ignore in watcher and asset builder.
+   * @type {string[]}
+   */
+  TEMP_FILES: string[] = [ '**/*___jb_tmp___', '**/*~' ];
+  /**
+   * List of directories to include in commonjs
+   * @type {string[]}
+   */
+  ROLLUP_INCLUDE_DIR: string[] = [ 'node_modules/**' ];
+  /**
+   * The configuration of SystemJS of the application.
+   * Per default, the configuration of the `dev` environment will be used.
+   * @type {any}
+   */
+  SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
+  /**
+   * List of named export Object key value pairs
+   * key: dependencie file
+   * value: exported Objects
+   */
+  ROLLUP_NAMED_EXPORTS: any[] = [];
+  /**
    * White list for CSS color guard
    * @type {[string, string][]}
    */
@@ -614,6 +591,11 @@ export class SeedConfig {
     'android >= 4.4',
     'bb >= 10'
   ];
+  /**
+   * Browser-sync middleware configurations array.
+   * @type {Array}
+   */
+  PROXY_MIDDLEWARE: any[] = [];
 
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
@@ -626,12 +608,6 @@ export class SeedConfig {
       this._APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE))
     );
   }
-
-  /**
-   * Browser-sync middleware configurations array.
-   * @type {Array}
-   */
-  PROXY_MIDDLEWARE: any[] = [];
 
   /**
    * Configurations for NPM module configurations. Add to or override in project.config.ts.

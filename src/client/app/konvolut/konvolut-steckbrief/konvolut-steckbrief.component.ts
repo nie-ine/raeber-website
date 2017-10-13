@@ -4,7 +4,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
-import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
 import { MdDialog } from '@angular/material';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
@@ -45,7 +44,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
 
   constructor(private http: Http, private dateFormatService: DateFormatService, public dialog: MdDialog) {}
 
-  ngOnChanges(){
+  ngOnChanges() {
     if (this.IRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL
         + '/resources/' + encodeURIComponent(this.IRI))
@@ -211,7 +210,6 @@ export class KonvolutSteckbriefComponent implements OnChanges {
       this.stufenIRIs = null;
     }
   }
-
 
 
   formatDate(date: string) {

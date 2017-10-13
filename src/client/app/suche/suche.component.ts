@@ -4,7 +4,6 @@ import { globalSearchVariableService } from './globalSearchVariablesService';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -28,17 +27,17 @@ export class SucheComponent implements OnInit {
   searchForVal: string;
   query: string;
   availableboolOperators = [
-    {name: 'equal to', operator: 'EQ'},
-    {name: 'not equal to', operator: '!EQ'},
-    {name: 'greater than', operator: 'GT'},
-    {name: 'greater or equal', operator: 'GT_EQ'},
-    {name: 'lower than', operator: 'LT'},
-    {name: 'lower or equal than', operator: 'LT_EQ'},
-    {name: 'exists', operator: 'EXISTS'},
-    {name: 'match', operator: 'MATCH'},
-    {name: 'like', operator: 'LIKE'},
-    {name: '!like', operator: '!LIKE'},
-    {name: 'match_boolean', operator: 'MATCH_BOOLEAN'}
+    { name: 'equal to', operator: 'EQ' },
+    { name: 'not equal to', operator: '!EQ' },
+    { name: 'greater than', operator: 'GT' },
+    { name: 'greater or equal', operator: 'GT_EQ' },
+    { name: 'lower than', operator: 'LT' },
+    { name: 'lower or equal than', operator: 'LT_EQ' },
+    { name: 'exists', operator: 'EXISTS' },
+    { name: 'match', operator: 'MATCH' },
+    { name: 'like', operator: 'LIKE' },
+    { name: '!like', operator: '!LIKE' },
+    { name: 'match_boolean', operator: 'MATCH_BOOLEAN' }
   ];
   arraySize: number;
   array = [
@@ -58,7 +57,7 @@ export class SucheComponent implements OnInit {
   str: string;
   value: string;
   keys: Array<any>;
-  finalQueryArray = [''];
+  finalQueryArray = [ '' ];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
   notizbuchDisabled = false;
@@ -97,10 +96,6 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckGedichte = new Set();
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
-  setOfAllSearchResults = new Set();
-  numberOfPerformedQueries = 0;
-  arg: AbstractControl;
-  rightProperty: string;
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',
@@ -128,7 +123,8 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'manuskript79',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript79},
+      'memberPoems': this.setOfPoemsManuskript79
+    },
     {
       'konvolut': 'manuskripte-1979-1983',
       'suchmaskeKonvolutName': 'manuskript7983',
@@ -141,13 +137,15 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'manuskriptKarten',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskriptKarten},
+      'memberPoems': this.setOfPoemsManuskriptKarten
+    },
     {
       'konvolut': 'typoskripte-1979',
       'suchmaskeKonvolutName': 'typoskript79',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79},
+      'memberPoems': this.setOfPoemsTyposkript79
+    },
     {
       'konvolut': 'typoskripte-1979-spez',
       'suchmaskeKonvolutName': 'typoskript79Spez',
@@ -160,13 +158,15 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'typoskript83',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript83},
+      'memberPoems': this.setOfPoemsTyposkript83
+    },
     {
       'konvolut': 'gesicht-im-mittag',
       'suchmaskeKonvolutName': 'druckGesicht',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGesicht},
+      'memberPoems': this.setOfPoemsdruckGesicht
+    },
     {
       'konvolut': 'die-verwandelten-schiffe',
       'suchmaskeKonvolutName': 'druckSchiffe',
@@ -179,20 +179,27 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'druckGedichte',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGedichte},
+      'memberPoems': this.setOfPoemsdruckGedichte
+    },
     {
       'konvolut': 'flussufer',
       'suchmaskeKonvolutName': 'druckFlussufer',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckFlussufer},
+      'memberPoems': this.setOfPoemsdruckFlussufer
+    },
     {
       'konvolut': 'reduktionen',
       'suchmaskeKonvolutName': 'druckReduktionen',
       'enabled': 'true',
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckReduktionen}
+      'memberPoems': this.setOfPoemsdruckReduktionen
+    }
   ];
+  setOfAllSearchResults = new Set();
+  numberOfPerformedQueries = 0;
+  arg: AbstractControl;
+  rightProperty: string;
   poemResTypes = [
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PoemNote',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
@@ -216,11 +223,11 @@ export class SucheComponent implements OnInit {
   }
 
   ngOnInit() {
-    for(this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
-      this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[this.o].konvolut, this.o);
+    for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
+      this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
     if (!this.inputSearchStringToBeParsed) {
-      this.inputSearchStringToBeParsed = this.route.snapshot.params['queryParameters'];
+      this.inputSearchStringToBeParsed = this.route.snapshot.params[ 'queryParameters' ];
       console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
     }
     if (this.allSearchResults === undefined) {
@@ -229,8 +236,6 @@ export class SucheComponent implements OnInit {
       this.numberOfSearchResults = this.allSearchResults.length;
     }
   }
-
-
 
 
   executeFinalQueries() {
@@ -254,16 +259,16 @@ export class SucheComponent implements OnInit {
       console.log('Request Group nr: ' + this.i);
       this.finalTemporaryResults = undefined;
       this.temporarySearchResults = undefined;
-      for (this.j = 0; this.j < queries[this.i].length; this.j++) {
+      for (this.j = 0; this.j < queries[ this.i ].length; this.j++) {
         if (this.j !== 0) {
           console.log('And merge with?');
         }
         this.numberOfQueries += 1;
         console.log('Search for: '
-          + queries[this.i][this.j].searchString
-          + ' in: ' + queries[this.i][this.j].where);
-        this.searchTerm = queries[this.i][this.j].searchString;
-        this.performQuery(this.searchTerm, queries[this.i][this.j].where, this.firstTermAfterOr, this.i, queries[this.i].length);
+          + queries[ this.i ][ this.j ].searchString
+          + ' in: ' + queries[ this.i ][ this.j ].where);
+        this.searchTerm = queries[ this.i ][ this.j ].searchString;
+        this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
         this.firstTermAfterOr = false;
       }
     }
@@ -275,37 +280,37 @@ export class SucheComponent implements OnInit {
 
   performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
     if (location === 'anywhere') {
-      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+      for (this.m = 0; this.m < this.poemResTypes.length; this.m++) {
         this.performSearchInTitle(
           searchTerm,
           firstTermAfterOr,
           searchGroup,
           numberOfTermsInSearchGroup,
-          this.poemResTypes[this.m]);
+          this.poemResTypes[ this.m ]);
         this.performSearchInText(
           searchTerm,
           firstTermAfterOr,
           searchGroup,
           numberOfTermsInSearchGroup,
-          this.poemResTypes[this.m]);
+          this.poemResTypes[ this.m ]);
       }
     } else if (location === 'title') {
-      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+      for (this.m = 0; this.m < this.poemResTypes.length; this.m++) {
         this.performSearchInTitle(
           searchTerm,
           firstTermAfterOr,
           searchGroup,
           numberOfTermsInSearchGroup,
-          this.poemResTypes[this.m]);
+          this.poemResTypes[ this.m ]);
       }
     } else if (location === 'text') {
-      for(this.m = 0; this.m < this.poemResTypes.length; this.m ++) {
+      for (this.m = 0; this.m < this.poemResTypes.length; this.m++) {
         this.performSearchInText(
           searchTerm,
           firstTermAfterOr,
           searchGroup,
           numberOfTermsInSearchGroup,
-          this.poemResTypes[this.m]);
+          this.poemResTypes[ this.m ]);
       }
     }
   }
@@ -313,43 +318,42 @@ export class SucheComponent implements OnInit {
   performSearchInTitle(searchTerm: string,
                        firstTermAfterOr: boolean,
                        searchGroup: number,
-                       numberOfTermsInSearchGroup:
-                         number,
+                       numberOfTermsInSearchGroup: number,
                        poemResType: string) {
     this.numberOfPerformedQueries += 1;
-      return this.http.get(
-        globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        poemResType +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
-        '&compop=LIKE' +
-        '&searchval=' +
-        encodeURIComponent(searchTerm) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
-        '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            console.log(data);
-            if (data.subjects[0] !== undefined) {
-              this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
-            } else {
-              console.log('Keine Treffer fuer diese Suche');
-            }
-            return data.properties;
+    return this.http.get(
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      poemResType +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
+      '&compop=LIKE' +
+      '&searchval=' +
+      encodeURIComponent(searchTerm) +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
+      '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+      '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(data);
+          if (data.subjects[ 0 ] !== undefined) {
+            this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+          } else {
+            console.log('Keine Treffer fuer diese Suche');
           }
-        )
-        .subscribe(response => this.myProperties = response);
+          return data.properties;
+        }
+      )
+      .subscribe(response => this.myProperties = response);
 
   }
+
   performSearchInText(searchTerm: string,
-                       firstTermAfterOr: boolean,
-                       searchGroup: number,
-                       numberOfTermsInSearchGroup:
-                         number,
-                       poemResType: string) {
+                      firstTermAfterOr: boolean,
+                      searchGroup: number,
+                      numberOfTermsInSearchGroup: number,
+                      poemResType: string) {
     this.numberOfPerformedQueries += 1;
     return this.http.get(
       'http://130.60.24.65:3333/v1/search/?searchtype=extended' +
@@ -362,14 +366,14 @@ export class SucheComponent implements OnInit {
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          if (data.subjects[0] !== undefined) {
-            for(let result of data.subjects) {
+          if (data.subjects[ 0 ] !== undefined) {
+            for (let result of data.subjects) {
               this.performSearchToGetPoemBelongingToEdition(
                 result.obj_id,
                 firstTermAfterOr,
                 searchGroup,
                 numberOfTermsInSearchGroup,
-                this.poemResTypes[this.m]);
+                this.poemResTypes[ this.m ]);
             }
           } else {
             console.log('Keine Treffer fuer diese Suche');
@@ -380,12 +384,12 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myProperties = response);
 
   }
+
   performSearchToGetPoemBelongingToEdition(searchTerm: string,
-                      firstTermAfterOr: boolean,
-                      searchGroup: number,
-                      numberOfTermsInSearchGroup:
-                        number,
-                      poemResType: string) {
+                                           firstTermAfterOr: boolean,
+                                           searchGroup: number,
+                                           numberOfTermsInSearchGroup: number,
+                                           poemResType: string) {
     this.numberOfPerformedQueries += 1;
     return this.http.get(
       'http://130.60.24.65:3333/v1/resources/' +
@@ -395,11 +399,11 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           //console.log(data);
           if (data !== undefined) {
-              //console.log(data.incoming[0].ext_res_id.id);
-              this.addToFinalSearchResultArray(
-                undefined,
-                data.incoming[0].ext_res_id.id
-                );
+            //console.log(data.incoming[0].ext_res_id.id);
+            this.addToFinalSearchResultArray(
+              undefined,
+              data.incoming[ 0 ].ext_res_id.id
+            );
           }
           return data.properties;
         }
@@ -425,20 +429,20 @@ export class SucheComponent implements OnInit {
       //}
       //if (this.temporarySearchResults[searchGroup] === undefined) {
       //  this.temporarySearchResults[searchGroup] = searchResults;
-        //console.log(this.temporarySearchResults);
-     // } //else {
-        //for (this.l = 0; this.l < searchResults.length; this.l++) {
-          //console.log('SearchGroup:' + searchGroup);
-          //for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m++) {
-            //if (searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
-              //console.log('found duplicate in temporary array');
-              //if (this.finalTemporaryResults === undefined) {
-              //  this.finalTemporaryResults = [];
-              //}
-              //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
-            //}
-          //}
-        //}
+      //console.log(this.temporarySearchResults);
+      // } //else {
+      //for (this.l = 0; this.l < searchResults.length; this.l++) {
+      //console.log('SearchGroup:' + searchGroup);
+      //for (this.m = 0; this.m < this.temporarySearchResults[searchGroup].length; this.m++) {
+      //if (searchResults[this.l].obj_id === this.temporarySearchResults[searchGroup][this.m].obj_id) {
+      //console.log('found duplicate in temporary array');
+      //if (this.finalTemporaryResults === undefined) {
+      //  this.finalTemporaryResults = [];
+      //}
+      //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+      //}
+      //}
+      //}
       //}
       //TODO: consider more than 2 searchTerms between ORs
       //Following statement for one search without output
@@ -458,8 +462,8 @@ export class SucheComponent implements OnInit {
   addToFinalSearchResultArray(searchResults: Array<any>, searchResultString: string) {
     //console.log('Add to final Search Results');
     //console.log(searchResultString);
-    if(searchResultString !== undefined) {
-      if(this.allSearchResults === undefined) {
+    if (searchResultString !== undefined) {
+      if (this.allSearchResults === undefined) {
         this.allSearchResults = [];
       }
       this.performPoemQuery(
@@ -469,16 +473,16 @@ export class SucheComponent implements OnInit {
         undefined);
     }
     if (searchResults !== undefined && searchResults.length !== 0) {
-        if(this.allSearchResults === undefined) {
-          this.allSearchResults = [];
-        }
-          for (let result of searchResults) {
-          this.performPoemQuery(
-            result.obj_id,
-            result.value[3],
-            result.value[1],
-            result.value[2]);
-        }
+      if (this.allSearchResults === undefined) {
+        this.allSearchResults = [];
+      }
+      for (let result of searchResults) {
+        this.performPoemQuery(
+          result.obj_id,
+          result.value[ 3 ],
+          result.value[ 1 ],
+          result.value[ 2 ]);
+      }
     }
   }
 
@@ -509,14 +513,12 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
       this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
       for (this.k = 0; this.k < this.suchmaskeKonvolutIRIMapping.length; this.k++) {
-        if (this.suchmaskeKonvolutIRIMapping[this.k].enabled) {
-            console.log('check if poems in result is in one set of allowed poems in: ' + this.suchmaskeKonvolutIRIMapping[this.k].konvolut);
-          }
+        if (this.suchmaskeKonvolutIRIMapping[ this.k ].enabled) {
+          console.log('check if poems in result is in one set of allowed poems in: ' + this.suchmaskeKonvolutIRIMapping[ this.k ].konvolut);
         }
       }
     }
-
-
+  }
 
 
   getKonvolutIRI(konvolut_id: string, i: number) {
@@ -526,128 +528,128 @@ export class SucheComponent implements OnInit {
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Notizbuch%201979',i);
+        '&searchval=Notizbuch%201979', i);
     } else if (konvolut_id === 'notizbuch-1979-1982') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201979-82',i);
+        '&searchval=Notizbuch%201979-82', i);
     } else if (konvolut_id === 'notizbuch-1980-1988') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201980-88',i);
+        '&searchval=Notizbuch%201980-88', i);
     } else if (konvolut_id === 'notizbuch-1965-80') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201965-80',i);
+        '&searchval=Notizbuch%201965-80', i);
     } else if (konvolut_id === 'manuskripte-1979') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Manuskripte%201979',i);
+        '&searchval=Manuskripte%201979', i);
     } else if (konvolut_id === 'manuskripte-1979-1983') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Manuskripte%201979-83',i);
+        '&searchval=Manuskripte%201979-83', i);
     } else if (konvolut_id === 'karten-1984') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Karten%201984',i);
+        '&searchval=Karten%201984', i);
     } else if (konvolut_id === 'karten-1984') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Karten%201984',i);
+        '&searchval=Karten%201984', i);
     } else if (konvolut_id === 'typoskripte-1979') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201979',i);
+        '&searchval=Typoskripte%201979', i);
     }
     if (konvolut_id === 'typoskripte-1979-spez') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201979-spez',i);
+        '&searchval=Typoskripte%201979-spez', i);
     } else if (konvolut_id === 'typoskripte-1983') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201983',i);
+        '&searchval=Typoskripte%201983', i);
     } else if (konvolut_id === 'gesicht-im-mittag') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=gesicht',i);
+        '&searchval=gesicht', i);
     } else if (konvolut_id === 'die-verwandelten-schiffe') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Schiffe',i);
+        '&searchval=Schiffe', i);
     } else if (konvolut_id === 'gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=GEDICHTE%201960',i);
+        '&searchval=GEDICHTE%201960', i);
     } else if (konvolut_id === 'flussufer') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Flussufer',i);
+        '&searchval=Flussufer', i);
     } else if (konvolut_id === 'reduktionen') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Reduktionen',i);
+        '&searchval=Reduktionen', i);
     } else if (konvolut_id === 'abgewandt-zugewandt-hochdeutsche-gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Hochdeutsche',i);
+        '&searchval=Hochdeutsche', i);
     } else if (konvolut_id === 'abgewandt-zugewandt-alemannische-gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Alemannische',i);
+        '&searchval=Alemannische', i);
     } else if (konvolut_id === 'verstreutes') {
       this.performQueryToGetIRI(
         '%23PolyAuthorPublicationConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Verstreutes',i);
+        '&searchval=Verstreutes', i);
     } else if (konvolut_id === 'tagebuecher') {
       this.performQueryToGetIRI(
         '%23DiaryConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Tagebuch',i);
+        '&searchval=Tagebuch', i);
     } else if (konvolut_id === 'tagebuecher-2') {
       this.performQueryToGetIRI(
         '%23DiaryConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Tagebuch',i);
+        '&searchval=Tagebuch', i);
     }
   }
 
@@ -668,21 +670,20 @@ export class SucheComponent implements OnInit {
             globalSearchVariableService.extendedSearch +
             globalSearchVariableService.initialVocabulary +
             queryPart);
-          if ( data.subjects[0] !== undefined) {
-            this.setOfKonvolutIRIs.add(data.subjects[0].obj_id);
-            this.suchmaskeKonvolutIRIMapping[i].IRI = data.subjects[0].obj_id;
+          if (data.subjects[ 0 ] !== undefined) {
+            this.setOfKonvolutIRIs.add(data.subjects[ 0 ].obj_id);
+            this.suchmaskeKonvolutIRIMapping[ i ].IRI = data.subjects[ 0 ].obj_id;
             console.log(this.suchmaskeKonvolutIRIMapping);
             this.rightProperty = '';
-            this.performQueryToGetAllowedPoems(data.subjects[0].obj_id,data.subjects[0].iconlabel, this.rightProperty, i);
+            this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
           console.log('alle Konvolutinformationen');
           console.log(this.setOfKonvolutIRIs);
-            return null;
+          return null;
         }
       )
       .subscribe(response => this.responseArray = response);
   }
-
 
 
   performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
@@ -698,7 +699,7 @@ export class SucheComponent implements OnInit {
         (lambda: Response) => {
           const data = lambda.json();
           console.log(data);
-          for(this.l = 0; this.l < data.nodes.length; this.l ++) {
+          for (this.l = 0; this.l < data.nodes.length; this.l++) {
             if (konvolutType === 'poem notebook') {
               rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';
               //console.log('Right Property: ' + rightProperty);
@@ -718,11 +719,11 @@ export class SucheComponent implements OnInit {
               rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
               //console.log('Right Property: ' + rightProperty);
             }
-            if(
-              data.nodes[this.l].resourceClassIri === rightProperty
+            if (
+              data.nodes[ this.l ].resourceClassIri === rightProperty
             ) {
               //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
-              this.suchmaskeKonvolutIRIMapping[i].memberPoems.add(data.nodes[this.l].resourceIri);
+              this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
             }
           }
           //console.log(this.setOfAlowedPoemIRIs);
@@ -746,9 +747,9 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           //console.log(data);
           this.performTextQuery(
-            data.props['http://www.knora.org/ontology/kuno-raeber#hasEdition'].values[0],
+            data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
             poemIRI,
-            data.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str,
+            data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
             date,
             seqnum);
           return data.resourcetypes;
@@ -756,6 +757,7 @@ export class SucheComponent implements OnInit {
       )
       .subscribe(response => this.responseArray = response);
   }
+
   performTextQuery(editionIRI: string, poemIRI: string, titel: string, date: string, seqnum: string) {
     //console.log(editionIRI);
     return this.http.get
@@ -767,16 +769,16 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          if(!this.setOfAllSearchResults.has(poemIRI)) {
+          if (!this.setOfAllSearchResults.has(poemIRI)) {
             this.setOfAllSearchResults.add(poemIRI);
-            if (this.allSearchResults[this.allSearchResults.length] === undefined) {
-              this.allSearchResults[this.allSearchResults.length] = [];
-              this.allSearchResults[this.allSearchResults.length - 1][0] = titel;
-              this.allSearchResults[this.allSearchResults.length - 1][1] = date;
-              this.allSearchResults[this.allSearchResults.length - 1][2]
-                = data.props['http://www.knora.org/ontology/text#hasContent'].values[0].utf8str;
-              this.allSearchResults[this.allSearchResults.length - 1][3] = poemIRI;
-              this.allSearchResults[this.allSearchResults.length - 1][4] = seqnum;
+            if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+              this.allSearchResults[ this.allSearchResults.length ] = [];
+              this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+              this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+              this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
+                = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+              this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+              this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
               this.numberOfSearchResults += 1;
             }
           }

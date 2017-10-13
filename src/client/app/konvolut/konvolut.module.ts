@@ -69,9 +69,9 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
     GetKonvolutIRIComponent,
     KonvolutTrefferleisteComponent
   ],
-entryComponents: [
-KonvolutKommentarComponent
-],
+  entryComponents: [
+    KonvolutKommentarComponent
+  ],
   exports: [
     KonvolutComponent,
     KonvolutsucheModule

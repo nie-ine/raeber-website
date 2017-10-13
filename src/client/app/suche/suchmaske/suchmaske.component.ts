@@ -17,7 +17,7 @@ import 'rxjs/add/operator/switchMap';
   moduleId: module.id,
   selector: 'rae-suchmaske',
   templateUrl: './suchmaske.component.html',
-  styleUrls: ['./suchmaske.component.css']
+  styleUrls: [ './suchmaske.component.css' ]
 })
 
 export class SuchmaskeComponent implements OnChanges {
@@ -32,7 +32,7 @@ export class SuchmaskeComponent implements OnChanges {
   @Input() poemsInGrid: string;
 
   /*
-  Options for extension of fulltext search
+   Options for extension of fulltext search
    */
   suchraumOptions = [
     { value: 'volltext', viewValue: 'in Text & Titel' },
@@ -41,7 +41,7 @@ export class SuchmaskeComponent implements OnChanges {
   ];
 
   /*
-  Tracks if convolute category elements are hidden
+   Tracks if convolute category elements are hidden
    */
   catHidden = {
     notizbuecher: false,
@@ -58,6 +58,7 @@ export class SuchmaskeComponent implements OnChanges {
     this.createForm();
     this.onSearchParamsChange();
   }
+
   ngOnChanges() {
     console.log('Data arrived back in Suchmaske: ');
     console.log(this.poemsInGrid);
@@ -76,8 +77,8 @@ export class SuchmaskeComponent implements OnChanges {
     let b: boolean;
     for (const v in children) {
       if (v !== parentFormControlName) {
-        if (b == null || children[v].value === b) {
-          b = children[v].value;
+        if (b == null || children[ v ].value === b) {
+          b = children[ v ].value;
         } else {
           res = false;
         }
@@ -126,7 +127,7 @@ export class SuchmaskeComponent implements OnChanges {
   toggleGroupDisabled(formGroupPath: string, parentFormControlName: string) {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
     for (const c in children) {
-      children[c].setValue(this.allConvolutesSelected);
+      children[ c ].setValue(this.allConvolutesSelected);
       if (this.suchmenuForm.get(formGroupPath).pristine) {
         this.suchmenuForm.get(formGroupPath).markAsDirty();
       }
@@ -144,7 +145,7 @@ export class SuchmaskeComponent implements OnChanges {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
     for (const c in children) {
       if (c !== parentFormControlName) {
-        const v = children[c].value;
+        const v = children[ c ].value;
         if (v === reverseFilter) {
           return false;
         }
@@ -162,7 +163,7 @@ export class SuchmaskeComponent implements OnChanges {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
     const allElemValue = (this.suchmenuForm.get(parentFormControlPath) as FormControl).value;
     for (const c in children) {
-      children[c].setValue(allElemValue, { emitModeltoViewChange: true });
+      children[ c ].setValue(allElemValue, { emitModeltoViewChange: true });
     }
   }
 
@@ -172,7 +173,7 @@ export class SuchmaskeComponent implements OnChanges {
   onSearchParamsChange() {
     const suchmenuForm = (this.suchmenuForm as FormGroup).controls;
     for (const s in suchmenuForm) {
-      suchmenuForm[s].valueChanges.forEach(
+      suchmenuForm[ s ].valueChanges.forEach(
         x => this.suchEvents.next(this.suchmenuForm));
     }
   }
@@ -188,14 +189,14 @@ export class SuchmaskeComponent implements OnChanges {
       typoskriptForm: this.fb.group(new Typoskript()),
       druckForm: this.fb.group(new Druck()),
       /*      druckForm: this.fb.group({
-              druckAll: false,
-              druckGesicht: false,
-              druckSchiffe: false,
-              druckGedichte: false,
-              druckFlussufer: false,
-              druckReduktionen: false,
-              druckAbgewandt: this.fb.group(new DruckAbgewandt())
-            }),*/
+       druckAll: false,
+       druckGesicht: false,
+       druckSchiffe: false,
+       druckGedichte: false,
+       druckFlussufer: false,
+       druckReduktionen: false,
+       druckAbgewandt: this.fb.group(new DruckAbgewandt())
+       }),*/
       zeitschriftForm: this.fb.group(new Zeitschrift()),
       materialienForm: this.fb.group(new Materialien()),
       textartForm: this.fb.group(new Textart()),

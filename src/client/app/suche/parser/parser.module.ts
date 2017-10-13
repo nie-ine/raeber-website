@@ -4,8 +4,7 @@ import { ParserComponent } from './parser.component';
 
 
 @NgModule({
-  imports: [
-  ],
+  imports: [],
   declarations: [
     ParserComponent
   ],

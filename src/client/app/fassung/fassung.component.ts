@@ -50,6 +50,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   poem_resizable: boolean;
   show_register: boolean;
 
+  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef) {
+  }
 
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
@@ -57,9 +59,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     } else {
       return 'Linkinformation has not arrived yet';
     }
-  }
-
-  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {

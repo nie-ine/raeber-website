@@ -1,5 +1,6 @@
 <ng-container *ngFor="let pageIRI of pageIRIs">
-  <rae-fassung-diplomatisch-seiten [pageIRI]="pageIRI" (propertiesReset)="addPage($event)"></rae-fassung-diplomatisch-seiten>
+  <rae-fassung-diplomatisch-seiten [pageIRI]="pageIRI"
+                                   (propertiesReset)="addPage($event)"></rae-fassung-diplomatisch-seiten>
 </ng-container>
 
 <div #diplomatischKarte>

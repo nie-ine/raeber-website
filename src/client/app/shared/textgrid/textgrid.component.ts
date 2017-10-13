@@ -43,7 +43,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.resetPoems === 'reset') {
+    if (this.resetPoems === 'reset') {
       this.poemsInGrid = [];
     }
     for (let propName in changes) {
@@ -91,7 +91,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (searchTerm === undefined) {
       return textToHighlight;
     }
-    else if(textToHighlight !== undefined ) {
+    else if (textToHighlight !== undefined) {
       return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
         return '<span class="highlightText">' + match + '</span>';
       });
@@ -106,11 +106,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   produceFassungsLink(titel: string, iri: string) {
-    if(titel !== undefined && iri !== undefined) {
-      if(this.konvolutTitle === undefined) {
+    if (titel !== undefined && iri !== undefined) {
+      if (this.konvolutTitle === undefined) {
         this.konvolutTitle = 'noKonvolutTitelDefined';
       }
-      return '/' + this.konvolutTitle + '/' + titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+      return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }

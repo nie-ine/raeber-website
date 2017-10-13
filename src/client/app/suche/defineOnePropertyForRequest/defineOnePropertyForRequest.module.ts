@@ -8,11 +8,11 @@ import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
+  MdCheckboxModule,
   MdGridListModule,
   MdIconModule,
   MdInputModule,
   MdMenuModule,
-  MdCheckboxModule,
   MdSelectModule
 } from '@angular/material';
 

@@ -36,6 +36,8 @@ export class KonvolutComponent implements OnInit {
   showText: boolean = true;
   gridHeight: number = 0;
   poemIRIArray: Array<any>;
+  konvolutType: string;
+  resetPoems: string;
 
   viewMode: string;
   konvolut_type: string;
@@ -153,11 +155,22 @@ export class KonvolutComponent implements OnInit {
   updatePoemInformation(poemInformation: Array<any>) {
     //console.log(poemInformation);
     this.poems = poemInformation;
+    this.resetPoems = undefined;
     //console.log(this.poems);
   }
 
   createPoemIRIList(poemIRIList: Array<any>) {
     this.poemIRIArray = poemIRIList;
+  }
+
+  updateKonvolutType(konvolutType: string) {
+    console.log('KonvolutType: ' + konvolutType);
+    this.konvolutType = konvolutType;
+  }
+
+  deletePoemsInCache(input: string) {
+    console.log('ResetPoemArray');
+    this.resetPoems = 'reset';
   }
 
 }

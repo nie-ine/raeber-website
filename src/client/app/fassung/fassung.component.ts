@@ -31,6 +31,7 @@ export class FassungComponent implements OnInit {
   ];
   // TODO dynamisieren
 
+  fassungIRI: string = 'http://rdfh.ch/kuno-raeber/R-eJHE7NQnCXElwfZ5o95g'; // TODO
   pageIRIs: Array<string>;
 
   // for testings
@@ -39,7 +40,7 @@ export class FassungComponent implements OnInit {
   poem_id: string;
   konvolut_id: string;
   konvolut_type: string;
-  konvolutIRI = 'http://rdfh.ch/kuno-raeber/34FIMLqvTZqHv4GUaaohKw';
+  konvolutIRI = 'http://rdfh.ch/kuno-raeber/34FIMLqvTZqHv4GUaaohKw'; // TODO
 
   nextPoem: string = '219-brunnen'; // TODO
   prevPoem: string = '221-baum'; // TODO
@@ -69,7 +70,7 @@ export class FassungComponent implements OnInit {
     });
 
     this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
+      encodeURIComponent(this.fassungIRI))
       .map(result => result.json())
       .subscribe(res => {
         this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;

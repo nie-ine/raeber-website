@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { Config } from '../config/env.config';
 import { Router } from '@angular/router';
@@ -22,12 +23,10 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    //console.log('Get Information for this poem IRI: ');
-    //console.log(this.poemIRIArray);
     this.poemInformation = [];
     this.countRequests = 0;
-    if (this.poemIRIArray !== undefined) {
-      for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
+    if(this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+      for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
         //console.log('get information for this poem:');
         this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
         this.poemInformation[ this.i ] = [];
@@ -60,18 +59,15 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
             this.poemInformation[ i ][ 5 ] = data.resdata[ 'restype_name' ].split('#')[ 1 ];
             this.getConvoluteIriName(this.poemInformation[ i ][ 5 ], data, i);
           }
-          console.log(data.resdata[ 'restype_name' ].split('#')[ 1 ]);
-          console.log(data.resdata[ 'restype_name' ]);
-          console.log(this.poemInformation[ i ][ 0 ]);
-          console.log(this.poemInformation[ i ][ 1 ]);
+          // console.log(data.resdata[ 'restype_name' ].split('#')[ 1 ]);
+          // console.log(data.resdata[ 'restype_name' ]);
+          // console.log(this.poemInformation[ i ][ 0 ]);
+          // console.log(this.poemInformation[ i ][ 1 ]);
           this.performTextQuery(data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ], i);
           return data.resourcetypes;
         }
       )
-      .subscribe(response =>
-        this
-          .responseArray = response
-      );
+      .subscribe(response => this.responseArray = response);
   }
 
   performTextQuery(IRI: string, i: number) {

@@ -12,11 +12,8 @@ import { Component, Input } from '@angular/core';
 })
 export class FassungBlaetternComponent {
   @Input() idOfPrev: string;
+  @Input() titleOfPrev: string;
   @Input() idOfNext: string;
-
-
-  titleOfPrev = 'Baum'; //TODO
-  titleOfNext = 'Brunnen'; //TODO
-
+  @Input() titleOfNext: string;
 
 }

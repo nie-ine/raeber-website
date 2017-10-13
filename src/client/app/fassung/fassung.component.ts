@@ -1,15 +1,15 @@
 /**
  * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 6/7/17.
  */
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { FulltextSearch } from '../shared/utilities/knora-api-params';
-import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
+import { Config } from '../shared/config/env.config';
+import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -17,29 +17,32 @@ import { globalSearchVariableService } from '../suche/globalSearchVariablesServi
   templateUrl: 'fassung.component.html',
   styleUrls: [ 'fassung.component.css' ]
 })
-export class FassungComponent implements OnInit {
+export class FassungComponent implements OnInit, AfterViewChecked {
   creationDate = 'Freitag, 01 Juni 1979';
   modificationDate = 'Samstag, 13 Mai 2017';
 
   zeigeKonstituiert: boolean = true;
   zeigeDiplomatisch: boolean = false;
 
-  fassung_tag: Array<string> = [
-    'Sonne',
-    'Wind',
-    'Wasser'
-  ];
-  // TODO dynamisieren
+  urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
 
   pageIRIs: Array<string>;
 
-  // for testings
-  searchQuery: string;
-
   poem_id: string;
+  poemTitle: string;
+  poemSeqnum: number;
+  poemConvoluteIri: string;
+  poemConvoluteType: string;
+  convoluteProperty: string;
+  editedPoemText: string;
+  textEdition: string;
   konvolut_id: string;
   konvolut_type: string;
-  konvolutIRI = 'http://rdfh.ch/kuno-raeber/34FIMLqvTZqHv4GUaaohKw';
+  konvolutIRI: string;
+  synopseIRI: string;
+  workTitle: string;
+  otherWorkExpressions: any[] = [];
+  otherWorkExpressionsIri: string[];
 
   nextPoem: string = '219-brunnen'; // TODO
   prevPoem: string = '221-baum'; // TODO
@@ -47,10 +50,15 @@ export class FassungComponent implements OnInit {
   poem_resizable: boolean;
   show_register: boolean;
 
-  private sub: any;
-  private sub2: any;
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef) {
+  }
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  private static produceFassungsLink(titel: string, iri: string) {
+    if (titel !== undefined && iri !== undefined) {
+      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
   }
 
   ngOnInit() {
@@ -59,20 +67,136 @@ export class FassungComponent implements OnInit {
 
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
 
-    let searchParams = new FulltextSearch;
-    searchParams.searchstring = 'e';
+    // TODO: Change when route definitions have been changed
+    this.poem_id = this.router.url.split('/')[ 3 ].split('---')[ 1 ];
 
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-    this.sub = this.route.params.subscribe(params => {
-      this.konvolut_id = params[ 'konvolut' ];
-      this.poem_id = params[ 'fassung' ];
-    });
-
-    this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-      encodeURIComponent('http://rdfh.ch/kuno-raeber/GlOSHSWsSrGfBdZACCe_Zw'))
+    this.http
+      .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
       .map(result => result.json())
       .subscribe(res => {
-        this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;
+        console.log(res);
+        this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+        this.textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
+        this.getEditedPoemText(this.textEdition);
+        this.pageIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isOnPage' ].values;
+        this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
+        this.poemConvoluteType = res.resdata[ 'restype_name' ].split('#')[ 1 ];
+        switch (this.poemConvoluteType) {
+          case 'PoemNote':
+            this.convoluteProperty = 'http://www.knora.org/ontology/kuno-raeber#isInNotebook';
+            break;
+          case 'HandwrittenPoem':
+            this.convoluteProperty = 'http://www.knora.org/ontology/text#isInManuscript';
+            break;
+          case 'PostCardPoem':
+            this.convoluteProperty = 'http://www.knora.org/ontology/text#isOnPostcard';
+            break;
+          case 'TypewrittenPoem':
+            this.convoluteProperty = 'http://www.knora.org/ontology/text#isInTypescript';
+            break;
+          case 'PublicationPoem':
+            this.convoluteProperty = 'http://www.knora.org/ontology/work#isPublishedIn';
+            break;
+        }
+        this.poemConvoluteIri = res.props[ this.convoluteProperty ].values[ 0 ];
+        this.getPrevNextPoems(this.poemSeqnum);
+      });
+
+    this.http
+      .get(Config.API + 'graphdata/' + encodeURIComponent(this.urlPrefix + this.poem_id) + '?depth=2')
+      .map(result => result.json())
+      .subscribe(res => {
+        for (const r of res.nodes) {
+          console.log(r);
+          if (r[ 'resourceClassIri' ].split('#')[ 1 ] === ('PoemNotebook' ||
+              'PoemManuscriptConvolute' ||
+              'PoemPostcardConvolute' ||
+              'PoemTypescriptConvolute' ||
+              'PrintedPoemBookPublication' ||
+              'PolyAuthorPublication')) {
+            this.konvolutIRI = r[ 'resourceIri' ];
+          }
+          if (r[ 'resourceClassIri' ].split('#')[ 1 ] === 'Work') {
+            this.synopseIRI = r[ 'resourceIri' ];
+            this.getWork(this.synopseIRI);
+          }
+        }
       });
   }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+  }
+
+  private getEditedPoemText(editedTextIri: string) {
+    this.http.get(Config.API + 'resources/' + encodeURIComponent(editedTextIri))
+      .map(result => result.json())
+      .subscribe(res => this.editedPoemText = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str);
+  }
+
+  private getWork(workIri: string) {
+    this.http.get(Config.API + 'resources/' + encodeURIComponent(workIri))
+      .map(result => result.json())
+      .subscribe(res => {
+          this.workTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+          this.otherWorkExpressionsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
+          for (const { item, index } of this.otherWorkExpressionsIri.map((item, index) => ({ item, index }))) {
+            this.getOtherPoemsTitle(item, index);
+          }
+        }
+      );
+  }
+
+  private getOtherPoemsTitle(poemIri: string, index: number) {
+    this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
+      .map(result => result.json())
+      .subscribe(res => {
+          const otherPoemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+          this.otherWorkExpressions[ index ] = '/fassung/' + FassungComponent.produceFassungsLink(otherPoemTitle, poemIri) +
+            '###' + otherPoemTitle;
+        }
+      );
+  }
+
+  private getPrevNextPoems(poemSeqnum: number) {
+    let searchParamsPrev = new ExtendedSearch();
+    searchParamsPrev.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
+    // TODO Check for boundaries!
+    searchParamsPrev.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum - 1).toString());
+    searchParamsPrev.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
+    let searchParamsNext = new ExtendedSearch();
+    searchParamsNext.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
+    // TODO: Check for boundaries!
+    searchParamsNext.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum + 1).toString());
+    searchParamsNext.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
+    console.log(searchParamsPrev.toString());
+    console.log(searchParamsNext.toString());
+    this.http.get(searchParamsPrev.toString())
+      .map(result => result.json())
+      .subscribe(res => {
+        console.log(res);
+        let poemIri = res.subjects[ 0 ][ 'obj_id' ];
+        this.prevPoem = poemIri.split('/')[ 3 ];
+        this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
+          .map(result => result.json())
+          .subscribe(res => {
+            this.prevPoem = this.prevPoem + '###' +
+              res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+          });
+      });
+    this.http.get(searchParamsNext.toString())
+      .map(result => result.json())
+      .subscribe(res => {
+        let poemIri = res.subjects[ 0 ][ 'obj_id' ];
+        this.nextPoem = poemIri.split('/')[ 3 ];
+        this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
+          .map(result => result.json())
+          .subscribe(res => {
+            this.nextPoem = this.nextPoem + '###' +
+              res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+          });
+      });
+
+  }
+
 }

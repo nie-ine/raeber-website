@@ -50,13 +50,15 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
 
     // infos for title and routing
-    this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
-      .map(response => response.json()).subscribe(res => {
-        this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
-        this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
-        this.knoraKonvolutType = res.resinfo.restype_label;
-        this.konvolutType = this.konvolutTypeMap[this.knoraKonvolutType];
-      });
+    if (this.konvolutIRI !== undefined) {
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
+        .map(response => response.json()).subscribe(res => {
+          this.konvolutTitle = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
+          this.konvolutId = res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ].utf8str;
+          this.knoraKonvolutType = res.resinfo.restype_label;
+          this.konvolutType = this.konvolutTypeMap[ this.knoraKonvolutType ];
+        });
+    }
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
@@ -131,15 +133,15 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   produceFassungsLink(titel: string, iri: string) {
-   if(titel !== undefined && iri !== undefined) {
-      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+    if (titel !== undefined && iri !== undefined) {
+      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }
   }
 
   removeHtml(content: string) {
-    if(content !== undefined) {
+    if (content !== undefined) {
       return content.replace(/<[^>]+>/g, '');
     } else {
       return undefined;

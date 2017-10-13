@@ -19,11 +19,10 @@
 
                   <div class="itemTagsBlock" style='float:right'>
                     <ul class="itemTags">
-                      <li *ngFor="let t of fassung_tag">
-                        <a [routerLink]="['/synopsen/' + t]" routerLinkActive="active">
-                          Synopse&nbsp;{{ t }} &nbsp;
-                        </a>
-                      </li>
+                      <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
+                         *ngIf="synopseIRI !== undefined">
+                        Synopse
+                      </a>
                     </ul>
                   </div>
 
@@ -31,11 +30,7 @@
                     <!-- Date created -->
                     <span class="itemDateCreated">{{ creationDate }}</span>
                     <!-- Item title -->
-                    <h2 class="itemTitle">
-                      {{ poem_id }}
-                      <!-- TODO -->
-                      Wolke
-                    </h2>
+                    <h2 class="itemTitle">{{poemTitle}}</h2>
                   </div>
 
                   <div class="itemBody">
@@ -48,7 +43,8 @@
                           *ngIf="zeigeKonstituiert"
                           [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
                           <section class="edtext edtext_hs">
-                            <rae-text></rae-text>
+                            <div [innerHTML]="editedPoemText"></div>
+                            <!--<rae-text></rae-text>-->
                           </section>
                         </md-card-content>
                         <md-card-footer>
@@ -88,25 +84,35 @@
                     <!-- Item tags -->
                     <div class="itemTagsBlock">
                       <span>Synopse:</span>
-                      <ul class="itemTags">
-                        <li *ngFor="let t of fassung_tag">
-                          <a [routerLink]="['/synopsen/', + t]" routerLinkActive="active">{{t}}</a>
-                        </li>
-                      </ul>
+                      <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
+                         *ngIf="synopseIRI !== undefined">
+                        {{workTitle}}
+                      </a>
                     </div>
                   </div>
 
                   <!-- Related items by tag -->
                   <div class="itemRelated">
-                    <rae-fassung-weitere [synopsenTags]="fassung_tag"></rae-fassung-weitere>
+                    <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                    <!--<md-nav-list dense>-->
+                    <ul>
+                      <li *ngFor="let p of otherWorkExpressions">
+                        <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active" *ngIf="p !== undefined">
+                          {{p.split('###')[1]}}
+                        </a>
+                      </li>
+                    </ul>
+                    <!--</md-nav-list>-->
                   </div>
 
                   <div class="itemToolbar">
                     <ul>
                       <rae-fassung-blaettern
                         style="font-size: 0.8em; float: left"
-                        [idOfPrev]="prevPoem"
-                        [idOfNext]="nextPoem"></rae-fassung-blaettern>
+                        [idOfPrev]="prevPoem.split('###')[0]"
+                        [titleOfPrev]="prevPoem.split('###')[1]"
+                        [idOfNext]="nextPoem.split('###')[0]"
+                        [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
                       <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
                       <!-- Print Button -->
                     </ul>
@@ -150,5 +156,5 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>

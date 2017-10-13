@@ -1,7 +1,7 @@
 <h3>Weitere Fassungen</h3>
 <md-nav-list dense>
-  <a md-list-item *ngFor="let p of weitereFassungen; let i = index" [routerLink]="['../id']" routerLinkActive="active">
-    <h5 md-line>{{ p.id }}</h5>
-    <p md-line>in: {{ p.text }}</p>
+  <a md-list-item *ngFor="let p of weitereFassungen; let i = index" [routerLink]="[p[0]]" routerLinkActive="active">
+    <!--<h5 md-line>{{ p[1] }}</h5>-->
+    <p md-line>in: {{ p[1] }}</p>
   </a>
 </md-nav-list>

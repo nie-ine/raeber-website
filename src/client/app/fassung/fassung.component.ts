@@ -153,7 +153,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .map(result => result.json())
       .subscribe(res => {
           const otherPoemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-          this.otherWorkExpressions[ index ] = '/fassung/' + FassungComponent.produceFassungsLink(otherPoemTitle, poemIri) +
+        this.otherWorkExpressions[ index ] = '/' + this.konvolutTitel + '/' +
+          FassungComponent.produceFassungsLink(otherPoemTitle, poemIri) +
             '###' + otherPoemTitle;
         }
       );
@@ -177,13 +178,18 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         console.log(res);
         let poemIri = res.subjects[ 0 ][ 'obj_id' ];
-        this.prevPoem = poemIri.split('/')[ 3 ];
+        console.log(poemIri);
+        this.prevPoem = poemIri.split('/')[ 4 ];
         this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
           .map(result => result.json())
           .subscribe(res => {
             if (res.nhits !== '0') {
-              this.prevPoem = '/' + encodeURIComponent(this.konvolutTitel) + '/' + this.prevPoem + '###' +
+              console.log(this.konvolutTitel);
+              this.prevPoem = '/' + this.konvolutTitel + '/' +
+                encodeURIComponent(res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str) +
+                '---' + this.prevPoem + '###' +
                 res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+              console.log(this.prevPoem);
             } else {
               this.prevPoem = '###';
             }
@@ -193,13 +199,18 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .map(result => result.json())
       .subscribe(res => {
         let poemIri = res.subjects[ 0 ][ 'obj_id' ];
-        this.nextPoem = poemIri.split('/')[ 3 ];
+        console.log(poemIri);
+        this.nextPoem = poemIri.split('/')[ 4 ];
         this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
           .map(result => result.json())
           .subscribe(res => {
             if (res.nhits !== '0') {
-              this.nextPoem = '/' + encodeURIComponent(this.konvolutTitel) + '/' + this.nextPoem + '###' +
+              console.log(this.konvolutTitel);
+              this.nextPoem = '/' + this.konvolutTitel + '/' +
+                encodeURIComponent(res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str) +
+                '---' + this.nextPoem + '###' +
                 res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+              console.log(this.nextPoem);
             } else {
               this.prevPoem = '###';
             }

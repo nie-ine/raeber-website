@@ -24,13 +24,13 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
     if (this.fassungIRI) {
       for (let i = 0; i < this.fassungIRI.length; i++) {
         this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-        encodeURIComponent(this.fassungIRI[i]))
+          encodeURIComponent(this.fassungIRI[ i ]))
           .map(result => result.json())
           .subscribe(res => {
-            let title = res.props['http://www.knora.org/ontology/text#hasTitle'].values[0].utf8str;
-            let iriPart = this.fassungIRI[i].split('raeber/')[1];
+            let title = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            let iriPart = this.fassungIRI[ i ].split('raeber/')[ 1 ];
             // TODO get convolute title for linking
-            this.fassung.push({'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart});
+            this.fassung.push({ 'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart });
           });
 
       }

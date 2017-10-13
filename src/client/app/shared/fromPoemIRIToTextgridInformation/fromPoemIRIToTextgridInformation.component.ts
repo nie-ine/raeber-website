@@ -1,6 +1,5 @@
-import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { Config } from '../config/env.config';
 import { Router } from '@angular/router';
@@ -25,8 +24,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   ngOnChanges() {
     this.poemInformation = [];
     this.countRequests = 0;
-    if(this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
-      for(this.i=0; this.i < this.poemIRIArray.length; this.i++) {
+    if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+      for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
         //console.log('get information for this poem:');
         this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
         this.poemInformation[ this.i ] = [];

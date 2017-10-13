@@ -64,16 +64,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     );
   }
 
-  /**
-   * Filters chronologically first and last element in array
-   * @param {Array<any>} x Unfiltered array
-   * @returns {Array<any>} Filtered array
-   */
-  private static filterFirstLast(x: Array<any>): Array<any> {
-    let firstLast: Array<any> = [];
-    firstLast.push(x[ 0 ]);
-    firstLast.push(x[ x.length - 1 ]);
-    return firstLast;
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService) {
   }
 
   /**
@@ -95,11 +86,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return x[ 5 ] !== type;
   }
 
-  constructor(private cdr: ChangeDetectorRef) {
+  /**
+   * Filters chronologically first and last element in array
+   * @param {Array<any>} x Unfiltered array
+   * @returns {Array<any>} Filtered array
+   */
+  private static filterFirstLast(x: Array<any>): Array<any> {
+    let firstLast: Array<any> = [];
+    firstLast.push(x[ 0 ]);
+    if (x.length > 1) {
+      firstLast.push(x[ x.length - 1 ]);
+    }
+    return firstLast;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.resetPoems === 'reset') {
+    if (this.resetPoems === 'reset') {
       this.poemsInGrid = [];
     }
     for (let propName in changes) {
@@ -151,11 +153,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   highlight(textToHighlight: string, searchTerm: string) {
     if (searchTerm === undefined) {
       return textToHighlight;
-    }
-    if(textToHighlight !== undefined ) {
+    } else if (textToHighlight !== undefined) {
       return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
         return '<span class="highlightText">' + match + '</span>';
       });
+    } else {
+      return textToHighlight;
     }
   }
 
@@ -165,11 +168,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   produceFassungsLink(titel: string, iri: string) {
-    if(titel !== undefined && iri !== undefined) {
-      if(this.konvolutTitle === undefined) {
+    if (titel !== undefined && iri !== undefined) {
+      if (this.konvolutTitle === undefined) {
         this.konvolutTitle = 'noKonvolutTitelDefined';
       }
-      return '/' + this.konvolutTitle + '/' + titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+      return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }

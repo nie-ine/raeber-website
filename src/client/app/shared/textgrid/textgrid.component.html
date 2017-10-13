@@ -9,14 +9,15 @@
       <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
-        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active" [innerHTML]="highlight(p[0],searchTerm)">
+        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
+           [innerHTML]="highlight(p[0],searchTerm)">
         </a>
       </md-card-title>
 
       <md-card-content
         [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
         [ngStyle]="{'height': rahmen ? 'calc(20em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  poemText.offsetHeight+'px', 'overflow-y': rahmen ? 'auto' : 'visible'}">
-        <div class="rae-poem" [innerHTML]="highlight(p[2],searchTerm)">
+        <div class="rae-poem" [innerHTML]="highlight(p[2],searchTerm)" #poemText>
         </div>
       </md-card-content>
 

@@ -16,7 +16,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class KonvolutSteckbriefMiniaturansichtComponent implements OnChanges {
 
-  @Input() konvolutBild: any;
+  @Input() konvolutBild: string;
 
   picturePath = '';
 

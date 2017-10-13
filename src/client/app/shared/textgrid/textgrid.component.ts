@@ -91,10 +91,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (searchTerm === undefined) {
       return textToHighlight;
     }
-    if(textToHighlight !== undefined ) {
+    else if(textToHighlight !== undefined ) {
       return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
         return '<span class="highlightText">' + match + '</span>';
       });
+    } else {
+      return textToHighlight;
     }
   }
 

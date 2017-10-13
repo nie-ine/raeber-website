@@ -101,7 +101,6 @@ export class SucheComponent implements OnInit {
   numberOfPerformedQueries = 0;
   arg: AbstractControl;
   rightProperty: string;
-  responseArray: Array<any>;
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',

@@ -76,85 +76,60 @@
 
                     </div>
                     <div class="itemExtraFields">
-                      <rae-fassung-steckbrief></rae-fassung-steckbrief>
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id" [konvolutIRI]="konvolutIRI">
+                      </rae-fassung-steckbrief>
                     </div>
                   </div>
+                </div>
 
-                  <div class="itemLinks">
-                    <!-- Item tags -->
-                    <div class="itemTagsBlock">
-                      <span>Synopse:</span>
-                      <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
-                         *ngIf="synopseIRI !== undefined">
-                        {{workTitle}}
-                      </a>
-                    </div>
+                <div class="itemLinks">
+                  <!-- Item tags -->
+                  <div class="itemTagsBlock">
+                    <span>Synopse:</span>
+                    <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
+                       *ngIf="synopseIRI !== undefined">
+                      {{workTitle}}
+                    </a>
                   </div>
+                </div>
 
-                  <!-- Related items by tag -->
-                  <div class="itemRelated">
-                    <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
-                    <!--<md-nav-list dense>-->
-                    <ul>
-                      <li *ngFor="let p of otherWorkExpressions">
-                        <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active" *ngIf="p !== undefined">
-                          {{p.split('###')[1]}}
-                        </a>
-                      </li>
-                    </ul>
-                    <!--</md-nav-list>-->
-                  </div>
+                <!-- Related items by tag -->
+                <div class="itemRelated">
+                  <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                </div>
 
-                  <div class="itemToolbar">
-                    <ul>
-                      <rae-fassung-blaettern
-                        style="font-size: 0.8em; float: left"
-                        [idOfPrev]="prevPoem.split('###')[0]"
-                        [titleOfPrev]="prevPoem.split('###')[1]"
-                        [idOfNext]="nextPoem.split('###')[0]"
-                        [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
-                      <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
-                      <!-- Print Button -->
-                    </ul>
-                  </div>
+                <div class="itemToolbar">
+                  <ul>
+                    <rae-fassung-blaettern
+                      style="font-size: 0.8em; float: left"
+                      [idOfPrev]="prevPoem.split('###')[0]"
+                      [titleOfPrev]="prevPoem.split('###')[1]"
+                      [idOfNext]="nextPoem.split('###')[0]"
+                      [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
+                    <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="rt-grid-3 " *ngIf="show_register">
-          <div id="rt-sidebar-a" style="margin-top:4px;">
-            <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
-              <ngb-panel id="register" title="Register">
-                <ng-template ngbPanelContent>
-                  <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
-                </ng-template>
-              </ngb-panel>
-              <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
-                <ng-template ngbPanelContent>
-                  <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
-                </ng-template>
-              </ngb-panel>
-              <!--           <ngb-panel id="darstellung" title="Darstellungsoptionen">
-                           <ng-template ngbPanelContent>
-                             <rae-darstellungsoptionen (darstellung)="setTextgridLayout($event)"
-                                                       (vergroessereText)="textgrid.vergroessereFeld()"
-                                                       (verkleinereText)="textgrid.verkleinereFeld()"
-                                                       [gridHeight]="gridHeight"
-                                                       (resetHeight)="textgrid.resetField()"></rae-darstellungsoptionen>
-                           </ng-template>
-                         </ngb-panel>-->
-            </ngb-accordion>
-            <!--<rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>-->
-
-            <!--<div class="moduletable">-->
-            <!--<h6>Suchen: {{konvolut_id}}</h6>&lt;!&ndash; TODO: Variable ersetzen &ndash;&gt;-->
-            <!--<p>Nach Suchbegriff</p>&lt;!&ndash; TODO: ersetzen &ndash;&gt;-->
-            <!--<p>Nach Seite oder Blatt</p>&lt;!&ndash; TODO: ersetzen &ndash;&gt;-->
-            <!--</div>-->
-            <!--</div>-->
-          </div>
+      </div>
+      <div class="rt-grid-3 " *ngIf="show_register">
+        <div id="rt-sidebar-a" style="margin-top:4px;">
+          <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
+            <ngb-panel id="register" title="Register">
+              <ng-template ngbPanelContent>
+                <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
+              <ng-template ngbPanelContent>
+                <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
         </div>
       </div>
     </div>
   </div>
+</div>

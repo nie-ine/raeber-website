@@ -16,6 +16,7 @@ import {
   MdListModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { DiplomatischerTextModule } from '../shared/diplomatischer-text/diplomatischer-text.module';
 import { FassungRoutingModule } from './fassung-routing.module';
 import { ImageFrameModule } from '../shared/image-frame/image-frame.module';
@@ -31,6 +32,9 @@ import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.compo
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { TextComponent } from '../shared/text/text.component';
 import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassung-diplomatisch-seiten.component';
+import { FassungSteckbriefKonvolutComponent } from './fassung-steckbrief/fassung-steckbrief-konvolut.component';
+import { FassungSteckbriefFassungComponent } from './fassung-steckbrief/fassung-steckbrief-fassung.component';
+import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung-steckbrief-signatur.component';
 import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
 
 
@@ -62,6 +66,9 @@ import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
     FassungDiplomatischSeitenComponent,
     FassungHilfeComponent,
     FassungSteckbriefComponent,
+    FassungSteckbriefFassungComponent,
+    FassungSteckbriefKonvolutComponent,
+    FassungSteckbriefSignaturComponent,
     FassungWeitereComponent,
     FassungWerkzeugleisteComponent,
     TextComponent

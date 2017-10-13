@@ -67,7 +67,8 @@ import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolu
   ],
   exports: [
     KonvolutComponent,
-    FromPoemIRIToTextgridInformationComponent
+    FromPoemIRIToTextgridInformationComponent, 
+    KonvolutsucheModule
   ]
 })
 export class KonvolutModule {

@@ -55,6 +55,8 @@ export class FassungSteckbriefComponent implements OnChanges {
   }
 
   ngOnChanges() {
+    console.log("Fassungs-IRI: " +  this.fassungIRI);
+    console.log("Konvolut-IRI: " + this.konvolutIRI);
     if (this.fassungIRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL
         + '/resources/' + encodeURIComponent(this.fassungIRI))

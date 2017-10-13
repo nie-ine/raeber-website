@@ -9,6 +9,7 @@ import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
+  MdDialogModule,
   MdGridListModule,
   MdIconModule,
   MdInputModule,
@@ -20,6 +21,8 @@ import { DiplomatischerTextModule } from '../shared/diplomatischer-text/diplomat
 import { FassungRoutingModule } from './fassung-routing.module';
 import { ImageFrameModule } from '../shared/image-frame/image-frame.module';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { KonvolutModule } from '../konvolut/konvolut.module';
 
 import { FassungBlaetternComponent } from './fassung-blaettern/fassung-blaettern.component';
 import { FassungComponent } from './fassung.component';
@@ -32,6 +35,7 @@ import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassu
 import { FassungSteckbriefKonvolutComponent } from './fassung-steckbrief/fassung-steckbrief-konvolut.component';
 import { FassungSteckbriefFassungComponent } from './fassung-steckbrief/fassung-steckbrief-fassung.component';
 import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung-steckbrief-signatur.component';
+import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
 
 
 @NgModule({
@@ -44,12 +48,15 @@ import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung
     ImageFrameModule,
     MdButtonModule,
     MdButtonToggleModule,
+    MdDialogModule,
     MdCardModule,
     MdGridListModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
+    NgbModule,
     RegisterspalteModule,
+    KonvolutModule,
     FassungRoutingModule
   ],
   declarations: [
@@ -57,6 +64,7 @@ import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung
     FassungComponent,
     FassungDiplomatischComponent,
     FassungDiplomatischSeitenComponent,
+    FassungHilfeComponent,
     FassungSteckbriefComponent,
     FassungSteckbriefFassungComponent,
     FassungSteckbriefKonvolutComponent,
@@ -66,7 +74,10 @@ import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung
     TextComponent
   ],
   exports: [ FassungComponent ],
-  providers: []
+  providers: [],
+  entryComponents: [
+    FassungHilfeComponent
+  ]
 })
 export class FassungModule {
 }

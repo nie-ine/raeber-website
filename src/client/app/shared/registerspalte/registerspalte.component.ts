@@ -50,13 +50,15 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
 
     // infos for title and routing
-    this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
-      .map(response => response.json()).subscribe(res => {
-        this.konvolutTitle = res.props['http://www.knora.org/ontology/text#hasConvoluteTitle'].values[0].utf8str;
-        this.konvolutId = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
-        this.knoraKonvolutType = res.resinfo.restype_label;
-        this.konvolutType = this.konvolutTypeMap[ this.knoraKonvolutType ];
-      });
+    if (this.konvolutIRI !== undefined) {
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
+        .map(response => response.json()).subscribe(res => {
+          this.konvolutTitle = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
+          this.konvolutId = res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ].utf8str;
+          this.knoraKonvolutType = res.resinfo.restype_label;
+          this.konvolutType = this.konvolutTypeMap[ this.knoraKonvolutType ];
+        });
+    }
   }
 
   updatePoemInformation(poemInformation: Array<any>) {

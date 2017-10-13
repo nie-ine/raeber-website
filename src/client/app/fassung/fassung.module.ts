@@ -29,6 +29,9 @@ import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.compo
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
 import { TextComponent } from '../shared/text/text.component';
 import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassung-diplomatisch-seiten.component';
+import { FassungSteckbriefKonvolutComponent } from './fassung-steckbrief/fassung-steckbrief-konvolut.component';
+import { FassungSteckbriefFassungComponent } from './fassung-steckbrief/fassung-steckbrief-fassung.component';
+import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung-steckbrief-signatur.component';
 
 
 @NgModule({
@@ -55,6 +58,9 @@ import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassu
     FassungDiplomatischComponent,
     FassungDiplomatischSeitenComponent,
     FassungSteckbriefComponent,
+    FassungSteckbriefFassungComponent,
+    FassungSteckbriefKonvolutComponent,
+    FassungSteckbriefSignaturComponent,
     FassungWeitereComponent,
     FassungWerkzeugleisteComponent,
     TextComponent

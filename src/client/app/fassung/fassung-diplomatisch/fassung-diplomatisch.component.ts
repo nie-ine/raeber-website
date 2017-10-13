@@ -1,9 +1,7 @@
 /**
  * Created by Reto Baumgartner (rfbaumgartner) on 24.07.17.
  */
-import { Component, ElementRef, EventEmitter, Input, Output, OnChanges, AfterViewInit, ViewChild} from '@angular/core';
-import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -18,9 +16,10 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
   @Output() pictureIncreased = new EventEmitter();
 
   cardWidth: number;
-  pages: Array<any> = new Array();
+  pages: Array<any> = [];
   gewaehlteSchicht: string = 'schicht0';
-
+  @ViewChild('diplomatischKarte')
+  diplomatischKarte: ElementRef;
   private sub: any;
 
   ngOnChanges() {
@@ -34,9 +33,6 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
       this.cardWidth = 300;
     }
   }
-
-  @ViewChild('diplomatischKarte')
-  diplomatischKarte: ElementRef;
 
   addPage(values: Array<string>) {
     this.pages.push(values);

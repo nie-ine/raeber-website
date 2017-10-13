@@ -23,11 +23,11 @@ export class KonvolutSteckbriefMiniaturansichtComponent implements OnChanges {
   height = 120;
 
   ngOnChanges() {
-    if(this.konvolutBild) {
+    if (this.konvolutBild) {
       let parts = this.konvolutBild.split('/');
       console.log(parts);
-      parts[4] = parts[4].replace(/.jpg$/, '.jpx');
-      parts[6] = ',' + this.height;
+      parts[ 4 ] = parts[ 4 ].replace(/.jpg$/, '.jpx');
+      parts[ 6 ] = ',' + this.height;
       this.picturePath = parts.join('/');
     }
   }

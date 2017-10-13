@@ -4,6 +4,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
+import { MdDialog } from '@angular/material';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 
@@ -39,9 +40,9 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   laterStagesIRIs: Array<string>;
   stufenIRIs: Array<string>;
   private sub: any;
+  private sub2: any;
 
-  constructor(private http: Http, private dateFormatService: DateFormatService) {
-  }
+  constructor(private http: Http, private dateFormatService: DateFormatService, public dialog: MdDialog) {}
 
   ngOnChanges() {
     if (this.IRI) {

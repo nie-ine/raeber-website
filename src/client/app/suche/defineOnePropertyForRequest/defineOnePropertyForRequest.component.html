@@ -1,9 +1,8 @@
-<button  *ngIf="array.length > 1" md-button style="min-width: 1px;">
+<button *ngIf="array.length > 1" md-button style="min-width: 1px;">
 
-  <md-icon >close</md-icon>
+  <md-icon>close</md-icon>
 
 </button>
-
 
 
 <md-select placeholder="All properties" [(ngModel)]="selectedProperty">
@@ -17,17 +16,16 @@
 </md-select>
 
 
-
 <md-select placeholder="Select logical Operator" [(ngModel)]="selectedBoolOperator">
 
-  <md-option *ngFor="let operator of availableboolOperators" [value]="operator.operator" (click)="updatePropertyTriple()">
+  <md-option *ngFor="let operator of availableboolOperators" [value]="operator.operator"
+             (click)="updatePropertyTriple()">
 
     {{ operator.name }}
 
   </md-option>
 
 </md-select>
-
 
 
 <md-input-container>

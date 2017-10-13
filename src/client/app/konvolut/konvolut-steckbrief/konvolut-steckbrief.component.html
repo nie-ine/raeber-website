@@ -42,7 +42,8 @@
 
       <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs.length > 0">
         <span class="emphase">Publikation:</span>
-        <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
+        <rae-konvolut-steckbrief-publikation
+          [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
       </p>
 
       <p *ngIf="archiveSignature">
@@ -57,10 +58,12 @@
 
       <br/>
 
-      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
+      <p
+        *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
         <span class="emphase">Stufen:</span>
-        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen><span
-        *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
+        <span
+          *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
@@ -76,9 +79,11 @@
       </p>
 
       <p *ngIf="comment">
-        <span class="emphase">Kommentar:</span>
-        <span [innerHtml]="comment"></span>
-      </p>
+      <span class="emphase">Kommentar:</span>
+      <!-- FIXME: Wert gibt im Moment lediglich den das Link-HTML-Element auf die Beschreibung zurück, anstatt den Inhalt zurückzugeben -->
+      <a (click)="openDialog()">Beschreibung</a>
+      <span [innerHtml]="comment"></span>
+    </p>
 
       <p *ngIf="konvoluttyp != 'poem manuscript convolute' && laterStagesIRIs && laterStagesIRIs.length > 0">
         <span class="emphase">Spätere Stufen:</span>

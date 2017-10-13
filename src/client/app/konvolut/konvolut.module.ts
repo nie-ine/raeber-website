@@ -9,6 +9,7 @@ import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
+  MdDialogModule,
   MdGridListModule,
   MdIconModule,
   MdInputModule,
@@ -33,6 +34,7 @@ import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolu
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
 import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrief/konvolut-steckbrief-miniaturansicht.component';
+import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,7 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
     MdButtonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdDialogModule,
     MdGridListModule,
     MdIconModule,
     MdInputModule,
@@ -57,6 +60,7 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
   ],
   declarations: [
     KonvolutComponent,
+    KonvolutKommentarComponent,
     KonvolutSteckbriefComponent,
     KonvolutSteckbriefDatierungComponent,
     KonvolutSteckbriefMiniaturansichtComponent,
@@ -65,6 +69,9 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
     KonvolutWerkzeugleisteComponent,
     GetKonvolutIRIComponent,
     KonvolutTrefferleisteComponent
+  ],
+  entryComponents: [
+    KonvolutKommentarComponent
   ],
   exports: [
     KonvolutComponent,

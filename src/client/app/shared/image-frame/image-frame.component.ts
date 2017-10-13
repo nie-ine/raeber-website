@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'rxjs/Rx';
 
 import 'rxjs/add/operator/catch';
@@ -34,21 +34,21 @@ export class ImageFrameComponent implements OnInit {
   ausgeklappt: boolean = true;
 
   ngOnInit() {
-    this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[0];
+    this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[ 0 ];
     this.width = this.initWidth;
-    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
-    this.orignameWithoutPath = this.pictureData.origname.split('/')[this.pictureData.origname.split('/').length - 1];
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
+    this.orignameWithoutPath = this.pictureData.origname.split('/')[ this.pictureData.origname.split('/').length - 1 ];
   }
 
   increaseFrameSize() {
     this.width += 40;
-    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
     this.pictureIncreased.emit(null);
   }
 
   reduceFrameSize() {
     this.width -= 40;
-    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx );
+    this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
     this.pictureReduced.emit(null);
   }
 

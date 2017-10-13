@@ -37,7 +37,8 @@ export class SynopseComponent implements OnInit {
     // TODO Parameter anpassen
     let searchParams = new ExtendedSearch();
     searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    // searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', 'MATCH', this.synopseTag);
+    // searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', 'MATCH',
+    // this.synopseTag);
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
     searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
     searchParams.showNRows = 500;

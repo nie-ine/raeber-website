@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   moduleId: module.id,
   selector: 'rae-basic-search',
   templateUrl: './basic-search.component.html',
-  styleUrls: ['./basic-search.component.css']
+  styleUrls: [ './basic-search.component.css' ]
 })
 export class BasicSearchComponent {
 
@@ -20,7 +20,7 @@ export class BasicSearchComponent {
   }
 
   sendRequest(values: any) {
-    this.router.navigateByUrl('/suche?wort=' + encodeURIComponent(values),);
+    this.router.navigateByUrl('/suche?wort=' + encodeURIComponent(values));
   }
 
 

@@ -102,10 +102,10 @@ export class Druck {
 }
 
 /*export class DruckAbgewandt {
-  druckAbgewandtAll = false;
-  druckAbgewandtHochdeutsch = false;
-  druckAbgewandtAlemannisch = false;
-}*/
+ druckAbgewandtAll = false;
+ druckAbgewandtHochdeutsch = false;
+ druckAbgewandtAlemannisch = false;
+ }*/
 
 export class Zeitschrift {
   zeitschriftAll = false;

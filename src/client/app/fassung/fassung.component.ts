@@ -36,22 +36,20 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   convoluteProperty: string;
   editedPoemText: string;
   textEdition: string;
-  konvolut_id: string;
-  konvolut_type: string;
+  konvolutType: string;
   konvolutIRI: string;
+  konvolutTitel: string;
   synopseIRI: string;
   workTitle: string;
   otherWorkExpressions: any[] = [];
   otherWorkExpressionsIri: string[];
 
-  nextPoem: string = '219-brunnen'; // TODO
-  prevPoem: string = '221-baum'; // TODO
+  nextPoem: string = '';
+  prevPoem: string = '';
 
   poem_resizable: boolean;
   show_register: boolean;
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef) {
-  }
 
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
@@ -61,14 +59,16 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef) {
+  }
+
   ngOnInit() {
     this.poem_resizable = true;
     this.show_register = true;
 
-    this.konvolut_type = this.route.snapshot.url[ 0 ].path;
-
     // TODO: Change when route definitions have been changed
-    this.poem_id = this.router.url.split('/')[ 3 ].split('---')[ 1 ];
+    this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[ 1 ]);
+    this.poem_id = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
 
     this.http
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
@@ -115,6 +115,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
               'PrintedPoemBookPublication' ||
               'PolyAuthorPublication')) {
             this.konvolutIRI = r[ 'resourceIri' ];
+            this.konvolutType = r[ 'resourceClassIri' ].split('#')[ 1 ];
           }
           if (r[ 'resourceClassIri' ].split('#')[ 1 ] === 'Work') {
             this.synopseIRI = r[ 'resourceIri' ];
@@ -180,8 +181,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
           .map(result => result.json())
           .subscribe(res => {
-            this.prevPoem = this.prevPoem + '###' +
-              res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            if (res.nhits !== '0') {
+              this.prevPoem = '/' + encodeURIComponent(this.konvolutTitel) + '/' + this.prevPoem + '###' +
+                res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            } else {
+              this.prevPoem = '###';
+            }
           });
       });
     this.http.get(searchParamsNext.toString())
@@ -192,8 +197,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
           .map(result => result.json())
           .subscribe(res => {
-            this.nextPoem = this.nextPoem + '###' +
-              res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            if (res.nhits !== '0') {
+              this.nextPoem = '/' + encodeURIComponent(this.konvolutTitel) + '/' + this.nextPoem + '###' +
+                res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            } else {
+              this.prevPoem = '###';
+            }
           });
       });
 

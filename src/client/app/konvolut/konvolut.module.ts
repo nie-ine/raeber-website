@@ -16,6 +16,9 @@ import {
   MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DarstellungsoptionenModule } from '../shared/darstellungsoptionen/darstellungsoptionen.module';
+import { KonvolutsucheModule } from '../shared/konvolutsuche/konvolutsuche.module';
 
 import { KonvolutComponent } from './konvolut.component';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
@@ -23,13 +26,21 @@ import { KonvolutSteckbriefComponent } from './konvolut-steckbrief/konvolut-stec
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutWerkzeugleisteComponent } from './konvolut-werkzeugleiste/konvolut-werkzeugleiste.component';
-import { SteckbriefVariables } from './konvolutVariables';
-import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
+import { KonvolutSteckbriefPublikationComponent } from './konvolut-steckbrief/konvolut-steckbrief-publikation.component';
+import { KonvolutSteckbriefStufenComponent } from './konvolut-steckbrief/konvolut-steckbrief-stufen.component';
+import { KonvolutSteckbriefDatierungComponent } from './konvolut-steckbrief/konvolut-steckbrief-datierung.component';
+import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.component';
+import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
+import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
+import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
+import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrief/konvolut-steckbrief-miniaturansicht.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    FromKonvolutIRIToPoemIRIsModule,
+    FromPoemIRIToTextgridInformationModule,
     HttpModule,
     MdButtonModule,
     MdButtonToggleModule,
@@ -41,18 +52,30 @@ import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommen
     MdToolbarModule,
     RegisterspalteModule,
     TextgridModule,
+    NgbModule,
+    DarstellungsoptionenModule,
+    KonvolutsucheModule,
     KonvolutRoutingModule
   ],
   declarations: [
     KonvolutComponent,
     KonvolutKommentarComponent,
     KonvolutSteckbriefComponent,
-    KonvolutWerkzeugleisteComponent
+    KonvolutSteckbriefDatierungComponent,
+    KonvolutSteckbriefMiniaturansichtComponent,
+    KonvolutSteckbriefPublikationComponent,
+    KonvolutSteckbriefStufenComponent,
+    KonvolutWerkzeugleisteComponent,
+    GetKonvolutIRIComponent,
+    KonvolutTrefferleisteComponent
   ],
-  entryComponents: [
-    KonvolutKommentarComponent
-  ],
-  exports: [ KonvolutComponent ]
+entryComponents: [
+KonvolutKommentarComponent
+],
+  exports: [
+    KonvolutComponent,
+    KonvolutsucheModule
+  ]
 })
 export class KonvolutModule {
 }

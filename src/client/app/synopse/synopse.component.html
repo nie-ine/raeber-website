@@ -7,17 +7,17 @@
             <div class="rt-block">
               <div id="rt-mainbody">
                 <div class="component-content">
-                  <h1>Synopse ({{nHits}})</h1>
-                  <rae-synopse-werkzeugleiste [(viewMode)]="viewMode"
-                                              [(showText)]="showText"
+                  <h1>Synopse ({{ nHits }})</h1>
+                  <rae-synopse-werkzeugleiste #werkzeugleiste [(showText)]="showText"
                                               (vergroessereText)="textgrid.vergroessereFeld()"
-                                              (verkleinereText)="textgrid.verkleinereFeld()">
+                                              (verkleinereText)="textgrid.verkleinereFeld()"
+                                              (cols)="setColumns($event)">
                   </rae-synopse-werkzeugleiste>
-                  <rae-textgrid #textgrid
-                                [(viewMode)]="viewMode"
-                                [showText]="showText"
+                  <rae-textgrid #textgrid [showText]="showText"
                                 [poemsInGrid]="poemsInSynopse"
-                                contentType="synopse">
+                                [columns]="columns"
+                                contentType="synopse"
+                                [rahmen]="werkzeugleiste.rahmen">
                   </rae-textgrid>
                 </div>
               </div>

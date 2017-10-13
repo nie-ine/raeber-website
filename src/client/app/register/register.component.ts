@@ -13,7 +13,7 @@ import '../operators';
   templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
-  title = 'Titelregister';
+  // title = 'Titelregister';
 
   selectedTab: string;
 

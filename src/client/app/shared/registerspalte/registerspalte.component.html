@@ -1,40 +1,54 @@
-<div class="rae-registerspalte-list">
-  <h5>{{konvolutTitle}}<br/>(Total: {{nHits}})</h5>
+ <div class="rae-registerspalte-list">
+  <h5>{{ konvolutTitle }}<br/>(Total: {{ nrOfPoems }})</h5>
   <md-button-toggle-group [(ngModel)]=sortingType>
     <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
     <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
   </md-button-toggle-group>
   <md-nav-list dense>
-    <a md-list-item *ngFor="let p of rsEntry; let i = index"
-       [routerLink]="['/' + konvolutTypeMap[konvolutType] + '/' + konvolutId + '/' + p.value[0]]" routerLinkActive="active">
-      <!-- TODO: geht nicht fuer zugewandt-abgewandt u. ae. -->
-      <h5 md-line>{{p.value[0]}}</h5>
+    <a md-list-item *ngFor="let p of poems; let i = index"
+       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p.title,p.iri)"
+       routerLinkActive="active">
+
+      <h5 md-line>{{ p.title }}</h5>
+
       <p *ngIf="sortingType=='alphabetic'"
          md-line>
         <!-- incipit -->
-        {{p.value[1]}}
+        {{ p.text }}
       </p>
+
       <p *ngIf="sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
-        [Datum] {{p.value[0]}}
-        {{formatDate('2017-04-21')}}
+        {{ p.textdate }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
-        [Datum] {{p.value[0]}}
+        {{ p.textdate }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>
-        {{p.value[1]}}
+        {{ p.text }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='drucke'"
          md-line>
-        {{p.value[1]}}
+        {{ p.text }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='material'"
          md-line>
-        {{p.value[1]}}
+        {{ p.text }}
       </p>
+
     </a>
   </md-nav-list>
 </div>
+
+<from-poem-iri-to-textgrid-information
+  [poemIRIArray]="poemIRIArray"
+  (sendPoemInformationBack)="updatePoemInformation($event)"
+></from-poem-iri-to-textgrid-information>
+
+<from-konvolut-iri-to-poem-iris
+  [konvolutIRI]="konvolutIRI"
+  [konvolutType]="knoraKonvolutType"
+  (sendPoemIRIsBack)="createPoemIRIList($event)"
+></from-konvolut-iri-to-poem-iris>

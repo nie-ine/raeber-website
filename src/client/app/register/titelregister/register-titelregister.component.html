@@ -1,15 +1,17 @@
 <div class="rae-register-titelregister">
-  <h5>{{selectedTab}}<br/>(Total: {{nHits}})</h5>
+  <h5>
+    <!--{{selectedTab}}<br/>-->
+    (Total: {{ nHits }})</h5>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of rsEntry; let i = index" [routerLink]="['item/id']" routerLinkActive="active">
-      <h5 md-line>{{p.value[0]}}</h5>
+      <h5 md-line>{{ p.value[0] }}</h5>
       <p md-line
          *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'">
-        {{p.value[1]}}
+        {{ p.value[1] }}
       </p>
       <p md-line
          *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'">
-        {{p.value[1]}}
+        {{ p.value[1] }}
       </p>
     </a>
   </md-nav-list>

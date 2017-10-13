@@ -5,4 +5,5 @@ export interface EnvConfig {
   RELEASEURL?: string;
   RELEASEVERSION?: string;
   ENV?: string;
+  VERSION?: string;
 }

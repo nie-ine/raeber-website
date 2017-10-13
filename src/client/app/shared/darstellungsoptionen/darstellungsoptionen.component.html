@@ -1,0 +1,39 @@
+<form [formGroup]="layoutSettingsForm">
+  <button md-raised-button
+          [disabled]="!layoutSettingsForm.get('frameToggler').value || !layoutSettingsForm.get('textToggler').value || gridHeight <= -18"
+          title="Kartenformat schrittweise verkleinern"
+          (click)="textVerkleinern()">- Format
+  </button>
+  <button md-raised-button
+          [disabled]="!layoutSettingsForm.get('frameToggler').value || !layoutSettingsForm.get('textToggler').value || gridHeight >= 18"
+          title="Kartenformat schrittweise vergrößern"
+          (click)="textVergroessern()">+ Format
+  </button>
+  <hr/>
+  <div>
+    <md-slide-toggle formControlName="frameToggler">
+      {{ layoutSettingsForm.get('frameToggler').value ? 'Fixe Höhe' : 'Angepasste Höhe' }}
+    </md-slide-toggle>
+  </div>
+  <hr/>
+  <div>
+    <md-slide-toggle formControlName="textToggler">
+      {{ layoutSettingsForm.get('textToggler').value ? 'Text' : 'Kein Text' }}
+    </md-slide-toggle>
+  </div>
+  <hr style="margin-bottom: 20px;">
+  <div>
+    <!--    <md-select placeholder="Spalten" formControlName="colsSetter">
+          <md-option value="1">1</md-option>
+          <md-option value="2">2</md-option>
+          <md-option value="3">3</md-option>
+        </md-select>-->
+    <md-input-container style="width:50px !important; display: block;">
+      <input mdInput type="number" class="pagefield" min="1" max="3" placeholder="Spalten" formControlName="colsSetter">
+    </md-input-container>
+  </div>
+  <hr/>
+  <div>
+    <button md-raised-button (click)="resetLayout()">Zurücksetzen</button>
+  </div>
+</form>

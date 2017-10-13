@@ -17,6 +17,8 @@ import { RegisterModule } from '../register/register.module';
 import { StatischModule } from '../statisch/statisch.module';
 import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MdInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -24,10 +26,12 @@ import { SynopseModule } from '../synopse/synopse.module';
     // Order of imports is important!
     StatischModule,
     KonvolutModule,
-    FassungModule,
     RegisterModule,
     SucheModule,
     SynopseModule,
+    FassungModule,
+    MdInputModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/start', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

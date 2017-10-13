@@ -2,7 +2,9 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FassungHilfeComponent } from '../fassung-hilfe/fassung-hilfe.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +12,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: 'fassung-werkzeugleiste.component.html',
   styleUrls: [ 'fassung-werkzeugleiste.component.css' ]
 })
-export class FassungWerkzeugleisteComponent implements OnInit {
+export class FassungWerkzeugleisteComponent {
 
   @Input() poemResizable: boolean;
   @Input() showRegister: boolean;
@@ -20,14 +22,18 @@ export class FassungWerkzeugleisteComponent implements OnInit {
   @Input() idOfPrev: string;
   @Input() idOfNext: string;
 
+  constructor(public dialog: MdDialog) {}
+
   neuladen() {
     window.location.reload();
   }
 
-  hilfe() {
-    // TODO
-    console.log('Hilfetext ergaenzen');
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(FassungHilfeComponent, {
+        width: '700px',
+        height: '95%'
+      });
   }
 
-  ngOnInit() {}
 }

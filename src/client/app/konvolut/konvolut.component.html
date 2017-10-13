@@ -1,3 +1,12 @@
+<get-konvolut-iri
+  [konvolut_id]="konvolut_id"
+  (sendKonvolutTitleBack)="updateKonvolutTitle($event)"
+  (sendKonvolutIRIBack)="updateKonvolutIRI($event)"
+  (sendKonvolutBildBack)="updateKonvolutBild($event)"
+  (sendKonvolutTypeBack)="updateKonvolutType($event)">
+
+</get-konvolut-iri>
+
 <div class="rae-convolute-view">
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
@@ -23,11 +32,18 @@
                                                [konvolutBild]="konvolutBild"></rae-konvolut-steckbrief>
                     </div>
                     <br/>
-                    <rae-konvolut-werkzeugleiste [(viewMode)]="viewMode"></rae-konvolut-werkzeugleiste>
-                    <rae-textgrid [poemsInGrid]="poems"
+                    <rae-konvolut-trefferleiste *ngIf="searchContext" [results]="searchResultsNo"
+                                                [searchTerm]="searchTerm"
+                                                (reset)="quitSearchMode($event)"></rae-konvolut-trefferleiste>
+                    <rae-textgrid [konvolutTitle]="konvolutTitle"
+                                  [resetPoems]="resetPoems"
+                                  [poemsInGrid]="poems"
                                   [viewMode]="viewMode"
-                                  [showText]=true
-                                  [contentType]="'konvolut'">
+                                  [columns]="columns"
+                                  [showText]=showText
+                                  [contentType]="'konvolut'"
+                                  [rahmen]="rahmen" #textgrid
+                                  (gridHeight)="setGridHeight($event)" #textgrid>
                     </rae-textgrid>
                   </div>
                 </div>
@@ -39,16 +55,31 @@
           <div id="rt-sidebar-a">
             <div class="rt-block ">
               <div class="module-surround">
-                <div class="module-title">
-                  <h2 class="title">Register</h2>
-                </div>
+                <!--                <div class="module-title">
+                                  <h2 class="title">Register</h2>
+                                </div>-->
                 <div class="module-content">
-                  <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
-                  <div class="moduletable">
-                    <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
-                    <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-                    <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
-                  </div>
+                  <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
+                    <ngb-panel id="register" title="Register">
+                      <ng-template ngbPanelContent>
+                        <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
+                      <ng-template ngbPanelContent>
+                        <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="darstellung" title="Darstellungsoptionen">
+                      <ng-template ngbPanelContent>
+                        <rae-darstellungsoptionen (darstellung)="setTextgridLayout($event)"
+                                                  (vergroessereText)="textgrid.vergroessereFeld()"
+                                                  (verkleinereText)="textgrid.verkleinereFeld()"
+                                                  [gridHeight]="gridHeight"
+                                                  (resetHeight)="textgrid.resetField()"></rae-darstellungsoptionen>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
                 </div>
               </div>
             </div>
@@ -60,3 +91,14 @@
   </div>
 </div>
 
+<from-poem-iri-to-textgrid-information
+  [poemIRIArray]="poemIRIArray"
+  (sendPoemInformationBack)="updatePoemInformation($event)"
+></from-poem-iri-to-textgrid-information>
+
+<from-konvolut-iri-to-poem-iris
+  [konvolutIRI]="IRI"
+  [konvolutType]="konvolutType"
+  (sendPoemIRIsBack)="createPoemIRIList($event)"
+  (signalizeThatNoRequestDefined)="deletePoemsInCache($event)"
+></from-konvolut-iri-to-poem-iris>

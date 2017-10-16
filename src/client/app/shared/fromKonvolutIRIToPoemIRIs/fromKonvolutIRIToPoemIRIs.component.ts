@@ -43,14 +43,14 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           for(this.i = 0; this.i < data.nodes.length; this.i ++) {
             if(
               data.nodes[ this.i ].resourceClassIri === this.rightProperty
             ) {
               this.poemIRIArray[this.poemIRIArray.length]=data.nodes[this.i].resourceIri;
-              console.log(data.nodes[this.i].resourceClassIri.split('#')[1]);
-              console.log(data.nodes[ this.i ].resourceClassLabel);
+              //console.log(data.nodes[this.i].resourceClassIri.split('#')[1]);
+              //console.log(data.nodes[ this.i ].resourceClassLabel);
             }
           }
           this.sendPoemIRIsBack.emit(this.poemIRIArray);

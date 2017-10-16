@@ -152,6 +152,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   highlight(textToHighlight: string, searchTermArray: Array<string>) {
+    //console.log(textToHighlight);
+    //console.log(searchTermArray);
+    if (searchTermArray === undefined) {
+      return textToHighlight;
+    }
     this.j = 0;
       for(let seachTerm of searchTermArray) {
         textToHighlight = this.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);

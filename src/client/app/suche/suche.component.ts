@@ -112,98 +112,98 @@ export class SucheComponent implements OnInit {
     {
       'konvolut': 'notizbuch-1979',
       'suchmaskeKonvolutName': 'notizbuch79',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsNotizbuch79
     },
     {
       'konvolut': 'notizbuch-1979-1982',
       'suchmaskeKonvolutName': 'notizbuch7982',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsNotizbuch7982
     },
     {
       'konvolut': 'notizbuch-1980-1988',
       'suchmaskeKonvolutName': 'notizbuch8088',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsNotizbuch8088
     },
     {
       'konvolut': 'manuskripte-1979',
       'suchmaskeKonvolutName': 'manuskript79',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsManuskript79
     },
     {
       'konvolut': 'manuskripte-1979-1983',
       'suchmaskeKonvolutName': 'manuskript7983',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsManuskript7983
     },
     {
       'konvolut': 'karten-1984',
       'suchmaskeKonvolutName': 'manuskriptKarten',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsManuskriptKarten
     },
     {
       'konvolut': 'typoskripte-1979',
       'suchmaskeKonvolutName': 'typoskript79',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsTyposkript79
     },
     {
       'konvolut': 'typoskripte-1979-spez',
       'suchmaskeKonvolutName': 'typoskript79Spez',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsTyposkript79Spez
     },
     {
       'konvolut': 'typoskripte-1983',
       'suchmaskeKonvolutName': 'typoskript83',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsTyposkript83
     },
     {
       'konvolut': 'gesicht-im-mittag',
       'suchmaskeKonvolutName': 'druckGesicht',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckGesicht
     },
     {
       'konvolut': 'die-verwandelten-schiffe',
       'suchmaskeKonvolutName': 'druckSchiffe',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckSchiffe
     },
     {
       'konvolut': 'gedichte',
       'suchmaskeKonvolutName': 'druckGedichte',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckGedichte
     },
     {
       'konvolut': 'flussufer',
       'suchmaskeKonvolutName': 'druckFlussufer',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckFlussufer
     },
     {
       'konvolut': 'reduktionen',
       'suchmaskeKonvolutName': 'druckReduktionen',
-      'enabled': 'true',
+      'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckReduktionen
     }
@@ -227,7 +227,6 @@ export class SucheComponent implements OnInit {
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
     this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
-    console.log(this.suchmaskeKonvolutIRIMapping);
   }
 
   ngOnInit() {
@@ -539,7 +538,7 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 3 ].enabled = arg.get('manuskriptForm.manuskript79').value;
       this.suchmaskeKonvolutIRIMapping[ 4 ].enabled = arg.get('manuskriptForm.manuskript7983').value;
       this.suchmaskeKonvolutIRIMapping[ 5 ].enabled = arg.get('manuskriptForm.manuskriptKarten').value;
-      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled = arg.get('typoskriptForm.manuskript79').value;
+      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled = arg.get('typoskriptForm.typoskript79').value;
       this.suchmaskeKonvolutIRIMapping[ 7 ].enabled = arg.get('typoskriptForm.typoskript79Spez').value;
       this.suchmaskeKonvolutIRIMapping[ 8 ].enabled = arg.get('typoskriptForm.typoskript83').value;
       this.suchmaskeKonvolutIRIMapping[ 9 ].enabled = arg.get('druckForm.druckGesicht').value;
@@ -547,11 +546,7 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 11 ].enabled = arg.get('druckForm.druckGedichte').value;
       this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
       this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
-      for (this.k = 0; this.k < this.suchmaskeKonvolutIRIMapping.length; this.k++) {
-        if (this.suchmaskeKonvolutIRIMapping[ this.k ].enabled) {
-          console.log('check if poems in result is in one set of allowed poems in: ' + this.suchmaskeKonvolutIRIMapping[ this.k ].konvolut);
-        }
-      }
+      console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
 
@@ -808,21 +803,36 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           if (!this.setOfAllSearchResults.has(poemIRI)) {
             this.setOfAllSearchResults.add(poemIRI);
-            if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-              this.allSearchResults[ this.allSearchResults.length ] = [];
-              this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-              this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-              this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
-                = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
-              this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-              this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-              this.numberOfSearchResults += 1;
-            }
+            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI, data, titel, seqnum, date, 0);
           }
           return null;
         }
       )
       .subscribe(response => this.responseArray = response);
+  }
+
+  onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string, data: Array<any>, titel: string, seqnum: string, date: string, k: number) {
+    for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+      console.log(typeof this.suchmaskeKonvolutIRIMapping[ k ].enabled);
+      if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
+        console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+        console.log(k);
+        console.log(poemIRI);
+        if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+          console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+          if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+            this.allSearchResults[ this.allSearchResults.length ] = [];
+            this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+            this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+            this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
+              = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+            this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+            this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+            this.numberOfSearchResults += 1;
+          }
+        }
+      }
+    }
   }
 
 }

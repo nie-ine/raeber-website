@@ -242,10 +242,8 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskriptKarten"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskriptKarten').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskriptKarten').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Karten 1984
+                <md-checkbox [disabled]="true"
+                             [checked]="false">Karten 1984
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">

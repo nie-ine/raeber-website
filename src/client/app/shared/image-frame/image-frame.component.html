@@ -21,8 +21,8 @@ For the kitchen sink
     <md-card-content *ngIf="ausgeklappt">
 
       <div [ngStyle]="{'height': height + px, 'width': width + px, 'overflow-y': overflow, 'resize': resize}" #picFrame>
-      <!--  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
-             class="rae-image_resizeable"> -->
+        <!--  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
+               class="rae-image_resizeable"> -->
         <img src="{{ pictureIdBase }}{{ width }},/0/default.jpg" class="rae-image_resizeable">
       </div>
 
@@ -44,7 +44,7 @@ For the kitchen sink
 
       <md-menu #menu="mdMenu" yPosition="above">
 
-         <button md-button (click)="increaseFrameSize()">
+        <button md-button (click)="increaseFrameSize()">
           <md-icon *ngIf="ausgeklappt">flip_to_front</md-icon>
           Bild vergrössern
         </button>

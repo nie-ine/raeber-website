@@ -26,11 +26,11 @@ export class FassungSteckbriefSignaturComponent implements OnChanges {
     if (this.carrierIRIs) {
       for (let i = 0; i < this.carrierIRIs.length; i++) {
         this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-          encodeURIComponent(this.carrierIRIs[i]))
+          encodeURIComponent(this.carrierIRIs[ i ]))
           .map(result => result.json())
           .subscribe(res => {
-            this.signatures.push(res.props['http://www.knora.org/ontology/work#hasArchiveSignature'].values[0].utf8str);
-            console.log(res.props['http://www.knora.org/ontology/work#hasArchiveSignature'].values[0].utf8str);
+            this.signatures.push(res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str);
+            console.log(res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str);
           });
       }
     }

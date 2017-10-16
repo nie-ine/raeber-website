@@ -67,7 +67,6 @@ export class RegisterspalteComponent implements OnChanges {
     for (let i = 0; i < poemInformation.length; i++) {
       this.poems.push({
         'title': poemInformation[ i ][ 0 ],
-        'textdate': this.formatDate(poemInformation[ i ][ 1 ]),
         'date': poemInformation[ i ][ 1 ],
         'text': this.removeHtml(poemInformation[ i ][ 2 ]),
         'iri': poemInformation[ i ][ 3 ],

@@ -17,13 +17,14 @@
         {{ p.text }}
       </p>
 
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='notizbuecher'"
+      <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
+      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
-        {{ p.textdate }}
+        {{ formatDate(p.date) }}
       </p>
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='manuskripte'"
+      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
-        {{ p.textdate }}
+        {{ formatDate(p.date) }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>

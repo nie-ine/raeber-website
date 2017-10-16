@@ -359,11 +359,12 @@ export class SucheComponent implements OnInit {
                 firstTermAfterOr,
                 searchGroup,
                 numberOfTermsInSearchGroup,
-                searchTerm);
+                searchTerm,
+                undefined);
           } else {
-            console.log('Keine Treffer fuer diese Suche');
+            //console.log('Keine Treffer fuer diese Suche');
             }
-            return console.log('Results are added to temporary search results');
+            return null;
         }
       )
       .subscribe(response => response = response);
@@ -386,7 +387,7 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           if (data.subjects[ 0 ] !== undefined) {
             for (let result of data.subjects) {
               this.performSearchToGetPoemBelongingToEdition(
@@ -394,7 +395,8 @@ export class SucheComponent implements OnInit {
                 firstTermAfterOr,
                 searchGroup,
                 numberOfTermsInSearchGroup,
-                this.poemResTypes[ this.m ]);
+                this.poemResTypes[ this.m ],
+                searchTerm);
             }
           } else {
             console.log('Keine Treffer fuer diese Suche');
@@ -406,27 +408,30 @@ export class SucheComponent implements OnInit {
 
   }
 
-  performSearchToGetPoemBelongingToEdition(searchTerm: string,
+  performSearchToGetPoemBelongingToEdition(editionIRI: string,
                                            firstTermAfterOr: boolean,
                                            searchGroup: number,
                                            numberOfTermsInSearchGroup: number,
-                                           poemResType: string) {
+                                           poemResType: string,
+                                           searchTerm: string) {
     this.numberOfPerformedQueries += 1;
     return this.http.get(
       'http://130.60.24.65:3333/v1/resources/' +
-      encodeURIComponent(searchTerm))
+      encodeURIComponent(editionIRI))
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           //console.log(data);
-          if (data !== undefined) {
-            //console.log(data.incoming[0].ext_res_id.id);
-            this.addToFinalSearchResultArray(
+          if (data !== undefined && data.incoming[ 0 ] !== undefined) {
+            this.addToTemporarySearchResultArray(
               undefined,
-              data.incoming[ 0 ].ext_res_id.id
-            );
+              firstTermAfterOr,
+              searchGroup,
+              numberOfTermsInSearchGroup,
+              searchTerm,
+              data.incoming[ 0 ].ext_res_id.id);
           }
-          return data.properties;
+          return null;
         }
       )
       .subscribe(response => this.myProperties = response);
@@ -436,14 +441,15 @@ export class SucheComponent implements OnInit {
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number,
-                                  searchTerm: string) {
+                                  searchTerm: string,
+                                  poemIRI: string) {
     //console.log(
     //  'Only take searchresults from searchTerms if ' +
     //  'they exists in the other searchresults from searchTerms same searchgroups'
     //);
-    console.log('Searchgroup: ' + searchGroup);
-    console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
-    console.log('First Term after OR ' + firstTermAfterOr);
+    //console.log('Searchgroup: ' + searchGroup);
+    //console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
+    //console.log('First Term after OR ' + firstTermAfterOr);
     if(this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
     }
@@ -452,21 +458,38 @@ export class SucheComponent implements OnInit {
       this.partOfAllSearchResults[searchGroup] = new Set();
     }
     if(numberOfTermsInSearchGroup > 1) {
-      for(let poem of searchResults) {
-        if(this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
-          !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
-          console.log('Found Duplicate, so add to results');
-          console.log(poem);
-          this.addToFinalSearchResultArray(undefined, poem.obj_id);
+      if (searchResults !== undefined) {
+        for (let poem of searchResults) {
+          if (this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
+            !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
+            //console.log('Found Duplicate, so add to results');
+            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
+            this.addToFinalSearchResultArray(undefined, poem.obj_id);
+          } else {
+            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
+            this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
+            //console.log('No duplicate found');
+          }
+        }
+      }
+      if (poemIRI !== undefined) {
+        if (this.partOfAllSearchResults[searchGroup].has(poemIRI) &&
+          !this.partOfAllSearchResults[searchGroup].has(poemIRI + searchTerm)) {
+          //console.log('Found Duplicate, so add to results for searchTerm: ' + searchTerm);
+          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
+          this.addToFinalSearchResultArray(undefined, poemIRI);
         } else {
-          this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
-          this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
-          console.log('No duplicate found');
+          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
+          this.partOfAllSearchResults[searchGroup].add(poemIRI);
+          //console.log('No duplicate found');
         }
       }
     } else {
       if (searchResults !== undefined) {
         this.addToFinalSearchResultArray(searchResults, undefined);
+      }
+      if (poemIRI !== undefined) {
+        this.addToFinalSearchResultArray(undefined, poemIRI);
       }
     }
   }
@@ -712,7 +735,7 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           for (this.l = 0; this.l < data.nodes.length; this.l++) {
             if (konvolutType === 'poem notebook') {
               rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';

@@ -34,10 +34,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() konvolutTitle: string;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
-  @Input() searchTerm: Array<any>;
+  @Input() searchTermArray: Array<any>;
 
   gridTextHeight: number = 0;
   i: number;
+  j: number;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -150,19 +151,48 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
   }
 
-  highlight(textToHighlight: string, searchTerm: string) {
+  highlight(textToHighlight: string, searchTermArray: Array<string>) {
+    //console.log(textToHighlight);
+    //console.log(searchTermArray);
+    if (searchTermArray === undefined) {
+      return textToHighlight;
+    }
+    this.j = 0;
+      for(let seachTerm of searchTermArray) {
+        textToHighlight = this.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
+        this.j += 1;
+      }
+      return textToHighlight;
+  }
+  highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
     if (searchTerm === undefined) {
       return textToHighlight;
-    }
-    else if(textToHighlight !== undefined ) {
-      return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-        return '<span class="highlightText">' + match + '</span>';
-      });
+    } else if(textToHighlight !== undefined ) {
+      if (j === 0) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText0">' + match + '</span>';
+        });
+      } else if (j === 1) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText1">' + match + '</span>';
+        });
+      } else if (j === 2) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText2">' + match + '</span>';
+        });
+      } else if (j === 3) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText3">' + match + '</span>';
+        });
+      } else {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText0">' + match + '</span>';
+        });
+      }
     } else {
-      return textToHighlight;
+      return null;
     }
   }
-
   resetField() {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);

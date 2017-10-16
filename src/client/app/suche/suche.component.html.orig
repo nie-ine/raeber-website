@@ -8,8 +8,12 @@
               <div class="component-content">
 
                 <h1>Suche</h1>
-                Number of Results: {{ numberOfSearchResults }}, <!--Number of performed Queries: {{ numberOfPerformedQueries }}-->
+<<<<<<< HEAD
+                Number of Results: {{ numberOfSearchResults }}, Number of performed Queries: {{ numberOfPerformedQueries }}
+=======
+                Number of Results: {{ numberOfSearchResults }}
                 <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
+>>>>>>> master
 
 
                 <br>

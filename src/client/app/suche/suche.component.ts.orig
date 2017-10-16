@@ -96,11 +96,21 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
 <<<<<<< HEAD
-=======
   setOfAllSearchResults = new Set();
   numberOfPerformedQueries = 0;
+  setOfResultsInSearchGroup = new Set();
+  setOfSearchTermsInSearchGroup = new Set();
+  searchTermArray: Array<string>;
+  arrayOfResultsInAllSearchGroups = [
+    {
+      'setOfSearchTermsInSearchGroup': new Set(),
+      'setOfResultsInSearchGroup': new Set()
+    }
+  ];
   arg: AbstractControl;
   rightProperty: string;
+  responseArray: Array<any>;
+=======
 >>>>>>> master
   suchmaskeKonvolutIRIMapping = [
     {
@@ -247,7 +257,11 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.numberOfQueries = 0;
+    this.numberOfSearchResults = 0;
     this.allSearchResults = [];
+    this.searchTermArray = [];
+    this.partOfAllSearchResults = undefined;
     this.setOfAllSearchResults.clear();
     if (!this.queries) {
       console.log('No query defined');
@@ -260,7 +274,6 @@ export class SucheComponent implements OnInit {
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
     console.log('Queries: ' + this.str);
-    this.numberOfQueries = 0;
     this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
       this.firstTermAfterOr = true;
@@ -273,10 +286,21 @@ export class SucheComponent implements OnInit {
         }
         this.numberOfQueries += 1;
         console.log('Search for: '
+<<<<<<< HEAD
+          + queries[this.i][this.j].searchString
+          + ' in: ' + queries[this.i][this.j].where);
+        this.searchTerm = queries[this.i][this.j].searchString;
+        if(this.searchTermArray === undefined) {
+          this.searchTermArray = [];
+        }
+        this.searchTermArray[this.searchTermArray.length] = this.searchTerm;
+        this.performQuery(this.searchTerm, queries[this.i][this.j].where, this.firstTermAfterOr, this.i, queries[this.i].length);
+=======
           + queries[ this.i ][ this.j ].searchString
           + ' in: ' + queries[ this.i ][ this.j ].where);
         this.searchTerm = queries[ this.i ][ this.j ].searchString;
         this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
+>>>>>>> master
         this.firstTermAfterOr = false;
       }
     }
@@ -329,6 +353,34 @@ export class SucheComponent implements OnInit {
                        numberOfTermsInSearchGroup: number,
                        poemResType: string) {
     this.numberOfPerformedQueries += 1;
+<<<<<<< HEAD
+      return this.http.get(
+        globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        poemResType +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
+        '&compop=LIKE' +
+        '&searchval=' +
+        encodeURIComponent(searchTerm) +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
+        '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+        '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            //console.log(data);
+            if (data.subjects[0] !== undefined) {
+              this.addToTemporarySearchResultArray(data.subjects,
+                firstTermAfterOr,
+                searchGroup,
+                numberOfTermsInSearchGroup,
+                searchTerm);
+            } else {
+              console.log('Keine Treffer fuer diese Suche');
+            }
+            return console.log('Results are added to temporary search results');
+=======
     return this.http.get(
       globalSearchVariableService.API_URL +
       globalSearchVariableService.extendedSearch +
@@ -349,6 +401,7 @@ export class SucheComponent implements OnInit {
             this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
           } else {
             console.log('Keine Treffer fuer diese Suche');
+>>>>>>> master
           }
           return data.properties;
         }
@@ -419,12 +472,44 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myProperties = response);
 
   }
-
-  // For more statements between the ORs
-  // Scenarios: 2 times the same word, one word without output
   addToTemporarySearchResultArray(searchResults: Array<any>,
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
+<<<<<<< HEAD
+                                  numberOfTermsInSearchGroup: number,
+                                  searchTerm: string) {
+    //console.log(
+    //  'Only take searchresults from searchTerms if ' +
+    //  'they exists in the other searchresults from searchTerms same searchgroups'
+    //);
+    console.log('Searchgroup: ' + searchGroup);
+    console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
+    console.log('First Term after OR ' + firstTermAfterOr);
+    if(this.partOfAllSearchResults === undefined) {
+      this.partOfAllSearchResults = [];
+    }
+    if(this.partOfAllSearchResults[searchGroup] === undefined) {
+      this.partOfAllSearchResults[searchGroup] = [];
+      this.partOfAllSearchResults[searchGroup] = new Set();
+    }
+    if(numberOfTermsInSearchGroup > 1) {
+      for(let poem of searchResults) {
+        if(this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
+          !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
+          console.log('Found Duplicate, so add to results');
+          console.log(poem);
+          this.addToFinalSearchResultArray(undefined, poem.obj_id);
+        } else {
+          this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
+          this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
+          console.log('No duplicate found');
+        }
+      }
+    } else {
+      if (searchResults !== undefined) {
+        this.addToFinalSearchResultArray(searchResults, undefined);
+      }
+=======
                                   numberOfTermsInSearchGroup: number) {
     //console.log('Add to temporary Search Results and only take one of the duplicates');
     //console.log('firstTermAfterOr: ' + firstTermAfterOr);
@@ -448,6 +533,8 @@ export class SucheComponent implements OnInit {
       //  this.finalTemporaryResults = [];
       //}
       //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+            //}
+          //}
       //}
       //}
       //}
@@ -464,6 +551,7 @@ export class SucheComponent implements OnInit {
       //if (numberOfTermsInSearchGroup === 1) {
       //  this.addToFinalSearchResultArray(searchResults);
       //}
+>>>>>>> master
     }
   }
 

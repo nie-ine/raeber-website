@@ -69,6 +69,7 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
   ],
   exports: [
     KonvolutComponent,
+    FromPoemIRIToTextgridInformationComponent,
     KonvolutsucheModule
   ]
 })

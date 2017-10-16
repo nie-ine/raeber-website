@@ -101,6 +101,7 @@ export class SucheComponent implements OnInit {
   numberOfPerformedQueries = 0;
   setOfResultsInSearchGroup = new Set();
   setOfSearchTermsInSearchGroup = new Set();
+  searchTermArray: Array<string>;
   arrayOfResultsInAllSearchGroups = [
     {
       'setOfSearchTermsInSearchGroup': new Set(),
@@ -246,6 +247,8 @@ export class SucheComponent implements OnInit {
     this.numberOfQueries = 0;
     this.numberOfSearchResults = 0;
     this.allSearchResults = [];
+    this.searchTermArray = [];
+    this.partOfAllSearchResults = undefined;
     this.setOfAllSearchResults.clear();
     if (!this.queries) {
       console.log('No query defined');
@@ -273,6 +276,10 @@ export class SucheComponent implements OnInit {
           + queries[this.i][this.j].searchString
           + ' in: ' + queries[this.i][this.j].where);
         this.searchTerm = queries[this.i][this.j].searchString;
+        if(this.searchTermArray === undefined) {
+          this.searchTermArray = [];
+        }
+        this.searchTermArray[this.searchTermArray.length] = this.searchTerm;
         this.performQuery(this.searchTerm, queries[this.i][this.j].where, this.firstTermAfterOr, this.i, queries[this.i].length);
         this.firstTermAfterOr = false;
       }
@@ -344,11 +351,15 @@ export class SucheComponent implements OnInit {
             const data = lambda.json();
             //console.log(data);
             if (data.subjects[0] !== undefined) {
-              this.addToTemporarySearchResultArray(data.subjects, firstTermAfterOr, searchGroup, numberOfTermsInSearchGroup);
+              this.addToTemporarySearchResultArray(data.subjects,
+                firstTermAfterOr,
+                searchGroup,
+                numberOfTermsInSearchGroup,
+                searchTerm);
             } else {
               console.log('Keine Treffer fuer diese Suche');
             }
-            return data.properties;
+            return console.log('Results are added to temporary search results');
           }
         )
         .subscribe(response => this.myProperties = response);
@@ -417,29 +428,42 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myProperties = response);
 
   }
-
-  // For more statements between the ORs
-  // Scenarios: 2 times the same word, one word without output
   addToTemporarySearchResultArray(searchResults: Array<any>,
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
-                                  numberOfTermsInSearchGroup: number) {
-    console.log(
-      'Only take searchresults from searchTerms if ' +
-      'they exists in the other searchresults from searchTerms same searchgroups'
-    );
+                                  numberOfTermsInSearchGroup: number,
+                                  searchTerm: string) {
+    //console.log(
+    //  'Only take searchresults from searchTerms if ' +
+    //  'they exists in the other searchresults from searchTerms same searchgroups'
+    //);
     console.log('Searchgroup: ' + searchGroup);
     console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
     console.log('First Term after OR ' + firstTermAfterOr);
-    this.arrayOfResultsInAllSearchGroups.push(this.arrayOfResultsInAllSearchGroups[0]);
-    console.log('Nur um zu schauen');
-    this.arrayOfResultsInAllSearchGroups[searchGroup].setOfSearchTermsInSearchGroup.add(numberOfTermsInSearchGroup);
-    console.log(this.arrayOfResultsInAllSearchGroups);
-    if (searchResults !== undefined) {
-
-
-      this.addToFinalSearchResultArray(searchResults, undefined);
-
+    if(this.partOfAllSearchResults === undefined) {
+      this.partOfAllSearchResults = [];
+    }
+    if(this.partOfAllSearchResults[searchGroup] === undefined) {
+      this.partOfAllSearchResults[searchGroup] = [];
+      this.partOfAllSearchResults[searchGroup] = new Set();
+    }
+    if(numberOfTermsInSearchGroup > 1) {
+      for(let poem of searchResults) {
+        if(this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
+          !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
+          console.log('Found Duplicate, so add to results');
+          console.log(poem);
+          this.addToFinalSearchResultArray(undefined, poem.obj_id);
+        } else {
+          this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
+          this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
+          console.log('No duplicate found');
+        }
+      }
+    } else {
+      if (searchResults !== undefined) {
+        this.addToFinalSearchResultArray(searchResults, undefined);
+      }
     }
   }
 

@@ -28,7 +28,7 @@ export class SuchmaskeComponent implements OnChanges {
   // Form model which contains all search parameters
   suchmenuForm: FormGroup;
   @Input() sidenavOpened: boolean;
-  @Input() searchTerm: string;
+  @Input() searchTermArray: Array<string>;
   @Input() poemsInGrid: string;
 
   /*

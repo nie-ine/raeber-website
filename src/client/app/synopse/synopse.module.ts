@@ -5,15 +5,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-import { SynopseComponent } from './synopse.component';
+import { KonvolutModule } from '../konvolut/konvolut.module';
+import { FormsModule } from '@angular/forms';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
-import { SynopseWerkzeugleisteComponent } from './synopse-werkzeugleiste/synopse-werkzeugleiste.component';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCheckboxModule, MdIconModule, MdToolbarModule
+  MdButtonToggleModule,
+  MdCheckboxModule,
+  MdDialogModule,
+  MdIconModule,
+  MdSelectModule,
+  MdToolbarModule
 } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+
+import { SynopseComponent } from './synopse.component';
+import { SynopseWerkzeugleisteComponent } from './synopse-werkzeugleiste/synopse-werkzeugleiste.component';
+import { SynopseHilfeComponent } from './synopse-hilfe/synopse-hilfe.component';
 
 @NgModule({
   imports: [
@@ -23,18 +30,25 @@ import { FormsModule } from '@angular/forms';
     MdButtonToggleModule,
     MdCheckboxModule,
     MdIconModule,
+    MdSelectModule,
     MdToolbarModule,
+    MdDialogModule,
+    KonvolutModule,
+    TextgridModule,
     RouterModule.forChild([
       { path: 'synopsen/:synopse', component: SynopseComponent }
-    ]),
-    TextgridModule
+    ])
   ],
   declarations: [
     SynopseComponent,
-    SynopseWerkzeugleisteComponent
+    SynopseWerkzeugleisteComponent,
+    SynopseHilfeComponent
   ],
   exports: [
     SynopseComponent
+  ],
+  entryComponents: [
+    SynopseHilfeComponent
   ]
 })
 export class SynopseModule {

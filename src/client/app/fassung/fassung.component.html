@@ -1,133 +1,135 @@
 <div id="rae-fassung-view">
   <div class="rt-container">
     <div id="rt-main" class="mb9-sa3">
-        <div class="rt-container">
-          <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
-            <div class="rt-block">
-              <div id="rt-mainbody">
-                <div class="component-content">
+      <div class="rt-container">
+        <div [ngClass]="{'rt-grid-9': show_register, 'rt-grid-12': !show_register}">
+          <div class="rt-block">
+            <div id="rt-mainbody">
+              <div class="component-content">
 
-                  <div id="rae-toolbar">
-                    <rae-fassung-werkzeugleiste
-                      [(showRegister)]="show_register"
-                      [(poemResizable)]="poem_resizable"
-                      [idOfPrev]="prevPoem"
-                      [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                <div id="rae-toolbar">
+                  <rae-fassung-werkzeugleiste
+                    [(showRegister)]="show_register"
+                    [(poemResizable)]="poem_resizable"
+                    [idOfPrev]="prevPoem"
+                    [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                </div>
+
+                <div id="k2Container" class="itemView">
+
+                  <div class="itemTagsBlock" style='float:right'>
+                    <ul class="itemTags">
+                      <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
+                         *ngIf="synopseIRI !== undefined">
+                        Synopse
+                      </a>
+                    </ul>
                   </div>
 
-                  <div id="k2Container" class="itemView">
+                  <div class="itemHeader">
+                    <!-- Date created -->
+                    <span class="itemDateCreated">{{ creationDate }}</span>
+                    <!-- Item title -->
+                    <h2 class="itemTitle">{{poemTitle}}</h2>
+                  </div>
 
-                    <div class="itemTagsBlock" style='float:right'>
-                      <ul class="itemTags">
-                        <li *ngFor="let t of fassung_tag">
-                          <a [routerLink]="['/synopsen/' + t]" routerLinkActive="active">
-                            Synopse&nbsp;{{t}} &nbsp;
-                          </a>
-                        </li>
-                      </ul>
+                  <div class="itemBody">
+
+                    <!-- Item text -->
+                    <div class="itemFullText">
+
+                      <md-card>
+                        <md-card-content
+                          *ngIf="zeigeKonstituiert"
+                          [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
+                          <section class="edtext edtext_hs">
+                            <div [innerHTML]="editedPoemText"></div>
+                            <!--<rae-text></rae-text>-->
+                          </section>
+                        </md-card-content>
+                        <md-card-footer>
+                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
+                            <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
+                            <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
+                            <span *ngIf="zeigeKonstituiert">Text verbergen</span>
+                            <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
+                          </button>
+                        </md-card-footer>
+                      </md-card>
+
+                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
+                        <md-card-content *ngIf="zeigeDiplomatisch">
+                          <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
+                                                    (pictureReduced)="show_register = true;"
+                                                    (pictureIncreased)="show_register = false;">
+                          </rae-fassung-diplomatisch>
+                        </md-card-content>
+                        <md-card-footer>
+                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
+                            <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
+                            <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
+                            <span *ngIf="zeigeDiplomatisch">Diplomatischen Text verbergen</span>
+                            <span *ngIf="!zeigeDiplomatisch">Diplomatischen Text anzeigen</span>
+                          </button>
+                        </md-card-footer>
+                      </md-card>
+
                     </div>
-
-                    <div class="itemHeader">
-                      <!-- Date created -->
-                      <span class="itemDateCreated">{{creationDate}}</span>
-                      <!-- Item title -->
-                      <h2 class="itemTitle">
-                        {{poem_id}}
-                        <!-- TODO -->
-                        Wolke
-                      </h2>
-                    </div>
-
-                    <div class="itemBody">
-
-                      <!-- Item text -->
-                      <div class="itemFullText">
-
-                        <md-card>
-                          <md-card-content
-                            *ngIf="zeigeKonstituiert"
-                            [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
-                            <section class="edtext edtext_hs">
-                              <rae-text></rae-text>
-                            </section>
-                          </md-card-content>
-                          <md-card-footer>
-                            <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
-                              <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
-                              <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
-                              <span *ngIf="zeigeKonstituiert">Text verbergen</span>
-                              <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
-                            </button>
-                          </md-card-footer>
-                        </md-card>
-
-                        <md-card *ngIf="konvolut_type === 'manuskripte' || konvolut_type === 'notizbuecher'">
-                          <md-card-content *ngIf="zeigeDiplomatisch">
-                            <rae-fassung-diplomatisch [pages]="pages"
-                                                      (pictureReduced)="show_register = true;"
-                                                      (pictureIncreased)="show_register = false;">
-                            </rae-fassung-diplomatisch>
-                          </md-card-content>
-                          <md-card-footer>
-                            <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
-                              <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
-                              <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
-                              <span *ngIf="zeigeDiplomatisch">Diplomatischen Text verbergen</span>
-                              <span *ngIf="!zeigeDiplomatisch">Diplomatischen Text anzeigen</span>
-                            </button>
-                          </md-card-footer>
-                        </md-card>
-
-                      </div>
-                      <div class="itemExtraFields">
-                        <rae-fassung-steckbrief></rae-fassung-steckbrief>
-                      </div>
-                    </div>
-
-                    <div class="itemLinks">
-                      <!-- Item tags -->
-                      <div class="itemTagsBlock">
-                        <span>Synopse:</span>
-                        <ul class="itemTags">
-                          <li *ngFor="let t of fassung_tag">
-                            <a [routerLink]="['/synopsen/', + t]" routerLinkActive="active">{{t}}</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    <!-- Related items by tag -->
-                    <div class="itemRelated">
-                      <rae-fassung-weitere [synopsenTags]="fassung_tag"></rae-fassung-weitere>
-                    </div>
-
-                    <div class="itemToolbar">
-                      <ul>
-                        <rae-fassung-blaettern
-                          style="font-size: 0.8em; float: left"
-                          [idOfPrev]="prevPoem"
-                          [idOfNext]="nextPoem"></rae-fassung-blaettern>
-                        <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
-                        <!-- Print Button -->
-                      </ul>
+                    <div class="itemExtraFields">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id" [konvolutIRI]="konvolutIRI">
+                      </rae-fassung-steckbrief>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="rt-grid-3 " *ngIf="show_register">
-            <div id="rt-sidebar-a">
-              <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
 
-              <div class="moduletable">
-                <h6>Suchen: {{konvolut_id}}</h6><!-- TODO: Variable ersetzen -->
-                <p>Nach Suchbegriff</p><!-- TODO: ersetzen -->
-                <p>Nach Seite oder Blatt</p><!-- TODO: ersetzen -->
+                <div class="itemLinks">
+                  <!-- Item tags -->
+                  <div class="itemTagsBlock">
+                    <span>Synopse:</span>
+                    <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
+                       *ngIf="synopseIRI !== undefined">
+                      {{workTitle}}
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Related items by tag -->
+                <div class="itemRelated">
+                  <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                </div>
+
+                <div class="itemToolbar">
+                  <ul>
+                    <rae-fassung-blaettern
+                      style="font-size: 0.8em; float: left"
+                      [idOfPrev]="prevPoem.split('###')[0]"
+                      [titleOfPrev]="prevPoem.split('###')[1]"
+                      [idOfNext]="nextPoem.split('###')[0]"
+                      [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
+                    <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="rt-grid-3 " *ngIf="show_register">
+        <div id="rt-sidebar-a" style="margin-top:4px;">
+          <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
+            <ngb-panel id="register" title="Register">
+              <ng-template ngbPanelContent>
+                <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
+              <ng-template ngbPanelContent>
+                <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

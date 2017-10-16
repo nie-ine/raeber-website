@@ -1,10 +1,15 @@
-@import "bootstrap.css";
+@import "bootstrap-card.css";
 @import "grid-responsive.css";
 @import "k2.css";
 @import "mediaqueries.css";
 @import "menu.css";
 
 .clearfix {
+}
+
+/* Wichtig fuer Raeber!! Fuer das hervorheben der Suchworte!! */
+.highlightText {
+  background: yellow;
 }
 
 .clearfix::before, .clearfix::after {

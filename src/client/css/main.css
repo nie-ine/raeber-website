@@ -8,8 +8,20 @@
 }
 
 /* Wichtig fuer Raeber!! Fuer das hervorheben der Suchworte!! */
-.highlightText {
-  background: yellow;
+.highlightText0 {
+  background: #fffe9f;
+}
+
+.highlightText1 {
+  background: #a6ffc3;
+}
+
+.highlightText2 {
+  background: #ffb49b;
+}
+
+.highlightText3 {
+  background: #c3bfff;
 }
 
 .clearfix::before, .clearfix::after {

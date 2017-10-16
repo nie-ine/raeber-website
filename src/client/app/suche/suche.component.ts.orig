@@ -95,6 +95,13 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckGedichte = new Set();
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
+<<<<<<< HEAD
+=======
+  setOfAllSearchResults = new Set();
+  numberOfPerformedQueries = 0;
+  arg: AbstractControl;
+  rightProperty: string;
+>>>>>>> master
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',
@@ -441,8 +448,6 @@ export class SucheComponent implements OnInit {
       //  this.finalTemporaryResults = [];
       //}
       //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
-            //}
-          //}
       //}
       //}
       //}

@@ -1,7 +1,7 @@
 /**
  * Created by Reto Baumgartner (rfbaumgartner) on 06.10.17.
  */
-import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
@@ -16,7 +16,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
 
   @Output() propertiesReset = new EventEmitter();
 
-  properties = {'diplIRI': '', 'pagenumber': '', 'picData': ''};
+  properties = { 'diplIRI': '', 'pagenumber': '', 'picData': '' };
 
   private sub: any;
 
@@ -35,7 +35,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
               this.properties['diplIRI'] = res.incoming[ j ].ext_res_id.id;
             }
           }
-          this.properties['picData'] = res.resinfo.locdata;
+          this.properties[ 'picData' ] = res.resinfo.locdata;
           this.propertiesReset.emit(this.properties);
         });
     }

@@ -441,6 +441,8 @@ export class SucheComponent implements OnInit {
       //  this.finalTemporaryResults = [];
       //}
       //this.finalTemporaryResults[this.finalTemporaryResults.length] = searchResults[this.l];
+            //}
+          //}
       //}
       //}
       //}

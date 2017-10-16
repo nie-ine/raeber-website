@@ -1,0 +1,4 @@
+<span *ngFor="let f of fassung; let i = index">
+  <a [routerLink]="['/' + f.konvolutTitle + '/' + f.title + '---' + f.iri]">{{ f.title }}</a><span
+  *ngIf="i+1 < fassung.length">,</span>
+</span>

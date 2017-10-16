@@ -162,6 +162,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
     if (searchTerm === undefined) {
       return textToHighlight;
+<<<<<<< HEAD
     } else if(textToHighlight !== undefined ) {
       if (j === 0) {
         return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
@@ -186,6 +187,15 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       }
     } else {
       return null;
+=======
+    }
+    else if(textToHighlight !== undefined ) {
+      return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+        return '<span class="highlightText">' + match + '</span>';
+      });
+    } else {
+      return textToHighlight;
+>>>>>>> master
     }
   }
   resetField() {

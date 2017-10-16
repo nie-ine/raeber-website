@@ -1,36 +1,127 @@
 <div>
   <h3>Weitere Informationen</h3>
   <ul>
-    <!-- Besonderes: ... -->
-    <!-- Zeitschrift: ... -->
-    <li class="odd typeSelect group2">
-      <span class="itemExtraFieldsLabel">Druck:</span>
-      <span class="itemExtraFieldsValue">Reduktionen 1981</span>
+    <li *ngIf="specialDescription" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Besonderes:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="specialDescription"></span>
+      </p>
     </li>
-    <!-- Werke -->
-    <!-- Mehrteilig -->
-    <!-- Textart -->
-    <li class="even typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
-      <span class="itemExtraFieldsValue">002</span>
+    <li *ngIf="detailDescription" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Details:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="detailDescription"></span>
+      </p>
     </li>
-    <li class="odd typeTextfield group2">
-      <span class="itemExtraFieldsLabel">Signatur:</span>
-      <span class="itemExtraFieldsValue">A-5-g/01</span>
+    <li *ngIf="lastAuthorizedPublication" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut
+            [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
-    <li class="odd typeRadio group2">
-      <span class="itemExtraFieldsLabel">Status Text:</span>
-      <span class="itemExtraFieldsValue">Kontrolliert</span>
+    <li *ngIf="publishingState === 'unpublished'" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
+        <span class="itemExtraFieldsValue">Unpubliziert</span>
+      </p>
     </li>
-    <li class="even typeRadio group2">
-      <span class="itemExtraFieldsLabel">Umschrift:</span>
-      <span class="itemExtraFieldsValue">Kontrolliert</span>
+    <li *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Nachdruck:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
-    <!-- Stufe -->
-    <li class="even typeRadio group2">
-      <span class="itemExtraFieldsLabel">Priorität:</span>
-      <span class="itemExtraFieldsValue">Hoch</span>
+    <li *ngIf="publishedIn && publishedIn.length > 0" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Zeitschrift:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
     </li>
-    <!-- Identisch mit -->
+    <li *ngIf="nachlassPublicationDescription" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Werke:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
+      </p>
+    </li>
+    <li *ngIf="pageNumberDescription" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
+      </p>
+    </li>
+    <li *ngIf="carrierIRIs && carrierIRIs.length > 0" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Signatur:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-signatur [carrierIRIs]="carrierIRIs"></rae-fassung-steckbrief-signatur>
+        </span>
+      </p>
+    </li>
+    <li *ngIf="structure" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Textart:</span>
+        <span class="itemExtraFieldsValue">{{ textartMap[structure] }}</span>
+      </p>
+    </li>
+    <li *ngIf="isFinalVersion" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Endfassung:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
+    </li>
+    <li *ngIf="publicationNumber" class="typeTextfield group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Textnr.:</span>
+        <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
+      </p>
+    </li>
+
+    <li *ngIf="hasStrophen" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Strophen:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
+    </li>
+    <li *ngIf="isPartOfCycle" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Zyklus:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
+    </li>
+    <li *ngIf="isInDialect" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Mundart:</span>
+        <span class="itemExtraFieldsValue">ja</span>
+      </p>
+    </li>
+    <li *ngIf="referencePoemIRIs && referencePoemIRIs.length > 0" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Bezugstext:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRIs"></rae-fassung-steckbrief-fassung>
+        </span>
+      </p>
+    </li>
+    <li *ngIf="isWrittenWith" class="typeSelect group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Schreibzeug:</span>
+        <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
+      </p>
+    </li>
+    <li *ngIf="sameEditionAs && sameEditionAs.length > 0" class="typeTextfield group2">
+      <p>
+        <span class="itemExtraFieldsLabel">Identisch mit:</span>
+        <span class="itemExtraFieldsValue">
+          <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
+        </span>
+      </p>
+    </li>
   </ul>
 </div>

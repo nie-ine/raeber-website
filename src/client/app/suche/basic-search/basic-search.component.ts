@@ -20,7 +20,7 @@ export class BasicSearchComponent {
   }
 
   sendRequest(values: any) {
-    this.router.navigateByUrl('/suche/' + encodeURIComponent(values),);
+    this.router.navigateByUrl('/suche?wort=' + encodeURIComponent(values));
   }
 
 

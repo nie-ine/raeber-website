@@ -4,9 +4,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params } from '@angular/router';
-
-import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Config } from '../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
@@ -15,18 +14,31 @@ import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-par
 })
 export class SynopseComponent implements OnInit {
 
-  poemsInSynopse: Array<any>;
   nHits: number;
   synopseTag: string;
 
   showText: boolean;
 
   columns: string;
+  gridHeight: number = 0;
+  workIri: string;
+  poemsIri: string[] = [];
+
+  poems: Array<any>;
+
+  results: number;
+
+  filterFirstLastFlag = false;
+  showNotebooks = true;
+  showManuscripts = true;
+  showTyposcripts = true;
+  showDuplicates = true;
 
   private sub: any;
 
-  constructor(private http: Http, private route: ActivatedRoute) {
+  constructor(private http: Http, private route: ActivatedRoute, router: Router) {
     this.showText = true;
+    this.workIri = router.url.split('/')[ 2 ];
   }
 
   ngOnInit() {
@@ -34,22 +46,16 @@ export class SynopseComponent implements OnInit {
       this.synopseTag = params[ 'synopse' ];
     });
 
-    // TODO Parameter anpassen
-    let searchParams = new ExtendedSearch();
-    searchParams.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    // searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', 'MATCH', this.synopseTag);
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    searchParams.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    searchParams.showNRows = 500;
+    let searchParamsPrefix = Config.API + 'resources/';
+    let searchParamsWork = searchParamsPrefix + encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIri);
 
     this.route.params
       .switchMap((params: Params) =>
-        this.http.get(searchParams.toString()))
+        this.http.get(searchParamsWork))
       .map(response => response.json())
       .subscribe((res: any) => {
-        this.poemsInSynopse = res.subjects;
-        this.nHits = res.nhits;
-        console.log(res.nhits);
+        this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
+        this.results = this.poemsIri.length;
       });
   }
 
@@ -66,4 +72,33 @@ export class SynopseComponent implements OnInit {
         break;
     }
   }
+
+  setGridHeight(height: number) {
+    this.gridHeight = height;
+  }
+
+  updatePoemInformation(poemInformation: Array<any>) {
+    this.poems = poemInformation;
+  }
+
+  setFilterFirstLast() {
+    this.filterFirstLastFlag = !this.filterFirstLastFlag;
+  }
+
+  toggleShowNotebooks() {
+    this.showNotebooks = !this.showNotebooks;
+  }
+
+  toggleShowManuscripts() {
+    this.showManuscripts = !this.showManuscripts;
+  }
+
+  toggleShowTyposcripts() {
+    this.showTyposcripts = !this.showTyposcripts;
+  }
+
+  toggleShowDuplicates() {
+    this.showDuplicates = !this.showDuplicates;
+  }
+
 }

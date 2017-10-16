@@ -1,23 +1,22 @@
 /**
  * Created by Reto Baumgartner (rfbaumgartner) on 24.07.17.
  */
-import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
-import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-diplomatisch',
   templateUrl: 'fassung-diplomatisch.component.html'
 })
-export class FassungDiplomatischComponent implements OnChanges {
+export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
   @Input() pageIRIs: any;
 
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
 
-  pages: Array<any> = new Array();
+  cardWidth: number;
+  pages: Array<any> = [];
   gewaehlteSchicht: string = 'schicht0';
 
   private sub: any;
@@ -26,13 +25,23 @@ export class FassungDiplomatischComponent implements OnChanges {
     this.pages = [];
   }
 
+  @ViewChild('diplomatischKarte')
+  diplomatischKarte: ElementRef;
+
+  ngAfterViewInit() {
+    if (this.diplomatischKarte.nativeElement.offsetWidth > 300) {
+      this.cardWidth = Math.floor(this.diplomatischKarte.nativeElement.offsetWidth * 0.4);
+    } else {
+      this.cardWidth = 300;
+    }
+  }
+
   addPage(values: Array<string>) {
     this.pages.push(values);
     this.sortPages();
     console.log(this.pages);
   }
 
-  // TODO: sort pages by seqnum, find picture id and transcription id per page.
   sortPages() {
     this.pages = this.pages.sort((n1, n2) => {
       const k1 = n1.value[ 'pagenumber' ];

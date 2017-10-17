@@ -95,6 +95,13 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckGedichte = new Set();
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
+  setOfPoemsdzeitschriftAkzente = new Set();
+  setOfPoemszeitschriftBlaetter = new Set();
+  zeitschriftZeit = new Set();
+  zeitschriftTat = new Set();
+  zeitschriftTag = new Set();
+  zeitschriftEnsemble = new Set();
+  zeitschriftSchoenste = new Set();
   setOfAllSearchResults = new Set();
   numberOfPerformedQueries = 0;
   setOfResultsInSearchGroup = new Set();
@@ -206,6 +213,55 @@ export class SucheComponent implements OnInit {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckReduktionen
+    },
+    {
+      'konvolut': 'akzente',
+      'suchmaskeKonvolutName': 'zeitschriftAkzente',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsdzeitschriftAkzente
+    },
+    {
+      'konvolut': 'blaetter+bilder',
+      'suchmaskeKonvolutName': 'zeitschriftBlaetter',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemszeitschriftBlaetter
+    },
+    {
+      'konvolut': 'zeitschriftSchoenste',
+      'suchmaskeKonvolutName': 'zeitschriftSchoenste',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftSchoenste
+    },
+    {
+      'konvolut': 'zeitschriftTag',
+      'suchmaskeKonvolutName': 'zeitschriftTag',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftTag
+    },
+    {
+      'konvolut': 'zeitschriftTat',
+      'suchmaskeKonvolutName': 'zeitschriftTat',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftTat
+    },
+    {
+      'konvolut': 'zeitschriftZeit',
+      'suchmaskeKonvolutName': 'zeitschriftZeit',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftZeit
+    },
+    {
+      'konvolut': 'zeitschriftEnsemble',
+      'suchmaskeKonvolutName': 'zeitschriftEnsemble',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftEnsemble
     }
   ];
   poemResTypes = [
@@ -528,6 +584,7 @@ export class SucheComponent implements OnInit {
       && arg.get('materialienForm').pristine
       && arg.get('typoskriptForm').pristine
       && arg.get('manuskriptForm').pristine
+      && arg.get('zeitschriftForm').pristine
     ) {
       console.log('Perform Search in all convolutes');
     } else {
@@ -546,6 +603,13 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 11 ].enabled = arg.get('druckForm.druckGedichte').value;
       this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
       this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
+      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled = arg.get('zeitschriftForm.zeitschriftAkzente').value;
+      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled = arg.get('zeitschriftForm.zeitschriftBlaetter').value;
+      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled = arg.get('zeitschriftForm.zeitschriftSchoenste').value;
+      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled = arg.get('zeitschriftForm.zeitschriftTag').value;
+      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled = arg.get('zeitschriftForm.zeitschriftTat').value;
+      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled = arg.get('zeitschriftForm.zeitschriftZeit').value;
+      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled = arg.get('zeitschriftForm.zeitschriftEnsemble').value;
       console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
@@ -560,138 +624,200 @@ export class SucheComponent implements OnInit {
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Notizbuch%201979', i);
+        '&searchval=Notizbuch%201979', i, undefined);
     } else if (konvolut_id === 'notizbuch-1979-1982') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201979-82', i);
+        '&searchval=Notizbuch%201979-82', i, undefined);
     } else if (konvolut_id === 'notizbuch-1980-1988') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201980-88', i);
+        '&searchval=Notizbuch%201980-88', i, undefined);
     } else if (konvolut_id === 'notizbuch-1965-80') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Notizbuch%201965-80', i);
+        '&searchval=Notizbuch%201965-80', i, undefined);
     } else if (konvolut_id === 'manuskripte-1979') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Manuskripte%201979', i);
+        '&searchval=Manuskripte%201979', i, undefined);
     } else if (konvolut_id === 'manuskripte-1979-1983') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Manuskripte%201979-83', i);
+        '&searchval=Manuskripte%201979-83', i, undefined);
     } else if (konvolut_id === 'karten-1984') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Karten%201984', i);
+        '&searchval=Karten%201984', i, undefined);
     } else if (konvolut_id === 'karten-1984') {
       this.performQueryToGetIRI(
         '%23PoemManuscriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Karten%201984', i);
+        '&searchval=Karten%201984', i, undefined);
     } else if (konvolut_id === 'typoskripte-1979') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201979', i);
+        '&searchval=Typoskripte%201979', i, undefined);
     }
     if (konvolut_id === 'typoskripte-1979-spez') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201979-spez', i);
+        '&searchval=Typoskripte%201979-spez', i, undefined);
     } else if (konvolut_id === 'typoskripte-1983') {
       this.performQueryToGetIRI(
         '%23PoemTypescriptConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=EQ' +
-        '&searchval=Typoskripte%201983', i);
+        '&searchval=Typoskripte%201983', i, undefined);
     } else if (konvolut_id === 'gesicht-im-mittag') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=gesicht', i);
+        '&searchval=gesicht', i, undefined);
     } else if (konvolut_id === 'die-verwandelten-schiffe') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Schiffe', i);
+        '&searchval=Schiffe', i, undefined);
     } else if (konvolut_id === 'gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=GEDICHTE%201960', i);
+        '&searchval=GEDICHTE%201960', i, undefined);
     } else if (konvolut_id === 'flussufer') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Flussufer', i);
+        '&searchval=Flussufer', i, undefined);
     } else if (konvolut_id === 'reduktionen') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Reduktionen', i);
+        '&searchval=Reduktionen', i, undefined);
     } else if (konvolut_id === 'abgewandt-zugewandt-hochdeutsche-gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Hochdeutsche', i);
+        '&searchval=Hochdeutsche', i, undefined);
     } else if (konvolut_id === 'abgewandt-zugewandt-alemannische-gedichte') {
       this.performQueryToGetIRI(
         '%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Alemannische', i);
+        '&searchval=Alemannische', i, undefined);
     } else if (konvolut_id === 'verstreutes') {
       this.performQueryToGetIRI(
         '%23PolyAuthorPublicationConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Verstreutes', i);
+        '&searchval=Verstreutes', i, undefined);
     } else if (konvolut_id === 'tagebuecher') {
       this.performQueryToGetIRI(
         '%23DiaryConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Tagebuch', i);
+        '&searchval=Tagebuch', i, undefined);
     } else if (konvolut_id === 'tagebuecher-2') {
       this.performQueryToGetIRI(
         '%23DiaryConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=Tagebuch', i);
+        '&searchval=Tagebuch', i, undefined);
+    } else if (konvolut_id === 'akzente') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Akzente');
+    } else if (konvolut_id === 'blaetter+bilder') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=bl%C3%A4tter%20%2B%20bilder');
+    } else if (konvolut_id === 'zeitschriftSchoenste') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Das%20Sch%C3%B6nste');
+    } else if (konvolut_id === 'zeitschriftTag') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Tages-Anzeiger');
+    } else if (konvolut_id === 'zeitschriftTat') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Die%20Tat');
+    } else if (konvolut_id === 'zeitschriftZeit') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Die%20Zeit');
+    } else if (konvolut_id === 'zeitschriftEnsemble') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=ensemble');
     }
   }
 
-  performQueryToGetIRI(queryPart: string, i: number) {
+  performQueryToGetIRI(queryPart: string, i: number, individualQueryPart: string) {
+    if(queryPart === undefined) {
+      queryPart = individualQueryPart;
+    } else {
+      queryPart = globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        encodeURIComponent(globalSearchVariableService.initialVocabulary) +
+        queryPart;
+    }
     this.numberOfPerformedQueries += 1;
+    console.log(queryPart);
     return this.http.get
     (
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      globalSearchVariableService.initialVocabulary +
       queryPart
     )
       .map(
@@ -719,6 +845,7 @@ export class SucheComponent implements OnInit {
 
 
   performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
+    console.log(konvolutType);
     this.numberOfPerformedQueries += 1;
     return this.http.get
     (
@@ -747,7 +874,7 @@ export class SucheComponent implements OnInit {
             } else if (konvolutType === 'printed poem book publication') {
               rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
               //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'poly-author publication convolute') {
+            } else if (konvolutType === 'poly-author publication') {
               rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
               //console.log('Right Property: ' + rightProperty);
             }

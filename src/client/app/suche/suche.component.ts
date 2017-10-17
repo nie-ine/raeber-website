@@ -1151,20 +1151,30 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log(data);
+          console.log(data);
+          if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
+            //console.log(data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[0].dateval1);
           this.performTextQuery(
             data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
             poemIRI,
             data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
             date,
-            seqnum);
-          return data.resourcetypes;
+            seqnum,
+            data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0]
+          );
+          }
+          return null;
         }
       )
       .subscribe(response => this.responseArray = response);
   }
 
-  performTextQuery(editionIRI: string, poemIRI: string, titel: string, date: string, seqnum: string) {
+  performTextQuery(editionIRI: string,
+                   poemIRI: string,
+                   titel: string,
+                   date: string,
+                   seqnum: string,
+                   textart: string) {
     //console.log(editionIRI);
     return this.http.get
     (
@@ -1177,7 +1187,7 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           if (!this.setOfAllSearchResults.has(poemIRI)) {
             this.setOfAllSearchResults.add(poemIRI);
-            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI, data, titel, seqnum, date, 0);
+            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI, data, titel, seqnum, date, 0, textart);
           }
           return null;
         }
@@ -1185,28 +1195,80 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.responseArray = response);
   }
 
-  onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string, data: Array<any>, titel: string, seqnum: string, date: string, k: number) {
+  onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
+                                           data: Array<any>,
+                                           titel: string,
+                                           seqnum: string,
+                                           date: string,
+                                           k: number,
+                                           textart: string) {
     for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
-      console.log(typeof this.suchmaskeKonvolutIRIMapping[ k ].enabled);
       if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
-        console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-        console.log(k);
-        console.log(poemIRI);
+        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+        //console.log(k);
+        //console.log(poemIRI);
         if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-          console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-          if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-            this.allSearchResults[ this.allSearchResults.length ] = [];
-            this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-            this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-            this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
-              = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
-            this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-            this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-            this.numberOfSearchResults += 1;
+          if(this.checkTextart(textart)) {
+            if(this.checkTimeInterval(date)){
+              //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+              if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                this.allSearchResults[ this.allSearchResults.length ] = [];
+                this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
+                  = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+                this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                this.numberOfSearchResults += 1;
+            }
+            }
           }
         }
       }
     }
+  }
+
+  checkTextart(textart: string): boolean {
+    if (this.arg.get('textartForm').pristine) {
+      //console.log(textart);
+      return true;
+    } else if(this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
+        return true;
+    } else if(this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
+      return true;
+    } else if(this.arg.get('textartForm.textartProsa').value && textart === 'RythmicProse') {
+      return true;
+    } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
+      return true;
+    } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
+      return true;
+    } else {
+      return false;
+    }
+    }
+
+  checkTimeInterval(date: string): boolean {
+    console.log(date.split('-')[0]);
+    //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
+    if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
+      && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
+      return true;
+    } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+      && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
+      if(date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
+        && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+        console.log('Poem liegt im beidseitig geschlossenen Intervall');
+        return true;
+      }
+    } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+      && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {
+      console.log('Groesser als Linker Intervall');
+      return true;
+    } else if(this.arg.get('zeitraumForm.zeitraumBis').value !== ''
+      && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+      console.log('Kleiner als Linker Intervall');
+      return true;
+    } else return false;
   }
 
 }

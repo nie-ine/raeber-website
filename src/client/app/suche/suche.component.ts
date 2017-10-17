@@ -1153,14 +1153,15 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           console.log(data);
           if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
-            //console.log(data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[0].dateval1);
+            console.log(data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0]);
           this.performTextQuery(
             data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
             poemIRI,
             data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
             date,
             seqnum,
-            data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0]
+            data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
+            data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0]
           );
           }
           return null;
@@ -1174,7 +1175,8 @@ export class SucheComponent implements OnInit {
                    titel: string,
                    date: string,
                    seqnum: string,
-                   textart: string) {
+                   textart: string,
+                   isFinalVersion: string) {
     //console.log(editionIRI);
     return this.http.get
     (
@@ -1187,7 +1189,14 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           if (!this.setOfAllSearchResults.has(poemIRI)) {
             this.setOfAllSearchResults.add(poemIRI);
-            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI, data, titel, seqnum, date, 0, textart);
+            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI,
+              data,
+              titel,
+              seqnum,
+              date,
+              0,
+              textart,
+              isFinalVersion);
           }
           return null;
         }
@@ -1201,7 +1210,8 @@ export class SucheComponent implements OnInit {
                                            seqnum: string,
                                            date: string,
                                            k: number,
-                                           textart: string) {
+                                           textart: string,
+                                           isFinalVersion: string) {
     for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
       if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
         //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
@@ -1209,23 +1219,33 @@ export class SucheComponent implements OnInit {
         //console.log(poemIRI);
         if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
           if(this.checkTextart(textart)) {
-            if(this.checkTimeInterval(date)){
-              //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-              if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                this.allSearchResults[ this.allSearchResults.length ] = [];
-                this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
-                  = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
-                this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                this.numberOfSearchResults += 1;
+            if(this.checkTimeInterval(date)) {
+              if(this.checkIfFinalVersion(isFinalVersion)) {
+                //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                  this.allSearchResults[ this.allSearchResults.length ] = [];
+                  this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                  this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                  this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
+                    = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+                  this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                  this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                  this.numberOfSearchResults += 1;
+              }
             }
             }
           }
         }
       }
     }
+  }
+
+  checkIfFinalVersion(isFinalVersion: string):boolean {
+    if(!this.arg.get('endfassung').value) {
+      return true;
+    } else if (this.arg.get('endfassung').value && isFinalVersion) {
+      return true;
+    } else return false;
   }
 
   checkTextart(textart: string): boolean {

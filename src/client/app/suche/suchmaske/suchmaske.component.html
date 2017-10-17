@@ -621,7 +621,7 @@
                 <md-checkbox formControlName="zeitschriftGegengewichte"
                              [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value || pristineConvolutes()"
                              [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Gegengewichte
+                             [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Gegengewichte - NoImp
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
@@ -714,7 +714,7 @@
                 <md-checkbox formControlName="zeitschriftSonntagsblatt"
                              [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value || pristineConvolutes()"
                              [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Sonntagsblatt
+                             [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Sonntagsblatt - NoImp
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
@@ -725,11 +725,11 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftTA"
+                <!--<md-checkbox formControlName="zeitschriftTA"
                              [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTA').value || pristineConvolutes()"
                              [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTA').value && !pristineConvolutes()"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Tages-Anzeiger
-                </md-checkbox>
+                </md-checkbox>-->
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
                 <md-checkbox formControlName="zeitschriftWortTat"
@@ -763,10 +763,8 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.materialien">
-                <md-checkbox formControlName="materialienBrief"
-                             [class.green]="suchmenuForm.get('materialienForm.materialienBrief').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('materialienForm.materialienBrief').value && !pristineConvolutes()"
-                             [checked]="suchmenuForm.get('materialienForm.materialienAll').value">Brief
+                <md-checkbox [disabled]="true"
+                             [checked]="false">Brief
                 </md-checkbox>
               </li>
             </ul>

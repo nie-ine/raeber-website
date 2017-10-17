@@ -100,13 +100,28 @@ export class SucheComponent implements OnInit {
   zeitschriftZeit = new Set();
   zeitschriftTat = new Set();
   zeitschriftTag = new Set();
+  zeitschriftJahresring = new Set();
   zeitschriftEnsemble = new Set();
   zeitschriftSchoenste = new Set();
+  zeitschriftLadZ = new Set();
   setOfAllSearchResults = new Set();
+  zeitschriftLNN = new Set();
+  zeitschriftKonturen = new Set();
   numberOfPerformedQueries = 0;
   setOfResultsInSearchGroup = new Set();
   setOfSearchTermsInSearchGroup = new Set();
+  zeitschriftLuZ = new Set();
+  zeitschriftDeutscheHefte = new Set();
+  zeitschriftMerkur = new Set();
+  zeitschriftSueddeutsche = new Set();
+  zeitschriftNZZ = new Set();
+  zeitschriftNZN = new Set();
+  materialienTagebuch = new Set();
+  zeitschriftHortulus = new Set();
+  zeitschriftRundschau = new Set();
+  zeitschriftRenaissance = new Set();
   searchTermArray: Array<string>;
+  zeitschriftWortTat = new Set();
   arrayOfResultsInAllSearchGroups = [
     {
       'setOfSearchTermsInSearchGroup': new Set(),
@@ -262,6 +277,111 @@ export class SucheComponent implements OnInit {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.zeitschriftEnsemble
+    },
+    {
+      'konvolut': 'zeitschriftHortulus',
+      'suchmaskeKonvolutName': 'zeitschriftHortulus',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftHortulus
+    },
+    {
+      'konvolut': 'zeitschriftJahresring',
+      'suchmaskeKonvolutName': 'zeitschriftJahresring',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftJahresring
+    },
+    {
+      'konvolut': 'zeitschriftKonturen',
+      'suchmaskeKonvolutName': 'zeitschriftKonturen',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftKonturen
+    },
+    {
+      'konvolut': 'zeitschriftLNN',
+      'suchmaskeKonvolutName': 'zeitschriftLNN',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftLNN
+    },
+    {
+      'konvolut': 'zeitschriftLadZ',
+      'suchmaskeKonvolutName': 'zeitschriftLadZ',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftLadZ
+    },
+    {
+      'konvolut': 'zeitschriftLuZ',
+      'suchmaskeKonvolutName': 'zeitschriftLuZ',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftLuZ
+    },
+    {
+      'konvolut': 'zeitschriftMerkur',
+      'suchmaskeKonvolutName': 'zeitschriftMerkur',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftMerkur
+    },
+    {
+      'konvolut': 'zeitschriftDeutscheHefte',
+      'suchmaskeKonvolutName': 'zeitschriftDeutscheHefte',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftDeutscheHefte
+    },
+    {
+      'konvolut': 'zeitschriftNZN',
+      'suchmaskeKonvolutName': 'zeitschriftNZN',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftNZN
+    },
+    {
+      'konvolut': 'zeitschriftNZZ',
+      'suchmaskeKonvolutName': 'zeitschriftNZZ',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftNZZ
+    },
+    {
+      'konvolut': 'zeitschriftRenaissance',
+      'suchmaskeKonvolutName': 'zeitschriftRenaissance',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftRenaissance
+    },
+    {
+      'konvolut': 'zeitschriftRundschau',
+      'suchmaskeKonvolutName': 'zeitschriftRundschau',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftRundschau
+    },
+    {
+      'konvolut': 'zeitschriftSueddeutsche',
+      'suchmaskeKonvolutName': 'zeitschriftSueddeutsche',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftSueddeutsche
+    },
+    {
+      'konvolut': 'zeitschriftWortTat',
+      'suchmaskeKonvolutName': 'zeitschriftWortTat',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.zeitschriftWortTat
+    }
+    {
+      'konvolut': 'materialienTagebuch',
+      'suchmaskeKonvolutName': 'materialienTagebuch',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.materialienTagebuch
     }
   ];
   poemResTypes = [
@@ -610,6 +730,21 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 18 ].enabled = arg.get('zeitschriftForm.zeitschriftTat').value;
       this.suchmaskeKonvolutIRIMapping[ 19 ].enabled = arg.get('zeitschriftForm.zeitschriftZeit').value;
       this.suchmaskeKonvolutIRIMapping[ 20 ].enabled = arg.get('zeitschriftForm.zeitschriftEnsemble').value;
+      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled = arg.get('zeitschriftForm.zeitschriftHortulus').value;
+      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled = arg.get('zeitschriftForm.zeitschriftJahresring').value;
+      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled = arg.get('zeitschriftForm.zeitschriftKonturen').value;
+      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled = arg.get('zeitschriftForm.zeitschriftLNN').value;
+      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled = arg.get('zeitschriftForm.zeitschriftLadZ').value;
+      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled = arg.get('zeitschriftForm.zeitschriftLuZ').value;
+      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled = arg.get('zeitschriftForm.zeitschriftMerkur').value;
+      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled = arg.get('zeitschriftForm.zeitschriftDeutscheHefte').value;
+      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled = arg.get('zeitschriftForm.zeitschriftNZN').value;
+      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled = arg.get('zeitschriftForm.zeitschriftNZZ').value;
+      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled = arg.get('zeitschriftForm.zeitschriftRenaissance').value;
+      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled = arg.get('zeitschriftForm.zeitschriftRundschau').value;
+      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
+      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
+      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('zeitschriftForm.materialienTagebuch').value;
       console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
@@ -734,7 +869,7 @@ export class SucheComponent implements OnInit {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
         '&searchval=Verstreutes', i, undefined);
-    } else if (konvolut_id === 'tagebuecher') {
+    } else if (konvolut_id === 'materialienTagebuch') {
       this.performQueryToGetIRI(
         '%23DiaryConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
@@ -802,6 +937,118 @@ export class SucheComponent implements OnInit {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
         '&compop=EQ' +
         '&searchval=ensemble');
+    } else if (konvolut_id === 'zeitschriftHortulus') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Hortulus');
+    } else if (konvolut_id === 'zeitschriftJahresring') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Jahresring');
+    } else if (konvolut_id === 'zeitschriftKonturen') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Konturen');
+    } else if (konvolut_id === 'zeitschriftLNN') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Luzerner%20Neueste%20Nachrichten');
+    } else if (konvolut_id === 'zeitschriftLadZ') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Lyrik%20aus%20dieser%20Zeit');
+    } else if (konvolut_id === 'zeitschriftLuZ') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Lyrik%20unserer%20Zeit');
+    } else if (konvolut_id === 'zeitschriftMerkur') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Merkur');
+    } else if (konvolut_id === 'zeitschriftDeutscheHefte') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Neue%20Deutsche%20Hefte');
+    } else if (konvolut_id === 'zeitschriftNZN') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Neue%20Z%C3%BCrcher%20Nachrichten');
+    } else if (konvolut_id === 'zeitschriftNZZ') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Neue%20Z%C3%BCrcher%20Zeitung');
+    } else if (konvolut_id === 'zeitschriftRenaissance') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Renaissance');
+    } else if (konvolut_id === 'zeitschriftRundschau') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Schweizer%20Rundschau');
+    } else if (konvolut_id === 'zeitschriftSueddeutsche') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=S%C3%BCddeutsche%20Zeitung');
+    } else if (konvolut_id === 'zeitschriftWortTat') {
+      this.performQueryToGetIRI(
+        undefined, i,
+        globalSearchVariableService.API_URL
+        + '/search/?searchtype=extended' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fwork%23hasPublicationTitle' +
+        '&compop=EQ' +
+        '&searchval=Wort%20und%20Tat');
     }
   }
 

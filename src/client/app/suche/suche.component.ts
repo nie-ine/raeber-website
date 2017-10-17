@@ -4,6 +4,8 @@ import { globalSearchVariableService } from './globalSearchVariablesService';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MdDialog } from '@angular/material';
+import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
 
 
 @Component({
@@ -216,7 +218,7 @@ export class SucheComponent implements OnInit {
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem'
   ];
 
-  constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
+  constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location) {
     this.route.params.subscribe(params => console.log(params));
   }
 
@@ -823,6 +825,13 @@ export class SucheComponent implements OnInit {
         }
       )
       .subscribe(response => this.responseArray = response);
+  }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(SuchmaskeHilfeComponent, {
+        width: '500px'
+      });
   }
 
 }

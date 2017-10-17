@@ -1070,7 +1070,7 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           this.setOfPerformedQueries.add(globalSearchVariableService.API_URL +
             globalSearchVariableService.extendedSearch +
             globalSearchVariableService.initialVocabulary +
@@ -1083,7 +1083,7 @@ export class SucheComponent implements OnInit {
             this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
           console.log('alle Konvolutinformationen');
-          console.log(this.setOfKonvolutIRIs);
+          //console.log(this.setOfKonvolutIRIs);
           return null;
         }
       )
@@ -1092,7 +1092,7 @@ export class SucheComponent implements OnInit {
 
 
   performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
-    console.log(konvolutType);
+    //console.log(konvolutType);
     this.numberOfPerformedQueries += 1;
     return this.http.get
     (
@@ -1151,19 +1151,20 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
-            console.log(data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0]);
-          this.performTextQuery(
-            data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
-            poemIRI,
-            data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
-            date,
-            seqnum,
-            data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
-            data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
-            data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0]
-          );
+            this.performTextQuery(
+              data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
+              poemIRI,
+              data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
+              date,
+              seqnum,
+              data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
+              data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
+              data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
+              data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
+              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
+            );
           }
           return null;
         }
@@ -1178,7 +1179,9 @@ export class SucheComponent implements OnInit {
                    seqnum: string,
                    textart: string,
                    isFinalVersion: string,
-                   hatStrophenunterteilung: string) {
+                   hatStrophenunterteilung: string,
+                   isInDialiect: string,
+                   isPartOfCycle: string) {
     //console.log(editionIRI);
     return this.http.get
     (
@@ -1199,7 +1202,9 @@ export class SucheComponent implements OnInit {
               0,
               textart,
               isFinalVersion,
-              hatStrophenunterteilung);
+              hatStrophenunterteilung,
+              isInDialiect,
+              isPartOfCycle);
           }
           return null;
         }
@@ -1215,7 +1220,9 @@ export class SucheComponent implements OnInit {
                                            k: number,
                                            textart: string,
                                            isFinalVersion: string,
-                                           hatStrophenunterteilung: string) {
+                                           hatStrophenunterteilung: string,
+                                           isInDialiect: string,
+                                           isPartOfCycle: string) {
     for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
       if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
         //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
@@ -1226,16 +1233,20 @@ export class SucheComponent implements OnInit {
             if(this.checkTimeInterval(date)) {
               if(this.checkIfFinalVersion(isFinalVersion)) {
                 if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                  //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                  if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                    this.allSearchResults[ this.allSearchResults.length ] = [];
-                    this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                    this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                    this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
-                      = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
-                    this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                    this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                    this.numberOfSearchResults += 1;
+                  if(this.checkIfIsInDialect(isInDialiect)) {
+                    if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                      //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                      if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                        this.allSearchResults[ this.allSearchResults.length ] = [];
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
+                          = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                        this.numberOfSearchResults += 1;
+                    }
+                  }
                 }
               }
             }
@@ -1246,8 +1257,26 @@ export class SucheComponent implements OnInit {
     }
   }
 
-  checkIfHasStrophe(hatStrophenunterteilung: string) {
-    console.log(hatStrophenunterteilung);
+  checkIfPartOfCycle(isPartOfCycle: string): boolean {
+    console.log(isPartOfCycle);
+    if(!this.arg.get('zyklus').value) {
+      return true;
+    } else if (this.arg.get('zyklus').value && isPartOfCycle) {
+      return true;
+    } else return false;
+  }
+
+  checkIfIsInDialect(isInDialiect: string): boolean {
+    //console.log(isInDialiect);
+    if(!this.arg.get('mundart').value) {
+      return true;
+    } else if (this.arg.get('mundart').value && isInDialiect) {
+      return true;
+    } else return false;
+  }
+
+  checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
+    //console.log(hatStrophenunterteilung);
     if(!this.arg.get('strophen').value) {
       return true;
     } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
@@ -1283,7 +1312,7 @@ export class SucheComponent implements OnInit {
     }
 
   checkTimeInterval(date: string): boolean {
-    console.log(date.split('-')[0]);
+    //console.log(date.split('-')[0]);
     //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
     if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
       && this.arg.get('zeitraumForm.zeitraumBis').value === '') {

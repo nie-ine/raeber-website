@@ -52,11 +52,18 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
+          this.poemInformation[ i ][ 5 ] = [];
           if (this.router.url.split('/')[ 1 ] === 'synopsen') {
             const sameEditionAs = data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasSameEditionAs' ];
             this.poemInformation[ i ][ 4 ] = sameEditionAs.values !== undefined;
             this.poemInformation[ i ][ 5 ] = data.resdata[ 'restype_name' ].split('#')[ 1 ];
             this.getConvoluteIriName(this.poemInformation[ i ][ 5 ], data, i);
+          } else {
+            for (let j = 0; j < data.incoming.length; j++ ) {
+              if (data.incoming[ j ].ext_res_id.pid === 'http://www.knora.org/ontology/work#isExpressedIn') {
+                this.poemInformation[i][5][j] = data.incoming[ j ].ext_res_id.id;
+              }
+            }
           }
           // console.log(data.resdata[ 'restype_name' ].split('#')[ 1 ]);
           // console.log(data.resdata[ 'restype_name' ]);
@@ -98,7 +105,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
     let convolute: string;
     switch (res) {
       case 'PoemNote':
-        console.log(data);
+        //console.log(data);
         this.getConvoluteTitleAlias(data.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ 0 ],
           'notizbuecher', i);
         break;
@@ -114,13 +121,15 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         this.getConvoluteIri(typescriptIri, 'typoskripte', i);
         break;
       case 'PublicationPoem':
-        console.log(data);
+        // console.log(data);
         // FIXME: Remove next two lines if data problem is solved!
-        this.poemInformation[ i ][ 6 ] = '';
-        this.poemInformation[ i ][ 7 ] = '';
-      // FIXME: Data not available?
-      //const publicationIri = data.props[ 'http://www.knora.org/ontology/work#isPublishedIn' ].values[ 0 ];
-      //this.getConvoluteTitleAlias(publicationIri, 'drucke', i);
+        // this.poemInformation[ i ][ 6 ] = '';
+        // this.poemInformation[ i ][ 7 ] = '';
+        // FIXME: Data not available?
+        const publicationIri = (data.props[ 'http://www.knora.org/ontology/work#isPublishedIn' ].values === undefined ?
+        data.props[ 'http://www.knora.org/ontology/work#hasLastAuthorizedPublication' ].values[ 0 ] :
+        data.props[ 'http://www.knora.org/ontology/work#isPublishedIn' ].values[ 0 ]);
+        this.getConvoluteTitleAlias(publicationIri, 'drucke', i);
     }
   }
 
@@ -148,15 +157,20 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   private getConvoluteTitleAlias(convoluteIri: string, convType: string, i: number): void {
     this.http.get(Config.API + 'resources/' + encodeURIComponent(convoluteIri)).map((res: any) => res.json())
       .subscribe((res: any) => {
-        if (convType === 'drucke') {
-          this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/text#hasPublicationTitle' ].values[ 0 ][ 'utf8str' ];
+        // if (convType === 'drucke') {
+        //  this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/work#hasPublicationTitle' ].values[ 0 ][ 'utf8str' ];
+        //} else {
+          // this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ][ 'utf8str' ];
+        //}
+        console.log(res);
+        if (res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ] === undefined) {
+          this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/work#hasPublicationTitle' ].values[ 0 ][ 'utf8str' ];
         } else {
           this.poemInformation[ i ][ 7 ] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ][ 'utf8str' ];
         }
         // TODO: Check links!
         this.poemInformation[ i ][ 6 ] =
           '/' + convType + '/' + res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ][ 'utf8str' ];
-        console.log(this.poemInformation[ i ][ 6 ]);
       });
   }
 }

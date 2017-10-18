@@ -706,7 +706,7 @@ export class SucheComponent implements OnInit {
       && arg.get('manuskriptForm').pristine
       && arg.get('zeitschriftForm').pristine
     ) {
-      console.log('Perform Search in all convolutes');
+      //console.log('Perform Search in all convolutes');
     } else {
       console.log('Gehe durch jedes Konvolut');
       this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
@@ -753,7 +753,7 @@ export class SucheComponent implements OnInit {
 
 
   getKonvolutIRI(konvolut_id: string, i: number) {
-    console.log('Get IRI Component for Konvolut - ID: ' + konvolut_id);
+    //console.log('Get IRI Component for Konvolut - ID: ' + konvolut_id);
     if (konvolut_id === 'notizbuch-1979') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
@@ -1062,7 +1062,7 @@ export class SucheComponent implements OnInit {
         queryPart;
     }
     this.numberOfPerformedQueries += 1;
-    console.log(queryPart);
+    //console.log(queryPart);
     return this.http.get
     (
       queryPart
@@ -1082,7 +1082,7 @@ export class SucheComponent implements OnInit {
             this.rightProperty = '';
             this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
-          console.log('alle Konvolutinformationen');
+          //console.log('alle Konvolutinformationen');
           //console.log(this.setOfKonvolutIRIs);
           return null;
         }

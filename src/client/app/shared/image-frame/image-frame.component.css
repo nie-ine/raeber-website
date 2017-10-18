@@ -12,3 +12,11 @@
   overflow: auto;
 }
 
+button.rae-image-small-button {
+  min-width: 10px;
+  height: 30px;
+  line-height: normal;
+  padding: 5px;
+  font-size: 80%;
+  vertical-align: middle;
+}

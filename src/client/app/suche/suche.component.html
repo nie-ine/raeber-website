@@ -8,7 +8,7 @@
               <div class="component-content">
 
                 <h1>Suche</h1>
-                Number of Results: {{ numberOfSearchResults }}
+                Number of Results: {{ numberOfSearchResults }}, <!--Number of performed Queries: {{ numberOfPerformedQueries }}-->
                 <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
 
 
@@ -18,7 +18,7 @@
                                (suchEvents)="handleSearchEvent($event)"
                                [poemsInGrid]="allSearchResults"
                                (startSearch)="executeFinalQueries()"
-                               [searchTerm]="searchTerm">
+                               [searchTermArray]="searchTermArray">
 
                 </rae-suchmaske>
 

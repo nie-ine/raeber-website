@@ -62,7 +62,6 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
             for (let j = 0; j < data.incoming.length; j++ ) {
               if (data.incoming[ j ].ext_res_id.pid === 'http://www.knora.org/ontology/work#isExpressedIn') {
                 this.poemInformation[i][5][j] = data.incoming[ j ].ext_res_id.id;
-                console.log('P5: ' + this.poemInformation[ i ][ 5 ]);
               }
             }
           }

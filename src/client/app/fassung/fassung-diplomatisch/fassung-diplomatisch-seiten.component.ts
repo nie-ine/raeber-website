@@ -16,27 +16,23 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
 
   @Output() propertiesReset = new EventEmitter();
 
-  properties = { 'diplIRI': '', 'pagenumber': '', 'picData': '' };
+  properties = { 'pageIRI': '', 'pagenumber': '', 'picData': '' };
 
   private sub: any;
 
-  constructor(private http: Http){
+  constructor(private http: Http) {
   }
 
   ngOnChanges() {
-
     if (this.pageIRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.pageIRI))
         .map(results => results.json())
-        .subscribe(res =>{
-          this.properties['pagenumber'] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;
-          for (let j = 0; j < res.incoming.length; j++) {
-            if (res.incoming[ j ].ext_res_id.pid === 'http://www.knora.org/ontology/text#isDiplomaticTranscriptionOfTextOnPage') {
-              this.properties['diplIRI'] = res.incoming[ j ].ext_res_id.id;
-            }
-          }
+        .subscribe(res => {
+          this.properties[ 'pagenumber' ] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;
           this.properties[ 'picData' ] = res.resinfo.locdata;
+          this.properties[ 'pageIRI' ] = this.pageIRI;
           this.propertiesReset.emit(this.properties);
+          console.log(res.props);
         });
     }
   }

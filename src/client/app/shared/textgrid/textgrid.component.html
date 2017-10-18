@@ -9,7 +9,11 @@
       <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
-        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
+        <a class="item" *ngIf="contentType == 'konvolut'"
+           [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active" [innerHTML]="highlight(p[0],searchTerm)">
+        </a>
+        <a class="item" *ngIf="contentType == 'synopse'"
+          [routerLink]="'/' + p[7] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
            [innerHTML]="highlight(p[0],searchTerm)">
         </a>
       </md-card-title>

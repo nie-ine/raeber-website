@@ -153,8 +153,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   highlight(textToHighlight: string, searchTerm: string) {
     if (searchTerm === undefined) {
       return textToHighlight;
-    }
-    else if(textToHighlight !== undefined ) {
+    } else if(textToHighlight !== undefined ) {
       return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
         return '<span class="highlightText">' + match + '</span>';
       });
@@ -171,9 +170,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
       if (this.konvolutTitle === undefined) {
-        this.konvolutTitle = 'noKonvolutTitelDefined';
+        return '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+      } else {
+        return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
       }
-      return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }

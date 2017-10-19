@@ -68,6 +68,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
           this.poemInformation[ i ][ 5 ] = [];
+          this.poemInformation[ i ][ 9 ] = [];
           this.poemInformation[ i ][ 8 ] = data.props['http://www.knora.org/ontology/knora-base#seqnum'].values[ 0 ];
           if (this.router.url.split('/')[ 1 ] === 'synopsen' || this.router.url.split('/')[ 1 ] === 'suche') {
             const sameEditionAs = data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasSameEditionAs' ];

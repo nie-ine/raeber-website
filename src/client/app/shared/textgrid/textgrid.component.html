@@ -13,7 +13,7 @@
            [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
            [innerHTML]="highlight(p[0],searchTermArray)">
         </a>
-        <a class="item" *ngIf="contentType == 'synopse'"
+        <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche' "
           [routerLink]="'/' + p[7] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
            [innerHTML]="highlight(p[0],searchTermArray)">
         </a>

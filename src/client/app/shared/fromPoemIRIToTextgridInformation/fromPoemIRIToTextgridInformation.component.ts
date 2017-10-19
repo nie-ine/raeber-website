@@ -62,6 +62,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           7: Convolute title
           8: seqnum of poem for sorting as in convolute
           9: Array: synopse IRI
+          10: Convolute ID from menu
+          11: SynopseLink without array
            */
 
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

@@ -65,11 +65,13 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.poem_resizable = true;
     this.show_register = true;
-
-    // TODO: Change when route definitions have been changed
     this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[ 1 ]);
     this.poem_id = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
+    this.updateView();
+  }
 
+  updateView() {
+    // TODO: Change when route definitions have been changed
     this.http
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
       .map(result => result.json())
@@ -123,6 +125,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           }
         }
       });
+  }
+
+  goToOtherFassung(idOfFassung: string) {
+    this.poem_id = idOfFassung.split('---')[1];
+    console.log('Go to other Fassung: ' + idOfFassung.split('---')[1] );
+    this.updateView();
   }
 
   ngAfterViewChecked() {

@@ -51,19 +51,6 @@ export class KonvolutComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     this.viewMode = 'grid';
 
-    window.onscroll = () => {
-      let windowHeight = 'innerHeight' in window ? window.innerHeight
-        : document.documentElement.offsetHeight;
-      let body = document.body, html = document.documentElement;
-      let docHeight = Math.max(body.scrollHeight,
-        body.offsetHeight, html.clientHeight,
-        html.scrollHeight, html.offsetHeight);
-      let windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        this.loadMore();
-      }
-    };
-
   }
 
   ngOnInit() {

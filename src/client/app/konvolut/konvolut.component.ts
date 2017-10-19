@@ -30,7 +30,7 @@ export class KonvolutComponent implements OnInit {
   responseArray: Array<any>;
   searchContext: boolean = false;
   searchResultsNo: number;
-  searchTerm: string;
+  searchTermArray: Array<string>;
   columns: string;
   rahmen: boolean = true;
   showText: boolean = true;
@@ -119,9 +119,9 @@ export class KonvolutComponent implements OnInit {
    * @param {FormGroup} fg Search parameters
    */
   searchInConvolute(fg: FormGroup) {
-    // TODO: Implement real search query
+    //console.log(fg.searchTerm);
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
-    this.searchTerm = ''; // TODO: Variable takes search term
+    this.searchTermArray = fg.searchTerm; // TODO: Variable takes search term
   }
 
   /**

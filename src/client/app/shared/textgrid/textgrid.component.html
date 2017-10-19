@@ -1,9 +1,9 @@
-<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid', 'rae-poem-list-cols': viewMode == 'cols'}">
+<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
 
   <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
-       [ngStyle]="{ 'width': columns }">
+       [ngStyle]="{ 'width': columns }" >
 
-    <md-card class="rae-poem-card">
+    <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
 
       <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>

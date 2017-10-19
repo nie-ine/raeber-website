@@ -375,7 +375,7 @@ export class SucheComponent implements OnInit {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.zeitschriftWortTat
-    }
+    },
     {
       'konvolut': 'materialienTagebuch',
       'suchmaskeKonvolutName': 'materialienTagebuch',
@@ -528,7 +528,7 @@ export class SucheComponent implements OnInit {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            //console.log(data);
+            console.log(typeof data);
             if (data.subjects[0] !== undefined) {
               this.addToTemporarySearchResultArray(data.subjects,
                 firstTermAfterOr,
@@ -1194,8 +1194,9 @@ export class SucheComponent implements OnInit {
           const data = lambda.json();
           if (!this.setOfAllSearchResults.has(poemIRI)) {
             this.setOfAllSearchResults.add(poemIRI);
-            this.onlyChoosePoemsThatAreInChosenConvolutes(poemIRI,
-              data,
+            this.onlyChoosePoemsThatAreInChosenConvolutes(
+              poemIRI,
+              data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str,
               titel,
               seqnum,
               date,
@@ -1213,7 +1214,7 @@ export class SucheComponent implements OnInit {
   }
 
   onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
-                                           data: Array<any>,
+                                           text: string,
                                            titel: string,
                                            seqnum: string,
                                            date: string,
@@ -1240,8 +1241,7 @@ export class SucheComponent implements OnInit {
                         this.allSearchResults[ this.allSearchResults.length ] = [];
                         this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
                         this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ]
-                          = data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
                         this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
                         this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
                         this.numberOfSearchResults += 1;
@@ -1323,6 +1323,8 @@ export class SucheComponent implements OnInit {
         && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
         console.log('Poem liegt im beidseitig geschlossenen Intervall');
         return true;
+      } else {
+        return false;
       }
     } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
       && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {

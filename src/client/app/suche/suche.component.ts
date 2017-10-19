@@ -136,252 +136,288 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'notizbuch79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch79
+      'memberPoems': this.setOfPoemsNotizbuch79,
+      'officialTitle': 'Notizbuch 1979'
     },
     {
       'konvolut': 'notizbuch-1979-1982',
       'suchmaskeKonvolutName': 'notizbuch7982',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch7982
+      'memberPoems': this.setOfPoemsNotizbuch7982,
+      'officialTitle': 'Notizbuch 1979-82'
     },
     {
       'konvolut': 'notizbuch-1980-1988',
       'suchmaskeKonvolutName': 'notizbuch8088',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch8088
+      'memberPoems': this.setOfPoemsNotizbuch8088,
+      'officialTitle': 'Notizbuch 1979-88'
     },
     {
       'konvolut': 'manuskripte-1979',
       'suchmaskeKonvolutName': 'manuskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript79
+      'memberPoems': this.setOfPoemsManuskript79,
+      'officialTitle': 'Manuskripte 1979'
     },
     {
       'konvolut': 'manuskripte-1979-1983',
       'suchmaskeKonvolutName': 'manuskript7983',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript7983
+      'memberPoems': this.setOfPoemsManuskript7983,
+      'officialTitle': 'Manuskripte 1979-83'
     },
     {
       'konvolut': 'karten-1984',
       'suchmaskeKonvolutName': 'manuskriptKarten',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskriptKarten
+      'memberPoems': this.setOfPoemsManuskriptKarten,
+      'officialTitle': 'Manuskripte 1984'
     },
     {
       'konvolut': 'typoskripte-1979',
       'suchmaskeKonvolutName': 'typoskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79
+      'memberPoems': this.setOfPoemsTyposkript79,
+      'officialTitle': 'Typoskripte 1979'
     },
     {
       'konvolut': 'typoskripte-1979-spez',
       'suchmaskeKonvolutName': 'typoskript79Spez',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79Spez
+      'memberPoems': this.setOfPoemsTyposkript79Spez,
+      'officialTitle': 'Typoskripte 1979-spez'
     },
     {
       'konvolut': 'typoskripte-1983',
       'suchmaskeKonvolutName': 'typoskript83',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript83
+      'memberPoems': this.setOfPoemsTyposkript83,
+      'officialTitle': 'Typoskripte 1983'
     },
     {
       'konvolut': 'gesicht-im-mittag',
       'suchmaskeKonvolutName': 'druckGesicht',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGesicht
+      'memberPoems': this.setOfPoemsdruckGesicht,
+      'officialTitle': 'GESICHT IM MITTAG 1950'
     },
     {
       'konvolut': 'die-verwandelten-schiffe',
       'suchmaskeKonvolutName': 'druckSchiffe',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckSchiffe
+      'memberPoems': this.setOfPoemsdruckSchiffe,
+      'officialTitle': 'Die verwandelten Schiffe 1957'
     },
     {
       'konvolut': 'gedichte',
       'suchmaskeKonvolutName': 'druckGedichte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGedichte
+      'memberPoems': this.setOfPoemsdruckGedichte,
+      'officialTitle': 'GEDICHTE 1960'
     },
     {
       'konvolut': 'flussufer',
       'suchmaskeKonvolutName': 'druckFlussufer',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckFlussufer
+      'memberPoems': this.setOfPoemsdruckFlussufer,
+      'officialTitle': 'FLUSSUFER 1963'
     },
     {
       'konvolut': 'reduktionen',
       'suchmaskeKonvolutName': 'druckReduktionen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckReduktionen
+      'memberPoems': this.setOfPoemsdruckReduktionen,
+      'officialTitle': 'Reduktionen 1981'
     },
     {
       'konvolut': 'akzente',
       'suchmaskeKonvolutName': 'zeitschriftAkzente',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdzeitschriftAkzente
+      'memberPoems': this.setOfPoemsdzeitschriftAkzente,
+      'officialTitle': 'Akzente'
     },
     {
       'konvolut': 'blaetter+bilder',
       'suchmaskeKonvolutName': 'zeitschriftBlaetter',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemszeitschriftBlaetter
+      'memberPoems': this.setOfPoemszeitschriftBlaetter,
+      'officialTitle': 'blätter + bilder'
     },
     {
       'konvolut': 'zeitschriftSchoenste',
       'suchmaskeKonvolutName': 'zeitschriftSchoenste',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSchoenste
+      'memberPoems': this.zeitschriftSchoenste,
+      'officialTitle': 'Das Schönste'
     },
     {
       'konvolut': 'zeitschriftTag',
       'suchmaskeKonvolutName': 'zeitschriftTag',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTag
+      'memberPoems': this.zeitschriftTag,
+      'officialTitle': 'Der Tages - Anzeiger'
     },
     {
       'konvolut': 'zeitschriftTat',
       'suchmaskeKonvolutName': 'zeitschriftTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTat
+      'memberPoems': this.zeitschriftTat,
+      'officialTitle': 'Die Tat'
     },
     {
       'konvolut': 'zeitschriftZeit',
       'suchmaskeKonvolutName': 'zeitschriftZeit',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftZeit
+      'memberPoems': this.zeitschriftZeit,
+      'officialTitle': 'DIE ZEIT'
     },
     {
       'konvolut': 'zeitschriftEnsemble',
       'suchmaskeKonvolutName': 'zeitschriftEnsemble',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftEnsemble
+      'memberPoems': this.zeitschriftEnsemble,
+      'officialTitle': 'ensemble'
     },
     {
       'konvolut': 'zeitschriftHortulus',
       'suchmaskeKonvolutName': 'zeitschriftHortulus',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftHortulus
+      'memberPoems': this.zeitschriftHortulus,
+      'officialTitle': 'hortulus'
     },
     {
       'konvolut': 'zeitschriftJahresring',
       'suchmaskeKonvolutName': 'zeitschriftJahresring',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftJahresring
+      'memberPoems': this.zeitschriftJahresring,
+      'officialTitle': 'Jahresring'
     },
     {
       'konvolut': 'zeitschriftKonturen',
       'suchmaskeKonvolutName': 'zeitschriftKonturen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftKonturen
+      'memberPoems': this.zeitschriftKonturen,
+      'officialTitle': 'Konturen'
     },
     {
       'konvolut': 'zeitschriftLNN',
       'suchmaskeKonvolutName': 'zeitschriftLNN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLNN
+      'memberPoems': this.zeitschriftLNN,
+      'officialTitle': 'Luzerner Neueste Nachrichten'
     },
     {
       'konvolut': 'zeitschriftLadZ',
       'suchmaskeKonvolutName': 'zeitschriftLadZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLadZ
+      'memberPoems': this.zeitschriftLadZ,
+      'officialTitle': 'Lyrik aus dieser Zeit'
     },
     {
       'konvolut': 'zeitschriftLuZ',
       'suchmaskeKonvolutName': 'zeitschriftLuZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLuZ
+      'memberPoems': this.zeitschriftLuZ,
+      'officialTitle': 'Lyrik unserer Zeit'
     },
     {
       'konvolut': 'zeitschriftMerkur',
       'suchmaskeKonvolutName': 'zeitschriftMerkur',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftMerkur
+      'memberPoems': this.zeitschriftMerkur,
+      'officialTitle': 'Merkur'
     },
     {
       'konvolut': 'zeitschriftDeutscheHefte',
       'suchmaskeKonvolutName': 'zeitschriftDeutscheHefte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftDeutscheHefte
+      'memberPoems': this.zeitschriftDeutscheHefte,
+      'officialTitle': 'Neue Deutsche Hefte'
     },
     {
       'konvolut': 'zeitschriftNZN',
       'suchmaskeKonvolutName': 'zeitschriftNZN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZN
+      'memberPoems': this.zeitschriftNZN,
+      'officialTitle': 'Neue Zürcher Nachrichten'
     },
     {
       'konvolut': 'zeitschriftNZZ',
       'suchmaskeKonvolutName': 'zeitschriftNZZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZZ
+      'memberPoems': this.zeitschriftNZZ,
+      'officialTitle': 'Neue Zürcher Zeitung'
     },
     {
       'konvolut': 'zeitschriftRenaissance',
       'suchmaskeKonvolutName': 'zeitschriftRenaissance',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRenaissance
+      'memberPoems': this.zeitschriftRenaissance,
+      'officialTitle': 'Renaissance'
     },
     {
       'konvolut': 'zeitschriftRundschau',
       'suchmaskeKonvolutName': 'zeitschriftRundschau',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRundschau
+      'memberPoems': this.zeitschriftRundschau,
+      'officialTitle': 'Schweizer Rundschau'
     },
     {
       'konvolut': 'zeitschriftSueddeutsche',
       'suchmaskeKonvolutName': 'zeitschriftSueddeutsche',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSueddeutsche
+      'memberPoems': this.zeitschriftSueddeutsche,
+      'officialTitle': 'Süddeutsche Zeitung'
     },
     {
       'konvolut': 'zeitschriftWortTat',
       'suchmaskeKonvolutName': 'zeitschriftWortTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftWortTat
+      'memberPoems': this.zeitschriftWortTat,
+      'officialTitle': 'Wort und Tat'
     },
     {
       'konvolut': 'materialienTagebuch',
       'suchmaskeKonvolutName': 'materialienTagebuch',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.materialienTagebuch
+      'memberPoems': this.materialienTagebuch,
+      'officialTitle': 'Tagebuch'
     }
   ];
   poemResTypes = [
@@ -1163,7 +1199,8 @@ export class SucheComponent implements OnInit {
               data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
               data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
               data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
+              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0],
+              data.incoming[ 0 ].ext_res_id.id
             );
           }
           return null;
@@ -1181,7 +1218,8 @@ export class SucheComponent implements OnInit {
                    isFinalVersion: string,
                    hatStrophenunterteilung: string,
                    isInDialiect: string,
-                   isPartOfCycle: string) {
+                   isPartOfCycle: string,
+                   synopsenLink: string) {
     //console.log(editionIRI);
     return this.http.get
     (
@@ -1205,7 +1243,8 @@ export class SucheComponent implements OnInit {
               isFinalVersion,
               hatStrophenunterteilung,
               isInDialiect,
-              isPartOfCycle);
+              isPartOfCycle,
+              synopsenLink);
           }
           return null;
         }
@@ -1223,33 +1262,40 @@ export class SucheComponent implements OnInit {
                                            isFinalVersion: string,
                                            hatStrophenunterteilung: string,
                                            isInDialiect: string,
-                                           isPartOfCycle: string) {
-    for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
-      if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
-        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-        //console.log(k);
-        //console.log(poemIRI);
-        if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-          if(this.checkTextart(textart)) {
-            if(this.checkTimeInterval(date)) {
-              if(this.checkIfFinalVersion(isFinalVersion)) {
-                if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                  if(this.checkIfIsInDialect(isInDialiect)) {
-                    if(this.checkIfPartOfCycle(isPartOfCycle)) {
-                      //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                      if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                        this.allSearchResults[ this.allSearchResults.length ] = [];
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                        this.numberOfSearchResults += 1;
+                                           isPartOfCycle: string,
+                                           synopsenLink: string) {
+      for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+        if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
+          //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+          //console.log(k);
+          //console.log(poemIRI);
+          if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+            console.log(this.suchmaskeKonvolutIRIMapping[ k ].officialTitle);
+            if(this.checkTextart(textart)) {
+              if(this.checkTimeInterval(date)) {
+                if(this.checkIfFinalVersion(isFinalVersion)) {
+                  if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                    if(this.checkIfIsInDialect(isInDialiect)) {
+                      if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                        //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                        if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                          this.allSearchResults[ this.allSearchResults.length ] = [];
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 7 ]
+                            = this.suchmaskeKonvolutIRIMapping[ k ].officialTitle;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 10 ]
+                            = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 11 ] = synopsenLink.split('/')[4]
+                          this.numberOfSearchResults += 1;
+                      }
                     }
                   }
                 }
               }
-            }
             }
           }
         }
@@ -1258,7 +1304,7 @@ export class SucheComponent implements OnInit {
   }
 
   checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    console.log(isPartOfCycle);
+    //console.log(isPartOfCycle);
     if(!this.arg.get('zyklus').value) {
       return true;
     } else if (this.arg.get('zyklus').value && isPartOfCycle) {

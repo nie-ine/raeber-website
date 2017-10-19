@@ -29,6 +29,12 @@
       <br/>
 
       <md-card-footer style="position: static;">
+
+        <div class="catItemTagsBlock" *ngIf="p[10]">
+          In: <a [routerLink]="'/material/' + p[10]" routerLinkActive="active">{{ p[7] }}</a>,
+          <a [routerLink]="'/synopsen/' + p[11]" routerLinkActive="active" *ngIf="p[11]">Synopse</a>
+        </div>
+
         <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
           <span>Synopse:</span>
           <ul class="catItemTags">

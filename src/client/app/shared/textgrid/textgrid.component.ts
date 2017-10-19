@@ -32,6 +32,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() poemsInGrid: Array<any>;
   @Input() resetPoems: string;
   @Input() konvolutTitle: string;
+  @Input() searchTermfromKonvolut: string;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTermArray: Array<any>;
@@ -39,6 +40,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   gridTextHeight: number = 0;
   i: number;
   j: number;
+  searchActivated = false;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -111,23 +113,45 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         if (!chng.isFirstChange()) {
           if (this.poemsInGrid) {
             this.poemsInGrid = chng.currentValue;
-            //for (this.i = 0; this.i < this.poemsInGrid.length; this.i++) {
-            //  this.poemsInGrid[ this.i ].obj_id = encodeURIComponent(this.poemsInGrid[ this.i ].obj_id);
-            //}
           }
         }
       }
-
-      /*    for (let propName in changes) {
-       let chng = changes[propName];
-       let cur  = JSON.stringify(chng.currentValue);
-       let prev = JSON.stringify(chng.previousValue);
-       this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-       }*/
-      // changes.prop contains the old and the new value...
+      if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
+        this.searchAndFilterInTextgrid();
+      } else {
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+      }
     }
 
   }
+
+  searchAndFilterInTextgrid() {
+    this.searchTermArray = undefined;
+    console.log(this.searchTermfromKonvolut);
+    if (this.searchTermfromKonvolut === '') {
+      this.searchActivated = false;
+    } else {
+      this.searchActivated = true;
+    }
+    console.log('Filter and Search in Textgrid');
+    console.log(this.searchTermfromKonvolut);
+    for(let poem of this.poemsInGrid) {
+      if(poem[0] !== undefined) {
+        if(poem[0].search(this.searchTermfromKonvolut) !== -1) {
+          this.searchTermArray = [];
+          poem.show = true;
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
+        } else if (poem[2].search(this.searchTermfromKonvolut) !== -1) {
+          this.searchTermArray = [];
+          poem.show = true;
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
+        } else {
+          poem.show = false;
+        }
+        }
+      }
+    }
 
 
   ngAfterViewChecked() {

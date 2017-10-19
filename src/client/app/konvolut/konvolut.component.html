@@ -35,7 +35,8 @@
                     <rae-konvolut-trefferleiste *ngIf="searchContext" [results]="searchResultsNo"
                                                 [searchTerm]="searchTerm"
                                                 (reset)="quitSearchMode($event)"></rae-konvolut-trefferleiste>
-                    <rae-textgrid [konvolutTitle]="konvolutTitle"
+                    <rae-textgrid [searchTermfromKonvolut]="searchTermArray"
+                                  [konvolutTitle]="konvolutTitle"
                                   [resetPoems]="resetPoems"
                                   [poemsInGrid]="poems"
                                   [viewMode]="viewMode"
@@ -62,7 +63,7 @@
                   <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
                     <ngb-panel id="register" title="Register">
                       <ng-template ngbPanelContent>
-                        <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
+                        <!--<rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>-->
                       </ng-template>
                     </ngb-panel>
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">

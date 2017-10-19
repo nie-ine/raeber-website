@@ -41,6 +41,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   i: number;
   j: number;
   searchActivated = false;
+  searchInKonvolut = false;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -116,14 +117,14 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
           }
         }
       }
-      if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
-        this.searchAndFilterInTextgrid();
-      } else {
-        this.searchActivated = false;
-        this.searchTermArray = undefined;
-      }
     }
-
+    if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
+      this.searchAndFilterInTextgrid();
+      this.searchInKonvolut = true;
+    } else if (this.searchInKonvolut !== false ) {
+      this.searchActivated = false;
+      this.searchTermArray = undefined;
+    }
   }
 
   searchAndFilterInTextgrid() {

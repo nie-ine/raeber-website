@@ -122,6 +122,7 @@ export class SucheComponent implements OnInit {
   zeitschriftRenaissance = new Set();
   searchTermArray: Array<string>;
   zeitschriftWortTat = new Set();
+  startSearchImmediately = false;
   arrayOfResultsInAllSearchGroups = [
     {
       'setOfSearchTermsInSearchGroup': new Set(),
@@ -409,9 +410,11 @@ export class SucheComponent implements OnInit {
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
-    if (!this.inputSearchStringToBeParsed) {
-      this.inputSearchStringToBeParsed = this.route.snapshot.params[ 'queryParameters' ];
-      console.log('Queryparameters: ' + this.inputSearchStringToBeParsed);
+    if (this.route.snapshot.queryParams[ 'wort' ]) {
+      this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
+      this.startSearchImmediately = true;
+      this.searchTermArray = [];
+      this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
     }
     if (this.allSearchResults === undefined) {
       this.numberOfSearchResults = 0;
@@ -467,7 +470,11 @@ export class SucheComponent implements OnInit {
   }
 
   getQueries(queries: Array<any>) {
+    console.log(queries);
     this.queries = queries;
+    if(this.startSearchImmediately) {
+      this.executeFinalQueries();
+    }
   }
 
   performQuery(searchTerm: string, location: string, firstTermAfterOr: boolean, searchGroup: number, numberOfTermsInSearchGroup: number) {
@@ -618,13 +625,6 @@ export class SucheComponent implements OnInit {
                                   numberOfTermsInSearchGroup: number,
                                   searchTerm: string,
                                   poemIRI: string) {
-    //console.log(
-    //  'Only take searchresults from searchTerms if ' +
-    //  'they exists in the other searchresults from searchTerms same searchgroups'
-    //);
-    //console.log('Searchgroup: ' + searchGroup);
-    //console.log('Number of Terms in Searchgroup ' + numberOfTermsInSearchGroup);
-    //console.log('First Term after OR ' + firstTermAfterOr);
     if(this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
     }
@@ -1078,7 +1078,7 @@ export class SucheComponent implements OnInit {
           if (data.subjects[ 0 ] !== undefined) {
             this.setOfKonvolutIRIs.add(data.subjects[ 0 ].obj_id);
             this.suchmaskeKonvolutIRIMapping[ i ].IRI = data.subjects[ 0 ].obj_id;
-            console.log(this.suchmaskeKonvolutIRIMapping);
+            //console.log(this.suchmaskeKonvolutIRIMapping);
             this.rightProperty = '';
             this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
@@ -1230,35 +1230,36 @@ export class SucheComponent implements OnInit {
         //console.log(k);
         //console.log(poemIRI);
         if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-          if(this.checkTextart(textart)) {
-            if(this.checkTimeInterval(date)) {
-              if(this.checkIfFinalVersion(isFinalVersion)) {
-                if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                  if(this.checkIfIsInDialect(isInDialiect)) {
-                    if(this.checkIfPartOfCycle(isPartOfCycle)) {
-                      //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                      if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                        this.allSearchResults[ this.allSearchResults.length ] = [];
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                        this.numberOfSearchResults += 1;
+            if(this.checkTextart(textart)) {
+              if(this.checkTimeInterval(date)) {
+                if(this.checkIfFinalVersion(isFinalVersion)) {
+                  if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                    if(this.checkIfIsInDialect(isInDialiect)) {
+                      if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                        //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                        if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                          this.allSearchResults[ this.allSearchResults.length ] = [];
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                          this.numberOfSearchResults += 1;
+                      }
                     }
                   }
                 }
               }
+              }
             }
-            }
-          }
         }
       }
     }
   }
 
   checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    console.log(isPartOfCycle);
+    //console.log(isPartOfCycle);
+    if(!this.arg) return true;
     if(!this.arg.get('zyklus').value) {
       return true;
     } else if (this.arg.get('zyklus').value && isPartOfCycle) {
@@ -1268,6 +1269,7 @@ export class SucheComponent implements OnInit {
 
   checkIfIsInDialect(isInDialiect: string): boolean {
     //console.log(isInDialiect);
+    if(!this.arg) return true;
     if(!this.arg.get('mundart').value) {
       return true;
     } else if (this.arg.get('mundart').value && isInDialiect) {
@@ -1277,6 +1279,7 @@ export class SucheComponent implements OnInit {
 
   checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
     //console.log(hatStrophenunterteilung);
+    if(!this.arg) return true;
     if(!this.arg.get('strophen').value) {
       return true;
     } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
@@ -1285,6 +1288,7 @@ export class SucheComponent implements OnInit {
   }
 
   checkIfFinalVersion(isFinalVersion: string):boolean {
+    if(!this.arg) return true;
     if(!this.arg.get('endfassung').value) {
       return true;
     } else if (this.arg.get('endfassung').value && isFinalVersion) {
@@ -1293,6 +1297,7 @@ export class SucheComponent implements OnInit {
   }
 
   checkTextart(textart: string): boolean {
+    if(!this.arg) return true;
     if (this.arg.get('textartForm').pristine) {
       //console.log(textart);
       return true;
@@ -1312,6 +1317,7 @@ export class SucheComponent implements OnInit {
     }
 
   checkTimeInterval(date: string): boolean {
+    if(!this.arg) return true;
     //console.log(date.split('-')[0]);
     //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
     if (this.arg.get('zeitraumForm.zeitraumVon').value === ''

@@ -14,7 +14,8 @@
 
                 <br>
 
-                <rae-suchmaske [sidenavOpened]="false"
+                <rae-suchmaske [startSearchImmediately]="startSearchImmediately"
+                               [sidenavOpened]="false"
                                (suchEvents)="handleSearchEvent($event)"
                                [poemsInGrid]="allSearchResults"
                                (startSearch)="executeFinalQueries()"

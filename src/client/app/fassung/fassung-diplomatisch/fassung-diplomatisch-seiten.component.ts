@@ -32,7 +32,6 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
           this.properties[ 'picData' ] = res.resinfo.locdata;
           this.properties[ 'pageIRI' ] = this.pageIRI;
           this.propertiesReset.emit(this.properties);
-          console.log(res.props);
         });
     }
   }

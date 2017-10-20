@@ -45,3 +45,8 @@
 .hidden {
   display: none;
 }
+
+.signalizeSearch {
+  border-style: solid;
+  border-color: #fffe9f;
+}

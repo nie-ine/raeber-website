@@ -49,11 +49,28 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         (lambda: Response) => {
           const data = lambda.json();
           //console.log(data);
+
+          /*
+          Fields in poemInformation
+          0: Poem title
+          1: Creation date of Poem
+          2: Edited text of this poem
+          3: Poem IRI
+          4: Same edition as poem: IRI
+          5: Array: Resource type of poem
+          6: Convolute link
+          7: Convolute title
+          8: seqnum of poem for sorting as in convolute
+          9: Array: synopse IRI
+           */
+
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
           this.poemInformation[ i ][ 5 ] = [];
-          if (this.router.url.split('/')[ 1 ] === 'synopsen') {
+          this.poemInformation[ i ][ 9 ] = [];
+          this.poemInformation[ i ][ 8 ] = data.props['http://www.knora.org/ontology/knora-base#seqnum'].values[ 0 ];
+          if (this.router.url.split('/')[ 1 ] === 'synopsen' || this.router.url.split('/')[ 1 ] === 'suche') {
             const sameEditionAs = data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasSameEditionAs' ];
             this.poemInformation[ i ][ 4 ] = sameEditionAs.values !== undefined;
             this.poemInformation[ i ][ 5 ] = data.resdata[ 'restype_name' ].split('#')[ 1 ];
@@ -61,7 +78,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           } else {
             for (let j = 0; j < data.incoming.length; j++ ) {
               if (data.incoming[ j ].ext_res_id.pid === 'http://www.knora.org/ontology/work#isExpressedIn') {
-                this.poemInformation[i][5][j] = data.incoming[ j ].ext_res_id.id;
+                this.poemInformation[ i ][ 9 ][ j ] = data.incoming[ j ].ext_res_id.id;
               }
             }
           }

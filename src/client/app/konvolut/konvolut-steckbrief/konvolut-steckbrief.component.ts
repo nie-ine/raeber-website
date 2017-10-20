@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { MdDialog } from '@angular/material';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
 
 
 @Component({
@@ -40,7 +41,6 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   laterStagesIRIs: Array<string>;
   stufenIRIs: Array<string>;
   private sub: any;
-  private sub2: any;
 
   constructor(private http: Http, private dateFormatService: DateFormatService, public dialog: MdDialog) {}
 
@@ -211,6 +211,17 @@ export class KonvolutSteckbriefComponent implements OnChanges {
     }
   }
 
+  openDialog(): void {
+    let dialogRef = this.dialog.open(KonvolutKommentarComponent, {
+      // data: { text: this.comment },
+      data: { text: this.comment },
+      width: '600px',
+      height: '400px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
   formatDate(date: string) {
     return this.dateFormatService.germanNumericDate(date);

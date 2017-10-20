@@ -105,7 +105,7 @@ export class KonvolutComponent implements OnInit {
    * Start search in convolute and enter search result mode
    * @param {FormGroup} fg Search parameters
    */
-  searchInConvolute(fg: FormGroup) {
+  searchInConvolute(fg: any) {
     //console.log(fg.searchTerm);
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
     this.searchTermArray = fg.searchTerm; // TODO: Variable takes search term

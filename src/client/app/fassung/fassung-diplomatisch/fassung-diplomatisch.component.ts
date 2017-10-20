@@ -56,6 +56,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
     }
 
     this.gewaehlteSchicht = 'schicht0';
+    this.textIsMovable = false;
   }
 
   @ViewChild('diplomatischKarte')

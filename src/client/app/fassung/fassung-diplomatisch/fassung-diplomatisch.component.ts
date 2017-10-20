@@ -20,6 +20,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
   cardWidth: number;
   pages: Array<any> = [];
   gewaehlteSchicht: string = 'schicht0';
+  textIsMovable: boolean = false;
 
   private sub: any;
 

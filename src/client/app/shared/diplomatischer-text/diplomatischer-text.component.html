@@ -1,4 +1,4 @@
-<div>
+<div class="rae-diplomatic">
   <md-toolbar>
     <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{textIRI}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
@@ -24,9 +24,11 @@
       </md-button-toggle>
     </md-button-toggle-group>
 
-    <!-- TODO replace with better layout. Now as checkbox because button toggle is broken -->
-    <md-checkbox [(ngModel)]="textIsMovable"
-                        title="Umschrift verschiebbar machen">↔</md-checkbox>
+    <button md-raised-button (click)="toggleDraggable()" title="Umschrift verschiebbar machen">
+      <md-icon *ngIf="textIsMovable">check_box</md-icon>
+      <md-icon *ngIf="!textIsMovable">check_box_outline_blank</md-icon>
+      ↔
+    </button>
 
   </md-toolbar>
   <div class="umschrift edtext edtext_hs"

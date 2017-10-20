@@ -27,6 +27,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
 
   pageIRIs: Array<string>;
+  diplomaticIRIs: Array<string>;
 
   poem_id: string;
   poemTitle: string;
@@ -81,6 +82,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(this.textEdition);
         this.pageIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isOnPage' ].values;
+        this.diplomaticIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription'].values;
         this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
         this.poemConvoluteType = res.resdata[ 'restype_name' ].split('#')[ 1 ];
         switch (this.poemConvoluteType) {

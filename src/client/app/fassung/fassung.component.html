@@ -58,7 +58,7 @@
 
                       <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
                         <md-card-content *ngIf="zeigeDiplomatisch">
-                          <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
+                          <rae-fassung-diplomatisch [diplomaticIRIs]="diplomaticIRIs"
                                                     (pictureReduced)="show_register = true;"
                                                     (pictureIncreased)="show_register = false;">
                           </rae-fassung-diplomatisch>

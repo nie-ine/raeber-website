@@ -99,6 +99,7 @@
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
+                      (goToOtherFassung) = "goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"

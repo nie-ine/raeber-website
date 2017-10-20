@@ -1,18 +1,44 @@
-<div class="rae-register-titelregister">
-  <h5>
+<ng-container *ngFor="let k of konvolutTitel; let i = index">
+  <get-konvolut-iris
+    [konvolutTitelText]="k"
+    (sendKonvolutIRIBack)="updateKonvolutIRI($event, i)"
+    (sendKonvolutTypeBack)="updateKonvolutType($event, i)">
+  </get-konvolut-iris>
+</ng-container>
+
+<div *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'"
+     class="rae-register-titelregister">
+  <h5 *ngIf="poems">
     <!--{{selectedTab}}<br/>-->
-    (Total: {{ nHits }})</h5>
+    (Total: {{ poems.length }})</h5>
   <md-nav-list dense>
-    <a md-list-item *ngFor="let p of rsEntry; let i = index" [routerLink]="['item/id']" routerLinkActive="active">
-      <h5 md-line>{{ p.value[0] }}</h5>
-      <p md-line
-         *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'">
-        {{ p.value[1] }}
+    <a md-list-item *ngFor="let p of poems" [routerLink]="produceFassungsLink(p)">
+      <h5 md-line *ngIf="p && p['titel']">{{ p.titel }}</h5>
+      <p md-line *ngIf="p && p['datum']">
+        {{ formatDate(p.datum) }}
       </p>
-      <p md-line
-         *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'">
-        {{ p.value[1] }}
+      <p md-line *ngIf="p && p['konvolutTitel']">
+        {{ p.konvolutTitel }}
       </p>
     </a>
   </md-nav-list>
 </div>
+
+<ng-container *ngFor="let k of konvolutTitel; let i = index">
+  <ng-container *ngIf="konvolutIRI[i] && knoraKonvolutType[i]">
+    <from-konvolut-iri-to-poem-iris
+      [konvolutIRI]="konvolutIRI[i]"
+      [konvolutType]="knoraKonvolutType[i]"
+      (sendPoemIRIsBack)="createPoemIRIList($event, i)">
+    </from-konvolut-iri-to-poem-iris>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngFor="let k of konvolutTitel; let i = index">
+  <ng-container *ngIf="poemIRIArray[i]">
+    <from-poem-iri-to-textgrid-information
+      [poemIRIArray]="poemIRIArray[i]"
+      (sendPoemInformationBack)="updatePoemInformation($event, k, i)">
+    </from-poem-iri-to-textgrid-information>
+  </ng-container>
+</ng-container>

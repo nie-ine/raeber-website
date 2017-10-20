@@ -60,7 +60,7 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
           return data.resourcetypes;
         }
       )
-      .subscribe(response => this.responseArray = response);
+      .subscribe(response => this.responseArray = response, error => console.log('Error: ', error));
   }
   getRightProperty(konvolutType: string) {
     console.log(konvolutType);

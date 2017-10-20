@@ -66,7 +66,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           return data.resourcetypes;
         }
       )
-      .subscribe(response => this.responseArray = response);
+      .subscribe(response => this.responseArray = response, error => console.log('Error: ', error),
+        () => console.log('Request completed'));
   }
   performTextQuery(IRI: string, i: number) {
     //console.log('get Text: ' + IRI);
@@ -89,6 +90,6 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           return data.resourcetypes;
         }
       )
-      .subscribe(response => this.responseArray = response);
+      .subscribe(response => this.responseArray = response, error => console.log('Error: ', error));
   }
 }

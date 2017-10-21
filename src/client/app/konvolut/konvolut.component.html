@@ -63,7 +63,7 @@
                   <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
                     <ngb-panel id="register" title="Register">
                       <ng-template ngbPanelContent>
-                        <!--<rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>-->
+                        <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
                       </ng-template>
                     </ngb-panel>
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
@@ -98,9 +98,11 @@
   (sendPoemInformationBack)="updatePoemInformation($event)"
 ></from-poem-iri-to-textgrid-information>
 
+<!--
 <from-konvolut-iri-to-poem-iris
   [konvolutIRI]="IRI"
   [konvolutType]="konvolutType"
   (sendPoemIRIsBack)="createPoemIRIList($event)"
   (signalizeThatNoRequestDefined)="deletePoemsInCache($event)"
 ></from-konvolut-iri-to-poem-iris>
+-->

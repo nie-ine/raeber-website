@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() poemIRIArray: Array<any>;
+  @Input() konvolutIRI: Array<any>;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
   responseArray: Array<any>;
   i: number;
@@ -22,17 +23,32 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
 
   ngOnChanges() {
+    if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
     this.poemInformation = [];
     this.countRequests = 0;
-    if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
-      for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
+    //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+    //  for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
         //console.log('get information for this poem:');
-        this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
-        this.poemInformation[ this.i ] = [];
-      }
-    }
+        //this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
+    //    this.poemInformation[ this.i ] = [];
+    //  }
+    //}
+    this.performQuery();
   }
 
+//}
+
+performQuery() {
+  for(this.i = 0; this.i < 350; this.i ++) {
+    this.poemInformation[this.i] = [];
+    this.poemInformation[this.i][0] = 'Fake Title';
+    this.poemInformation[this.i][1] = 'Creation Date';
+    this.poemInformation[this.i][2] = 'Text';
+  }
+  this.sendPoemInformationBack.emit(this.poemInformation);
+}
+
+  /*
   getTitleAndDate(IRI: string, i: number) {
     //console.log('get Title and Date' + IRI);
     this.performQuery(IRI, i);
@@ -48,7 +64,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log(data);
+          //console.log(data); */
 
           /*
           Fields in poemInformation
@@ -63,7 +79,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           8: seqnum of poem for sorting as in convolute
           9: Array: synopse IRI
            */
-
+/*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
@@ -189,5 +205,5 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         this.poemInformation[ i ][ 6 ] =
           '/' + convType + '/' + res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ][ 'utf8str' ];
       });
-  }
+  } */
 }

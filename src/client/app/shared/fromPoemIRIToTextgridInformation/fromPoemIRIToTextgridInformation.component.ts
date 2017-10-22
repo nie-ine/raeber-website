@@ -69,7 +69,8 @@ performQuery() {
     '&searchval=123455666' +
     '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
     '&compop=!EQ' +
-    '&searchval=123455666'
+    '&searchval=123455666' +
+    '&show_nrows=2000'
   )
     .map(
       (lambda: Response) => {

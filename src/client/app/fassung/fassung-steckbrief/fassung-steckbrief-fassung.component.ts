@@ -17,6 +17,7 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
   fassung: Array<any>;
 
   private sub: any;
+  private sub2: any;
 
   constructor(private http: Http) {}
 
@@ -31,8 +32,24 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
             let iriPart = this.fassungIRI[ i ].split('raeber/')[ 1 ];
             // TODO get convolute title for linking
             this.fassung.push({ 'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart });
+            console.log(res);
           });
 
+        this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/search/'
+          + '?searchtype=extended&property_id='
+          + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#Poem')
+          + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI')
+          + '&compop=EQ&searchval=' + encodeURIComponent(this.fassungIRI[i])
+          + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteTitle')
+          + '&compop=EXISTS&searchval=')
+          .map(results => results.json())
+          .subscribe(res => {
+            for (let j = 0; j < this.fassung.length; j++) {
+              if (this.fassung[j]['pageIRI'] = this.fassungIRI[j]) {
+                this.fassung[j]['konvolutTitle'] = res.subjects[ 0 ].values[ 1 ];
+              }
+            }
+          });
       }
     }
   }

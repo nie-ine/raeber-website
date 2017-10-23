@@ -114,8 +114,8 @@ export class RegisterspalteComponent implements OnChanges {
     this.sortingType = 'chronologic';
     this.poemsOld = this.poems;
     for (let i = 0; i < this.poems.length; i++) {
-      //console.log('Alphabetic index: ' + this.poemsOld[i].dateIndex);
-      this.poems[this.poemsOld[i].dateIndex - 1] = this.poemsOld[i];
+      //console.log('chronological index: ' + this.poemsOld[i].reihe);
+      this.poems[this.poemsOld[i].reihe - 1] = this.poemsOld[i];
     }
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
     // TODO passe an entsprechende Datentypen der Felder an

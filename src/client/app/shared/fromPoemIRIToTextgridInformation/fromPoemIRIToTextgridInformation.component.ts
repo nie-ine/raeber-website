@@ -88,6 +88,7 @@ performQuery() {
           this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 6 ];
           this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 8 ];
           this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 7 ];
+          this.poemInformation[ this.i ][ 8 ]= data.subjects[ this.i ].value[ 1 ];
           this.poemInformation[ this.i ][ 10 ]= data.subjects[ this.i ].value[ 5 ];
           this.poemInformation[ this.i ][ 11 ]= data.subjects[ this.i ].value[ 2 ];
         }

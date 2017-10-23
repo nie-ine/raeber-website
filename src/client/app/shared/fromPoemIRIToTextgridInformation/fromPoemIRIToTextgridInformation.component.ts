@@ -70,6 +70,12 @@ performQuery() {
     '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
     '&compop=!EQ' +
     '&searchval=123455666' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
+    '&compop=!EQ' +
+    '&searchval=123455666' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
+    '&compop=!EQ' +
+    '&searchval=123455666' +
     '&show_nrows=2000'
   )
     .map(
@@ -78,10 +84,13 @@ performQuery() {
         console.log(data.subjects[ 0 ]);
         for(this.i = 0; this.i < data.subjects.length; this.i ++) {
           this.poemInformation[ this.i ] = [];
-          this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
-          this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
-          this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
-          this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
+          this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 9 ];
+          this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 6 ];
+          this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 8 ];
+          this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 7 ];
+          this.poemInformation[ this.i ][ 8 ]= data.subjects[ this.i ].value[ 1 ];
+          this.poemInformation[ this.i ][ 10 ]= data.subjects[ this.i ].value[ 5 ];
+          this.poemInformation[ this.i ][ 11 ]= data.subjects[ this.i ].value[ 2 ];
         }
         this.sendPoemInformationBack.emit(this.poemInformation);
         return null;
@@ -120,6 +129,8 @@ performQuery() {
           7: Convolute title
           8: seqnum of poem for sorting as in convolute
           9: Array: synopse IRI
+          10: Has Date Index
+          11: Has alphabetic index
            */
 /*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

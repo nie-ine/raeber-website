@@ -35,7 +35,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
     if (this.diplomaticIRIs) {
       for (let i = 0; i < this.diplomaticIRIs.length; i++) {
         let seqnum: number;
-        this.pages.push({'diplIRI': null, 'pageIRI': null, 'pagenumber': null, 'picData': null});
+        this.pages.push({'diplIRI': null, 'pageIRI': null, 'pagenumber': null, 'picData': null, 'origName': null});
 
         this.sub = this.http.get(globalSearchVariableService.API_URL + /resources/
           + encodeURIComponent(this.diplomaticIRIs[i]))
@@ -81,6 +81,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
       if (values['pageIRI'] === this.pages[i]['pageIRI']) {
         this.pages[i]['pagenumber'] = values['pagenumber'];
         this.pages[i]['picData'] = values['picData'];
+        this.pages[i]['origName'] = values['origName'];
       }
     }
   }

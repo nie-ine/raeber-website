@@ -1,7 +1,7 @@
 <div #diplomatischKarte>
   <div *ngFor="let p of pages">
-    <h5>{{p['pagenumber']}}</h5>
     <div style="display: inline-block; vertical-align: top">
+      <h4><span>{{ p['pagenumber'] }}</span> <span>({{ p['origName'] }})</span> </h4>
       <rae-image-frame *ngIf="p['picData']"
         [pictureData]="p['picData']"
         [initWidth]="cardWidth"

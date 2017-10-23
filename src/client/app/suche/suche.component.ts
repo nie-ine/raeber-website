@@ -792,7 +792,7 @@ export class SucheComponent implements OnInit {
         '&searchval=Manuskripte%201979-83', i, undefined);
     } else if (konvolut_id === 'karten-1984') {
       this.performQueryToGetIRI(
-        '%23PoemManuscriptConvolute' +
+        '%23PoemPostcardConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
         '&searchval=Karten%201984', i, undefined);

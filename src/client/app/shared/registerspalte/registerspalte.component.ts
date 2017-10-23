@@ -50,7 +50,7 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   ngOnChanges() {
-
+    console.log('Registerspalte ' + this.konvolutIRI);
     // infos for title and routing
     if (this.konvolutIRI !== undefined) {
       this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
@@ -64,6 +64,8 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
+    console.log('Update Poem Information');
+    console.log(poemInformation);
     this.poems = [];
 
     for (let i = 0; i < poemInformation.length; i++) {

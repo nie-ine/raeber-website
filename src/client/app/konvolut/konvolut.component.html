@@ -34,10 +34,10 @@
                     <br/>
                     <rae-konvolut-trefferleiste *ngIf="searchContext" [results]="searchResultsNo"
                                                 [searchTerm]="searchTerm"
-                                                (reset)="quitSearchMode($event)"></rae-konvolut-trefferleiste>
+                                                (reset)="quitSearchMode($event)"
+                    ></rae-konvolut-trefferleiste>
                     <rae-textgrid [searchTermfromKonvolut]="searchTermArray"
                                   [konvolutTitle]="konvolutTitle"
-                                  [resetPoems]="resetPoems"
                                   [poemsInGrid]="poems"
                                   [viewMode]="viewMode"
                                   [columns]="columns"
@@ -93,13 +93,16 @@
 </div>
 
 <from-poem-iri-to-textgrid-information
+  [konvolutIRI]="IRI"
   [poemIRIArray]="poemIRIArray"
   (sendPoemInformationBack)="updatePoemInformation($event)"
 ></from-poem-iri-to-textgrid-information>
 
+<!--
 <from-konvolut-iri-to-poem-iris
   [konvolutIRI]="IRI"
   [konvolutType]="konvolutType"
   (sendPoemIRIsBack)="createPoemIRIList($event)"
   (signalizeThatNoRequestDefined)="deletePoemsInCache($event)"
 ></from-konvolut-iri-to-poem-iris>
+-->

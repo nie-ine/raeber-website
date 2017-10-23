@@ -13,6 +13,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -57,9 +58,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
-        if (x[ 1 ] > y[ 1 ]) {
+        if (x[ 1 ] + String(1000000 + x[ 8 ]) > y[ 1 ] + String(1000000 + x[ 8 ])) {
           return 1;
-        } else if (x[ 1 ] < [ 1 ]) {
+        } else if (x[ 1 ] + String(1000000 + x[ 8 ]) < x[ 1 ]+ String(1000000 + x[ 8 ])) {
           return -1;
         } else {
           return 0;
@@ -68,7 +69,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     );
   }
 
-  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService) {
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
   }
 
   /**
@@ -156,7 +157,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
 
   ngAfterViewChecked() {
-    if (this.poemsInGrid !== undefined && this.poemsInGrid.every(x => x[ 6 ] !== undefined && x[ 7 ] !== undefined)) {
+    if (this.poemsInGrid !== undefined && this.router.url.split('/')[ 1 ] === 'synopsen'
+      && this.poemsInGrid.every(x => x[ 6 ] !== undefined && x[ 7 ] !== undefined)) {
       this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
     }
     this.cdr.detectChanges();

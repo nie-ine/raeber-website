@@ -88,7 +88,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
-    return x[ 5 ] !== type;
+    return !x[ 4 ].includes(type);
   }
 
   /**
@@ -245,9 +245,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
-        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'PoemNote') : x)
-        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'HandwrittenPoem') : x)
-        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'TypewrittenPoem') : x);
+        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
+        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
+        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x);
     } else {
       return unfiltered;
     }

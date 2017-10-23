@@ -21,14 +21,20 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   poemInformation: Array<any>;
 
   constructor(private http: Http, private router: Router) {
-
   }
 
   ngOnChanges() {
-    if(this.konvolutIRI || this.workIRI) console.log('Konvoluttitle to get Poems with Cache ' +
-      this.konvolutIRI + 'Work iri: ' + this.workIRI);
-    this.poemInformation = [];
-    this.countRequests = 0;
+    if (this.contentType === 'synopse') {
+      if(this.workIRI) console.log('Work iri to get Poems with Cache ' + this.workIRI);
+      this.poemInformation = [];
+      this.countRequests = 0;
+      this.performQuery();
+    } else {
+      if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+      this.poemInformation = [];
+      this.countRequests = 0;
+      this.performQuery();
+    }
     //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
     //  for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
         //console.log('get information for this poem:');
@@ -36,14 +42,12 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
     //    this.poemInformation[ this.i ] = [];
     //  }
     //}
-    this.performQuery();
   }
 
 //}
 
 performQuery() {
     if(this.contentType === 'synopse') {
-      this.workIRI = 'http://rdfh.ch/kuno-raeber/' + this.workIRI;
       return this.http.get
       (
         globalSearchVariableService.API_URL +
@@ -52,11 +56,11 @@ performQuery() {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=EQ' +
         '&searchval=' +
-        encodeURIComponent(this.workIRI) +
+        encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIRI) +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
         '&compop=!EQ' +
         '&searchval=123455666'+
-        /*'&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
         '&compop=!EQ' +
         '&searchval=GREGORIAN:2217-01-27' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
@@ -73,19 +77,48 @@ performQuery() {
         '&searchval=123455666' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
         '&compop=!EQ' +
-        '&searchval=123455666' +*/
+        '&searchval=123455666' +
         '&show_nrows=2000'
       )
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data.subjects[ 0 ]);
+            console.log(data.subjects);
             for(this.i = 0; this.i < data.subjects.length; this.i ++) {
               this.poemInformation[ this.i ] = [];
-              this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
-              this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
-              this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
-              this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
+              this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ]; // poem title
+              this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ]; // poem creation date
+              this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ]; // poem text
+              this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ]; // poem IRI
+              this.poemInformation[ this.i ][ 4 ]= data.subjects[ this.i ].value[ 3 ]; // Convolute Title
+              // TO DO the following not hard coded but over triplestore requests
+              if (this.poemInformation[ this.i ][ 4 ].includes('Notizbuch')) {
+                this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-' + this.poemInformation[this.i][4].split(' ')[1];
+              } else if (this.poemInformation[ this.i ][ 4 ].includes('manuskripte')) {
+                this.poemInformation[ this.i ][ 11 ] = '/manuskripte/manuskripte-' + this.poemInformation[this.i][4].split(' ')[1];
+              } else if (this.poemInformation[ this.i ][ 4 ].includes('Typoskript')) {
+                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-' + this.poemInformation[this.i][4].split(' ')[1];
+              } else {
+                if (this.poemInformation[this.i][4] === 'GESICHT IM MITTAG 1950') {
+                  this.poemInformation[this.i][11] = '/drucke/gesicht-im-mittag';
+                } else if (this.poemInformation[this.i][4] === 'Die verwandelten Schiffe 1957') {
+                  this.poemInformation[this.i][11] = '/drucke/die-verwandelten-schiffe';
+                } else if (this.poemInformation[this.i][4] === 'GEDICHTE 1960') {
+                  this.poemInformation[this.i][11] = '/drucke/gedichte';
+                } else if (this.poemInformation[this.i][4] === 'FLUSSUFER 1963') {
+                  this.poemInformation[this.i][11] = '/drucke/flussufer';
+                } else if (this.poemInformation[this.i][4] === 'Reduktionen 1981') {
+                  this.poemInformation[this.i][11] = '/drucke/gesicht-im-mittag';
+                } else if (this.poemInformation[this.i][4] === 'Reduktionen 1981') {
+                  this.poemInformation[this.i][11] = '/drucke/gesicht-im-mittag';
+                } else if (this.poemInformation[this.i][4] === 'Hochdeutsche Gedichte 1985') {
+                  this.poemInformation[this.i][11] = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
+                } else if (this.poemInformation[this.i][4] === 'Alemannische Gedichte 1985') {
+                  this.poemInformation[this.i][11] = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+                } else {
+                  this.poemInformation[this.i][11] = '/drucke/verstreutes';
+                }
+              }
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;

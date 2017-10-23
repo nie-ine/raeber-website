@@ -37,7 +37,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
         let seqnum: number;
         this.pages.push({'diplIRI': null, 'pageIRI': null, 'pagenumber': null, 'picData': null, 'origName': null});
 
-        this.sub = this.http.get(globalSearchVariableService.API_URL + /resources/
+        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/'
           + encodeURIComponent(this.diplomaticIRIs[i]))
           .map(results => results.json())
           .subscribe(res => {

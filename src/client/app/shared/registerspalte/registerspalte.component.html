@@ -7,7 +7,7 @@
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of poems; let i = index"
        [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p.title,p.iri)"
-       (click)="goToOtherFassung('/' + konvolutTitle + '/' + produceFassungsLink(p.title,p.iri) + '###' + p.title)"
+       (click)="goToOtherFassung.emit('/' + konvolutTitle + '/' + produceFassungsLink(p.title,p.iri))"
        routerLinkActive="active">
 
       <h5 md-line>{{ p.title }}</h5>

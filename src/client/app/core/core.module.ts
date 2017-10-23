@@ -4,7 +4,6 @@
 
 import { NgModule } from '@angular/core';
 
-import { FusszeileComponent } from './fusszeile.component';
 import { KopfzeileComponent } from './kopfzeile.component';
 import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { CommonModule } from '@angular/common';
@@ -39,7 +38,6 @@ import { CoreRoutingModule } from './core-routing.module';
      ])*/
   ],
   declarations: [
-    FusszeileComponent,
     KopfzeileComponent,
     HaupttextComponent,
     NavigationsleisteComponent,
@@ -48,7 +46,6 @@ import { CoreRoutingModule } from './core-routing.module';
   exports: [
     KopfzeileComponent,
     HaupttextComponent,
-    FusszeileComponent
   ]
 })
 export class CoreModule {

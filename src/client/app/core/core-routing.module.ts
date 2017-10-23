@@ -12,6 +12,7 @@ import { SucheModule } from '../suche/suche.module';
 import { PdfNotizbuecherComponent } from '../statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from '../statisch/pdf-synopsen.component';
 import { PageNotFoundComponent } from './404.component';
+import { HomepageWithInitTextComponent } from '../statisch/homepagewithinittext.component';
 
 @NgModule({
   imports: [
@@ -25,8 +26,7 @@ import { PageNotFoundComponent } from './404.component';
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
-      { path: 'start', component: HomepageComponent },
-      { path: '', redirectTo: '/start', pathMatch: 'full' },
+      { path: '', redirectTo: '/init', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ])
   ],
@@ -38,6 +38,7 @@ export class CoreRoutingModule {
 export const routingComponents = [
   AnleitungComponent,
   HomepageComponent,
+  HomepageWithInitTextComponent,
   ImpressumComponent,
   LebensdatenComponent,
   PageNotFoundComponent,

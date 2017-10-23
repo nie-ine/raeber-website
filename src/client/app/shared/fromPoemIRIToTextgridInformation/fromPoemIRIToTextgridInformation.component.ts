@@ -10,8 +10,10 @@ import { Router } from '@angular/router';
   templateUrl: 'fromPoemIRIToTextgridInformation.component.html'
 })
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
+  @Input() contentType: string;
   @Input() poemIRIArray: Array<any>;
   @Input() konvolutIRI: string;
+  @Input() workIRI: string;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
   responseArray: Array<any>;
   i: number;
@@ -23,7 +25,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+    if(this.konvolutIRI || this.workIRI) console.log('Konvoluttitle to get Poems with Cache ' +
+      this.konvolutIRI + 'Work iri: ' + this.workIRI);
     this.poemInformation = [];
     this.countRequests = 0;
     //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
@@ -39,55 +42,106 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
 //}
 
 performQuery() {
-
-  return this.http.get
-  (
-    globalSearchVariableService.API_URL +
-    globalSearchVariableService.extendedSearch +
-    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-    '&compop=EQ' +
-    '&searchval=' +
-    encodeURIComponent(this.konvolutIRI) +
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-    '&compop=!EQ' +
-    '&searchval=123455666'+
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-    '&compop=!EQ' +
-    '&searchval=GREGORIAN:2217-01-27' +
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-    '&compop=!EQ' +
-    '&searchval=123455666'+
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-    '&compop=!EQ' +
-    '&searchval=123455666' +
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-    '&compop=!EQ' +
-    '&searchval=123455666'+
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-    '&compop=!EQ' +
-    '&searchval=123455666' +
-    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-    '&compop=!EQ' +
-    '&searchval=123455666' +
-    '&show_nrows=2000'
-  )
-    .map(
-      (lambda: Response) => {
-        const data = lambda.json();
-        console.log(data.subjects[ 0 ]);
-        for(this.i = 0; this.i < data.subjects.length; this.i ++) {
-          this.poemInformation[ this.i ] = [];
-          this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
-          this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
-          this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
-          this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
-        }
-        this.sendPoemInformationBack.emit(this.poemInformation);
-        return null;
-      }
-    )
-    .subscribe(response => this.responseArray = response);
+    if(this.contentType === 'synopse') {
+      this.workIRI = 'http://rdfh.ch/kuno-raeber/' + this.workIRI;
+      return this.http.get
+      (
+        globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+        '&compop=EQ' +
+        '&searchval=' +
+        encodeURIComponent(this.workIRI) +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        /*'&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+        '&compop=!EQ' +
+        '&searchval=GREGORIAN:2217-01-27' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +*/
+        '&show_nrows=2000'
+      )
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            console.log(data.subjects[ 0 ]);
+            for(this.i = 0; this.i < data.subjects.length; this.i ++) {
+              this.poemInformation[ this.i ] = [];
+              this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
+            }
+            this.sendPoemInformationBack.emit(this.poemInformation);
+            return null;
+          }
+        )
+        .subscribe(response => this.responseArray = response);
+    } else {
+      return this.http.get
+      (
+        globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+        '&compop=EQ' +
+        '&searchval=' +
+        encodeURIComponent(this.konvolutIRI) +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+        '&compop=!EQ' +
+        '&searchval=GREGORIAN:2217-01-27' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&show_nrows=2000'
+      )
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            console.log(data.subjects[ 0 ]);
+            for(this.i = 0; this.i < data.subjects.length; this.i ++) {
+              this.poemInformation[ this.i ] = [];
+              this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
+            }
+            this.sendPoemInformationBack.emit(this.poemInformation);
+            return null;
+          }
+        )
+        .subscribe(response => this.responseArray = response);
+    }
 }
 
   /*

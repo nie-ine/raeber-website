@@ -108,9 +108,7 @@ performQuery() {
                 } else if (this.poemInformation[this.i][4] === 'FLUSSUFER 1963') {
                   this.poemInformation[this.i][11] = '/drucke/flussufer';
                 } else if (this.poemInformation[this.i][4] === 'Reduktionen 1981') {
-                  this.poemInformation[this.i][11] = '/drucke/gesicht-im-mittag';
-                } else if (this.poemInformation[this.i][4] === 'Reduktionen 1981') {
-                  this.poemInformation[this.i][11] = '/drucke/gesicht-im-mittag';
+                  this.poemInformation[this.i][11] = '/drucke/reduktionen';
                 } else if (this.poemInformation[this.i][4] === 'Hochdeutsche Gedichte 1985') {
                   this.poemInformation[this.i][11] = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
                 } else if (this.poemInformation[this.i][4] === 'Alemannische Gedichte 1985') {

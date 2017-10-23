@@ -49,7 +49,7 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log('Registerspalte ' + this.konvolutIRI);
+    //console.log('Registerspalte ' + this.konvolutIRI);
     // infos for title and routing
     if (this.konvolutIRI !== undefined) {
       this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))

@@ -9,7 +9,6 @@ import { KopfzeileComponent } from './kopfzeile.component';
 import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { CommonModule } from '@angular/common';
 import { HaupttextComponent } from './haupttext.component';
-import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './404.component';
 import { KonvolutModule } from '../konvolut/konvolut.module';
 import { FassungModule } from '../fassung/fassung.module';
@@ -19,6 +18,7 @@ import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdInputModule } from '@angular/material';
+import { CoreRoutingModule } from './core-routing.module';
 
 @NgModule({
   imports: [
@@ -32,10 +32,11 @@ import { MdInputModule } from '@angular/material';
     FassungModule,
     MdInputModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot([
+    CoreRoutingModule
+    /*    RouterModule.forRoot([
       { path: '', redirectTo: '/start', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
-    ])
+     ])*/
   ],
   declarations: [
     FusszeileComponent,

@@ -58,7 +58,7 @@
 
                       <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
                         <md-card-content *ngIf="zeigeDiplomatisch">
-                          <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
+                          <rae-fassung-diplomatisch [diplomaticIRIs]="diplomaticIRIs"
                                                     (pictureReduced)="show_register = true;"
                                                     (pictureIncreased)="show_register = false;">
                           </rae-fassung-diplomatisch>
@@ -99,6 +99,7 @@
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
+                      (goToOtherFassung) = "goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"

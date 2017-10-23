@@ -27,6 +27,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
 
   pageIRIs: Array<string>;
+  diplomaticIRIs: Array<string>;
 
   poem_id: string;
   poemTitle: string;
@@ -65,11 +66,13 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.poem_resizable = true;
     this.show_register = true;
-
-    // TODO: Change when route definitions have been changed
     this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[ 1 ]);
     this.poem_id = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
+    this.updateView();
+  }
 
+  updateView() {
+    // TODO: Change when route definitions have been changed
     this.http
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
       .map(result => result.json())
@@ -79,6 +82,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(this.textEdition);
         this.pageIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isOnPage' ].values;
+        this.diplomaticIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription'].values;
         this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
         this.poemConvoluteType = res.resdata[ 'restype_name' ].split('#')[ 1 ];
         switch (this.poemConvoluteType) {
@@ -123,6 +127,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           }
         }
       });
+  }
+
+  goToOtherFassung(idOfFassung: string) {
+    this.poem_id = idOfFassung.split('---')[1];
+    console.log('Go to other Fassung: ' + idOfFassung.split('---')[1] );
+    this.updateView();
   }
 
   ngAfterViewChecked() {

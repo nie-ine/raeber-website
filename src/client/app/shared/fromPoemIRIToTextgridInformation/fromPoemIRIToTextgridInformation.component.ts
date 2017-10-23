@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() poemIRIArray: Array<any>;
+  @Input() konvolutIRI: string;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
   responseArray: Array<any>;
   i: number;
@@ -22,17 +23,74 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
 
   ngOnChanges() {
+    if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
     this.poemInformation = [];
     this.countRequests = 0;
-    if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
-      for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
+    //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+    //  for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
         //console.log('get information for this poem:');
-        this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
-        this.poemInformation[ this.i ] = [];
-      }
-    }
+        //this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
+    //    this.poemInformation[ this.i ] = [];
+    //  }
+    //}
+    this.performQuery();
   }
 
+//}
+
+performQuery() {
+
+  return this.http.get
+  (
+    globalSearchVariableService.API_URL +
+    globalSearchVariableService.extendedSearch +
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+    '&compop=EQ' +
+    '&searchval=' +
+    encodeURIComponent(this.konvolutIRI) +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
+    '&compop=!EQ' +
+    '&searchval=123455666'+
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+    '&compop=!EQ' +
+    '&searchval=GREGORIAN:2217-01-27' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
+    '&compop=!EQ' +
+    '&searchval=123455666'+
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+    '&compop=!EQ' +
+    '&searchval=123455666' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+    '&compop=!EQ' +
+    '&searchval=123455666'+
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+    '&compop=!EQ' +
+    '&searchval=123455666' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+    '&compop=!EQ' +
+    '&searchval=123455666' +
+    '&show_nrows=2000'
+  )
+    .map(
+      (lambda: Response) => {
+        const data = lambda.json();
+        console.log(data.subjects[ 0 ]);
+        for(this.i = 0; this.i < data.subjects.length; this.i ++) {
+          this.poemInformation[ this.i ] = [];
+          this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ];
+          this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ];
+          this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ];
+          this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ];
+        }
+        this.sendPoemInformationBack.emit(this.poemInformation);
+        return null;
+      }
+    )
+    .subscribe(response => this.responseArray = response);
+}
+
+  /*
   getTitleAndDate(IRI: string, i: number) {
     //console.log('get Title and Date' + IRI);
     this.performQuery(IRI, i);
@@ -48,7 +106,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log(data);
+          //console.log(data); */
 
           /*
           Fields in poemInformation
@@ -63,7 +121,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           8: seqnum of poem for sorting as in convolute
           9: Array: synopse IRI
            */
-
+/*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
           this.poemInformation[ i ][ 1 ] = data.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1;
           this.poemInformation[ i ][ 3 ] = queryPart;
@@ -189,5 +247,5 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         this.poemInformation[ i ][ 6 ] =
           '/' + convType + '/' + res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ][ 'utf8str' ];
       });
-  }
+  } */
 }

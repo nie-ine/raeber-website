@@ -51,19 +51,6 @@ export class KonvolutComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     this.viewMode = 'grid';
 
-    window.onscroll = () => {
-      let windowHeight = 'innerHeight' in window ? window.innerHeight
-        : document.documentElement.offsetHeight;
-      let body = document.body, html = document.documentElement;
-      let docHeight = Math.max(body.scrollHeight,
-        body.offsetHeight, html.clientHeight,
-        html.scrollHeight, html.offsetHeight);
-      let windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        this.loadMore();
-      }
-    };
-
   }
 
   ngOnInit() {
@@ -118,7 +105,7 @@ export class KonvolutComponent implements OnInit {
    * Start search in convolute and enter search result mode
    * @param {FormGroup} fg Search parameters
    */
-  searchInConvolute(fg: FormGroup) {
+  searchInConvolute(fg: any) {
     //console.log(fg.searchTerm);
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
     this.searchTermArray = fg.searchTerm; // TODO: Variable takes search term

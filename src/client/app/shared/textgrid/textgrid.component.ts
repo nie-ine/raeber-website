@@ -157,8 +157,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
 
   ngAfterViewChecked() {
-    if (this.poemsInGrid !== undefined && this.router.url.split('/')[ 1 ] === 'synopsen'
-      && this.poemsInGrid.every(x => x[ 6 ] !== undefined && x[ 7 ] !== undefined)) {
+    if (this.poemsInGrid !== undefined && this.router.url.split('/')[ 1 ] === 'synopsen') {
       this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
     }
     this.cdr.detectChanges();

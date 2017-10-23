@@ -63,7 +63,7 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    console.log('Update Poem Information');
+    //console.log('Update Poem Information');
     //console.log(poemInformation[0]['11']);
     this.poems = [];
 
@@ -79,7 +79,7 @@ export class RegisterspalteComponent implements OnChanges {
     }
     this.nrOfPoems = poemInformation.length;
 
-    console.log(this.poems);
+    //console.log(this.poems);
 
     this.sortingType = 'alphabetic';
   }
@@ -90,8 +90,10 @@ export class RegisterspalteComponent implements OnChanges {
 
   sortAlphabetically() {
     this.sortingType = 'alphabetic';
+    this.poemsOld = [];
     this.poemsOld = this.poems;
-    for (let i = 0; i < this.poems.length; i++) {
+    this.poems = [];
+    for (let i = 0; i < this.poemsOld.length; i++) {
       //console.log('Alphabetic index: ' + this.poemsOld[i].alphabeticIndex + ' PoemTitle: ' + this.poemsOld[i].title);
       this.poems[this.poemsOld[i].alphabeticIndex - 1] = this.poemsOld[i];
     }
@@ -111,9 +113,13 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   sortChronologically() {
+    //console.log('Sort chronologically');
     this.sortingType = 'chronologic';
+    //console.log(this.poems);
+    this.poemsOld = [];
     this.poemsOld = this.poems;
-    for (let i = 0; i < this.poems.length; i++) {
+    this.poems = [];
+    for (let i = 0; i < this.poemsOld.length; i++) {
       //console.log('chronological index: ' + this.poemsOld[i].reihe);
       this.poems[this.poemsOld[i].reihe - 1] = this.poemsOld[i];
     }

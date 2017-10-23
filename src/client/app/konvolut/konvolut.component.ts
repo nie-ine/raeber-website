@@ -38,6 +38,7 @@ export class KonvolutComponent implements OnInit {
   poemIRIArray: Array<any>;
   konvolutType: string;
   resetPoems: string;
+  konvolutView = true;
 
   viewMode: string;
   konvolut_type: string;
@@ -78,17 +79,17 @@ export class KonvolutComponent implements OnInit {
 
   updateKonvolutTitle(konvolutTitle: string) {
     this.konvolutTitle = konvolutTitle;
-    console.log('Konvolut - Titel: ' + this.konvolutTitle);
+    //console.log('Konvolut - Titel: ' + this.konvolutTitle);
   }
 
   updateKonvolutIRI(konvolutIRI: string) {
     this.IRI = konvolutIRI;
-    console.log('IRI: ' + this.IRI);
+    //console.log('IRI: ' + this.IRI);
   }
 
   updateKonvolutBild(konvolutBild: string) {
     this.konvolutBild = konvolutBild;
-    console.log('Konvolutbild: ' + this.konvolutBild);
+    //console.log('Konvolutbild: ' + this.konvolutBild);
   }
 
   /**
@@ -151,7 +152,7 @@ export class KonvolutComponent implements OnInit {
   }
 
   updateKonvolutType(konvolutType: string) {
-    console.log('KonvolutType: ' + konvolutType);
+    //console.log('KonvolutType: ' + konvolutType);
     this.konvolutType = konvolutType;
   }
 

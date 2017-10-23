@@ -42,6 +42,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   j: number;
   searchActivated = false;
   searchInKonvolut = false;
+  poemsOld: Array<any>;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -49,6 +50,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() filterNotebookFlag = false;
   @Input() filterManuscriptFlag = false;
   @Input() filterTyposcriptFlag = false;
+  @Input() konvolutView: boolean;
 
   /**
    * Orders an array by date (ascending)
@@ -105,19 +107,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.resetPoems === 'reset') {
-      this.poemsInGrid = [];
-    }
-    for (let propName in changes) {
-      if (propName === 'poemsInGrid') {
-        let chng = changes[ propName ];
-        if (!chng.isFirstChange()) {
-          if (this.poemsInGrid) {
-            this.poemsInGrid = chng.currentValue;
-          }
-        }
-      }
-    }
+
     if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
       this.searchAndFilterInTextgrid();
       this.searchInKonvolut = true;

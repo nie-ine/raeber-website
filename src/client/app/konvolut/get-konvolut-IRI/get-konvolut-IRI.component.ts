@@ -66,7 +66,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
         '&searchval=Manuskripte%201979-83');
     } else if (this.konvolut_id === 'karten-1984') {
       this.performQuery(
-        '%23PoemManuscriptConvolute' +
+        '%23PoemPostcardConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
         '&searchval=Karten%201984');

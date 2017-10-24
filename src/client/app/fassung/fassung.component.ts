@@ -163,6 +163,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .map(result => result.json())
       .subscribe(res => {
           const otherPoemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+        // TODO: change this.konvolutTitel to the right konvolut
         this.otherWorkExpressions[ index ] = '/' + this.konvolutTitel + '/' +
           FassungComponent.produceFassungsLink(otherPoemTitle, poemIri) +
             '###' + otherPoemTitle;

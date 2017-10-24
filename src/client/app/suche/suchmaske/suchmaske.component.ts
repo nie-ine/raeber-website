@@ -28,8 +28,9 @@ export class SuchmaskeComponent implements OnChanges {
   // Form model which contains all search parameters
   suchmenuForm: FormGroup;
   @Input() sidenavOpened: boolean;
-  @Input() searchTerm: string;
+  @Input() searchTermArray: Array<string>;
   @Input() poemsInGrid: string;
+  @Input() startSearchImmediately: boolean;
 
   /*
   Options for extension of fulltext search
@@ -61,7 +62,9 @@ export class SuchmaskeComponent implements OnChanges {
   ngOnChanges() {
     console.log('Data arrived back in Suchmaske: ');
     console.log(this.poemsInGrid);
+    console.log(this.searchTermArray);
     this.cdr.detectChanges();
+
   }
 
   /**

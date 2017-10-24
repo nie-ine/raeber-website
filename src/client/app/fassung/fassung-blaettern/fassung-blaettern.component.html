@@ -2,13 +2,13 @@
   <span class="itemNavigationTitle">Im Konvolut blättern:</span>
 
   <button md-button title="vorangehender Text" *ngIf="idOfPrev"
-          [routerLink]="['../' + idOfPrev]">
+          [routerLink]="[idOfPrev]" (click)="goToPrevFassung()" >
     <md-icon>navigate_before</md-icon>
     {{ titleOfPrev }}
   </button>
 
   <button md-button title="nächster Text" *ngIf="idOfNext"
-          [routerLink]="['../' + idOfNext]">
+          [routerLink]="[idOfNext]" (click)="goToNextFassung()">
     <md-icon>navigate_next</md-icon>
     {{ titleOfNext }}
   </button>

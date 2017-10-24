@@ -1,21 +1,28 @@
-<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid', 'rae-poem-list-cols': viewMode == 'cols'}">
+<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
 
-  <div class="rae-poem-container" *ngFor="let p of poemsInGrid; let i = index" [ngStyle]="{ 'width': columns }">
+  <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
+       [ngStyle]="{ 'width': columns }" >
 
-    <md-card class="rae-poem-card">
+    <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
 
       <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
 
       <md-card-title #poemTitle>
-        <a class="item" [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active" [innerHTML]="highlight(p[0],searchTerm)">
+        <a class="item" *ngIf="contentType == 'konvolut'"
+           [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
+           [innerHTML]="highlight(p[0],searchTermArray)">
+        </a>
+        <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche' "
+          [routerLink]="'/' + p[7] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
+           [innerHTML]="highlight(p[0],searchTermArray)">
         </a>
       </md-card-title>
 
       <md-card-content
         [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
         [ngStyle]="{'height': rahmen ? 'calc(20em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  poemText.offsetHeight+'px', 'overflow-y': rahmen ? 'auto' : 'visible'}">
-        <div class="rae-poem" [innerHTML]="highlight(p[2],searchTerm)">
+        <div class="rae-poem" [innerHTML]="highlight(p[2],searchTermArray)" #poemText>
         </div>
       </md-card-content>
 
@@ -25,13 +32,13 @@
         <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
           <span>Synopse:</span>
           <ul class="catItemTags">
-            <li *ngFor="let s of p[5]; let j = index">
+            <li *ngFor="let s of p[9]; let j = index">
               <rae-textgrid-synopsenlink [workIRI]="s"></rae-textgrid-synopsenlink>
             </li>
           </ul>
         </div>
         <div class="catItemTagsBlock" *ngIf="contentType == 'synopse'">
-          <span>Link zu Konvolut</span><!-- TODO link von Synopse zu Konvolut -->
+          <a [routerLink]="p[6]" routerLinkActive="active">{{ p[7] }}</a>
         </div>
       </md-card-footer>
     </md-card>

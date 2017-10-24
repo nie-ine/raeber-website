@@ -5,6 +5,7 @@
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+declare var $ :any;
 
 @Component({
   moduleId: module.id,
@@ -16,8 +17,10 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
 
   @Input() gewaehlteSchicht: string;
   @Input() textIRI: string;
-  @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input() textIsMovable: boolean;
 
+  @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() textIsMovableChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   farbeNeutral = '#6e6e6e';
   farbeMarkierung = '#d00501';
@@ -25,9 +28,6 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   farbeZeilennummer = '#FF0000';
   farbeLetzte = '#F00000';
   farbeErste = '#800000';
-
-  textIsMovable: boolean = false;
-  // TODO: herausfinden wie das geht
 
   text: string;
 
@@ -60,7 +60,7 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     if(this.textIRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
         .map(response => response.json())
-        .subscribe(res =>{
+        .subscribe(res => {
           this.text = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
           this.updateSchichten();
         });
@@ -284,4 +284,22 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
       }
     }
   }
+
+  toggleDraggable() {
+    this.textIsMovable = !this.textIsMovable;
+    this.textIsMovableChange.emit(this.textIsMovable);
+
+    if (this.textIsMovable) {
+      $('.rae-diplomatic').draggable({disabled: false, cursor: 'move'});
+    } else {
+      $('.rae-diplomatic').draggable({disabled: true, cursor: 'auto'});
+    }
+    /*$('.umschrift').toggle(function() {
+        jQuery(".umschrift").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+      },
+      function() {
+        jQuery(".umschrift").draggable({disabled: true}).css( {cursor:"auto"});
+      });*/
+  }
+
 }

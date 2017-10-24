@@ -1,8 +1,6 @@
-import { Component, Input, Output, OnChanges, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
-import { Config } from '../../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +12,7 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
   @Input() konvolutType: string;
   @Output() sendPoemIRIsBack: EventEmitter<any> = new EventEmitter<any>();
   @Output() signalizeThatNoRequestDefined: EventEmitter<any> = new EventEmitter<any>();
-  responseArray: Array<any>
+  responseArray: Array<any>;
   i: number;
   poemIRIArray: Array<any>;
   rightProperty: string;
@@ -24,11 +22,10 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
   }
 
 
-
   ngOnChanges() {
     console.log('Get PoemIRIArray ' + this.konvolutIRI);
     this.poemIRIArray = [];
-    if(this.konvolutIRI !== undefined) {
+    if (this.konvolutIRI !== undefined) {
       this.performQuery(this.konvolutIRI);
     } else {
       this.signalizeThatNoRequestDefined.emit(undefined);
@@ -46,14 +43,14 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           for(this.i = 0; this.i < data.nodes.length; this.i ++) {
             if(
-              data.nodes[this.i].resourceClassIri === this.rightProperty
+              data.nodes[ this.i ].resourceClassIri === this.rightProperty
             ) {
               this.poemIRIArray[this.poemIRIArray.length]=data.nodes[this.i].resourceIri;
-              console.log(data.nodes[this.i].resourceClassIri.split('#')[1]);
-              console.log(data.nodes[this.i].resourceClassLabel);
+              //console.log(data.nodes[this.i].resourceClassIri.split('#')[1]);
+              //console.log(data.nodes[ this.i ].resourceClassLabel);
             }
           }
           this.sendPoemIRIsBack.emit(this.poemIRIArray);
@@ -62,6 +59,7 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
       )
       .subscribe(response => this.responseArray = response, error => console.log('Error: ', error));
   }
+
   getRightProperty(konvolutType: string) {
     console.log(konvolutType);
     if (konvolutType === 'poem notebook') {

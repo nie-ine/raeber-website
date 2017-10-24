@@ -7,17 +7,34 @@
             <div class="rt-block">
               <div id="rt-mainbody">
                 <div class="component-content">
-                  <h1>Synopse ({{ nHits }})</h1>
-                  <rae-synopse-werkzeugleiste #werkzeugleiste [(showText)]="showText"
+                  <h1>Synopse ({{results}})</h1>
+                  <rae-synopse-werkzeugleiste #werkzeugleiste
+                                              [(showText)]="showText"
+                                              [gridHeight]="gridHeight"
                                               (vergroessereText)="textgrid.vergroessereFeld()"
                                               (verkleinereText)="textgrid.verkleinereFeld()"
-                                              (cols)="setColumns($event)">
+                                              (cols)="setColumns($event)"
+                                              (resetHeight)="textgrid.resetField()"
+                                              (firstLastState)="setFilterFirstLast()"
+                                              (showNotebooksState)="toggleShowNotebooks()"
+                                              (showManuscriptsState)="toggleShowManuscripts()"
+                                              (showTyposcriptsState)="toggleShowTyposcripts()"
+                                              (showDuplicatesState)="toggleShowDuplicates()">
                   </rae-synopse-werkzeugleiste>
-                  <rae-textgrid #textgrid [showText]="showText"
-                                [poemsInGrid]="poemsInSynopse"
+                  <from-poem-iri-to-textgrid-information [poemIRIArray]="poemsIri"
+                                                         (sendPoemInformationBack)="updatePoemInformation($event)"></from-poem-iri-to-textgrid-information>
+                  <rae-textgrid #textgrid
+                                [poemsInGrid]="poems"
                                 [columns]="columns"
+                                [showText]="showText"
                                 contentType="synopse"
-                                [rahmen]="werkzeugleiste.rahmen">
+                                [rahmen]="werkzeugleiste.rahmen"
+                                [filterFirstLastFlag]="filterFirstLastFlag"
+                                [filterNotebookFlag]="!showNotebooks"
+                                [filterManuscriptFlag]="!showManuscripts"
+                                [filterTyposcriptFlag]="!showTyposcripts"
+                                [filterDuplicatesFlag]="!showDuplicates"
+                                (gridHeight)="setGridHeight($event)">
                   </rae-textgrid>
                 </div>
               </div>

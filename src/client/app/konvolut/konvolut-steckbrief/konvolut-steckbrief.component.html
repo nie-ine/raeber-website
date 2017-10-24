@@ -1,5 +1,9 @@
 <div class="convolute-description">
   <md-card>
+    <div *ngIf="konvolutBild" class="rae-konvolutbild">
+      <rae-konvolut-steckbrief-miniaturansicht [konvolutBild]="konvolutBild"></rae-konvolut-steckbrief-miniaturansicht>
+    </div>
+
     <div>
       <p *ngIf="publicationTitle">
         <span class="emphase">Titel:</span>
@@ -73,6 +77,8 @@
 
       <p *ngIf="comment">
         <span class="emphase">Kommentar:</span>
+        <!-- FIXME: Wert gibt im Moment lediglich den das Link-HTML-Element auf die Beschreibung zurück, anstatt den Inhalt zurückzugeben -->
+        <a (click)="openDialog()">Beschreibung</a>
         <span [innerHtml]="comment"></span>
       </p>
 
@@ -87,8 +93,5 @@
       </p>
     </div>
 
-    <div *ngIf="konvolutBild" style="position: absolute; top: 20px; right: 20px;">
-      <img [src]="konvolutBild" />
-    </div>
   </md-card>
 </div>

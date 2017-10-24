@@ -46,6 +46,7 @@
   display: none;
 }
 
-.highlightText {
-  background: yellow;
+.signalizeSearch {
+  border-style: solid;
+  border-color: #fffe9f;
 }

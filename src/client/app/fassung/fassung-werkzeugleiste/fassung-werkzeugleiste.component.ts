@@ -3,6 +3,8 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FassungHilfeComponent } from '../fassung-hilfe/fassung-hilfe.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -20,13 +22,18 @@ export class FassungWerkzeugleisteComponent {
   @Input() idOfPrev: string;
   @Input() idOfNext: string;
 
+  constructor(public dialog: MdDialog) {}
+
   neuladen() {
     window.location.reload();
   }
 
-  hilfe() {
-    // TODO
-    console.log('Hilfetext ergaenzen');
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(FassungHilfeComponent, {
+        width: '700px',
+        height: '95%'
+      });
   }
 
 }

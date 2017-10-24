@@ -1,4 +1,4 @@
- <div class="rae-registerspalte-list">
+<div class="rae-registerspalte-list">
   <h5>{{ konvolutTitle }}<br/>(Total: {{ nrOfPoems }})</h5>
   <md-button-toggle-group [(ngModel)]=sortingType>
     <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
@@ -17,13 +17,14 @@
         {{ p.text }}
       </p>
 
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='notizbuecher'"
+      <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
+      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
-        {{ p.textdate }}
+        {{ formatDate(p.date) }}
       </p>
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='manuskripte'"
+      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
-        {{ p.textdate }}
+        {{ formatDate(p.date) }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>
@@ -43,12 +44,15 @@
 </div>
 
 <from-poem-iri-to-textgrid-information
+  [konvolutIRI]="konvolutIRI"
   [poemIRIArray]="poemIRIArray"
   (sendPoemInformationBack)="updatePoemInformation($event)"
 ></from-poem-iri-to-textgrid-information>
 
+<!--
 <from-konvolut-iri-to-poem-iris
   [konvolutIRI]="konvolutIRI"
   [konvolutType]="knoraKonvolutType"
   (sendPoemIRIsBack)="createPoemIRIList($event)"
 ></from-konvolut-iri-to-poem-iris>
+-->

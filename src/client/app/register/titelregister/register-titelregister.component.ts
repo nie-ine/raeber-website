@@ -108,17 +108,19 @@ export class RegisterTitelregisterComponent implements OnChanges {
     }
   }
 
-  updatePoemInformation(poemInformation: Array<any>, k: string, i:number) {
-    console.log('PoemInformation[' + i +']: ' + k );
+  updatePoemInformation(poemInformation: Array<any>, i:number) {
+    console.log('PoemInformation[' + i +']');
     this.konvolutPoems[i]=[];
     if (poemInformation) {
       for (let j = 0; j < poemInformation.length; j++) {
-        this.konvolutPoems[i].push({
-          'titel': poemInformation[j][0],
-          'datum': poemInformation[j][1],
-          'iri': poemInformation[j][3],
-          'konvoluttitel': k
-        });
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ] = [];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].title = poemInformation[ i ][ 0 ];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].date = poemInformation[ i ][ 1 ];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].text = this.removeHtml(poemInformation[ i ][ 2 ]);
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].iri = poemInformation[ i ][ 3 ];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].reihe = poemInformation[ i ][ 8 ];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].alphabeticIndex = poemInformation[ i ][ 11 ];
+        this.konvolutPoems[i][ poemInformation[j]['11'] - 1 ].dateIndex = poemInformation[ i ][ 10 ];
       }
     }
     this.sortAlphabetically(i);

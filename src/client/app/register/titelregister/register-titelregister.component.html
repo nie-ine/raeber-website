@@ -24,7 +24,7 @@
   </md-nav-list>
 </div>
 
-<ng-container *ngFor="let k of konvolutTitel; let i = index">
+<!--<ng-container *ngFor="let k of konvolutTitel; let i = index">
   <ng-container *ngIf="konvolutIRI[i] && knoraKonvolutType[i]">
     <from-konvolut-iri-to-poem-iris
       [konvolutIRI]="konvolutIRI[i]"
@@ -32,13 +32,14 @@
       (sendPoemIRIsBack)="createPoemIRIList($event, i)">
     </from-konvolut-iri-to-poem-iris>
   </ng-container>
-</ng-container>
+</ng-container>-->
 
 <ng-container *ngFor="let k of konvolutTitel; let i = index">
   <ng-container *ngIf="poemIRIArray[i]">
     <from-poem-iri-to-textgrid-information
+      [konvolutIRI]="konvolutIRI[i]"
       [poemIRIArray]="poemIRIArray[i]"
-      (sendPoemInformationBack)="updatePoemInformation($event, k, i)">
+      (sendPoemInformationBack)="updatePoemInformation($event, i)">
     </from-poem-iri-to-textgrid-information>
   </ng-container>
 </ng-container>

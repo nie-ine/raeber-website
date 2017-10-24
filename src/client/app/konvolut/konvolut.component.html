@@ -64,7 +64,10 @@
                   <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
                     <ngb-panel id="register" title="Register">
                       <ng-template ngbPanelContent>
-                        <rae-registerspalte [konvolutIRI]="IRI"></rae-registerspalte>
+                        <rae-registerspalte
+                          [konvolutIRI]="IRI"
+                          [poemsFromKonvolut]="poems"
+                          [konvolutView]="konvolutView"></rae-registerspalte>
                       </ng-template>
                     </ngb-panel>
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">

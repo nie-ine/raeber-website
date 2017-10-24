@@ -23,17 +23,14 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    //if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
-    this.poemInformation = [];
-    this.countRequests = 0;
-    //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
-    //  for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
-        //console.log('get information for this poem:');
-        //this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
-    //    this.poemInformation[ this.i ] = [];
-    //  }
-    //}
-    this.performQuery();
+
+    if(this.konvolutIRI) {
+      console.log('KonvolutIRI: ' + this.konvolutIRI);
+      this.poemInformation = [];
+      this.countRequests = 0;
+
+      this.performQuery();
+    }
   }
 
 //}
@@ -81,7 +78,7 @@ performQuery() {
     .map(
       (lambda: Response) => {
         const data = lambda.json();
-        //console.log(data.subjects[ 0 ]);
+        console.log(data.subjects);
         for(this.i = 0; this.i < data.subjects.length; this.i ++) {
           this.poemInformation[ this.i ] = [];
           this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 9 ];

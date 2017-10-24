@@ -107,9 +107,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-    console.log('Start ordering poems with seqnum');
-
     if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
       this.searchAndFilterInTextgrid();
       this.searchInKonvolut = true;

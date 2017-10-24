@@ -6,37 +6,37 @@
   </md-button-toggle-group>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of poems; let i = index"
-       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p.title,p.iri)"
+       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p[0],p[3])"
        routerLinkActive="active">
 
-      <h5 md-line>{{ p.title }}</h5>
+      <h5 md-line>{{ p[0] }}</h5>
 
       <p *ngIf="sortingType=='alphabetic'"
          md-line>
         <!-- incipit -->
-        {{ p.text }}
+        {{ p[2] }}
       </p>
 
       <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
-      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='notizbuecher'"
+      <p *ngIf="p[1] && sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
-        {{ formatDate(p.date) }}
+        {{ formatDate(p[1]) }}
       </p>
-      <p *ngIf="p['date'] && sortingType=='chronologic' && konvolutType=='manuskripte'"
+      <p *ngIf="p[1] && sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
-        {{ formatDate(p.date) }}
+        {{ formatDate(p[1]) }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>
-        {{ p.text }}
+        {{ p[2] }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='drucke'"
          md-line>
-        {{ p.text }}
+        {{ p[2] }}
       </p>
       <p *ngIf="sortingType=='chronologic' && konvolutType=='material'"
          md-line>
-        {{ p.text }}
+        {{ p[2] }}
       </p>
 
     </a>
@@ -44,7 +44,7 @@
 </div>
 
 <from-poem-iri-to-textgrid-information
-  [konvolutIRI]="konvolutIRI"
+  [konvolutIRI]="konvolutIRItoStartownRequest"
   [poemIRIArray]="poemIRIArray"
   (sendPoemInformationBack)="updatePoemInformation($event)"
 ></from-poem-iri-to-textgrid-information>

@@ -21,7 +21,10 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 export class RegisterspalteComponent implements OnChanges {
 
   @Input() konvolutIRI: string;
+  @Input() poemsFromKonvolut: Array<any>;
+  @Input() konvolutView: boolean;
 
+  konvolutIRItoStartownRequest: string;
   poems: Array<any>;
   poemsOld: Array<any>;
   poemIRIArray: Array<any>;
@@ -49,7 +52,16 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    //console.log('Registerspalte ' + this.konvolutIRI);
+    if(this.konvolutView) {
+      //console.log('dont do request again');
+      this.updatePoemInformation(this.poemsFromKonvolut);
+    } else {
+      if(this.konvolutIRI) {
+        this.konvolutIRItoStartownRequest = this.konvolutIRI;
+        console.log('start own request with konvolut - IRI: ' + this.konvolutIRI);
+      }
+    }
+    //console.log(this.poemsFromKonvolut);
     // infos for title and routing
     if (this.konvolutIRI !== undefined) {
       this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
@@ -63,22 +75,22 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    //console.log('Update Poem Information');
-    //console.log(poemInformation[0]['11']);
+    console.log('Update Poem Information');
+    console.log(poemInformation);
     this.poems = [];
-
-    for (let i = 0; i < poemInformation.length; i++) {
-      this.poems[ poemInformation[i]['11'] - 1 ] = [];
-      this.poems[ poemInformation[i]['11'] - 1 ].title = poemInformation[ i ][ 0 ];
-      this.poems[ poemInformation[i]['11'] - 1 ].date = poemInformation[ i ][ 1 ];
-      this.poems[ poemInformation[i]['11'] - 1 ].text = this.removeHtml(poemInformation[ i ][ 2 ]);
-      this.poems[ poemInformation[i]['11'] - 1 ].iri = poemInformation[ i ][ 3 ];
-      this.poems[ poemInformation[i]['11'] - 1 ].reihe = poemInformation[ i ][ 8 ];
-      this.poems[ poemInformation[i]['11'] - 1 ].alphabeticIndex = poemInformation[ i ][ 11 ];
-      this.poems[ poemInformation[i]['11'] - 1 ].dateIndex = poemInformation[ i ][ 10 ];
+    if(poemInformation) {
+      for (let i = 0; i < poemInformation.length; i++) {
+        this.poems[ poemInformation[i]['11'] - 1 ] = [];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 2 ] = this.removeHtml(poemInformation[ i ][ 2 ]);
+        this.poems[ poemInformation[i]['11'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
+        this.poems[ poemInformation[i]['11'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+      }
+      this.nrOfPoems = poemInformation.length;
     }
-    this.nrOfPoems = poemInformation.length;
-
     //console.log(this.poems);
 
     this.sortingType = 'alphabetic';
@@ -92,10 +104,9 @@ export class RegisterspalteComponent implements OnChanges {
     this.sortingType = 'alphabetic';
     this.poemsOld = [];
     this.poemsOld = this.poems;
-    this.poems = [];
     for (let i = 0; i < this.poemsOld.length; i++) {
       //console.log('Alphabetic index: ' + this.poemsOld[i].alphabeticIndex + ' PoemTitle: ' + this.poemsOld[i].title);
-      this.poems[this.poemsOld[i].alphabeticIndex - 1] = this.poemsOld[i];
+      this.poems[this.poemsOld[i][ 11 ] - 1] = this.poemsOld[i];
     }
     /*this.poems = this.poems.sort((n1, n2) => {
       const k1 = this.sortingService.germanAlphabeticalSortKey(n1.title);
@@ -118,10 +129,8 @@ export class RegisterspalteComponent implements OnChanges {
     //console.log(this.poems);
     this.poemsOld = [];
     this.poemsOld = this.poems;
-    this.poems = [];
     for (let i = 0; i < this.poemsOld.length; i++) {
-      //console.log('chronological index: ' + this.poemsOld[i].reihe);
-      this.poems[this.poemsOld[i].reihe - 1] = this.poemsOld[i];
+      this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
     }
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
     // TODO passe an entsprechende Datentypen der Felder an

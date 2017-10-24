@@ -58,7 +58,7 @@ export class RegisterspalteComponent implements OnChanges {
     } else {
       if(this.konvolutIRI) {
         this.konvolutIRItoStartownRequest = this.konvolutIRI;
-        console.log('start own request with konvolut - IRI: ' + this.konvolutIRI);
+        //console.log('start own request with konvolut - IRI: ' + this.konvolutIRI);
       }
     }
     //console.log(this.poemsFromKonvolut);
@@ -75,8 +75,8 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    console.log('Update Poem Information');
-    console.log(poemInformation);
+    //console.log('Update Poem Information');
+    //console.log(poemInformation);
     this.poems = [];
     if(poemInformation) {
       for (let i = 0; i < poemInformation.length; i++) {

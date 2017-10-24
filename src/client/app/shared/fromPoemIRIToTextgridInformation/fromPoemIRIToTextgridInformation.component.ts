@@ -30,7 +30,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       this.countRequests = 0;
       this.performQuery();
     } else {
-      if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+      //if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
       this.poemInformation = [];
       this.countRequests = 0;
       this.performQuery();
@@ -86,7 +86,7 @@ performQuery() {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data.subjects);
+            //console.log(data.subjects);
             for(this.i = 0; this.i < data.subjects.length; this.i ++) {
               this.poemInformation[ this.i ] = [];
               this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 7 ]; // poem title
@@ -164,21 +164,29 @@ performQuery() {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
         '&compop=!EQ' +
         '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
         '&show_nrows=2000'
       )
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data.subjects[ 0 ]);
+            //console.log(data.subjects[ 0 ]);
             for(this.i = 0; this.i < data.subjects.length; this.i ++) {
               this.poemInformation[ this.i ] = [];
-              this.poemInformation[ this.i ][ 0 ]= data.subjects[ this.i ].value[ 9 ];
-              this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 6 ];
-              this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 8 ];
-              this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 7 ];
-              this.poemInformation[ this.i ][ 11 ]= data.subjects[ this.i ].value[ 2 ];
-              this.poemInformation[ this.i ][ 10 ]= data.subjects[ this.i ].value[ 5 ];
-              this.poemInformation[ this.i ][ 8 ]= data.subjects[ this.i ].value[ 1 ];
+              this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 9 ];
+              this.poemInformation[ this.i ][ 1 ] = data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ][ 2 ] = data.subjects[ this.i ].value[ 8 ];
+              this.poemInformation[ this.i ][ 3 ] = data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ][ 11 ] = data.subjects[ this.i ].value[ 2 ];
+              this.poemInformation[ this.i ][ 10 ] = data.subjects[ this.i ].value[ 5 ];
+              this.poemInformation[ this.i ][ 8 ] = data.subjects[ this.i ].value[ 1 ];
+              this.poemInformation[ this.i ][ 9 ] = data.subjects[ this.i ].value[ 10 ];
+              this.poemInformation[ this.i ][ 12 ] = data.subjects[ this.i ].value[ 11 ];
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;
@@ -220,6 +228,7 @@ performQuery() {
           9: Array: synopse IRI
           10: Has Date Index
           11: Has alphabetic index
+          12: Has Synopsis Title
            */
 /*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

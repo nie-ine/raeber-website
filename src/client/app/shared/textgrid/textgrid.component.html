@@ -31,11 +31,7 @@
       <md-card-footer style="position: static;">
         <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
           <span>Synopse:</span>
-          <ul class="catItemTags">
-            <li *ngFor="let s of p[9]; let j = index">
-              <rae-textgrid-synopsenlink [workIRI]="s"></rae-textgrid-synopsenlink>
-            </li>
-          </ul>
+          <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
         </div>
         <div class="catItemTagsBlock" *ngIf="contentType == 'synopse'">
           <a [routerLink]="p[11]" routerLinkActive="active">{{ p[4] }}</a>

@@ -1,8 +1,10 @@
 <h3>Weitere Fassungen</h3>
 <ul>
-  <li *ngFor="let p of synopsenTags;">
-    <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active" *ngIf="p !== undefined">
+  <ng-container *ngFor="let p of synopsenTags;">
+  <li *ngIf="p !== undefined && !router.url.includes(p.split('###')[0].split('---')[1])">
+    <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active">
       {{p.split('###')[1]}}
     </a>
   </li>
+  </ng-container>
 </ul>

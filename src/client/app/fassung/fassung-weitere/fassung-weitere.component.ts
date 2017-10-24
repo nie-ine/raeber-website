@@ -3,6 +3,7 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,5 +12,8 @@ import { Component, Input } from '@angular/core';
 })
 export class FassungWeitereComponent {
   @Input() synopsenTags: any[] = [];
+
+  constructor(private router: Router) {
+  }
 
 }

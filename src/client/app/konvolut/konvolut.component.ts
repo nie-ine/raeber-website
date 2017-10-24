@@ -146,7 +146,7 @@ export class KonvolutComponent implements OnInit {
       this.poems[ poemInformation[i]['8'] - 1 ] = [];
       this.poems[ poemInformation[i]['8'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = this.removeHtml(poemInformation[ i ][ 2 ]);
+      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];

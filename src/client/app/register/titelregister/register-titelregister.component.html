@@ -1,24 +1,23 @@
-<ng-container *ngFor="let k of konvolutTitel; let i = index">
+<!--<ng-container *ngFor="let k of konvolutTitel; let i = index">
   <get-konvolut-iris
     [konvolutTitelText]="k"
     (sendKonvolutIRIBack)="updateKonvolutIRI($event, i)"
     (sendKonvolutTypeBack)="updateKonvolutType($event, i)">
   </get-konvolut-iris>
-</ng-container>
+</ng-container>-->
 
-<div *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'"
+<div *ngIf="selectedTab=='publizierte-gedichte' || selectedTab=='unpublizierte-gedichte' ||
+     selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'"
      class="rae-register-titelregister">
-  <h5 *ngIf="poems">
-    <!--{{selectedTab}}<br/>-->
-    (Total: {{ poems.length }})</h5>
+  <h5>Register (Total: {{ poems.length }})</h5>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of poems" [routerLink]="produceFassungsLink(p)">
-      <h5 md-line *ngIf="p && p['titel']">{{ p.titel }}</h5>
-      <p md-line *ngIf="p && p['datum']">
-        {{ formatDate(p.datum) }}
+      <h5 md-line>{{ p.value[4] }}</h5>
+      <p *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'" md-line>
+        {{ formatDate(p.value[2]) }}
       </p>
-      <p md-line *ngIf="p && p['konvolutTitel']">
-        {{ p.konvolutTitel }}
+      <p *ngIf="selectedTab=='nachlass-1979' || selectedTab=='nachlass-1979-1988'" md-line>
+        {{ p.value[1]}}
       </p>
     </a>
   </md-nav-list>
@@ -34,6 +33,7 @@
   </ng-container>
 </ng-container>-->
 
+<!--
 <ng-container *ngFor="let k of konvolutTitel; let i = index">
   <ng-container *ngIf="poemIRIArray[i]">
     <from-poem-iri-to-textgrid-information
@@ -43,3 +43,4 @@
     </from-poem-iri-to-textgrid-information>
   </ng-container>
 </ng-container>
+-->

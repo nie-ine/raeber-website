@@ -36,4 +36,16 @@ export class FassungWerkzeugleisteComponent {
       });
   }
 
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
+
+  goToNextFassung() {
+    console.log('Go to next Fassung');
+    this.goToOtherFassung.emit(this.idOfNext);
+  }
+
+  goToPrevFassung() {
+    console.log('Go to prev Fassung');
+    this.goToOtherFassung.emit(this.idOfPrev);
+  }
+
 }

@@ -9,10 +9,11 @@
 
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
+                    (goToOtherFassung) = "goToOtherFassung($event)"
+                    [idOfPrev]="prevPoem.split('###')[0]"
+                    [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
-                    [(poemResizable)]="poem_resizable"
-                    [idOfPrev]="prevPoem"
-                    [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                    [(poemResizable)]="poem_resizable"></rae-fassung-werkzeugleiste>
                 </div>
 
                 <div id="k2Container" class="itemView">

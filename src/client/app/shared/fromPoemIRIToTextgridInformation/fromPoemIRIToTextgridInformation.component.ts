@@ -58,26 +58,29 @@ performQuery() {
         '&searchval=' +
         encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIRI) +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666'+
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-        '&compop=!EQ' +
-        '&searchval=GREGORIAN:2217-01-27' +
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-        '&compop=!EQ' +
-        '&searchval=123455666'+
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666'+
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
+        '&compop=EXISTS' +
+        '&searchval=' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
+        '&compop=EXISTS' +
+        '&searchval=' +
+        /*'&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSameEditionAs' +
+        '&compop=EXISTS' +
+        '&searchval=' +*/
         '&show_nrows=2000'
       )
         .map(

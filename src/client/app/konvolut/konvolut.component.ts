@@ -38,6 +38,7 @@ export class KonvolutComponent implements OnInit {
   poemIRIArray: Array<any>;
   konvolutType: string;
   resetPoems: string;
+  konvolutView = true;
 
   viewMode: string;
   konvolut_type: string;
@@ -78,17 +79,17 @@ export class KonvolutComponent implements OnInit {
 
   updateKonvolutTitle(konvolutTitle: string) {
     this.konvolutTitle = konvolutTitle;
-    console.log('Konvolut - Titel: ' + this.konvolutTitle);
+    //console.log('Konvolut - Titel: ' + this.konvolutTitle);
   }
 
   updateKonvolutIRI(konvolutIRI: string) {
     this.IRI = konvolutIRI;
-    console.log('IRI: ' + this.IRI);
+    //console.log('IRI: ' + this.IRI);
   }
 
   updateKonvolutBild(konvolutBild: string) {
     this.konvolutBild = konvolutBild;
-    console.log('Konvolutbild: ' + this.konvolutBild);
+    //console.log('Konvolutbild: ' + this.konvolutBild);
   }
 
   /**
@@ -140,10 +141,17 @@ export class KonvolutComponent implements OnInit {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    //console.log(poemInformation);
-    this.poems = poemInformation;
-    this.resetPoems = undefined;
-    //console.log(this.poems);
+    this.poems = [];
+    for (let i = 0; i < poemInformation.length; i++) {
+      this.poems[ poemInformation[i]['8'] - 1 ] = [];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+    }
   }
 
   createPoemIRIList(poemIRIList: Array<any>) {
@@ -151,13 +159,22 @@ export class KonvolutComponent implements OnInit {
   }
 
   updateKonvolutType(konvolutType: string) {
-    console.log('KonvolutType: ' + konvolutType);
+    //console.log('KonvolutType: ' + konvolutType);
     this.konvolutType = konvolutType;
   }
 
   deletePoemsInCache(input: string) {
     console.log('ResetPoemArray');
     this.resetPoems = 'reset';
+  }
+
+  removeHtml(content: string) {
+    if (content !== undefined) {
+      return content.replace(/<[^>]+>/g, '');
+    } else {
+      return undefined;
+      //console.log('no value yet');
+    }
   }
 
 }

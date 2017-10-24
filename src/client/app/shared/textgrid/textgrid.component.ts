@@ -13,6 +13,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -57,11 +58,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @param {Array<any>} unsorted Array to be sorted
    * @returns {Array<any>} Sorted array
    */
+  // TODO implement also three functions: first is sort by date, second by convolute title, third by seqnum
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
-        if (x[ 1 ] > y[ 1 ]) {
+        if (x[ 1 ] + String(1000000 + x[ 5 ]) > y[ 1 ] + String(1000000 + x[ 5 ])) {
           return 1;
-        } else if (x[ 1 ] < [ 1 ]) {
+        } else if (x[ 1 ] + String(1000000 + x[ 5 ]) < x[ 1 ]+ String(1000000 + x[ 5 ])) {
           return -1;
         } else {
           return 0;
@@ -70,7 +72,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     );
   }
 
-  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService) {
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
   }
 
   /**
@@ -89,7 +91,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
-    return x[ 5 ] !== type;
+    return !x[ 4 ].includes(type);
   }
 
   /**
@@ -107,6 +109,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    //console.log(this.poemsInGrid);
     if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
       this.searchAndFilterInTextgrid();
       this.searchInKonvolut = true;
@@ -145,7 +148,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
 
   ngAfterViewChecked() {
-    if (this.poemsInGrid !== undefined && this.poemsInGrid.every(x => x[ 6 ] !== undefined && x[ 7 ] !== undefined)) {
+    if (this.poemsInGrid !== undefined && this.router.url.split('/')[ 1 ] === 'synopsen') {
       this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
     }
     this.cdr.detectChanges();
@@ -233,9 +236,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
-        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'PoemNote') : x)
-        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'HandwrittenPoem') : x)
-        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'TypewrittenPoem') : x);
+        .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
+        .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
+        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x);
     } else {
       return unfiltered;
     }

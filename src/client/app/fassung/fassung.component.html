@@ -94,7 +94,9 @@
 
                 <!-- Related items by tag -->
                 <div class="itemRelated">
-                  <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                  <rae-fassung-weitere
+                    (goOtherFassung) = "goToOtherFassung($event)"
+                    [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">

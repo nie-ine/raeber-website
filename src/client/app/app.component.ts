@@ -15,9 +15,6 @@ import './operators';
     <main id='rt-mainbody-surround'>
       <rae-haupttext></rae-haupttext>
     </main>
-    <footer id='rt-footer-surround'>
-      <rae-fusszeile></rae-fusszeile>
-    </footer>
   `,
   styles: [
       `:host {

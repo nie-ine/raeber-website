@@ -4,19 +4,27 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MdDialogModule } from '@angular/material';
 
 import { routingComponents, StatischRoutingModule } from './statisch-routing.module';
+import { InitKommentarComponent } from './initkommentar.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    MdDialogModule,
     StatischRoutingModule
   ],
   declarations: [
-    routingComponents
+    routingComponents,
+    InitKommentarComponent
+  ],
+  entryComponents: [
+    InitKommentarComponent
   ],
   exports: [
-    routingComponents
+    routingComponents,
+    InitKommentarComponent
   ]
 })
 export class StatischModule {

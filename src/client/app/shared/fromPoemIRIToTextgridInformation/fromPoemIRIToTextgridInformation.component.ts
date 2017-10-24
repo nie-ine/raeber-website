@@ -209,6 +209,8 @@ performQuery() {
           7: Convolute title
           8: seqnum of poem for sorting as in convolute
           9: Array: synopse IRI
+          10: Has Date Index
+          11: Has alphabetic index
            */
 /*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

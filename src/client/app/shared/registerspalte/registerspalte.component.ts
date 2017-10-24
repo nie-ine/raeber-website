@@ -104,9 +104,12 @@ export class RegisterspalteComponent implements OnChanges {
     this.sortingType = 'alphabetic';
     this.poemsOld = [];
     this.poemsOld = this.poems;
+    this.poems = [];
     for (let i = 0; i < this.poemsOld.length; i++) {
       //console.log('Alphabetic index: ' + this.poemsOld[i].alphabeticIndex + ' PoemTitle: ' + this.poemsOld[i].title);
-      this.poems[this.poemsOld[i][ 11 ] - 1] = this.poemsOld[i];
+      if(this.poemsOld[i]) {
+        this.poems[this.poemsOld[i][ '11' ] - 1] = this.poemsOld[i];
+      }
     }
     /*this.poems = this.poems.sort((n1, n2) => {
       const k1 = this.sortingService.germanAlphabeticalSortKey(n1.title);
@@ -129,9 +132,12 @@ export class RegisterspalteComponent implements OnChanges {
     //console.log(this.poems);
     this.poemsOld = [];
     this.poemsOld = this.poems;
+    this.poems = [];
+    //console.log(this.poems);
     for (let i = 0; i < this.poemsOld.length; i++) {
       this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
     }
+    //console.log(this.poems);
     // Sortiere nach obj_id bis eine interne Nummerierung da ist
     // TODO passe an entsprechende Datentypen der Felder an
     /*this.poems = this.poems.sort((n1, n2) => {
@@ -160,11 +166,15 @@ export class RegisterspalteComponent implements OnChanges {
     return this.dateFormatService.germanLongDate(date);
   }
 
-  produceFassungsLink(titel: string, iri: string) {
-    if (titel !== undefined && iri !== undefined) {
-      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+  produceFassungsLink(poem: Array<any>) {
+    if(poem) {
+      if (poem[0] !== undefined && poem[3] !== undefined) {
+        return poem[0].split('/')[ 0 ] + '---' + poem[3].split('raeber/')[ 1 ];
+      } else {
+        return 'Linkinformation has not arrived yet';
+      }
     } else {
-      return 'Linkinformation has not arrived yet';
+      return null;
     }
   }
 

@@ -6,35 +6,35 @@
   </md-button-toggle-group>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of poems; let i = index"
-       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p[0],p[3])"
+       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p)"
        routerLinkActive="active">
 
-      <h5 md-line>{{ p[0] }}</h5>
+      <h5 md-line *ngIf="p">{{ p[0] }}</h5>
 
-      <p *ngIf="sortingType=='alphabetic'"
+      <p *ngIf="sortingType=='alphabetic' && p"
          md-line>
         <!-- incipit -->
         {{ p[2] }}
       </p>
 
       <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
-      <p *ngIf="p[1] && sortingType=='chronologic' && konvolutType=='notizbuecher'"
+      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='notizbuecher'"
          md-line>
         {{ formatDate(p[1]) }}
       </p>
-      <p *ngIf="p[1] && sortingType=='chronologic' && konvolutType=='manuskripte'"
+      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='manuskripte'"
          md-line>
         {{ formatDate(p[1]) }}
       </p>
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='typoskripte'"
+      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='typoskripte'"
          md-line>
         {{ p[2] }}
       </p>
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='drucke'"
+      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='drucke'"
          md-line>
         {{ p[2] }}
       </p>
-      <p *ngIf="sortingType=='chronologic' && konvolutType=='material'"
+      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='material'"
          md-line>
         {{ p[2] }}
       </p>

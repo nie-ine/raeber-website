@@ -159,6 +159,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getOtherPoemsTitle(poemIri: string, index: number) {
+    this.otherWorkExpressions = [];
     this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
       .map(result => result.json())
       .subscribe(res => {

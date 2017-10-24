@@ -90,7 +90,8 @@ performQuery() {
               this.poemInformation[ this.i ][ 1 ]= data.subjects[ this.i ].value[ 4 ]; // poem creation date
               this.poemInformation[ this.i ][ 2 ]= data.subjects[ this.i ].value[ 6 ]; // poem text
               this.poemInformation[ this.i ][ 3 ]= data.subjects[ this.i ].value[ 5 ]; // poem IRI
-              this.poemInformation[ this.i ][ 4 ]= data.subjects[ this.i ].value[ 3 ]; // Convolute Title
+              this.poemInformation[ this.i ][ 4 ]= data.subjects[ this.i ].value[ 3 ]; // convolute Title
+              this.poemInformation[ this.i ][ 5 ]= data.subjects[ this.i ].value[ 1 ]; // poem seqnum
               // TO DO the following not hard coded but over triplestore requests
               if (this.poemInformation[ this.i ][ 4 ].includes('Notizbuch')) {
                 this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-' + this.poemInformation[this.i][4].split(' ')[1];

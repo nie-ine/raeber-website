@@ -137,252 +137,288 @@ export class SucheComponent implements OnInit {
       'suchmaskeKonvolutName': 'notizbuch79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch79
+      'memberPoems': this.setOfPoemsNotizbuch79,
+      'officialName': 'Notizbuch 1979'
     },
     {
       'konvolut': 'notizbuch-1979-1982',
       'suchmaskeKonvolutName': 'notizbuch7982',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch7982
+      'memberPoems': this.setOfPoemsNotizbuch7982,
+      'officialName': 'Notizbuch 1979 - 82'
     },
     {
       'konvolut': 'notizbuch-1980-1988',
       'suchmaskeKonvolutName': 'notizbuch8088',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch8088
+      'memberPoems': this.setOfPoemsNotizbuch8088,
+      'officialName': 'Notizbuch 1980 - 1988'
     },
     {
       'konvolut': 'manuskripte-1979',
       'suchmaskeKonvolutName': 'manuskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript79
+      'memberPoems': this.setOfPoemsManuskript79,
+      'officialName': 'Manuskripte 1979'
     },
     {
       'konvolut': 'manuskripte-1979-1983',
       'suchmaskeKonvolutName': 'manuskript7983',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript7983
+      'memberPoems': this.setOfPoemsManuskript7983,
+      'officialName': 'Manuskripte 1979 - 1983'
     },
     {
       'konvolut': 'karten-1984',
       'suchmaskeKonvolutName': 'manuskriptKarten',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskriptKarten
+      'memberPoems': this.setOfPoemsManuskriptKarten,
+      'officialName': 'Karten 1984'
     },
     {
       'konvolut': 'typoskripte-1979',
       'suchmaskeKonvolutName': 'typoskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79
+      'memberPoems': this.setOfPoemsTyposkript79,
+      'officialName': 'Typoskripte 1979'
     },
     {
       'konvolut': 'typoskripte-1979-spez',
       'suchmaskeKonvolutName': 'typoskript79Spez',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79Spez
+      'memberPoems': this.setOfPoemsTyposkript79Spez,
+      'officialName': 'Manuskripte 1979 - spez'
     },
     {
       'konvolut': 'typoskripte-1983',
       'suchmaskeKonvolutName': 'typoskript83',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript83
+      'memberPoems': this.setOfPoemsTyposkript83,
+      'officialName': 'Manuskripte 1983'
     },
     {
       'konvolut': 'gesicht-im-mittag',
       'suchmaskeKonvolutName': 'druckGesicht',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGesicht
+      'memberPoems': this.setOfPoemsdruckGesicht,
+      'officialName': 'Gesicht im Mittag'
     },
     {
       'konvolut': 'die-verwandelten-schiffe',
       'suchmaskeKonvolutName': 'druckSchiffe',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckSchiffe
+      'memberPoems': this.setOfPoemsdruckSchiffe,
+      'officialName': 'Die verwandelten Schiffe'
     },
     {
       'konvolut': 'gedichte',
       'suchmaskeKonvolutName': 'druckGedichte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGedichte
+      'memberPoems': this.setOfPoemsdruckGedichte,
+      'officialName': 'Gedichte'
     },
     {
       'konvolut': 'flussufer',
       'suchmaskeKonvolutName': 'druckFlussufer',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckFlussufer
+      'memberPoems': this.setOfPoemsdruckFlussufer,
+      'officialName': 'Flussufer'
     },
     {
       'konvolut': 'reduktionen',
       'suchmaskeKonvolutName': 'druckReduktionen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckReduktionen
+      'memberPoems': this.setOfPoemsdruckReduktionen,
+      'officialName': 'Reduktionen'
     },
     {
       'konvolut': 'akzente',
       'suchmaskeKonvolutName': 'zeitschriftAkzente',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdzeitschriftAkzente
+      'memberPoems': this.setOfPoemsdzeitschriftAkzente,
+      'officialName': 'Akzente'
     },
     {
       'konvolut': 'blaetter+bilder',
       'suchmaskeKonvolutName': 'zeitschriftBlaetter',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemszeitschriftBlaetter
+      'memberPoems': this.setOfPoemszeitschriftBlaetter,
+      'officialName': 'Blätter + Bilder'
     },
     {
       'konvolut': 'zeitschriftSchoenste',
       'suchmaskeKonvolutName': 'zeitschriftSchoenste',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSchoenste
+      'memberPoems': this.zeitschriftSchoenste,
+      'officialName': 'Schönste'
     },
     {
       'konvolut': 'zeitschriftTag',
       'suchmaskeKonvolutName': 'zeitschriftTag',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTag
+      'memberPoems': this.zeitschriftTag,
+      'officialName': 'Tag'
     },
     {
       'konvolut': 'zeitschriftTat',
       'suchmaskeKonvolutName': 'zeitschriftTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTat
+      'memberPoems': this.zeitschriftTat,
+      'officialName': 'Tat'
     },
     {
       'konvolut': 'zeitschriftZeit',
       'suchmaskeKonvolutName': 'zeitschriftZeit',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftZeit
+      'memberPoems': this.zeitschriftZeit,
+      'officialName': 'DIE ZEIT'
     },
     {
       'konvolut': 'zeitschriftEnsemble',
       'suchmaskeKonvolutName': 'zeitschriftEnsemble',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftEnsemble
+      'memberPoems': this.zeitschriftEnsemble,
+      'officialName': 'ensemble'
     },
     {
       'konvolut': 'zeitschriftHortulus',
       'suchmaskeKonvolutName': 'zeitschriftHortulus',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftHortulus
+      'memberPoems': this.zeitschriftHortulus,
+      'officialName': 'Hortulus'
     },
     {
       'konvolut': 'zeitschriftJahresring',
       'suchmaskeKonvolutName': 'zeitschriftJahresring',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftJahresring
+      'memberPoems': this.zeitschriftJahresring,
+      'officialName': 'Jahresring'
     },
     {
       'konvolut': 'zeitschriftKonturen',
       'suchmaskeKonvolutName': 'zeitschriftKonturen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftKonturen
+      'memberPoems': this.zeitschriftKonturen,
+      'officialName': 'Konturen'
     },
     {
       'konvolut': 'zeitschriftLNN',
       'suchmaskeKonvolutName': 'zeitschriftLNN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLNN
+      'memberPoems': this.zeitschriftLNN,
+      'officialName': 'Luzerner Neueste Nachrichten'
     },
     {
       'konvolut': 'zeitschriftLadZ',
       'suchmaskeKonvolutName': 'zeitschriftLadZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLadZ
+      'memberPoems': this.zeitschriftLadZ,
+      'officialName': 'Lyrik aus dieser Zeit'
     },
     {
       'konvolut': 'zeitschriftLuZ',
       'suchmaskeKonvolutName': 'zeitschriftLuZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLuZ
+      'memberPoems': this.zeitschriftLuZ,
+      'officialName': 'Lyrik unserer Zeit'
     },
     {
       'konvolut': 'zeitschriftMerkur',
       'suchmaskeKonvolutName': 'zeitschriftMerkur',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftMerkur
+      'memberPoems': this.zeitschriftMerkur,
+      'officialName': 'Merkur'
     },
     {
       'konvolut': 'zeitschriftDeutscheHefte',
       'suchmaskeKonvolutName': 'zeitschriftDeutscheHefte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftDeutscheHefte
+      'memberPoems': this.zeitschriftDeutscheHefte,
+      'officialName': 'Neue Deutsche Hefte'
     },
     {
       'konvolut': 'zeitschriftNZN',
       'suchmaskeKonvolutName': 'zeitschriftNZN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZN
+      'memberPoems': this.zeitschriftNZN,
+      'officialName': 'Neue Zürcher Nachrichten'
     },
     {
       'konvolut': 'zeitschriftNZZ',
       'suchmaskeKonvolutName': 'zeitschriftNZZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZZ
+      'memberPoems': this.zeitschriftNZZ,
+      'officialName': 'Neue Zürcher Zeitung'
     },
     {
       'konvolut': 'zeitschriftRenaissance',
       'suchmaskeKonvolutName': 'zeitschriftRenaissance',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRenaissance
+      'memberPoems': this.zeitschriftRenaissance,
+      'officialName': 'Renaissance'
     },
     {
       'konvolut': 'zeitschriftRundschau',
       'suchmaskeKonvolutName': 'zeitschriftRundschau',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRundschau
+      'memberPoems': this.zeitschriftRundschau,
+      'officialName': 'Schweizer Rundschau'
     },
     {
       'konvolut': 'zeitschriftSueddeutsche',
       'suchmaskeKonvolutName': 'zeitschriftSueddeutsche',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSueddeutsche
+      'memberPoems': this.zeitschriftSueddeutsche,
+      'officialName': 'Sueddeutsche Zeitung'
     },
     {
       'konvolut': 'zeitschriftWortTat',
       'suchmaskeKonvolutName': 'zeitschriftWortTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftWortTat
+      'memberPoems': this.zeitschriftWortTat,
+      'officialName': 'Wort und Tat'
     },
     {
       'konvolut': 'materialienTagebuch',
       'suchmaskeKonvolutName': 'materialienTagebuch',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.materialienTagebuch
+      'memberPoems': this.materialienTagebuch,
+      'officialName': 'Tagebuch'
     }
   ];
   poemResTypes = [
@@ -519,23 +555,53 @@ export class SucheComponent implements OnInit {
                        searchGroup: number,
                        numberOfTermsInSearchGroup: number,
                        poemResType: string) {
+    console.log('Search in Title');
     this.numberOfPerformedQueries += 1;
       return this.http.get(
         globalSearchVariableService.API_URL +
         globalSearchVariableService.extendedSearch +
-        poemResType +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
+        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
         '&compop=LIKE' +
-        '&searchval=' +
-        encodeURIComponent(searchTerm) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
-        '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
+        '&searchval=' + encodeURIComponent(searchTerm) +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+        '&compop=!EQ' +
+        '&searchval=GREGORIAN:2217-01-27' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666'+
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&show_nrows=2000')
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(typeof data);
+            console.log(data);
             if (data.subjects[0] !== undefined) {
               this.addToTemporarySearchResultArray(data.subjects,
                 firstTermAfterOr,
@@ -552,34 +618,65 @@ export class SucheComponent implements OnInit {
       .subscribe(response => response = response);
 
   }
-
   performSearchInText(searchTerm: string,
                       firstTermAfterOr: boolean,
                       searchGroup: number,
                       numberOfTermsInSearchGroup: number,
                       poemResType: string) {
+    console.log('Search in Text');
     this.numberOfPerformedQueries += 1;
     return this.http.get(
-      'http://130.60.24.65:3333/v1/search/?searchtype=extended' +
-      '&filter_by_restype=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23Edition' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasContent' +
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+      '&compop=!EQ' +
+      '&searchval=GREGORIAN:2217-01-27' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
       '&compop=LIKE' +
-      '&searchval=' +
-      encodeURIComponent(searchTerm) + '&show_nrows=' + 2000)
+      '&searchval=' + encodeURIComponent(searchTerm) +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
+      '&compop=!EQ' +
+      '&searchval=123455666'+
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&show_nrows=2000')
       .map(
         (lambda: Response) => {
           const data = lambda.json();
           //console.log(data);
           if (data.subjects[ 0 ] !== undefined) {
-            for (let result of data.subjects) {
-              this.performSearchToGetPoemBelongingToEdition(
-                result.obj_id,
-                firstTermAfterOr,
-                searchGroup,
-                numberOfTermsInSearchGroup,
-                this.poemResTypes[ this.m ],
-                searchTerm);
-            }
+            this.addToTemporarySearchResultArray(data.subjects,
+              firstTermAfterOr,
+              searchGroup,
+              numberOfTermsInSearchGroup,
+              searchTerm,
+              undefined);
           } else {
             console.log('Keine Treffer fuer diese Suche');
           }
@@ -625,54 +722,85 @@ export class SucheComponent implements OnInit {
                                   numberOfTermsInSearchGroup: number,
                                   searchTerm: string,
                                   poemIRI: string) {
-    if(this.partOfAllSearchResults === undefined) {
+    if (this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
     }
-    if(this.partOfAllSearchResults[searchGroup] === undefined) {
+    if (this.partOfAllSearchResults[searchGroup] === undefined) {
       this.partOfAllSearchResults[searchGroup] = [];
       this.partOfAllSearchResults[searchGroup] = new Set();
     }
-    if(numberOfTermsInSearchGroup > 1) {
+    if (numberOfTermsInSearchGroup > 1) {
       if (searchResults !== undefined) {
         for (let poem of searchResults) {
-          if (this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
-            !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
-            //console.log('Found Duplicate, so add to results');
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
-            this.addToFinalSearchResultArray(undefined, poem.obj_id);
+          if (this.partOfAllSearchResults[searchGroup].has(poem.value[7]) &&
+            !this.partOfAllSearchResults[searchGroup].has(poem.value[7] + searchTerm)) {
+            console.log('Found Duplicate, so add to results');
+            this.partOfAllSearchResults[searchGroup].add(poem.value[7] + searchTerm);
+            this.addToFinalSearchResultArray(undefined, poem);
           } else {
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
+            this.partOfAllSearchResults[searchGroup].add(poem.value[7] + searchTerm);
+            this.partOfAllSearchResults[searchGroup].add(poem.value[7]);
             //console.log('No duplicate found');
           }
-        }
-      }
-      if (poemIRI !== undefined) {
-        if (this.partOfAllSearchResults[searchGroup].has(poemIRI) &&
-          !this.partOfAllSearchResults[searchGroup].has(poemIRI + searchTerm)) {
-          //console.log('Found Duplicate, so add to results for searchTerm: ' + searchTerm);
-          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
-          this.addToFinalSearchResultArray(undefined, poemIRI);
-        } else {
-          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
-          this.partOfAllSearchResults[searchGroup].add(poemIRI);
-          //console.log('No duplicate found');
         }
       }
     } else {
       if (searchResults !== undefined) {
         this.addToFinalSearchResultArray(searchResults, undefined);
-      }
+/*      }
       if (poemIRI !== undefined) {
-        this.addToFinalSearchResultArray(undefined, poemIRI);
+        this.addToFinalSearchResultArray(undefined, poemIRI);*/
       }
     }
   }
 
-  addToFinalSearchResultArray(searchResults: Array<any>, searchResultString: string) {
+
+  addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     //console.log('Add to final Search Results');
+    //console.log(searchResults);
+    //console.log(singlePoem);
+    if (this.allSearchResults === undefined) {
+      this.allSearchResults = [];
+    }
+    if(searchResults) {
+      //console.log('add every poem to final search results');
+      for (let poem of searchResults) {
+        //console.log(poem.value['7']);
+        this.onlyChoosePoemsThatAreInChosenConvolutes(
+          poem.value['7'],
+          poem.value['8'],
+          poem.value['9'],
+          poem.value['1'],
+          poem.value['6'],
+          0,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          poem.value['11'],
+          poem.value['10']);
+      }
+    }
+    if(singlePoem) {
+      console.log('add poem to final search results');
+      this.onlyChoosePoemsThatAreInChosenConvolutes(
+        singlePoem.value['7'],
+        singlePoem.value['8'],
+        singlePoem.value['9'],
+        singlePoem.value['1'],
+        singlePoem.value['6'],
+        0,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        singlePoem.value['11'],
+        singlePoem.value['10']);
+    }
     //console.log(searchResultString);
-    if (searchResultString !== undefined) {
+/*    if (searchResultString !== undefined) {
       if (this.allSearchResults === undefined) {
         this.allSearchResults = [];
       }
@@ -693,7 +821,7 @@ export class SucheComponent implements OnInit {
           result.value[ 1 ],
           result.value[ 2 ]);
       }
-    }
+    }*/
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
@@ -748,6 +876,7 @@ export class SucheComponent implements OnInit {
       console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
+
 
 
 
@@ -1051,7 +1180,6 @@ export class SucheComponent implements OnInit {
         '&searchval=Wort%20und%20Tat');
     }
   }
-
   performQueryToGetIRI(queryPart: string, i: number, individualQueryPart: string) {
     if(queryPart === undefined) {
       queryPart = individualQueryPart;
@@ -1091,256 +1219,254 @@ export class SucheComponent implements OnInit {
   }
 
 
-  performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
-    //console.log(konvolutType);
-    this.numberOfPerformedQueries += 1;
-    return this.http.get
-    (
-      globalSearchVariableService.API_URL +
-      '/graphdata/' +
-      encodeURIComponent(queryPart) +
-      '?depth=2'
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          //console.log(data);
-          for (this.l = 0; this.l < data.nodes.length; this.l++) {
-            if (konvolutType === 'poem notebook') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';
-              //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'poem manuscript convolute') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#HandwrittenPoem';
-              //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'poem typescript convolute') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
-              //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'poem typescript convolute with image') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
-              //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'printed poem book publication') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
-              //console.log('Right Property: ' + rightProperty);
-            } else if (konvolutType === 'poly-author publication') {
-              rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
-              //console.log('Right Property: ' + rightProperty);
-            }
-            if (
-              data.nodes[ this.l ].resourceClassIri === rightProperty
-            ) {
-              //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
-              this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
-            }
-          }
-          //console.log(this.setOfAlowedPoemIRIs);
-          return null;
-        }
+    performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
+      //console.log(konvolutType);
+      this.numberOfPerformedQueries += 1;
+      return this.http.get
+      (
+        globalSearchVariableService.API_URL +
+        '/graphdata/' +
+        encodeURIComponent(queryPart) +
+        '?depth=2'
       )
-      .subscribe(response => this.responseArray = response);
-
-  }
-
-  performPoemQuery(poemIRI: string, titel: string, date: string, seqnum: string) {
-    this.numberOfPerformedQueries += 1;
-    return this.http.get
-    (
-      globalSearchVariableService.API_URL +
-      '/resources/' +
-      encodeURIComponent(poemIRI)
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          //console.log(data);
-          if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
-            this.performTextQuery(
-              data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
-              poemIRI,
-              data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
-              date,
-              seqnum,
-              data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
-              data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
-            );
-          }
-          return null;
-        }
-      )
-      .subscribe(response => this.responseArray = response);
-  }
-
-  performTextQuery(editionIRI: string,
-                   poemIRI: string,
-                   titel: string,
-                   date: string,
-                   seqnum: string,
-                   textart: string,
-                   isFinalVersion: string,
-                   hatStrophenunterteilung: string,
-                   isInDialiect: string,
-                   isPartOfCycle: string) {
-    //console.log(editionIRI);
-    return this.http.get
-    (
-      globalSearchVariableService.API_URL +
-      '/resources/' +
-      encodeURIComponent(editionIRI)
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          if (!this.setOfAllSearchResults.has(poemIRI)) {
-            this.setOfAllSearchResults.add(poemIRI);
-            this.onlyChoosePoemsThatAreInChosenConvolutes(
-              poemIRI,
-              data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str,
-              titel,
-              seqnum,
-              date,
-              0,
-              textart,
-              isFinalVersion,
-              hatStrophenunterteilung,
-              isInDialiect,
-              isPartOfCycle);
-          }
-          return null;
-        }
-      )
-      .subscribe(response => this.responseArray = response);
-  }
-
-  onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
-                                           text: string,
-                                           titel: string,
-                                           seqnum: string,
-                                           date: string,
-                                           k: number,
-                                           textart: string,
-                                           isFinalVersion: string,
-                                           hatStrophenunterteilung: string,
-                                           isInDialiect: string,
-                                           isPartOfCycle: string) {
-    for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
-      if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
-        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-        //console.log(k);
-        //console.log(poemIRI);
-        if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-            if(this.checkTextart(textart)) {
-              if(this.checkTimeInterval(date)) {
-                if(this.checkIfFinalVersion(isFinalVersion)) {
-                  if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                    if(this.checkIfIsInDialect(isInDialiect)) {
-                      if(this.checkIfPartOfCycle(isPartOfCycle)) {
-                        //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                        if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                          this.allSearchResults[ this.allSearchResults.length ] = [];
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                          this.numberOfSearchResults += 1;
-                      }
-                    }
-                  }
-                }
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            //console.log(data);
+            for (this.l = 0; this.l < data.nodes.length; this.l++) {
+              if (konvolutType === 'poem notebook') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';
+                //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'poem manuscript convolute') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#HandwrittenPoem';
+                //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'poem typescript convolute') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
+                //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'poem typescript convolute with image') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
+                //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'printed poem book publication') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
+                //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'poly-author publication') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
+                //console.log('Right Property: ' + rightProperty);
               }
+              if (
+                data.nodes[ this.l ].resourceClassIri === rightProperty
+              ) {
+                //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
+                this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
               }
             }
+            //console.log(this.setOfAlowedPoemIRIs);
+            return null;
+          }
+        )
+        .subscribe(response => this.responseArray = response);
+    }
+/*    performPoemQuery(poemIRI: string, titel: string, date: string, seqnum: string) {
+      this.numberOfPerformedQueries += 1;
+      return this.http.get
+      (
+        globalSearchVariableService.API_URL +
+        '/resources/' +
+        encodeURIComponent(poemIRI)
+      )
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            //console.log(data);
+            if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
+              this.performTextQuery(
+                data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
+                poemIRI,
+                data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
+                date,
+                seqnum,
+                data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
+                data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
+                data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
+                data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
+                data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
+              );
+            }
+            return null;
+          }
+        )
+        .subscribe(response => this.responseArray = response);
+    }*/
+/*    performTextQuery(editionIRI: string,
+                     poemIRI: string,
+                     titel: string,
+                     date: string,
+                     seqnum: string,
+                     textart: string,
+                     isFinalVersion: string,
+                     hatStrophenunterteilung: string,
+                     isInDialiect: string,
+                     isPartOfCycle: string) {
+      //console.log(editionIRI);
+      return this.http.get
+      (
+        globalSearchVariableService.API_URL +
+        '/resources/' +
+        encodeURIComponent(editionIRI)
+      )
+        .map(
+          (lambda: Response) => {
+            const data = lambda.json();
+            if (!this.setOfAllSearchResults.has(poemIRI)) {
+              this.setOfAllSearchResults.add(poemIRI);
+              this.onlyChoosePoemsThatAreInChosenConvolutes(
+                poemIRI,
+                data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str,
+                titel,
+                seqnum,
+                date,
+                0,
+                textart,
+                isFinalVersion,
+                hatStrophenunterteilung,
+                isInDialiect,
+                isPartOfCycle);
+            }
+            return null;
+          }
+        )
+        .subscribe(response => this.responseArray = response);
+    }*/
+    onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
+                                             text: string,
+                                             titel: string,
+                                             seqnum: string,
+                                             date: string,
+                                             k: number,
+                                             textart: string,
+                                             isFinalVersion: string,
+                                             hatStrophenunterteilung: string,
+                                             isInDialiect: string,
+                                             isPartOfCycle: string,
+                                             synopsisTitle: string,
+                                             synopsisIRI: string,) {
+      for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+        if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
+          //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+          //console.log(k);
+          //console.log(poemIRI);
+          if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+              // if(this.checkTextart(textart)) {
+              //   if(this.checkTimeInterval(date)) {
+              //     if(this.checkIfFinalVersion(isFinalVersion)) {
+              //       if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+              //         if(this.checkIfIsInDialect(isInDialiect)) {
+              //           if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                          //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                          if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                            this.allSearchResults[ this.allSearchResults.length ] = [];
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 12 ] = synopsisTitle;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 9 ] = synopsisIRI;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 7 ]
+                              = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 6 ]
+                              = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
+                            this.numberOfSearchResults += 1;
+                        }
+              //         }
+              //       }
+              //     }
+              //   }
+              //   }
+              // }
+          }
         }
       }
     }
-  }
-
-  checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    //console.log(isPartOfCycle);
-    if(!this.arg) return true;
-    if(!this.arg.get('zyklus').value) {
-      return true;
-    } else if (this.arg.get('zyklus').value && isPartOfCycle) {
-      return true;
-    } else return false;
-  }
-
-  checkIfIsInDialect(isInDialiect: string): boolean {
-    //console.log(isInDialiect);
-    if(!this.arg) return true;
-    if(!this.arg.get('mundart').value) {
-      return true;
-    } else if (this.arg.get('mundart').value && isInDialiect) {
-      return true;
-    } else return false;
-  }
-
-  checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-    //console.log(hatStrophenunterteilung);
-    if(!this.arg) return true;
-    if(!this.arg.get('strophen').value) {
-      return true;
-    } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
-      return true;
-    } else return false;
-  }
-
-  checkIfFinalVersion(isFinalVersion: string):boolean {
-    if(!this.arg) return true;
-    if(!this.arg.get('endfassung').value) {
-      return true;
-    } else if (this.arg.get('endfassung').value && isFinalVersion) {
-      return true;
-    } else return false;
-  }
-
-  checkTextart(textart: string): boolean {
-    if(!this.arg) return true;
-    if (this.arg.get('textartForm').pristine) {
-      //console.log(textart);
-      return true;
-    } else if(this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
+    checkIfPartOfCycle(isPartOfCycle: string): boolean {
+      //console.log(isPartOfCycle);
+      if(!this.arg) return true;
+      if(!this.arg.get('zyklus').value) {
         return true;
-    } else if(this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
-      return true;
-    } else if(this.arg.get('textartForm.textartProsa').value && textart === 'RythmicProse') {
-      return true;
-    } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
-      return true;
-    } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
-      return true;
-    } else {
-      return false;
+      } else if (this.arg.get('zyklus').value && isPartOfCycle) {
+        return true;
+      } else return false;
     }
+    checkIfIsInDialect(isInDialiect: string): boolean {
+      //console.log(isInDialiect);
+      if(!this.arg) return true;
+      if(!this.arg.get('mundart').value) {
+        return true;
+      } else if (this.arg.get('mundart').value && isInDialiect) {
+        return true;
+      } else return false;
     }
-
-  checkTimeInterval(date: string): boolean {
-    if(!this.arg) return true;
-    //console.log(date.split('-')[0]);
-    //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
-    if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
-      && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
-      return true;
-    } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-      && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
-      if(date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
-        && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
-        console.log('Poem liegt im beidseitig geschlossenen Intervall');
+    checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
+      //console.log(hatStrophenunterteilung);
+      if(!this.arg) return true;
+      if(!this.arg.get('strophen').value) {
+        return true;
+      } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
+        return true;
+      } else return false;
+    }
+    checkIfFinalVersion(isFinalVersion: string):boolean {
+      if(!this.arg) return true;
+      if(!this.arg.get('endfassung').value) {
+        return true;
+      } else if (this.arg.get('endfassung').value && isFinalVersion) {
+        return true;
+      } else return false;
+    }
+    checkTextart(textart: string): boolean {
+      if(!this.arg) return true;
+      if (this.arg.get('textartForm').pristine) {
+        //console.log(textart);
+        return true;
+      } else if(this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
+          return true;
+      } else if(this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
+        return true;
+      } else if(this.arg.get('textartForm.textartProsa').value && textart === 'RythmicProse') {
+        return true;
+      } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
+        return true;
+      } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
         return true;
       } else {
         return false;
       }
-    } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-      && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {
-      console.log('Groesser als Linker Intervall');
-      return true;
-    } else if(this.arg.get('zeitraumForm.zeitraumBis').value !== ''
-      && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
-      console.log('Kleiner als Linker Intervall');
-      return true;
-    } else return false;
-  }
+      }
+    checkTimeInterval(date: string): boolean {
+      if(!this.arg) return true;
+      //console.log(date.split('-')[0]);
+      //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
+      if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
+        && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
+        return true;
+      } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+        && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
+        if(date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
+          && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+          console.log('Poem liegt im beidseitig geschlossenen Intervall');
+          return true;
+        } else {
+          return false;
+        }
+      } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+        && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {
+        console.log('Groesser als Linker Intervall');
+        return true;
+      } else if(this.arg.get('zeitraumForm.zeitraumBis').value !== ''
+        && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+        console.log('Kleiner als Linker Intervall');
+        return true;
+      } else return false;
+    }
 
 }

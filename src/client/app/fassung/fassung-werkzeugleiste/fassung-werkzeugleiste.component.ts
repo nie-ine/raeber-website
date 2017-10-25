@@ -35,7 +35,7 @@ export class FassungWerkzeugleisteComponent {
     this.poemResizableChange.emit(this.poemResizable);
     this.showRegisterChange.emit(this.showRegister);
     this.showEditedTextChange.emit();
-    this.showTranscriptionChange.emit()
+    this.showTranscriptionChange.emit();
   }
 
   showHelp(): void {

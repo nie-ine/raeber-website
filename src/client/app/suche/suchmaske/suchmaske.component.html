@@ -821,11 +821,11 @@
           <ng-template ngbPanelContent>
             <div formGroupName="zeitraumForm">
               von
-              <md-input-container>
-                <input mdInput formControlName="zeitraumVon" class="ip-epoche"/>
+              <md-input-container style="width: 70px; align: center">
+                <input mdInput formControlName="zeitraumVon" class="ip-epoche"  />
               </md-input-container>
               bis
-              <md-input-container>
+              <md-input-container style="width: 70px; align: center">
                 <input mdInput formControlName="zeitraumBis" class="ip-epoche"/>
               </md-input-container>
             </div>
@@ -884,6 +884,14 @@
       </ngb-accordion>
     </form>
   </md-sidenav>
+
+  <md-progress-bar
+    *ngIf="loadingIndicator"
+    class="example-margin"
+    color="primary"
+    mode="indeterminate">
+  </md-progress-bar>
+
   <div class="suchmenu-content">
     <button md-mini-fab class="suchmenu-button" (click)="suchmenu.open()">
       <md-icon>dehaze</md-icon>

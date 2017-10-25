@@ -31,6 +31,7 @@ export class SuchmaskeComponent implements OnChanges {
   @Input() searchTermArray: Array<string>;
   @Input() poemsInGrid: string;
   @Input() startSearchImmediately: boolean;
+  @Input() loadingIndicatorInput: boolean;
 
   /*
   Options for extension of fulltext search
@@ -54,12 +55,17 @@ export class SuchmaskeComponent implements OnChanges {
   };
 
   allConvolutesSelected: boolean = false;
+  loadingIndicator = true;
+
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.createForm();
     this.onSearchParamsChange();
   }
   ngOnChanges() {
+    console.log(this.loadingIndicator);
+    this.loadingIndicator = this.loadingIndicatorInput;
+    if(this.startSearchImmediately) this.sidenavOpened = false;
     console.log('Data arrived back in Suchmaske: ');
     console.log(this.poemsInGrid);
     console.log(this.searchTermArray);

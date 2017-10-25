@@ -123,6 +123,11 @@ export class SucheComponent implements OnInit {
   searchTermArray: Array<string>;
   zeitschriftWortTat = new Set();
   startSearchImmediately = false;
+  warning: string;
+  warningread: boolean;
+  currentPath: string;
+  loadingIndicatorInput: boolean;
+  progressIndicator = 0;
   arrayOfResultsInAllSearchGroups = [
     {
       'setOfSearchTermsInSearchGroup': new Set(),
@@ -433,24 +438,113 @@ export class SucheComponent implements OnInit {
     this.route.params.subscribe(params => console.log(params));
   }
 
+  checkProgress() {
+    console.log('check progress');
+    this.loadingIndicatorInput = true;
+    setTimeout(() => {
+      this.loadingIndicatorInput = false;
+    }, 8000);
+  }
+
   handleSearchEvent(arg: AbstractControl) {
+    if(this.startSearchImmediately) this.startSearchImmediately = false;
     //console.log(arg);
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
-    this.location.replaceState('/suche/' + this.inputSearchStringToBeParsed);
+    this.currentPath = '/suche?wort=' + this.inputSearchStringToBeParsed
+    this.location.replaceState(this.currentPath);
+  }
+  updateFilterParams(routeSnapshot: boolean, defaultValue: boolean): boolean {
+    if(routeSnapshot) return routeSnapshot;
+    else return defaultValue;
   }
 
   ngOnInit() {
+    this.checkProgress();
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
     if (this.route.snapshot.queryParams[ 'wort' ]) {
-      this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
+      console.log('Start search immediately');
+      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch79' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch7982' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch8088' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript79' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript7983' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskriptKarten' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79Spez' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript83' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGesicht' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckSchiffe' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGedichte' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckFlussufer' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckReduktionen' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftAkzente' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftBlaetter' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSchoenste' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTag' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTat' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftZeit' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftEnsemble' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftHortulus' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftJahresring' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftKonturen' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLNN' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLadZ' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLuZ' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftMerkur' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftDeutscheHefte' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZN' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZZ' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRenaissance' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRundschau' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSueddeutsche' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftWortTat' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'materialienTagebuch' ],true);
+      console.log(this.suchmaskeKonvolutIRIMapping);
       this.startSearchImmediately = true;
       this.searchTermArray = [];
       this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
+      this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
     }
     if (this.allSearchResults === undefined) {
       this.numberOfSearchResults = 0;
@@ -469,6 +563,7 @@ export class SucheComponent implements OnInit {
     this.searchTermArray = [];
     this.partOfAllSearchResults = undefined;
     this.setOfAllSearchResults.clear();
+    if(this.arg) this.updateQueryParamsInURL();
     if (!this.queries) {
       console.log('No query defined');
     } else {
@@ -499,8 +594,19 @@ export class SucheComponent implements OnInit {
           this.searchTermArray = [];
         }
         this.searchTermArray[this.searchTermArray.length] = this.searchTerm;
-        this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
-        this.firstTermAfterOr = false;
+        if(this.searchTerm.length < 3) {
+          if(!this.warningread) {
+            this.warning = ' - Bitte geben Sie ein Wort mit mindestens 3 Buchstaben ein oder starten Sie die Suche erneut.';
+            this.warningread = true;
+          } else {
+            this.warning = '';
+            this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
+            this.firstTermAfterOr = false;
+          }
+        } else {
+          this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
+          this.firstTermAfterOr = false;
+        }
       }
     }
   }
@@ -555,7 +661,6 @@ export class SucheComponent implements OnInit {
                        searchGroup: number,
                        numberOfTermsInSearchGroup: number,
                        poemResType: string) {
-    console.log('Search in Title');
     this.numberOfPerformedQueries += 1;
       return this.http.get(
         globalSearchVariableService.API_URL +
@@ -687,41 +792,13 @@ export class SucheComponent implements OnInit {
 
   }
 
-  performSearchToGetPoemBelongingToEdition(editionIRI: string,
-                                           firstTermAfterOr: boolean,
-                                           searchGroup: number,
-                                           numberOfTermsInSearchGroup: number,
-                                           poemResType: string,
-                                           searchTerm: string) {
-    this.numberOfPerformedQueries += 1;
-    return this.http.get(
-      'http://130.60.24.65:3333/v1/resources/' +
-      encodeURIComponent(editionIRI))
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          //console.log(data);
-          if (data !== undefined && data.incoming[ 0 ] !== undefined) {
-            this.addToTemporarySearchResultArray(
-              undefined,
-              firstTermAfterOr,
-              searchGroup,
-              numberOfTermsInSearchGroup,
-              searchTerm,
-              data.incoming[ 0 ].ext_res_id.id);
-          }
-          return null;
-        }
-      )
-      .subscribe(response => this.myProperties = response);
-
-  }
   addToTemporarySearchResultArray(searchResults: Array<any>,
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number,
                                   searchTerm: string,
                                   poemIRI: string) {
+    this.checkProgress();
     if (this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
     }
@@ -756,6 +833,7 @@ export class SucheComponent implements OnInit {
 
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
+    this.checkProgress();
     //console.log('Add to final Search Results');
     //console.log(searchResults);
     //console.log(singlePoem);
@@ -872,13 +950,61 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 32 ].enabled = arg.get('zeitschriftForm.zeitschriftRundschau').value;
       this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
       this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
-      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('zeitschriftForm.materialienTagebuch').value;
+      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
       console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
-
-
-
+  updateQueryParamsInURL() {
+    this.currentPath = this.currentPath +
+      '&notizbuch79=' + this.suchmaskeKonvolutIRIMapping[ 0 ].enabled +
+      '&notizbuch7982=' + this.suchmaskeKonvolutIRIMapping[ 1 ].enabled +
+      '&notizbuch8088=' + this.suchmaskeKonvolutIRIMapping[ 2 ].enabled +
+      '&manuskript79=' + this.suchmaskeKonvolutIRIMapping[ 3 ].enabled +
+      '&manuskript7983=' + this.suchmaskeKonvolutIRIMapping[ 4 ].enabled +
+      '&manuskriptKarten=' + this.suchmaskeKonvolutIRIMapping[ 5 ].enabled +
+      '&typoskript79=' + this.suchmaskeKonvolutIRIMapping[ 6 ].enabled +
+      '&typoskript79Spez=' + this.suchmaskeKonvolutIRIMapping[ 7 ].enabled +
+      '&typoskript83=' + this.suchmaskeKonvolutIRIMapping[ 8 ].enabled +
+      '&druckGesicht=' + this.suchmaskeKonvolutIRIMapping[ 9 ].enabled +
+      '&druckSchiffe=' + this.suchmaskeKonvolutIRIMapping[ 10 ].enabled +
+      '&druckGedichte=' + this.suchmaskeKonvolutIRIMapping[ 11 ].enabled +
+      '&druckFlussufer=' + this.suchmaskeKonvolutIRIMapping[ 12 ].enabled +
+      '&druckReduktionen=' + this.suchmaskeKonvolutIRIMapping[ 13 ].enabled +
+      '&zeitschriftAkzente=' + this.suchmaskeKonvolutIRIMapping[ 14 ].enabled +
+      '&zeitschriftBlaetter=' + this.suchmaskeKonvolutIRIMapping[ 15 ].enabled +
+      '&zeitschriftSchoenste=' + this.suchmaskeKonvolutIRIMapping[ 16 ].enabled +
+      '&zeitschriftTag=' + this.suchmaskeKonvolutIRIMapping[ 17 ].enabled +
+      '&zeitschriftTat=' + this.suchmaskeKonvolutIRIMapping[ 18 ].enabled +
+      '&zeitschriftZeit=' + this.suchmaskeKonvolutIRIMapping[ 19 ].enabled +
+      '&zeitschriftEnsemble=' + this.suchmaskeKonvolutIRIMapping[ 20 ].enabled +
+      '&zeitschriftHortulus=' + this.suchmaskeKonvolutIRIMapping[ 21 ].enabled +
+      '&zeitschriftJahresring=' + this.suchmaskeKonvolutIRIMapping[ 22 ].enabled +
+      '&zeitschriftKonturen=' + this.suchmaskeKonvolutIRIMapping[ 23 ].enabled +
+      '&zeitschriftLNN=' + this.suchmaskeKonvolutIRIMapping[ 24 ].enabled +
+      '&zeitschriftLadZ=' + this.suchmaskeKonvolutIRIMapping[ 25 ].enabled +
+      '&zeitschriftLuZ=' + this.suchmaskeKonvolutIRIMapping[ 26 ].enabled +
+      '&zeitschriftMerkur=' + this.suchmaskeKonvolutIRIMapping[ 27 ].enabled +
+      '&zeitschriftDeutscheHefte=' + this.suchmaskeKonvolutIRIMapping[ 28 ].enabled +
+      '&zeitschriftNZN=' + this.suchmaskeKonvolutIRIMapping[ 29 ].enabled +
+      '&zeitschriftNZZ=' + this.suchmaskeKonvolutIRIMapping[ 30 ].enabled +
+      '&zeitschriftRenaissance=' + this.suchmaskeKonvolutIRIMapping[ 31 ].enabled +
+      '&zeitschriftRundschau=' + this.suchmaskeKonvolutIRIMapping[ 32 ].enabled +
+      '&zeitschriftSueddeutsche=' + this.suchmaskeKonvolutIRIMapping[ 33 ].enabled +
+      '&zeitschriftWortTat=' + this.suchmaskeKonvolutIRIMapping[ 34 ].enabled +
+      '&materialienTagebuch=' + this.suchmaskeKonvolutIRIMapping[ 35 ].enabled +
+      '&textartFreieVerse=' + this.arg.get('textartForm.textartFreieVerse').value +
+      '&textartProsanotat=' + this.arg.get('textartForm.textartProsanotat').value +
+      '&textartProsa=' + this.arg.get('textartForm.textartProsa').value +
+      '&textartBriefentwurf=' + this.arg.get('textartForm.textartBriefentwurf').value +
+      '&textartGereimteVerse=' + this.arg.get('textartForm.textartGereimteVerse').value +
+      '&zeitBeginn=' + this.arg.get('zeitraumForm.zeitraumVon').value +
+      '&zeitEnde=' + this.arg.get('zeitraumForm.zeitraumBis').value +
+      '&nurEndfassungen=' + this.arg.get('endfassung').value +
+      '&nurMitStrophen=' + this.arg.get('strophen').value +
+      '&nurMundart=' + this.arg.get('mundart').value +
+      '&nurZyklus=' + this.arg.get('zyklus').value;
+    this.location.replaceState(this.currentPath);
+  }
 
 
   getKonvolutIRI(konvolut_id: string, i: number) {
@@ -1351,13 +1477,15 @@ export class SucheComponent implements OnInit {
                                              synopsisTitle: string,
                                              synopsisIRI: string,) {
       for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
-        if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
+        this.checkProgress();
+        if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
+          this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
           //console.log(k);
           //console.log(poemIRI);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
               // if(this.checkTextart(textart)) {
-              //   if(this.checkTimeInterval(date)) {
+                 if(this.checkTimeInterval(date)) {
               //     if(this.checkIfFinalVersion(isFinalVersion)) {
               //       if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
               //         if(this.checkIfIsInDialect(isInDialiect)) {
@@ -1382,7 +1510,7 @@ export class SucheComponent implements OnInit {
               //       }
               //     }
               //   }
-              //   }
+                 }
               // }
           }
         }
@@ -1438,35 +1566,88 @@ export class SucheComponent implements OnInit {
         return true;
       } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
         return true;
+      } else if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' && textart === 'RythmicProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' && textart === 'LetterStructure') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true' && textart === 'RythmicVerse') {
+        return true;
       } else {
         return false;
       }
       }
     checkTimeInterval(date: string): boolean {
-      if(!this.arg) return true;
-      //console.log(date.split('-')[0]);
-      //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
-      if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
-        && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
-        return true;
-      } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-        && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
-        if(date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
-          && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
-          console.log('Poem liegt im beidseitig geschlossenen Intervall');
+      //console.log(this.route.snapshot.queryParams[ 'zeitBeginn' ]);
+      //console.log(this.route.snapshot.queryParams[ 'zeitEnde' ]);
+      if(!this.arg
+        && this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
+        && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) return true;
+      if(this.arg) {
+        if (
+          this.arg.get('zeitraumForm.zeitraumVon').value === ''
+          && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
           return true;
-        } else {
-          return false;
-        }
-      } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-        && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {
-        console.log('Groesser als Linker Intervall');
-        return true;
-      } else if(this.arg.get('zeitraumForm.zeitraumBis').value !== ''
-        && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
-        console.log('Kleiner als Linker Intervall');
-        return true;
-      } else return false;
+        } else if (
+          this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+            && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
+          if(
+            (date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
+              && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value)
+          ) {
+            console.log('Poem liegt im beidseitig geschlossenen Intervall');
+            return true;
+          } else {
+            return false;
+          }
+        } else if(
+          (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+            && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value)
+        ) {
+          console.log('Groesser als Linker Intervall');
+          return true;
+        } else if(
+          (this.arg.get('zeitraumForm.zeitraumBis').value !== ''
+            && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value)
+        ) {
+          console.log('Kleiner als Linker Intervall');
+          return true;
+        } else return false;
+      } else {
+        if (
+          this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
+          && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) {
+          return true;
+        } else if (
+          this.route.snapshot.queryParams[ 'zeitBeginn' ] !== undefined
+            && this.route.snapshot.queryParams[ 'zeitEnde' ] !== undefined
+        ) {
+          if(
+            date.split('-')[0] > this.route.snapshot.queryParams[ 'zeitBeginn' ]
+              && date.split('-')[0] < this.route.snapshot.queryParams[ 'zeitEnde' ]
+          ) {
+            console.log('Poem liegt im beidseitig geschlossenen Intervall');
+            return true;
+          } else {
+            return false;
+          }
+        } else if(
+          this.route.snapshot.queryParams[ 'zeitBeginn' ] !== undefined
+            && date.split('-')[0] > this.route.snapshot.queryParams[ 'zeitBeginn' ]
+        ) {
+          console.log('Groesser als Linker Intervall');
+          return true;
+        } else if(
+          this.route.snapshot.queryParams[ 'zeitEnde' ] !== undefined
+            && date.split('-')[0] < this.route.snapshot.queryParams[ 'zeitEnde' ]
+        ) {
+          console.log('Kleiner als Linker Intervall');
+          return true;
+        } else return false;
+      }
     }
 
 }

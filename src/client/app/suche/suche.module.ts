@@ -20,7 +20,8 @@ import {
   MdMenuModule,
   MdSelectModule,
   MdSidenavModule,
-  MdSlideToggleModule
+  MdSlideToggleModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -57,6 +58,7 @@ import { BasicSearchComponent } from './basic-search/basic-search.component';
     SearchForOneResourceModule,
     MdSlideToggleModule,
     ParserModule,
+    MatProgressBarModule,
     RouterModule.forChild([
       { path: 'suche', component: SucheComponent }
     ]),

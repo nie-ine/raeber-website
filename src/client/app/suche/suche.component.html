@@ -8,14 +8,15 @@
               <div class="component-content">
 
                 <h1>Suche</h1>
-                Number of Results: {{ numberOfSearchResults }}, Number of performed Queries: {{ numberOfPerformedQueries }}
+                Number of Results: {{ numberOfSearchResults }} {{ warning }}
                 <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
 
 
                 <br>
 
-                <rae-suchmaske [startSearchImmediately]="startSearchImmediately"
-                               [sidenavOpened]="false"
+                <rae-suchmaske [loadingIndicatorInput] = "loadingIndicatorInput"
+                               [startSearchImmediately]="startSearchImmediately"
+                               [sidenavOpened]="true"
                                (suchEvents)="handleSearchEvent($event)"
                                [poemsInGrid]="allSearchResults"
                                (startSearch)="executeFinalQueries()"

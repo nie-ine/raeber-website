@@ -79,7 +79,7 @@
         <span class="emphase">Kommentar:</span>
         <!-- FIXME: Wert gibt im Moment lediglich den das Link-HTML-Element auf die Beschreibung zurück, anstatt den Inhalt zurückzugeben -->
         <a (click)="openDialog()">Beschreibung</a>
-        <span [innerHtml]="comment"></span>
+        <!--<span [innerHtml]="comment"></span>-->
       </p>
 
       <p *ngIf="konvoluttyp != 'poem manuscript convolute' && laterStagesIRIs && laterStagesIRIs.length > 0">

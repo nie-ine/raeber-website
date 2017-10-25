@@ -1,19 +1,21 @@
-<ng-container *ngFor="let pageIRI of pageIRIs">
-  <rae-fassung-diplomatisch-seiten [pageIRI]="pageIRI" (propertiesReset)="addPage($event)"></rae-fassung-diplomatisch-seiten>
-</ng-container>
-
 <div #diplomatischKarte>
-<div *ngFor="let p of pages">
-  <h5>{{p['pagenumber']}}</h5>
-  <div style="display: inline-block; vertical-align: top">
-    <rae-image-frame
-      [pictureData]="p['picData']"
-      [initWidth]="cardWidth"
-      (pictureIncreased)="pictureIncreased.emit(null)"
-      (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
+  <div *ngFor="let p of pages">
+    <div style="display: inline-block; vertical-align: top">
+      <h4><span>{{ p['pagenumber'] }}</span> <span>({{ p['origName'] }})</span> </h4>
+      <rae-image-frame *ngIf="p['picData']"
+        [pictureData]="p['picData']"
+        [initWidth]="cardWidth"
+        (pictureIncreased)="pictureIncreased.emit(null)"
+        (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
+    </div>
+    <div *ngIf="p['diplIRI']" style="display: inline-block; vertical-align: top">
+      <rae-diplomatischer-text [textIRI]="p['diplIRI']"
+                               [(gewaehlteSchicht)]="gewaehlteSchicht"
+                               [(textIsMovable)]="textIsMovable">
+      </rae-diplomatischer-text>
+    </div>
+    <rae-fassung-diplomatisch-seiten [pageIRI]="p['pageIRI']"
+                                     (propertiesReset)="addPage($event)">
+    </rae-fassung-diplomatisch-seiten>
   </div>
-  <div style="display: inline-block; vertical-align: top">
-    <rae-diplomatischer-text [textIRI]="p['diplIRI']" [(gewaehlteSchicht)]="gewaehlteSchicht"></rae-diplomatischer-text>
-  </div>
-</div>
 </div>

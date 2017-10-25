@@ -11,6 +11,7 @@ import { WerkausgabeComponent } from './werkausgabe.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
 import { AbgewandtZugewandtNachwortComponent } from './abgewandt-zugewandt-nachwort.component';
+import { HomepageWithInitTextComponent } from './homepagewithinittext.component';
 
 @NgModule({
   imports: [
@@ -24,10 +25,11 @@ import { AbgewandtZugewandtNachwortComponent } from './abgewandt-zugewandt-nachw
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
-      { path: 'start', component: HomepageComponent }
+      { path: 'start', component: HomepageComponent },
+      { path: 'init', component: HomepageWithInitTextComponent }
     ])
   ],
-  exports: [RouterModule]
+  exports: [ RouterModule ]
 })
 export class StatischRoutingModule {
 }
@@ -36,6 +38,7 @@ export const routingComponents = [
   AbgewandtZugewandtNachwortComponent,
   AnleitungComponent,
   HomepageComponent,
+  HomepageWithInitTextComponent,
   ImpressumComponent,
   LebensdatenComponent,
   PdfNotizbuecherComponent,

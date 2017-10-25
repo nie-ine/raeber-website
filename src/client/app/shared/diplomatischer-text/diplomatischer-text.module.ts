@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
-  MdButtonToggleModule, MdCheckboxModule,
+  MdButtonToggleModule, MdCheckboxModule, MdIconModule,
   MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +22,7 @@ import { DimplomatischerTextComponent } from './diplomatischer-text.component';
     MdButtonModule,
     MdButtonToggleModule,
     MdCheckboxModule,
+    MdIconModule,
     MdToolbarModule,
     ReactiveFormsModule
   ],

@@ -58,7 +58,7 @@
 
                       <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
                         <md-card-content *ngIf="zeigeDiplomatisch">
-                          <rae-fassung-diplomatisch [pageIRIs]="pageIRIs"
+                          <rae-fassung-diplomatisch [diplomaticIRIs]="diplomaticIRIs"
                                                     (pictureReduced)="show_register = true;"
                                                     (pictureIncreased)="show_register = false;">
                           </rae-fassung-diplomatisch>
@@ -99,6 +99,7 @@
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
+                      (goToOtherFassung) = "goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"
@@ -117,7 +118,9 @@
           <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
-                <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+                <rae-registerspalte [konvolutIRI]="konvolutIRI"
+                                    (goToOtherFassung)="goToOtherFassung($event)">
+                </rae-registerspalte>
               </ng-template>
             </ngb-panel>
             <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">

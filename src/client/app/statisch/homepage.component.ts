@@ -11,4 +11,8 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
   title = 'Historisch-kritische Online-Edition';
+
+  constructor() {
+    console.log('Referrer:  ' + document.referrer);
+  }
 }

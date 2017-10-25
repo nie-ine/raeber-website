@@ -30,7 +30,7 @@ export class KonvolutComponent implements OnInit {
   responseArray: Array<any>;
   searchContext: boolean = false;
   searchResultsNo: number;
-  searchTerm: string;
+  searchTermArray: Array<string>;
   columns: string;
   rahmen: boolean = true;
   showText: boolean = true;
@@ -38,6 +38,7 @@ export class KonvolutComponent implements OnInit {
   poemIRIArray: Array<any>;
   konvolutType: string;
   resetPoems: string;
+  konvolutView = true;
 
   viewMode: string;
   konvolut_type: string;
@@ -50,19 +51,6 @@ export class KonvolutComponent implements OnInit {
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
     this.viewMode = 'grid';
-
-    window.onscroll = () => {
-      let windowHeight = 'innerHeight' in window ? window.innerHeight
-        : document.documentElement.offsetHeight;
-      let body = document.body, html = document.documentElement;
-      let docHeight = Math.max(body.scrollHeight,
-        body.offsetHeight, html.clientHeight,
-        html.scrollHeight, html.offsetHeight);
-      let windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        this.loadMore();
-      }
-    };
 
   }
 
@@ -91,17 +79,17 @@ export class KonvolutComponent implements OnInit {
 
   updateKonvolutTitle(konvolutTitle: string) {
     this.konvolutTitle = konvolutTitle;
-    console.log('Konvolut - Titel: ' + this.konvolutTitle);
+    //console.log('Konvolut - Titel: ' + this.konvolutTitle);
   }
 
   updateKonvolutIRI(konvolutIRI: string) {
     this.IRI = konvolutIRI;
-    console.log('IRI: ' + this.IRI);
+    //console.log('IRI: ' + this.IRI);
   }
 
   updateKonvolutBild(konvolutBild: string) {
     this.konvolutBild = konvolutBild;
-    console.log('Konvolutbild: ' + this.konvolutBild);
+    //console.log('Konvolutbild: ' + this.konvolutBild);
   }
 
   /**
@@ -118,10 +106,10 @@ export class KonvolutComponent implements OnInit {
    * Start search in convolute and enter search result mode
    * @param {FormGroup} fg Search parameters
    */
-  searchInConvolute(fg: FormGroup) {
-    // TODO: Implement real search query
+  searchInConvolute(fg: any) {
+    //console.log(fg.searchTerm);
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
-    this.searchTerm = ''; // TODO: Variable takes search term
+    this.searchTermArray = fg.searchTerm; // TODO: Variable takes search term
   }
 
   /**
@@ -154,8 +142,23 @@ export class KonvolutComponent implements OnInit {
 
   updatePoemInformation(poemInformation: Array<any>) {
     //console.log(poemInformation);
-    this.poems = poemInformation;
-    this.resetPoems = undefined;
+    this.poems = [];
+    for (let i = 0; i < poemInformation.length; i++) {
+      this.poems[ poemInformation[i]['8'] - 1 ] = [];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 4 ] = poemInformation[ i ][ 4 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 5 ] = poemInformation[ i ][ 5 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 6 ] = poemInformation[ i ][ 6 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 7 ] = poemInformation[ i ][ 7 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 9 ] = poemInformation[ i ][ 9 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
+    }
     //console.log(this.poems);
   }
 
@@ -164,13 +167,22 @@ export class KonvolutComponent implements OnInit {
   }
 
   updateKonvolutType(konvolutType: string) {
-    console.log('KonvolutType: ' + konvolutType);
+    //console.log('KonvolutType: ' + konvolutType);
     this.konvolutType = konvolutType;
   }
 
   deletePoemsInCache(input: string) {
     console.log('ResetPoemArray');
     this.resetPoems = 'reset';
+  }
+
+  removeHtml(content: string) {
+    if (content !== undefined) {
+      return content.replace(/<[^>]+>/g, '');
+    } else {
+      return undefined;
+      //console.log('no value yet');
+    }
   }
 
 }

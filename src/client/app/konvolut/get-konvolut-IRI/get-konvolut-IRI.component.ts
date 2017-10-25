@@ -23,7 +23,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log('Get IRI Component for Konvolut - ID: ' + this.konvolut_id);
+    //console.log('Get IRI Component for Konvolut - ID: ' + this.konvolut_id);
     //**
     // Notizbuch 1979
     // TODO: Steckbrief etc.
@@ -66,7 +66,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
         '&searchval=Manuskripte%201979-83');
     } else if (this.konvolut_id === 'karten-1984') {
       this.performQuery(
-        '%23PoemManuscriptConvolute' +
+        '%23PoemPostcardConvolute' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
         '&searchval=Karten%201984');
@@ -162,7 +162,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
   }
 
   performQuery(queryPart: string) {
-    console.log('Klicked on Menu: ' + this.konvolut_id);
+    //console.log('Klicked on Menu: ' + this.konvolut_id);
     return this.http.get
     (
       globalSearchVariableService.API_URL +
@@ -173,7 +173,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          console.log(data);
+          //console.log(data);
           if(data.subjects[ 0 ]!== undefined) {
             this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
             this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);

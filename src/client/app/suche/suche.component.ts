@@ -1220,6 +1220,7 @@ export class SucheComponent implements OnInit {
       this.dialog.open(SuchmaskeHilfeComponent, {
         width: '500px'
       });
+  }
 
   onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
                                            text: string,

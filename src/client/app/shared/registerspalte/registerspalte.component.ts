@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/catch';
@@ -24,7 +24,8 @@ export class RegisterspalteComponent implements OnChanges {
   @Input() poemsFromKonvolut: Array<any>;
   @Input() konvolutView: boolean;
 
-  konvolutIRItoStartownRequest: string;
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
+
   poems: Array<any>;
   poemsOld: Array<any>;
   poemIRIArray: Array<any>;
@@ -45,6 +46,7 @@ export class RegisterspalteComponent implements OnChanges {
   };
   konvolutTitle: string;
   sortingType: string;
+  konvolutIRItoStartownRequest: string;
   private sub: any;
 
   constructor(private http: Http, private sortingService: AlphabeticalSortingService,
@@ -76,18 +78,19 @@ export class RegisterspalteComponent implements OnChanges {
 
   updatePoemInformation(poemInformation: Array<any>) {
     //console.log('Update Poem Information');
-    //console.log(poemInformation);
     this.poems = [];
-    if(poemInformation) {
+    if(poemInformation !== undefined) {
       for (let i = 0; i < poemInformation.length; i++) {
-        this.poems[ poemInformation[i]['11'] - 1 ] = [];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 2 ] = this.removeHtml(poemInformation[ i ][ 2 ]);
-        this.poems[ poemInformation[i]['11'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+        if (poemInformation[i] !== undefined) {
+          this.poems[poemInformation[i]['11'] - 1] = [];
+          this.poems[poemInformation[i]['11'] - 1][0] = poemInformation[i][0];
+          this.poems[poemInformation[i]['11'] - 1][1] = poemInformation[i][1];
+          this.poems[poemInformation[i]['11'] - 1][2] = this.removeHtml(poemInformation[i][2]);
+          this.poems[poemInformation[i]['11'] - 1][3] = poemInformation[i][3];
+          this.poems[poemInformation[i]['11'] - 1][8] = poemInformation[i][8];
+          this.poems[poemInformation[i]['11'] - 1][11] = poemInformation[i][11];
+          this.poems[poemInformation[i]['11'] - 1][10] = poemInformation[i][10];
+        }
       }
       this.nrOfPoems = poemInformation.length;
     }

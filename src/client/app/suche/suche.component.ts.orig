@@ -833,6 +833,7 @@ export class SucheComponent implements OnInit {
     }
   }
 
+
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     this.checkProgress();
     //console.log('Add to final Search Results');
@@ -1441,6 +1442,7 @@ export class SucheComponent implements OnInit {
         '/resources/' +
         encodeURIComponent(editionIRI)
       )
+<<<<<<< HEAD
         .map(
           (lambda: Response) => {
             const data = lambda.json();
@@ -1458,6 +1460,55 @@ export class SucheComponent implements OnInit {
                 hatStrophenunterteilung,
                 isInDialiect,
                 isPartOfCycle);
+=======
+      .subscribe(response => this.responseArray = response);
+  }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(SuchmaskeHilfeComponent, {
+        width: '500px'
+      });
+
+  onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
+                                           text: string,
+                                           titel: string,
+                                           seqnum: string,
+                                           date: string,
+                                           k: number,
+                                           textart: string,
+                                           isFinalVersion: string,
+                                           hatStrophenunterteilung: string,
+                                           isInDialiect: string,
+                                           isPartOfCycle: string) {
+    for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+      if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
+        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+        //console.log(k);
+        //console.log(poemIRI);
+        if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+            if(this.checkTextart(textart)) {
+              if(this.checkTimeInterval(date)) {
+                if(this.checkIfFinalVersion(isFinalVersion)) {
+                  if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                    if(this.checkIfIsInDialect(isInDialiect)) {
+                      if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                        //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                        if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                          this.allSearchResults[ this.allSearchResults.length ] = [];
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                          this.numberOfSearchResults += 1;
+                      }
+                    }
+                  }
+                }
+              }
+              }
+>>>>>>> master
             }
             return null;
           }

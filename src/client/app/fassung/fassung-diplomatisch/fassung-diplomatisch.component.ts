@@ -17,6 +17,9 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
 
+  @ViewChild('diplomatischKarte')
+  diplomatischKarte: ElementRef;
+
   cardWidth: number;
   pages: Array<any> = [];
   gewaehlteSchicht: string = 'schicht0';
@@ -31,36 +34,39 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
     if (this.diplomaticIRIs) {
       for (let i = 0; i < this.diplomaticIRIs.length; i++) {
-        let page = {
-          'diplIRI': this.diplomaticIRIs[i],
-          'pageIRI': '',
-          'pagenumber': '',
-          'picData': ''
-        };
+        let seqnum: number;
+        this.pages.push({'diplIRI': null, 'pageIRI': null, 'pagenumber': null, 'picData': null, 'origName': null});
 
-        this.sub = this.http.get(globalSearchVariableService.API_URL + /resources/
+        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/'
           + encodeURIComponent(this.diplomaticIRIs[i]))
           .map(results => results.json())
           .subscribe(res => {
             try {
-              page['pageIRI'] = res.props['http://www.knora.org/ontology/text#isDiplomaticTranscriptionOfTextOnPage'].values[0];
-              console.log(page['pageIRI']);
+              seqnum = Number(res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ]);
             } catch (TypeError) {
-              page[ 'pageIRI' ] = '';
+              console.log('Cannot get seqnum for this page.');
+              seqnum = 100;
+            }
+
+            try {
+              this.pages[seqnum][ 'pageIRI' ]
+                = res.props[ 'http://www.knora.org/ontology/text#isDiplomaticTranscriptionOfTextOnPage' ].values[ 0 ];
+            } catch (TypeError) {
+              console.log('Cannot set IRI of page for this page.');
+            }
+
+            try {
+              this.pages[seqnum]['diplIRI'] = this.diplomaticIRIs[i];
+            } catch (TypeError) {
+              console.log('Cannot set IRI of diplomatic transcription for this page.');
             }
           });
-
-        this.pages.push(page);
       }
 
     }
-
     this.gewaehlteSchicht = 'schicht0';
     this.textIsMovable = false;
   }
-
-  @ViewChild('diplomatischKarte')
-  diplomatischKarte: ElementRef;
 
   ngAfterViewInit() {
     if (this.diplomatischKarte.nativeElement.offsetWidth > 300) {
@@ -72,27 +78,11 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
   addPage(values: any) {
     for (let i = 0; i < this.pages.length; i++) {
-      if (values['pageIRI'] = this.pages[i]['pageIRI']) {
+      if (values['pageIRI'] === this.pages[i]['pageIRI']) {
         this.pages[i]['pagenumber'] = values['pagenumber'];
         this.pages[i]['picData'] = values['picData'];
+        this.pages[i]['origName'] = values['origName'];
       }
     }
-  }
-
-  // TODO kann nicht sortieren, wenn alle Seiten alle Nummern haben.
-  sortPages() {
-    this.pages = this.pages.sort((n1, n2) => {
-      const k1 = n1.value[ 'pagenumber' ];
-      const k2 = n2.value[ 'pagenumber' ];
-      if (k1 > k2) {
-        return 1;
-      }
-
-      if (k1 < k2) {
-        return -1;
-      }
-
-      return 0;
-    });
   }
 }

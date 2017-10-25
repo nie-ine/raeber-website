@@ -16,7 +16,7 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
 
   @Output() propertiesReset = new EventEmitter();
 
-  properties = { 'pageIRI': '', 'pagenumber': '', 'picData': '' };
+  properties = { 'pageIRI': '', 'pagenumber': '', 'picData': '', 'origName': '' };
 
   private sub: any;
 
@@ -31,6 +31,8 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
           this.properties[ 'pagenumber' ] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;
           this.properties[ 'picData' ] = res.resinfo.locdata;
           this.properties[ 'pageIRI' ] = this.pageIRI;
+          this.properties[ 'origName' ]
+            = res.resinfo.locdata.origname.split('/')[ res.resinfo.locdata.origname.split('/').length - 1 ];
           this.propertiesReset.emit(this.properties);
         });
     }

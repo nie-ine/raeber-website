@@ -149,8 +149,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   goToOtherFassung(idOfFassung: string) {
-    this.poem_id = idOfFassung.split('---')[1];
-    console.log('Go to other Fassung: ' + idOfFassung.split('---')[1]);
+    const tempPoemId = idOfFassung.split('---')[1];
+    this.poem_id = tempPoemId !== undefined && !tempPoemId.includes('/') ? tempPoemId : this.poem_id;
     this.updateView();
   }
 

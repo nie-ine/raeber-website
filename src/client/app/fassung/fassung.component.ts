@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
 import { Config } from '../shared/config/env.config';
 import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
+import { DateFormatService } from '../shared/utilities/date-format.service';
 
 @Component({
   moduleId: module.id,
@@ -19,8 +20,8 @@ import { globalSearchVariableService } from '../suche/globalSearchVariablesServi
   styleUrls: ['fassung.component.css']
 })
 export class FassungComponent implements OnInit, AfterViewChecked {
-  creationDate = 'Freitag, 01 Juni 1979';
-  modificationDate = 'Samstag, 13 Mai 2017';
+  creationDate: string;
+  modificationDate: string;
 
   zeigeKonstituiert: boolean = true;
   zeigeDiplomatisch: boolean = false;
@@ -52,7 +53,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   poem_resizable: boolean;
   show_register: boolean;
 
-  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef, private dfs: DateFormatService) {
   }
 
   private static produceFassungsLink(titel: string, iri: string) {
@@ -84,6 +85,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.pageIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#isOnPage'].values;
         this.diplomaticIRIs = res.props['http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription'].values;
         this.poemSeqnum = res.props['http://www.knora.org/ontology/knora-base#seqnum'].values[0];
+        this.creationDate = this.dfs.germanLongDate(res.props['http://www.knora.org/ontology/human#hasCreationDate'].values[0].dateval1);
+        this.modificationDate = this.dfs.germanLongDate(res.props['http://www.knora.org/ontology/human#hasModificationDate'].values[0].utf8str);
         this.poemConvoluteType = res.resdata['restype_name'].split('#')[1];
         switch (this.poemConvoluteType) {
           case 'PoemNote':

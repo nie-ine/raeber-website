@@ -559,6 +559,7 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.warning = '';
     this.numberOfQueries = 0;
     this.numberOfSearchResults = 0;
     this.allSearchResults = [];

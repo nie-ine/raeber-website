@@ -76,18 +76,19 @@ export class RegisterspalteComponent implements OnChanges {
 
   updatePoemInformation(poemInformation: Array<any>) {
     //console.log('Update Poem Information');
-    //console.log(poemInformation);
     this.poems = [];
-    if(poemInformation) {
+    if(poemInformation !== undefined) {
       for (let i = 0; i < poemInformation.length; i++) {
-        this.poems[ poemInformation[i]['11'] - 1 ] = [];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 2 ] = this.removeHtml(poemInformation[ i ][ 2 ]);
-        this.poems[ poemInformation[i]['11'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
-        this.poems[ poemInformation[i]['11'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+        if (poemInformation[i] !== undefined) {
+          this.poems[poemInformation[i]['11'] - 1] = [];
+          this.poems[poemInformation[i]['11'] - 1][0] = poemInformation[i][0];
+          this.poems[poemInformation[i]['11'] - 1][1] = poemInformation[i][1];
+          this.poems[poemInformation[i]['11'] - 1][2] = this.removeHtml(poemInformation[i][2]);
+          this.poems[poemInformation[i]['11'] - 1][3] = poemInformation[i][3];
+          this.poems[poemInformation[i]['11'] - 1][8] = poemInformation[i][8];
+          this.poems[poemInformation[i]['11'] - 1][11] = poemInformation[i][11];
+          this.poems[poemInformation[i]['11'] - 1][10] = poemInformation[i][10];
+        }
       }
       this.nrOfPoems = poemInformation.length;
     }

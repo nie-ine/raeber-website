@@ -10,11 +10,16 @@ import { RegisterComponent } from './register.component';
 import { RegisterBeschreibungComponent } from './register-beschreibung/register-beschreibung.component';
 import { RegisterTitelregisterComponent } from './titelregister/register-titelregister.component';
 import { RouterModule } from '@angular/router';
+import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
+import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
+import {GetKonvolutIRIsComponent} from "./titelregister/get-konvolut-IRIs.component";
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    FromKonvolutIRIToPoemIRIsModule,
+    FromPoemIRIToTextgridInformationModule,
     HttpModule,
     MdButtonModule,
     MdListModule,
@@ -24,6 +29,7 @@ import { RouterModule } from '@angular/router';
     ])
   ],
   declarations: [
+    GetKonvolutIRIsComponent,
     RegisterBeschreibungComponent,
     RegisterComponent,
     RegisterTitelregisterComponent

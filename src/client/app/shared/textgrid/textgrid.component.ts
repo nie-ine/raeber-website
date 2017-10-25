@@ -38,7 +38,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTermArray: Array<any>;
 
-  gridTextHeight: number = 0;
+  @Input() gridTextHeight: number = 0;
   i: number;
   j: number;
   searchActivated = false;
@@ -117,6 +117,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       this.searchActivated = false;
       this.searchTermArray = undefined;
     }
+    console.log('Relative Spaltenbreite: ' + this.columns);
+    console.log('Text anzeigen: ' + this.showText);
+    console.log('Höhe: ' + this.gridTextHeight);
+    console.log('Fixe Höhe: ' + this.rahmen);
+
   }
 
   searchAndFilterInTextgrid() {

@@ -74,7 +74,9 @@
                       </md-card>
                     </div>
                     <div class="itemExtraFields">
-                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id" [konvolutIRI]="konvolutIRI">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id"
+                                              [konvolutIRI]="konvolutIRI"
+                                              (goToOtherFassung) = "goToOtherFassung($event)">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>

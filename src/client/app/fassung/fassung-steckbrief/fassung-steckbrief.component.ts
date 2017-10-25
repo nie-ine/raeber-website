@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 05.07.17.
  */
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
@@ -14,6 +14,7 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 export class FassungSteckbriefComponent implements OnChanges {
   @Input() fassungIRI: string;
   @Input() konvolutIRI: string;
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   isWrittenWith: string;
   specialDescription: string;
@@ -29,9 +30,10 @@ export class FassungSteckbriefComponent implements OnChanges {
   isInDialect: boolean;
   nachlassPublicationDescription: string;
   publicationNumber: string;
+  referenceTitle: string;
+  referencePoemIRI: string;
   unauthorizedPublication: Array<string>;
   publishedIn: Array<string>;
-  referencePoemIRIs: Array<string>;
 
   carrierIRIs: Array<string>;
 
@@ -55,8 +57,6 @@ export class FassungSteckbriefComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log("Fassungs-IRI: " +  this.fassungIRI);
-    console.log("Konvolut-IRI: " + this.konvolutIRI);
     if (this.fassungIRI) {
       this.sub = this.http.get(globalSearchVariableService.API_URL
         + '/resources/' + encodeURIComponent(this.fassungIRI))
@@ -158,6 +158,20 @@ export class FassungSteckbriefComponent implements OnChanges {
             this.publicationNumber = null;
           }
 
+          try {
+            this.referenceTitle =
+              res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferenceTitle' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+            this.referenceTitle = null;
+          }
+
+          try {
+            this.referencePoemIRI =
+              res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values[ 0 ];
+          } catch (TypeError) {
+            this.referencePoemIRI = null;
+          }
+
           this.unauthorizedPublication = [];
           try {
             for (let i = 0; i <
@@ -178,17 +192,6 @@ export class FassungSteckbriefComponent implements OnChanges {
             }
           } catch (TypeError) {
             // skip if there is no same edition
-          }
-
-          this.referencePoemIRIs = [];
-          try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values.length; i++) {
-              this.referencePoemIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values[ i ]);
-            }
-          } catch (TypeError) {
-            // skip if there is no bezugstext
           }
 
           this.carrierIRIs = [];

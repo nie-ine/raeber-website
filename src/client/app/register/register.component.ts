@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       this.selectedTab = params[ 'zeitraum' ];
     });
 
-    console.log('search/schlaf?searchtype=fulltext');
+    console.log('Titelregister ' + this.selectedTab);
   }
 
 

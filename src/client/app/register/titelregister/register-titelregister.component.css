@@ -1,6 +1,6 @@
 .rae-register-titelregister md-nav-list {
   min-height: 200px;
-  max-height: 400px;
+/*  max-height: 400px;*/
   overflow-y: auto;
   overflow-x: hidden;
 

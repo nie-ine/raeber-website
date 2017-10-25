@@ -5,8 +5,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'rae-404',
-  template: '<h1>404!</h1>'
+  templateUrl: './404.component.html'
 })
 export class PageNotFoundComponent {
 

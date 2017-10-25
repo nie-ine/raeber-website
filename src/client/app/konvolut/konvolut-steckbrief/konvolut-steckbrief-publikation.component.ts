@@ -50,7 +50,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
           .map(response => response.json())
           .subscribe((res: any) => {
             this.publications[i]['size'] = res.subjects.length;
-            console.log(res);
+            //console.log(res);
           });
       } catch (TypeError) {
         this.publications[i]['size'] = null;

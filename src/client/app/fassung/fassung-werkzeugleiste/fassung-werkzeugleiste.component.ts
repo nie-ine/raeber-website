@@ -18,6 +18,7 @@ export class FassungWerkzeugleisteComponent {
   @Input() showRegister: boolean;
   @Output() poemResizableChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showRegisterChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() idOfPrev: string;
   @Input() idOfNext: string;
@@ -25,7 +26,12 @@ export class FassungWerkzeugleisteComponent {
   constructor(public dialog: MdDialog) {}
 
   neuladen() {
-    window.location.reload();
+    // TODO: Don't reload the whole window!
+    // window.location.reload();
+    this.poemResizable = true;
+    this.showRegister = true;
+    this.poemResizableChange.emit(this.poemResizable);
+    this.showRegisterChange.emit(this.showRegister);
   }
 
   showHelp(): void {
@@ -36,7 +42,6 @@ export class FassungWerkzeugleisteComponent {
       });
   }
 
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   goToNextFassung() {
     console.log('Go to next Fassung');

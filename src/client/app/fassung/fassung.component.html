@@ -9,7 +9,7 @@
 
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
-                    (goToOtherFassung) = "goToOtherFassung($event)"
+                    (goToOtherFassung)="goToOtherFassung($event)"
                     [idOfPrev]="prevPoem.split('###')[0]"
                     [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
@@ -95,14 +95,14 @@
                 <!-- Related items by tag -->
                 <div class="itemRelated">
                   <rae-fassung-weitere
-                    (goOtherFassung) = "goToOtherFassung($event)"
+                    (goOtherFassung)="goToOtherFassung($event)"
                     [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
-                      (goToOtherFassung) = "goToOtherFassung($event)"
+                      (goToOtherFassung)="goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"

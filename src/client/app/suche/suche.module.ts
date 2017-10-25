@@ -17,6 +17,7 @@ import {
   MdGridListModule,
   MdIconModule,
   MdInputModule,
+  MdDialogModule,
   MdMenuModule,
   MdSelectModule,
   MdSidenavModule,
@@ -32,6 +33,7 @@ import { ParserModule } from './parser/parser.module';
 
 import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
 import { BasicSearchComponent } from './basic-search/basic-search.component';
+import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,7 @@ import { BasicSearchComponent } from './basic-search/basic-search.component';
     SucheRoutingModule,
     MdButtonModule,
     MdButtonToggleModule,
+    MdDialogModule,
     MdCardModule,
     MdGridListModule,
     MdIconModule,
@@ -64,11 +67,15 @@ import { BasicSearchComponent } from './basic-search/basic-search.component';
   declarations: [
     SucheComponent,
     SuchmaskeComponent,
+    SuchmaskeHilfeComponent,
     BasicSearchComponent
   ],
   exports: [
     SucheComponent,
     BasicSearchComponent
+  ],
+  entryComponents: [
+    SuchmaskeHilfeComponent
   ],
   providers: []
 })

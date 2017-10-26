@@ -21,7 +21,7 @@ import {
   MdMenuModule,
   MdSelectModule,
   MdSidenavModule,
-  MdSlideToggleModule, MdToolbarModule
+  MdSlideToggleModule, MdToolbarModule,
   MatProgressBarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';

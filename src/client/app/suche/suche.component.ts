@@ -201,7 +201,7 @@ export class SucheComponent implements OnInit {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsTyposkript79Spez,
-      'officialName': 'Manuskripte 1979 - spez'
+      'officialName': 'Typoskripte 1979 - spez'
     },
     {
       'konvolut': 'typoskripte-1983',
@@ -476,7 +476,7 @@ export class SucheComponent implements OnInit {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
     if (this.route.snapshot.queryParams[ 'wort' ]) {
-      console.log('Start search immediately');
+      //console.log('Start search immediately');
       this.suchmaskeKonvolutIRIMapping[ 0 ].enabled
         = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch79' ],true);
       this.suchmaskeKonvolutIRIMapping[ 1 ].enabled
@@ -549,12 +549,12 @@ export class SucheComponent implements OnInit {
         = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftWortTat' ],true);
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled
         = this.updateFilterParams(this.route.snapshot.queryParams[ 'materialienTagebuch' ],true);
-      console.log(this.suchmaskeKonvolutIRIMapping);
+      //console.log(this.suchmaskeKonvolutIRIMapping);
       this.startSearchImmediately = true;
       this.searchTermArray = [];
       this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
       setTimeout(() => {
-        console.log('Wait for Konvolutes to load');
+        //console.log('Wait for Konvolutes to load');
         this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
       }, 3000);
 
@@ -795,7 +795,7 @@ export class SucheComponent implements OnInit {
               searchTerm,
               undefined);
           } else {
-            console.log('Keine Treffer fuer diese Suche');
+            //console.log('Keine Treffer fuer diese Suche');
           }
           return null;
         }
@@ -824,7 +824,7 @@ export class SucheComponent implements OnInit {
         for (let poem of searchResults) {
           if (this.partOfAllSearchResults[searchGroup].has(poem.value[7]) &&
             !this.partOfAllSearchResults[searchGroup].has(poem.value[7] + searchTerm)) {
-            console.log('Found Duplicate, so add to results');
+            //console.log('Found Duplicate, so add to results');
             this.partOfAllSearchResults[searchGroup].add(poem.value[7] + searchTerm);
             this.addToFinalSearchResultArray(undefined, poem);
           } else {
@@ -873,7 +873,7 @@ export class SucheComponent implements OnInit {
       }
     }
     if(singlePoem) {
-      console.log('add poem to final search results');
+      //console.log('add poem to final search results');
       this.onlyChoosePoemsThatAreInChosenConvolutes(
         singlePoem.value['7'],
         singlePoem.value['8'],
@@ -940,7 +940,7 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
       this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
-      console.log(this.suchmaskeKonvolutIRIMapping);
+      //console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
   updateQueryParamsInURL() {
@@ -1360,10 +1360,6 @@ export class SucheComponent implements OnInit {
                 //console.log('Right Property: ' + rightProperty);
               } else if (konvolutType === 'poem typescript convolute with image') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
-        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k
-        // ].konvolut); console.log(k); console.log(poemIRI);
-        if (this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-          if (this.checkTextart(textart)) {
                 //console.log('Right Property: ' + rightProperty);
               } else if (konvolutType === 'printed poem book publication') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
@@ -1377,18 +1373,12 @@ export class SucheComponent implements OnInit {
               ) {
                 //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
                 this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
-                        this.numberOfSearchResults += 1;
-                      }
-                    }
-                  }
                 }
               }
-            }
             //console.log(this.setOfAlowedPoemIRIs);
             return null;
           }
-        )
-        .subscribe(response => this.responseArray = response);
+        ).subscribe(response => this.responseArray = response);
     }
     onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
                                              text: string,
@@ -1455,54 +1445,6 @@ export class SucheComponent implements OnInit {
       return true;
     } else return false;
   }
-
-  checkIfIsInDialect(isInDialiect: string): boolean {
-      //console.log(isPartOfCycle);
-    if (!this.arg) return true;
-    if (!this.arg.get('mundart').value) {
-      return true;
-    } else if (this.arg.get('mundart').value && isInDialiect) {
-      return true;
-    } else return false;
-  }
-
-  checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-    //console.log(hatStrophenunterteilung);
-      if(!this.arg) return true;
-    if (!this.arg.get('strophen').value) {
-      return true;
-    } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
-      return true;
-    } else return false;
-  }
-
-  checkIfFinalVersion(isFinalVersion: string): boolean {
-    if (!this.arg) return true;
-    if (!this.arg.get('endfassung').value) {
-      return true;
-      if(!this.arg.get('zyklus').value) {
-      return true;
-    } else return false;
-  }
-
-  checkTextart(textart: string): boolean {
-    if (!this.arg) return true;
-    if (this.arg.get('textartForm').pristine) {
-      //console.log(textart);
-      return true;
-    } else if (this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
-        return true;
-    } else if (this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
-      return true;
-      } else if (this.arg.get('zyklus').value && isPartOfCycle) {
-      return true;
-    } else if (this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
-        return true;
-    } else if (this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
-      return true;
-    } else {
-      } else return false;
-    }
     checkIfIsInDialect(isInDialiect: string): boolean {
     if (!this.arg) return true;
       //console.log(isInDialiect);

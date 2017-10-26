@@ -416,7 +416,7 @@ export class SucheComponent implements OnInit {
       this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
       this.startSearchImmediately = true;
       this.searchTermArray = [];
-      this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
+      this.searchTermArray[ this.searchTermArray.length ] = this.route.snapshot.queryParams[ 'wort' ];
     }
     if (this.allSearchResults === undefined) {
       this.numberOfSearchResults = 0;
@@ -424,8 +424,6 @@ export class SucheComponent implements OnInit {
       this.numberOfSearchResults = this.allSearchResults.length;
     }
   }
-
-
 
 
   executeFinalQueries() {
@@ -461,10 +459,10 @@ export class SucheComponent implements OnInit {
           + queries[ this.i ][ this.j ].searchString
           + ' in: ' + queries[ this.i ][ this.j ].where);
         this.searchTerm = queries[ this.i ][ this.j ].searchString;
-        if(this.searchTermArray === undefined) {
+        if (this.searchTermArray === undefined) {
           this.searchTermArray = [];
         }
-        this.searchTermArray[this.searchTermArray.length] = this.searchTerm;
+        this.searchTermArray[ this.searchTermArray.length ] = this.searchTerm;
         this.performQuery(this.searchTerm, queries[ this.i ][ this.j ].where, this.firstTermAfterOr, this.i, queries[ this.i ].length);
         this.firstTermAfterOr = false;
       }
@@ -474,7 +472,7 @@ export class SucheComponent implements OnInit {
   getQueries(queries: Array<any>) {
     console.log(queries);
     this.queries = queries;
-    if(this.startSearchImmediately) {
+    if (this.startSearchImmediately) {
       this.executeFinalQueries();
     }
   }
@@ -522,33 +520,33 @@ export class SucheComponent implements OnInit {
                        numberOfTermsInSearchGroup: number,
                        poemResType: string) {
     this.numberOfPerformedQueries += 1;
-      return this.http.get(
-        globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        poemResType +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
-        '&compop=LIKE' +
-        '&searchval=' +
-        encodeURIComponent(searchTerm) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
-        '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            console.log(typeof data);
-            if (data.subjects[0] !== undefined) {
-              this.addToTemporarySearchResultArray(data.subjects,
-                firstTermAfterOr,
-                searchGroup,
-                numberOfTermsInSearchGroup,
-                searchTerm,
-                undefined);
+    return this.http.get(
+      globalSearchVariableService.API_URL +
+      globalSearchVariableService.extendedSearch +
+      poemResType +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasTitle' +
+      '&compop=LIKE' +
+      '&searchval=' +
+      encodeURIComponent(searchTerm) +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fhuman%23hasCreationDate' +
+      '&compop=!EQ&searchval=GREGORIAN:2217-01-27' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+      '&compop=!EQ&searchval=' + 1 + '&show_nrows=' + 2000)
+      .map(
+        (lambda: Response) => {
+          const data = lambda.json();
+          console.log(typeof data);
+          if (data.subjects[ 0 ] !== undefined) {
+            this.addToTemporarySearchResultArray(data.subjects,
+              firstTermAfterOr,
+              searchGroup,
+              numberOfTermsInSearchGroup,
+              searchTerm,
+              undefined);
           } else {
             //console.log('Keine Treffer fuer diese Suche');
-            }
-            return null;
+          }
+          return null;
         }
       )
       .subscribe(response => response = response);
@@ -621,43 +619,44 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.myProperties = response);
 
   }
+
   addToTemporarySearchResultArray(searchResults: Array<any>,
                                   firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number,
                                   searchTerm: string,
                                   poemIRI: string) {
-    if(this.partOfAllSearchResults === undefined) {
+    if (this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
     }
-    if(this.partOfAllSearchResults[searchGroup] === undefined) {
-      this.partOfAllSearchResults[searchGroup] = [];
-      this.partOfAllSearchResults[searchGroup] = new Set();
+    if (this.partOfAllSearchResults[ searchGroup ] === undefined) {
+      this.partOfAllSearchResults[ searchGroup ] = [];
+      this.partOfAllSearchResults[ searchGroup ] = new Set();
     }
-    if(numberOfTermsInSearchGroup > 1) {
+    if (numberOfTermsInSearchGroup > 1) {
       if (searchResults !== undefined) {
         for (let poem of searchResults) {
-          if (this.partOfAllSearchResults[searchGroup].has(poem.obj_id) &&
-            !this.partOfAllSearchResults[searchGroup].has(poem.obj_id + searchTerm)) {
+          if (this.partOfAllSearchResults[ searchGroup ].has(poem.obj_id) &&
+            !this.partOfAllSearchResults[ searchGroup ].has(poem.obj_id + searchTerm)) {
             //console.log('Found Duplicate, so add to results');
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
+            this.partOfAllSearchResults[ searchGroup ].add(poem.obj_id + searchTerm);
             this.addToFinalSearchResultArray(undefined, poem.obj_id);
           } else {
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id + searchTerm);
-            this.partOfAllSearchResults[searchGroup].add(poem.obj_id);
+            this.partOfAllSearchResults[ searchGroup ].add(poem.obj_id + searchTerm);
+            this.partOfAllSearchResults[ searchGroup ].add(poem.obj_id);
             //console.log('No duplicate found');
           }
         }
       }
       if (poemIRI !== undefined) {
-        if (this.partOfAllSearchResults[searchGroup].has(poemIRI) &&
-          !this.partOfAllSearchResults[searchGroup].has(poemIRI + searchTerm)) {
+        if (this.partOfAllSearchResults[ searchGroup ].has(poemIRI) &&
+          !this.partOfAllSearchResults[ searchGroup ].has(poemIRI + searchTerm)) {
           //console.log('Found Duplicate, so add to results for searchTerm: ' + searchTerm);
-          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
+          this.partOfAllSearchResults[ searchGroup ].add(poemIRI + searchTerm);
           this.addToFinalSearchResultArray(undefined, poemIRI);
         } else {
-          this.partOfAllSearchResults[searchGroup].add(poemIRI + searchTerm);
-          this.partOfAllSearchResults[searchGroup].add(poemIRI);
+          this.partOfAllSearchResults[ searchGroup ].add(poemIRI + searchTerm);
+          this.partOfAllSearchResults[ searchGroup ].add(poemIRI);
           //console.log('No duplicate found');
         }
       }
@@ -750,8 +749,6 @@ export class SucheComponent implements OnInit {
       console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
-
-
 
 
   getKonvolutIRI(konvolut_id: string, i: number) {
@@ -1055,7 +1052,7 @@ export class SucheComponent implements OnInit {
   }
 
   performQueryToGetIRI(queryPart: string, i: number, individualQueryPart: string) {
-    if(queryPart === undefined) {
+    if (queryPart === undefined) {
       queryPart = individualQueryPart;
     } else {
       queryPart = globalSearchVariableService.API_URL +
@@ -1154,18 +1151,18 @@ export class SucheComponent implements OnInit {
         (lambda: Response) => {
           const data = lambda.json();
           //console.log(data);
-          if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
+          if (data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
             this.performTextQuery(
               data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
               poemIRI,
               data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
               date,
               seqnum,
-              data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
-              data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
-              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
+              data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[ 0 ],
+              data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[ 0 ],
+              data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[ 0 ],
+              data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[ 0 ],
+              data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[ 0 ]
             );
           }
           return null;
@@ -1215,12 +1212,7 @@ export class SucheComponent implements OnInit {
       .subscribe(response => this.responseArray = response);
   }
 
-  showHelp(): void {
-    let dialogRef =
-      this.dialog.open(SuchmaskeHilfeComponent, {
-        width: '500px'
-      });
-  }
+
 
   onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
                                            text: string,
@@ -1235,32 +1227,31 @@ export class SucheComponent implements OnInit {
                                            isPartOfCycle: string) {
     for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
       if (this.suchmaskeKonvolutIRIMapping[ k ].enabled) {
-        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-        //console.log(k);
-        //console.log(poemIRI);
-        if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-            if(this.checkTextart(textart)) {
-              if(this.checkTimeInterval(date)) {
-                if(this.checkIfFinalVersion(isFinalVersion)) {
-                  if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                    if(this.checkIfIsInDialect(isInDialiect)) {
-                      if(this.checkIfPartOfCycle(isPartOfCycle)) {
-                        //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                        if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                          this.allSearchResults[ this.allSearchResults.length ] = [];
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                          this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                          this.numberOfSearchResults += 1;
+        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k
+        // ].konvolut); console.log(k); console.log(poemIRI);
+        if (this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+          if (this.checkTextart(textart)) {
+            if (this.checkTimeInterval(date)) {
+              if (this.checkIfFinalVersion(isFinalVersion)) {
+                if (this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                  if (this.checkIfIsInDialect(isInDialiect)) {
+                    if (this.checkIfPartOfCycle(isPartOfCycle)) {
+                      //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
+                      if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
+                        this.allSearchResults[ this.allSearchResults.length ] = [];
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
+                        this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
+                        this.numberOfSearchResults += 1;
                       }
                     }
                   }
                 }
               }
-              }
             }
+          }
         }
       }
     }
@@ -1268,8 +1259,8 @@ export class SucheComponent implements OnInit {
 
   checkIfPartOfCycle(isPartOfCycle: string): boolean {
     //console.log(isPartOfCycle);
-    if(!this.arg) return true;
-    if(!this.arg.get('zyklus').value) {
+    if (!this.arg) return true;
+    if (!this.arg.get('zyklus').value) {
       return true;
     } else if (this.arg.get('zyklus').value && isPartOfCycle) {
       return true;
@@ -1278,8 +1269,8 @@ export class SucheComponent implements OnInit {
 
   checkIfIsInDialect(isInDialiect: string): boolean {
     //console.log(isInDialiect);
-    if(!this.arg) return true;
-    if(!this.arg.get('mundart').value) {
+    if (!this.arg) return true;
+    if (!this.arg.get('mundart').value) {
       return true;
     } else if (this.arg.get('mundart').value && isInDialiect) {
       return true;
@@ -1288,17 +1279,17 @@ export class SucheComponent implements OnInit {
 
   checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
     //console.log(hatStrophenunterteilung);
-    if(!this.arg) return true;
-    if(!this.arg.get('strophen').value) {
+    if (!this.arg) return true;
+    if (!this.arg.get('strophen').value) {
       return true;
     } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
       return true;
     } else return false;
   }
 
-  checkIfFinalVersion(isFinalVersion: string):boolean {
-    if(!this.arg) return true;
-    if(!this.arg.get('endfassung').value) {
+  checkIfFinalVersion(isFinalVersion: string): boolean {
+    if (!this.arg) return true;
+    if (!this.arg.get('endfassung').value) {
       return true;
     } else if (this.arg.get('endfassung').value && isFinalVersion) {
       return true;
@@ -1306,27 +1297,27 @@ export class SucheComponent implements OnInit {
   }
 
   checkTextart(textart: string): boolean {
-    if(!this.arg) return true;
+    if (!this.arg) return true;
     if (this.arg.get('textartForm').pristine) {
       //console.log(textart);
       return true;
-    } else if(this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
-        return true;
-    } else if(this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
+    } else if (this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
       return true;
-    } else if(this.arg.get('textartForm.textartProsa').value && textart === 'RythmicProse') {
+    } else if (this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
       return true;
-    } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
+    } else if (this.arg.get('textartForm.textartProsa').value && textart === 'RythmicProse') {
       return true;
-    } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
+    } else if (this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
+      return true;
+    } else if (this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
       return true;
     } else {
       return false;
     }
-    }
+  }
 
   checkTimeInterval(date: string): boolean {
-    if(!this.arg) return true;
+    if (!this.arg) return true;
     //console.log(date.split('-')[0]);
     //console.log(typeof this.arg.get('zeitraumForm.zeitraumVon').value);
     if (this.arg.get('zeitraumForm.zeitraumVon').value === ''
@@ -1334,19 +1325,19 @@ export class SucheComponent implements OnInit {
       return true;
     } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
       && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
-      if(date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
-        && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+      if (date.split('-')[ 0 ] > this.arg.get('zeitraumForm.zeitraumVon').value
+        && date.split('-')[ 0 ] < this.arg.get('zeitraumForm.zeitraumBis').value) {
         console.log('Poem liegt im beidseitig geschlossenen Intervall');
         return true;
       } else {
         return false;
       }
-    } else if(this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-      && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value) {
+    } else if (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
+      && date.split('-')[ 0 ] > this.arg.get('zeitraumForm.zeitraumVon').value) {
       console.log('Groesser als Linker Intervall');
       return true;
-    } else if(this.arg.get('zeitraumForm.zeitraumBis').value !== ''
-      && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value) {
+    } else if (this.arg.get('zeitraumForm.zeitraumBis').value !== ''
+      && date.split('-')[ 0 ] < this.arg.get('zeitraumForm.zeitraumBis').value) {
       console.log('Kleiner als Linker Intervall');
       return true;
     } else return false;

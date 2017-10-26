@@ -1,13 +1,10 @@
 .rae-fassung-resizable {
-  resize: vertical;
-  overflow-y: hidden;
-  border-bottom-color: silver;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
 }
 
 .rae-fassung-nonresizable {
-
+  height: 280px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 div.itemFullText md-card md-card-footer button {

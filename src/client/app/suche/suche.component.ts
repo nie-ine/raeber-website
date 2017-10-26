@@ -428,7 +428,6 @@ export class SucheComponent implements OnInit {
       'officialName': 'Tagebuch'
     }
   ];
-  suchmaskeKonvolutIRIMappingOld = this.suchmaskeKonvolutIRIMapping;
   poemResTypes = [
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PoemNote',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
@@ -589,7 +588,7 @@ export class SucheComponent implements OnInit {
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
     this.str = JSON.stringify(queries, null, 4);
-    console.log('Queries: ' + this.str);
+    //console.log('Queries: ' + this.str);
     this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
       this.firstTermAfterOr = true;
@@ -627,7 +626,7 @@ export class SucheComponent implements OnInit {
   }
 
   getQueries(queries: Array<any>) {
-    console.log(queries);
+    //console.log(queries);
     this.queries = queries;
     if(this.startSearchImmediately) {
       this.executeFinalQueries();
@@ -721,7 +720,7 @@ export class SucheComponent implements OnInit {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
+            //console.log(data);
             if (data.subjects[0] !== undefined) {
               this.addToTemporarySearchResultArray(data.subjects,
                 firstTermAfterOr,
@@ -743,7 +742,7 @@ export class SucheComponent implements OnInit {
                       searchGroup: number,
                       numberOfTermsInSearchGroup: number,
                       poemResType: string) {
-    console.log('Search in Text');
+    //console.log('Search in Text');
     this.numberOfPerformedQueries += 1;
     return this.http.get(
       globalSearchVariableService.API_URL +
@@ -906,7 +905,7 @@ export class SucheComponent implements OnInit {
     ) {
       //console.log('Perform Search in all convolutes');
     } else {
-      console.log('Gehe durch jedes Konvolut');
+      //console.log('Gehe durch jedes Konvolut');
       this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
       this.suchmaskeKonvolutIRIMapping[ 1 ].enabled = arg.get('notizbuchForm.notizbuch7982').value;
       this.suchmaskeKonvolutIRIMapping[ 2 ].enabled = arg.get('notizbuchForm.notizbuch8088').value;

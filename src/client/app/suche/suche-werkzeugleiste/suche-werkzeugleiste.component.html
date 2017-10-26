@@ -1,0 +1,36 @@
+<md-toolbar>
+
+  <button md-raised-button class="layoutbutton"
+          (click)="toggleShowTexts();">
+    {{showTexts ? 'Kein Text' : 'Text'}}
+  </button>
+
+  <button md-raised-button class="layoutbutton" title="Spaltenanzahl" (click)="rotateNumberOfColumns();">
+    {{numberOfColumns}} Spalten
+  </button>
+
+  <button md-raised-button class="layoutbutton" [disabled]="textsHaveAlignedFrames || !showTexts || textboxHeight >= 18"
+          title="Kartenformat schrittweise vergrößern"
+          (click)="increaseTextboxHeight()">+ Format
+  </button>
+
+  <button md-raised-button class="layoutbutton" [disabled]="textsHaveAlignedFrames || !showTexts || textboxHeight <= -18"
+          title="Kartenformat schrittweise verkleinern"
+          (click)="decreaseTextboxHeight()">- Format
+  </button>
+
+  <button md-raised-button class="layoutbutton" title="Rahmen anzeigen" [disabled]="!showTexts"
+          (click)="toggleAlignedFrames()">
+    {{!textsHaveAlignedFrames ? 'Angepasste Höhe'
+    : 'Fixe Höhe'}}
+  </button>
+
+  <button md-raised-button class="layoutbutton" title="neu laden" (click)="resetDisplayOptions()">
+    Reset
+  </button>
+
+  <button md-raised-button title="Hilfe" (click)="showHelp()" style="margin-left:30px;">
+    <md-icon>help</md-icon>
+  </button>
+
+</md-toolbar>

@@ -17,10 +17,11 @@ import {
   MdGridListModule,
   MdIconModule,
   MdInputModule,
+  MdDialogModule,
   MdMenuModule,
   MdSelectModule,
   MdSidenavModule,
-  MdSlideToggleModule
+  MdSlideToggleModule, MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -32,6 +33,9 @@ import { ParserModule } from './parser/parser.module';
 
 import { SuchmaskeComponent } from './suchmaske/suchmaske.component';
 import { BasicSearchComponent } from './basic-search/basic-search.component';
+import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
+import { SucheWerkzeugleisteComponent } from './suche-werkzeugleiste/suche-werkzeugleiste.component';
+import { SucheDarstellungsoptionenService } from './suche-darstellungsoptionen.service';
 
 @NgModule({
   imports: [
@@ -44,12 +48,14 @@ import { BasicSearchComponent } from './basic-search/basic-search.component';
     SucheRoutingModule,
     MdButtonModule,
     MdButtonToggleModule,
+    MdDialogModule,
     MdCardModule,
     MdGridListModule,
     MdIconModule,
     MdInputModule,
     MdMenuModule,
     MdCheckboxModule,
+    MdToolbarModule,
     BrowserAnimationsModule,
     MdSelectModule,
     MdSidenavModule,
@@ -59,18 +65,23 @@ import { BasicSearchComponent } from './basic-search/basic-search.component';
     ParserModule,
     RouterModule.forChild([
       { path: 'suche', component: SucheComponent }
-    ]),
+    ])
   ],
   declarations: [
     SucheComponent,
     SuchmaskeComponent,
+    SuchmaskeHilfeComponent,
+    SucheWerkzeugleisteComponent,
     BasicSearchComponent
   ],
   exports: [
     SucheComponent,
     BasicSearchComponent
   ],
-  providers: []
+  entryComponents: [
+    SuchmaskeHilfeComponent
+  ],
+  providers: [ SucheDarstellungsoptionenService ]
 })
 export class SucheModule {
 }

@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/catch';
@@ -24,7 +24,8 @@ export class RegisterspalteComponent implements OnChanges {
   @Input() poemsFromKonvolut: Array<any>;
   @Input() konvolutView: boolean;
 
-  konvolutIRItoStartownRequest: string;
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
+
   poems: Array<any>;
   poemsOld: Array<any>;
   poemIRIArray: Array<any>;
@@ -45,6 +46,7 @@ export class RegisterspalteComponent implements OnChanges {
   };
   konvolutTitle: string;
   sortingType: string;
+  konvolutIRItoStartownRequest: string;
   private sub: any;
 
   constructor(private http: Http, private sortingService: AlphabeticalSortingService,

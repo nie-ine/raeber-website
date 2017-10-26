@@ -9,10 +9,13 @@
 
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
+                    (goToOtherFassung)="goToOtherFassung($event)"
+                    [idOfPrev]="prevPoem.split('###')[0]"
+                    [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
                     [(poemResizable)]="poem_resizable"
-                    [idOfPrev]="prevPoem"
-                    [idOfNext]="nextPoem"></rae-fassung-werkzeugleiste>
+                    (showEditedTextChange)="zeigeKonstituiert=true"
+                    (showTranscriptionChange)="zeigeDiplomatisch=false"></rae-fassung-werkzeugleiste>
                 </div>
 
                 <div id="k2Container" class="itemView">
@@ -30,7 +33,7 @@
                     <!-- Date created -->
                     <span class="itemDateCreated">{{ creationDate }}</span>
                     <!-- Item title -->
-                    <h2 class="itemTitle">{{poemTitle}}</h2>
+                    <h2 class="itemTitle">{{ poemTitle }}</h2>
                   </div>
 
                   <div class="itemBody">
@@ -73,10 +76,15 @@
                         </md-card-footer>
                       </md-card>
                     </div>
+<<<<<<< HEAD
                     <div class="itemExtraFields">
                       <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id"
                                               [konvolutIRI]="konvolutIRI"
                                               (goToOtherFassung) = "goToOtherFassung($event)">
+=======
+                    <div style="margin-top:20px;">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id" [konvolutIRI]="konvolutIRI">
+>>>>>>> origin/master
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
@@ -95,19 +103,21 @@
 
                 <!-- Related items by tag -->
                 <div class="itemRelated">
-                  <rae-fassung-weitere [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                  <rae-fassung-weitere
+                    (goOtherFassung)="goToOtherFassung($event)"
+                    [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
-                      (goToOtherFassung) = "goToOtherFassung($event)"
+                      (goToOtherFassung)="goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"
                       [idOfNext]="nextPoem.split('###')[0]"
                       [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
-                    <span style='font-size:0.8em;'>Änderung: {{modificationDate}}</span>
+                    <span style='font-size:0.8em;'>Änderung: {{ modificationDate }}</span>
                   </ul>
                 </div>
               </div>
@@ -120,7 +130,9 @@
           <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
-                <rae-registerspalte [konvolutIRI]="konvolutIRI"></rae-registerspalte>
+                <rae-registerspalte [konvolutIRI]="konvolutIRI"
+                                    (goToOtherFassung)="goToOtherFassung($event)">
+                </rae-registerspalte>
               </ng-template>
             </ngb-panel>
             <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">

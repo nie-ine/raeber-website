@@ -1,88 +1,65 @@
 <div>
   <h3>Weitere Informationen</h3>
-  <ul>
-    <li *ngIf="specialDescription" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Besonderes:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="specialDescription"></span>
-      </p>
+  <ul style="list-style-type: none; padding-left: 0; margin-left:0;">
+    <li style="padding-bottom:5px;" *ngIf="specialDescription" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Besonderes:</span>
+        <span [innerHtml]="specialDescription"></span>
     </li>
-    <li *ngIf="detailDescription" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Details:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="detailDescription"></span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="detailDescription" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Details:</span>
+        <span  [innerHtml]="detailDescription"></span>
     </li>
-    <li *ngIf="lastAuthorizedPublication" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
-        <span class="itemExtraFieldsValue">
+    <li style="padding-bottom:5px;" *ngIf="lastAuthorizedPublication" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+        <span >
           <rae-fassung-steckbrief-konvolut
             [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
         </span>
-      </p>
     </li>
-    <li *ngIf="publishingState === 'unpublished'" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Letzter Druck:</span>
-        <span class="itemExtraFieldsValue">Unpubliziert</span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="publishingState === 'unpublished'" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+        <span >Unpubliziert</span>
     </li>
-    <li *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Nachdruck:</span>
-        <span class="itemExtraFieldsValue">
+    <li style="padding-bottom:5px;" *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Nachdruck:</span>
+        <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
         </span>
-      </p>
     </li>
-    <li *ngIf="publishedIn && publishedIn.length > 0" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Zeitschrift:</span>
-        <span class="itemExtraFieldsValue">
+    <li style="padding-bottom:5px;" *ngIf="publishedIn && publishedIn.length > 0" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Zeitschrift:</span>
+        <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
         </span>
-      </p>
     </li>
-    <li *ngIf="nachlassPublicationDescription" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Werke:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="nachlassPublicationDescription"></span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="nachlassPublicationDescription" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Werke:</span>
+        <span  [innerHtml]="nachlassPublicationDescription"></span>
     </li>
-    <li *ngIf="pageNumberDescription" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Seite / Blatt:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="pageNumberDescription"></span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="pageNumberDescription" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Seite / Blatt:</span>
+        <span  [innerHtml]="pageNumberDescription"></span>
     </li>
-    <li *ngIf="carrierIRIs && carrierIRIs.length > 0" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Signatur:</span>
-        <span class="itemExtraFieldsValue">
+    <li style="padding-bottom:5px;" *ngIf="carrierIRIs && carrierIRIs.length > 0" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Signatur:</span>
+        <span >
           <rae-fassung-steckbrief-signatur [carrierIRIs]="carrierIRIs"></rae-fassung-steckbrief-signatur>
         </span>
-      </p>
     </li>
-    <li *ngIf="structure" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Textart:</span>
-        <span class="itemExtraFieldsValue">{{ textartMap[structure] }}</span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="textartMap[structure]" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textart:</span>
+        <span >{{ textartMap[structure] }}</span>
     </li>
-    <li *ngIf="isFinalVersion" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Endfassung:</span>
-        <span class="itemExtraFieldsValue">ja</span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="isFinalVersion" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Endfassung:</span>
+        <span >ja</span>
     </li>
-    <li *ngIf="publicationNumber" class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Textnr.:</span>
-        <span class="itemExtraFieldsValue" [innerHtml]="publicationNumber"></span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="publicationNumber" class="typeTextfield group2">
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textnr.:</span>
+        <span  [innerHtml]="publicationNumber"></span>
     </li>
 
+<<<<<<< HEAD
     <li *ngIf="hasStrophen" class="typeSelect group2">
       <p>
         <span class="itemExtraFieldsLabel">Strophen:</span>
@@ -110,22 +87,35 @@
             [linkText]="referenceTitle"
             (goToOtherFassung) = "goToOtherFassung.emit($event)">
           </rae-fassung-steckbrief-fassung>
+=======
+    <li style="padding-bottom:5px;" *ngIf="hasStrophen" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Strophen:</span>
+        <span >ja</span>
+    </li>
+    <li style="padding-bottom:5px;" *ngIf="isPartOfCycle" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Zyklus:</span>
+        <span >ja</span>
+    </li>
+    <li style="padding-bottom:5px;" *ngIf="isInDialect" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Mundart:</span>
+        <span >ja</span>
+    </li>
+    <li style="padding-bottom:5px;" *ngIf="referencePoemIRIs && referencePoemIRIs.length > 0" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Bezugstext:</span>
+        <span >
+          <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRIs"></rae-fassung-steckbrief-fassung>
+>>>>>>> origin/master
         </span>
-      </p>
     </li>
-    <li *ngIf="isWrittenWith" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Schreibzeug:</span>
-        <span class="itemExtraFieldsValue">{{ schreibzeugMap[isWrittenWith] }}</span>
-      </p>
+    <li style="padding-bottom:5px;" *ngIf="isWrittenWith" >
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Schreibzeug:</span>
+        <span >{{ schreibzeugMap[isWrittenWith] }}</span>
     </li>
-    <li *ngIf="sameEditionAs && sameEditionAs.length > 0" class="typeTextfield group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Identisch mit:</span>
-        <span class="itemExtraFieldsValue">
+    <li style="padding-bottom:5px;" *ngIf="sameEditionAs && sameEditionAs.length > 0">
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Identisch mit:</span>
+        <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
         </span>
-      </p>
     </li>
   </ul>
 </div>

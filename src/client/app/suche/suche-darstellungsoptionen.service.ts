@@ -54,7 +54,8 @@ export class SucheDarstellungsoptionenService {
     this.showTextsSource.next(this.showTextFlag);
     this.textboxHeight = 0;
     this.textboxHeightSource.next(this.textboxHeight);
-    this.numberOfColumns = 2;
+    this.numberOfColumns = 3;
+    this.relativeSizeOfColumnsSource.next(this.relativeSizesOfColumns[1]);
     this.numberOfColumnsSource.next(this.numberOfColumns);
     this.textsHaveAlignedFrames = false;
     this.textsHaveAlignedFramesSource.next(this.textsHaveAlignedFrames);

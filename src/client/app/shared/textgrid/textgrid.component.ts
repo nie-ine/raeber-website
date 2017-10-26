@@ -117,21 +117,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       this.searchActivated = false;
       this.searchTermArray = undefined;
     }
-    console.log('Relative Spaltenbreite: ' + this.columns);
-    console.log('Text anzeigen: ' + this.showText);
-    console.log('Höhe: ' + this.gridTextHeight);
-    console.log('Fixe Höhe: ' + this.rahmen);
-
   }
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
     console.log(this.searchTermfromKonvolut);
-    if (this.searchTermfromKonvolut === '') {
-      this.searchActivated = false;
-    } else {
-      this.searchActivated = true;
-    }
+    this.searchActivated = this.searchTermfromKonvolut !== '';
     console.log('Filter and Search in Textgrid');
     console.log(this.searchTermfromKonvolut);
     for(let poem of this.poemsInGrid) {
@@ -181,12 +172,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
     this.j = 0;
       for(let seachTerm of searchTermArray) {
-        textToHighlight = this.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
+        textToHighlight = TextgridComponent.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
         this.j += 1;
       }
       return textToHighlight;
   }
-  highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
+  static highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
     if (searchTerm === undefined) {
       return textToHighlight;
     } else if(textToHighlight !== undefined ) {

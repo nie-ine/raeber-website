@@ -36,6 +36,7 @@ import { FassungSteckbriefKonvolutComponent } from './fassung-steckbrief/fassung
 import { FassungSteckbriefFassungComponent } from './fassung-steckbrief/fassung-steckbrief-fassung.component';
 import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung-steckbrief-signatur.component';
 import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
+import { DateFormatService } from "../shared/utilities/date-format.service";
 
 
 @NgModule({
@@ -74,7 +75,7 @@ import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
     TextComponent
   ],
   exports: [ FassungComponent ],
-  providers: [],
+  providers: [DateFormatService],
   entryComponents: [
     FassungHilfeComponent
   ]

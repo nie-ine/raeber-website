@@ -453,13 +453,13 @@ export class SucheComponent implements OnInit {
     if(this.startSearchImmediately) this.startSearchImmediately = false;
     //console.log(arg);
     this.arg = arg;
-    if(this.allSearchResults) {
+/*    if(this.allSearchResults) {
       console.log('Reset suchmaskeKonvolutIRIMapping');
       for(let i = 0; i < this.suchmaskeKonvolutIRIMapping.length; i++) {
-        this.suchmaskeKonvolutIRIMapping[i].enabled = this.suchmaskeKonvolutIRIMappingOld[].enabled;
+        this.suchmaskeKonvolutIRIMapping[i].enabled = this.suchmaskeKonvolutIRIMappingOld[i].enabled;
       }
       console.log(this.suchmaskeKonvolutIRIMapping);
-    }
+    }*/
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;

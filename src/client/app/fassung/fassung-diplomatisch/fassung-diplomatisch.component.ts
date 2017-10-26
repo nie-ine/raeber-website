@@ -25,6 +25,8 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
   gewaehlteSchicht: string = 'schicht0';
   textIsMovable: boolean = false;
   showPage: Array<boolean>;
+  showStufe1: boolean = false;
+  showStufe2: boolean = false;
 
   private sub: any;
 

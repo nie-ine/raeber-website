@@ -8,11 +8,13 @@
         0
       </md-button-toggle>
       <md-button-toggle value="schicht1"
+                        *ngIf="showStufe1"
                         [ngStyle]="{'color': farbeErste}"
                         title="Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet">
         1
       </md-button-toggle>
       <md-button-toggle value="schicht2"
+                        *ngIf="showStufe2"
                         [ngStyle]="{'color': farbeEinfuegung}"
                         title="Texteinfügung entgegen dem linearen Verlauf der Niederschrift">
         2

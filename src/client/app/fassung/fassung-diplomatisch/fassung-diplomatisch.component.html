@@ -22,7 +22,9 @@
     <div *ngIf="p['diplIRI'] && showPage[i]" style="display: inline-block; vertical-align: top">
       <rae-diplomatischer-text [textIRI]="p['diplIRI']"
                                [(gewaehlteSchicht)]="gewaehlteSchicht"
-                               [(textIsMovable)]="textIsMovable">
+                               [(textIsMovable)]="textIsMovable"
+                               [(showStufe1)]="showStufe1"
+                               [(showStufe2)]="showStufe2">
       </rae-diplomatischer-text>
     </div>
     <rae-fassung-diplomatisch-seiten [pageIRI]="p['pageIRI']"

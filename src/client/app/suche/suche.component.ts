@@ -428,6 +428,7 @@ export class SucheComponent implements OnInit {
       'officialName': 'Tagebuch'
     }
   ];
+  suchmaskeKonvolutIRIMappingOld = this.suchmaskeKonvolutIRIMapping;
   poemResTypes = [
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PoemNote',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
@@ -441,7 +442,7 @@ export class SucheComponent implements OnInit {
   }
 
   checkProgress() {
-    console.log('check progress');
+    //console.log('check progress');
     this.loadingIndicatorInput = true;
     setTimeout(() => {
       this.loadingIndicatorInput = false;
@@ -452,10 +453,17 @@ export class SucheComponent implements OnInit {
     if(this.startSearchImmediately) this.startSearchImmediately = false;
     //console.log(arg);
     this.arg = arg;
+    if(this.allSearchResults) {
+      console.log('Reset suchmaskeKonvolutIRIMapping');
+      for(let i = 0; i < this.suchmaskeKonvolutIRIMapping.length; i++) {
+        this.suchmaskeKonvolutIRIMapping[i].enabled = this.suchmaskeKonvolutIRIMappingOld[].enabled;
+      }
+      console.log(this.suchmaskeKonvolutIRIMapping);
+    }
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
-    this.currentPath = '/suche?wort=' + this.inputSearchStringToBeParsed
+    this.currentPath = '/suche?wort=' + this.inputSearchStringToBeParsed;
     this.location.replaceState(this.currentPath);
   }
   updateFilterParams(routeSnapshot: boolean, defaultValue: boolean): boolean {
@@ -546,7 +554,11 @@ export class SucheComponent implements OnInit {
       this.startSearchImmediately = true;
       this.searchTermArray = [];
       this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
-      this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
+      setTimeout(() => {
+        console.log('Wait for Konvolutes to load');
+        this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
+      }, 3000);
+
     }
     if (this.allSearchResults === undefined) {
       this.numberOfSearchResults = 0;
@@ -801,6 +813,7 @@ export class SucheComponent implements OnInit {
                                   numberOfTermsInSearchGroup: number,
                                   searchTerm: string,
                                   poemIRI: string) {
+    //console.log('add to temporary result');
     this.checkProgress();
     if (this.partOfAllSearchResults === undefined) {
       this.partOfAllSearchResults = [];
@@ -879,29 +892,6 @@ export class SucheComponent implements OnInit {
         singlePoem.value['11'],
         singlePoem.value['10']);
     }
-    //console.log(searchResultString);
-/*    if (searchResultString !== undefined) {
-      if (this.allSearchResults === undefined) {
-        this.allSearchResults = [];
-      }
-      this.performPoemQuery(
-        searchResultString,
-        undefined,
-        undefined,
-        undefined);
-    }
-    if (searchResults !== undefined && searchResults.length !== 0) {
-      if (this.allSearchResults === undefined) {
-        this.allSearchResults = [];
-      }
-      for (let result of searchResults) {
-        this.performPoemQuery(
-          result.obj_id,
-          result.value[ 3 ],
-          result.value[ 1 ],
-          result.value[ 2 ]);
-      }
-    }*/
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
@@ -1394,77 +1384,6 @@ export class SucheComponent implements OnInit {
         )
         .subscribe(response => this.responseArray = response);
     }
-/*    performPoemQuery(poemIRI: string, titel: string, date: string, seqnum: string) {
-      this.numberOfPerformedQueries += 1;
-      return this.http.get
-      (
-        globalSearchVariableService.API_URL +
-        '/resources/' +
-        encodeURIComponent(poemIRI)
-      )
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            //console.log(data);
-            if(data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops !== undefined) {
-              this.performTextQuery(
-                data.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ],
-                poemIRI,
-                data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str,
-                date,
-                seqnum,
-                data.props[ 'http://www.knora.org/ontology/text#hasStructure' ].value_firstprops[0],
-                data.props[ 'http://www.knora.org/ontology/text#isFinalVersion' ].values[0],
-                data.props[ 'http://www.knora.org/ontology/text#hasStrophe' ].values[0],
-                data.props[ 'http://www.knora.org/ontology/text#isInDialect' ].values[0],
-                data.props[ 'http://www.knora.org/ontology/text#isPartOfCycle' ].values[0]
-              );
-            }
-            return null;
-          }
-        )
-        .subscribe(response => this.responseArray = response);
-    }*/
-/*    performTextQuery(editionIRI: string,
-                     poemIRI: string,
-                     titel: string,
-                     date: string,
-                     seqnum: string,
-                     textart: string,
-                     isFinalVersion: string,
-                     hatStrophenunterteilung: string,
-                     isInDialiect: string,
-                     isPartOfCycle: string) {
-      //console.log(editionIRI);
-      return this.http.get
-      (
-        globalSearchVariableService.API_URL +
-        '/resources/' +
-        encodeURIComponent(editionIRI)
-      )
-        .map(
-          (lambda: Response) => {
-            const data = lambda.json();
-            if (!this.setOfAllSearchResults.has(poemIRI)) {
-              this.setOfAllSearchResults.add(poemIRI);
-              this.onlyChoosePoemsThatAreInChosenConvolutes(
-                poemIRI,
-                data.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str,
-                titel,
-                seqnum,
-                date,
-                0,
-                textart,
-                isFinalVersion,
-                hatStrophenunterteilung,
-                isInDialiect,
-                isPartOfCycle);
-            }
-            return null;
-          }
-        )
-        .subscribe(response => this.responseArray = response);
-    }*/
     onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
                                              text: string,
                                              titel: string,
@@ -1478,6 +1397,7 @@ export class SucheComponent implements OnInit {
                                              isPartOfCycle: string,
                                              synopsisTitle: string,
                                              synopsisIRI: string,) {
+      //console.log('Only choose poems that are in chosen convolutes');
       for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
         this.checkProgress();
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
@@ -1485,8 +1405,10 @@ export class SucheComponent implements OnInit {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
           //console.log(k);
           //console.log(poemIRI);
+          //console.log(this.suchmaskeKonvolutIRIMapping);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
               // if(this.checkTextart(textart)) {
+                 //console.log('Check Textart');
                  if(this.checkTimeInterval(date)) {
               //     if(this.checkIfFinalVersion(isFinalVersion)) {
               //       if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
@@ -1583,11 +1505,12 @@ export class SucheComponent implements OnInit {
       }
       }
     checkTimeInterval(date: string): boolean {
+      //console.log('Check time interval');
       //console.log(this.route.snapshot.queryParams[ 'zeitBeginn' ]);
       //console.log(this.route.snapshot.queryParams[ 'zeitEnde' ]);
       if(!this.arg
-        && this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
-        && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) return true;
+        || (this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
+        && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined)) return true;
       if(this.arg) {
         if (
           this.arg.get('zeitraumForm.zeitraumVon').value === ''
@@ -1651,5 +1574,12 @@ export class SucheComponent implements OnInit {
         } else return false;
       }
     }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(SuchmaskeHilfeComponent, {
+        width: '500px'
+      });
+  }
 
 }

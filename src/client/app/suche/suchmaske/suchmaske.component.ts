@@ -32,6 +32,7 @@ export class SuchmaskeComponent implements OnChanges {
   @Input() searchTermArray: Array<string>;
   @Input() poemsInGrid: string;
   @Input() startSearchImmediately: boolean;
+  @Input() loadingIndicatorInput: boolean;
 
   relativeSizeOfColumns: string = '43%';
   textboxHeight: number = 0;
@@ -60,6 +61,8 @@ export class SuchmaskeComponent implements OnChanges {
   };
 
   allConvolutesSelected: boolean = false;
+  loadingIndicator = true;
+
 
   constructor(private fb: FormBuilder,
               private cdr: ChangeDetectorRef,
@@ -81,6 +84,9 @@ export class SuchmaskeComponent implements OnChanges {
   }
 
   ngOnChanges() {
+    console.log(this.loadingIndicator);
+    this.loadingIndicator = this.loadingIndicatorInput;
+    if(this.startSearchImmediately) this.sidenavOpened = false;
     console.log('Data arrived back in Suchmaske: ');
     console.log(this.poemsInGrid);
     console.log(this.searchTermArray);

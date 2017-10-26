@@ -58,36 +58,6 @@
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textnr.:</span>
         <span  [innerHtml]="publicationNumber"></span>
     </li>
-
-<<<<<<< HEAD
-    <li *ngIf="hasStrophen" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Strophen:</span>
-        <span class="itemExtraFieldsValue">ja</span>
-      </p>
-    </li>
-    <li *ngIf="isPartOfCycle" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Zyklus:</span>
-        <span class="itemExtraFieldsValue">ja</span>
-      </p>
-    </li>
-    <li *ngIf="isInDialect" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Mundart:</span>
-        <span class="itemExtraFieldsValue">ja</span>
-      </p>
-    </li>
-    <li *ngIf="referencePoemIRI && referenceTitle" class="typeSelect group2">
-      <p>
-        <span class="itemExtraFieldsLabel">Bezugstext:</span>
-        <span class="itemExtraFieldsValue">
-          <rae-fassung-steckbrief-fassung
-            [fassungIRI]="referencePoemIRI"
-            [linkText]="referenceTitle"
-            (goToOtherFassung) = "goToOtherFassung.emit($event)">
-          </rae-fassung-steckbrief-fassung>
-=======
     <li style="padding-bottom:5px;" *ngIf="hasStrophen" >
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Strophen:</span>
         <span >ja</span>
@@ -100,11 +70,14 @@
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Mundart:</span>
         <span >ja</span>
     </li>
-    <li style="padding-bottom:5px;" *ngIf="referencePoemIRIs && referencePoemIRIs.length > 0" >
+    <li style="padding-bottom:5px;" *ngIf="referencePoemIRI && referenceTitle" >
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Bezugstext:</span>
         <span >
-          <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRIs"></rae-fassung-steckbrief-fassung>
->>>>>>> origin/master
+          <rae-fassung-steckbrief-fassung
+            [fassungIRI]="referencePoemIRI"
+            [linkText]="referenceTitle"
+            (goToOtherFassung) = "goToOtherFassung.emit($event)">
+          </rae-fassung-steckbrief-fassung>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isWrittenWith" >

@@ -57,7 +57,7 @@ export class SucheComponent implements OnInit {
   numberOfPropertiesInSearchBox = '';
   str: string;
   value: string;
-  keys: Array<any>;
+  sendInputStringToSuchmaske: string;
   finalQueryArray = [ '' ];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
@@ -568,6 +568,7 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
     this.warning = '';
     this.numberOfQueries = 0;
     this.numberOfSearchResults = 0;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { InitKommentarComponent } from './initkommentar.component';
 import { Router } from '@angular/router';
@@ -8,15 +8,13 @@ import { Router } from '@angular/router';
   template: ''
 
 })
-export class HomepageWithInitTextComponent implements OnInit {
+export class HomepageWithInitTextComponent {
+
 
   constructor(public dialog: MdDialog, private router: Router) {
-
-  }
-
-  ngOnInit() {
     this.openDialog();
   }
+
 
   openDialog(): void {
     let dialogRef = this.dialog.open(InitKommentarComponent, {

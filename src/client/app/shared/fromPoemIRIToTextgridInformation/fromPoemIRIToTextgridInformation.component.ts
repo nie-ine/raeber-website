@@ -170,12 +170,15 @@ performQuery() {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=!EQ' +
         '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
         '&show_nrows=2000'
       )
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            //console.log(data.subjects[ 0 ]);
+            console.log(data.subjects[ 0 ]);
             for(this.i = 0; this.i < data.subjects.length; this.i ++) {
               this.poemInformation[ this.i ] = [];
               this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 9 ];
@@ -187,6 +190,7 @@ performQuery() {
               this.poemInformation[ this.i ][ 8 ] = data.subjects[ this.i ].value[ 1 ];
               this.poemInformation[ this.i ][ 9 ] = data.subjects[ this.i ].value[ 10 ];
               this.poemInformation[ this.i ][ 12 ] = data.subjects[ this.i ].value[ 11 ];
+              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 12 ];
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;
@@ -229,6 +233,7 @@ performQuery() {
           10: Has Date Index
           11: Has alphabetic index
           12: Has Synopsis Title
+          13: isOnPage
            */
 /*
           this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

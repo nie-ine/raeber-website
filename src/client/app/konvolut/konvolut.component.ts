@@ -39,6 +39,7 @@ export class KonvolutComponent implements OnInit {
   konvolutType: string;
   resetPoems: string;
   konvolutView = true;
+  searchOnPage: number;
 
   viewMode: string;
   konvolut_type: string;
@@ -107,9 +108,11 @@ export class KonvolutComponent implements OnInit {
    * @param {FormGroup} fg Search parameters
    */
   searchInConvolute(fg: any) {
-    //console.log(fg.searchTerm);
+    //console.log(fg);
+    this.searchTermArray = [];
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
-    this.searchTermArray = fg.searchTerm; // TODO: Variable takes search term
+    this.searchTermArray[0] = fg.searchTerm; // TODO: Variable takes search term
+    this.searchTermArray[1] = fg.page;
   }
 
   /**
@@ -158,6 +161,7 @@ export class KonvolutComponent implements OnInit {
       this.poems[ poemInformation[i]['8'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 13 ] = poemInformation[ i ][ 13 ];
     }
     //console.log(this.poems);
   }

@@ -109,32 +109,44 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.contentType);
-    if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
-      this.searchAndFilterInTextgrid();
-      this.searchInKonvolut = true;
-    } else if (this.searchInKonvolut !== false ) {
-      this.searchActivated = false;
-      this.searchTermArray = undefined;
+    console.log(this.searchTermfromKonvolut);
+    if(this.searchTermfromKonvolut) {
+      if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
+        this.searchAndFilterInTextgrid();
+        this.searchInKonvolut = true;
+      } else if (this.searchInKonvolut !== false ) {
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+      }
+      if(this.searchTermfromKonvolut[1]) {
+        this.filterPoemsOnPage();
+        this.searchInKonvolut = true;
+      } else if (this.searchInKonvolut !== false ) {
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+      }
     }
+  }
+  filterPoemsOnPage() {
+    console.log('Filter Poems on Page');
   }
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    console.log(this.searchTermfromKonvolut);
-    this.searchActivated = this.searchTermfromKonvolut !== '';
+    console.log(this.searchTermfromKonvolut[0]);
+    this.searchActivated = this.searchTermfromKonvolut[0] !== '';
     console.log('Filter and Search in Textgrid');
-    console.log(this.searchTermfromKonvolut);
+    console.log(this.searchTermfromKonvolut[0]);
     for(let poem of this.poemsInGrid) {
       if(poem[0] !== undefined) {
-        if(poem[0].search(this.searchTermfromKonvolut) !== -1) {
+        if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
           this.searchTermArray = [];
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
-        } else if (poem[2].search(this.searchTermfromKonvolut) !== -1) {
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
+        } else if (poem[2].search(this.searchTermfromKonvolut[0]) !== -1) {
           this.searchTermArray = [];
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
         } else {
           poem.show = false;
         }

@@ -38,7 +38,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTermArray: Array<any>;
 
-  gridTextHeight: number = 0;
+  @Input() gridTextHeight: number = 0;
   i: number;
   j: number;
   searchActivated = false;
@@ -109,7 +109,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    //console.log(this.poemsInGrid);
+    console.log(this.contentType);
     if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
       this.searchAndFilterInTextgrid();
       this.searchInKonvolut = true;
@@ -122,11 +122,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
     console.log(this.searchTermfromKonvolut);
-    if (this.searchTermfromKonvolut === '') {
-      this.searchActivated = false;
-    } else {
-      this.searchActivated = true;
-    }
+    this.searchActivated = this.searchTermfromKonvolut !== '';
     console.log('Filter and Search in Textgrid');
     console.log(this.searchTermfromKonvolut);
     for(let poem of this.poemsInGrid) {
@@ -176,12 +172,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
     this.j = 0;
       for(let seachTerm of searchTermArray) {
-        textToHighlight = this.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
+        textToHighlight = TextgridComponent.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
         this.j += 1;
       }
       return textToHighlight;
   }
-  highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
+  static highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
     if (searchTerm === undefined) {
       return textToHighlight;
     } else if(textToHighlight !== undefined ) {

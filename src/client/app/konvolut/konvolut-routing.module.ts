@@ -15,7 +15,8 @@ import { KonvolutComponent } from './konvolut.component';
       { path: 'notizbuecher/:konvolut', component: KonvolutComponent },
       { path: 'typoskripte/typoskripte-sammlungen/:konvolut', component: KonvolutComponent },
       { path: 'typoskripte/:konvolut', component: KonvolutComponent },
-      { path: 'material/:konvolut', component: KonvolutComponent }
+      { path: 'material/:konvolut', component: KonvolutComponent },
+      { path: 'suchergebnisse/:konvolut', component: KonvolutComponent },
     ])
   ],
   exports: [RouterModule]

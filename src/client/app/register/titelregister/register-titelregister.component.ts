@@ -44,6 +44,9 @@ export class RegisterTitelregisterComponent implements OnChanges {
         /*
          * nur Endfassungen aus Verstreutes und den Drucken
          */
+        this.poems[0] = {value:['','/drucke/abgewandt-zugewandt-nachwort', '', 'Nachwort',
+          'Nachwort über das schweizerische Sprachdilemma']};
+        console.log(this.poems);
         this.konvolutTitel = ['GESICHT IM MITTAG 1950', 'Die verwandelten Schiffe 1957', 'GEDICHTE 1960',
           'FLUSSUFER 1963', 'Reduktionen 1981', 'Hochdeutsche Gedichte 1985','Alemannische Gedichte 1985',
           'Verstreutes'];
@@ -119,18 +122,23 @@ convolutePoemsQuery(konvolutTitel:string, endFassungen:boolean) {
     '&compop=EXISTS&searchval=' +
     '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
     '&compop=EXISTS&searchval=' +
-//    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
-//    '&compop=EQ&searchval=true' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+    '&compop=!EQ&searchval=0' +
     '&show_nrows=2000'
   )
     .map(response => response.json())
     .subscribe(res => this.poems = this.poems.concat(res.subjects),
-      error => console.log('Error: ', error), () => this.sortAlphabetically());
+      error => console.log('Error: ', error), () => { console.log(this.poems);
+      return this.sortAlphabetically();});
 }
 
 produceFassungsLink(p: any) {
   if(p && p.value[1] !== undefined && p.value[4] !== undefined && p.value[3] !== undefined) {
-    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1];
+    if (p.value[3]==='Nachwort') {
+      return '/drucke/abgewandt-zugewandt-nachwort';
+    } else {
+      console.log(['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1]);
+    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1];}
   } else {
     return 'Linkinformation has not arrived yet';
   }

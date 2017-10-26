@@ -1,5 +1,4 @@
 <div class="rae-diplomatic">
-  <md-toolbar>
     <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{textIRI}}"
                             (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
       <md-button-toggle value="schicht0"
@@ -24,15 +23,15 @@
                         title="Endschicht (Basis für edierten Text)">
         3
       </md-button-toggle>
+
+      <button md-raised-button (click)="toggleDraggable()" title="Umschrift verschiebbar machen">
+        <md-icon *ngIf="textIsMovable">check_box</md-icon>
+        <md-icon *ngIf="!textIsMovable">check_box_outline_blank</md-icon>
+        ↔
+      </button>
+
     </md-button-toggle-group>
 
-    <button md-raised-button (click)="toggleDraggable()" title="Umschrift verschiebbar machen">
-      <md-icon *ngIf="textIsMovable">check_box</md-icon>
-      <md-icon *ngIf="!textIsMovable">check_box_outline_blank</md-icon>
-      ↔
-    </button>
-
-  </md-toolbar>
   <div class="umschrift edtext edtext_hs">
     <div class="transkription" [innerHtml]="text"></div>
   </div>

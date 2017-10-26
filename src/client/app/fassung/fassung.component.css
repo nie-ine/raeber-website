@@ -12,6 +12,10 @@ div.itemFullText md-card md-card-footer button {
   text-align: left;
 }
 
+div.itemFullText md-card md-card-header button {
+  width: 100%;
+  text-align: left;
+}
 #rae-toolbar {
   text-align: right;
 }

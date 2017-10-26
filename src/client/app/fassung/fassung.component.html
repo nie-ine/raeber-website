@@ -43,8 +43,16 @@
                     <!-- Item text -->
                     <div class="itemFullText">
 
-                      <md-card>
-                        <md-card-content
+                      <md-card style="padding-top:0;">
+                        <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
+                                        *ngIf="zeigeKonstituiert">
+                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert"
+                                  style="background-color:#eee;">
+                            <md-icon>{{zeigeKonstituiert ? 'expand_more' : 'expand_less'}}</md-icon>
+                            <span>Text {{zeigeKonstituiert ? 'verbergen' : 'anzeigen'}}</span>
+                          </button>
+                        </md-card-header>
+                        <md-card-content style="padding-top:20px; padding-bottom:5px;"
                           *ngIf="zeigeKonstituiert"
                           [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
                           <section class="edtext edtext_hs">
@@ -52,28 +60,36 @@
                           </section>
                         </md-card-content>
                         <md-card-footer>
-                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
-                            <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
-                            <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
-                            <span *ngIf="zeigeKonstituiert">Text verbergen</span>
-                            <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
+                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert"
+                                  style="background-color:#eee;">
+                            <md-icon>{{zeigeKonstituiert ? 'expand_less' : 'expand_more'}}</md-icon>
+                            <span>Text {{zeigeKonstituiert ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
+                      <br/>
 
-                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
-                        <md-card-content *ngIf="zeigeDiplomatisch">
+                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'"
+                               style="padding-top:0;">
+                        <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
+                                        *ngIf="zeigeDiplomatisch">
+                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch"
+                                  style="background-color:#eee;">
+                            <md-icon>{{zeigeDiplomatisch ? 'expand_more' : 'expand_less'}}</md-icon>
+                            <span>Diplomatische Umschrift {{zeigeDiplomatisch ? 'verbergen' : 'anzeigen'}}</span>
+                          </button>
+                        </md-card-header>
+                        <md-card-content *ngIf="zeigeDiplomatisch" style="padding-top:20px; padding-bottom:5px;">
                           <rae-fassung-diplomatisch [diplomaticIRIs]="diplomaticIRIs"
                                                     (pictureReduced)="show_register = true;"
                                                     (pictureIncreased)="show_register = false;">
                           </rae-fassung-diplomatisch>
                         </md-card-content>
                         <md-card-footer>
-                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
-                            <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
-                            <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
-                            <span *ngIf="zeigeDiplomatisch">Diplomatische Umschrift verbergen</span>
-                            <span *ngIf="!zeigeDiplomatisch">Diplomatische Umschrift anzeigen</span>
+                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch"
+                                  style="background-color:#eee;">
+                            <md-icon>{{zeigeDiplomatisch ? 'expand_less' : 'expand_more'}}</md-icon>
+                            <span>Diplomatische Umschrift {{zeigeDiplomatisch ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
                         </md-card-footer>
                       </md-card>

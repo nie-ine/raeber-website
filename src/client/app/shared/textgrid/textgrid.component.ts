@@ -231,10 +231,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   filterPoems(unfiltered: Array<any>): Array<any> {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
-        .filter(x => {
-          console.log('Flag: ' + x[ 4 ]);
-          return this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x
-        })
+        .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
         .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x);

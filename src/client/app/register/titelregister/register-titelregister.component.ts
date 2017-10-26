@@ -86,6 +86,22 @@ export class RegisterTitelregisterComponent implements OnChanges {
   }
 
 convolutePoemsQuery(konvolutTitel:string, endFassungen:boolean) {
+  console.log(    globalSearchVariableService.API_URL +
+    globalSearchVariableService.extendedSearch +
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
+    '&compop=EQ&searchval=' +
+    encodeURIComponent(konvolutTitel) +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
+    '&compop=EXISTS&searchval=' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
+    '&compop=EXISTS&searchval=' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
+    '&compop=EXISTS&searchval=' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+    '&compop=!EQ&searchval=0' +
+    '&show_nrows=2000');
+  console.log(this.poems);
   if (!endFassungen) return this.http.get
   (
     globalSearchVariableService.API_URL +
@@ -119,8 +135,8 @@ convolutePoemsQuery(konvolutTitel:string, endFassungen:boolean) {
     '&compop=EXISTS&searchval=' +
     '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
     '&compop=EXISTS&searchval=' +
-//    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
-//    '&compop=EQ&searchval=true' +
+    '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+    '&compop=!EQ&searchval=0' +
     '&show_nrows=2000'
   )
     .map(response => response.json())

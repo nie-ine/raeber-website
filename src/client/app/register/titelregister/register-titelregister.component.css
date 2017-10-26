@@ -17,6 +17,6 @@
   line-height: normal;
 }
 
-.rae-register-titelregister md-nav-list a p {
-  text-overflow: ellipsis;
+.rae-register-titelregister md-nav-list a h5 {
+  color: #2698de;
 }

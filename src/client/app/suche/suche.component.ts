@@ -567,8 +567,6 @@ export class SucheComponent implements OnInit {
   }
 
 
-
-
   executeFinalQueries() {
     this.warning = '';
     this.numberOfQueries = 0;
@@ -604,10 +602,10 @@ export class SucheComponent implements OnInit {
           + queries[ this.i ][ this.j ].searchString
           + ' in: ' + queries[ this.i ][ this.j ].where);
         this.searchTerm = queries[ this.i ][ this.j ].searchString;
-        if(this.searchTermArray === undefined) {
+        if (this.searchTermArray === undefined) {
           this.searchTermArray = [];
         }
-        this.searchTermArray[this.searchTermArray.length] = this.searchTerm;
+        this.searchTermArray[ this.searchTermArray.length ] = this.searchTerm;
         if(this.searchTerm.length < 3) {
           if(!this.warningread) {
             this.warning = ' - Bitte geben Sie ein Wort mit mindestens 3 Buchstaben ein oder starten Sie die Suche erneut.';
@@ -628,7 +626,7 @@ export class SucheComponent implements OnInit {
   getQueries(queries: Array<any>) {
     //console.log(queries);
     this.queries = queries;
-    if(this.startSearchImmediately) {
+    if (this.startSearchImmediately) {
       this.executeFinalQueries();
     }
   }
@@ -730,8 +728,8 @@ export class SucheComponent implements OnInit {
                 undefined);
           } else {
             //console.log('Keine Treffer fuer diese Suche');
-            }
-            return null;
+          }
+          return null;
         }
       )
       .subscribe(response => response = response);
@@ -799,7 +797,7 @@ export class SucheComponent implements OnInit {
           } else {
             console.log('Keine Treffer fuer diese Suche');
           }
-          return data.properties;
+          return null;
         }
       )
       .subscribe(response => response = response);
@@ -1298,7 +1296,7 @@ export class SucheComponent implements OnInit {
     }
   }
   performQueryToGetIRI(queryPart: string, i: number, individualQueryPart: string) {
-    if(queryPart === undefined) {
+    if (queryPart === undefined) {
       queryPart = individualQueryPart;
     } else {
       queryPart = globalSearchVariableService.API_URL +
@@ -1362,6 +1360,10 @@ export class SucheComponent implements OnInit {
                 //console.log('Right Property: ' + rightProperty);
               } else if (konvolutType === 'poem typescript convolute with image') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#TypewrittenPoem';
+        //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k
+        // ].konvolut); console.log(k); console.log(poemIRI);
+        if (this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+          if (this.checkTextart(textart)) {
                 //console.log('Right Property: ' + rightProperty);
               } else if (konvolutType === 'printed poem book publication') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
@@ -1375,6 +1377,11 @@ export class SucheComponent implements OnInit {
               ) {
                 //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
                 this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
+                        this.numberOfSearchResults += 1;
+                      }
+                    }
+                  }
+                }
               }
             }
             //console.log(this.setOfAlowedPoemIRIs);
@@ -1440,15 +1447,64 @@ export class SucheComponent implements OnInit {
       }
     }
     checkIfPartOfCycle(isPartOfCycle: string): boolean {
+    //console.log(isPartOfCycle);
+    if (!this.arg) return true;
+    if (!this.arg.get('zyklus').value) {
+      return true;
+    } else if (this.arg.get('zyklus').value && isPartOfCycle) {
+      return true;
+    } else return false;
+  }
+
+  checkIfIsInDialect(isInDialiect: string): boolean {
       //console.log(isPartOfCycle);
+    if (!this.arg) return true;
+    if (!this.arg.get('mundart').value) {
+      return true;
+    } else if (this.arg.get('mundart').value && isInDialiect) {
+      return true;
+    } else return false;
+  }
+
+  checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
+    //console.log(hatStrophenunterteilung);
       if(!this.arg) return true;
+    if (!this.arg.get('strophen').value) {
+      return true;
+    } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
+      return true;
+    } else return false;
+  }
+
+  checkIfFinalVersion(isFinalVersion: string): boolean {
+    if (!this.arg) return true;
+    if (!this.arg.get('endfassung').value) {
+      return true;
       if(!this.arg.get('zyklus').value) {
+      return true;
+    } else return false;
+  }
+
+  checkTextart(textart: string): boolean {
+    if (!this.arg) return true;
+    if (this.arg.get('textartForm').pristine) {
+      //console.log(textart);
+      return true;
+    } else if (this.arg.get('textartForm.textartFreieVerse').value && textart === 'FreeVerse') {
         return true;
+    } else if (this.arg.get('textartForm.textartProsanotat').value && textart === 'NoteProse') {
+      return true;
       } else if (this.arg.get('zyklus').value && isPartOfCycle) {
+      return true;
+    } else if (this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
         return true;
+    } else if (this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
+      return true;
+    } else {
       } else return false;
     }
     checkIfIsInDialect(isInDialiect: string): boolean {
+    if (!this.arg) return true;
       //console.log(isInDialiect);
       if(!this.arg) return true;
       if(!this.arg.get('mundart').value) {

@@ -7,7 +7,7 @@
                  formControlName="suchwortInput"
                  style="width: 250px"/>
         </md-input-container>
-        <button md-button (click)="startTheSearch()" >
+        <button md-button (click)="startTheSearch()">
           <md-icon>arrow_forward</md-icon>
         </button>
       </div>
@@ -768,8 +768,8 @@
                 </md-checkbox>
               </li>
             </ul>
-            <button md-button (click)="selectAllConvolutes()">{{ allConvolutesSelected ? 'Alle abwählen' : 'Alle
-              auswählen' }}
+            <button md-button (click)="selectAllConvolutes()">
+              {{ allConvolutesSelected ? 'Alle abwählen' : 'Alle auswählen' }}
             </button>
           </ng-template>
         </ngb-panel>
@@ -900,10 +900,13 @@
     <div style="margin-top: 70px;">
       <rae-textgrid
         [searchTermArray]="searchTermArray"
-        [poemsInGrid]="poemsInGrid">
+        [poemsInGrid]="poemsInGrid"
+        [columns]="relativeSizeOfColumns"
+        [showText]="showTexts"
+        [rahmen]="!textsHaveAlignedFrames"
+        [gridTextHeight]="textboxHeight">
       </rae-textgrid>
     </div>
-
 
 
   </div>

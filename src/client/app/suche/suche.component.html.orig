@@ -7,19 +7,20 @@
             <div id="rt-mainbody">
               <div class="component-content">
 
-                <h1>Suche</h1>
 <<<<<<< HEAD
-                Number of Results: {{ numberOfSearchResults }} {{ warning }}
-                <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
-=======
-                <!--<md-toolbar>
+                <h1>Suche <sup><md-icon (click)="showHelp()" >help</md-icon></sup> </h1>
+<!--<md-toolbar>
                 <md-toolbar-row>-->
-                <button md-raised-button title="Hilfe" (click)="showHelp()" style="margin-left:30px;">
-                  <md-icon>help</md-icon>
-                </button>
+
+
                 <!--</md-toolbar-row>
                 </md-toolbar>-->
-                Number of Results: {{ numberOfSearchResults }} <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
+                Number of Results: {{ numberOfSearchResults }} {{ warning }} <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
+=======
+                <h1>Suche</h1>
+                <rae-suche-werkzeugleiste> </rae-suche-werkzeugleiste>
+                Number of Results: {{ numberOfSearchResults }}
+                <!--, Number of performed Queries: {{ numberOfPerformedQueries }}-->
 >>>>>>> master
 
 

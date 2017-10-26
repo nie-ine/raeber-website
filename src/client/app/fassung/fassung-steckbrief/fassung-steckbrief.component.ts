@@ -41,7 +41,7 @@ export class FassungSteckbriefComponent implements OnChanges {
     'writing utensil': '',
     'typewriter': 'Schreibmaschine'
   };
-  textartMap = {
+  textartMap: any = {
     'structure': '[...]',
     'free verse': 'Reimlose Verse',
     'rhyming verse': 'Gereimte Verse',

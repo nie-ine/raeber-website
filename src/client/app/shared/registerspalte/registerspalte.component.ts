@@ -46,6 +46,7 @@ export class RegisterspalteComponent implements OnChanges {
   };
   konvolutTitle: string;
   sortingType: string;
+  konvolutIRItoStartownRequest: string;
   private sub: any;
 
   constructor(private http: Http, private sortingService: AlphabeticalSortingService,

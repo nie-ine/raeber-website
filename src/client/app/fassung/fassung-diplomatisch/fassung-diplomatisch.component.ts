@@ -24,6 +24,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
   pages: Array<any> = [];
   gewaehlteSchicht: string = 'schicht0';
   textIsMovable: boolean = false;
+  showPage: Array<boolean>;
 
   private sub: any;
 
@@ -31,6 +32,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges() {
     this.pages = [];
+    this.showPage = [];
 
     if (this.diplomaticIRIs) {
       for (let i = 0; i < this.diplomaticIRIs.length; i++) {
@@ -43,6 +45,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
           .subscribe(res => {
             try {
               seqnum = Number(res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ]);
+              this.showPage[ i ] = true;
             } catch (TypeError) {
               console.log('Cannot get seqnum for this page.');
               seqnum = 100;

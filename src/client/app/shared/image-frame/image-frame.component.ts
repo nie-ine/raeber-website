@@ -16,6 +16,7 @@ export class ImageFrameComponent implements OnInit {
 
   @Input() pictureData: any;
   @Input() initWidth: number;
+  @Input() origName: string;
 
   @Output() pictureReduced = new EventEmitter();
   @Output() pictureIncreased = new EventEmitter();
@@ -31,8 +32,6 @@ export class ImageFrameComponent implements OnInit {
   resize = 'both';
   px = 'px';
 
-  ausgeklappt: boolean = true;
-
   ngOnInit() {
     this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[ 0 ];
     this.width = this.initWidth;
@@ -40,13 +39,13 @@ export class ImageFrameComponent implements OnInit {
   }
 
   increaseFrameSize() {
-    this.width += 40;
+    this.width += 200;
     this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
     this.pictureIncreased.emit(null);
   }
 
   reduceFrameSize() {
-    this.width -= 40;
+    this.width -= 200;
     this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
     this.pictureReduced.emit(null);
   }

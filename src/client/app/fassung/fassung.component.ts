@@ -33,9 +33,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   poem_id: string;
   poemTitle: string;
   poemSeqnum: number;
-  poemConvoluteIri: string;
   poemConvoluteType: string;
-  convoluteProperty: string;
   editedPoemText: string;
   textEdition: string;
   konvolutType: string;
@@ -45,7 +43,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   synopseIRI: string;
   workTitle: string;
   otherWorkExpressions: any[] = [];
-  otherWorkExpressionsIri: string[];
 
   konvolutTypeName: string;
 
@@ -55,15 +52,35 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   poem_resizable: boolean;
   show_register: boolean;
 
-  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef, private dfs: DateFormatService) {
-  }
-
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
       return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }
+  }
+
+  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef, private dfs: DateFormatService) {
+  }
+
+  private static createRequestForNeighbourPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
+    let searchParams = new ExtendedSearch();
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber-gui#Poem';
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteIRI', 'EQ', convoluteIRI);
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (seqnumOfNeighbour).toString());
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI', 'EXISTS', '');
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemTitle', 'EXISTS', '');
+    return searchParams.toString();
+  }
+
+  private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
+    const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
+    const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
+    return '/' + convoluteTitle + '/' + poemTitle + '---' + poemShortIRI + '###' + poemTitle;
   }
 
   ngOnInit() {
@@ -101,13 +118,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   updateView() {
-    // TODO: Change when route definitions have been changed
-    console.log('IRI: ' + Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id));
     this.http
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
       .map(result => result.json())
       .subscribe(res => {
-        console.log(res);
         this.poemConvoluteType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         this.textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
@@ -117,38 +131,34 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.modificationDate = this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);
         switch (this.poemConvoluteType) {
           case 'PoemNote':
-            this.convoluteProperty = 'http://www.knora.org/ontology/kuno-raeber#isInNotebook';
             this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
             this.konvolutTypeName = 'Notizbuch';
             break;
           case 'HandwrittenPoem':
-            this.convoluteProperty = 'http://www.knora.org/ontology/text#isInManuscript';
+            // FIXME
             this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
             this.konvolutTypeName = 'Manuskript';
             break;
           case 'PostCardPoem':
-            this.convoluteProperty = 'http://www.knora.org/ontology/text#isOnPostcard';
+            // FIXME
             this.konvolutTypeName = 'Manuskript';
             break;
           case 'TypewrittenPoem':
-            this.convoluteProperty = 'http://www.knora.org/ontology/text#isInTypescript';
+            // FIXME
             this.konvolutTypeName = 'Typoskript';
             break;
           case 'PublicationPoem':
-            this.convoluteProperty = 'http://www.knora.org/ontology/work#isPublishedIn';
             this.konvolutTypeName = 'DRUCK';
             break;
         }
-        this.poemConvoluteIri = res.props[ this.convoluteProperty ].values[ 0 ];
-        this.getPrevNextPoems(this.poemSeqnum);
+        this.getNeighbouringPoems(this.poemSeqnum);
       });
 
-    this.http
+    /*    this.http
       .get(Config.API + 'graphdata/' + encodeURIComponent(this.urlPrefix + this.poem_id) + '?depth=2')
       .map(result => result.json())
       .subscribe(res => {
         for (const r of res.nodes) {
-          console.log('Konvolutyp (Model): ' + r[ 'resourceClassIri' ].split('#')[ 1 ]);
           if (r[ 'resourceClassIri' ].split('#')[ 1 ] === ('PoemNotebook' ||
               'PoemManuscriptConvolute' ||
               'PoemPostcardConvolute' ||
@@ -163,7 +173,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
             this.getWork(this.synopseIRI);
           }
         }
-      });
+     });*/
 
     this.http
       .get(globalSearchVariableService.API_URL +
@@ -174,14 +184,18 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         '&searchval=' +
         encodeURIComponent(this.urlPrefix + this.poem_id) +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666'
+        '&compop=EXISTS' +
+        '&searchval=' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+        '&compop=EXISTS' +
+        '&searchval='
       )
       .map(result => result.json())
+      // FIXME: Problem!
       .subscribe(res => {
-        console.log(res.subjects);
-        console.log(res.subjects[ 0 ].value[ 1 ]);
         this.konvolutIRI = res.subjects[ 0 ].value[ 1 ];
+        this.synopseIRI = res.subjects[ 0 ].value[ 3 ];
+        this.getWork(this.synopseIRI);
       });
   }
 
@@ -256,65 +270,23 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       );
   }
 
-  private getPrevNextPoems(poemSeqnum: number) {
-    let searchParamsPrev = new ExtendedSearch();
-    searchParamsPrev.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
-    searchParamsPrev.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum - 1).toString());
-    searchParamsPrev.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
-    let searchParamsNext = new ExtendedSearch();
-    searchParamsNext.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber#Poem';
-    searchParamsNext.property = new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (poemSeqnum + 1).toString());
-    searchParamsNext.property = new KnoraProperty(this.convoluteProperty, 'EQ', this.poemConvoluteIri);
-    //console.log(searchParamsPrev.toString());
-    //console.log(searchParamsNext.toString());
-    this.http.get(searchParamsPrev.toString())
-      .map(result => result.json())
-      .subscribe(res => {
-        console.log(res);
-        if (res.subjects[ 0 ]) {
-          let poemIri = res.subjects[ 0 ][ 'obj_id' ];
-          console.log(poemIri);
-          this.prevPoem = poemIri.split('/')[ 4 ];
-          this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
-            .map(result => result.json())
-            .subscribe(res => {
-              if (res.nhits !== '0') {
-                console.log(this.konvolutTitel);
-                this.prevPoem = '/' + this.konvolutTitel + '/' +
-                  encodeURIComponent(res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str) +
-                  '---' + this.prevPoem + '###' +
-                  res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-                console.log(this.prevPoem);
-              } else {
-                this.prevPoem = '###';
-              }
-            });
-        }
-      });
-    this.http.get(searchParamsNext.toString())
+  private getNeighbouringPoems(poemSeqnum: number) {
+    const searchParamsPrev = FassungComponent.createRequestForNeighbourPoem(this.konvolutIRI, (poemSeqnum - 1));
+    this.http.get(searchParamsPrev)
       .map(result => result.json())
       .subscribe(res => {
         if (res.subjects[ 0 ]) {
-          let poemIri = res.subjects[ 0 ][ 'obj_id' ];
-          console.log(poemIri);
-          this.nextPoem = poemIri.split('/')[ 4 ];
-          this.http.get(Config.API + 'resources/' + encodeURIComponent(poemIri))
-            .map(result => result.json())
-            .subscribe(res => {
-              if (res.nhits !== '0') {
-                console.log(this.konvolutTitel);
-                this.nextPoem = '/' + this.konvolutTitel + '/' +
-                  encodeURIComponent(res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str) +
-                  '---' + this.nextPoem + '###' +
-                  res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-                console.log(this.nextPoem);
-              } else {
-                this.prevPoem = '###';
-              }
-            });
+          this.prevPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.konvolutTitel);
         }
       });
-
+    const searchParamsNext = FassungComponent.createRequestForNeighbourPoem(this.konvolutIRI, (poemSeqnum + 1));
+    this.http.get(searchParamsNext)
+      .map(result => result.json())
+      .subscribe(res => {
+        if (res.subjects[ 0 ]) {
+          this.nextPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.konvolutTitel);
+        }
+      });
   }
 
 }

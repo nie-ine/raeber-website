@@ -98,7 +98,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ][ 4 ] = data.subjects[ this.i ].value[ 3 ]; // convolute Title
               this.poemInformation[ this.i ][ 5 ] = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
               this.poemInformation[ this.i ][ 6 ] = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
-              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 9 ]; // is written with
+              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 10 ]; // is written with
               // TODO the following not hard coded but over triplestore requests
               if (this.poemInformation[ this.i ][ 4 ].includes('Notizbuch')) {
                 this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-' + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ];

@@ -33,6 +33,7 @@ export class SuchmaskeComponent implements OnChanges {
   @Input() poemsInGrid: string;
   @Input() startSearchImmediately: boolean;
   @Input() loadingIndicatorInput: boolean;
+  @Input() lastSearchTerm: string;
 
   relativeSizeOfColumns: string = '43%';
   textboxHeight: number = 0;
@@ -244,5 +245,12 @@ export class SuchmaskeComponent implements OnChanges {
   startTheSearch() {
     console.log('startTheSearch');
     this.startSearch.emit();
+  }
+
+  generateTextForInputField(): string {
+    if(!this.lastSearchTerm) {
+      return 'Volltext';
+    } else return this.lastSearchTerm;
+
   }
 }

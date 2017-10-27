@@ -1,6 +1,3 @@
-/**
- * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 6/7/17.
- */
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
@@ -143,7 +140,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
             this.convoluteTypeGermanLabel = 'DRUCK';
             break;
         }
-        this.getNeighbouringPoems(this.poemSeqnum);
+        this.getNeighbouringPoems();
       });
   }
 
@@ -153,8 +150,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => this.editedPoemText = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str);
   }
 
-  private getNeighbouringPoems(poemSeqnum: number) {
-    const searchParamsPrev = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (poemSeqnum - 1));
+  private getNeighbouringPoems() {
+    const searchParamsPrev = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (this.poemSeqnum - 1));
     this.http.get(searchParamsPrev)
       .map(result => result.json())
       .subscribe(res => {
@@ -162,7 +159,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           this.prevPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.convoluteTitle);
         }
       });
-    const searchParamsNext = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (poemSeqnum + 1));
+    const searchParamsNext = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (this.poemSeqnum + 1));
     this.http.get(searchParamsNext)
       .map(result => result.json())
       .subscribe(res => {
@@ -193,10 +190,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       )
       .map(result => result.json())
       .subscribe(res => {
-        this.convoluteIri = res.subjects[ 0 ].value[ 1 ];
-        this.synopsisIri = res.subjects[ 0 ].value[ 3 ];
-        this.synopsisTitle = res.subjects[ 0 ].value[ 4 ];
-        this.getInformationOnRelatedPoems();
+        if (res.subjects[ 0 ] !== undefined) {
+          this.convoluteIri = res.subjects[ 0 ].value[ 1 ];
+          this.synopsisIri = res.subjects[ 0 ].value[ 3 ];
+          this.synopsisTitle = res.subjects[ 0 ].value[ 4 ];
+          this.getInformationOnRelatedPoems();
+        }
       });
   }
 

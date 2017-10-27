@@ -93,6 +93,11 @@ export class RegisterspalteComponent implements OnChanges {
         }
       }
       this.nrOfPoems = poemInformation.length;
+      for (let i = 0; i < this.poems.length; i++) {
+        if(!this.poems[i]) {
+          this.poems.splice(i,1);
+        }
+      }
     }
     //console.log(this.poems);
 
@@ -114,10 +119,15 @@ export class RegisterspalteComponent implements OnChanges {
         this.poems[this.poemsOld[i][ '11' ] - 1] = this.poemsOld[i];
       }
     }
+    for (let i = 0; i < this.poems.length; i++) {
+      if(!this.poems[i]) {
+        this.poems.splice(i,1);
+      }
+    }
   }
 
   sortChronologically() {
-    console.log('Sort chronologically');
+    //console.log('Sort chronologically');
     this.sortingType = 'chronologic';
     this.poemsOld = [];
     this.poemsOld = this.poems;
@@ -129,7 +139,12 @@ export class RegisterspalteComponent implements OnChanges {
         this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
       }
     }
-    console.log(this.poems);
+    for (let i = 0; i < this.poems.length; i++) {
+      if(!this.poems[i]) {
+        this.poems.splice(i,1);
+      }
+    }
+    //console.log(this.poems[0]);
   }
 
   formatDate(date: string) {

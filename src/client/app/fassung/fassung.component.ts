@@ -28,7 +28,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
 
-  pageIRIs: Array<string>;
   diplomaticIRIs: Array<string>;
 
   poem_id: string;
@@ -61,7 +60,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
-      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
+      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
     } else {
       return 'Linkinformation has not arrived yet';
     }
@@ -70,16 +69,16 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.poem_resizable = true;
     this.show_register = true;
-    this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[1]);
-    this.poem_id = this.router.url.split('/')[2].split('---')[1];
+    this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[ 1 ]);
+    this.poem_id = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
     this.updateView();
 
     if (this.konvolutTitel.includes('Notizbuch')) {
-      this.konvolutLink = '/notizbuecher/notizbuch-' + this.konvolutTitel.split(' ')[1];
+      this.konvolutLink = '/notizbuecher/notizbuch-' + this.konvolutTitel.split(' ')[ 1 ];
     } else if (this.konvolutTitel.includes('manuskripte')) {
-      this.konvolutLink = '/manuskripte/manuskripte-' + this.konvolutTitel.split(' ')[1];
+      this.konvolutLink = '/manuskripte/manuskripte-' + this.konvolutTitel.split(' ')[ 1 ];
     } else if (this.konvolutTitel.includes('Typoskript')) {
-      this.konvolutLink = '/typoskripte/typoskripte-' + this.konvolutTitel.split(' ')[1];
+      this.konvolutLink = '/typoskripte/typoskripte-' + this.konvolutTitel.split(' ')[ 1 ];
     } else {
       if (this.konvolutTitel === 'GESICHT IM MITTAG 1950') {
         this.konvolutLink = '/drucke/gesicht-im-mittag';
@@ -103,27 +102,28 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   updateView() {
     // TODO: Change when route definitions have been changed
+    console.log('IRI: ' + Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id));
     this.http
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poem_id))
       .map(result => result.json())
       .subscribe(res => {
         console.log(res);
+        this.poemConvoluteType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         this.textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(this.textEdition);
-        this.pageIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isOnPage' ].values;
-        this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
         this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
         this.creationDate = this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1);
         this.modificationDate = this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);
-        this.poemConvoluteType = res.resdata[ 'restype_name' ].split('#')[ 1 ];
         switch (this.poemConvoluteType) {
           case 'PoemNote':
             this.convoluteProperty = 'http://www.knora.org/ontology/kuno-raeber#isInNotebook';
+            this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
             this.konvolutTypeName = 'Notizbuch';
             break;
           case 'HandwrittenPoem':
             this.convoluteProperty = 'http://www.knora.org/ontology/text#isInManuscript';
+            this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
             this.konvolutTypeName = 'Manuskript';
             break;
           case 'PostCardPoem':
@@ -148,7 +148,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .map(result => result.json())
       .subscribe(res => {
         for (const r of res.nodes) {
-          //console.log(r);
+          console.log('Konvolutyp (Model): ' + r[ 'resourceClassIri' ].split('#')[ 1 ]);
           if (r[ 'resourceClassIri' ].split('#')[ 1 ] === ('PoemNotebook' ||
               'PoemManuscriptConvolute' ||
               'PoemPostcardConvolute' ||

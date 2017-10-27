@@ -114,55 +114,22 @@ export class RegisterspalteComponent implements OnChanges {
         this.poems[this.poemsOld[i][ '11' ] - 1] = this.poemsOld[i];
       }
     }
-    /*this.poems = this.poems.sort((n1, n2) => {
-      const k1 = this.sortingService.germanAlphabeticalSortKey(n1.title);
-      const k2 = this.sortingService.germanAlphabeticalSortKey(n2.title);
-      if (k1 > k2) {
-        return 1;
-      }
-
-      if (k1 < k2) {
-        return -1;
-      }
-
-      return 0;
-    });*/
   }
 
   sortChronologically() {
-    //console.log('Sort chronologically');
+    console.log('Sort chronologically');
     this.sortingType = 'chronologic';
-    //console.log(this.poems);
     this.poemsOld = [];
     this.poemsOld = this.poems;
     this.poems = [];
     //console.log(this.poems);
     for (let i = 0; i < this.poemsOld.length; i++) {
-      this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
+      if(this.poemsOld[i]) {
+        //console.log(this.poemsOld[i][ '8' ]);
+        this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
+      }
     }
-    //console.log(this.poems);
-    // Sortiere nach obj_id bis eine interne Nummerierung da ist
-    // TODO passe an entsprechende Datentypen der Felder an
-    /*this.poems = this.poems.sort((n1, n2) => {
-      let k1;
-      let k2;
-      if (this.konvolutType === 'notizbuecher' || this.konvolutType === 'manuskripte') {
-        k1 = n1.date;
-        k2 = n2.date;
-      } else {
-        k1 = n1.reihe;
-        k2 = n2.reihe;
-      }
-      if (k1 > k2) {
-        return 1;
-      }
-
-      if (k1 < k2) {
-        return -1;
-      }
-
-      return 0;
-    });*/
+    console.log(this.poems);
   }
 
   formatDate(date: string) {

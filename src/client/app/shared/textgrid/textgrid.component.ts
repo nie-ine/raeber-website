@@ -43,7 +43,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   j: number;
   searchActivated = false;
   searchInKonvolut = false;
-  poemsOld: Array<any>;
+  searchForPage: Array<any>;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -112,16 +112,18 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     console.log(this.searchTermfromKonvolut);
     if(this.searchTermfromKonvolut) {
       if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
-        this.searchAndFilterInTextgrid();
         this.searchInKonvolut = true;
-      } else if (this.searchInKonvolut !== false ) {
-        this.searchActivated = false;
-        this.searchTermArray = undefined;
+        this.searchActivated = true;
+        this.searchAndFilterInTextgrid();
+        console.log(this.searchActivated);
       }
       if(this.searchTermfromKonvolut[1]) {
         this.filterPoemsOnPage();
+        this.searchActivated = true;
         this.searchInKonvolut = true;
-      } else if (this.searchInKonvolut !== false ) {
+      }
+      if(!(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1)
+        && !this.searchTermfromKonvolut[1]) {
         this.searchActivated = false;
         this.searchTermArray = undefined;
       }
@@ -129,23 +131,33 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
   filterPoemsOnPage() {
     console.log('Filter Poems on Page');
+    this.searchForPage = undefined;
+    for(let poem of this.poemsInGrid) {
+      if(poem !== undefined) {
+        console.log(poem[13]);
+        if(poem[13] === this.searchTermfromKonvolut[1]) {
+          poem.show = true;
+        } else {
+          poem.show = false;
+        }
+      }
+    }
   }
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    console.log(this.searchTermfromKonvolut[0]);
-    this.searchActivated = this.searchTermfromKonvolut[0] !== '';
     console.log('Filter and Search in Textgrid');
     console.log(this.searchTermfromKonvolut[0]);
     for(let poem of this.poemsInGrid) {
-      if(poem[0] !== undefined) {
+      if(poem !== undefined) {
         if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
-          this.searchTermArray = [];
+          console.log('Term found');
           poem.show = true;
+          this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
         } else if (poem[2].search(this.searchTermfromKonvolut[0]) !== -1) {
-          this.searchTermArray = [];
           poem.show = true;
+          this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
         } else {
           poem.show = false;

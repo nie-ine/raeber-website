@@ -18,9 +18,35 @@ import { SynopseModule } from '../synopse/synopse.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdInputModule } from '@angular/material';
 import { CoreRoutingModule } from './core-routing.module';
+import {
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdCheckboxModule,
+  MdGridListModule,
+  MdIconModule,
+  MdDialogModule,
+  MdMenuModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSlideToggleModule, MdToolbarModule,
+  MdProgressBarModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdGridListModule,
+    MdIconModule,
+    MdDialogModule,
+    MdMenuModule,
+    MdSelectModule,
+    MdSidenavModule,
+    MdSlideToggleModule, MdToolbarModule,
+    MdProgressBarModule,
     CommonModule,
     // Order of imports is important!
     StatischModule,

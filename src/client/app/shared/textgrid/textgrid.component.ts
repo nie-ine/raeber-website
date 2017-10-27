@@ -43,7 +43,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   j: number;
   searchActivated = false;
   searchInKonvolut = false;
-  poemsOld: Array<any>;
+  searchForPage: Array<any>;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
@@ -81,7 +81,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
-    return !x[ 4 ];
+    return x[ 6 ] !== '1';
   }
 
   /**
@@ -109,32 +109,56 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.contentType);
-    if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
-      this.searchAndFilterInTextgrid();
-      this.searchInKonvolut = true;
-    } else if (this.searchInKonvolut !== false ) {
-      this.searchActivated = false;
-      this.searchTermArray = undefined;
+    console.log(this.searchTermfromKonvolut);
+    if(this.searchTermfromKonvolut) {
+      if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
+        this.searchInKonvolut = true;
+        this.searchActivated = true;
+        this.searchAndFilterInTextgrid();
+        console.log(this.searchActivated);
+      }
+      if(this.searchTermfromKonvolut[1]) {
+        this.filterPoemsOnPage();
+        this.searchActivated = true;
+        this.searchInKonvolut = true;
+      }
+      if(!(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1)
+        && !this.searchTermfromKonvolut[1]) {
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+      }
+    }
+  }
+  filterPoemsOnPage() {
+    console.log('Filter Poems on Page');
+    this.searchForPage = undefined;
+    for(let poem of this.poemsInGrid) {
+      if(poem !== undefined) {
+        console.log(poem[13]);
+        if(poem[13] === this.searchTermfromKonvolut[1]) {
+          poem.show = true;
+        } else {
+          poem.show = false;
+        }
+      }
     }
   }
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    console.log(this.searchTermfromKonvolut);
-    this.searchActivated = this.searchTermfromKonvolut !== '';
     console.log('Filter and Search in Textgrid');
-    console.log(this.searchTermfromKonvolut);
+    console.log(this.searchTermfromKonvolut[0]);
     for(let poem of this.poemsInGrid) {
-      if(poem[0] !== undefined) {
-        if(poem[0].search(this.searchTermfromKonvolut) !== -1) {
-          this.searchTermArray = [];
+      if(poem !== undefined) {
+        if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
+          console.log('Term found');
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
-        } else if (poem[2].search(this.searchTermfromKonvolut) !== -1) {
           this.searchTermArray = [];
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
+        } else if (poem[2].search(this.searchTermfromKonvolut[0]) !== -1) {
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
+          this.searchTermArray = [];
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
         } else {
           poem.show = false;
         }

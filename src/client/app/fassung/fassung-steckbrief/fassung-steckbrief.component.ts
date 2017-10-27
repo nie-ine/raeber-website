@@ -33,7 +33,7 @@ export class FassungSteckbriefComponent implements OnChanges {
   publishedIn: Array<string>;
   referencePoemIRIs: Array<string>;
 
-  carrierIRIs: Array<string>;
+  carrierIRI: string;
 
   schreibzeugMap = {
     'pencil': 'Bleistift',
@@ -191,35 +191,21 @@ export class FassungSteckbriefComponent implements OnChanges {
             // skip if there is no bezugstext
           }
 
-          this.carrierIRIs = [];
           try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ i ]);
-            }
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ 0 ];
           } catch (TypeError) {
             // skip if there is no notebook
           }
           try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/text#isInManuscript' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/text#isInManuscript' ].values[ i ]);
-            }
-          } catch (TypeError) {
-            // skip if there is no manuscript
-          }
-          try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/text#isInTypescript' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/text#isInTypescript' ].values[ i ]);
-            }
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInManuscript' ].values[ 0 ];
           } catch (TypeError) {
             // skip if there is no notebook
           }
-
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInTypescript' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no notebook
+          }
         });
     }
   }

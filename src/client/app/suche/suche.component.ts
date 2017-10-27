@@ -1424,12 +1424,8 @@ export class SucheComponent implements OnInit {
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-          //console.log(k);
-          //console.log(poemIRI);
-          //console.log(this.suchmaskeKonvolutIRIMapping);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
                if(this.checkTextart(textart)) {
-                 //console.log('Check Textart');
                  if(this.checkTimeInterval(date)) {
                    if(this.checkIfFinalVersion(isFinalVersion)) {
                      if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
@@ -1462,47 +1458,52 @@ export class SucheComponent implements OnInit {
       }
     }
     checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    //console.log(isPartOfCycle);
-    if (!this.arg || this.route.snapshot.queryParams[ 'nurZyklus' ] === 'false') return true;
-    if (!this.arg.get('zyklus').value || this.route.snapshot.queryParams[ 'nurZyklus' ] === 'false') {
-      return true;
-    } else if ((this.arg.get('zyklus').value || this.route.snapshot.queryParams[ 'nurZyklus' ] === 'true')
-      && isPartOfCycle) {
-      return true;
-    } else return false;
+    return this.checkIfTrue('nurZyklus','zyklus', isPartOfCycle);
   }
     checkIfIsInDialect(isInDialiect: string): boolean {
-    if (!this.arg || this.route.snapshot.queryParams[ 'nurMundart' ] === 'false') return true;
-      //console.log(isInDialiect);
-      if(!this.arg || this.route.snapshot.queryParams[ 'nurMundart' ] === 'false') return true;
-      if(!this.arg.get('mundart').value || this.route.snapshot.queryParams[ 'nurMundart' ] === 'false') {
-        return true;
-      } else if ((this.arg.get('mundart').value || this.route.snapshot.queryParams[ 'nurZyklus' ] === 'true')
-        && isInDialiect) {
-        return true;
-      } else return false;
+      return this.checkIfTrue('nurMundart','mundart', isInDialiect);
     }
     checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-      //console.log(hatStrophenunterteilung);
-      if(!this.arg || this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'false') return true;
-      if(!this.arg.get('strophen').value || this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'false') {
+      return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+    }
+    checkIfTrue(inputFromRoute: string, controlFromFormName: string, parameterToCheck: string) {
+      if(!this.arg) {
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'false') return true;
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'true' && parameterToCheck === '1') return true;
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'true' && parameterToCheck === '0') return false;
+      }
+      if(!this.arg) return true;
+      if(!this.arg.get(controlFromFormName).value) {
         return true;
-      } else if ((this.arg.get('strophen') || this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'true')
-        && hatStrophenunterteilung) {
+      } else if ((this.arg.get(controlFromFormName).value)
+        && parameterToCheck === '1') {
         return true;
       } else return false;
     }
     checkIfFinalVersion(isFinalVersion: string):boolean {
-      if(!this.arg || this.route.snapshot.queryParams[ 'nurEndfassungen' ] === 'false') return true;
-      if(!this.arg.get('endfassung').value || this.route.snapshot.queryParams[ 'nurEndfassungen' ] === 'false') {
-        return true;
-      } else if ((this.arg.get('endfassung').value || this.route.snapshot.queryParams[ 'nurEndfassungen' ] === 'true')
-        && isFinalVersion) {
-        return true;
-      } else return false;
+    return this.checkIfTrue('nurEndfassungen','endfassung', isFinalVersion);
     }
     checkTextart(textart: string): boolean {
-      if(!this.arg) return true;
+    //console.log('checktextart: ' + textart);
+      if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' && textart === 'RythmicProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' && textart === 'LetterStructure') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true' && textart === 'RythmicVerse') {
+        return true; } else if (
+          this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true'
+      ) {
+        return false;
+      }
+      if(!this.arg ) return true;
       if (this.arg.get('textartForm').pristine) {
         //console.log(textart);
         return true;
@@ -1515,16 +1516,6 @@ export class SucheComponent implements OnInit {
       } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
         return true;
       } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' && textart === 'RythmicProse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' && textart === 'LetterStructure') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true' && textart === 'RythmicVerse') {
         return true;
       } else {
         return false;

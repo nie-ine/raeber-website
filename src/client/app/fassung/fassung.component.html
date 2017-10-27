@@ -69,8 +69,9 @@
                       </md-card>
                       <br/>
 
-                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'"
-                               style="padding-top:0;">
+                      <md-card
+                        *ngIf="poemConvoluteType === 'PoemManuscriptConvolute' || poemConvoluteType === 'PoemNotebook'"
+                        style="padding-top:0;">
                         <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
                                         *ngIf="zeigeDiplomatisch">
                           <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch"

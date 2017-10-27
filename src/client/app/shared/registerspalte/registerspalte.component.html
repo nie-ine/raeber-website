@@ -8,9 +8,9 @@
     <a md-list-item *ngFor="let p of poems; let i = index"
        [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p)"
        (click)="goToOtherFassung.emit('/' + konvolutTitle + '/' + produceFassungsLink(p))"
-       routerLinkActive="active">
+       routerLinkActive="active" [ngClass]="{'color0': i % 2}"  >
 
-      <h5 md-line *ngIf="p">{{ p[0] }}</h5>
+      <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p[0] }}</h5>
 
       <p *ngIf="sortingType=='alphabetic' && p"
          md-line>

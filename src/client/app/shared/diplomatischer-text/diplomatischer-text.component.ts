@@ -18,9 +18,14 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   @Input() gewaehlteSchicht: string;
   @Input() textIRI: string;
   @Input() textIsMovable: boolean;
+  @Input() showStufe1: boolean;
+  @Input() showStufe2: boolean;
 
   @Output() gewaehlteSchichtChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() textIsMovableChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() showStufe1Change: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() showStufe2Change: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   farbeNeutral = '#6e6e6e';
   farbeMarkierung = '#d00501';
@@ -63,6 +68,14 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
         .subscribe(res => {
           this.text = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
           this.updateSchichten();
+          if(this.text.match('schicht1')) {
+            this.showStufe1 = true;
+            this.showStufe1Change.emit(this.showStufe1);
+          }
+          if(this.text.match('einfuegung')) {
+            this.showStufe2 = true;
+            this.showStufe2Change.emit(this.showStufe2);
+          }
         });
     }
   }

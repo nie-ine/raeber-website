@@ -1,17 +1,30 @@
 <div #diplomatischKarte>
-  <div *ngFor="let p of pages">
-    <div style="display: inline-block; vertical-align: top">
-      <h4><span>{{ p['pagenumber'] }}</span> <span>({{ p['origName'] }})</span> </h4>
-      <rae-image-frame *ngIf="p['picData']"
-        [pictureData]="p['picData']"
-        [initWidth]="cardWidth"
-        (pictureIncreased)="pictureIncreased.emit(null)"
-        (pictureReduced)="pictureReduced.emit(null)"></rae-image-frame>
+  <div *ngFor="let p of pages; let i = index">
+    <div>
+      <h4 style="display: inline-block;">{{ p['pagenumber'] }}</h4>
+      <button md-button
+              (click)="showPage[i] = !showPage[i]"
+              style="display: inline-block;">
+        <md-icon *ngIf="showPage[i]">clear</md-icon>
+        <md-icon *ngIf="!showPage[i]">add</md-icon>
+      </button>
     </div>
-    <div *ngIf="p['diplIRI']" style="display: inline-block; vertical-align: top">
+    <div *ngIf="showPage[i]" style="display: inline-block; vertical-align: top">
+
+      <rae-image-frame *ngIf="p['picData']"
+                       [origName]="p['origName']"
+                       [pictureData]="p['picData']"
+                       [initWidth]="cardWidth"
+                       (pictureIncreased)="pictureIncreased.emit(null)"
+                       (pictureReduced)="pictureReduced.emit(null)">
+      </rae-image-frame>
+    </div>
+    <div *ngIf="p['diplIRI'] && showPage[i]" style="display: inline-block; vertical-align: top">
       <rae-diplomatischer-text [textIRI]="p['diplIRI']"
                                [(gewaehlteSchicht)]="gewaehlteSchicht"
-                               [(textIsMovable)]="textIsMovable">
+                               [(textIsMovable)]="textIsMovable"
+                               [(showStufe1)]="showStufe1"
+                               [(showStufe2)]="showStufe2">
       </rae-diplomatischer-text>
     </div>
     <rae-fassung-diplomatisch-seiten [pageIRI]="p['pageIRI']"

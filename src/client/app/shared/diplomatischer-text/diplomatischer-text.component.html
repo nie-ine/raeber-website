@@ -1,36 +1,53 @@
 <div class="rae-diplomatic">
-  <md-toolbar>
-    <md-button-toggle-group [(ngModel)]="gewaehlteSchicht" name="schichtwaehler{{textIRI}}"
-                            (ngModelChange)="gewaehlteSchichtChange.emit(gewaehlteSchicht)">
-      <md-button-toggle value="schicht0"
-                        [ngStyle]="{'color': farbeNeutral}"
-                        title="Anfangsschicht ohne Auszeichnung">
-        0
-      </md-button-toggle>
-      <md-button-toggle value="schicht1"
-                        [ngStyle]="{'color': farbeErste}"
-                        title="Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet">
-        1
-      </md-button-toggle>
-      <md-button-toggle value="schicht2"
-                        [ngStyle]="{'color': farbeEinfuegung}"
-                        title="Texteinfügung entgegen dem linearen Verlauf der Niederschrift">
-        2
-      </md-button-toggle>
-      <md-button-toggle value="schicht3"
-                        [ngStyle]="{'color': farbeLetzte}"
-                        title="Endschicht (Basis für edierten Text)">
-        3
-      </md-button-toggle>
-    </md-button-toggle-group>
+  <menu>
 
-    <button md-raised-button (click)="toggleDraggable()" title="Umschrift verschiebbar machen">
-      <md-icon *ngIf="textIsMovable">check_box</md-icon>
-      <md-icon *ngIf="!textIsMovable">check_box_outline_blank</md-icon>
-      ↔
+    <button md-raised-button
+            [ngStyle]="{'color': farbeNeutral}"
+            [ngClass]="{'button-is-active': gewaehlteSchicht == 'schicht0'}"
+            class="rae-image-small-button"
+            title="Anfangsschicht ohne Auszeichnung"
+            (click)="gewaehlteSchicht = 'schicht0'; gewaehlteSchichtChange.emit(gewaehlteSchicht); updateSchichten();">
+      0
     </button>
 
-  </md-toolbar>
+    <button md-raised-button
+            [ngStyle]="{'color': farbeErste}"
+            [ngClass]="{'button-is-active': gewaehlteSchicht == 'schicht1'}"
+            class="rae-image-small-button"
+            *ngIf="showStufe1"
+            title="Grundschicht (kleiner Verbund), nur ausnahmsweise ausgezeichnet"
+            (click)="gewaehlteSchicht = 'schicht1'; gewaehlteSchichtChange.emit(gewaehlteSchicht); updateSchichten();">
+      1
+    </button>
+
+    <button md-raised-button
+            [ngStyle]="{'color': farbeEinfuegung}"
+            [ngClass]="{'button-is-active': gewaehlteSchicht == 'schicht2'}"
+            class="rae-image-small-button"
+            *ngIf="showStufe2"
+            title="Texteinfügung entgegen dem linearen Verlauf der Niederschrift"
+            (click)="gewaehlteSchicht = 'schicht2'; gewaehlteSchichtChange.emit(gewaehlteSchicht); updateSchichten();">
+      2
+    </button>
+
+    <button md-raised-button
+            [ngStyle]="{'color': farbeLetzte}"
+            [ngClass]="{'button-is-active': gewaehlteSchicht == 'schicht3'}"
+            class="rae-image-small-button"
+            title="Endschicht (Basis für edierten Text)"
+            (click)="gewaehlteSchicht = 'schicht3'; gewaehlteSchichtChange.emit(gewaehlteSchicht); updateSchichten();">
+      3
+    </button>
+
+    <button md-raised-button
+            (click)="toggleDraggable()"
+            [ngClass]="{'button-is-active': textIsMovable}"
+            class="rae-image-small-button"
+            title="Umschrift verschiebbar machen">
+      ↔
+    </button>
+  </menu>
+
   <div class="umschrift edtext edtext_hs">
     <div class="transkription" [innerHtml]="text"></div>
   </div>

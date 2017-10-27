@@ -69,18 +69,23 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     return searchParams.toString();
   }
 
+  constructor(private http: Http,
+              private router: Router,
+              private cdr: ChangeDetectorRef,
+              private dfs: DateFormatService) {
+  }
+
   private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
     const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
     const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
-    return '/' + convoluteTitle + '/' + FassungComponent.escapeSlashesInRouteElement(poemTitle) +
+    return '/' + convoluteTitle + '/' + FassungComponent.removeSlashesInRouteElement(poemTitle) +
       '---' + poemShortIRI + '###' + poemTitle;
   }
 
-  private static escapeSlashesInRouteElement(element: string) {
-    element.replace('/', '/*');
-  }
-
-  constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef, private dfs: DateFormatService) {
+  private static removeSlashesInRouteElement(element: string) {
+    return element.includes('/') ?
+      element.replace('/', '') :
+      element;
   }
 
   ngOnInit() {

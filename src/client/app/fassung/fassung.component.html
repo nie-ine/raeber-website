@@ -69,7 +69,7 @@
                       </md-card>
                       <br/>
 
-                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'"
+                      <md-card *ngIf="diplomaticIRIs && diplomaticIRIs.length > 0"
                                style="padding-top:0;">
                         <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
                                         *ngIf="zeigeDiplomatisch">

@@ -28,3 +28,15 @@ md-button-toggle {
   height: 36px;
   font-size: 80%;
 }
+
+.color0 {
+  background-color: #f3f3f3;
+}
+
+.color1 {
+  background-color: lightyellow;
+}
+
+.color2 {
+  background-color: lightgray;
+}

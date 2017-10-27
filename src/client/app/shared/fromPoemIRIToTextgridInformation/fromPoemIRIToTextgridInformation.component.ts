@@ -170,15 +170,15 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=!EQ' +
         '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
+/*        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
         '&compop=!EQ' +
-        '&searchval=123455666' +
+        '&searchval=123455666' +*/
         '&show_nrows=2000'
       )
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            //console.log(data.subjects[ 0 ]);
+            console.log(data);
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
               this.poemInformation[ this.i ] = [];
               this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 9 ];

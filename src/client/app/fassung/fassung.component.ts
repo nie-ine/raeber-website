@@ -42,6 +42,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   konvolutType: string;
   konvolutIRI: string;
   konvolutTitel: string;
+  konvolutLink: string;
   synopseIRI: string;
   workTitle: string;
   otherWorkExpressions: any[] = [];
@@ -60,7 +61,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
-      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+      return titel.split('/')[0] + '---' + iri.split('raeber/')[1];
     } else {
       return 'Linkinformation has not arrived yet';
     }
@@ -69,9 +70,35 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.poem_resizable = true;
     this.show_register = true;
-    this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[ 1 ]);
-    this.poem_id = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
+    this.konvolutTitel = decodeURIComponent(this.router.url.split('/')[1]);
+    this.poem_id = this.router.url.split('/')[2].split('---')[1];
     this.updateView();
+
+    if (this.konvolutTitel.includes('Notizbuch')) {
+      this.konvolutLink = '/notizbuecher/notizbuch-' + this.konvolutTitel.split(' ')[1];
+    } else if (this.konvolutTitel.includes('manuskripte')) {
+      this.konvolutLink = '/manuskripte/manuskripte-' + this.konvolutTitel.split(' ')[1];
+    } else if (this.konvolutTitel.includes('Typoskript')) {
+      this.konvolutLink = '/typoskripte/typoskripte-' + this.konvolutTitel.split(' ')[1];
+    } else {
+      if (this.konvolutTitel === 'GESICHT IM MITTAG 1950') {
+        this.konvolutLink = '/drucke/gesicht-im-mittag';
+      } else if (this.konvolutTitel === 'Die verwandelten Schiffe 1957') {
+        this.konvolutLink = '/drucke/die-verwandelten-schiffe';
+      } else if (this.konvolutTitel === 'GEDICHTE 1960') {
+        this.konvolutLink = '/drucke/gedichte';
+      } else if (this.konvolutTitel === 'FLUSSUFER 1963') {
+        this.konvolutLink = '/drucke/flussufer';
+      } else if (this.konvolutTitel === 'Reduktionen 1981') {
+        this.konvolutLink = '/drucke/reduktionen';
+      } else if (this.konvolutTitel === 'Hochdeutsche Gedichte 1985') {
+        this.konvolutLink = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
+      } else if (this.konvolutTitel === 'Alemannische Gedichte 1985') {
+        this.konvolutLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else {
+        this.konvolutLink = '/drucke/verstreutes';
+      }
+    }
   }
 
   updateView() {

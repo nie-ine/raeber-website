@@ -108,6 +108,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return firstLast;
   }
 
+  private static filterSearchResults(x: any): boolean {
+    return x.show;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.searchTermfromKonvolut);
     if(this.searchTermfromKonvolut) {
@@ -255,6 +259,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   filterPoems(unfiltered: Array<any>): Array<any> {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+        .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)

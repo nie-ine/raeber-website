@@ -63,7 +63,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   constructor(private http: Http, private router: Router, private cdr: ChangeDetectorRef, private dfs: DateFormatService) {
   }
 
-  private static createRequestForNeighbourPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
+  private static createRequestForNeighbouringPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
     let searchParams = new ExtendedSearch();
     searchParams.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber-gui#Poem';
     searchParams.property =
@@ -80,7 +80,12 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
     const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
     const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
-    return '/' + convoluteTitle + '/' + poemTitle + '---' + poemShortIRI + '###' + poemTitle;
+    return '/' + convoluteTitle + '/' + FassungComponent.escapeSlashesInRouteElement(poemTitle) +
+      '---' + poemShortIRI + '###' + poemTitle;
+  }
+
+  private static escapeSlashesInRouteElement(element: string) {
+    element.replace('/', '/*');
   }
 
   ngOnInit() {
@@ -154,27 +159,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.getNeighbouringPoems(this.poemSeqnum);
       });
 
-    /*    this.http
-      .get(Config.API + 'graphdata/' + encodeURIComponent(this.urlPrefix + this.poem_id) + '?depth=2')
-      .map(result => result.json())
-      .subscribe(res => {
-        for (const r of res.nodes) {
-          if (r[ 'resourceClassIri' ].split('#')[ 1 ] === ('PoemNotebook' ||
-              'PoemManuscriptConvolute' ||
-              'PoemPostcardConvolute' ||
-              'PoemTypescriptConvolute' ||
-              'PrintedPoemBookPublication' ||
-              'PolyAuthorPublication')) {
-            //this.konvolutIRI = r[ 'resourceIri' ];
-            this.konvolutType = r[ 'resourceClassIri' ].split('#')[ 1 ];
-          }
-          if (r[ 'resourceClassIri' ].split('#')[ 1 ] === 'Work') {
-            this.synopseIRI = r[ 'resourceIri' ];
-            this.getWork(this.synopseIRI);
-          }
-        }
-     });*/
-
     this.http
       .get(globalSearchVariableService.API_URL +
         globalSearchVariableService.extendedSearch +
@@ -191,7 +175,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         '&searchval='
       )
       .map(result => result.json())
-      // FIXME: Problem!
       .subscribe(res => {
         this.konvolutIRI = res.subjects[ 0 ].value[ 1 ];
         this.synopseIRI = res.subjects[ 0 ].value[ 3 ];
@@ -271,19 +254,19 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getNeighbouringPoems(poemSeqnum: number) {
-    const searchParamsPrev = FassungComponent.createRequestForNeighbourPoem(this.konvolutIRI, (poemSeqnum - 1));
+    const searchParamsPrev = FassungComponent.createRequestForNeighbouringPoem(this.konvolutIRI, (poemSeqnum - 1));
     this.http.get(searchParamsPrev)
       .map(result => result.json())
       .subscribe(res => {
-        if (res.subjects[ 0 ]) {
+        if (res.subjects[ 0 ] !== undefined) {
           this.prevPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.konvolutTitel);
         }
       });
-    const searchParamsNext = FassungComponent.createRequestForNeighbourPoem(this.konvolutIRI, (poemSeqnum + 1));
+    const searchParamsNext = FassungComponent.createRequestForNeighbouringPoem(this.konvolutIRI, (poemSeqnum + 1));
     this.http.get(searchParamsNext)
       .map(result => result.json())
       .subscribe(res => {
-        if (res.subjects[ 0 ]) {
+        if (res.subjects[ 0 ] !== undefined) {
           this.nextPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.konvolutTitel);
         }
       });

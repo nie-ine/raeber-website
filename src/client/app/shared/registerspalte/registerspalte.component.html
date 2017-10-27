@@ -6,8 +6,8 @@
   </md-button-toggle-group>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of poems; let i = index"
-       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p.title,p.iri)"
-       (click)="goToOtherFassung.emit('/' + konvolutTitle + '/' + produceFassungsLink(p.title,p.iri))"
+       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p)"
+       (click)="goToOtherFassung.emit('/' + konvolutTitle + '/' + produceFassungsLink(p))"
        routerLinkActive="active">
 
       <h5 md-line *ngIf="p">{{ p[0] }}</h5>

@@ -32,9 +32,9 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   poemShortIri: string;
   poemTitle: string;
+  poemType: string;
   poemSeqnum: number;
   editedPoemText: string;
-  convoluteType: string;
   convoluteIri: string;
   convoluteTitle: string;
   convoluteLink: string;
@@ -115,7 +115,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
       .map(result => result.json())
       .subscribe(res => {
-        this.convoluteType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
+        this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         const textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(textEdition);
@@ -124,7 +124,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);
-        switch (this.convoluteType) {
+        switch (this.poemType) {
           case 'PoemNote':
             this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
             this.convoluteTypeGermanLabel = 'Notizbuch';

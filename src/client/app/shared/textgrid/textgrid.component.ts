@@ -54,11 +54,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() konvolutView: boolean;
 
   /**
-   * Orders an array by date (ascending)
+   * Orders an array by date (ascending) and seqnum (ascending)
    * @param {Array<any>} unsorted Array to be sorted
    * @returns {Array<any>} Sorted array
    */
-  // TODO implement also three functions: first is sort by date, second by convolute title, third by seqnum
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
         if (x[ 1 ] + String(1000000 + x[ 5 ]) > y[ 1 ] + String(1000000 + x[ 5 ])) {
@@ -66,7 +65,17 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         } else if (x[ 1 ] + String(1000000 + x[ 5 ]) < x[ 1 ]+ String(1000000 + x[ 5 ])) {
           return -1;
         } else {
-          return 0;
+          if (x[ 4 ] === y[ 4 ]) {
+            if (x[ 5 ] > y[ 5 ]) {
+              return 1;
+            } else if (x[ 5 ] < y[ 5 ]) {
+              return -1;
+            } else {
+              return 0;
+            }
+          } else {
+            return 0;
+          }
         }
       }
     );

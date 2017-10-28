@@ -2,13 +2,12 @@
 
   <md-toolbar-row>
 
-    <button md-raised-button class="layoutbutton" (click)="showText = !showText; showTextChange.emit(showText);">
+    <button md-raised-button class="layoutbutton" (click)="toggleShowText()">
       {{showText ? 'Kein Text' : 'Text'}}
     </button>
 
-    <button md-raised-button class="layoutbutton" title="Spaltenanzahl"
-            (click)="columns = (columns % 3) + 1; cols.emit(columns)">{{(columns %
-      3) + 1}} Spalten
+    <button md-raised-button class="layoutbutton" title="Spaltenanzahl" (click)="rotateGridColumns()">
+      {{(columns % 3) + 1}} Spalten
     </button>
 
     <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText || gridHeight >= 18"

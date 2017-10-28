@@ -40,12 +40,29 @@ export class SynopseWerkzeugleisteComponent {
   }
 
   neuladen() {
-    this.rahmen = true;
+    if (!this.showText) {
+      this.toggleShowText();
+    }
+    if (!this.rahmen) {
+      this.toggleFrame();
+    }
     this.columns = 2;
     this.cols.emit(2);
     this.resetHeight.emit();
     if (this.firstLast) {
       this.setFirstLast();
+    }
+    if (!this.showDuplicates) {
+      this.toggleShowDuplicates();
+    }
+    if (!this.showNotebooks) {
+      this.toggleShowNotebooks();
+    }
+    if (!this.showManuscripts) {
+      this.toggleShowManuscripts();
+    }
+    if (!this.showTyposcripts) {
+      this.toggleShowTyposcripts();
     }
   }
 
@@ -55,6 +72,16 @@ export class SynopseWerkzeugleisteComponent {
 
   textVerkleinern() {
     this.verkleinereText.emit(null);
+  }
+
+  toggleShowText() {
+    this.showText = !this.showText;
+    this.showTextChange.emit(this.showText);
+  }
+
+  rotateGridColumns() {
+    this.columns = (this.columns % 3) + 1;
+    this.cols.emit(this.columns);
   }
 
   toggleFrame() {

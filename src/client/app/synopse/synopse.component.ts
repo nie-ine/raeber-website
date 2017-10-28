@@ -22,6 +22,7 @@ export class SynopseComponent implements OnInit {
   columns: string;
   gridHeight: number = 0;
   workIri: string;
+  workTitle: string;
   poemsIri: string[] = [];
 
   poems: Array<any>;
@@ -55,6 +56,7 @@ export class SynopseComponent implements OnInit {
       .map(response => response.json())
       .subscribe((res: any) => {
         this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
+        this.workTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         this.results = this.poemsIri.length;
       });
   }

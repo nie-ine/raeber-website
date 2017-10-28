@@ -1,11 +1,13 @@
-<h3>Weitere Fassungen</h3>
-<ul>
-  <ng-container *ngFor="let p of sortByDateAndSeqnum(synopsenTags);">
-  <li *ngIf="p !== undefined && !router.url.includes(p.split('###')[0].split('---')[1])">
-    <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active" (click)="goToOtherFassung(p.split('###')[0])">
-      {{p.split('###')[1]}}
-    </a> <br/>
-    in : {{p.split('###')[0].split('/')[1]}}
-  </li>
-  </ng-container>
-</ul>
+<ng-container *ngIf="synopsenTags.length > 1">
+  <h3>Weitere Fassungen</h3>
+  <ul>
+    <ng-container *ngFor="let p of sortByDateAndSeqnum(synopsenTags);">
+      <li *ngIf="p !== undefined && !router.url.includes(p.split('###')[0].split('---')[1])">
+        <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active" (click)="goToOtherFassung(p.split('###')[0])">
+          {{p.split('###')[1]}}
+        </a> <br/>
+        in : {{p.split('###')[0].split('/')[1]}}
+      </li>
+    </ng-container>
+  </ul>
+</ng-container>

@@ -245,7 +245,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           for (let res of response.subjects) {
             this.relatedPoems.push('/' + res.value[ 3 ] + '/' +
               FassungComponent.produceFassungsLink(res.value[ 7 ], res.value[ 5 ]) +
-              '###' + res.value[ 7 ]);
+              '###' + res.value[ 7 ] + '###' + res.value[ 4 ] + '###' + res.value[ 1 ]);
           }
         }
       );

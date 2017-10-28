@@ -60,9 +60,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
-        if (x[ 1 ] + String(1000000 + x[ 5 ]) > y[ 1 ] + String(1000000 + x[ 5 ])) {
+      if (x[ 1 ] > y[ 1 ]) {
           return 1;
-        } else if (x[ 1 ] + String(1000000 + x[ 5 ]) < x[ 1 ]+ String(1000000 + x[ 5 ])) {
+      } else if (x[ 1 ] < y[ 1 ]) {
           return -1;
         } else {
           if (x[ 4 ] === y[ 4 ]) {

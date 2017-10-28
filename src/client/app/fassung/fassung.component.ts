@@ -162,6 +162,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         if (res.subjects[ 0 ] !== undefined) {
           this.prevPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.convoluteTitle);
+        } else {
+          this.prevPoem = '';
         }
       });
     const searchParamsNext = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (this.poemSeqnum + 1));
@@ -170,6 +172,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         if (res.subjects[ 0 ] !== undefined) {
           this.nextPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.convoluteTitle);
+        } else {
+          this.nextPoem = '';
         }
       });
   }

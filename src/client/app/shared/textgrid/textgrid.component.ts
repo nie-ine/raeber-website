@@ -47,7 +47,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
-  @Input() filterDuplicatesFlag = false;
+  @Input() filterDuplicatesFlag = true;
   @Input() filterNotebookFlag = false;
   @Input() filterManuscriptFlag = false;
   @Input() filterTyposcriptFlag = false;

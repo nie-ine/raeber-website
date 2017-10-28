@@ -32,7 +32,7 @@ export class SynopseComponent implements OnInit {
   showNotebooks = true;
   showManuscripts = true;
   showTyposcripts = true;
-  showDuplicates = true;
+  showDuplicates = false;
 
   private sub: any;
 

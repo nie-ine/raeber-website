@@ -34,7 +34,7 @@ export class SynopseWerkzeugleisteComponent {
   showNotebooks: boolean = true;
   showManuscripts: boolean = true;
   showTyposcripts: boolean = true;
-  showDuplicates: boolean = true;
+  showDuplicates: boolean = false;
 
   constructor(public dialog: MdDialog) {
   }
@@ -52,7 +52,7 @@ export class SynopseWerkzeugleisteComponent {
     if (this.firstLast) {
       this.setFirstLast();
     }
-    if (!this.showDuplicates) {
+    if (this.showDuplicates) {
       this.toggleShowDuplicates();
     }
     if (!this.showNotebooks) {

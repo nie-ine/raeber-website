@@ -89,7 +89,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.poem_resizable = true;
+    this.poem_resizable = false;
     this.show_register = true;
     this.convoluteTitle = decodeURIComponent(this.router.url.split('/')[ 1 ]);
     this.poemShortIri = this.router.url.split('/')[ 2 ].split('---')[ 1 ];

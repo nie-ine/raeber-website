@@ -23,7 +23,7 @@ export class KonvolutsucheComponent {
   }
 
   checkIfNotizbuch(konvolutTitle: string) {
-    console.log(konvolutTitle);
+    //console.log(konvolutTitle);
     if(konvolutTitle) {
       if(konvolutTitle.search('Notizbuch') !== -1) return true;
       else return false;

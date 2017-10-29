@@ -130,10 +130,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
   }
   filterPoemsOnPage() {
-    console.log('Filter Poems on Page');
+    //console.log('Filter Poems on Page');
     this.searchForPage = undefined;
     for(let poem of this.poemsInGrid) {
       if(poem !== undefined) {
+        console.log('Seite des Poems: ' + poem[13]);
         console.log(poem[13]);
         if(poem[13] === this.searchTermfromKonvolut[1]) {
           poem.show = true;

@@ -1522,16 +1522,21 @@ export class SucheComponent implements OnInit {
       }
       }
     checkTimeInterval(date: string): boolean {
-      //console.log('Check time interval');
-      //console.log(this.route.snapshot.queryParams[ 'zeitBeginn' ]);
-      //console.log(this.route.snapshot.queryParams[ 'zeitEnde' ]);
-      if(!this.arg
-        || (this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
-        && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined)) return true;
+      console.log('Check time interval');
+      console.log(this.route.snapshot.queryParams[ 'zeitBeginn' ]);
+      console.log(this.route.snapshot.queryParams[ 'zeitEnde' ]);
+      console.log(date);
+      if(!this.arg) {
+        if(this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
+          && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) return true;
+      }
       if(this.arg) {
+        console.log(this.arg.get('zeitraumForm.zeitraumVon').value);
+        console.log(this.arg.get('zeitraumForm.zeitraumBis').value);
         if (
           this.arg.get('zeitraumForm.zeitraumVon').value === ''
           && this.arg.get('zeitraumForm.zeitraumBis').value === '') {
+          console.log('case 1');
           return true;
         } else if (
           this.arg.get('zeitraumForm.zeitraumVon').value !== ''

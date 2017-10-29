@@ -2792,6 +2792,11 @@ h4.ui-accordion-header {
   line-height: 15px;
 }
 
+h4.einfuegung {
+  font-weight: normal;
+  font-size: 100%;
+}
+
 .titelzeile_rechts {
   float: right;
   font-weight: bold;

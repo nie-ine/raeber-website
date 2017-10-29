@@ -1,25 +1,20 @@
-/**
- * Created by Roberta Padlina (roberta.padlina@unibas.ch) on 28.10.2017.
- */
-
-import { Directive, HostListener, Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-
-@Directive({
-  selector: '[backtotop]'
+@Component({
+  moduleId: module.id,
+  selector: 'rae-scroll-to-top',
+  templateUrl: './scroll-to-top.component.html'
 })
+export class ScrollToTopComponent {
 
-export class BackToTopButtonDirective {
+  navIsFixed = false;
 
-  navIsFixed: boolean = false;
-
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    console.log('CIAO');
-    if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
+    if (window.pageYOffset > 100 || document.documentElement.scrollTop > 100 || document.body.scrollTop > 100) {
       this.navIsFixed = true;
     } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
       this.navIsFixed = false;
@@ -35,5 +30,4 @@ export class BackToTopButtonDirective {
       }
     })();
   }
-
 }

@@ -9,7 +9,6 @@ import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { CommonModule } from '@angular/common';
 import { HaupttextComponent } from './haupttext.component';
 import { PageNotFoundComponent } from './404.component';
-import { BackToTopButtonDirective } from '../shared/utilities/back-to-top-button.directive';
 import { KonvolutModule } from '../konvolut/konvolut.module';
 import { FassungModule } from '../fassung/fassung.module';
 import { RegisterModule } from '../register/register.module';
@@ -17,22 +16,24 @@ import { StatischModule } from '../statisch/statisch.module';
 import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MdInputModule } from '@angular/material';
-import { CoreRoutingModule } from './core-routing.module';
 import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
   MdCheckboxModule,
+  MdDialogModule,
   MdGridListModule,
   MdIconModule,
-  MdDialogModule,
+  MdInputModule,
   MdMenuModule,
+  MdProgressBarModule,
   MdSelectModule,
   MdSidenavModule,
-  MdSlideToggleModule, MdToolbarModule,
-  MdProgressBarModule
+  MdSlideToggleModule,
+  MdToolbarModule
 } from '@angular/material';
+import { CoreRoutingModule } from './core-routing.module';
+import { ScrollToTopComponent } from './scroll-to-top.component';
 
 @NgModule({
   imports: [
@@ -69,11 +70,12 @@ import {
     HaupttextComponent,
     NavigationsleisteComponent,
     PageNotFoundComponent,
-    BackToTopButtonDirective
+    ScrollToTopComponent
   ],
   exports: [
     KopfzeileComponent,
     HaupttextComponent,
+    ScrollToTopComponent
   ]
 })
 export class CoreModule {

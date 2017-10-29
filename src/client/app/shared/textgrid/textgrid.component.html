@@ -11,7 +11,7 @@
       <md-card-title #poemTitle>
         <a class="item" *ngIf="contentType == 'konvolut'"
            [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)">
+           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]) }">
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche' "
            [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"

@@ -111,8 +111,8 @@ export class KonvolutComponent implements OnInit {
     //console.log(fg);
     this.searchTermArray = [];
     this.searchResultsNo = 0; // TODO: Variable takes number of search results
-    this.searchTermArray[0] = fg.searchTerm; // TODO: Variable takes search term
-    this.searchTermArray[1] = fg.page;
+    this.searchTermArray[ 0 ] = fg.searchTerm; // TODO: Variable takes search term
+    this.searchTermArray[ 1 ] = fg.page;
   }
 
   /**

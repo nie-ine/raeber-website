@@ -14,6 +14,7 @@ import './operators';
     </header>
     <main id='rt-mainbody-surround'>
       <rae-haupttext></rae-haupttext>
+      <rae-scroll-to-top></rae-scroll-to-top>
     </main>
   `,
   styles: [

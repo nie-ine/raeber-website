@@ -147,22 +147,22 @@ export class KonvolutComponent implements OnInit {
     //console.log(poemInformation);
     this.poems = [];
     for (let i = 0; i < poemInformation.length; i++) {
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ] = [];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 4 ] = poemInformation[ i ][ 4 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 5 ] = poemInformation[ i ][ 5 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 6 ] = poemInformation[ i ][ 6 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 7 ] = poemInformation[ i ][ 7 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 9 ] = poemInformation[ i ][ 9 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 13 ] = poemInformation[ i ][ 13 ];
-      this.poems[ poemInformation[ i ][ '8' ] - 1 ][ 14 ] = poemInformation[ i ][ 14 ];
+      this.poems[ poemInformation[i]['8'] - 1 ] = [];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 4 ] = poemInformation[ i ][ 4 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 5 ] = poemInformation[ i ][ 5 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 6 ] = poemInformation[ i ][ 6 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 7 ] = poemInformation[ i ][ 7 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 9 ] = poemInformation[ i ][ 9 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 13 ] = poemInformation[ i ][ 13 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 14 ] = poemInformation[ i ][ 14 ];
     }
     //console.log(this.poems);
   }

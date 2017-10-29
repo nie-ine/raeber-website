@@ -9,6 +9,7 @@ import { NavigationsleisteComponent } from './navigationsleiste.component';
 import { CommonModule } from '@angular/common';
 import { HaupttextComponent } from './haupttext.component';
 import { PageNotFoundComponent } from './404.component';
+import { BackToTopButtonDirective } from '../shared/utilities/back-to-top-button.directive';
 import { KonvolutModule } from '../konvolut/konvolut.module';
 import { FassungModule } from '../fassung/fassung.module';
 import { RegisterModule } from '../register/register.module';
@@ -67,7 +68,8 @@ import {
     KopfzeileComponent,
     HaupttextComponent,
     NavigationsleisteComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BackToTopButtonDirective
   ],
   exports: [
     KopfzeileComponent,

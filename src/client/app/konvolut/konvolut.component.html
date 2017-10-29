@@ -72,7 +72,9 @@
                     </ngb-panel>
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
                       <ng-template ngbPanelContent>
-                        <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                        <rae-konvolutsuche
+                          [konvolutTitle]="konvolutTitle"
+                          (suche)="searchInConvolute($event)"></rae-konvolutsuche>
                       </ng-template>
                     </ngb-panel>
                     <ngb-panel id="darstellung" title="Darstellungsoptionen">

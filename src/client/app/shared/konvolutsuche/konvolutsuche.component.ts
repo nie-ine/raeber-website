@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   moduleId: module.id,
@@ -7,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './konvolutsuche.component.html'
 })
 export class KonvolutsucheComponent {
+  @Input() konvolutTitle: string;
   @Output() suche = new EventEmitter<FormGroup>();
   searchForm: FormGroup;
 
@@ -19,4 +21,13 @@ export class KonvolutsucheComponent {
       //.debounceTime(500)
       .subscribe(suche => this.suche.emit(suche));
   }
+
+  checkIfNotizbuch(konvolutTitle: string) {
+    console.log(konvolutTitle);
+    if(konvolutTitle) {
+      if(konvolutTitle.search('Notizbuch') !== -1) return true;
+      else return false;
+    } else return false;
+  }
+
 }

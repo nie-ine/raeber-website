@@ -1,6 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -69,12 +69,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     return searchParams.toString();
   }
 
-  constructor(private http: Http,
-              private router: Router,
-              private cdr: ChangeDetectorRef,
-              private dfs: DateFormatService) {
-  }
-
   private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
     const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
     const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
@@ -88,11 +82,19 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       element;
   }
 
+  constructor(private http: Http,
+              private route: ActivatedRoute,
+              private cdr: ChangeDetectorRef,
+              private dfs: DateFormatService) {
+    route.params.subscribe(p => {
+      this.convoluteTitle = p.konvolut;
+      this.poemShortIri = p.fassung.split('---')[ 1 ];
+    });
+  }
+
   ngOnInit() {
-    this.poem_resizable = true;
+    this.poem_resizable = false;
     this.show_register = true;
-    this.convoluteTitle = decodeURIComponent(this.router.url.split('/')[ 1 ]);
-    this.poemShortIri = this.router.url.split('/')[ 2 ].split('---')[ 1 ];
     this.getDataFromDB();
     this.buildLinkToRelatedConvolute();
   }
@@ -162,6 +164,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         if (res.subjects[ 0 ] !== undefined) {
           this.prevPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.convoluteTitle);
+        } else {
+          this.prevPoem = '';
         }
       });
     const searchParamsNext = FassungComponent.createRequestForNeighbouringPoem(this.convoluteIri, (this.poemSeqnum + 1));
@@ -170,6 +174,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .subscribe(res => {
         if (res.subjects[ 0 ] !== undefined) {
           this.nextPoem = FassungComponent.buildRouteTitleStringFromResultSet(res, this.convoluteTitle);
+        } else {
+          this.nextPoem = '';
         }
       });
   }
@@ -245,7 +251,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           for (let res of response.subjects) {
             this.relatedPoems.push('/' + res.value[ 3 ] + '/' +
               FassungComponent.produceFassungsLink(res.value[ 7 ], res.value[ 5 ]) +
-              '###' + res.value[ 7 ]);
+              '###' + res.value[ 7 ] + '###' + res.value[ 4 ] + '###' + res.value[ 1 ]);
           }
         }
       );

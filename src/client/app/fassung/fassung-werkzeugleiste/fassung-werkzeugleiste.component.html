@@ -11,16 +11,10 @@
           [routerLink]="[idOfPrev]" (click)="goToPrevFassung()">
     <md-icon>navigate_before</md-icon>
   </button>
-  <button md-raised-button title="kein vorangehender Text" *ngIf="!idOfPrev" >
-    <md-icon class="button-without-link">navigate_before</md-icon>
-  </button>
 
   <button md-raised-button title="nächster Text" *ngIf="idOfNext"
           [routerLink]="[idOfNext]" (click)="goToNextFassung()">
     <md-icon>navigate_next</md-icon>
-  </button>
-  <button md-raised-button title="kein nächster Text" *ngIf="!idOfNext" >
-    <md-icon class="button-without-link">navigate_next</md-icon>
   </button>
 
   <button md-raised-button title="Hilfe" (click)="showHelp()">

@@ -9,30 +9,28 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief-signatur',
-  templateUrl: 'fassung-steckbrief-signatur.component.html'
+  template: '<span>{{ signature }}</span>'
 })
 export class FassungSteckbriefSignaturComponent implements OnChanges {
 
-  @Input() carrierIRIs: Array<string>;
+  @Input() carrierIRI: string;
 
-  signatures: Array<string>;
+  signature: string;
 
   private sub: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   ngOnChanges() {
-    this.signatures = [];
-    if (this.carrierIRIs) {
-      for (let i = 0; i < this.carrierIRIs.length; i++) {
-        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-          encodeURIComponent(this.carrierIRIs[ i ]))
-          .map(result => result.json())
-          .subscribe(res => {
-            this.signatures.push(res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str);
-            console.log(res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str);
-          });
-      }
+    this.signature = '';
+    if (this.carrierIRI) {
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
+        encodeURIComponent(this.carrierIRI))
+        .map(result => result.json())
+        .subscribe(res => {
+          this.signature = res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str;
+        });
     }
   }
 }

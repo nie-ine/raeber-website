@@ -2792,6 +2792,11 @@ h4.ui-accordion-header {
   line-height: 15px;
 }
 
+h4.einfuegung {
+  font-weight: normal;
+  font-size: 100%;
+}
+
 .titelzeile_rechts {
   float: right;
   font-weight: bold;
@@ -7933,4 +7938,17 @@ body #k2Container select, body #k2Container input[type="file"] {
 
 .menudef {
   height: 2em;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scroll {
+  opacity: 1;
+  transition: all .2s ease-in-out;
 }

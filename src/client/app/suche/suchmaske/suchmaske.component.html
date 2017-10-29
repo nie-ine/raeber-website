@@ -927,6 +927,15 @@
         </ngb-panel>
       </ngb-accordion>
     </form>
+
+    <br>
+
+    <button
+      md-button
+      (click)="createForm()">
+      Reset Suchoptionen
+    </button>
+
   </md-sidenav>
 
   <md-progress-bar
@@ -960,6 +969,6 @@
 
   <button
     md-mini-fab class="suchmenu-button"
-    (click)="suchmenu.toggle()">
+    (click)="suchmenu.toggle()" color="primary">
     <md-icon>dehaze</md-icon>
   </button>

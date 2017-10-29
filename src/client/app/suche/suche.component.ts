@@ -1445,6 +1445,7 @@ export class SucheComponent implements OnInit {
                               = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
                             this.allSearchResults[ this.allSearchResults.length - 1 ][ 6 ]
                               = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
+                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 14 ] = isFinalVersion;
                             this.numberOfSearchResults += 1;
                         }
                        }

@@ -276,7 +276,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   produceTitleCss(isInFinalVersion: string) {
     if(isInFinalVersion === '1') {
-      return 'red';
+      return '#a30f2d';
     } else return false;
   }
 

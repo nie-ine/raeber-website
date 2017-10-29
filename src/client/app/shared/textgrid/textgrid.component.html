@@ -18,7 +18,7 @@
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche' "
            [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)">
+           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]), 'font-size': '85%' }">
         </a>
       </md-card-title>
 
@@ -46,7 +46,7 @@
 
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
-          <span>In:</span> <a [routerLink]="'/suchergebnisse/' + p[6]" routerLinkActive="active">{{ p[7] }}</a> <br>
+          <span>In: {{ p[7] }} </span><br>
           <span>Synopse:</span> <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
         </div>
       </md-card-footer>

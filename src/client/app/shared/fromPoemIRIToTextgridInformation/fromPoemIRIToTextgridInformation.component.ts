@@ -173,9 +173,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
         '&compop=!EQ' +
         '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
+/*        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
         '&compop=!EQ' +
-        '&searchval=123455666' +
+        '&searchval=123455666' +*/
         '&show_nrows=2000'
       )
         .map(

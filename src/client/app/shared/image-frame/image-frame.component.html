@@ -18,7 +18,8 @@
 
   </md-toolbar>
 
-  <div [ngStyle]="{'height': height + px, 'width': width + px, 'overflow-y': overflow, 'resize': resize}" #picFrame>
+  <div [ngStyle]="{'height': height + px, 'width': width + px, 'overflow-y': overflow, 'resize': resize}"
+       style="margin-top:18px;" #picFrame>
     <!--  <img src="http://test-02.salsah.org/core/sendlocdata.php?res=212767&qtype=full&reduce={{ zoomfactor }}"
            class="rae-image_resizeable"> -->
     <img src="{{ pictureIdBase }}{{ width }},/0/default.jpg" class="rae-image_resizeable">

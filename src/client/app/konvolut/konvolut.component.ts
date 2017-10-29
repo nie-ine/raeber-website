@@ -1,9 +1,10 @@
 /**
  * Created by retobaumgartner on 06.06.17.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
+import { DOCUMENT } from '@angular/platform-browser';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -44,13 +45,34 @@ export class KonvolutComponent implements OnInit {
   viewMode: string;
   konvolut_type: string;
 
+  navIsFixed: boolean = false;
+
   private data: Observable<Array<number>>;
   private sub: any;
 
 
   private _esearch = new ExtendedSearch();
 
-  constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+      this.navIsFixed = false;
+    }
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
+
+  constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging, @Inject(DOCUMENT) private document: Document) {
     this.viewMode = 'grid';
 
   }

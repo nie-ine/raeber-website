@@ -1,5 +1,5 @@
 <md-sidenav-container class="suchmenu-container">
-  <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened">
+  <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened" mode="side">
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>
@@ -936,12 +936,14 @@
     mode="indeterminate">
   </md-progress-bar>
 
-  <div class="suchmenu-content">
-    <button md-mini-fab class="suchmenu-button" (click)="suchmenu.open()">
-      <md-icon>dehaze</md-icon>
-    </button>
 
-    <div style="margin-top: 70px;">
+
+
+
+
+  <div class="suchmenu-content">
+
+    <div style="margin-top: 10px;">
       <rae-textgrid
         [searchTermArray]="searchTermArray"
         [poemsInGrid]="poemsInGrid"
@@ -955,3 +957,9 @@
 
   </div>
 </md-sidenav-container>
+
+  <button
+    md-mini-fab class="suchmenu-button"
+    (click)="suchmenu.toggle()">
+    <md-icon>dehaze</md-icon>
+  </button>

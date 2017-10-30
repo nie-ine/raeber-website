@@ -1837,19 +1837,6 @@ a {
   transition: opacity 0.4s ease-in 0s;
 }
 
-.logo-block {
-  margin: 7px 10px;
-  padding: 0 15px;
-}
-
-#rt-logo {
-  display: block;
-  height: 46px;
-  margin: 0;
-  /* width: 112px;*/
-  background: url(../assets/jpg/logo.jpg) 50% 0 no-repeat !important;
-}
-
 #rt-top-surround {
   position: relative;
 }
@@ -2631,11 +2618,6 @@ a.inaktiv {
   font-size: 18px;
   height: 20px;
   width: 22px;
-}
-
-div.rt-block.logo-block {
-  margin-bottom: 0;
-  margin-left: 0;
 }
 
 #gantry-totop {
@@ -7676,11 +7658,6 @@ a.inaktiv {
   font-size: 18px;
   height: 20px;
   width: 22px;
-}
-
-div.rt-block.logo-block {
-  margin-bottom: 0;
-  margin-left: 0;
 }
 
 #gantry-totop {

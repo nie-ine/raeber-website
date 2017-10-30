@@ -30,7 +30,7 @@ export class FassungWerkzeugleisteComponent {
   neuladen() {
     // TODO: Don't reload the whole window!
     // window.location.reload();
-    this.poemResizable = true;
+    this.poemResizable = false;
     this.showRegister = true;
     this.poemResizableChange.emit(this.poemResizable);
     this.showRegisterChange.emit(this.showRegister);

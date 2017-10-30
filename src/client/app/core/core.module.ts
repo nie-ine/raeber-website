@@ -16,22 +16,24 @@ import { StatischModule } from '../statisch/statisch.module';
 import { SucheModule } from '../suche/suche.module';
 import { SynopseModule } from '../synopse/synopse.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MdInputModule } from '@angular/material';
-import { CoreRoutingModule } from './core-routing.module';
 import {
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
   MdCheckboxModule,
+  MdDialogModule,
   MdGridListModule,
   MdIconModule,
-  MdDialogModule,
+  MdInputModule,
   MdMenuModule,
+  MdProgressBarModule,
   MdSelectModule,
   MdSidenavModule,
-  MdSlideToggleModule, MdToolbarModule,
-  MdProgressBarModule
+  MdSlideToggleModule,
+  MdToolbarModule
 } from '@angular/material';
+import { CoreRoutingModule } from './core-routing.module';
+import { ScrollToTopComponent } from './scroll-to-top.component';
 
 @NgModule({
   imports: [
@@ -67,11 +69,13 @@ import {
     KopfzeileComponent,
     HaupttextComponent,
     NavigationsleisteComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ScrollToTopComponent
   ],
   exports: [
     KopfzeileComponent,
     HaupttextComponent,
+    ScrollToTopComponent
   ]
 })
 export class CoreModule {

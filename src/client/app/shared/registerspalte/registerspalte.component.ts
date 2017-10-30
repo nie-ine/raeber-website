@@ -56,6 +56,7 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
     if(this.konvolutView) {
       //console.log('dont do request again');
+      //console.log(this.poemsFromKonvolut);
       this.updatePoemInformation(this.poemsFromKonvolut);
     } else {
       if(this.konvolutIRI) {
@@ -77,21 +78,23 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    //console.log('Update Poem Information');
-    this.poems = [];
-    if(poemInformation !== undefined) {
+    console.log('Update Poem Information');
+    console.log(poemInformation);
+    if(poemInformation !== undefined && poemInformation.length > 0) {
+      this.poems = [];
       for (let i = 0; i < poemInformation.length; i++) {
         if (poemInformation[i] !== undefined) {
-          this.poems[poemInformation[i]['11'] - 1] = [];
-          this.poems[poemInformation[i]['11'] - 1][0] = poemInformation[i][0];
-          this.poems[poemInformation[i]['11'] - 1][1] = poemInformation[i][1];
-          this.poems[poemInformation[i]['11'] - 1][2] = this.removeHtml(poemInformation[i][2]);
-          this.poems[poemInformation[i]['11'] - 1][3] = poemInformation[i][3];
-          this.poems[poemInformation[i]['11'] - 1][8] = poemInformation[i][8];
-          this.poems[poemInformation[i]['11'] - 1][11] = poemInformation[i][11];
-          this.poems[poemInformation[i]['11'] - 1][10] = poemInformation[i][10];
+          this.poems[poemInformation[i]['11']] = [];
+          this.poems[poemInformation[i]['11']][0] = poemInformation[i][0];
+          this.poems[poemInformation[i]['11']][1] = poemInformation[i][1];
+          this.poems[poemInformation[i]['11']][2] = this.removeHtml(poemInformation[i][2]);
+          this.poems[poemInformation[i]['11']][3] = poemInformation[i][3];
+          this.poems[poemInformation[i]['11']][8] = poemInformation[i][8];
+          this.poems[poemInformation[i]['11']][11] = poemInformation[i][11];
+          this.poems[poemInformation[i]['11']][10] = poemInformation[i][10];
         }
       }
+      console.log(this.poems);
       this.nrOfPoems = poemInformation.length;
       for (let i = 0; i < this.poems.length; i++) {
         if(!this.poems[i]) {

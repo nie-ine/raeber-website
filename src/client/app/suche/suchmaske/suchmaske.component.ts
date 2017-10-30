@@ -61,7 +61,7 @@ export class SuchmaskeComponent implements OnChanges {
     materialien: false
   };
 
-  allConvolutesSelected: boolean = false;
+  allConvolutesSelected: boolean = true;
   loadingIndicator = true;
 
 
@@ -236,9 +236,13 @@ export class SuchmaskeComponent implements OnChanges {
         Validators.pattern('[0-9]{4}')
       ]),
       endfassung: false,
+      keineEndfassung: false,
       strophen: false,
+      keineStrophen: false,
       mundart: false,
-      zyklus: false
+      keineMundart: false,
+      zyklus: false,
+      keinZyklus: false
     });
   }
 

@@ -29,6 +29,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   printerDescription: string;
   convoluteDescription: string;
   carrierDescription: string;
+  carrierCollectionDescription: string;
   comment: string;
   archiveSignature: string;
   convoluteSizeDescripton: string;
@@ -80,6 +81,13 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             this.carrierDescription = res.props[ 'http://www.knora.org/ontology/text#hasCarrierDescription' ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.carrierDescription = null;
+          }
+
+          try {
+            this.carrierCollectionDescription
+              = res.props[ 'http://www.knora.org/ontology/text#hasCarrierCollectionDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+            this.carrierCollectionDescription = null;
           }
 
           try {

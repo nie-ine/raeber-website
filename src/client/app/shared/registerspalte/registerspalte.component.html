@@ -11,6 +11,10 @@
        routerLinkActive="active" [ngClass]="{'color0': i % 2}"  >
 
       <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p[0] }}</h5>
+      <h5 md-line *ngIf="p && p[0].length > 20"></h5>
+      <h5 md-line *ngIf="p && p[0].length > 40"></h5>
+      <h5 md-line *ngIf="p && p[0].length > 60"></h5>
+      <h5 md-line *ngIf="p && p[0].length > 80"></h5>
 
       <p *ngIf="sortingType=='alphabetic' && p"
          md-line>

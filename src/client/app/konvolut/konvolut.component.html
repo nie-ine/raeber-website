@@ -61,7 +61,7 @@
                                   <h2 class="title">Register</h2>
                                 </div>-->
                 <div class="module-content">
-                  <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
+                  <ngb-accordion #acc="ngbAccordion" activeIds="register,suche" destroyOnHide="false">
                     <ngb-panel id="register" title="Register">
                       <ng-template ngbPanelContent>
                         <rae-registerspalte
@@ -72,7 +72,9 @@
                     </ngb-panel>
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
                       <ng-template ngbPanelContent>
-                        <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                        <rae-konvolutsuche
+                          [konvolutTitle]="konvolutTitle"
+                          (suche)="searchInConvolute($event)"></rae-konvolutsuche>
                       </ng-template>
                     </ngb-panel>
                     <ngb-panel id="darstellung" title="Darstellungsoptionen">

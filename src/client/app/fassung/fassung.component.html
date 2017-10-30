@@ -141,7 +141,9 @@
             </ngb-panel>
             <ngb-panel id="suche" title="Suche in {{convoluteTitle}}">
               <ng-template ngbPanelContent>
-                <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                <rae-konvolutsuche
+                  [konvolutTitle]="convoluteTitle"
+                  (suche)="searchInConvolute($event)"></rae-konvolutsuche>
               </ng-template>
             </ngb-panel>
           </ngb-accordion>

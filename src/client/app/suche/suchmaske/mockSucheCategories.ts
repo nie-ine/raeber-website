@@ -9,9 +9,13 @@ export class Suche {
   textartForm: Textart;
   zeitraumForm: Zeitraum;
   endfassung = false;
+  keineEndfassung = false;
   strophen = false;
+  keineStrophe = false;
   mundart = false;
+  keineMundart = false;
   zyklus = false;
+  keinZyklus = false;
 }
 
 export class Suchwort {
@@ -20,134 +24,134 @@ export class Suchwort {
 }
 
 export class Notizbuch {
-  notizbuchAll = false;
-  notizbuch4849 = false;
-  notizbuch49 = false;
-  notizbuch50 = false;
-  notizbuch5051 = false;
-  notizbuch5254 = false;
-  notizbuch5455 = false;
-  notizbuch5557 = false;
-  notizbuch5758 = false;
-  notizbuch5861 = false;
-  notizbuch6165 = false;
-  notizbuch79 = false;
-  notizbuch7982 = false;
-  notizbuch8088 = false;
-  notizbuch6580 = false;
+  notizbuchAll = true;
+  notizbuch4849 = true;
+  notizbuch49 = true;
+  notizbuch50 = true;
+  notizbuch5051 = true;
+  notizbuch5254 = true;
+  notizbuch5455 = true;
+  notizbuch5557 = true;
+  notizbuch5758 = true;
+  notizbuch5861 = true;
+  notizbuch6165 = true;
+  notizbuch79 = true;
+  notizbuch7982 = true;
+  notizbuch8088 = true;
+  notizbuch6580 = true;
 }
 
 export class Manuskript {
-  manuskriptAll = false;
-  manuskriptDivers = false;
-  manuskript4851 = false;
-  manuskript51 = false;
-  manuskript52 = false;
-  manuskript53 = false;
-  manuskript54 = false;
-  manuskript55 = false;
-  manuskript56 = false;
-  manuskript57 = false;
-  manuskript58 = false;
-  manuskript5859 = false;
-  manuskript5960 = false;
-  manuskript61 = false;
-  manuskript62 = false;
-  manuskript63 = false;
-  manuskript6465 = false;
-  manuskript79 = false;
-  manuskript7983 = false;
-  manuskriptKarten = false;
+  manuskriptAll = true;
+  manuskriptDivers = true;
+  manuskript4851 = true;
+  manuskript51 = true;
+  manuskript52 = true;
+  manuskript53 = true;
+  manuskript54 = true;
+  manuskript55 = true;
+  manuskript56 = true;
+  manuskript57 = true;
+  manuskript58 = true;
+  manuskript5859 = true;
+  manuskript5960 = true;
+  manuskript61 = true;
+  manuskript62 = true;
+  manuskript63 = true;
+  manuskript6465 = true;
+  manuskript79 = true;
+  manuskript7983 = true;
+  manuskriptKarten = true;
 }
 
 export class Typoskript {
-  typoskriptAll = false;
-  typoskriptSpezialAll = false;
-  typoskriptSpezialKutter = false;
-  typoskriptSpezialHochstrasser = false;
-  typoskriptSpezialTRaeber = false;
-  typoskriptSpezialDivers = false;
-  typoskript4346 = false;
-  typoskript4550 = false;
-  typoskript4850 = false;
-  typoskript51 = false;
-  typoskript52 = false;
-  typoskript53 = false;
-  typoskript54 = false;
-  typoskript55 = false;
-  typoskript56 = false;
-  typoskript57 = false;
-  typoskript58 = false;
-  typoskript59 = false;
-  typoskript60 = false;
-  typoskript61 = false;
-  typoskript62 = false;
-  typoskript63 = false;
-  typoskript65 = false;
-  typoskript79 = false;
-  typoskript79Spez = false;
-  typoskript83 = false;
-  typoskript83Spez = false;
+  typoskriptAll = true;
+  typoskriptSpezialAll = true;
+  typoskriptSpezialKutter = true;
+  typoskriptSpezialHochstrasser = true;
+  typoskriptSpezialTRaeber = true;
+  typoskriptSpezialDivers = true;
+  typoskript4346 = true;
+  typoskript4550 = true;
+  typoskript4850 = true;
+  typoskript51 = true;
+  typoskript52 = true;
+  typoskript53 = true;
+  typoskript54 = true;
+  typoskript55 = true;
+  typoskript56 = true;
+  typoskript57 = true;
+  typoskript58 = true;
+  typoskript59 = true;
+  typoskript60 = true;
+  typoskript61 = true;
+  typoskript62 = true;
+  typoskript63 = true;
+  typoskript65 = true;
+  typoskript79 = true;
+  typoskript79Spez = true;
+  typoskript83 = true;
+  typoskript83Spez = true;
 }
 
 export class Druck {
-  druckAll = false;
-  druckGesicht = false;
-  druckSchiffe = false;
-  druckGedichte = false;
-  druckFlussufer = false;
-  druckReduktionen = false;
-  druckAbgewandtAll = false;
+  druckAll = true;
+  druckGesicht = true;
+  druckSchiffe = true;
+  druckGedichte = true;
+  druckFlussufer = true;
+  druckReduktionen = true;
+  druckAbgewandtAll = true;
   // druckAbgewandt: DruckAbgewandt;
 }
 
 /*export class DruckAbgewandt {
-  druckAbgewandtAll = false;
-  druckAbgewandtHochdeutsch = false;
-  druckAbgewandtAlemannisch = false;
+  druckAbgewandtAll = true;
+  druckAbgewandtHochdeutsch = true;
+  druckAbgewandtAlemannisch = true;
 }*/
 
 export class Zeitschrift {
-  zeitschriftAll = false;
-  zeitschriftAkzente = false;
-  zeitschriftBlaetter = false;
-  zeitschriftSchoenste = false;
-  zeitschriftTag = false;
-  zeitschriftLandschaft = false;
-  zeitschriftTat = false;
-  zeitschriftZeit = false;
-  zeitschriftEnsemble = false;
-  zeitschriftGegengewichte = false;
-  zeitschriftHortulus = false;
-  zeitschriftJahresring = false;
-  zeitschriftKonturen = false;
-  zeitschriftLNN = false;
-  zeitschriftLadZ = false;
-  zeitschriftLuZ = false;
-  zeitschriftMerkur = false;
-  zeitschriftDeutscheHefte = false;
-  zeitschriftNZN = false;
-  zeitschriftNZZ = false;
-  zeitschriftRenaissance = false;
-  zeitschriftRundschau = false;
-  zeitschriftSonntagsblatt = false;
-  zeitschriftSueddeutsche = false;
-  zeitschriftTA = false;
-  zeitschriftWortTat = false;
+  zeitschriftAll = true;
+  zeitschriftAkzente = true;
+  zeitschriftBlaetter = true;
+  zeitschriftSchoenste = true;
+  zeitschriftTag = true;
+  zeitschriftLandschaft = true;
+  zeitschriftTat = true;
+  zeitschriftZeit = true;
+  zeitschriftEnsemble = true;
+  zeitschriftGegengewichte = true;
+  zeitschriftHortulus = true;
+  zeitschriftJahresring = true;
+  zeitschriftKonturen = true;
+  zeitschriftLNN = true;
+  zeitschriftLadZ = true;
+  zeitschriftLuZ = true;
+  zeitschriftMerkur = true;
+  zeitschriftDeutscheHefte = true;
+  zeitschriftNZN = true;
+  zeitschriftNZZ = true;
+  zeitschriftRenaissance = true;
+  zeitschriftRundschau = true;
+  zeitschriftSonntagsblatt = true;
+  zeitschriftSueddeutsche = true;
+  zeitschriftTA = true;
+  zeitschriftWortTat = true;
 }
 
 export class Materialien {
-  materialienAll = false;
-  materialienTagebuch = false;
-  materialienBrief = false;
+  materialienAll = true;
+  materialienTagebuch = true;
+  materialienBrief = true;
 }
 
 export class Textart {
-  textartFreieVerse = false;
-  textartGereimteVerse = false;
-  textartProsa = false;
-  textartProsanotat = false;
-  textartBriefentwurf = false;
+  textartFreieVerse = true;
+  textartGereimteVerse = true;
+  textartProsa = true;
+  textartProsanotat = true;
+  textartBriefentwurf = true;
 }
 
 export class Zeitraum {

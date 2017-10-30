@@ -74,11 +74,8 @@
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
-      <p *ngIf=false>
-        <span class="emphase">Bilder:</span>
-        <!-- TODO: hier Link zu PDF einfuegen und *ngIf anpassen-->
-        TODO
-      </p>
+      <rae-konvolut-steckbrief-bilder *ngIf="konvoluttyp == 'poem notebook'" [konvolutId]="id" >
+      </rae-konvolut-steckbrief-bilder>
 
       <p *ngIf="comment">
         <span class="emphase">Kommentar:</span>

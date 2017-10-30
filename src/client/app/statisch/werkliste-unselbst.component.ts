@@ -22,8 +22,7 @@ export class WerklisteUnselbstComponent {
 
   fromPoemTitleToPoemIRI(poemTitle: string) {
 
-    return this.http.get
-    (
+    return this.http.get(
       globalSearchVariableService.API_URL +
       globalSearchVariableService.extendedSearch +
       'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
@@ -38,13 +37,7 @@ export class WerklisteUnselbstComponent {
       '&compop=EXISTS' +
       '&searchval='
     )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          this.poemIRI = data.subjects.value[2];
-        }
-        )
-      .subscribe(res => this.poemLink =  '/Verstreutes/' + poemTitle + '---' + this.poemIRI);
+      .map(lambda => lambda.json())
+      .subscribe(res => this.poemLink = '/Verstreutes/' + poemTitle + '---' + res);
   }
-
 }

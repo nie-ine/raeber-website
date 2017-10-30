@@ -9,15 +9,24 @@
   border-width: 1px;
 }
 
+.rae-registerspalte-list md-nav-list, md-button-toggle-group {
+  margin: 0 -1rem;
+}
+
 .rae-registerspalte-list md-nav-list a {
   border-bottom-color: silver;
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  margin: 0 -12px;
 }
 
 .rae-registerspalte-list md-nav-list a p {
-  text-wrap: normal;
-  word-wrap: break-word;
+  font-size: 0.75rem;
+}
+
+.rae-registerspalte-list md-nav-list a h5 {
+  line-height: 1rem;
+  white-space: normal;
 }
 
 md-button-toggle-group {

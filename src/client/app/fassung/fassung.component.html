@@ -45,14 +45,6 @@
                     <div class="itemFullText">
 
                       <md-card style="padding-top:0;">
-                        <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
-                                        *ngIf="showEditedText">
-                          <button md-button (click)="showEditedText = !showEditedText"
-                                  style="background-color:#eee;">
-                            <md-icon>{{showEditedText ? 'expand_more' : 'expand_less'}}</md-icon>
-                            <span>Text {{showEditedText ? 'verbergen' : 'anzeigen'}}</span>
-                          </button>
-                        </md-card-header>
                         <md-card-content style="padding-top:20px; padding-bottom:5px;"
                                          *ngIf="showEditedText"
                                          [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
@@ -62,21 +54,19 @@
                         </md-card-content>
                         <md-card-footer>
                           <button md-button (click)="showEditedText = !showEditedText"
-                                  style="background-color:#eee;">
+                                  style="background-color:#eee; font-size:12px;">
                             <md-icon>{{showEditedText ? 'expand_less' : 'expand_more'}}</md-icon>
                             <span>Text {{showEditedText ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
                       <br/>
-
-                      <md-card
-                        *ngIf="poemType === 'HandwrittenPoem' || poemType === 'PoemNote'"
-                        style="padding-top:0;">
+                      <md-card *ngIf="diplomaticIRIs && diplomaticIRIs.length > 0"
+                               style="padding-top:0;">
                         <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
                                         *ngIf="showDiplomaticTranscription">
                           <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
-                                  style="background-color:#eee;">
+                                  style="background-color:#eee; font-size:12px;">
                             <md-icon>{{showDiplomaticTranscription ? 'expand_more' : 'expand_less'}}</md-icon>
                             <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
@@ -90,7 +80,7 @@
                         </md-card-content>
                         <md-card-footer>
                           <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
-                                  style="background-color:#eee;">
+                                  style="background-color:#eee; font-size:12px;">
                             <md-icon>{{showDiplomaticTranscription ? 'expand_less' : 'expand_more'}}</md-icon>
                             <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
                           </button>

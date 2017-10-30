@@ -24,7 +24,8 @@ export class NavigationsleisteComponent implements OnInit {
   }
   createLinkToSearch() {
       //console.log(this.route._routerState.snapshot.url);
-      if(this.route._routerState.snapshot.url === '/suche') {
+      // if(this.route._routerState.snapshot.url === '/suche') {
+      if(this.route) {
         return 'resetSuche';
       } else return 'suche';
   }

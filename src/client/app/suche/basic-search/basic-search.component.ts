@@ -27,7 +27,8 @@ export class BasicSearchComponent {
   }
 
   createLinkToSearch(): string {
-    if(this.route._routerState.snapshot.url.search('reset') === -1) {
+    // if(this.route._routerState.snapshot.url.search('reset') === -1) {
+    if(this.route) {
       return '/resetSuche';
     } else return '/suche';
   }

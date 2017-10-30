@@ -122,13 +122,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
     if(this.searchTermfromKonvolut) {
       if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
         this.searchInKonvolut = true;
         this.searchActivated = true;
         this.searchAndFilterInTextgrid();
-        console.log(this.searchActivated);
       }
       if(this.searchTermfromKonvolut[1]) {
         this.filterPoemsOnPage();
@@ -143,11 +141,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     }
   }
   filterPoemsOnPage() {
-    console.log('Filter Poems on Page');
     this.searchForPage = undefined;
     for(let poem of this.poemsInGrid) {
       if(poem !== undefined) {
-        console.log(poem[13]);
         if(poem[13] === this.searchTermfromKonvolut[1]) {
           poem.show = true;
         } else {
@@ -159,12 +155,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    console.log('Filter and Search in Textgrid');
-    console.log(this.searchTermfromKonvolut[0]);
     for(let poem of this.poemsInGrid) {
       if(poem !== undefined) {
         if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
-          console.log('Term found');
           poem.show = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];

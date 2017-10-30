@@ -24,13 +24,6 @@ export class GetKonvolutIRIsComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.konvolutTitelText) {
-      console.log('KonvolutTitel:' + this.konvolutTitelText);
-      console.log(globalSearchVariableService.API_URL +
-        '/search/?searchtype=extended' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=' +
-        this.konvolutTitelText);
       this.http.get(globalSearchVariableService.API_URL +
         '/search/?searchtype=extended' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
@@ -40,7 +33,6 @@ export class GetKonvolutIRIsComponent implements OnChanges {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
              if(data.subjects[ 0 ]!== undefined) {
               this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
               this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);

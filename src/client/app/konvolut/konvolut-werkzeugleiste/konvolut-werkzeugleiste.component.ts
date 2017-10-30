@@ -17,7 +17,6 @@ export class KonvolutWerkzeugleisteComponent {
 
   hilfe() {
     // TODO
-    console.log('Hilfetext ergaenzen');
   }
 
 }

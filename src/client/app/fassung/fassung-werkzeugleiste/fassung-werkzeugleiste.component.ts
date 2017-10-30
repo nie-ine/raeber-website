@@ -28,8 +28,6 @@ export class FassungWerkzeugleisteComponent {
   constructor(public dialog: MdDialog) {}
 
   neuladen() {
-    // TODO: Don't reload the whole window!
-    // window.location.reload();
     this.poemResizable = false;
     this.showRegister = true;
     this.poemResizableChange.emit(this.poemResizable);
@@ -48,12 +46,10 @@ export class FassungWerkzeugleisteComponent {
 
 
   goToNextFassung() {
-    console.log('Go to next Fassung');
     this.goToOtherFassung.emit(this.idOfNext);
   }
 
   goToPrevFassung() {
-    console.log('Go to prev Fassung');
     this.goToOtherFassung.emit(this.idOfPrev);
   }
 

@@ -110,8 +110,8 @@ export class KonvolutComponent implements OnInit {
   searchInConvolute(fg: any) {
     //console.log(fg);
     this.searchTermArray = [];
-    this.searchResultsNo = 0; // TODO: Variable takes number of search results
-    this.searchTermArray[ 0 ] = fg.searchTerm; // TODO: Variable takes search term
+    this.searchResultsNo = 0;
+    this.searchTermArray[ 0 ] = fg.searchTerm;
     this.searchTermArray[ 1 ] = fg.page;
   }
 
@@ -177,7 +177,6 @@ export class KonvolutComponent implements OnInit {
   }
 
   deletePoemsInCache(input: string) {
-    console.log('ResetPoemArray');
     this.resetPoems = 'reset';
   }
 

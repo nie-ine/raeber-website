@@ -1,9 +1,17 @@
-md-button-toggle-group {
-  width: 80%;
+menu {
+  margin: 0;
+  padding: 0;
 }
 
-md-button-toggle, button {
-  width: 25%;
-  height: 36px;
+button.rae-image-small-button {
+  min-width: 30px;
+  height: 30px;
+  line-height: normal;
+  padding: 5px;
   font-size: 80%;
+  vertical-align: middle;
+}
+
+.button-is-active {
+  background-color: silver;
 }

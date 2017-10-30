@@ -3,7 +3,7 @@
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>
-          <input mdInput [placeholder]="suchmenuForm.get('suchwortForm.suchwortSuchraum').value"
+          <input mdInput [placeholder]="generateTextForInputField()"
                  formControlName="suchwortInput"
                  style="width: 250px"/>
         </md-input-container>

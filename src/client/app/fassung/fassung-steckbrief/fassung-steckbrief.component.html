@@ -40,10 +40,10 @@
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Seite / Blatt:</span>
         <span  [innerHtml]="pageNumberDescription"></span>
     </li>
-    <li style="padding-bottom:5px;" *ngIf="carrierIRIs && carrierIRIs.length > 0" >
+    <li style="padding-bottom:5px;" *ngIf="carrierIRI" >
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Signatur:</span>
         <span >
-          <rae-fassung-steckbrief-signatur [carrierIRIs]="carrierIRIs"></rae-fassung-steckbrief-signatur>
+          <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="textartMap[structure]" >

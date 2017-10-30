@@ -43,30 +43,39 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   j: number;
   searchActivated = false;
   searchInKonvolut = false;
-  poemsOld: Array<any>;
+  searchForPage: Array<any>;
 
   // Filter flags for synoptic view
   @Input() filterFirstLastFlag = false;
-  @Input() filterDuplicatesFlag = false;
+  @Input() filterDuplicatesFlag = true;
   @Input() filterNotebookFlag = false;
   @Input() filterManuscriptFlag = false;
   @Input() filterTyposcriptFlag = false;
   @Input() konvolutView: boolean;
 
   /**
-   * Orders an array by date (ascending)
+   * Orders an array by date (ascending) and seqnum (ascending)
    * @param {Array<any>} unsorted Array to be sorted
    * @returns {Array<any>} Sorted array
    */
-  // TODO implement also three functions: first is sort by date, second by convolute title, third by seqnum
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
-        if (x[ 1 ] + String(1000000 + x[ 5 ]) > y[ 1 ] + String(1000000 + x[ 5 ])) {
+      if (x[ 1 ] > y[ 1 ]) {
           return 1;
-        } else if (x[ 1 ] + String(1000000 + x[ 5 ]) < x[ 1 ]+ String(1000000 + x[ 5 ])) {
+      } else if (x[ 1 ] < y[ 1 ]) {
           return -1;
         } else {
-          return 0;
+          if (x[ 4 ] === y[ 4 ]) {
+            if (x[ 5 ] > y[ 5 ]) {
+              return 1;
+            } else if (x[ 5 ] < y[ 5 ]) {
+              return -1;
+            } else {
+              return 0;
+            }
+          } else {
+            return 0;
+          }
         }
       }
     );
@@ -81,7 +90,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
-    return !x[ 4 ];
+    return x[ 6 ] !== '1';
   }
 
   /**
@@ -108,33 +117,61 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return firstLast;
   }
 
+  private static filterSearchResults(x: any): boolean {
+    return x.show;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.contentType);
-    if(this.searchTermfromKonvolut && this.searchTermfromKonvolut.length > 1) {
-      this.searchAndFilterInTextgrid();
-      this.searchInKonvolut = true;
-    } else if (this.searchInKonvolut !== false ) {
-      this.searchActivated = false;
-      this.searchTermArray = undefined;
+    console.log(this.searchTermfromKonvolut);
+    if(this.searchTermfromKonvolut) {
+      if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
+        this.searchInKonvolut = true;
+        this.searchActivated = true;
+        this.searchAndFilterInTextgrid();
+        console.log(this.searchActivated);
+      }
+      if(this.searchTermfromKonvolut[1]) {
+        this.filterPoemsOnPage();
+        this.searchActivated = true;
+        this.searchInKonvolut = true;
+      }
+      if(!(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1)
+        && !this.searchTermfromKonvolut[1]) {
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+      }
+    }
+  }
+  filterPoemsOnPage() {
+    console.log('Filter Poems on Page');
+    this.searchForPage = undefined;
+    for(let poem of this.poemsInGrid) {
+      if(poem !== undefined) {
+        console.log(poem[13]);
+        if(poem[13] === this.searchTermfromKonvolut[1]) {
+          poem.show = true;
+        } else {
+          poem.show = false;
+        }
+      }
     }
   }
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    console.log(this.searchTermfromKonvolut);
-    this.searchActivated = this.searchTermfromKonvolut !== '';
     console.log('Filter and Search in Textgrid');
-    console.log(this.searchTermfromKonvolut);
+    console.log(this.searchTermfromKonvolut[0]);
     for(let poem of this.poemsInGrid) {
-      if(poem[0] !== undefined) {
-        if(poem[0].search(this.searchTermfromKonvolut) !== -1) {
-          this.searchTermArray = [];
+      if(poem !== undefined) {
+        if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
+          console.log('Term found');
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
-        } else if (poem[2].search(this.searchTermfromKonvolut) !== -1) {
           this.searchTermArray = [];
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
+        } else if (poem[2].search(this.searchTermfromKonvolut[0]) !== -1) {
           poem.show = true;
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut;
+          this.searchTermArray = [];
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
         } else {
           poem.show = false;
         }
@@ -231,6 +268,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   filterPoems(unfiltered: Array<any>): Array<any> {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+        .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)

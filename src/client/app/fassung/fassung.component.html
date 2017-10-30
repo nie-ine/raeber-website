@@ -7,6 +7,9 @@
             <div id="rt-mainbody">
               <div class="component-content">
 
+                <span>Aktuelle Seite: {{convoluteTypeGermanLabel}} > <a
+                  [routerLink]="convoluteLink">{{convoluteTitle}}</a></span>
+
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
                     (goToOtherFassung)="goToOtherFassung($event)"
@@ -14,16 +17,16 @@
                     [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
                     [(poemResizable)]="poem_resizable"
-                    (showEditedTextChange)="zeigeKonstituiert=true"
-                    (showTranscriptionChange)="zeigeDiplomatisch=false"></rae-fassung-werkzeugleiste>
+                    (showEditedTextChange)="showEditedText=true"
+                    (showTranscriptionChange)="showDiplomaticTranscription=false"></rae-fassung-werkzeugleiste>
                 </div>
 
                 <div id="k2Container" class="itemView">
 
                   <div class="itemTagsBlock" style='float:right'>
                     <ul class="itemTags">
-                      <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
-                         *ngIf="synopseIRI !== undefined">
+                      <a [routerLink]="['/synopsen/' + synopsisIri.split('/')[4]]" routerLinkActive="active"
+                         *ngIf="synopsisIri !== undefined">
                         Synopse
                       </a>
                     </ul>
@@ -31,7 +34,7 @@
 
                   <div class="itemHeader">
                     <!-- Date created -->
-                    <span class="itemDateCreated">{{ creationDate }}</span>
+                    <span class="itemDateCreated">{{ creationDateOfPoem }}</span>
                     <!-- Item title -->
                     <h2 class="itemTitle">{{ poemTitle }}</h2>
                   </div>
@@ -41,45 +44,51 @@
                     <!-- Item text -->
                     <div class="itemFullText">
 
-                      <md-card>
-                        <md-card-content
-                          *ngIf="zeigeKonstituiert"
-                          [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
+                      <md-card style="padding-top:0;">
+                        <md-card-content style="padding-top:20px; padding-bottom:5px;"
+                                         *ngIf="showEditedText"
+                                         [ngClass]="{'rae-fassung-resizable': poem_resizable, 'rae-fassung-nonresizable': !poem_resizable}">
                           <section class="edtext edtext_hs">
                             <div [innerHTML]="editedPoemText"></div>
                           </section>
                         </md-card-content>
                         <md-card-footer>
-                          <button md-button (click)="zeigeKonstituiert = !zeigeKonstituiert">
-                            <md-icon *ngIf="zeigeKonstituiert">expand_less</md-icon>
-                            <md-icon *ngIf="!zeigeKonstituiert">expand_more</md-icon>
-                            <span *ngIf="zeigeKonstituiert">Text verbergen</span>
-                            <span *ngIf="!zeigeKonstituiert">Text anzeigen</span>
+                          <button md-button (click)="showEditedText = !showEditedText"
+                                  style="background-color:#eee; font-size:12px;">
+                            <md-icon>{{showEditedText ? 'expand_less' : 'expand_more'}}</md-icon>
+                            <span>Text {{showEditedText ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
-
-                      <md-card *ngIf="konvolutType === 'PoemManuscriptConvolute' || konvolutType === 'PoemNotebook'">
-                        <md-card-content *ngIf="zeigeDiplomatisch">
+                      <br/>
+                      <md-card *ngIf="diplomaticIRIs && diplomaticIRIs.length > 0"
+                               style="padding-top:0;">
+                        <md-card-header style="padding-left:0; padding-right:0; margin-left:-40px; margin-right:-24px;"
+                                        *ngIf="showDiplomaticTranscription">
+                          <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
+                                  style="background-color:#eee; font-size:12px;">
+                            <md-icon>{{showDiplomaticTranscription ? 'expand_more' : 'expand_less'}}</md-icon>
+                            <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
+                          </button>
+                        </md-card-header>
+                        <md-card-content *ngIf="showDiplomaticTranscription"
+                                         style="padding-top:20px; padding-bottom:5px;">
                           <rae-fassung-diplomatisch [diplomaticIRIs]="diplomaticIRIs"
                                                     (pictureReduced)="show_register = true;"
                                                     (pictureIncreased)="show_register = false;">
                           </rae-fassung-diplomatisch>
                         </md-card-content>
                         <md-card-footer>
-                          <button md-button (click)="zeigeDiplomatisch = !zeigeDiplomatisch">
-                            <md-icon *ngIf="zeigeDiplomatisch">expand_less</md-icon>
-                            <md-icon *ngIf="!zeigeDiplomatisch">expand_more</md-icon>
-                            <span *ngIf="zeigeDiplomatisch">Diplomatischen Text verbergen</span>
-                            <span *ngIf="!zeigeDiplomatisch">Diplomatischen Text anzeigen</span>
+                          <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
+                                  style="background-color:#eee; font-size:12px;">
+                            <md-icon>{{showDiplomaticTranscription ? 'expand_less' : 'expand_more'}}</md-icon>
+                            <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
                     </div>
                     <div style="margin-top:20px;">
-                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poem_id"
-                                              [konvolutIRI]="konvolutIRI"
-                                              (goToOtherFassung) = "goToOtherFassung($event)">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri" [konvolutIRI]="convoluteIri">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
@@ -89,9 +98,9 @@
                   <!-- Item tags -->
                   <div class="itemTagsBlock">
                     <span>Synopse:</span>
-                    <a [routerLink]="['/synopsen/' + synopseIRI.split('/')[4]]" routerLinkActive="active"
-                       *ngIf="synopseIRI !== undefined">
-                      {{workTitle}}
+                    <a [routerLink]="['/synopsen/' + synopsisIri.split('/')[4]]" routerLinkActive="active"
+                       *ngIf="synopsisIri !== undefined">
+                      {{synopsisTitle}}
                     </a>
                   </div>
                 </div>
@@ -100,7 +109,7 @@
                 <div class="itemRelated">
                   <rae-fassung-weitere
                     (goOtherFassung)="goToOtherFassung($event)"
-                    [synopsenTags]="otherWorkExpressions"></rae-fassung-weitere>
+                    [synopsenTags]="relatedPoems"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">
@@ -112,7 +121,7 @@
                       [titleOfPrev]="prevPoem.split('###')[1]"
                       [idOfNext]="nextPoem.split('###')[0]"
                       [titleOfNext]="nextPoem.split('###')[1]"></rae-fassung-blaettern>
-                    <span style='font-size:0.8em;'>Änderung: {{ modificationDate }}</span>
+                    <span style='font-size:0.8em;'>Änderung: {{ modificationDateOfPoem }}</span>
                   </ul>
                 </div>
               </div>
@@ -125,12 +134,12 @@
           <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
-                <rae-registerspalte [konvolutIRI]="konvolutIRI"
+                <rae-registerspalte [konvolutIRI]="convoluteIri"
                                     (goToOtherFassung)="goToOtherFassung($event)">
                 </rae-registerspalte>
               </ng-template>
             </ngb-panel>
-            <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
+            <ngb-panel id="suche" title="Suche in {{convoluteTitle}}">
               <ng-template ngbPanelContent>
                 <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
               </ng-template>

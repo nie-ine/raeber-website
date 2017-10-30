@@ -35,7 +35,7 @@ export class FassungSteckbriefComponent implements OnChanges {
   unauthorizedPublication: Array<string>;
   publishedIn: Array<string>;
 
-  carrierIRIs: Array<string>;
+  carrierIRI: string;
 
   schreibzeugMap = {
     'pencil': 'Bleistift',
@@ -196,35 +196,32 @@ export class FassungSteckbriefComponent implements OnChanges {
             // skip if there is no same edition
           }
 
-          this.carrierIRIs = [];
+          this.referencePoemIRIs = [];
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ i ]);
+            res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values.length; i++) {
+              this.referencePoemIRIs
+                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values[ i ]);
             }
           } catch (TypeError) {
-            // skip if there is no notebook
-          }
-          try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/text#isInManuscript' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/text#isInManuscript' ].values[ i ]);
-            }
-          } catch (TypeError) {
-            // skip if there is no manuscript
-          }
-          try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/text#isInTypescript' ].values.length; i++) {
-              this.carrierIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/text#isInTypescript' ].values[ i ]);
-            }
-          } catch (TypeError) {
-            // skip if there is no notebook
+            // skip if there is no bezugstext
           }
 
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no notebook
+          }
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInManuscript' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no notebook
+          }
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInTypescript' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no notebook
+          }
         });
     }
   }

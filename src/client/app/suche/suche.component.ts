@@ -57,7 +57,7 @@ export class SucheComponent implements OnInit {
   numberOfPropertiesInSearchBox = '';
   str: string;
   value: string;
-  keys: Array<any>;
+  sendInputStringToSuchmaske: string;
   finalQueryArray = [ '' ];
   currentSearchBox = '1';
   allSearchResults: Array<any>;
@@ -568,6 +568,7 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
     this.warning = '';
     this.numberOfQueries = 0;
     this.numberOfSearchResults = 0;
@@ -699,9 +700,6 @@ export class SucheComponent implements OnInit {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
         '&compop=!EQ' +
         '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
         '&compop=!EQ' +
         '&searchval=123455666' +
@@ -714,11 +712,26 @@ export class SucheComponent implements OnInit {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=!EQ' +
         '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isInDialect' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStructure' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isPartOfCycle' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStrophe' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
         '&show_nrows=2000')
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            //console.log(data);
+            console.log(data);
             if (data.subjects[0] !== undefined) {
               this.addToTemporarySearchResultArray(data.subjects,
                 firstTermAfterOr,
@@ -767,9 +780,6 @@ export class SucheComponent implements OnInit {
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
       '&compop=!EQ' +
       '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
       '&compop=!EQ' +
       '&searchval=123455666' +
@@ -780,6 +790,21 @@ export class SucheComponent implements OnInit {
       '&compop=!EQ' +
       '&searchval=123455666' +
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isInDialect' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStructure' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isPartOfCycle' +
+      '&compop=!EQ' +
+      '&searchval=123455666' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStrophe' +
       '&compop=!EQ' +
       '&searchval=123455666' +
       '&show_nrows=2000')
@@ -857,37 +882,37 @@ export class SucheComponent implements OnInit {
       for (let poem of searchResults) {
         //console.log(poem.value['7']);
         this.onlyChoosePoemsThatAreInChosenConvolutes(
+          poem.value['6'],
           poem.value['7'],
           poem.value['8'],
-          poem.value['9'],
-          poem.value['1'],
-          poem.value['6'],
+          undefined,
+          poem.value['5'],
           0,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          poem.value['11'],
-          poem.value['10']);
+          poem.value['10'],
+          poem.value['13'],
+          poem.value['9'],
+          poem.value['14'],
+          poem.value['15'],
+          poem.value['12'],
+          poem.value['11']);
       }
     }
     if(singlePoem) {
       //console.log('add poem to final search results');
       this.onlyChoosePoemsThatAreInChosenConvolutes(
+        singlePoem.value['6'],
         singlePoem.value['7'],
         singlePoem.value['8'],
-        singlePoem.value['9'],
-        singlePoem.value['1'],
-        singlePoem.value['6'],
+        undefined,
+        singlePoem.value['5'],
         0,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        singlePoem.value['11'],
-        singlePoem.value['10']);
+        singlePoem.value['10'],
+        singlePoem.value['13'],
+        singlePoem.value['9'],
+        singlePoem.value['14'],
+        singlePoem.value['15'],
+        singlePoem.value['12'],
+        singlePoem.value['11']);
     }
   }
 
@@ -1399,17 +1424,13 @@ export class SucheComponent implements OnInit {
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-          //console.log(k);
-          //console.log(poemIRI);
-          //console.log(this.suchmaskeKonvolutIRIMapping);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-              // if(this.checkTextart(textart)) {
-                 //console.log('Check Textart');
+               if(this.checkTextart(textart)) {
                  if(this.checkTimeInterval(date)) {
-              //     if(this.checkIfFinalVersion(isFinalVersion)) {
-              //       if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-              //         if(this.checkIfIsInDialect(isInDialiect)) {
-              //           if(this.checkIfPartOfCycle(isPartOfCycle)) {
+                   if(this.checkIfFinalVersion(isFinalVersion)) {
+                     if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                       if(this.checkIfIsInDialect(isInDialiect)) {
+                         if(this.checkIfPartOfCycle(isPartOfCycle)) {
                           //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
                           if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
                             this.allSearchResults[ this.allSearchResults.length ] = [];
@@ -1426,54 +1447,63 @@ export class SucheComponent implements OnInit {
                               = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
                             this.numberOfSearchResults += 1;
                         }
-              //         }
-              //       }
-              //     }
-              //   }
+                       }
+                     }
+                   }
                  }
-              // }
+                 }
+               }
           }
         }
       }
     }
     checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    //console.log(isPartOfCycle);
-    if (!this.arg) return true;
-    if (!this.arg.get('zyklus').value) {
-      return true;
-    } else if (this.arg.get('zyklus').value && isPartOfCycle) {
-      return true;
-    } else return false;
+    return this.checkIfTrue('nurZyklus','zyklus', isPartOfCycle);
   }
     checkIfIsInDialect(isInDialiect: string): boolean {
-    if (!this.arg) return true;
-      //console.log(isInDialiect);
-      if(!this.arg) return true;
-      if(!this.arg.get('mundart').value) {
-        return true;
-      } else if (this.arg.get('mundart').value && isInDialiect) {
-        return true;
-      } else return false;
+      return this.checkIfTrue('nurMundart','mundart', isInDialiect);
     }
     checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-      //console.log(hatStrophenunterteilung);
+      return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+    }
+    checkIfTrue(inputFromRoute: string, controlFromFormName: string, parameterToCheck: string) {
+      if(!this.arg) {
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'false') return true;
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'true' && parameterToCheck === '1') return true;
+        if(this.route.snapshot.queryParams[ inputFromRoute ] === 'true' && parameterToCheck === '0') return false;
+      }
       if(!this.arg) return true;
-      if(!this.arg.get('strophen').value) {
+      if(!this.arg.get(controlFromFormName).value) {
         return true;
-      } else if (this.arg.get('strophen').value && hatStrophenunterteilung) {
+      } else if ((this.arg.get(controlFromFormName).value)
+        && parameterToCheck === '1') {
         return true;
       } else return false;
     }
     checkIfFinalVersion(isFinalVersion: string):boolean {
-      if(!this.arg) return true;
-      if(!this.arg.get('endfassung').value) {
-        return true;
-      } else if (this.arg.get('endfassung').value && isFinalVersion) {
-        return true;
-      } else return false;
+    return this.checkIfTrue('nurEndfassungen','endfassung', isFinalVersion);
     }
     checkTextart(textart: string): boolean {
-      if(!this.arg) return true;
+    //console.log('checktextart: ' + textart);
+      if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' && textart === 'RythmicProse') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' && textart === 'LetterStructure') {
+        return true;
+      } else if (this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true' && textart === 'RythmicVerse') {
+        return true; } else if (
+          this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' ||
+          this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true'
+      ) {
+        return false;
+      }
+      if(!this.arg ) return true;
       if (this.arg.get('textartForm').pristine) {
         //console.log(textart);
         return true;
@@ -1486,16 +1516,6 @@ export class SucheComponent implements OnInit {
       } else if(this.arg.get('textartForm.textartBriefentwurf').value && textart === 'LetterStructure') {
         return true;
       } else if(this.arg.get('textartForm.textartGereimteVerse').value && textart === 'RythmicVerse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartProsa' ] === 'true' && textart === 'RythmicProse') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartBriefentwurf' ] === 'true' && textart === 'LetterStructure') {
-        return true;
-      } else if (this.route.snapshot.queryParams[ 'textartGereimteVerse' ] === 'true' && textart === 'RythmicVerse') {
         return true;
       } else {
         return false;

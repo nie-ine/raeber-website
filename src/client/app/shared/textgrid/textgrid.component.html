@@ -1,3 +1,6 @@
+<div *ngIf="searchActivated" id="searchTermBar">
+  Suche nach: {{searchTermfromKonvolut[0]}} ({{filterPoems(poemsInGrid).length}} Resultate)
+</div>
 <div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
 
   <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
@@ -5,15 +8,19 @@
 
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
-
-      <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
+      <div *ngIf="contentType == 'konvolut'">
+        <md-card-subtitle *ngIf="p[1] && !p[14].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
+      </div>
+      <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
+          <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
+      </div>
 
       <md-card-title #poemTitle>
         <a class="item" *ngIf="contentType == 'konvolut'"
            [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
            [innerHTML]="highlight(p[0],searchTermArray)">
         </a>
-        <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche' "
+        <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
            [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
            [innerHTML]="highlight(p[0],searchTermArray)">
         </a>

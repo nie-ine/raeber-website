@@ -196,17 +196,6 @@ export class FassungSteckbriefComponent implements OnChanges {
             // skip if there is no same edition
           }
 
-          this.referencePoemIRIs = [];
-          try {
-            for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values.length; i++) {
-              this.referencePoemIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasReferencePoem' ].values[ i ]);
-            }
-          } catch (TypeError) {
-            // skip if there is no bezugstext
-          }
-
           try {
             this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInNotebook' ].values[ 0 ];
           } catch (TypeError) {

@@ -35,6 +35,11 @@
         <span [innerHtml]="carrierDescription"></span>
       </p>
 
+      <p *ngIf="carrierCollectionDescription">
+        <span class="emphase">Textträger:</span>
+        <span [innerHtml]="carrierCollectionDescription"></span>
+      </p>
+
       <p *ngIf="convoluteSizeDescripton">
         <span class="emphase">Umfang:</span>
         <span [innerHtml]="convoluteSizeDescripton"></span>

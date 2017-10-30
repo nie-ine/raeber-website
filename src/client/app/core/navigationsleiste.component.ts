@@ -19,12 +19,14 @@ export class NavigationsleisteComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParams[ 'reset' ]);
+    this.createLinkToSearch();
+    console.log(this.route.snapshot.queryParams[ 'wort' ]);
   }
   createLinkToSearch() {
-    if(!this.route.snapshot.queryParams[ 'wort' ]) {
-      return '/resetSuche';
-    } else return '/suche';
+      //console.log(this.route._routerState.snapshot.url);
+      if(this.route._routerState.snapshot.url === '/suche') {
+        return 'resetSuche';
+      } else return 'suche';
   }
 
 }

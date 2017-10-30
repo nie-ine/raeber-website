@@ -97,6 +97,8 @@ export class SucheComponent implements OnInit {
   setOfPoemsdruckGedichte = new Set();
   setOfPoemsdruckFlussufer = new Set();
   setOfPoemsdruckReduktionen = new Set();
+  setOfPoemsAbgewandZugewandtHochdeutscheGedichte = new Set();
+  setOfPoemsAbgewandZugewandtAlemannischeGedichte = new Set();
   setOfPoemsdzeitschriftAkzente = new Set();
   setOfPoemszeitschriftBlaetter = new Set();
   zeitschriftZeit = new Set();
@@ -125,6 +127,7 @@ export class SucheComponent implements OnInit {
   searchTermArray: Array<string>;
   zeitschriftWortTat = new Set();
   startSearchImmediately = false;
+  setOfPoemsInResult = new Set();
   warning: string;
   warningread: boolean;
   currentPath: string;
@@ -250,6 +253,22 @@ export class SucheComponent implements OnInit {
       'IRI': 'undefined',
       'memberPoems': this.setOfPoemsdruckReduktionen,
       'officialName': 'Reduktionen'
+    },
+    {
+      'konvolut': 'abgewandt-zugewandt-hochdeutsche-gedichte',
+      'suchmaskeKonvolutName': 'druckAbgewandtAll',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsAbgewandZugewandtHochdeutscheGedichte,
+      'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte'
+    },
+    {
+      'konvolut': 'abgewandt-zugewandt-alemannische-gedichte',
+      'suchmaskeKonvolutName': 'druckAbgewandtAll',
+      'enabled': true,
+      'IRI': 'undefined',
+      'memberPoems': this.setOfPoemsAbgewandZugewandtAlemannischeGedichte,
+      'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte'
     },
     {
       'konvolut': 'akzente',
@@ -549,6 +568,8 @@ export class SucheComponent implements OnInit {
         = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftWortTat' ],true);
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled
         = this.updateFilterParams(this.route.snapshot.queryParams[ 'materialienTagebuch' ],true);
+      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled
+        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckAbgewandtAll' ],true);
       //console.log(this.suchmaskeKonvolutIRIMapping);
       this.startSearchImmediately = true;
       this.searchTermArray = [];
@@ -568,6 +589,7 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.setOfPoemsInResult.clear();
     this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
     this.warning = '';
     this.numberOfQueries = 0;
@@ -965,6 +987,7 @@ export class SucheComponent implements OnInit {
       this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
       this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
+      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckform.druckAbgewandtAll').value;
       //console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
@@ -1006,6 +1029,7 @@ export class SucheComponent implements OnInit {
       '&zeitschriftSueddeutsche=' + this.suchmaskeKonvolutIRIMapping[ 33 ].enabled +
       '&zeitschriftWortTat=' + this.suchmaskeKonvolutIRIMapping[ 34 ].enabled +
       '&materialienTagebuch=' + this.suchmaskeKonvolutIRIMapping[ 35 ].enabled +
+      '&druckAbgewandtAll=' + this.suchmaskeKonvolutIRIMapping[ 36 ].enabled +
       '&textartFreieVerse=' + this.arg.get('textartForm.textartFreieVerse').value +
       '&textartProsanotat=' + this.arg.get('textartForm.textartProsanotat').value +
       '&textartProsa=' + this.arg.get('textartForm.textartProsa').value +
@@ -1016,6 +1040,8 @@ export class SucheComponent implements OnInit {
       '&nurEndfassungen=' + this.arg.get('endfassung').value +
       '&nurMitStrophen=' + this.arg.get('strophen').value +
       '&nurMundart=' + this.arg.get('mundart').value +
+      '&keineMundart=' + this.arg.get('keineMundart').value +
+      '&keinZyklus=' + this.arg.get('keinZyklus').value +
       '&nurZyklus=' + this.arg.get('zyklus').value;
     this.location.replaceState(this.currentPath);
   }
@@ -1346,7 +1372,7 @@ export class SucheComponent implements OnInit {
           if (data.subjects[ 0 ] !== undefined) {
             this.setOfKonvolutIRIs.add(data.subjects[ 0 ].obj_id);
             this.suchmaskeKonvolutIRIMapping[ i ].IRI = data.subjects[ 0 ].obj_id;
-            //console.log(this.suchmaskeKonvolutIRIMapping);
+            console.log(this.suchmaskeKonvolutIRIMapping);
             this.rightProperty = '';
             this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
@@ -1425,12 +1451,17 @@ export class SucheComponent implements OnInit {
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
-               if(this.checkTextart(textart)) {
-                 if(this.checkTimeInterval(date)) {
-                   if(this.checkIfFinalVersion(isFinalVersion)) {
-                     if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                       if(this.checkIfIsInDialect(isInDialiect)) {
-                         if(this.checkIfPartOfCycle(isPartOfCycle)) {
+            if(!this.setOfPoemsInResult.has(poemIRI)) {
+              this.setOfPoemsInResult.add(poemIRI);
+              console.log('checktextart');
+              if(this.checkTextart(textart)) {
+                console.log('checkdate');
+                if(this.checkTimeInterval(date)) {
+                  console.log('checkFinalVersion');
+                  if(this.checkIfFinalVersion(isFinalVersion)) {
+                    if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
+                      if(this.checkIfIsInDialect(isInDialiect)) {
+                        if(this.checkIfPartOfCycle(isPartOfCycle)) {
                           //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
                           if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
                             this.allSearchResults[ this.allSearchResults.length ] = [];
@@ -1447,25 +1478,38 @@ export class SucheComponent implements OnInit {
                               = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
                             this.allSearchResults[ this.allSearchResults.length - 1 ][ 14 ] = isFinalVersion;
                             this.numberOfSearchResults += 1;
+                          }
                         }
-                       }
-                     }
-                   }
-                 }
-                 }
-               }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
     checkIfPartOfCycle(isPartOfCycle: string): boolean {
-    return this.checkIfTrue('nurZyklus','zyklus', isPartOfCycle);
+    if(!this.checkIfTrue('nurZyklus','zyklus', '1') &&
+      !this.checkIfTrue('keinZyklus','keinZyklus', '1')) return true;
+    if(isPartOfCycle === '1') return this.checkIfTrue('nurZyklus','zyklus', '1');
+    if(isPartOfCycle === '0') return this.checkIfTrue('keinZyklus','keinZyklus', '1');
+    else return true;
   }
     checkIfIsInDialect(isInDialiect: string): boolean {
-      return this.checkIfTrue('nurMundart','mundart', isInDialiect);
+    if(!this.checkIfTrue('nurMundart','mundart', '1') &&
+    !this.checkIfTrue('keineMundart','keineMundart', '1')) return true;
+      if(isInDialiect === '1') return this.checkIfTrue('nurMundart','mundart', '1');
+      if(isInDialiect === '0') return this.checkIfTrue('keineMundart','keineMundart', '1');
+      else return true;
     }
     checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-      return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+    if(!this.checkIfTrue('nurMitStrophen','strophen', '1') &&
+    !this.checkIfTrue('keineStrophen','keineStrophen', '1')) return true;
+      if(hatStrophenunterteilung === '1') return this.checkIfTrue('nurMitStrophen','strophen', '1');
+      if(hatStrophenunterteilung === '0') return this.checkIfTrue('keineStrophen','keineStrophen', '1');
+      else return true;
     }
     checkIfTrue(inputFromRoute: string, controlFromFormName: string, parameterToCheck: string) {
       if(!this.arg) {
@@ -1481,11 +1525,17 @@ export class SucheComponent implements OnInit {
         return true;
       } else return false;
     }
-    checkIfFinalVersion(isFinalVersion: string):boolean {
-    return this.checkIfTrue('nurEndfassungen','endfassung', isFinalVersion);
+    checkIfFinalVersion(isFinalVersion: string): boolean {
+      console.log('Check Endfassung ' + isFinalVersion);
+      console.log(this.checkIfTrue('nurEndfassungen','endfassung', '1'));
+      console.log(this.checkIfTrue('keineEndfassung','keineEndfassung', '1'));
+      if(!this.checkIfTrue('nurEndfassungen','endfassung', '1')
+        && !this.checkIfTrue('keineEndfassung','keineEndfassung', '1')) return true;
+      if(isFinalVersion === '1') return this.checkIfTrue('nurEndfassungen','endfassung', '1');
+      if(isFinalVersion === '0') return this.checkIfTrue('keineEndfassung','keineEndfassung', '1');
+      else return true;
     }
     checkTextart(textart: string): boolean {
-    //console.log('checktextart: ' + textart);
       if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {
         return true;
       } else if (this.route.snapshot.queryParams[ 'textartProsanotat' ] === 'true' && textart === 'NoteProse') {
@@ -1530,6 +1580,8 @@ export class SucheComponent implements OnInit {
       if(!this.arg) {
         if(this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
           && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) return true;
+        if(this.route.snapshot.queryParams[ 'zeitBeginn' ] === ''
+          && this.route.snapshot.queryParams[ 'zeitEnde' ] === '') return true;
       }
       if(this.arg) {
         console.log(this.arg.get('zeitraumForm.zeitraumVon').value);

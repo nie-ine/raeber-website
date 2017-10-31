@@ -4,10 +4,12 @@ import { RouterModule } from '@angular/router';
 import { HomepageComponent } from '../statisch/homepage.component';
 import { ImpressumComponent } from '../statisch/impressum.component';
 import { SignaturenComponent } from '../statisch/signaturen.component';
-import { WerklisteComponent } from '../statisch/werkliste.component';
+import { WerklisteSelbstComponent } from '../statisch/werkliste-selbst.component';
+import { WerklisteUnselbstComponent } from '../statisch/werkliste-unselbst.component';
 import { LebensdatenComponent } from '../statisch/lebensdaten.component';
 import { AnleitungComponent } from '../statisch/anleitung.component';
 import { WerkausgabeComponent } from '../statisch/werkausgabe.component';
+import { TextausagabenComponent } from '../statisch/textausgaben.component';
 import { SucheModule } from '../suche/suche.module';
 import { PdfNotizbuecherComponent } from '../statisch/pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from '../statisch/pdf-synopsen.component';
@@ -19,10 +21,12 @@ import { HomepageWithInitTextComponent } from '../statisch/homepagewithinittext.
     SucheModule,
     RouterModule.forRoot([
       { path: 'werkausgabe', component: WerkausgabeComponent },
+      { path: 'textausgaben', component: TextausagabenComponent },
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
       { path: 'anleitung', component: AnleitungComponent },
       { path: 'lebensdaten', component: LebensdatenComponent },
-      { path: 'werkliste', component: WerklisteComponent },
+      { path: 'werkliste-selbst', component: WerklisteSelbstComponent },
+      { path: 'werkliste-unselbst', component: WerklisteUnselbstComponent },
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
@@ -46,6 +50,8 @@ export const routingComponents = [
   PdfSynopsenComponent,
   SignaturenComponent,
   WerkausgabeComponent,
-  WerklisteComponent
+  TextausagabenComponent,
+  WerklisteSelbstComponent,
+  WerklisteUnselbstComponent
 ];
 

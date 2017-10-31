@@ -119,12 +119,14 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
       .map(result => result.json())
       .subscribe(res => {
+        console.log(res);
         this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         const textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(textEdition);
         this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
-        this.creationDateOfPoem =
+        this.creationDateOfPoem = this.poemType === 'DiaryEntry' ?
+          this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/text#hasEnteringDate' ].values[ 0 ].dateval1) :
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);

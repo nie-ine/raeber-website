@@ -47,7 +47,8 @@
 
       <p *ngIf="containsEarlierStagesOfPublicationIRIs && containsEarlierStagesOfPublicationIRIs.length > 0">
         <span class="emphase">Publikation:</span>
-        <rae-konvolut-steckbrief-publikation [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
+        <rae-konvolut-steckbrief-publikation
+          [konvolutIRI]="containsEarlierStagesOfPublicationIRIs"></rae-konvolut-steckbrief-publikation>
       </p>
 
       <p *ngIf="archiveSignature">
@@ -62,10 +63,12 @@
 
       <br/>
 
-      <p *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
+      <p
+        *ngIf="konvoluttyp == 'poem manuscript convolute' && ((earlierStagesIRIs && earlierStagesIRIs.length > 0) || (laterStagesIRIs && laterStagesIRIs.length > 0))">
         <span class="emphase">Stufen:</span>
-        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen><span
-        *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
+        <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
+        <span
+          *ngIf="earlierStagesIRIs && earlierStagesIRIs.length > 0 && laterStagesIRIs && laterStagesIRIs.length > 0">,</span>
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="laterStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
@@ -74,14 +77,74 @@
         <rae-konvolut-steckbrief-stufen [konvolutIRI]="earlierStagesIRIs"></rae-konvolut-steckbrief-stufen>
       </p>
 
-      <rae-konvolut-steckbrief-bilder *ngIf="konvoluttyp == 'poem notebook'" [konvolutId]="id" >
+      <rae-konvolut-steckbrief-bilder *ngIf="konvoluttyp == 'poem notebook'" [konvolutId]="id">
       </rae-konvolut-steckbrief-bilder>
 
-      <p *ngIf="comment">
+      <p *ngIf="comment && (konvolutTitle === 'Notizbuch 1979')">
         <span class="emphase">Kommentar:</span>
-        <!-- FIXME: Wert gibt im Moment lediglich den das Link-HTML-Element auf die Beschreibung zurück, anstatt den Inhalt zurückzugeben -->
-        <a (click)="openDialog()">Beschreibung</a>
-        <!--<span [innerHtml]="comment"></span>-->
+        <a (click)="openDialog(commentsContent['Notizbuch 1979'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Notizbuch 1979-82')">
+        <span class="emphase">Kommentar:</span>
+        Enthält alle Gedichte von <span class="titel">Abgewandt Zugewandt</span> außer
+        <span class="titel">Lozärn 1</span> und <span class="titel">Mosch ned tänke</span>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Manuskripte 1979')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['Manuskripte 1979'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Typoskripte 1979')">
+        <span class="emphase">Kommentar:</span>
+        Jeweils Typoskript + Durchschlag; Gedicht-Blätter (bzw. Gedichte) mit Filzstift aoR rechts numeriert (1-101);
+        alle Gedichttitel in Versalien<br/>Dossier 1: Titelblatt (Kuno Raeber / REDUKTIONEN / Gedichte /
+        1.6.1979-2.11.1979)<br/>Dossier 2: Einführungstexte + <a
+        (click)="openDialog(commentsContent['Typoskripte 1979'])" style="cursor:pointer">Gedichtliste</a><br/>Dossier
+        3-12: je 10 Gedichte<br/>
+      </p>
+      <ng-container *ngIf="comment && (konvolutTitle === 'Typoskripte 1983')">
+        <p><span class="emphase">Kommentar:</span></p>
+        <p>Durchschläge (z.T. Kopien) mit Satzauszeichnungen und gestempelten
+          Blattnummern (00001-00119); Titelei vom Verlag; oben Paginierung durch Raeber (3-116). Besonderheit:
+          diphtongiertes "ië" bei den Mundartgedichten als überschriebenes "iö" dargestellt, z. t. mit Bleistift
+          (Setzer)
+          zu "ie" korrigiert (vgl. v.a. bei SCHTROOSS); auch Verdeutlichungen mit Bleistift (<a
+            (click)="openDialog(commentsContent['Typoskripte 1983'])">Detaillierte Angaben</a>),</p>
+        <p>Eine <span class="unterstrichen">KOPIE</span> des Druckmanuskripts (A-5-h/06), die Raeber bei sich behielt,
+          enthält einige zusätzliche Korrekturen (vgl. DETAILS); gleiche Verteilung der Texte auf 13 Dossiers; Dossier
+          10
+          zusätzlich eingeschoben für Zwischentitel<br/>
+        </p>
+      </ng-container>
+      <p *ngIf="comment && (konvolutTitle === 'GESICHT IM MITTAG 1950')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['GESICHT IM MITTAG 1950'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Die verwandelten Schiffe 1957')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['Die verwandelten Schiffe 1957'])"
+           style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'GEDICHTE 1960')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['GEDICHTE 1960'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'FLUSSUFER 1963')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['FLUSSUFER 1963'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Reduktionen 1981')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['Reduktionen 1981'])" style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte'])"
+           style="cursor:pointer">Beschreibung</a>
+      </p>
+      <p *ngIf="comment && (konvolutTitle === 'Abgewandt Zugewandt 1985 – Alemannische Gedichte')">
+        <span class="emphase">Kommentar:</span>
+        <a (click)="openDialog(commentsContent['Abgewandt Zugewandt 1985 – Alemannische Gedichte'])"
+           style="cursor:pointer">Beschreibung</a>
       </p>
 
       <p *ngIf="konvoluttyp != 'poem manuscript convolute' && laterStagesIRIs && laterStagesIRIs.length > 0">

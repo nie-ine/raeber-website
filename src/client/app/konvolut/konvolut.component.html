@@ -21,8 +21,12 @@
                   </div>
                   <div class="itemHeader">
                     <!-- Item title -->
-                    <h2 class="itemTitle" style="padding-left: 30px" *ngIf="konvolutTitle">
+                    <h2 class="itemTitle" style="padding-left: 30px; min-height:40px;" *ngIf="konvolutTitle">
                       {{ konvolutTitle }}
+                      <button md-raised-button title="Hilfe" (click)="showHelp()"
+                              style="margin-top:0; padding:0; min-height:30px; min-width:30px; float:right;">
+                        <md-icon style="margin-top:-4px;">help</md-icon>
+                      </button>
                     </h2>
                   </div>
                   <div class="itemBody">

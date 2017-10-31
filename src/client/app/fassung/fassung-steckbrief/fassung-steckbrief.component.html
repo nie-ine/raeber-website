@@ -58,7 +58,7 @@
       <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textnr.:</span>
       <span  [innerHtml]="publicationNumber"></span>
     </li>
-    <li style="padding-bottom:5px;" *ngIf="nachlassPublicationDescription" >
+    <li style="padding-bottom:5px;" *ngIf="nachlassPublicationDescription && nachlassPublicationDescription !== ' '" >
       <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Werke:</span>
       <span  [innerHtml]="nachlassPublicationDescription"></span>
     </li>

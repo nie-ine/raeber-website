@@ -4,10 +4,12 @@ import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage.component';
 import { ImpressumComponent } from './impressum.component';
 import { SignaturenComponent } from './signaturen.component';
-import { WerklisteComponent } from './werkliste.component';
+import { WerklisteSelbstComponent } from './werkliste-selbst.component';
+import { WerklisteUnselbstComponent } from './werkliste-unselbst.component';
 import { LebensdatenComponent } from './lebensdaten.component';
 import { AnleitungComponent } from './anleitung.component';
 import { WerkausgabeComponent } from './werkausgabe.component';
+import { TextausagabenComponent} from './textausgaben.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
 import { AbgewandtZugewandtNachwortComponent } from './abgewandt-zugewandt-nachwort.component';
@@ -17,11 +19,13 @@ import { HomepageWithInitTextComponent } from './homepagewithinittext.component'
   imports: [
     RouterModule.forChild([
       { path: 'werkausgabe', component: WerkausgabeComponent },
+      { path: 'textausgaben', component: TextausagabenComponent},
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
       { path: 'drucke/abgewandt-zugewandt-nachwort', component: AbgewandtZugewandtNachwortComponent },
       { path: 'anleitung', component: AnleitungComponent },
       { path: 'lebensdaten', component: LebensdatenComponent },
-      { path: 'werkliste', component: WerklisteComponent },
+      { path: 'werkliste-selbst', component: WerklisteSelbstComponent },
+      { path: 'werkliste-unselbst', component: WerklisteUnselbstComponent},
       { path: 'signaturen', component: SignaturenComponent },
       { path: 'impressum', component: ImpressumComponent },
       { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
@@ -45,5 +49,7 @@ export const routingComponents = [
   PdfSynopsenComponent,
   SignaturenComponent,
   WerkausgabeComponent,
-  WerklisteComponent
+  TextausagabenComponent,
+  WerklisteSelbstComponent,
+  WerklisteUnselbstComponent
 ];

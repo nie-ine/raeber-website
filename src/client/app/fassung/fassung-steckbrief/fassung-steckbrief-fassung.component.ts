@@ -1,39 +1,55 @@
 /**
  * Created by retobaumgartner on 10.10.17.
  */
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief-fassung',
-  templateUrl: 'fassung-steckbrief-fassung.component.html'
+  template: '<a [routerLink]="[\'/\' + linkPartConv + \'/\' + linkPartPoem]"'
+  + ' (click)="goToOtherFassung.emit(\'/\' + linkPartConv + \'/\' + linkPartPoem)">{{ linkText }}</a>'
 })
 export class FassungSteckbriefFassungComponent implements OnChanges {
 
-  @Input() fassungIRI: Array<string>;
+  @Input() fassungIRI: string;
+  @Input() linkText: string;
+  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
-  fassung: Array<any>;
+  linkPartPoem: string;
+  linkPartConv: string;
 
   private sub: any;
+  private sub2: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   ngOnChanges() {
     if (this.fassungIRI) {
-      for (let i = 0; i < this.fassungIRI.length; i++) {
-        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-          encodeURIComponent(this.fassungIRI[ i ]))
-          .map(result => result.json())
-          .subscribe(res => {
-            let title = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-            let iriPart = this.fassungIRI[ i ].split('raeber/')[ 1 ];
-            // TODO get convolute title for linking
-            this.fassung.push({ 'konvolutTitle': 'hoffnung', 'title': title, 'iri': iriPart });
-          });
+      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
+        encodeURIComponent(this.fassungIRI))
+        .map(result => result.json())
+        .subscribe(res => {
+          let title = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str.split('/')[ 0 ];
+          let iriPart = this.fassungIRI.split('raeber/')[ 1 ];
+          this.linkPartPoem = title + '---' + iriPart;
+        });
 
-      }
+      this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/search/'
+        + '?searchtype=extended'
+        + '&filter_by_restype=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#Poem')
+        + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI')
+        + '&compop=EQ'
+        + '&searchval=' + encodeURIComponent(this.fassungIRI)
+        + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteTitle')
+        + '&compop=EXISTS'
+        + '&searchval=')
+        .map(results => results.json())
+        .subscribe(res => {
+          this.linkPartConv = res.subjects[ 0 ].value[ 1 ];
+        });
     }
   }
 }

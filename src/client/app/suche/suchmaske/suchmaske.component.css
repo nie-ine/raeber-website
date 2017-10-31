@@ -78,8 +78,15 @@ md-checkbox {
 }
 
 .suchmenu-button {
-  position: fixed;
-  left: 5px;
-  top: 10px;
-}
+   position: fixed;
+   left: 0px;
+   top: 45%;
+   min-width: 1%;
+ }
 
+.suchmenu-button2 {
+  position: fixed;
+  left: 0px;
+  top: 50%;
+  min-width: 1%;
+}

@@ -88,7 +88,8 @@
                       </md-card>
                     </div>
                     <div style="margin-top:20px;">
-                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri" [konvolutIRI]="convoluteIri">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri" [konvolutIRI]="convoluteIri"
+                                              (goToOtherFassung) = "goToOtherFassung($event)">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
@@ -141,7 +142,9 @@
             </ngb-panel>
             <ngb-panel id="suche" title="Suche in {{convoluteTitle}}">
               <ng-template ngbPanelContent>
-                <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                <rae-konvolutsuche
+                  [konvolutTitle]="convoluteTitle"
+                  (suche)="searchInConvolute($event)"></rae-konvolutsuche>
               </ng-template>
             </ngb-panel>
           </ngb-accordion>

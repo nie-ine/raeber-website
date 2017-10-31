@@ -1,11 +1,12 @@
-<md-sidenav-container class="suchmenu-container">
-  <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened">
+<md-sidenav-container class="suchmenu-container" id="containerDiv">
+  <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened" mode="side">
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>
-          <input mdInput [placeholder]="generateTextForInputField()"
+          <input mdInput [placeholder]="generatePlaceHolder()"
                  formControlName="suchwortInput"
-                 style="width: 250px"/>
+                 style="width: 250px"
+                 [value]="generateTextForInputField()"/>
         </md-input-container>
         <button md-button (click)="startTheSearch()">
           <md-icon>arrow_forward</md-icon>
@@ -16,6 +17,9 @@
         <ngb-panel>
           <ng-template ngbPanelTitle>Konvolute</ng-template>
           <ng-template ngbPanelContent>
+            <button md-button (click)="selectAllConvolutes()">
+              {{ allConvolutesSelected ? 'Alle abwählen' : 'Alle auswählen' }}
+            </button>
             <ul formGroupName="notizbuchForm">
               <li class="cb-l1">
                 <button class="showMoreButton" type="button" md-icon-button
@@ -768,9 +772,6 @@
                 </md-checkbox>
               </li>
             </ul>
-            <button md-button (click)="selectAllConvolutes()">
-              {{ allConvolutesSelected ? 'Alle abwählen' : 'Alle auswählen' }}
-            </button>
           </ng-template>
         </ngb-panel>
         <ngb-panel title="Textart">
@@ -836,8 +837,17 @@
             <li class="cb-l1">
               <md-checkbox formControlName="endfassung" class="cb-l1"
                            [class.green]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
-                           [class.red]="!suchmenuForm.get('endfassung').value || suchmenuForm.pristine"> Nur
-                Endfassungen
+                           [class.red]="!suchmenuForm.get('endfassung').value || suchmenuForm.pristine"
+                           [disabled]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
+                           >Nur Endfassungen
+              </md-checkbox>
+            </li>
+            <li class="cb-l1">
+              <md-checkbox formControlName="keineEndfassung" class="cb-l1"
+                           [class.green]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
+                           [class.red]="!suchmenuForm.get('keineEndfassung').value || suchmenuForm.pristine"
+                           [disabled]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
+                           >Keine Endfassungen
               </md-checkbox>
             </li>
           </ng-template>
@@ -848,8 +858,17 @@
               <li class="cb-l1">
                 <md-checkbox formControlName="strophen" class="cb-l1"
                              [class.green]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
-                             [class.red]="!suchmenuForm.get('strophen').value || suchmenuForm.pristine">Nur Texte mit
-                  Strophenunterteilung
+                             [class.red]="!suchmenuForm.get('strophen').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
+                             >Nur Texte mit Strophenunterteilung
+                </md-checkbox>
+              </li>
+              <li class="cb-l1">
+                <md-checkbox formControlName="keineStrophen" class="cb-l1"
+                             [class.green]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
+                             [class.red]="!suchmenuForm.get('keineStrophen').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
+                             >Keine Texte mit Strophenunterteilung
                 </md-checkbox>
               </li>
             </ul>
@@ -861,8 +880,17 @@
               <li class="cb-l1">
                 <md-checkbox formControlName="mundart" class="cb-l1"
                              [class.green]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
-                             [class.red]="!suchmenuForm.get('mundart').value || suchmenuForm.pristine">Nur
-                  Mundartgedichte
+                             [class.red]="!suchmenuForm.get('mundart').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
+                             >Nur Mundartgedichte
+                </md-checkbox>
+              </li>
+              <li class="cb-l1">
+                <md-checkbox formControlName="keineMundart" class="cb-l1"
+                             [class.green]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
+                             [class.red]="!suchmenuForm.get('keineMundart').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
+                             >Keine Mundartgedichte
                 </md-checkbox>
               </li>
             </ul>
@@ -874,8 +902,17 @@
               <li class="cb-l1">
                 <md-checkbox formControlName="zyklus" class="cb-l1"
                              [class.green]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"
-                             [class.red]="!suchmenuForm.get('zyklus').value || suchmenuForm.pristine">Nur Texte
-                  eines Zyklus
+                             [class.red]="!suchmenuForm.get('zyklus').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
+                             >Nur Texte eines Zyklus
+                </md-checkbox>
+              </li>
+              <li class="cb-l1">
+                <md-checkbox formControlName="keinZyklus" class="cb-l1"
+                             [class.green]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
+                             [class.red]="!suchmenuForm.get('keinZyklus').value || suchmenuForm.pristine"
+                             [disabled]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"
+                             >Keine Texte eines Zyklus
                 </md-checkbox>
               </li>
             </ul>
@@ -883,6 +920,15 @@
         </ngb-panel>
       </ngb-accordion>
     </form>
+
+    <br>
+
+    <button
+      md-raised-button
+      (click)="createForm()">
+      Reset Suchoptionen
+    </button>
+
   </md-sidenav>
 
   <md-progress-bar
@@ -892,12 +938,14 @@
     mode="indeterminate">
   </md-progress-bar>
 
-  <div class="suchmenu-content">
-    <button md-mini-fab class="suchmenu-button" (click)="suchmenu.open()">
-      <md-icon>dehaze</md-icon>
-    </button>
 
-    <div style="margin-top: 70px;">
+
+
+
+
+  <div class="suchmenu-content">
+
+    <div style="margin-top: 10px;">
       <rae-textgrid
         [searchTermArray]="searchTermArray"
         [poemsInGrid]="poemsInGrid"
@@ -911,3 +959,18 @@
 
   </div>
 </md-sidenav-container>
+
+<!--  <button
+    md-mini-fab class="suchmenu-button"
+    (click)="suchmenu.toggle()" color="primary">
+    <md-icon>dehaze</md-icon>
+  </button>-->
+
+<md-button-toggle-group #group="mdButtonToggleGroup" class="suchmenu-button" [vertical]="true">
+  <md-button-toggle value="left" (click)="suchmenu.open()">
+    <md-icon>keyboard_arrow_right</md-icon>
+  </md-button-toggle>
+  <md-button-toggle value="center" (click)="suchmenu.close()">
+    <md-icon>keyboard_arrow_left</md-icon>
+  </md-button-toggle>
+</md-button-toggle-group>

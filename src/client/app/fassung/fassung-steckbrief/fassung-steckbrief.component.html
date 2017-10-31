@@ -77,10 +77,14 @@
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Mundart:</span>
         <span >ja</span>
     </li>
-    <li style="padding-bottom:5px;" *ngIf="referencePoemIRIs && referencePoemIRIs.length > 0" >
+    <li style="padding-bottom:5px;" *ngIf="referencePoemIRI && referenceTitle" >
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Bezugstext:</span>
         <span >
-          <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRIs"></rae-fassung-steckbrief-fassung>
+          <rae-fassung-steckbrief-fassung
+            [fassungIRI]="referencePoemIRI"
+            [linkText]="referenceTitle"
+            (goToOtherFassung) = "goToOtherFassung.emit($event)">
+          </rae-fassung-steckbrief-fassung>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isWrittenWith" >

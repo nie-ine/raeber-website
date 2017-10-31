@@ -13,6 +13,8 @@ import { ExtendedSearch } from '../shared/utilities/knora-api-params';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';
+import { MdDialog } from '@angular/material';
+import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
 
 
 @Component({
@@ -50,7 +52,7 @@ export class KonvolutComponent implements OnInit {
 
   private _esearch = new ExtendedSearch();
 
-  constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging) {
+  constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging, public dialog: MdDialog) {
     this.viewMode = 'grid';
 
   }
@@ -163,6 +165,7 @@ export class KonvolutComponent implements OnInit {
       this.poems[ poemInformation[i]['8'] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 13 ] = poemInformation[ i ][ 13 ];
       this.poems[ poemInformation[i]['8'] - 1 ][ 14 ] = poemInformation[ i ][ 14 ];
+      this.poems[ poemInformation[i]['8'] - 1 ][ 15 ] = poemInformation[ i ][ 15 ];
     }
     //console.log(this.poems);
   }
@@ -188,6 +191,13 @@ export class KonvolutComponent implements OnInit {
       return undefined;
       //console.log('no value yet');
     }
+  }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(KonvolutHilfeComponent, {
+        width: '500px'
+      });
   }
 
 }

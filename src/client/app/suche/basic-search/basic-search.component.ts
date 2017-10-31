@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,8 @@ export class BasicSearchComponent {
   hideSearchfield: boolean = true;
   placeholder = 'Suche...';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute,) {
+    this.route.params.subscribe(params => console.log(params));
     router.events.subscribe(changes => {
       this.hideSearchfield = true;
       this.placeholder = 'Suche...';
@@ -20,7 +22,15 @@ export class BasicSearchComponent {
   }
 
   sendRequest(values: any) {
-    this.router.navigateByUrl('/suche?wort=' + encodeURIComponent(values));
+    this.createLinkToSearch();
+    this.router.navigateByUrl(this.createLinkToSearch() + '?wort=' + encodeURIComponent(values));
+  }
+
+  createLinkToSearch(): string {
+    // if(this.route._routerState.snapshot.url.search('reset') === -1) {
+    if(this.route) {
+      return '/resetSuche';
+    } else return '/suche';
   }
 
 

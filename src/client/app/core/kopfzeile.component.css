@@ -1,0 +1,14 @@
+#logo-wrapper {
+  min-width: 100px;
+  max-width: 195px;
+  max-height: 46px;
+  margin: 0;
+  margin-top: 11px;
+  padding: 0;
+  overflow-y: hidden;
+}
+
+#logo {
+  display: block;
+  margin: 0;
+}

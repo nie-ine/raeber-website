@@ -403,9 +403,22 @@
               <a class="item icon" [routerLink]="['lebensdaten']" routerLinkActive="active">
                 <i class="icon-star">Lebensdaten</i> </a>
             </li>
-            <li class="item163">
-              <a class="item icon" [routerLink]="['werkliste']" routerLinkActive="active">
-                <i class="icon-star">Werkliste</i> </a>
+            <li class="item173 parent">
+              <span class="item icon">
+                <i class="icon-star">Werkliste</i> <span class="border-fixer"></span>
+              </span>
+              <div class="dropdown flyout columns-1 " style="width:200px;">
+                <div class="column col1" style="width:200px;">
+                  <ul class="l3">
+                    <li class="item293">
+                      <a class="item icon" [routerLink]="['werkliste-selbst']" routerLinkActive="active">Selbständige</a>
+                    </li>
+                    <li class="item293">
+                      <a class="item icon" [routerLink]="['werkliste-unselbst']" routerLinkActive="active">Unselbständige</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </li>
             <li class="item173 parent">
               <span class="item icon">
@@ -419,7 +432,7 @@
                         <i class="icon-star">Signaturen</i> </a>
                     </li>
                     <li class="item293">
-                      <a class="item" [routerLink]="['../assets/pdf/bildsignaturen.pdf']" routerLinkActive="active"
+                      <a class="item" href="../assets/pdf/bildsignaturen.pdf"
                          onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">
                         Bild-Signaturen (pdf) </a>
                     </li>
@@ -427,9 +440,28 @@
                 </div>
               </div>
             </li>
-            <li class="item439">
-              <a class="item icon" [routerLink]="['werkausgabe']" routerLinkActive="active">
-                <i class="icon-star">Werkausgabe</i> </a>
+            <li class="item173 parent">
+              <span class="item icon">
+                <i class="icon-star">Ausgaben / Literatur</i> <span class="border-fixer"></span>
+              </span>
+              <div class="dropdown flyout columns-1 " style="width:200px;">
+                <div class="column col1" style="width:200px;">
+                  <ul class="l3">
+                    <li class="item293">
+                      <a class="item icon" [routerLink]="['werkausgabe']" routerLinkActive="active"><i
+                        class="icon-star">Werkausgabe</i></a>
+                    </li>
+                    <li class="item293">
+                      <a class="item icon" [routerLink]="['textausgaben']" routerLinkActive="active"><i
+                        class="icon-star">Textausgaben</i></a>
+                    </li>
+                    <li class="item293">
+                      <a class="item icon" [routerLink]="['literatur']" routerLinkActive="active"><i
+                        class="icon-star">Literatur</i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </li>
             <li class="item322">
               <a class="item icon" [routerLink]="['impressum']" routerLinkActive="active">
@@ -490,7 +522,7 @@
                 <i><rae-basic-search></rae-basic-search></i> </a>
             </li>
             <li class="item437">
-              <a class="item" [routerLink]="['/suche']" routerLinkActive="active">
+              <a class="item" [routerLink]="[createLinkToSearch()]" routerLinkActive="active">
                 &nbsp;Erweiterte Suche </a>
             </li>
           </ul>

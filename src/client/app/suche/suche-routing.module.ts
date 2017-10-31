@@ -6,7 +6,8 @@ import { SucheComponent } from './suche.component';
   imports: [
     RouterModule.forChild([
       { path: 'suche', component: SucheComponent },
-      { path: 'suche/:queryParameters', component: SucheComponent }
+      { path: 'suche/:queryParameters', component: SucheComponent },
+      { path: 'resetSuche', component: SucheComponent }
     ])
   ],
   exports: [ RouterModule ]

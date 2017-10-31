@@ -29,7 +29,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       this.countRequests = 0;
       this.performQuery();
     } else {
-      //if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+      console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
       this.poemInformation = [];
       this.countRequests = 0;
       this.performQuery();
@@ -170,6 +170,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=!EQ' +
         '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
 /*        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
         '&compop=!EQ' +
         '&searchval=123455666' +*/
@@ -178,7 +181,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
+            console.log(data.subjects[0]);
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
               this.poemInformation[ this.i ] = [];
               this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 9 ];
@@ -190,8 +193,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ][ 8 ] = data.subjects[ this.i ].value[ 1 ];
               this.poemInformation[ this.i ][ 9 ] = data.subjects[ this.i ].value[ 10 ];
               this.poemInformation[ this.i ][ 12 ] = data.subjects[ this.i ].value[ 11 ];
-              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 12 ];
-              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 12 ];
+              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 13 ];
+              this.poemInformation[ this.i ][ 15 ] = data.subjects[ this.i ].value[ 4 ];
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;
@@ -235,6 +239,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           11: Has alphabetic index
           12: Has Synopsis Title
           13: isOnPage
+          14: isFinalVersion
            */
   /*
    this.poemInformation[ i ][ 0 ] = data.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;

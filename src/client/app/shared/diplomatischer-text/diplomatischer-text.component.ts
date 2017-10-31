@@ -42,7 +42,7 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   einfuegung_gestrElements = document.getElementsByClassName('einfuegung_gestr') as HTMLCollectionOf<HTMLElement>;
   einfuegung_gestr_typoElements = document.getElementsByClassName('einfuegung_gestr_typo') as HTMLCollectionOf<HTMLElement>;
   einfuegung_typoElements = document.getElementsByClassName('einfuegung_typo') as HTMLCollectionOf<HTMLElement>;
-  grundschichtElements = document.getElementsByClassName('grundschicht') as HTMLCollectionOf<HTMLElement>;
+  grundschichtElements = document.getElementsByClassName('schicht1') as HTMLCollectionOf<HTMLElement>;
   herausgeberElements = document.getElementsByClassName('herausgeber') as HTMLCollectionOf<HTMLElement>;
   markierungElements = document.getElementsByClassName('markierung') as HTMLCollectionOf<HTMLElement>;
   streichungElements = document.getElementsByClassName('streichung') as HTMLCollectionOf<HTMLElement>;

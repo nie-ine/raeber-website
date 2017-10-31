@@ -9,7 +9,7 @@
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
       <div *ngIf="contentType == 'konvolut'">
-        <md-card-subtitle *ngIf="p[1] && !p[14].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
+        <md-card-subtitle *ngIf="p[1] && !p[15].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
       </div>
       <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
           <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>

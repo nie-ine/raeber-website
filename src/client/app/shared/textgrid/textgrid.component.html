@@ -22,13 +22,13 @@
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
            [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]), 'font-size': '85%' }">
+           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14])}">
         </a>
       </md-card-title>
 
       <md-card-content
         [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
-        [ngStyle]="{'height': rahmen ? 'calc(20em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
+        [ngStyle]="{'height': rahmen ? 'calc(10em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
         <div class="rae-poem" [innerHTML]="highlight(p[2],searchTermArray)" #poemText>
         </div>
       </md-card-content>

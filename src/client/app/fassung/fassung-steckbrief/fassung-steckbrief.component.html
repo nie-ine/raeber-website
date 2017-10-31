@@ -16,72 +16,72 @@
         </span>
     </li>-->
     <li style="padding-bottom: 5px;" *ngIf="!lastAuthorizedPublication && convoluteTitle === 'Verstreutes'">
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
       <span>Verstreutes</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="lastAuthorizedPublication" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
         <span >
           <rae-fassung-steckbrief-konvolut
             [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="publishingState === 'unpublished'" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
         <span >Unpubliziert</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Nachdruck:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Nachdruck:</span>
       <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isFinalVersion" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Endfassung:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Endfassung:</span>
       <span >ja</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="textartMap[structure]" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Textart:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textart:</span>
       <span >{{ textartMap[structure] }}</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="carrierIRI" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Signatur:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Signatur:</span>
       <span >
           <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="pageNumberDescription" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Seite / Blatt:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Seite / Blatt:</span>
       <span  [innerHtml]="pageNumberDescription"></span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="publicationNumber" class="typeTextfield group2">
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Textnr.:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Textnr.:</span>
       <span  [innerHtml]="publicationNumber"></span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="nachlassPublicationDescription && nachlassPublicationDescription !== ' '" >
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Werke:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Werke:</span>
       <span  [innerHtml]="nachlassPublicationDescription"></span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="sameEditionAs && sameEditionAs.length > 0">
-      <span style="width:120px; padding-left:10px; font-weight:bold;">Identisch mit:</span>
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Identisch mit:</span>
       <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="hasStrophen" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Strophen:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Strophen:</span>
         <span >ja</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isPartOfCycle" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Zyklus:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Zyklus:</span>
         <span >ja</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isInDialect" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Mundart:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Mundart:</span>
         <span >ja</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="referencePoemIRI && referenceTitle" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Bezugstext:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Bezugstext:</span>
         <span >
           <rae-fassung-steckbrief-fassung
             [fassungIRI]="referencePoemIRI"
@@ -91,7 +91,7 @@
         </span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="isWrittenWith" >
-        <span style="width:120px; padding-left:10px; font-weight:bold;">Schreibzeug:</span>
+        <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Schreibzeug:</span>
         <span >{{ schreibzeugMap[isWrittenWith] }}</span>
     </li>
   </ul>

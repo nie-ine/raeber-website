@@ -7,6 +7,7 @@ import { MdDialog } from '@angular/material';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
+import { KOMMENTARINHALTE } from '../konvolut-kommentar/konvolut-kommentar-inhalte';
 
 @Component({
   moduleId: module.id,
@@ -29,6 +30,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   printerDescription: string;
   convoluteDescription: string;
   carrierDescription: string;
+  carrierCollectionDescription: string;
   comment: string;
   archiveSignature: string;
   convoluteSizeDescripton: string;
@@ -39,6 +41,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   earlierStagesIRIs: Array<string>;
   laterStagesIRIs: Array<string>;
   stufenIRIs: Array<string>;
+  commentsContent = KOMMENTARINHALTE;
   private sub: any;
 
   constructor(private http: Http, private dateFormatService: DateFormatService, public dialog: MdDialog) {
@@ -80,6 +83,13 @@ export class KonvolutSteckbriefComponent implements OnChanges {
             this.carrierDescription = res.props[ 'http://www.knora.org/ontology/text#hasCarrierDescription' ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.carrierDescription = null;
+          }
+
+          try {
+            this.carrierCollectionDescription
+              = res.props[ 'http://www.knora.org/ontology/text#hasCarrierCollectionDescription' ].values[ 0 ].utf8str;
+          } catch (TypeError) {
+            this.carrierCollectionDescription = null;
           }
 
           try {
@@ -211,12 +221,12 @@ export class KonvolutSteckbriefComponent implements OnChanges {
     }
   }
 
-  openDialog(): void {
+  openDialog(comment: string): void {
     let dialogRef = this.dialog.open(KonvolutKommentarComponent, {
       // data: { text: this.comment },
-      data: { text: this.comment },
-      width: '600px',
-      height: '400px'
+      data: { text: comment },
+      width: '865px',
+      height: '550px'
     });
   }
 

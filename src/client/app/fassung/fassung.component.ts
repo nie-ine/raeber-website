@@ -78,7 +78,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private static removeSlashesInRouteElement(element: string) {
     return element.includes('/') ?
-      element.replace('/', '') :
+      element.replace(/\//g, '') :
       element;
   }
 

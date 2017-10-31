@@ -9,7 +9,7 @@
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
       <div *ngIf="contentType == 'konvolut'">
-        <md-card-subtitle *ngIf="p[1] && !p[14].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
+        <md-card-subtitle *ngIf="p[1] && !p[15].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
       </div>
       <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
           <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
@@ -18,22 +18,20 @@
       <md-card-title #poemTitle>
         <a class="item" *ngIf="contentType == 'konvolut'"
            [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)">
+           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]) }">
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
            [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)">
+           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14])}">
         </a>
       </md-card-title>
 
       <md-card-content
         [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
-        [ngStyle]="{'height': rahmen ? 'calc(20em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  poemText.offsetHeight+'px', 'overflow-y': rahmen ? 'auto' : 'visible'}">
+        [ngStyle]="{'height': rahmen ? 'calc(10em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
         <div class="rae-poem" [innerHTML]="highlight(p[2],searchTermArray)" #poemText>
         </div>
       </md-card-content>
-
-      <br/>
 
       <md-card-footer style="position: static;">
 
@@ -50,8 +48,8 @@
 
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
-          <span>In:</span> <a [routerLink]="'/suchergebnisse/' + p[6]" routerLinkActive="active">{{ p[7] }}</a> <br>
-          <span>Synopse:</span> <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
+          <span>In: {{ p[7] }} </span><br>
+          <span>Synopse:</span> <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a><br>
         </div>
       </md-card-footer>
     </md-card>

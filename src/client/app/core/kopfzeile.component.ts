@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'rae-kopfzeile',
-  templateUrl: './kopfzeile.component.html'
+  templateUrl: './kopfzeile.component.html',
+  styleUrls: [ './kopfzeile.component.css' ]
 })
 export class KopfzeileComponent {
 }

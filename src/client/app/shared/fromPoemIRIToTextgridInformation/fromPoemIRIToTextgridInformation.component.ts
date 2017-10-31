@@ -169,6 +169,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
         '&compop=!EQ' +
         '&searchval=123455666' +
+        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
+        '&compop=!EQ' +
+        '&searchval=123455666' +
 /*        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
         '&compop=!EQ' +
         '&searchval=123455666' +*/
@@ -188,8 +191,9 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ][ 8 ] = data.subjects[ this.i ].value[ 1 ];
               this.poemInformation[ this.i ][ 9 ] = data.subjects[ this.i ].value[ 10 ];
               this.poemInformation[ this.i ][ 12 ] = data.subjects[ this.i ].value[ 11 ];
-              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 12 ];
-              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 12 ];
+              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 13 ];
+              this.poemInformation[ this.i ][ 15 ] = data.subjects[ this.i ].value[ 4 ];
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;

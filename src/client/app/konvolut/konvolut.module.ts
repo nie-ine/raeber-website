@@ -36,6 +36,8 @@ import { GetKonvolutIRIComponent } from './get-konvolut-IRI/get-konvolut-IRI.com
 import { KonvolutTrefferleisteComponent } from './konvolut-trefferleiste/konvolut-trefferleiste.component';
 import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrief/konvolut-steckbrief-miniaturansicht.component';
 import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
+import { KonvolutSteckbriefBilderComponent } from './konvolut-steckbrief/konvolut-steckbrief-bilder.component';
+import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,8 @@ import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommen
   declarations: [
     KonvolutComponent,
     KonvolutKommentarComponent,
+    KonvolutHilfeComponent,
+    KonvolutSteckbriefBilderComponent,
     KonvolutSteckbriefComponent,
     KonvolutSteckbriefDatierungComponent,
     KonvolutSteckbriefMiniaturansichtComponent,
@@ -72,7 +76,8 @@ import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommen
     KonvolutTrefferleisteComponent
   ],
   entryComponents: [
-    KonvolutKommentarComponent
+    KonvolutKommentarComponent,
+    KonvolutHilfeComponent
   ],
   exports: [
     KonvolutComponent,

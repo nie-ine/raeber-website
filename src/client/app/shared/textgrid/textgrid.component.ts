@@ -275,4 +275,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return this.dateFormatService.germanLongDate(date);
   }
 
+  produceTitleCss(isInFinalVersion: string) {
+    if(isInFinalVersion === '1') {
+      return '#a30f2d';
+    } else return false;
+  }
+
 }

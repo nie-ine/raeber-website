@@ -15,6 +15,10 @@ button {
   color: silver;
 }
 
+md-toolbar-row {
+  margin: -30px 0 0;
+}
+
 .layoutbutton {
   min-width: 90px;
   margin-left: 2px;

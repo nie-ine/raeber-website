@@ -88,22 +88,25 @@
                       </md-card>
                     </div>
                     <div style="margin-top:20px;">
-                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri" [konvolutIRI]="convoluteIri">
+                      <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri"
+                                              [konvolutIRI]="convoluteIri"
+                                              [convoluteTitle]=" convoluteTitle"
+                                              (goToOtherFassung) = "goToOtherFassung($event)">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
                 </div>
 
-                <div class="itemLinks">
-                  <!-- Item tags -->
-                  <div class="itemTagsBlock">
-                    <span>Synopse:</span>
+                <div style="margin: 16px 0;padding: 0;">
+                  <div style="float: right; display: inline-block;padding: 4px;border-bottom: 1px dotted #ccc;">
+                    <span style="font-weight: bold; color: #555;padding: 0 4px 0 0;">Synopse:</span>
                     <a [routerLink]="['/synopsen/' + synopsisIri.split('/')[4]]" routerLinkActive="active"
                        *ngIf="synopsisIri !== undefined">
                       {{synopsisTitle}}
                     </a>
                   </div>
                 </div>
+                <div style='clear:both'></div>
 
                 <!-- Related items by tag -->
                 <div class="itemRelated">
@@ -141,7 +144,9 @@
             </ngb-panel>
             <ngb-panel id="suche" title="Suche in {{convoluteTitle}}">
               <ng-template ngbPanelContent>
-                <rae-konvolutsuche (suche)="searchInConvolute($event)"></rae-konvolutsuche>
+                <rae-konvolutsuche
+                  [konvolutTitle]="convoluteTitle"
+                  (suche)="searchInConvolute($event)"></rae-konvolutsuche>
               </ng-template>
             </ngb-panel>
           </ngb-accordion>

@@ -837,18 +837,16 @@
               <md-checkbox formControlName="endfassung" class="cb-l1"
                            [class.green]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
                            [class.red]="!suchmenuForm.get('endfassung').value || suchmenuForm.pristine"
-                           [disabled]="disabledNurEndfassung"
-                           [(ngModel)]="disabledKeineEndfassung"> Nur
-                Endfassungen
+                           [disabled]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
+                           >Nur Endfassungen
               </md-checkbox>
             </li>
             <li class="cb-l1">
               <md-checkbox formControlName="keineEndfassung" class="cb-l1"
                            [class.green]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
                            [class.red]="!suchmenuForm.get('keineEndfassung').value || suchmenuForm.pristine"
-                           [disabled]="disabledKeineEndfassung"
-                           [(ngModel)]="disabledNurEndfassung"> Keine
-                Endfassungen
+                           [disabled]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
+                           >Keine Endfassungen
               </md-checkbox>
             </li>
           </ng-template>
@@ -860,18 +858,16 @@
                 <md-checkbox formControlName="strophen" class="cb-l1"
                              [class.green]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('strophen').value || suchmenuForm.pristine"
-                             [disabled]="disabledNurStrophen"
-                             [(ngModel)]="disabledKeineStrophen">Nur Texte mit
-                  Strophenunterteilung
+                             [disabled]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
+                             >Nur Texte mit Strophenunterteilung
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="keineStrophen" class="cb-l1"
                              [class.green]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keineStrophen').value || suchmenuForm.pristine"
-                             [disabled]="disabledKeineStrophen"
-                             [(ngModel)]="disabledNurStrophen"> Keine Texte mit
-                  Strophenunterteilung
+                             [disabled]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
+                             >Keine Texte mit Strophenunterteilung
                 </md-checkbox>
               </li>
             </ul>
@@ -884,18 +880,16 @@
                 <md-checkbox formControlName="mundart" class="cb-l1"
                              [class.green]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('mundart').value || suchmenuForm.pristine"
-                             [disabled]="disabledNurMundart"
-                             [(ngModel)]="disabledKeineMundart">Nur
-                  Mundartgedichte
+                             [disabled]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
+                             >Nur Mundartgedichte
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="keineMundart" class="cb-l1"
                              [class.green]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keineMundart').value || suchmenuForm.pristine"
-                             [disabled]="disabledKeineMundart"
-                             [(ngModel)]="disabledNurMundart">Keine
-                  Mundartgedichte
+                             [disabled]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
+                             >Keine Mundartgedichte
                 </md-checkbox>
               </li>
             </ul>
@@ -908,18 +902,16 @@
                 <md-checkbox formControlName="zyklus" class="cb-l1"
                              [class.green]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('zyklus').value || suchmenuForm.pristine"
-                             [disabled]="disabledNurZyklus"
-                             [(ngModel)]="disabledKeineZyklus">Nur Texte
-                  eines Zyklus
+                             [disabled]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
+                             >Nur Texte eines Zyklus
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="keinZyklus" class="cb-l1"
                              [class.green]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keinZyklus').value || suchmenuForm.pristine"
-                             [disabled]="disabledKeineZyklus"
-                             [(ngModel)]="disabledNurZyklus">Keine Texte
-                  eines Zyklus
+                             [disabled]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"
+                             >Keine Texte eines Zyklus
                 </md-checkbox>
               </li>
             </ul>

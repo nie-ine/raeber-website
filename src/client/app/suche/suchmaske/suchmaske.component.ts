@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
@@ -13,6 +13,9 @@ import {
 } from './mockSucheCategories';
 import 'rxjs/add/operator/switchMap';
 import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.service';
+import { HostListener, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+
 
 @Component({
   moduleId: module.id,
@@ -21,7 +24,7 @@ import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.
   styleUrls: [ './suchmaske.component.css' ]
 })
 
-export class SuchmaskeComponent implements OnChanges {
+export class SuchmaskeComponent implements OnChanges, OnInit {
 
   // Emits changes of search parameters
   @Output() public suchEvents: EventEmitter<AbstractControl> = new EventEmitter<AbstractControl>();
@@ -39,6 +42,7 @@ export class SuchmaskeComponent implements OnChanges {
   textboxHeight: number = 0;
   textsHaveAlignedFrames: boolean = false;
   showTexts: boolean = true;
+  navIsFixed = false;
 
   /*
    Options for extension of fulltext search
@@ -67,7 +71,8 @@ export class SuchmaskeComponent implements OnChanges {
 
   constructor(private fb: FormBuilder,
               private cdr: ChangeDetectorRef,
-              private sucheDarstellungsoptionen: SucheDarstellungsoptionenService) {
+              private sucheDarstellungsoptionen: SucheDarstellungsoptionenService,
+              @Inject(DOCUMENT) private document: Document) {
     this.createForm();
     this.onSearchParamsChange();
     this.sucheDarstellungsoptionen.relativeSizeOfColumns$.subscribe(
@@ -85,14 +90,18 @@ export class SuchmaskeComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.loadingIndicator);
+    //console.log(this.loadingIndicator);
     this.loadingIndicator = this.loadingIndicatorInput;
     if(this.startSearchImmediately) this.sidenavOpened = false;
-    console.log('Data arrived back in Suchmaske: ');
-    console.log(this.poemsInGrid);
-    console.log(this.searchTermArray);
+    //console.log('Data arrived back in Suchmaske: ');
+    //console.log(this.poemsInGrid);
+    //console.log(this.searchTermArray);
     this.cdr.detectChanges();
 
+  }
+
+  ngOnInit() {
+    //this.onSearchParamsChange();
   }
 
   /**
@@ -134,7 +143,7 @@ export class SuchmaskeComponent implements OnChanges {
     this.toggleGroupDisabled('druckForm', 'druckAll');
     this.toggleGroupDisabled('zeitschriftForm', 'zeitschriftAll');
     this.toggleGroupDisabled('materialienForm', 'materialienAll');
-    console.log('allConvolutesSelected: ' + this.allConvolutesSelected);
+    //console.log('allConvolutesSelected: ' + this.allConvolutesSelected);
   }
 
   /**
@@ -247,14 +256,40 @@ export class SuchmaskeComponent implements OnChanges {
   }
 
   startTheSearch() {
-    console.log('startTheSearch');
+    //console.log('startTheSearch');
     this.startSearch.emit();
   }
 
   generateTextForInputField(): string {
     if(!this.lastSearchTerm) {
-      return 'Volltext';
+      return null;
     } else return this.lastSearchTerm;
 
   }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (window.pageYOffset > 100 || document.documentElement.scrollTop > 100 || document.body.scrollTop > 100) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+      this.navIsFixed = false;
+    }
+  }
+
+
+  scrollToTop() {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
+  generatePlaceHolder() {
+    if(this.lastSearchTerm) return null;
+    else return 'Sucheingabe';
+  }
+
+
 }

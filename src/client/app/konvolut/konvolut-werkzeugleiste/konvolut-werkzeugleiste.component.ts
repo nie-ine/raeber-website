@@ -15,8 +15,4 @@ export class KonvolutWerkzeugleisteComponent {
   @Input() viewMode: string;
   @Output() viewModeChange: EventEmitter<string> = new EventEmitter<string>();
 
-  hilfe() {
-    // TODO
-  }
-
 }

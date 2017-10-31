@@ -9,12 +9,15 @@
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Details:</span>
         <span  [innerHtml]="detailDescription"></span>
     </li>
-    <!-- TODO : Zeitschrift nur bei Verstreutes -->
-    <li style="padding-bottom:5px;" *ngIf="publishedIn && publishedIn.length > 0" >
+    <li style="padding-bottom: 5px;" *ngIf="convoluteTitle === 'Verstreutes' && publishedIn && publishedIn.length > 0">
       <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Zeitschrift:</span>
       <span >
           <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
         </span>
+    </li>
+    <li style="padding-bottom: 5px;" *ngIf="convoluteTitle === 'Verstreutes'">
+      <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>
+      <span>Verstreutes</span>
     </li>
     <li style="padding-bottom:5px;" *ngIf="lastAuthorizedPublication" >
         <span style="float:left; width:120px; padding-left:10px; font-weight:bold;">Letzter Druck:</span>

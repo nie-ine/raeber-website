@@ -119,7 +119,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
       .map(result => result.json())
       .subscribe(res => {
-        console.log(res);
         this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
         const textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];

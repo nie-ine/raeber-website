@@ -23,6 +23,14 @@
   width: 90%;
 }
 
+md-card-title a {
+  font-size: 75%;
+}
+
+md-card-content {
+  padding-left: 15px;
+}
+
 .rae-poem-card-content-cols {
   overflow-y: auto;
   overflow-x: auto;

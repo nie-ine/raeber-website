@@ -25,18 +25,18 @@ export class WerklisteUnselbstComponent {
   }
 
   private static getIriFromRequestResult(elem: any) {
-    return elem.value[ 2 ].split('/')[ 4 ];
+    return elem.value[ 3 ].split('/')[ 4 ];
   }
 
-  private static getNameFromRequestResult(elem: any) {
-    return elem.value[ 3 ];
+  private static getNameAndSeqnumFromRequestResult(elem: any) {
+    return elem.value[ 1 ] + elem.value[ 4 ];
   }
 
   private static removeSlashes(text: string): string {
     return text.replace(/\//g, '');
   }
 
-  buildLinkFromPoemTitle(poemTitle: string) {
+  buildLinkFromPoemTitleAndSeqnum(poemTitle: string) {
     return '/Verstreutes/' + WerklisteUnselbstComponent.removeSlashes(poemTitle) + '---' + this.poemsInVerstreutes[ poemTitle ];
   }
 
@@ -53,12 +53,16 @@ export class WerklisteUnselbstComponent {
       '&searchval=' +
       '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
       '&compop=EXISTS' +
-      '&searchval=&show_nrows=300'
+      '&searchval=' +
+      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
+      '&compop=EXISTS' +
+      '&searchval=' +
+      '&show_nrows=300'
     )
       .map(lambda => lambda.json())
       .subscribe(res => {
         for (let r of res.subjects) {
-          this.poemsInVerstreutes[ WerklisteUnselbstComponent.getNameFromRequestResult(r) ] =
+          this.poemsInVerstreutes[ WerklisteUnselbstComponent.getNameAndSeqnumFromRequestResult(r) ] =
             WerklisteUnselbstComponent.getIriFromRequestResult(r);
         }
         console.log(this.poemsInVerstreutes);

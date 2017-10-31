@@ -75,6 +75,7 @@
                     <ngb-panel id="suche" title="Suche in {{konvolutTitle}}">
                       <ng-template ngbPanelContent>
                         <rae-konvolutsuche
+                          [searchTermArray]="searchTermArray"
                           [konvolutTitle]="konvolutTitle"
                           (suche)="searchInConvolute($event)"></rae-konvolutsuche>
                       </ng-template>

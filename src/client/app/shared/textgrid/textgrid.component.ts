@@ -130,7 +130,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         this.searchAndFilterInTextgrid();
         console.log(this.searchActivated);
       }
-      if(this.searchTermfromKonvolut[1]) {
+      if(this.searchTermfromKonvolut[1] && this.searchTermfromKonvolut[1] !== 'null') {
         this.filterPoemsOnPage();
         this.searchActivated = true;
         this.searchInKonvolut = true;
@@ -148,7 +148,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     for(let poem of this.poemsInGrid) {
       if(poem !== undefined) {
         console.log('Seite des Poems: ' + poem[13]);
-        console.log(poem[13]);
+        //console.log(poem[13]);
         if(poem[13] === this.searchTermfromKonvolut[1]) {
           poem.show = true;
         } else {

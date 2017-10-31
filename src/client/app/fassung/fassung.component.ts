@@ -1,7 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -47,6 +46,62 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   poem_resizable: boolean;
   show_register: boolean;
 
+  searchInConvolute(searchTerm: any) {
+    console.log(searchTerm);
+    console.log('Search in Convolute for Term: ' + searchTerm.searchTerm);
+    console.log('Search in Convolute for Page: ' + searchTerm.page);
+    console.log(searchTerm.searchTerm.length);
+    console.log(this.convoluteTitle);
+    if(searchTerm.searchTerm.length > 1 || searchTerm.page !== null) {
+      if(this.convoluteTitle === 'Notizbuch 1979') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979');
+      } else if(this.convoluteTitle === 'Notizbuch 1979-82') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979-1982');
+      } else if(this.convoluteTitle === 'Notizbuch 1980-88') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1980-1988');
+      } else if(this.convoluteTitle === 'Manuskripte 1979') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979');
+      } else if(this.convoluteTitle === 'Manuskripte 1979-83') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979-1983');
+      } else if(this.convoluteTitle === 'Karten 1984') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/karten-1984');
+      } else if(this.convoluteTitle === 'Typoskripte 1979') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1979');
+      } else if(this.convoluteTitle === 'Typoskripte 1979-spez') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1979-spez');
+      } else if(this.convoluteTitle === 'Typoskripte 1983') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1983');
+      } else if(this.convoluteTitle === 'GESICHT IM MITTAG 1950') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/gesicht-im-mittag');
+      } else if(this.convoluteTitle === 'Die verwandelten Schiffe 1957') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/die-verwandelten-schiffe');
+      } else if(this.convoluteTitle === 'GEDICHTE 1960') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/gedichte');
+      } else if(this.convoluteTitle === 'FLUSSUFER 1963') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/flussufer');
+      } else if(this.convoluteTitle === 'Reduktionen 1981') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/reduktionen');
+      } else if(this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/abgewandt-zugewandt-hochdeutsche-gedichte');
+      } else if(this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Alemannische Gedichte') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/abgewandt-zugewandt-alemannische-gedichte');
+      } else if(this.convoluteTitle === 'Verstreutes') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/verstreutes');
+      } else if(this.convoluteTitle === 'Tagebuch') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'material/tagebuecher');
+      }
+
+
+    }
+  }
+  goToConvoluteview(searchTerm: string, page: string, convolutURl: string) {
+    this.router.navigateByUrl(
+      convolutURl +
+      '?wort=' +
+      searchTerm +
+      '&page=' + page);
+  }
+
   private static produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
       return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
@@ -85,7 +140,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   constructor(private http: Http,
               private route: ActivatedRoute,
               private cdr: ChangeDetectorRef,
-              private dfs: DateFormatService) {
+              private dfs: DateFormatService,
+              private router: Router) {
     route.params.subscribe(p => {
       this.convoluteTitle = p.konvolut;
       this.poemShortIri = p.fassung.split('---')[ 1 ];
@@ -284,5 +340,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       }
     }
   }
+
+
 
 }

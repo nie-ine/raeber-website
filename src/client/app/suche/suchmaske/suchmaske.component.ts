@@ -13,6 +13,9 @@ import {
 } from './mockSucheCategories';
 import 'rxjs/add/operator/switchMap';
 import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.service';
+import { HostListener, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+
 
 @Component({
   moduleId: module.id,
@@ -39,6 +42,7 @@ export class SuchmaskeComponent implements OnChanges {
   textboxHeight: number = 0;
   textsHaveAlignedFrames: boolean = false;
   showTexts: boolean = true;
+  navIsFixed = false;
 
   /*
    Options for extension of fulltext search
@@ -67,7 +71,8 @@ export class SuchmaskeComponent implements OnChanges {
 
   constructor(private fb: FormBuilder,
               private cdr: ChangeDetectorRef,
-              private sucheDarstellungsoptionen: SucheDarstellungsoptionenService) {
+              private sucheDarstellungsoptionen: SucheDarstellungsoptionenService,
+              @Inject(DOCUMENT) private document: Document) {
     this.createForm();
     this.onSearchParamsChange();
     this.sucheDarstellungsoptionen.relativeSizeOfColumns$.subscribe(
@@ -253,8 +258,30 @@ export class SuchmaskeComponent implements OnChanges {
 
   generateTextForInputField(): string {
     if(!this.lastSearchTerm) {
-      return 'Volltext';
+      return null;
     } else return this.lastSearchTerm;
 
   }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (window.pageYOffset > 100 || document.documentElement.scrollTop > 100 || document.body.scrollTop > 100) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+      this.navIsFixed = false;
+    }
+  }
+
+
+  scrollToTop() {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
+
+
 }

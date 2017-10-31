@@ -1,11 +1,12 @@
-<md-sidenav-container class="suchmenu-container">
+<md-sidenav-container class="suchmenu-container" id="containerDiv">
   <md-sidenav #suchmenu class="suchmenu" position="right" [opened]="sidenavOpened" mode="side">
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>
-          <input mdInput [placeholder]="generateTextForInputField()"
+          <input mdInput [placeholder]="'Suchausdruck'"
                  formControlName="suchwortInput"
-                 style="width: 250px"/>
+                 style="width: 250px"
+                 [value]="generateTextForInputField()"/>
         </md-input-container>
         <button md-button (click)="startTheSearch()">
           <md-icon>arrow_forward</md-icon>
@@ -959,8 +960,17 @@
   </div>
 </md-sidenav-container>
 
-  <button
+<!--  <button
     md-mini-fab class="suchmenu-button"
     (click)="suchmenu.toggle()" color="primary">
     <md-icon>dehaze</md-icon>
-  </button>
+  </button>-->
+
+<md-button-toggle-group #group="matButtonToggleGroup" class="suchmenu-button" [vertical]="true">
+  <md-button-toggle value="left" (click)="suchmenu.open()">
+    <md-icon>keyboard_arrow_right</md-icon>
+  </md-button-toggle>
+  <md-button-toggle value="center" (click)="suchmenu.close()">
+    <md-icon>keyboard_arrow_left</md-icon>
+  </md-button-toggle>
+</md-button-toggle-group>

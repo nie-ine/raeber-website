@@ -211,6 +211,11 @@ export class FassungSteckbriefComponent implements OnChanges {
           } catch (TypeError) {
             // skip if there is no notebook
           }
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInDiary' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no diary entry
+          }
         });
     }
   }

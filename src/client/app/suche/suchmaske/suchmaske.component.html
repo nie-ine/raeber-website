@@ -3,7 +3,7 @@
     <form [formGroup]="suchmenuForm" novalidate>
       <div formGroupName="suchwortForm">
         <md-input-container>
-          <input mdInput [placeholder]="'Suchausdruck'"
+          <input mdInput [placeholder]="generatePlaceHolder()"
                  formControlName="suchwortInput"
                  style="width: 250px"
                  [value]="generateTextForInputField()"/>
@@ -924,7 +924,7 @@
     <br>
 
     <button
-      md-button
+      md-raised-button
       (click)="createForm()">
       Reset Suchoptionen
     </button>

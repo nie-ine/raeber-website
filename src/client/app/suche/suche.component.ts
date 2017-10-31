@@ -132,6 +132,8 @@ export class SucheComponent implements OnInit {
   warningread: boolean;
   currentPath: string;
   loadingIndicatorInput: boolean;
+  allSearchResultsLengthOld: number;
+  noMoreChanges = false;
   progressIndicator = 0;
   arrayOfResultsInAllSearchGroups = [
     {
@@ -589,6 +591,8 @@ export class SucheComponent implements OnInit {
 
 
   executeFinalQueries() {
+    this.allSearchResultsLengthOld = 0;
+    this.noMoreChanges = false;
     this.setOfPoemsInResult.clear();
     this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
     this.warning = '';
@@ -1444,13 +1448,13 @@ export class SucheComponent implements OnInit {
                                              isPartOfCycle: string,
                                              synopsisTitle: string,
                                              synopsisIRI: string,) {
-      //console.log('Only choose poems that are in chosen convolutes');
       for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
         this.checkProgress();
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+            this.checkIfDone(this.allSearchResults.length);
             if(!this.setOfPoemsInResult.has(poemIRI)) {
               this.setOfPoemsInResult.add(poemIRI);
               //console.log('checktextart');
@@ -1490,7 +1494,23 @@ export class SucheComponent implements OnInit {
         }
       }
     }
+
+  checkIfDone(currentLength: number) {
+    this.sortResultArray();
+  }
+
+  sortResultArray() {
+    for(let i = 0; i < this.allSearchResults.length - 1; i++ ) {
+      if(this.allSearchResults[i][1] < this.allSearchResults[i + 1][1]) {
+        //console.log(this.allSearchResults[i][1] + ' ist kleiner als ' + this.allSearchResults[i + 1][1]);
+      } else {
+        this.allSearchResults[i + 1][1] = this.allSearchResults[i][1];
+      }
+    }
+  }
+
     checkIfPartOfCycle(isPartOfCycle: string): boolean {
+    if(this.arg) {
       if(this.arg.get('zyklus').value || this.route.snapshot.queryParams[ 'nurZyklus' ] === 'true') {
         return this.checkIfTrue('nurZyklus','zyklus', isPartOfCycle);
       }
@@ -1499,8 +1519,20 @@ export class SucheComponent implements OnInit {
         else isPartOfCycle = '1';
         return this.checkIfTrue('keinZyklus','keinZyklus', isPartOfCycle);
       } else return true;
+    } else {
+      if(this.route.snapshot.queryParams[ 'nurZyklus' ] === 'true') {
+        return this.checkIfTrue('nurZyklus','zyklus', isPartOfCycle);
+      }
+      if(this.route.snapshot.queryParams[ 'keinZyklus' ] === 'true') {
+        if(isPartOfCycle === '1') isPartOfCycle = '0';
+        else isPartOfCycle = '1';
+        return this.checkIfTrue('keinZyklus','keinZyklus', isPartOfCycle);
+      } else return true;
+    }
+
   }
     checkIfIsInDialect(isInDialiect: string): boolean {
+    if(this.arg) {
       if(this.arg.get('mundart').value || this.route.snapshot.queryParams[ 'nurMundart' ] === 'true') {
         return this.checkIfTrue('nurMundart','mundart', isInDialiect);
       }
@@ -1509,16 +1541,38 @@ export class SucheComponent implements OnInit {
         else isInDialiect = '1';
         return this.checkIfTrue('keineMundart','keineMundart', isInDialiect);
       } else return true;
+    } else {
+      if(this.route.snapshot.queryParams[ 'nurMundart' ] === 'true') {
+        return this.checkIfTrue('nurMundart','mundart', isInDialiect);
+      }
+      if(this.route.snapshot.queryParams[ 'keineMundart' ] === 'true') {
+        if(isInDialiect === '1') isInDialiect = '0';
+        else isInDialiect = '1';
+        return this.checkIfTrue('keineMundart','keineMundart', isInDialiect);
+      } else return true;
+    }
+
     }
     checkIfHasStrophe(hatStrophenunterteilung: string): boolean {
-      if(this.arg.get('strophen').value || this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'true') {
-        return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+      if(this.arg) {
+        if(this.arg.get('strophen').value || this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'true') {
+          return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+        }
+        if(this.arg.get('keineStrophen').value || this.route.snapshot.queryParams[ 'keineStrophen' ] === 'true') {
+          if(hatStrophenunterteilung === '1') hatStrophenunterteilung = '0';
+          else hatStrophenunterteilung = '1';
+          return this.checkIfTrue('keineStrophen','keineStrophen', hatStrophenunterteilung);
+        } else return true;
+      } else {
+        if(this.route.snapshot.queryParams[ 'nurMitStrophen' ] === 'true') {
+          return this.checkIfTrue('nurMitStrophen','strophen', hatStrophenunterteilung);
+        }
+        if(this.route.snapshot.queryParams[ 'keineStrophen' ] === 'true') {
+          if(hatStrophenunterteilung === '1') hatStrophenunterteilung = '0';
+          else hatStrophenunterteilung = '1';
+          return this.checkIfTrue('keineStrophen','keineStrophen', hatStrophenunterteilung);
+        } else return true;
       }
-      if(this.arg.get('keineStrophen').value || this.route.snapshot.queryParams[ 'keineStrophen' ] === 'true') {
-        if(hatStrophenunterteilung === '1') hatStrophenunterteilung = '0';
-        else hatStrophenunterteilung = '1';
-        return this.checkIfTrue('keineStrophen','keineStrophen', hatStrophenunterteilung);
-      } else return true;
     }
     checkIfTrue(inputFromRoute: string, controlFromFormName: string, parameterToCheck: string) {
       if(!this.arg) {
@@ -1535,6 +1589,7 @@ export class SucheComponent implements OnInit {
       } else return false;
     }
     checkIfFinalVersion(isFinalVersion: string): boolean {
+    if(this.arg) {
       if(this.arg.get('endfassung').value || this.route.snapshot.queryParams[ 'nurEndfassungen' ] === 'true') {
         return this.checkIfTrue('nurEndfassungen','endfassung', isFinalVersion);
       }
@@ -1543,6 +1598,17 @@ export class SucheComponent implements OnInit {
         else isFinalVersion = '1';
         return this.checkIfTrue('keineEndfassung','keineEndfassung', isFinalVersion);
       } else return true;
+    } else {
+      if(this.route.snapshot.queryParams[ 'nurEndfassungen' ] === 'true') {
+        return this.checkIfTrue('nurEndfassungen','endfassung', isFinalVersion);
+      }
+      if(this.route.snapshot.queryParams[ 'keineEndfassung' ] === 'true') {
+        if(isFinalVersion === '1') isFinalVersion = '0';
+        else isFinalVersion = '1';
+        return this.checkIfTrue('keineEndfassung','keineEndfassung', isFinalVersion);
+      } else return true;
+    }
+
     }
     checkTextart(textart: string): boolean {
       if (this.route.snapshot.queryParams[ 'textartFreieVerse' ] === 'true' && textart === 'FreeVerse') {

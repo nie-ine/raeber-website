@@ -13,8 +13,8 @@ import { ExtendedSearch } from '../shared/utilities/knora-api-params';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';
-import { SynopseHilfeComponent } from '../synopse/synopse-hilfe/synopse-hilfe.component';
 import { MdDialog } from '@angular/material';
+import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
 
 
 @Component({
@@ -194,7 +194,7 @@ export class KonvolutComponent implements OnInit {
 
   showHelp(): void {
     let dialogRef =
-      this.dialog.open(SynopseHilfeComponent, {
+      this.dialog.open(KonvolutHilfeComponent, {
         width: '500px'
       });
   }

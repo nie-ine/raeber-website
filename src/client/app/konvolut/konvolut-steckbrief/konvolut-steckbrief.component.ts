@@ -7,6 +7,7 @@ import { MdDialog } from '@angular/material';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
+import { KOMMENTARINHALTE } from '../konvolut-kommentar/konvolut-kommentar-inhalte';
 
 @Component({
   moduleId: module.id,
@@ -40,6 +41,7 @@ export class KonvolutSteckbriefComponent implements OnChanges {
   earlierStagesIRIs: Array<string>;
   laterStagesIRIs: Array<string>;
   stufenIRIs: Array<string>;
+  commentsContent = KOMMENTARINHALTE;
   private sub: any;
 
   constructor(private http: Http, private dateFormatService: DateFormatService, public dialog: MdDialog) {
@@ -219,15 +221,12 @@ export class KonvolutSteckbriefComponent implements OnChanges {
     }
   }
 
-  openDialog(): void {
+  openDialog(comment: string): void {
     let dialogRef = this.dialog.open(KonvolutKommentarComponent, {
       // data: { text: this.comment },
-      data: { text: this.comment },
-      width: '600px',
-      height: '400px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      data: { text: comment },
+      width: '865px',
+      height: '550px'
     });
   }
 

@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       this.selectedTab = params[ 'zeitraum' ];
     });
 
-    console.log('Titelregister ' + this.selectedTab);
+    // console.log('Titelregister ' + this.selectedTab);
   }
 
 

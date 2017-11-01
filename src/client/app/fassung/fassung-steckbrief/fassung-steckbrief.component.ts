@@ -9,11 +9,13 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief',
-  templateUrl: 'fassung-steckbrief.component.html'
+  templateUrl: 'fassung-steckbrief.component.html',
+  styleUrls: [ 'fassung-steckbrief.component.css' ]
 })
 export class FassungSteckbriefComponent implements OnChanges {
   @Input() fassungIRI: string;
   @Input() konvolutIRI: string;
+  @Input() convoluteTitle: string;
   @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   isWrittenWith: string;
@@ -210,6 +212,11 @@ export class FassungSteckbriefComponent implements OnChanges {
             this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInTypescript' ].values[ 0 ];
           } catch (TypeError) {
             // skip if there is no notebook
+          }
+          try {
+            this.carrierIRI = res.props[ 'http://www.knora.org/ontology/kuno-raeber#isInDiary' ].values[ 0 ];
+          } catch (TypeError) {
+            // skip if there is no diary entry
           }
         });
     }

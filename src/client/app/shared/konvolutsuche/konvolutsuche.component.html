@@ -4,9 +4,9 @@
       <input mdInput type="text" placeholder="Suchbegriff" formControlName="searchTerm" [value]="defineInputValue()"
              (keyup.enter)="suche.emit(searchForm)" style="border-width:0px; border:none; box-shadow: none;">
     </md-input-container>
-    <md-input-container style="width:90px;" *ngIf="checkIfNotizbuch(konvolutTitle)">
-      <input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"
-             (keyup.enter)="suche.emit(searchForm)" style="border-width:0px; border:none; box-shadow: none;">
-    </md-input-container>
+    <!--<md-input-container style="width:90px;" *ngIf="checkIfNotizbuch(konvolutTitle)">-->
+    <!--<input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"-->
+    <!--(keyup.enter)="suche.emit(searchForm)" style="border-width:0px; border:none; box-shadow: none;">-->
+    <!--</md-input-container>-->
   </form>
 </div>

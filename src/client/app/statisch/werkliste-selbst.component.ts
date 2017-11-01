@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'rae-werkliste',
-  templateUrl: 'werkliste.component.html'
+  selector: 'rae-werkliste-selbst',
+  templateUrl: 'werkliste-selbst.component.html'
 })
-export class WerklisteComponent {
-  title = 'Werke';
+export class WerklisteSelbstComponent {
+  title = 'Selbständige Publikationen';
 }

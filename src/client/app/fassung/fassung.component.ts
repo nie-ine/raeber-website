@@ -133,7 +133,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private static removeSlashesInRouteElement(element: string) {
     return element.includes('/') ?
-      element.replace('/', '') :
+      element.replace(/\//g, '') :
       element;
   }
 
@@ -180,7 +180,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         const textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
         this.getEditedPoemText(textEdition);
         this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
-        this.creationDateOfPoem =
+        this.creationDateOfPoem = this.poemType === 'DiaryEntry' ?
+          this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/text#hasEnteringDate' ].values[ 0 ].dateval1) :
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
           this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);
@@ -335,6 +336,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
       } else if (this.convoluteTitle === 'Alemannische Gedichte 1985') {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else if (this.convoluteTitle === 'Tagebuch') {
+        this.convoluteLink = '/material/tagebuecher';
       } else {
         this.convoluteLink = '/drucke/verstreutes';
       }

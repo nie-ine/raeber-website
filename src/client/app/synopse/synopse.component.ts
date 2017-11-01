@@ -57,7 +57,6 @@ export class SynopseComponent implements OnInit {
       .subscribe((res: any) => {
         this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
         this.workTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-        this.results = this.poemsIri.length;
       });
   }
 
@@ -81,6 +80,7 @@ export class SynopseComponent implements OnInit {
 
   updatePoemInformation(poemInformation: Array<any>) {
     this.poems = poemInformation;
+    this.results = this.poems.length;
   }
 
   setFilterFirstLast() {

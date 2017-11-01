@@ -260,11 +260,13 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private buildLinkToRelatedConvolute() {
     if (this.convoluteTitle.includes('Notizbuch')) {
-      this.convoluteLink = '/notizbuecher/notizbuch-' + this.convoluteTitle.split(' ')[ 1 ];
-    } else if (this.convoluteTitle.includes('manuskripte')) {
-      this.convoluteLink = '/manuskripte/manuskripte-' + this.convoluteTitle.split(' ')[ 1 ];
+      this.convoluteLink = '/notizbuecher/notizbuch-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+    } else if (this.convoluteTitle.includes('Manuskripte')) {
+      this.convoluteLink = '/manuskripte/manuskripte-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+    } else if (this.convoluteTitle.includes('Typoskripte 1979-spez')) {
+      this.convoluteLink = '/typoskripte/typoskripte-1979-spez';
     } else if (this.convoluteTitle.includes('Typoskript')) {
-      this.convoluteLink = '/typoskripte/typoskripte-' + this.convoluteTitle.split(' ')[ 1 ];
+      this.convoluteLink = '/typoskripte/typoskripte-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
     } else {
       if (this.convoluteTitle === 'GESICHT IM MITTAG 1950') {
         this.convoluteLink = '/drucke/gesicht-im-mittag';
@@ -282,6 +284,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
       } else if (this.convoluteTitle === 'Tagebuch') {
         this.convoluteLink = '/material/tagebuecher';
+      } else if (this.convoluteTitle === 'Karten 1984') {
+        this.convoluteLink = '/manuskripte/karten-1984';
       } else {
         this.convoluteLink = '/drucke/verstreutes';
       }

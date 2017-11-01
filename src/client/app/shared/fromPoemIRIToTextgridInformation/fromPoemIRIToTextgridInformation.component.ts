@@ -117,6 +117,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
                 } else if (this.poemInformation[ this.i ][ 4 ] === 'Alemannische Gedichte 1985') {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+                } else if (this.poemInformation[ this.i ][ 4 ] === 'Tagebuch') {
+                  this.poemInformation[ this.i ][ 11 ] = '/material/tagebuecher';
                 } else {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/verstreutes';
                 }

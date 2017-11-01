@@ -168,7 +168,10 @@ export class RegisterspalteComponent implements OnChanges {
 
   removeHtml(content: string) {
     if (content !== undefined) {
-      return content.replace(/<[^>]+>/g, '');
+      return content.replace(/<span class="zeile">[0-9]+\s*<\/span>/g, '')
+        .replace(/<br[^>a-zA-Z0-9]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/<[^>]+>/g, '');
     } else {
       return undefined;
       //console.log('no value yet');

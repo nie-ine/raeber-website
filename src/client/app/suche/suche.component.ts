@@ -56,7 +56,7 @@ export class SucheComponent implements OnInit {
   mapOfAllQueries = new Map();
   count = 0;
   numberOfPropertiesInSearchBox = '';
-  dateArray: any;
+  helpArray: any;
   str: string;
   value: string;
   sendInputStringToSuchmaske: string;
@@ -1495,7 +1495,9 @@ this.allSearchResults[ poem.reservedPointer ][ 14 ] = poem.value['13']; // isFin
       if(this.allSearchResults[i][1] < this.allSearchResults[i + 1][1]) {
         //console.log(this.allSearchResults[i][1] + ' ist kleiner als ' + this.allSearchResults[i + 1][1]);
       } else {
-        this.allSearchResults[i + 1][1] = this.allSearchResults[i][1];
+        this.helpArray = this.allSearchResults[i + 1];
+        this.allSearchResults[i + 1] = this.allSearchResults[i];
+        this.allSearchResults[i] = this.helpArray;
       }
     }
   }

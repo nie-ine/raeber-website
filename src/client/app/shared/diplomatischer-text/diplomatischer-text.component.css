@@ -15,3 +15,7 @@ button.rae-image-small-button {
 .button-is-active {
   background-color: silver;
 }
+
+div.umschrift {
+  padding-left: 2em;
+}

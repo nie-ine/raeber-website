@@ -228,9 +228,6 @@ export class KonvolutSteckbriefComponent implements OnChanges {
       width: '865px',
       height: '550px'
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
 

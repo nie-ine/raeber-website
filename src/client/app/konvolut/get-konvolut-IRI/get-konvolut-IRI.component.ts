@@ -23,11 +23,6 @@ export class GetKonvolutIRIComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    //console.log('Get IRI Component for Konvolut - ID: ' + this.konvolut_id);
-    //**
-    // Notizbuch 1979
-    // TODO: Steckbrief etc.
-    // */
     if (this.konvolut_id === 'notizbuch-1979') {
       this.performQuery(
         '%23PoemNotebook' +

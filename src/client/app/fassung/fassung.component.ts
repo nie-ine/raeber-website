@@ -280,6 +280,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
       } else if (this.convoluteTitle === 'Alemannische Gedichte 1985') {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else if (this.convoluteTitle === 'Tagebuch') {
+        this.convoluteLink = '/material/tagebuecher';
       } else {
         this.convoluteLink = '/drucke/verstreutes';
       }

@@ -10,6 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class KonvolutsucheComponent {
   @Input() konvolutTitle: string;
   @Output() suche = new EventEmitter<FormGroup>();
+  @Input() searchTermArray: Array<string>;
   searchForm: FormGroup;
 
   constructor() {
@@ -28,6 +29,11 @@ export class KonvolutsucheComponent {
       if(konvolutTitle.search('Notizbuch') !== -1) return true;
       else return false;
     } else return false;
+  }
+
+  defineInputValue() {
+    if(this.searchTermArray) return this.searchTermArray[0];
+    else return null;
   }
 
 }

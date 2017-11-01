@@ -58,18 +58,21 @@ export class KonvolutComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this._esearch.filterByRestype = 'http://www.knora.org/ontology/text#Convolute';
-    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasTitle', '!EQ', ' ');
-    //this._esearch.property = new KnoraProperty('http://www.knora.org/ontology/text#hasDescription', '!EQ', ' ');
-    //this.dp.size = 10;
-    //this.dp.loadText(this._esearch).subscribe(
-    //  konstText => this.poems = konstText
-    //);
-
-
     this.konvolut_type = this.route.snapshot.url[ 0 ].path;
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
+      setTimeout(() => {
+        console.log(this.route.snapshot.queryParams['wort']);
+        console.log(this.route.snapshot.queryParams['page']);
+        if(this.route.snapshot.queryParams['wort'] !== 'null' && this.route.snapshot.queryParams['wort'] !== undefined) {
+          this.searchTermArray = [];
+          this.searchTermArray[ 0 ] = this.route.snapshot.queryParams['wort'];
+        }
+        if(this.route.snapshot.queryParams['page'] !== 'null' && this.route.snapshot.queryParams['page'] !== undefined) {
+          this.searchTermArray[ 1 ] = this.route.snapshot.queryParams['page'];
+        }
+      }, 3000);
+
     });
   }
 

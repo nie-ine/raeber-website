@@ -95,11 +95,16 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ][ 5 ] = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
               this.poemInformation[ this.i ][ 6 ] = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
               if (this.poemInformation[ this.i ][ 4 ].includes('Notizbuch')) {
-                this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-' + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ];
-              } else if (this.poemInformation[ this.i ][ 4 ].includes('manuskripte')) {
-                this.poemInformation[ this.i ][ 11 ] = '/manuskripte/manuskripte-' + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ];
+                this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-'
+                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
+              } else if (this.poemInformation[ this.i ][ 4 ].includes('Manuskripte')) {
+                this.poemInformation[ this.i ][ 11 ] = '/manuskripte/manuskripte-'
+                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
+              } else if (this.poemInformation[ this.i ][ 4 ].includes('Typoskripte 1979-spez')) {
+                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-1979-spez';
               } else if (this.poemInformation[ this.i ][ 4 ].includes('Typoskript')) {
-                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-' + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ];
+                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-'
+                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
               } else {
                 if (this.poemInformation[ this.i ][ 4 ] === 'GESICHT IM MITTAG 1950') {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/gesicht-im-mittag';
@@ -117,6 +122,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
                 } else if (this.poemInformation[ this.i ][ 4 ] === 'Tagebuch') {
                   this.poemInformation[ this.i ][ 11 ] = '/material/tagebuecher';
+                } else if (this.poemInformation[ this.i ][ 4 ] === 'Karten 1984') {
+                  this.poemInformation[ this.i ][ 11 ] = '/manuskripte/karten-1984';
                 } else {
                   this.poemInformation[ this.i ][ 11 ] = '/drucke/verstreutes';
                 }

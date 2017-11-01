@@ -122,7 +122,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
+    //console.log(this.poemsInGrid);
+    //console.log(this.searchTermfromKonvolut);
     if(this.searchTermfromKonvolut) {
       if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
         this.searchInKonvolut = true;
@@ -280,6 +281,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   formatDate(date: string) {
+    //console.log(date);
     return this.dateFormatService.germanLongDate(date);
   }
 

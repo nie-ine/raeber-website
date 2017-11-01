@@ -50,11 +50,13 @@ export class SucheComponent implements OnInit {
   l: number;
   m: number;
   o: number;
+  numberOfSearchResultsOld: number;
   isAlreadyInArray = 0;
   helperMap = new Map();
   mapOfAllQueries = new Map();
   count = 0;
   numberOfPropertiesInSearchBox = '';
+  dateArray: any;
   str: string;
   value: string;
   sendInputStringToSuchmaske: string;
@@ -757,8 +759,10 @@ export class SucheComponent implements OnInit {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            console.log(data);
+            //console.log('Data from Titel');
+            //console.log(data.subjects[0]);
             if (data.subjects[0] !== undefined) {
+              //console.log('add to temporary results');
               this.addToTemporarySearchResultArray(data.subjects,
                 firstTermAfterOr,
                 searchGroup,
@@ -837,8 +841,10 @@ export class SucheComponent implements OnInit {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
+          //console.log('Data From Text');
           //console.log(data);
           if (data.subjects[ 0 ] !== undefined) {
+            //console.log('add to temporary search array');
             this.addToTemporarySearchResultArray(data.subjects,
               firstTermAfterOr,
               searchGroup,
@@ -897,7 +903,7 @@ export class SucheComponent implements OnInit {
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     this.checkProgress();
-    //console.log('Add to final Search Results');
+    console.log('Add to final Search Results');
     //console.log(searchResults);
     //console.log(singlePoem);
     if (this.allSearchResults === undefined) {
@@ -908,37 +914,13 @@ export class SucheComponent implements OnInit {
       for (let poem of searchResults) {
         //console.log(poem.value['7']);
         this.onlyChoosePoemsThatAreInChosenConvolutes(
-          poem.value['6'],
-          poem.value['7'],
-          poem.value['8'],
-          undefined,
-          poem.value['5'],
-          0,
-          poem.value['10'],
-          poem.value['13'],
-          poem.value['9'],
-          poem.value['14'],
-          poem.value['15'],
-          poem.value['12'],
-          poem.value['11']);
+          poem);
       }
     }
     if(singlePoem) {
       //console.log('add poem to final search results');
       this.onlyChoosePoemsThatAreInChosenConvolutes(
-        singlePoem.value['6'],
-        singlePoem.value['7'],
-        singlePoem.value['8'],
-        undefined,
-        singlePoem.value['5'],
-        0,
-        singlePoem.value['10'],
-        singlePoem.value['13'],
-        singlePoem.value['9'],
-        singlePoem.value['14'],
-        singlePoem.value['15'],
-        singlePoem.value['12'],
-        singlePoem.value['11']);
+        singlePoem);
     }
   }
 
@@ -1376,7 +1358,7 @@ export class SucheComponent implements OnInit {
           if (data.subjects[ 0 ] !== undefined) {
             this.setOfKonvolutIRIs.add(data.subjects[ 0 ].obj_id);
             this.suchmaskeKonvolutIRIMapping[ i ].IRI = data.subjects[ 0 ].obj_id;
-            console.log(this.suchmaskeKonvolutIRIMapping);
+            //console.log(this.suchmaskeKonvolutIRIMapping);
             this.rightProperty = '';
             this.performQueryToGetAllowedPoems(data.subjects[ 0 ].obj_id, data.subjects[ 0 ].iconlabel, this.rightProperty, i);
           }
@@ -1435,54 +1417,63 @@ export class SucheComponent implements OnInit {
           }
         ).subscribe(response => this.responseArray = response);
     }
-    onlyChoosePoemsThatAreInChosenConvolutes(poemIRI: string,
-                                             text: string,
-                                             titel: string,
-                                             seqnum: string,
-                                             date: string,
-                                             k: number,
-                                             textart: string,
-                                             isFinalVersion: string,
-                                             hatStrophenunterteilung: string,
-                                             isInDialiect: string,
-                                             isPartOfCycle: string,
-                                             synopsisTitle: string,
-                                             synopsisIRI: string,) {
-      for (k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+    onlyChoosePoemsThatAreInChosenConvolutes(poem: any) {
+      for (let k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
         this.checkProgress();
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-          if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poemIRI)) {
+          if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poem.value['6'])) {
             this.checkIfDone(this.allSearchResults.length);
-            if(!this.setOfPoemsInResult.has(poemIRI)) {
-              this.setOfPoemsInResult.add(poemIRI);
+            if(!this.setOfPoemsInResult.has(poem.value['6'])) {
+              this.setOfPoemsInResult.add(poem.value['6']);
               //console.log('checktextart');
-              if(this.checkTextart(textart)) {
+              if(this.checkTextart(poem.value['10'])) {
                 //console.log('checkdate');
-                if(this.checkTimeInterval(date)) {
+                if(this.checkTimeInterval(poem.value['5'])) {
                   //console.log('checkFinalVersion');
-                  if(this.checkIfFinalVersion(isFinalVersion)) {
-                    if(this.checkIfHasStrophe(hatStrophenunterteilung)) {
-                      if(this.checkIfIsInDialect(isInDialiect)) {
-                        if(this.checkIfPartOfCycle(isPartOfCycle)) {
-                          //console.log('Poem included in ' + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-                          if (this.allSearchResults[ this.allSearchResults.length ] === undefined) {
-                            this.allSearchResults[ this.allSearchResults.length ] = [];
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 0 ] = titel;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 1 ] = date;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 2 ] = text;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 3 ] = poemIRI;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 4 ] = seqnum;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 12 ] = synopsisTitle;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 9 ] = synopsisIRI;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 7 ]
-                              = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 6 ]
-                              = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
-                            this.allSearchResults[ this.allSearchResults.length - 1 ][ 14 ] = isFinalVersion;
-                            this.numberOfSearchResults += 1;
-                          }
+                  if(this.checkIfFinalVersion(poem.value['13'])) {
+                    if(this.checkIfHasStrophe(poem.value['9'])) {
+                      if(this.checkIfIsInDialect(poem.value['14'])) {
+                        if(this.checkIfPartOfCycle(poem.value['15'])) {
+                              console.log('Date: ' + poem.value['5'] + ' Titel: ' + poem.value['8']);
+                              console.log(this.allSearchResults);
+                              poem.reservedPointer = this.allSearchResults.length;
+                              console.log(poem.reservedPointer);
+                              console.log(poem.value['5']);
+                              this.allSearchResults[ poem.reservedPointer ] = [];
+                                this.allSearchResults[ poem.reservedPointer ] = [
+                                  poem.value['8'], // Titel
+                                  poem.value['5'], // date
+                                  poem.value['7'], // text
+                                  poem.value['6'],
+                                  undefined,
+                                  5,
+                                  this.suchmaskeKonvolutIRIMapping[ k ].konvolut,
+                                  this.suchmaskeKonvolutIRIMapping[ k ].officialName,
+                                  8,
+                                  poem.value['11'],
+                                  10,
+                                  11,
+                                  poem.value['12'],
+                                  13,
+                                  poem.value['13']
+                                ];
+
+
+/* ; // titel
+this.allSearchResults[ poem.reservedPointer ][ 1 ] = ; // date
+this.allSearchResults[ poem.reservedPointer ][ 2 ] = ; // text
+this.allSearchResults[ poem.reservedPointer ][ 3 ] = ; // poem IRI
+this.allSearchResults[ poem.reservedPointer ][ 4 ] = undefined;
+this.allSearchResults[ poem.reservedPointer ][ 12 ] = poem.value['12']; // synopsisTitle
+this.allSearchResults[ poem.reservedPointer ][ 9 ] = ; // synopsisIRI
+this.allSearchResults[ poem.reservedPointer ][ 7 ]
+  = ;
+this.allSearchResults[ poem.reservedPointer ][ 6 ]
+  =
+this.allSearchResults[ poem.reservedPointer ][ 14 ] = poem.value['13']; // isFinalVersion*/
+                              this.numberOfSearchResults += 1;
                         }
                       }
                     }

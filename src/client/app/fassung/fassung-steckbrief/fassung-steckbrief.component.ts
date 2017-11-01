@@ -9,7 +9,8 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief',
-  templateUrl: 'fassung-steckbrief.component.html'
+  templateUrl: 'fassung-steckbrief.component.html',
+  styleUrls: [ 'fassung-steckbrief.component.css' ]
 })
 export class FassungSteckbriefComponent implements OnChanges {
   @Input() fassungIRI: string;

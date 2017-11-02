@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from './globalSearchVariablesService';
 import { AbstractControl } from '@angular/forms';
@@ -14,7 +14,7 @@ import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.compo
   templateUrl: 'suche.component.html',
   styleUrls: [ 'suche.component.css' ]
 })
-export class SucheComponent implements OnInit {
+export class SucheComponent implements OnInit, AfterViewChecked {
   numberOfComponents = 1;
 
   myResources: Array<any>;
@@ -459,8 +459,12 @@ export class SucheComponent implements OnInit {
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem'
   ];
 
-  constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location) {
+  constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location, private cdr: ChangeDetectorRef) {
     this.route.params.subscribe(params => console.log(params));
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
   }
 
   checkProgress() {

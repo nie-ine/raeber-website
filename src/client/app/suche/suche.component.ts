@@ -977,7 +977,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
       this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
-      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckform.druckAbgewandtAll').value;
+      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckForm.druckAbgewandtAll').value;
       //console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }

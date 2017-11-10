@@ -34,7 +34,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   convoluteIri: string;
   convoluteTitle: string;
   convoluteLink: string;
-  synopsisIri: string;
+  synopsisIri: string = '';
   synopsisTitle: string;
   relatedPoems: any[] = [];
 
@@ -163,6 +163,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     const tempPoemId = idOfFassung.split('---')[ 1 ];
     this.poemShortIri = tempPoemId !== undefined && !tempPoemId.includes('/') ? tempPoemId : this.poemShortIri;
     this.getDataFromDB();
+  }
+
+  belongsToSynopsis() {
+    return this.synopsisIri.split('/')[4] !== undefined;
   }
 
   private getDataFromDB() {

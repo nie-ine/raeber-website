@@ -1,10 +1,11 @@
 <div *ngIf="searchActivated" id="searchTermBar">
   Suche nach: {{searchTermfromKonvolut[0]}} ({{filterPoems(poemsInGrid).length}} Resultate)
 </div>
-<div [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
+<div
+  [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
 
   <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
-       [ngStyle]="{ 'width': columns }" >
+       [ngStyle]="{ 'width': columns }">
 
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
 
@@ -12,7 +13,7 @@
         <md-card-subtitle *ngIf="p[1] && !p[15].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
       </div>
       <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
-          <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
+        <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
       </div>
 
       <md-card-title #poemTitle>
@@ -35,8 +36,7 @@
 
       <md-card-footer style="position: static;">
 
-
-        <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
+        <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut' && p[12] !== ' '">
           <span>Synopse:</span>
           <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
         </div>
@@ -49,7 +49,10 @@
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
           <span>In: {{ p[7] }} </span><br>
-          <span>Synopse:</span> <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a><br>
+          <ng-container *ngIf="p[12] !== ' '">
+            <span>Synopse:</span>
+            <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12]}}</a><br>
+          </ng-container>
         </div>
       </md-card-footer>
     </md-card>

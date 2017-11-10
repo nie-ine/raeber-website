@@ -172,7 +172,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private getBasicInformationOnCurrentPoem() {
     this.http
-      .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
+      .get(Config.API + '/resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
       .map(result => result.json())
       .subscribe(res => {
         this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
@@ -209,7 +209,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getEditedPoemText(editedTextIri: string) {
-    this.http.get(Config.API + 'resources/' + encodeURIComponent(editedTextIri))
+    this.http.get(Config.API + '/resources/' + encodeURIComponent(editedTextIri))
       .map(result => result.json())
       .subscribe(res => this.editedPoemText = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str);
   }

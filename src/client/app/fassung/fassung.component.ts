@@ -266,7 +266,9 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           this.convoluteIri = res.subjects[ 0 ].value[ 1 ];
           this.synopsisIri = res.subjects[ 0 ].value[ 3 ];
           this.synopsisTitle = res.subjects[ 0 ].value[ 4 ];
-          this.getInformationOnRelatedPoems();
+          if (this.synopsisIri !== ' ') {
+            this.getInformationOnRelatedPoems();
+          }
         }
       });
   }

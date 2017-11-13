@@ -7922,10 +7922,12 @@ body #k2Container select, body #k2Container input[type="file"] {
   bottom: 15px;
   right: 15px;
   opacity: 0;
+  visibility: hidden;
   transition: all .2s ease-in-out;
 }
 
 .show-scroll {
   opacity: 1;
+  visibility: visible;
   transition: all .2s ease-in-out;
 }

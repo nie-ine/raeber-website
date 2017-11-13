@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Druck,
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/switchMap';
 import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.service';
 import { HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+import { TextgridComponent } from '../../shared/textgrid/textgrid.component';
 
 
 @Component({
@@ -37,6 +38,9 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   @Input() startSearchImmediately: boolean;
   @Input() loadingIndicatorInput: boolean;
   @Input() lastSearchTerm: string;
+
+  @ViewChild(TextgridComponent)
+  private textgridComponent: TextgridComponent;
 
   relativeSizeOfColumns: string = '43%';
   textboxHeight: number = 0;
@@ -87,12 +91,15 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.sucheDarstellungsoptionen.showTexts$.subscribe(
       showTexts => this.showTexts = showTexts
     );
+    this.sucheDarstellungsoptionen.noSinglePoemIsHidden$.subscribe(
+      noSinglePoemIsHidden => this.textgridComponent.resetSinglePoemHiddenState()
+    );
   }
 
   ngOnChanges() {
     //console.log(this.loadingIndicator);
     this.loadingIndicator = this.loadingIndicatorInput;
-    if(this.startSearchImmediately) this.sidenavOpened = false;
+    if (this.startSearchImmediately) this.sidenavOpened = false;
     //console.log('Data arrived back in Suchmaske: ');
     //console.log(this.poemsInGrid);
     //console.log(this.searchTermArray);
@@ -261,7 +268,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   generateTextForInputField(): string {
-    if(!this.lastSearchTerm) {
+    if (!this.lastSearchTerm) {
       return null;
     } else return this.lastSearchTerm;
 
@@ -286,8 +293,9 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
       }
     })();
   }
+
   generatePlaceHolder() {
-    if(this.lastSearchTerm) return null;
+    if (this.lastSearchTerm) return null;
     else return 'Sucheingabe';
   }
 

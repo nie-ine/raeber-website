@@ -1,12 +1,12 @@
-<div class="suchfeld">
+<div class="suchfeld-box">
   <form [formGroup]="searchForm">
-    <md-input-container style="width: 120px;">
+    <md-input-container class="suchfeld-container" style="width:95% !important;">
       <input mdInput type="text" placeholder="Suchbegriff" formControlName="searchTerm" [value]="defineInputValue()"
-             (keyup.enter)="suche.emit(searchForm)" style="border-width:0px; border:none; box-shadow: none;">
+             (keyup.enter)="suche.emit(searchForm)" class="suchfeld">
     </md-input-container>
-    <!--<md-input-container style="width:90px;" *ngIf="checkIfNotizbuch(konvolutTitle)">-->
+    <!--<md-input-container class="suchfeld-container" *ngIf="checkIfNotizbuch(konvolutTitle)">-->
     <!--<input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"-->
-    <!--(keyup.enter)="suche.emit(searchForm)" style="border-width:0px; border:none; box-shadow: none;">-->
+    <!--(keyup.enter)="suche.emit(searchForm)" class="suchfeld">-->
     <!--</md-input-container>-->
   </form>
 </div>

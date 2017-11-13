@@ -47,7 +47,7 @@ export class SynopseComponent implements OnInit {
       this.synopseTag = params[ 'synopse' ];
     });
 
-    let searchParamsPrefix = Config.API + 'resources/';
+    let searchParamsPrefix = Config.API + '/resources/';
     let searchParamsWork = searchParamsPrefix + encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIri);
 
     this.route.params

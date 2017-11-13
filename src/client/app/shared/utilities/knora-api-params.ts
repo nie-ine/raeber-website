@@ -8,7 +8,7 @@ import { Config } from '../config/env.config';
  * Base abstract class for configuring a request to Knora API
  */
 export abstract class KnoraRequest {
-  protected _host = Config.API + 'search/';
+  protected _host = Config.API + '/search/';
   protected abstract _searchtype: string;
   protected abstract _filterByRestype: string;
   protected abstract _filterByProject: string;

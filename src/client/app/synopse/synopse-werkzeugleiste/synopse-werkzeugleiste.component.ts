@@ -27,6 +27,7 @@ export class SynopseWerkzeugleisteComponent {
   @Output() showManuscriptsState = new EventEmitter();
   @Output() showTyposcriptsState = new EventEmitter();
   @Output() showDuplicatesState = new EventEmitter();
+  @Output() resetSinglePoemHiddenState = new EventEmitter();
 
   columns: number = 2;
   rahmen: boolean = true;
@@ -49,6 +50,7 @@ export class SynopseWerkzeugleisteComponent {
     this.columns = 2;
     this.cols.emit(2);
     this.resetHeight.emit();
+    this.resetSinglePoemHiddenState.emit();
     if (this.firstLast) {
       this.setFirstLast();
     }

@@ -30,13 +30,12 @@ import { FassungDiplomatischComponent } from './fassung-diplomatisch/fassung-dip
 import { FassungSteckbriefComponent } from './fassung-steckbrief/fassung-steckbrief.component';
 import { FassungWeitereComponent } from './fassung-weitere/fassung-weitere.component';
 import { FassungWerkzeugleisteComponent } from './fassung-werkzeugleiste/fassung-werkzeugleiste.component';
-import { TextComponent } from '../shared/text/text.component';
 import { FassungDiplomatischSeitenComponent } from './fassung-diplomatisch/fassung-diplomatisch-seiten.component';
 import { FassungSteckbriefKonvolutComponent } from './fassung-steckbrief/fassung-steckbrief-konvolut.component';
 import { FassungSteckbriefFassungComponent } from './fassung-steckbrief/fassung-steckbrief-fassung.component';
 import { FassungSteckbriefSignaturComponent } from './fassung-steckbrief/fassung-steckbrief-signatur.component';
 import { FassungHilfeComponent } from './fassung-hilfe/fassung-hilfe.component';
-import { DateFormatService } from "../shared/utilities/date-format.service";
+import { DateFormatService } from '../shared/utilities/date-format.service';
 
 
 @NgModule({
@@ -71,8 +70,7 @@ import { DateFormatService } from "../shared/utilities/date-format.service";
     FassungSteckbriefKonvolutComponent,
     FassungSteckbriefSignaturComponent,
     FassungWeitereComponent,
-    FassungWerkzeugleisteComponent,
-    TextComponent
+    FassungWerkzeugleisteComponent
   ],
   exports: [ FassungComponent ],
   providers: [DateFormatService],

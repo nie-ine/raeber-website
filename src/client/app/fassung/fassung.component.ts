@@ -34,7 +34,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   convoluteIri: string;
   convoluteTitle: string;
   convoluteLink: string;
-  synopsisIri: string;
+  synopsisIri: string = '';
   synopsisTitle: string;
   relatedPoems: any[] = [];
 
@@ -165,6 +165,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     this.getDataFromDB();
   }
 
+  belongsToSynopsis() {
+    return this.synopsisIri.split('/')[4] !== undefined;
+  }
+
   private getDataFromDB() {
     this.getBasicInformationOnCurrentPoem();
     this.getConvoluteIriSynopsisIriAndRelatedPoems();
@@ -172,7 +176,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private getBasicInformationOnCurrentPoem() {
     this.http
-      .get(Config.API + 'resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
+      .get(Config.API + '/resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
       .map(result => result.json())
       .subscribe(res => {
         this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
@@ -209,7 +213,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getEditedPoemText(editedTextIri: string) {
-    this.http.get(Config.API + 'resources/' + encodeURIComponent(editedTextIri))
+    this.http.get(Config.API + '/resources/' + encodeURIComponent(editedTextIri))
       .map(result => result.json())
       .subscribe(res => this.editedPoemText = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str);
   }
@@ -262,7 +266,9 @@ export class FassungComponent implements OnInit, AfterViewChecked {
           this.convoluteIri = res.subjects[ 0 ].value[ 1 ];
           this.synopsisIri = res.subjects[ 0 ].value[ 3 ];
           this.synopsisTitle = res.subjects[ 0 ].value[ 4 ];
-          this.getInformationOnRelatedPoems();
+          if (this.synopsisIri !== ' ') {
+            this.getInformationOnRelatedPoems();
+          }
         }
       });
   }

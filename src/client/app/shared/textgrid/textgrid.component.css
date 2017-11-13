@@ -69,3 +69,7 @@ md-card-content {
   border-top-right-radius: 4px;
   width: calc(100% - 16px);
 }
+
+.invisible {
+  visibility: hidden;
+}

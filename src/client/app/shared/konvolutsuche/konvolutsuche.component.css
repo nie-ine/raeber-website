@@ -1,5 +1,10 @@
-.suchfeld {
+.suchfeld-box {
   max-width: 150px;
   border: 1px black solid;
 }
 
+.suchfeld {
+  border-width:0;
+  border:none;
+  box-shadow:none;
+}

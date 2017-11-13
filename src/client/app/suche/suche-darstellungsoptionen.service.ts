@@ -9,6 +9,7 @@ export class SucheDarstellungsoptionenService {
   private numberOfColumnsSource = new Subject<number>();
   private relativeSizeOfColumnsSource = new Subject<string>();
   private textsHaveAlignedFramesSource = new Subject<boolean>();
+  private noSinglePoemIsHiddenSource = new Subject<boolean>();
 
   private showTextFlag: boolean = true;
   private textboxHeight: number = 0;
@@ -21,6 +22,7 @@ export class SucheDarstellungsoptionenService {
   numberOfColumns$ = this.numberOfColumnsSource.asObservable();
   relativeSizeOfColumns$ = this.relativeSizeOfColumnsSource.asObservable();
   textsHaveAlignedFrames$ = this.textsHaveAlignedFramesSource.asObservable();
+  noSinglePoemIsHidden$ = this.noSinglePoemIsHiddenSource.asObservable();
 
 
   decreaseTextboxHeight() {
@@ -59,5 +61,6 @@ export class SucheDarstellungsoptionenService {
     this.numberOfColumnsSource.next(this.numberOfColumns);
     this.textsHaveAlignedFrames = false;
     this.textsHaveAlignedFramesSource.next(this.textsHaveAlignedFrames);
+    this.noSinglePoemIsHiddenSource.next(true);
   }
 }

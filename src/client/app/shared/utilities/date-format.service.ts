@@ -42,7 +42,7 @@ export class DateFormatService {
     let parts = isoDate.split('-');
     let year = parts[ 0 ];
     let month = this.germanLongMonth[ Number(parts[ 1 ]) ];
-    let day = parts[ 2 ] + '.';
+    let day = parts[ 2 ].split(' ')[0] + '.';
     return day + ' ' + month + ' ' + year;
   }
 
@@ -50,7 +50,7 @@ export class DateFormatService {
     let parts = isoDate.split('-');
     let year = parts[ 0 ];
     let month = parts[ 1 ];
-    let day = parts[ 2 ];
+    let day = parts[ 2 ].split(' ')[0];
     return day + '.' + month + '.' + year;
   }
 }

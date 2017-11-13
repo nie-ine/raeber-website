@@ -344,6 +344,8 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
       } else if (this.convoluteTitle === 'Alemannische Gedichte 1985') {
         this.convoluteLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else if (this.convoluteTitle === 'Abgewandt Zugewandt (Nachwort)') {
+        this.convoluteLink = '/drucke/abgewandt-zugewandt-nachwort';
       } else if (this.convoluteTitle === 'Tagebuch') {
         this.convoluteLink = '/material/tagebuecher';
       } else if (this.convoluteTitle === 'Karten 1984') {

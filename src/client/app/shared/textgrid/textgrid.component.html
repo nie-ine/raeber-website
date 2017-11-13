@@ -41,9 +41,11 @@
 
       <md-card-footer style="position: static;">
 
-        <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut' && p[12] !== ' '">
-          <span>Synopse:</span>
-          <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
+        <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
+          <span [ngClass]="{'invisible': p[12] == ' '}">
+            Synopse:
+            <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
+          </span>
         </div>
 
 
@@ -54,10 +56,9 @@
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
           <span>In: {{ p[7] }} </span><br>
-          <ng-container *ngIf="p[12] !== ' '">
-            <span>Synopse:</span>
-            <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12]}}</a><br>
-          </ng-container>
+          <span [ngClass]="{'invisible': p[12] == ' '}">
+            Synopse: <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12]}}</a><br>
+          </span>
         </div>
       </md-card-footer>
     </md-card>

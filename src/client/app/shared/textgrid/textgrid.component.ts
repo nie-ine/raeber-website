@@ -53,6 +53,36 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() filterTyposcriptFlag = false;
   @Input() konvolutView: boolean;
 
+  static highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
+    if (searchTerm === undefined) {
+      return textToHighlight;
+    } else if (textToHighlight !== undefined) {
+      if (j === 0) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText0">' + match + '</span>';
+        });
+      } else if (j === 1) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText1">' + match + '</span>';
+        });
+      } else if (j === 2) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText2">' + match + '</span>';
+        });
+      } else if (j === 3) {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText3">' + match + '</span>';
+        });
+      } else {
+        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
+          return '<span class="highlightText0">' + match + '</span>';
+        });
+      }
+    } else {
+      return null;
+    }
+  }
+
   /**
    * Orders an array by date (ascending) and seqnum (ascending)
    * @param {Array<any>} unsorted Array to be sorted
@@ -79,9 +109,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         }
       }
     );
-  }
-
-  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
   }
 
   /**
@@ -121,32 +148,40 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return x.show;
   }
 
+  private static filterSingleTextbox(x: any) {
+    return !x[ 20 ];
+  }
+
+  constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    if(this.searchTermfromKonvolut) {
-      if(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1) {
+    if (this.searchTermfromKonvolut) {
+      if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 1) {
         this.searchInKonvolut = true;
         this.searchActivated = true;
         this.searchAndFilterInTextgrid();
       }
-      if(this.searchTermfromKonvolut[1] && this.searchTermfromKonvolut[1] !== 'null') {
+      if (this.searchTermfromKonvolut[ 1 ] && this.searchTermfromKonvolut[ 1 ] !== 'null') {
         this.filterPoemsOnPage();
         this.searchActivated = true;
         this.searchInKonvolut = true;
       }
-      if(!(this.searchTermfromKonvolut[0] && this.searchTermfromKonvolut[0].length > 1)
-        && !this.searchTermfromKonvolut[1]) {
+      if (!(this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 1)
+        && !this.searchTermfromKonvolut[ 1 ]) {
         this.searchActivated = false;
         this.searchTermArray = undefined;
       }
     }
   }
+
   filterPoemsOnPage() {
     this.searchForPage = undefined;
-    for(let poem of this.poemsInGrid) {
-      if(poem !== undefined) {
-        console.log('Seite des Poems: ' + poem[13]);
+    for (let poem of this.poemsInGrid) {
+      if (poem !== undefined) {
+        console.log('Seite des Poems: ' + poem[ 13 ]);
         //console.log(poem[13]);
-        if(poem[13] === this.searchTermfromKonvolut[1]) {
+        if (poem[ 13 ] === this.searchTermfromKonvolut[ 1 ]) {
           poem.show = true;
         } else {
           poem.show = false;
@@ -157,22 +192,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   searchAndFilterInTextgrid() {
     this.searchTermArray = undefined;
-    for(let poem of this.poemsInGrid) {
-      if(poem !== undefined) {
-        if(poem[0].search(this.searchTermfromKonvolut[0]) !== -1) {
+    for (let poem of this.poemsInGrid) {
+      if (poem !== undefined) {
+        if (poem[ 0 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
-        } else if (poem[2].search(this.searchTermfromKonvolut[0]) !== -1) {
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
+        } else if (poem[ 2 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
-          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[0];
+          this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
         } else {
           poem.show = false;
         }
-        }
       }
     }
+  }
 
 
   ngAfterViewChecked() {
@@ -203,44 +238,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
       return textToHighlight;
     }
     this.j = 0;
-      for(let seachTerm of searchTermArray) {
-        textToHighlight = TextgridComponent.highlightSingleSearchTerm(textToHighlight,seachTerm, this.j);
-        this.j += 1;
-      }
-      return textToHighlight;
-  }
-  static highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
-    if (searchTerm === undefined) {
-      return textToHighlight;
-    } else if(textToHighlight !== undefined ) {
-      if (j === 0) {
-        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-          return '<span class="highlightText0">' + match + '</span>';
-        });
-      } else if (j === 1) {
-        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-          return '<span class="highlightText1">' + match + '</span>';
-        });
-      } else if (j === 2) {
-        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-          return '<span class="highlightText2">' + match + '</span>';
-        });
-      } else if (j === 3) {
-        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-          return '<span class="highlightText3">' + match + '</span>';
-        });
-      } else {
-        return textToHighlight.replace(new RegExp(searchTerm, 'gi'), match => {
-          return '<span class="highlightText0">' + match + '</span>';
-        });
-      }
-    } else {
-      return null;
+    for (let seachTerm of searchTermArray) {
+      textToHighlight = TextgridComponent.highlightSingleSearchTerm(textToHighlight, seachTerm, this.j);
+      this.j += 1;
     }
+    return textToHighlight;
   }
+
   resetField() {
     this.gridTextHeight = 0;
     this.gridHeight.emit(this.gridTextHeight);
+  }
+
+  resetSinglePoemHiddenState() {
+    for (let i in this.poemsInGrid) {
+      this.poemsInGrid[i][20] = false;
+    }
   }
 
   produceFassungsLink(titel: string, iri: string) {
@@ -267,7 +280,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
-        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x);
+        .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x)
+        .filter(x => TextgridComponent.filterSingleTextbox(x));
     } else {
       return unfiltered;
     }
@@ -279,9 +293,21 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   produceTitleCss(isInFinalVersion: string) {
-    if(isInFinalVersion === '1') {
+    if (isInFinalVersion === '1') {
       return '#a30f2d';
     } else return false;
+  }
+
+  hideTextbox(iri: string) {
+    this.updatePoemByIriInArray(iri, x => x[20] = true);
+  }
+
+  updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
+    for (let i in this.poemsInGrid) {
+      if (this.poemsInGrid[i][3] === iri) {
+        updateFun(this.poemsInGrid[i]);
+      }
+    }
   }
 
 }

@@ -202,6 +202,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 12 ];
               this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 13 ];
               this.poemInformation[ this.i ][ 15 ] = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ][ 20 ] = false;
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;

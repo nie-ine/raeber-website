@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdButtonToggleModule, MdCardModule } from '@angular/material';
+import { MdButtonModule, MdButtonToggleModule, MdCardModule, MdIconModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { DynamicPaging } from './paging.service';
@@ -16,6 +16,8 @@ import { TextgridSynopsenlinkComponent } from './textgrid-synopsenlink/textgrid-
     CommonModule,
     MdButtonToggleModule,
     MdCardModule,
+    MdIconModule,
+    MdButtonModule,
     RouterModule
   ],
   declarations: [

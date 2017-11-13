@@ -8,6 +8,11 @@
        [ngStyle]="{ 'width': columns }">
 
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
+          <span *ngIf="contentType == 'synopse' || contentType == 'suche'" style="float:right;">
+            <button md-icon-button (click)="hideTextbox(p[3]);">
+              <md-icon>close</md-icon>
+            </button>
+          </span>
 
       <div *ngIf="contentType == 'konvolut'">
         <md-card-subtitle *ngIf="p[1] && !p[15].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>

@@ -353,7 +353,4 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         }
       );
   }
-
-
-
 }

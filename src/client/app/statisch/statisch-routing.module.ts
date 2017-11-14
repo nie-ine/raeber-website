@@ -12,7 +12,6 @@ import { WerkausgabeComponent } from './werkausgabe.component';
 import { TextausagabenComponent} from './textausgaben.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
-import { AbgewandtZugewandtNachwortComponent } from './abgewandt-zugewandt-nachwort.component';
 import { HomepageWithInitTextComponent } from './homepagewithinittext.component';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { HomepageWithInitTextComponent } from './homepagewithinittext.component'
       { path: 'werkausgabe', component: WerkausgabeComponent },
       { path: 'textausgaben', component: TextausagabenComponent},
       { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
-      { path: 'drucke/abgewandt-zugewandt-nachwort', component: AbgewandtZugewandtNachwortComponent },
       { path: 'anleitung', component: AnleitungComponent },
       { path: 'lebensdaten', component: LebensdatenComponent },
       { path: 'werkliste-selbst', component: WerklisteSelbstComponent },
@@ -39,7 +37,6 @@ export class StatischRoutingModule {
 }
 
 export const routingComponents = [
-  AbgewandtZugewandtNachwortComponent,
   AnleitungComponent,
   HomepageComponent,
   HomepageWithInitTextComponent,

@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
@@ -45,6 +45,104 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   poem_resizable: boolean;
   show_register: boolean;
+
+  private static produceFassungsLink(titel: string, iri: string) {
+    if (titel !== undefined && iri !== undefined) {
+      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+    } else {
+      return 'Linkinformation has not arrived yet';
+    }
+  }
+
+  private static createRequestForNeighbouringPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
+    let searchParams = new ExtendedSearch();
+    searchParams.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber-gui#Poem';
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteIRI', 'EQ', convoluteIRI);
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (seqnumOfNeighbour).toString());
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI', 'EXISTS', '');
+    searchParams.property =
+      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemTitle', 'EXISTS', '');
+    return searchParams.toString();
+  }
+
+  private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
+    const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
+    const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
+    return '/' + convoluteTitle + '/' + FassungComponent.removeSlashesInRouteElement(poemTitle) +
+      '---' + poemShortIRI + '###' + poemTitle;
+  }
+
+  private static removeSlashesInRouteElement(element: string) {
+    return element.includes('/') ?
+      element.replace(/\//g, '') :
+      element;
+  }
+
+  goToConvoluteview(searchTerm: string, page: string, convolutURl: string) {
+    this.router.navigateByUrl(
+      convolutURl +
+      '?wort=' +
+      searchTerm +
+      '&page=' + page);
+  }
+
+  constructor(private http: Http,
+              private route: ActivatedRoute,
+              private cdr: ChangeDetectorRef,
+              private dfs: DateFormatService,
+              private router: Router) {
+    route.params.subscribe(p => {
+      this.convoluteTitle = p.konvolut;
+      this.poemShortIri = p.fassung.split('---')[ 1 ];
+    });
+  }
+
+  ngOnInit() {
+    this.poem_resizable = false;
+    this.show_register = true;
+    this.getDataFromDB();
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+  }
+
+  buildLinkToRelatedConvolute(convoluteTitle: string): string {
+    if (convoluteTitle.includes('Notizbuch')) {
+      return '/notizbuecher/notizbuch-' + convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+    } else if (convoluteTitle.includes('Manuskripte')) {
+      return '/manuskripte/manuskripte-' + convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+    } else if (convoluteTitle.includes('Typoskripte 1979-spez')) {
+      return '/typoskripte/typoskripte-1979-spez';
+    } else if (convoluteTitle.includes('Typoskript')) {
+      return '/typoskripte/typoskripte-' + convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+    } else {
+      if (convoluteTitle === 'GESICHT IM MITTAG 1950') {
+        return '/drucke/gesicht-im-mittag';
+      } else if (convoluteTitle === 'Die verwandelten Schiffe 1957') {
+        return '/drucke/die-verwandelten-schiffe';
+      } else if (convoluteTitle === 'GEDICHTE 1960') {
+        return '/drucke/gedichte';
+      } else if (convoluteTitle === 'FLUSSUFER 1963') {
+        return '/drucke/flussufer';
+      } else if (convoluteTitle === 'Reduktionen 1981') {
+        return '/drucke/reduktionen';
+      } else if (convoluteTitle === 'Hochdeutsche Gedichte 1985') {
+        return '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
+      } else if (convoluteTitle === 'Alemannische Gedichte 1985') {
+        return '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else if (convoluteTitle === 'Tagebuch') {
+        return '/material/tagebuecher';
+      } else if (convoluteTitle === 'Karten 1984') {
+        return '/manuskripte/karten-1984';
+      } else {
+        return '/drucke/verstreutes';
+      }
+    }
+  }
 
   searchInConvolute(searchTerm: any) {
     console.log(searchTerm);
@@ -93,70 +191,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
 
     }
-  }
-  goToConvoluteview(searchTerm: string, page: string, convolutURl: string) {
-    this.router.navigateByUrl(
-      convolutURl +
-      '?wort=' +
-      searchTerm +
-      '&page=' + page);
-  }
-
-  private static produceFassungsLink(titel: string, iri: string) {
-    if (titel !== undefined && iri !== undefined) {
-      return titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
-    } else {
-      return 'Linkinformation has not arrived yet';
-    }
-  }
-
-  private static createRequestForNeighbouringPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
-    let searchParams = new ExtendedSearch();
-    searchParams.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber-gui#Poem';
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteIRI', 'EQ', convoluteIRI);
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (seqnumOfNeighbour).toString());
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI', 'EXISTS', '');
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemTitle', 'EXISTS', '');
-    return searchParams.toString();
-  }
-
-  private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
-    const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
-    const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
-    return '/' + convoluteTitle + '/' + FassungComponent.removeSlashesInRouteElement(poemTitle) +
-      '---' + poemShortIRI + '###' + poemTitle;
-  }
-
-  private static removeSlashesInRouteElement(element: string) {
-    return element.includes('/') ?
-      element.replace(/\//g, '') :
-      element;
-  }
-
-  constructor(private http: Http,
-              private route: ActivatedRoute,
-              private cdr: ChangeDetectorRef,
-              private dfs: DateFormatService,
-              private router: Router) {
-    route.params.subscribe(p => {
-      this.convoluteTitle = p.konvolut;
-      this.poemShortIri = p.fassung.split('---')[ 1 ];
-    });
-  }
-
-  ngOnInit() {
-    this.poem_resizable = false;
-    this.show_register = true;
-    this.getDataFromDB();
-    this.buildLinkToRelatedConvolute();
-  }
-
-  ngAfterViewChecked() {
-    this.cdr.detectChanges();
   }
 
   goToOtherFassung(idOfFassung: string) {
@@ -319,43 +353,4 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         }
       );
   }
-
-  private buildLinkToRelatedConvolute() {
-    if (this.convoluteTitle.includes('Notizbuch')) {
-      this.convoluteLink = '/notizbuecher/notizbuch-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
-    } else if (this.convoluteTitle.includes('Manuskripte')) {
-      this.convoluteLink = '/manuskripte/manuskripte-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
-    } else if (this.convoluteTitle.includes('Typoskripte 1979-spez')) {
-      this.convoluteLink = '/typoskripte/typoskripte-1979-spez';
-    } else if (this.convoluteTitle.includes('Typoskript')) {
-      this.convoluteLink = '/typoskripte/typoskripte-' + this.convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
-    } else {
-      if (this.convoluteTitle === 'GESICHT IM MITTAG 1950') {
-        this.convoluteLink = '/drucke/gesicht-im-mittag';
-      } else if (this.convoluteTitle === 'Die verwandelten Schiffe 1957') {
-        this.convoluteLink = '/drucke/die-verwandelten-schiffe';
-      } else if (this.convoluteTitle === 'GEDICHTE 1960') {
-        this.convoluteLink = '/drucke/gedichte';
-      } else if (this.convoluteTitle === 'FLUSSUFER 1963') {
-        this.convoluteLink = '/drucke/flussufer';
-      } else if (this.convoluteTitle === 'Reduktionen 1981') {
-        this.convoluteLink = '/drucke/reduktionen';
-      } else if (this.convoluteTitle === 'Hochdeutsche Gedichte 1985') {
-        this.convoluteLink = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
-      } else if (this.convoluteTitle === 'Alemannische Gedichte 1985') {
-        this.convoluteLink = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
-      } else if (this.convoluteTitle === 'Abgewandt Zugewandt (Nachwort)') {
-        this.convoluteLink = '/drucke/abgewandt-zugewandt-nachwort';
-      } else if (this.convoluteTitle === 'Tagebuch') {
-        this.convoluteLink = '/material/tagebuecher';
-      } else if (this.convoluteTitle === 'Karten 1984') {
-        this.convoluteLink = '/manuskripte/karten-1984';
-      } else {
-        this.convoluteLink = '/drucke/verstreutes';
-      }
-    }
-  }
-
-
-
 }

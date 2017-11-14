@@ -36,6 +36,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() searchTermfromKonvolut: string;
 
   @Output() gridHeight: EventEmitter<number> = new EventEmitter<number>();
+  @Output() numberOfResults: EventEmitter<number> = new EventEmitter<number>();
   @Input() searchTermArray: Array<any>;
 
   @Input() gridTextHeight: number = 0;
@@ -52,6 +53,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() filterManuscriptFlag = false;
   @Input() filterTyposcriptFlag = false;
   @Input() konvolutView: boolean;
+  numberOfShownPoems: number;
 
   static highlightSingleSearchTerm(textToHighlight: string, searchTerm: string, j: number) {
     if (searchTerm === undefined) {
@@ -213,6 +215,8 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   ngAfterViewChecked() {
     if (this.poemsInGrid !== undefined && this.router.url.split('/')[ 1 ] === 'synopsen') {
       this.poemsInGrid = TextgridComponent.sortByDate(this.poemsInGrid);
+      this.numberOfShownPoems = this.getNumberOfShownPoems();
+      this.numberOfResults.emit(this.numberOfShownPoems);
     }
     this.cdr.detectChanges();
   }
@@ -308,6 +312,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         updateFun(this.poemsInGrid[i]);
       }
     }
+  }
+
+  getNumberOfShownPoems(): number {
+    return this.filterPoems(this.poemsInGrid).length;
   }
 
 }

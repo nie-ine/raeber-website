@@ -136,7 +136,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
       this.performQuery('%23PrintedPoemBookPublication' +
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
-        '&searchval=(Nachwort)');)
+        '&searchval=(Nachwort)');
     } else if (this.konvolut_id === 'verstreutes') {
       this.performQuery(
         '%23PolyAuthorPublicationConvolute' +

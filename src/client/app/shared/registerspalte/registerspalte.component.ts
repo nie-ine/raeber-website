@@ -56,7 +56,7 @@ export class RegisterspalteComponent implements OnChanges {
   ngOnChanges() {
     if(this.konvolutView) {
       //console.log('dont do request again');
-      //console.log(this.poemsFromKonvolut);
+      // console.log(this.poemsFromKonvolut);
       this.updatePoemInformation(this.poemsFromKonvolut);
     } else {
       if(this.konvolutIRI) {
@@ -78,8 +78,6 @@ export class RegisterspalteComponent implements OnChanges {
   }
 
   updatePoemInformation(poemInformation: Array<any>) {
-    console.log('Update Poem Information');
-    console.log(poemInformation);
     if(poemInformation !== undefined && poemInformation.length > 0) {
       this.poems = [];
       for (let i = 0; i < poemInformation.length; i++) {
@@ -94,8 +92,7 @@ export class RegisterspalteComponent implements OnChanges {
           this.poems[poemInformation[i]['11']][10] = poemInformation[i][10];
         }
       }
-      console.log(this.poems);
-      this.nrOfPoems = poemInformation.length;
+      this.nrOfPoems = this.poems.length;
       for (let i = 0; i < this.poems.length; i++) {
         if(!this.poems[i]) {
           this.poems.splice(i,1);

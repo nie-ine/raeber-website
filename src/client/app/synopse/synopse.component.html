@@ -7,7 +7,8 @@
             <div class="rt-block">
               <div id="rt-mainbody">
                 <div class="component-content">
-                  <h4 style="margin:5px">Synopse: {{workTitle}} ({{results}})</h4>
+                  <h4 style="margin-left:5px; margin-top:5px; margin-bottom:0;">Synopse: {{workTitle}}</h4>
+                  <p style="margin-left:5px;">{{createNumberOfResultString()}}</p>
                   <rae-synopse-werkzeugleiste #werkzeugleiste
                                               [(showText)]="showText"
                                               [gridHeight]="gridHeight"
@@ -24,7 +25,7 @@
                   </rae-synopse-werkzeugleiste>
                   <from-poem-iri-to-textgrid-information
                     contentType="synopse"
-                    [workIRI] = "workIri"
+                    [workIRI]="workIri"
                     [poemIRIArray]="poemsIri"
                     (sendPoemInformationBack)="updatePoemInformation($event)"></from-poem-iri-to-textgrid-information>
                   <rae-textgrid #textgrid
@@ -38,7 +39,8 @@
                                 [filterManuscriptFlag]="!showManuscripts"
                                 [filterTyposcriptFlag]="!showTyposcripts"
                                 [filterDuplicatesFlag]="!showDuplicates"
-                                (gridHeight)="setGridHeight($event)">
+                                (gridHeight)="setGridHeight($event)"
+                                (numberOfResults)="setNumberOfShownPoems($event)">
                   </rae-textgrid>
                 </div>
               </div>

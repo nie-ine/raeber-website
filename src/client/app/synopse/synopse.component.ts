@@ -2,7 +2,7 @@
  * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 6/7/17.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Config } from '../shared/config/env.config';
@@ -12,9 +12,8 @@ import { Config } from '../shared/config/env.config';
   selector: 'rae-synopse',
   templateUrl: 'synopse.component.html'
 })
-export class SynopseComponent implements OnInit {
+export class SynopseComponent implements OnInit, AfterViewChecked {
 
-  nHits: number;
   synopseTag: string;
 
   showText: boolean;
@@ -26,6 +25,7 @@ export class SynopseComponent implements OnInit {
   poemsIri: string[] = [];
 
   poems: Array<any>;
+  numberOfShownPoems: number;
 
   results: number;
 
@@ -37,7 +37,7 @@ export class SynopseComponent implements OnInit {
 
   private sub: any;
 
-  constructor(private http: Http, private route: ActivatedRoute, router: Router) {
+  constructor(private http: Http, private route: ActivatedRoute, router: Router, private cdr: ChangeDetectorRef) {
     this.showText = true;
     this.workIri = router.url.split('/')[ 2 ];
   }
@@ -58,6 +58,10 @@ export class SynopseComponent implements OnInit {
         this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
         this.workTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
       });
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
   }
 
   setColumns(cols: number) {
@@ -101,6 +105,16 @@ export class SynopseComponent implements OnInit {
 
   toggleShowDuplicates() {
     this.showDuplicates = !this.showDuplicates;
+  }
+
+  setNumberOfShownPoems(n: number) {
+    this.numberOfShownPoems = n;
+  }
+
+  createNumberOfResultString(): string {
+    return 'Anzahl Gedichte: ' + ((this.numberOfShownPoems === this.results) ?
+      this.results :
+      this.numberOfShownPoems + ' (von total ' + this.results + ')');
   }
 
 }

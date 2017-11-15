@@ -2,11 +2,11 @@
 
   <button md-raised-button class="layoutbutton"
           (click)="toggleShowTexts();">
-    {{showTexts ? 'Kein Text' : 'Text'}}
+    {{ showTexts ? 'Kein Text' : 'Text' }}
   </button>
 
   <button md-raised-button class="layoutbutton" title="Spaltenanzahl" (click)="rotateNumberOfColumns();">
-    {{numberOfColumns}} Spalten
+    {{ numberOfColumns }} Spalten
   </button>
 
   <button md-raised-button class="layoutbutton" [disabled]="textsHaveAlignedFrames || !showTexts || textboxHeight >= 18"
@@ -21,8 +21,8 @@
 
   <button md-raised-button class="layoutbutton" title="Rahmen anzeigen" [disabled]="!showTexts"
           (click)="toggleAlignedFrames()">
-    {{!textsHaveAlignedFrames ? 'Angepasste Höhe'
-    : 'Fixe Höhe'}}
+    {{ !textsHaveAlignedFrames ? 'Angepasste Höhe'
+    : 'Fixe Höhe' }}
   </button>
 
   <button md-raised-button class="layoutbutton" title="neu laden" (click)="resetDisplayOptions()">

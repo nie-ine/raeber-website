@@ -12,7 +12,7 @@ import { RegisterTitelregisterComponent } from './titelregister/register-titelre
 import { RouterModule } from '@angular/router';
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
-import {GetKonvolutIRIsComponent} from "./titelregister/get-konvolut-IRIs.component";
+import { GetKonvolutIRIsComponent } from './titelregister/get-konvolut-IRIs.component';
 
 
 @NgModule({

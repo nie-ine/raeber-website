@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Event as NavigationEvent} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -98,6 +99,11 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       this.convoluteTitle = p.konvolut;
       this.poemShortIri = p.fassung.split('---')[ 1 ];
     });
+    router.events.subscribe( (event: NavigationEvent) => {
+      if (event instanceof NavigationEnd) {
+        this.updateAfterNavigation('abc---'+this.poemShortIri);
+      }
+    });
   }
 
   ngOnInit() {
@@ -194,6 +200,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   goToOtherFassung(idOfFassung: string) {
+    console.log('Altes goToOtherFassung!');
+  }
+
+  updateAfterNavigation(idOfFassung: string) {
     const tempPoemId = idOfFassung.split('---')[ 1 ];
     this.poemShortIri = tempPoemId !== undefined && !tempPoemId.includes('/') ? tempPoemId : this.poemShortIri;
     this.getDataFromDB();

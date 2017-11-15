@@ -8,14 +8,12 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief-fassung',
-  template: '<a [routerLink]="[\'/\' + linkPartConv + \'/\' + linkPartPoem]"'
-  + ' (click)="goToOtherFassung.emit(\'/\' + linkPartConv + \'/\' + linkPartPoem)">{{ linkText }}</a>'
+  template: '<a [routerLink]="[\'/\' + linkPartConv + \'/\' + linkPartPoem]">{{ linkText }}</a>'
 })
 export class FassungSteckbriefFassungComponent implements OnChanges {
 
   @Input() fassungIRI: string;
   @Input() linkText: string;
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   linkPartPoem: string;
   linkPartConv: string;

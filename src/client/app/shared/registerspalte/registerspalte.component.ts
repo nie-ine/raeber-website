@@ -24,8 +24,6 @@ export class RegisterspalteComponent implements OnChanges {
   @Input() poemsFromKonvolut: Array<any>;
   @Input() konvolutView: boolean;
 
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
-
   poems: Array<any>;
   poemsOld: Array<any>;
   poemIRIArray: Array<any>;

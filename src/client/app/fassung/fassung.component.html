@@ -12,7 +12,6 @@
 
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
-                    (goToOtherFassung)="goToOtherFassung($event)"
                     [idOfPrev]="prevPoem.split('###')[0]"
                     [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
@@ -89,8 +88,7 @@
                     <div style="margin-top:20px;">
                       <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri"
                                               [konvolutIRI]="convoluteIri"
-                                              [convoluteTitle]=" convoluteTitle"
-                                              (goToOtherFassung) = "goToOtherFassung($event)">
+                                              [convoluteTitle]=" convoluteTitle">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
@@ -109,14 +107,12 @@
                 <!-- Related items by tag -->
                 <div class="itemRelated">
                   <rae-fassung-weitere
-                    (goOtherFassung)="goToOtherFassung($event)"
                     [synopsenTags]="relatedPoems"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
-                      (goToOtherFassung)="goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"
@@ -135,8 +131,7 @@
           <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
-                <rae-registerspalte [konvolutIRI]="convoluteIri"
-                                    (goToOtherFassung)="goToOtherFassung($event)">
+                <rae-registerspalte [konvolutIRI]="convoluteIri">
                 </rae-registerspalte>
               </ng-template>
             </ngb-panel>

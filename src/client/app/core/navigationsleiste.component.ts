@@ -3,10 +3,8 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { AbstractControl } from '@angular/forms';
+import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
 
 @Component({
@@ -17,18 +15,15 @@ import { globalSearchVariableService } from '../suche/globalSearchVariablesServi
 export class NavigationsleisteComponent implements OnInit {
   abgewandtZugewandtNachwortIri: string;
 
-  constructor(private http: Http, private route: ActivatedRoute, private location: Location) {
-    this.route.params.subscribe(params => console.log(params));
+  constructor(private http: Http, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.createLinkToSearch();
     this.getLinkToAbgewandtZugewandtNachwort();
-    console.log(this.route.snapshot.queryParams[ 'wort' ]);
   }
 
   createLinkToSearch() {
-    //console.log(this.route._routerState.snapshot.url);
     // if(this.route._routerState.snapshot.url === '/suche') {
     if (this.route) {
       return 'resetSuche';
@@ -49,7 +44,6 @@ export class NavigationsleisteComponent implements OnInit {
       '&compop=EXISTS' +
       '&searchval=' +
       '&show_nrows=1';
-    console.log(request);
     return this.http.get(request)
       .map(lambda => lambda.json())
       .subscribe(res => this.abgewandtZugewandtNachwortIri =

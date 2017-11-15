@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
   selector: 'from-poem-iri-to-textgrid-information',
   templateUrl: 'fromPoemIRIToTextgridInformation.component.html'
 })
-export class FromPoemIRIToTextgridInformationComponent {
+export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() contentType: string;
   @Input() poemIRIArray: Array<any>;
   @Input() konvolutIRI: string;
@@ -18,8 +19,31 @@ export class FromPoemIRIToTextgridInformationComponent {
   countRequests: number;
   poemInformation: Array<any>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
   }
+
+  ngOnChanges() {
+    if (this.contentType === 'synopse') {
+      if (this.workIRI) console.log('Work iri to get Poems with Cache ' + this.workIRI);
+      this.poemInformation = [];
+      this.countRequests = 0;
+      this.performQuery();
+    } else {
+      //if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+      this.poemInformation = [];
+      this.countRequests = 0;
+      this.performQuery();
+    }
+    //if (this.poemIRIArray !== undefined && this.poemIRIArray.length !== 0) {
+    //  for (this.i = 0; this.i < this.poemIRIArray.length; this.i++) {
+    //console.log('get information for this poem:');
+    //this.getTitleAndDate(this.poemIRIArray[ this.i ], this.i);
+    //    this.poemInformation[ this.i ] = [];
+    //  }
+    //}
+  }
+
+//}
 
   performQuery() {
     if (this.contentType === 'synopse') {

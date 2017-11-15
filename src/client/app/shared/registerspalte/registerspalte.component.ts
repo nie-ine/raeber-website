@@ -23,14 +23,12 @@ export class RegisterspalteComponent {
   @Input() konvolutView: boolean;
   @Input() convoluteTitle: string;
   @Input() convoluteType: string;
+  @Input() poemType: string;
 
   @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   poemIRIArray: Array<any>;
   isAlphabeticallySorted: boolean = true;
-
-  constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
-  }
 
   private static sortBySeqnum(x: any, y: any) {
     if (x[ 8 ] < y[ 8 ]) {
@@ -39,6 +37,9 @@ export class RegisterspalteComponent {
       return 1;
     }
     return 0;
+  }
+
+  constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
   }
 
   formatDate(date: string) {
@@ -96,13 +97,27 @@ export class RegisterspalteComponent {
       this.convoluteType === 'printed poem book publication' ||
       this.convoluteType === 'poly-author publication convolute' ||
       this.convoluteType === 'diary convolute' ||
-      this.convoluteType === 'letter convolute';
+      this.convoluteType === 'letter convolute' ||
+      this.poemType === 'TypewrittenPoem' ||
+      this.poemType === 'PublicationPoem';
   }
 
   isHandwritten() {
     return this.convoluteType === 'poem notebook' ||
       this.convoluteType === 'poem manuscript convolute' ||
-      this.convoluteType === 'poem postcard convolute';
+      this.convoluteType === 'poem postcard convolute' ||
+      this.poemType === 'PoemNote' ||
+      this.poemType === 'HandwrittenPoem' ||
+      this.poemType === 'PostCardPoem';
+  }
+
+  isInDiary() {
+    return this.convoluteType === 'diary convolute' ||
+      this.poemType === 'DiaryEntry';
+  }
+
+  swapSortMode() {
+    this.isAlphabeticallySorted = !this.isAlphabeticallySorted;
   }
 
   private sortByFirstLetter(x: any, y: any) {

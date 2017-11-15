@@ -136,6 +136,9 @@
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
                 <rae-registerspalte [konvolutIRI]="convoluteIri"
+                                    [konvolutView]="false"
+                                    [convoluteTitle]="convoluteTitle"
+                                    [poemType]="poemType"
                                     (goToOtherFassung)="goToOtherFassung($event)">
                 </rae-registerspalte>
               </ng-template>

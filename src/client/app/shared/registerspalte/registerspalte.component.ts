@@ -75,7 +75,7 @@ export class RegisterspalteComponent {
     return unsortedPoems
       .filter(x => x !== undefined)
       .sort((x, y) =>
-        this.isAlphabeticallySorted ?
+        this.isAlphabeticallySorted && !this.isInDiary() ?
           this.sortAlphabetically(x, y) :
           RegisterspalteComponent.sortBySeqnum(x, y)
       );

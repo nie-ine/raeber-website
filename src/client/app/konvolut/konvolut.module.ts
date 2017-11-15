@@ -38,6 +38,7 @@ import { KonvolutSteckbriefMiniaturansichtComponent } from './konvolut-steckbrie
 import { KonvolutKommentarComponent } from './konvolut-kommentar/konvolut-kommentar.component';
 import { KonvolutSteckbriefBilderComponent } from './konvolut-steckbrief/konvolut-steckbrief-bilder.component';
 import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
+import { ConvoluteNotAvailableComponent } from './convolute-not-available.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.componen
     KonvolutSteckbriefPublikationComponent,
     KonvolutSteckbriefStufenComponent,
     KonvolutWerkzeugleisteComponent,
+    ConvoluteNotAvailableComponent,
     GetKonvolutIRIComponent,
     KonvolutTrefferleisteComponent
   ],

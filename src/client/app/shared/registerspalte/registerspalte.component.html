@@ -1,7 +1,7 @@
 <div class="rae-registerspalte-list">
   <h5>{{ convoluteTitle }}<br/>(Total: {{ getNumberOfPoems() }})</h5>
   <ng-container *ngIf="(convoluteType === undefined && poemType === undefined) || !isInDiary()">
-    <md-button-toggle-group style="box-shadow:none;" (change)="swapSortMode()">
+    <md-button-toggle-group style="box-shadow:none;" (change)="isAlphabeticallySorted = !isAlphabeticallySorted">
       <md-button-toggle value="alpha" checked="true">
         <md-icon>sort_by_alpha</md-icon>
       </md-button-toggle>

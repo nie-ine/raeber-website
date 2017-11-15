@@ -19,7 +19,7 @@ import { DateFormatService } from '../utilities/date-format.service';
 export class RegisterspalteComponent {
 
   @Input() konvolutIRI: string;
-  @Input() unsortedPoems: Array<any>;
+  @Input() unsortedPoems: any[];
   @Input() konvolutView: boolean;
   @Input() convoluteTitle: string;
   @Input() convoluteType: string;
@@ -27,10 +27,10 @@ export class RegisterspalteComponent {
 
   @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
-  poemIRIArray: Array<any>;
+  poemIRIArray: any[];
   isAlphabeticallySorted: boolean = true;
 
-  private static sortBySeqnum(x: any, y: any) {
+  private static sortBySeqnum(x: any, y: any): number {
     if (x[ 8 ] < y[ 8 ]) {
       return -1;
     } else if (x[ 8 ] > y[ 8 ]) {
@@ -42,11 +42,11 @@ export class RegisterspalteComponent {
   constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
   }
 
-  formatDate(date: string) {
+  formatDate(date: string): string {
     return this.dateFormatService.germanNumericDate(date);
   }
 
-  getSortedPoems(): Array<any> {
+  getSortedPoems(): any[] {
     return this.unsortedPoems !== undefined ?
       this.getAppropriateListOfSortedPoems(this.unsortedPoems) :
       this.unsortedPoems;
@@ -58,40 +58,32 @@ export class RegisterspalteComponent {
       0;
   }
 
-  produceFassungsLink(poem: Array<any>): string {
-    if (poem) {
-      if (poem[ 0 ] !== undefined && poem[ 3 ] !== undefined) {
-        return poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ];
-      } else {
-        return 'Linkinformation has not arrived yet';
-      }
-    } else {
-      return null;
-    }
+  produceFassungsLink(poem: any[]): string {
+    return poem ?
+      poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ] :
+      undefined;
   }
 
-  removeHtml(content: string) {
-    if (content !== undefined) {
-      return content.replace(/<span class="zeile">[0-9]+\s*<\/span>/g, '')
+  removeHtml(content: string): string {
+    return content ?
+      content.replace(/<span class="zeile">[0-9]+\s*<\/span>/g, '')
         .replace(/<br[^>a-zA-Z0-9]*>/g, ' ')
         .replace(/\s+/g, ' ')
-        .replace(/<[^>]+>/g, '');
-    } else {
-      return undefined;
-    }
+        .replace(/<[^>]+>/g, '') :
+      undefined;
   }
 
-  getAppropriateListOfSortedPoems(unsortedPoems: Array<any>) {
+  getAppropriateListOfSortedPoems(unsortedPoems: any[]): any[] {
     return unsortedPoems
       .filter(x => x !== undefined)
       .sort((x, y) =>
         this.isAlphabeticallySorted ?
-          this.sortByFirstLetter(x, y) :
+          this.sortAlphabetically(x, y) :
           RegisterspalteComponent.sortBySeqnum(x, y)
       );
   }
 
-  isTypewritten() {
+  isTypewritten(): boolean {
     return this.convoluteType === 'poem typescript convolute' ||
       this.convoluteType === 'poem typescript convolute with image' ||
       this.convoluteType === 'printed poem book publication' ||
@@ -102,7 +94,7 @@ export class RegisterspalteComponent {
       this.poemType === 'PublicationPoem';
   }
 
-  isHandwritten() {
+  isHandwritten(): boolean {
     return this.convoluteType === 'poem notebook' ||
       this.convoluteType === 'poem manuscript convolute' ||
       this.convoluteType === 'poem postcard convolute' ||
@@ -111,16 +103,12 @@ export class RegisterspalteComponent {
       this.poemType === 'PostCardPoem';
   }
 
-  isInDiary() {
+  isInDiary(): boolean {
     return this.convoluteType === 'diary convolute' ||
       this.poemType === 'DiaryEntry';
   }
 
-  swapSortMode() {
-    this.isAlphabeticallySorted = !this.isAlphabeticallySorted;
-  }
-
-  private sortByFirstLetter(x: any, y: any) {
+  private sortAlphabetically(x: any, y: any): number {
     const xNormalized = this.sortingService.germanAlphabeticalSortKey(x[ 0 ]);
     const yNormalized = this.sortingService.germanAlphabeticalSortKey(y[ 0 ]);
     if (xNormalized < yNormalized) {

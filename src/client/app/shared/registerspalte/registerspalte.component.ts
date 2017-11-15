@@ -4,8 +4,6 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
 

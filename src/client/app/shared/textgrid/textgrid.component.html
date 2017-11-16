@@ -9,55 +9,55 @@
 
     <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
           <span *ngIf="contentType == 'synopse' || contentType == 'suche'" style="float:right;">
-            <button md-icon-button (click)="hideTextbox(p[3]);">
+            <button md-icon-button (click)="hideTextbox(p.poemIRI);">
               <md-icon>close</md-icon>
             </button>
           </span>
 
       <div *ngIf="contentType == 'konvolut'">
-        <md-card-subtitle *ngIf="p[1] && !p[15].includes('Typoskripte')">{{ formatDate(p[1]) }}</md-card-subtitle>
+        <md-card-subtitle *ngIf="p.poemCreationDate && !p.convoluteTitle.includes('Typoskripte')">{{ formatDate(p.poemCreationDate) }}</md-card-subtitle>
       </div>
       <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
-        <md-card-subtitle *ngIf="p[1]">{{ formatDate(p[1]) }}</md-card-subtitle>
+        <md-card-subtitle *ngIf="p.poemCreationDate">{{ formatDate(p.poemCreationDate) }}</md-card-subtitle>
       </div>
 
       <md-card-title #poemTitle>
         <a class="item" *ngIf="contentType == 'konvolut'"
-           [routerLink]="produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]) }">
+           [routerLink]="produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
+           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]) }">
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
-           [routerLink]="'/' + p[4] + produceFassungsLink(p[0],p[3])" routerLinkActive="active"
-           [innerHTML]="highlight(p[0],searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14])}">
+           [routerLink]="'/' + p.convoluteTitle + produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
+           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14])}">
         </a>
       </md-card-title>
 
       <md-card-content
         [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
         [ngStyle]="{'height': rahmen ? 'calc(10em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
-        <div class="rae-poem" [innerHTML]="highlight(p[2],searchTermArray)" #poemText>
+        <div class="rae-poem" [innerHTML]="highlight(p.poemText,searchTermArray)" #poemText>
         </div>
       </md-card-content>
 
       <md-card-footer style="position: static;">
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
-          <span [ngClass]="{'invisible': p[12] == ' '}">
+          <span [ngClass]="{'invisible': p.synopsisTitle == ' '}">
             Synopse:
-            <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a>
+            <a [routerLink]="'/synopsen/' + p.synopsisIRI.split('/')[4]" routerLinkActive="active">{{ p.synopsisTitle }}</a>
           </span>
         </div>
 
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'synopse'">
-          <a [routerLink]="p[11]" routerLinkActive="active">{{ p[4] }}</a>
+          <a [routerLink]="p.convolutePath" routerLinkActive="active">{{ p.convoluteTitle }}</a>
         </div>
 
 
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
-          <span>In: {{ p[7] }} </span><br>
-          <span [ngClass]="{'invisible': p[12] == ' '}">
-            Synopse: <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a><br>
+          <span>In: {{ p.convoluteTitle }} </span><br>
+          <span [ngClass]="{'invisible': p.synopsisTitle == ' '}">
+            Synopse: <a [routerLink]="'/synopsen/' + p.synopsisIRI.split('/')[4]" routerLinkActive="active">{{ p.synopsisTitle }}</a><br>
           </span>
         </div>
       </md-card-footer>

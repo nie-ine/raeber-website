@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
+import { CachePoem } from '../textgrid/cache-poem';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,7 @@ import { DateFormatService } from '../utilities/date-format.service';
 export class RegisterspalteComponent {
 
   @Input() konvolutIRI: string;
-  @Input() unsortedPoems: any[];
+  @Input() unsortedPoems: Array<CachePoem>;
   @Input() konvolutView: boolean;
   @Input() convoluteTitle: string;
   @Input() convoluteType: string;
@@ -27,8 +28,8 @@ export class RegisterspalteComponent {
   isAlphabeticallySorted: boolean = true;
 
   private static sortBySeqnum(x: any, y: any): number {
-    const xNum = RegisterspalteComponent.prefixWithZeroes(x[ 8 ]);
-    const yNum = RegisterspalteComponent.prefixWithZeroes(y[ 8 ]);
+    const xNum = RegisterspalteComponent.prefixWithZeroes(x.seqnum);
+    const yNum = RegisterspalteComponent.prefixWithZeroes(y.seqnum);
     if (xNum < yNum) {
       return -1;
     } else if (xNum > yNum) {
@@ -60,9 +61,9 @@ export class RegisterspalteComponent {
       0;
   }
 
-  createLinkToPoem(poem: any[]): string {
+  createLinkToPoem(poem: CachePoem): string {
     return poem ?
-      poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ] :
+      poem.poemTitle.split('/')[ 0 ] + '---' + poem.poemIRI.split('raeber/')[ 1 ] :
       undefined;
   }
 
@@ -75,7 +76,7 @@ export class RegisterspalteComponent {
       undefined;
   }
 
-  getAppropriateListOfSortedPoems(unsortedPoems: any[]): any[] {
+  getAppropriateListOfSortedPoems(unsortedPoems: Array<CachePoem>): Array<CachePoem> {
     return unsortedPoems
       .filter(x => x !== undefined)
       .sort((x, y) =>
@@ -141,8 +142,8 @@ export class RegisterspalteComponent {
   }
 
   private sortAlphabetically(x: any, y: any): number {
-    const xNormalized = this.sortingService.germanAlphabeticalSortKey(x[ 0 ]);
-    const yNormalized = this.sortingService.germanAlphabeticalSortKey(y[ 0 ]);
+    const xNormalized = this.sortingService.germanAlphabeticalSortKey(x.poemTitle);
+    const yNormalized = this.sortingService.germanAlphabeticalSortKey(y.poemTitle);
     if (xNormalized < yNormalized) {
       return -1;
     } else if (xNormalized > yNormalized) {

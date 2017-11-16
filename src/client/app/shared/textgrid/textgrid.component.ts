@@ -92,12 +92,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   private static sortByDate(unsorted: Array<any>): Array<any> {
     return unsorted.sort((x, y) => {
-      if (x[ 1 ] > y[ 1 ]) {
+      if (x.poemCreationDate > y.poemCreationDate) {
           return 1;
-      } else if (x[ 1 ] < y[ 1 ]) {
+      } else if (x.poemCreationDate < y.poemCreationDate) {
           return -1;
         } else {
-          if (x[ 4 ] === y[ 4 ]) {
+          if (x.convoluteTitle === y.convoluteTitle) {
             if (x[ 5 ] > y[ 5 ]) {
               return 1;
             } else if (x[ 5 ] < y[ 5 ]) {
@@ -181,9 +181,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.searchForPage = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        console.log('Seite des Poems: ' + poem[ 13 ]);
+        console.log('Seite des Poems: ' + poem.onPage);
         //console.log(poem[13]);
-        if (poem[ 13 ] === this.searchTermfromKonvolut[ 1 ]) {
+        if (poem.onPage === this.searchTermfromKonvolut[ 1 ]) {
           poem.show = true;
         } else {
           poem.show = false;
@@ -196,11 +196,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.searchTermArray = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        if (poem[ 0 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        if (poem.poemTitle.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
-        } else if (poem[ 2 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        } else if (poem.poemText.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
@@ -256,7 +256,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   resetSinglePoemHiddenState() {
     for (let i in this.poemsInGrid) {
-      this.poemsInGrid[i][20] = false;
+      this.poemsInGrid[i].isVisible = false;
     }
   }
 
@@ -303,12 +303,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hideTextbox(iri: string) {
-    this.updatePoemByIriInArray(iri, x => x[20] = true);
+    this.updatePoemByIriInArray(iri, x => x.isVisible = true);
   }
 
   updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
     for (let i in this.poemsInGrid) {
-      if (this.poemsInGrid[i][3] === iri) {
+      if (this.poemsInGrid[i].poemIRI === iri) {
         updateFun(this.poemsInGrid[i]);
       }
     }

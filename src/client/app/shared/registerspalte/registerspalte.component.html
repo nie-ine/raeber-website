@@ -16,24 +16,24 @@
        [routerLink]="['/' + this.convoluteTitle + '/'] + createLinkToPoem(p)"
        routerLinkActive="active" [ngClass]="{'color0': i % 2}">
 
-      <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p[0] }}</h5>
-      <h5 md-line *ngIf="p && p[0].length > 20"></h5>
-      <h5 md-line *ngIf="p && p[0].length > 40"></h5>
-      <h5 md-line *ngIf="p && p[0].length > 60"></h5>
-      <h5 md-line *ngIf="p && p[0].length > 80"></h5>
+      <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p.poemTitle }}</h5>
+      <h5 md-line *ngIf="p && p.poemTitle.length > 20"></h5>
+      <h5 md-line *ngIf="p && p.poemTitle.length > 40"></h5>
+      <h5 md-line *ngIf="p && p.poemTitle.length > 60"></h5>
+      <h5 md-line *ngIf="p && p.poemTitle.length > 80"></h5>
 
       <p *ngIf="p && isAlphabeticallySorted" md-line>
 
-        {{ removeHtml(p[2]) }}
+        {{ removeHtml(p.poemText) }}
       </p>
 
       <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
       <p *ngIf="p && !isAlphabeticallySorted && isHandwritten()"
          md-line>
-        {{ formatDate(p[1]) }}
+        {{ formatDate(p.poemCreationDate) }}
       </p>
       <p *ngIf="p && !isAlphabeticallySorted && isTypewritten()" md-line>
-        {{ removeHtml(p[2]) }}
+        {{ removeHtml(p.poemText) }}
       </p>
     </a>
   </md-nav-list>

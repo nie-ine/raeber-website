@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core
 import { Http, Response } from '@angular/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { Router } from '@angular/router';
+import { CachePoem } from '../textgrid/cache-poem';
 
 @Component({
   moduleId: module.id,
@@ -14,10 +15,10 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() konvolutIRI: string;
   @Input() workIRI: string;
   @Output() sendPoemInformationBack: EventEmitter<any> = new EventEmitter<any>();
-  responseArray: Array<any>;
+  responseArray: Array<CachePoem>;
   i: number;
   countRequests: number;
-  poemInformation: Array<any>;
+  poemInformation: Array<CachePoem>;
 
   constructor(private http: Http, private router: Router) {
   }
@@ -86,46 +87,46 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           (lambda: Response) => {
             const data = lambda.json();
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
-              this.poemInformation[ this.i ] = [];
-              this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 7 ]; // poem title
-              this.poemInformation[ this.i ][ 1 ] = data.subjects[ this.i ].value[ 4 ]; // poem creation date
-              this.poemInformation[ this.i ][ 2 ] = data.subjects[ this.i ].value[ 6 ]; // poem text
-              this.poemInformation[ this.i ][ 3 ] = data.subjects[ this.i ].value[ 5 ]; // poem IRI
-              this.poemInformation[ this.i ][ 4 ] = data.subjects[ this.i ].value[ 3 ]; // convolute Title
-              this.poemInformation[ this.i ][ 5 ] = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
-              this.poemInformation[ this.i ][ 6 ] = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
-              if (this.poemInformation[ this.i ][ 4 ].includes('Notizbuch')) {
-                this.poemInformation[ this.i ][ 11 ] = '/notizbuecher/notizbuch-'
-                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
-              } else if (this.poemInformation[ this.i ][ 4 ].includes('Manuskripte')) {
-                this.poemInformation[ this.i ][ 11 ] = '/manuskripte/manuskripte-'
-                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
-              } else if (this.poemInformation[ this.i ][ 4 ].includes('Typoskripte 1979-spez')) {
-                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-1979-spez';
-              } else if (this.poemInformation[ this.i ][ 4 ].includes('Typoskript')) {
-                this.poemInformation[ this.i ][ 11 ] = '/typoskripte/typoskripte-'
-                  + this.poemInformation[ this.i ][ 4 ].split(' ')[ 1 ].replace('-', '-19');
+              this.poemInformation[ this.i ] = new CachePoem();
+              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 7 ]; // poem title
+              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 4 ]; // poem creation date
+              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ]; // poem text
+              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ]; // poem IRI
+              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ]; // convolute Title
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
+              this.poemInformation[ this.i ].sameEdition = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
+              if (this.poemInformation[ this.i ].convoluteTitle.includes('Notizbuch')) {
+                this.poemInformation[ this.i ].convolutePath = '/notizbuecher/notizbuch-'
+                  + this.poemInformation[ this.i ].convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+              } else if (this.poemInformation[ this.i ].convoluteTitle.includes('Manuskripte')) {
+                this.poemInformation[ this.i ].convolutePath = '/manuskripte/manuskripte-'
+                  + this.poemInformation[ this.i ].convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
+              } else if (this.poemInformation[ this.i ].convoluteTitle.includes('Typoskripte 1979-spez')) {
+                this.poemInformation[ this.i ].convolutePath = '/typoskripte/typoskripte-1979-spez';
+              } else if (this.poemInformation[ this.i ].convoluteTitle.includes('Typoskript')) {
+                this.poemInformation[ this.i ].convolutePath = '/typoskripte/typoskripte-'
+                  + this.poemInformation[ this.i ].convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
               } else {
-                if (this.poemInformation[ this.i ][ 4 ] === 'GESICHT IM MITTAG 1950') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/gesicht-im-mittag';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Die verwandelten Schiffe 1957') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/die-verwandelten-schiffe';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'GEDICHTE 1960') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/gedichte';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'FLUSSUFER 1963') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/flussufer';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Reduktionen 1981') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/reduktionen';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Hochdeutsche Gedichte 1985') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Alemannische Gedichte 1985') {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Tagebuch') {
-                  this.poemInformation[ this.i ][ 11 ] = '/material/tagebuecher';
-                } else if (this.poemInformation[ this.i ][ 4 ] === 'Karten 1984') {
-                  this.poemInformation[ this.i ][ 11 ] = '/manuskripte/karten-1984';
+                if (this.poemInformation[ this.i ].convoluteTitle === 'GESICHT IM MITTAG 1950') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/gesicht-im-mittag';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Die verwandelten Schiffe 1957') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/die-verwandelten-schiffe';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'GEDICHTE 1960') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/gedichte';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'FLUSSUFER 1963') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/flussufer';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Reduktionen 1981') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/reduktionen';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Hochdeutsche Gedichte 1985') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Alemannische Gedichte 1985') {
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Tagebuch') {
+                  this.poemInformation[ this.i ].convolutePath = '/material/tagebuecher';
+                } else if (this.poemInformation[ this.i ].convoluteTitle === 'Karten 1984') {
+                  this.poemInformation[ this.i ].convolutePath = '/manuskripte/karten-1984';
                 } else {
-                  this.poemInformation[ this.i ][ 11 ] = '/drucke/verstreutes';
+                  this.poemInformation[ this.i ].convolutePath = '/drucke/verstreutes';
                 }
               }
             }
@@ -189,20 +190,20 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
           (lambda: Response) => {
             const data = lambda.json();
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
-              this.poemInformation[ this.i ] = [];
-              this.poemInformation[ this.i ][ 0 ] = data.subjects[ this.i ].value[ 9 ];
-              this.poemInformation[ this.i ][ 1 ] = data.subjects[ this.i ].value[ 6 ];
-              this.poemInformation[ this.i ][ 2 ] = data.subjects[ this.i ].value[ 8 ];
-              this.poemInformation[ this.i ][ 3 ] = data.subjects[ this.i ].value[ 7 ];
-              this.poemInformation[ this.i ][ 11 ] = data.subjects[ this.i ].value[ 2 ];
-              this.poemInformation[ this.i ][ 10 ] = data.subjects[ this.i ].value[ 5 ];
-              this.poemInformation[ this.i ][ 8 ] = data.subjects[ this.i ].value[ 1 ];
-              this.poemInformation[ this.i ][ 9 ] = data.subjects[ this.i ].value[ 10 ];
-              this.poemInformation[ this.i ][ 12 ] = data.subjects[ this.i ].value[ 11 ];
-              this.poemInformation[ this.i ][ 14 ] = data.subjects[ this.i ].value[ 12 ];
-              this.poemInformation[ this.i ][ 13 ] = data.subjects[ this.i ].value[ 13 ];
-              this.poemInformation[ this.i ][ 15 ] = data.subjects[ this.i ].value[ 4 ];
-              this.poemInformation[ this.i ][ 20 ] = false;
+              this.poemInformation[ this.i ] = new CachePoem();
+              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 9 ];
+              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 8 ];
+              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ].alphabeticIndex = data.subjects[ this.i ].value[ 2 ];
+              this.poemInformation[ this.i ].dateIndex = data.subjects[ this.i ].value[ 5 ];
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ];
+              this.poemInformation[ this.i ].synopsisIRI = data.subjects[ this.i ].value[ 10 ];
+              this.poemInformation[ this.i ].synopsisTitle = data.subjects[ this.i ].value[ 11 ];
+              this.poemInformation[ this.i ].isFinalVersion = data.subjects[ this.i ].value[ 12 ];
+              this.poemInformation[ this.i ].onPage = data.subjects[ this.i ].value[ 13 ];
+              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ].isVisible = false;
             }
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;

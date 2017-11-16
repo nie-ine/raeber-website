@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
@@ -27,9 +27,11 @@ export class RegisterspalteComponent {
   isAlphabeticallySorted: boolean = true;
 
   private static sortBySeqnum(x: any, y: any): number {
-    if (x[ 8 ] < y[ 8 ]) {
+    const xNum = '000'.substr(0, 3 - x[ 8 ].length) + x[ 8 ];
+    const yNum = '000'.substr(0, 3 - y[ 8 ].length) + y[ 8 ];
+    if (xNum < yNum) {
       return -1;
-    } else if (x[ 8 ] > y[ 8 ]) {
+    } else if (xNum > yNum) {
       return 1;
     }
     return 0;

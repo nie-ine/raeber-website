@@ -56,7 +56,7 @@ export class RegisterspalteComponent {
       0;
   }
 
-  produceFassungsLink(poem: any[]): string {
+  createLinkToPoem(poem: any[]): string {
     return poem ?
       poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ] :
       undefined;
@@ -75,35 +75,65 @@ export class RegisterspalteComponent {
     return unsortedPoems
       .filter(x => x !== undefined)
       .sort((x, y) =>
-        this.isAlphabeticallySorted && !this.isInDiary() ?
+        this.isAlphabeticallySorted && !this.isDiaryEntry() ?
           this.sortAlphabetically(x, y) :
           RegisterspalteComponent.sortBySeqnum(x, y)
       );
   }
 
   isTypewritten(): boolean {
-    return this.convoluteType === 'poem typescript convolute' ||
-      this.convoluteType === 'poem typescript convolute with image' ||
-      this.convoluteType === 'printed poem book publication' ||
-      this.convoluteType === 'poly-author publication convolute' ||
-      this.convoluteType === 'diary convolute' ||
-      this.convoluteType === 'letter convolute' ||
-      this.poemType === 'TypewrittenPoem' ||
-      this.poemType === 'PublicationPoem';
+    return this.isTyposcript() ||
+      this.isInMonograph() ||
+      this.isInSerialPublication() ||
+      this.isDiaryEntry() ||
+      this.isLetter();
   }
 
   isHandwritten(): boolean {
+    return this.isNote() ||
+      this.isManuscript() ||
+      this.isPostcard();
+  }
+
+  isNote(): boolean {
     return this.convoluteType === 'poem notebook' ||
-      this.convoluteType === 'poem manuscript convolute' ||
-      this.convoluteType === 'poem postcard convolute' ||
-      this.poemType === 'PoemNote' ||
-      this.poemType === 'HandwrittenPoem' ||
+      this.poemType === 'PoemNote';
+  }
+
+  isManuscript(): boolean {
+    return this.convoluteType === 'poem manuscript convolute' ||
+      this.poemType === 'HandwrittenPoem';
+  }
+
+  isPostcard(): boolean {
+    return this.convoluteType === 'poem postcard convolute' ||
       this.poemType === 'PostCardPoem';
   }
 
-  isInDiary(): boolean {
+  isTyposcript(): boolean {
+    return this.convoluteType === 'poem typescript convolute' ||
+      this.convoluteType === 'poem typescript convolute with image' ||
+      this.poemType === 'TypewrittenPoem';
+  }
+
+  isInMonograph(): boolean {
+    return this.convoluteType === 'printed poem book publication' ||
+      (this.poemType === 'PublicationPoem' && this.convoluteTitle !== 'Verstreutes');
+  }
+
+  isInSerialPublication(): boolean {
+    return this.convoluteType === 'poly-author publication convolute' ||
+      this.convoluteTitle === 'Verstreutes';
+  }
+
+  isDiaryEntry(): boolean {
     return this.convoluteType === 'diary convolute' ||
       this.poemType === 'DiaryEntry';
+  }
+
+  isLetter(): boolean {
+    return this.convoluteType === 'letter convolute' ||
+      this.convoluteTitle === 'Briefe';
   }
 
   private sortAlphabetically(x: any, y: any): number {

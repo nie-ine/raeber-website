@@ -2,7 +2,7 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
@@ -26,24 +26,19 @@ export class RegisterspalteComponent {
   poemIRIArray: any[];
   isAlphabeticallySorted: boolean = true;
 
-  private static sortByDate(x: any, y: any): number {
-    if (x[ 1 ] > y[ 1 ]) {
-      return 1;
-    } else if (x[ 1 ] < y[ 1 ]) {
+  private static sortBySeqnum(x: any, y: any): number {
+    const xNum = RegisterspalteComponent.prefixWithZeroes(x[ 8 ]);
+    const yNum = RegisterspalteComponent.prefixWithZeroes(y[ 8 ]);
+    if (xNum < yNum) {
       return -1;
-    } else {
-      if (x[ 4 ] === y[ 4 ]) {
-        if (x[ 5 ] > y[ 5 ]) {
-          return 1;
-        } else if (x[ 5 ] < y[ 5 ]) {
-          return -1;
-        } else {
-          return 0;
-        }
-      } else {
-        return 0;
-      }
+    } else if (xNum > yNum) {
+      return 1;
     }
+    return 0;
+  }
+
+  private static prefixWithZeroes(s: string): string {
+    return '000'.substr(0, 3 - s.length) + s;
   }
 
   constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
@@ -65,7 +60,7 @@ export class RegisterspalteComponent {
       0;
   }
 
-  produceFassungsLink(poem: any[]): string {
+  createLinkToPoem(poem: any[]): string {
     return poem ?
       poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ] :
       undefined;
@@ -84,35 +79,65 @@ export class RegisterspalteComponent {
     return unsortedPoems
       .filter(x => x !== undefined)
       .sort((x, y) =>
-        this.isAlphabeticallySorted && !this.isInDiary() ?
+        this.isAlphabeticallySorted && !this.isDiaryEntry() ?
           this.sortAlphabetically(x, y) :
-          RegisterspalteComponent.sortByDate(x, y)
+          RegisterspalteComponent.sortBySeqnum(x, y)
       );
   }
 
   isTypewritten(): boolean {
-    return this.convoluteType === 'poem typescript convolute' ||
-      this.convoluteType === 'poem typescript convolute with image' ||
-      this.convoluteType === 'printed poem book publication' ||
-      this.convoluteType === 'poly-author publication convolute' ||
-      this.convoluteType === 'diary convolute' ||
-      this.convoluteType === 'letter convolute' ||
-      this.poemType === 'TypewrittenPoem' ||
-      this.poemType === 'PublicationPoem';
+    return this.isTyposcript() ||
+      this.isInMonograph() ||
+      this.isInSerialPublication() ||
+      this.isDiaryEntry() ||
+      this.isLetter();
   }
 
   isHandwritten(): boolean {
+    return this.isNote() ||
+      this.isManuscript() ||
+      this.isPostcard();
+  }
+
+  isNote(): boolean {
     return this.convoluteType === 'poem notebook' ||
-      this.convoluteType === 'poem manuscript convolute' ||
-      this.convoluteType === 'poem postcard convolute' ||
-      this.poemType === 'PoemNote' ||
-      this.poemType === 'HandwrittenPoem' ||
+      this.poemType === 'PoemNote';
+  }
+
+  isManuscript(): boolean {
+    return this.convoluteType === 'poem manuscript convolute' ||
+      this.poemType === 'HandwrittenPoem';
+  }
+
+  isPostcard(): boolean {
+    return this.convoluteType === 'poem postcard convolute' ||
       this.poemType === 'PostCardPoem';
   }
 
-  isInDiary(): boolean {
+  isTyposcript(): boolean {
+    return this.convoluteType === 'poem typescript convolute' ||
+      this.convoluteType === 'poem typescript convolute with image' ||
+      this.poemType === 'TypewrittenPoem';
+  }
+
+  isInMonograph(): boolean {
+    return this.convoluteType === 'printed poem book publication' ||
+      (this.poemType === 'PublicationPoem' && this.convoluteTitle !== 'Verstreutes');
+  }
+
+  isInSerialPublication(): boolean {
+    return this.convoluteType === 'poly-author publication convolute' ||
+      this.convoluteTitle === 'Verstreutes';
+  }
+
+  isDiaryEntry(): boolean {
     return this.convoluteType === 'diary convolute' ||
       this.poemType === 'DiaryEntry';
+  }
+
+  isLetter(): boolean {
+    return this.convoluteType === 'letter convolute' ||
+      this.convoluteTitle === 'Briefe';
   }
 
   private sortAlphabetically(x: any, y: any): number {

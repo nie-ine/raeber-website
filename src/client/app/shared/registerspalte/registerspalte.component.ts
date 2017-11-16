@@ -28,13 +28,24 @@ export class RegisterspalteComponent {
   poemIRIArray: any[];
   isAlphabeticallySorted: boolean = true;
 
-  private static sortBySeqnum(x: any, y: any): number {
-    if (x[ 8 ] < y[ 8 ]) {
-      return -1;
-    } else if (x[ 8 ] > y[ 8 ]) {
+  private static sortByDate(x: any, y: any): number {
+    if (x[ 1 ] > y[ 1 ]) {
       return 1;
+    } else if (x[ 1 ] < y[ 1 ]) {
+      return -1;
+    } else {
+      if (x[ 4 ] === y[ 4 ]) {
+        if (x[ 5 ] > y[ 5 ]) {
+          return 1;
+        } else if (x[ 5 ] < y[ 5 ]) {
+          return -1;
+        } else {
+          return 0;
+        }
+      } else {
+        return 0;
+      }
     }
-    return 0;
   }
 
   constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
@@ -77,7 +88,7 @@ export class RegisterspalteComponent {
       .sort((x, y) =>
         this.isAlphabeticallySorted && !this.isInDiary() ?
           this.sortAlphabetically(x, y) :
-          RegisterspalteComponent.sortBySeqnum(x, y)
+          RegisterspalteComponent.sortByDate(x, y)
       );
   }
 

@@ -5,7 +5,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MdButtonToggleModule, MdListModule } from '@angular/material';
+import { MdButtonToggleModule, MdIconModule, MdListModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -24,6 +24,7 @@ import { FromPoemIRIToTextgridInformationModule } from '../fromPoemIRIToTextgrid
     HttpModule,
     MdButtonToggleModule,
     MdListModule,
+    MdIconModule,
     RouterModule
   ],
   declarations: [ RegisterspalteComponent ],

@@ -1,62 +1,45 @@
 <div class="rae-registerspalte-list">
-  <h5>{{ konvolutTitle }}<br/>(Total: {{ nrOfPoems }})</h5>
-  <md-button-toggle-group [(ngModel)]="sortingType" style="box-shadow:none;">
-    <md-button-toggle value="alphabetic" (click)="sortAlphabetically()">alph.</md-button-toggle>
-    <md-button-toggle value="chronologic" (click)="sortChronologically()">Folge</md-button-toggle>
-  </md-button-toggle-group>
+  <h5>{{ convoluteTitle }}<br/>(Total: {{ getNumberOfPoems() }})</h5>
+  <ng-container *ngIf="(convoluteType === undefined && poemType === undefined) || !isInDiary()">
+    <md-button-toggle-group style="box-shadow:none;" (change)="isAlphabeticallySorted = !isAlphabeticallySorted">
+      <md-button-toggle value="alpha" checked="true">
+        <md-icon>sort_by_alpha</md-icon>
+      </md-button-toggle>
+      <md-button-toggle value="chrono">
+        <md-icon>access_time</md-icon>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </ng-container>
   <md-nav-list dense>
-    <a md-list-item *ngFor="let p of poems; let i = index"
-       [routerLink]="['/' + this.konvolutTitle + '/'] + produceFassungsLink(p)"
-       routerLinkActive="active" [ngClass]="{'color0': i % 2}"  >
-
+    <a md-list-item *ngFor="let p of getSortedPoems(); let i = index"
+       [routerLink]="['/' + this.convoluteTitle + '/'] + produceFassungsLink(p)"
+       routerLinkActive="active" [ngClass]="{'color0': i % 2}">
       <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p[0] }}</h5>
       <h5 md-line *ngIf="p && p[0].length > 20"></h5>
       <h5 md-line *ngIf="p && p[0].length > 40"></h5>
       <h5 md-line *ngIf="p && p[0].length > 60"></h5>
       <h5 md-line *ngIf="p && p[0].length > 80"></h5>
 
-      <p *ngIf="sortingType=='alphabetic' && p"
-         md-line>
+      <p *ngIf="p && isAlphabeticallySorted" md-line>
         <!-- incipit -->
-        {{ p[2] }}
+        {{ removeHtml(p[2]) }}
       </p>
 
       <!-- the formatted date needs an explicit *ngIf because it is reformatted and not a direct Knora text value -->
-      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='notizbuecher'"
+      <p *ngIf="p && !isAlphabeticallySorted && isHandwritten()"
          md-line>
         {{ formatDate(p[1]) }}
       </p>
-      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='manuskripte'"
-         md-line>
-        {{ formatDate(p[1]) }}
+      <p *ngIf="p && !isAlphabeticallySorted && isTypewritten()" md-line>
+        {{ removeHtml(p[2]) }}
       </p>
-      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='typoskripte'"
-         md-line>
-        {{ p[2] }}
-      </p>
-      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='drucke'"
-         md-line>
-        {{ p[2] }}
-      </p>
-      <p *ngIf="p && sortingType=='chronologic' && konvolutType=='material'"
-         md-line>
-        {{ p[2] }}
-      </p>
-
     </a>
   </md-nav-list>
 </div>
 
 <from-poem-iri-to-textgrid-information
-  [konvolutIRI]="konvolutIRItoStartownRequest"
-  [poemIRIArray]="poemIRIArray"
-  (sendPoemInformationBack)="updatePoemInformation($event)"
-></from-poem-iri-to-textgrid-information>
-
-<!--
-<from-konvolut-iri-to-poem-iris
+  *ngIf="!konvolutView"
   [konvolutIRI]="konvolutIRI"
-  [konvolutType]="knoraKonvolutType"
-  (sendPoemIRIsBack)="createPoemIRIList($event)"
-></from-konvolut-iri-to-poem-iris>
--->
+  [poemIRIArray]="poemIRIArray"
+  (sendPoemInformationBack)="unsortedPoems=$event">
+</from-poem-iri-to-textgrid-information>

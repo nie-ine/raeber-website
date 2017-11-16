@@ -131,7 +131,11 @@
           <ngb-accordion #acc="ngbAccordion" activeIds="register,suche">
             <ngb-panel id="register" title="Register">
               <ng-template ngbPanelContent>
-                <rae-registerspalte [konvolutIRI]="convoluteIri">
+                <rae-registerspalte [konvolutIRI]="convoluteIri"
+                                    [konvolutView]="false"
+                                    [convoluteTitle]="convoluteTitle"
+                                    [poemType]="poemType">
+
                 </rae-registerspalte>
               </ng-template>
             </ngb-panel>

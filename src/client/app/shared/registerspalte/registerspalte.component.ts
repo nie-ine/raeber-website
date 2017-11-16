@@ -27,14 +27,18 @@ export class RegisterspalteComponent {
   isAlphabeticallySorted: boolean = true;
 
   private static sortBySeqnum(x: any, y: any): number {
-    const xNum = '000'.substr(0, 3 - x[ 8 ].length) + x[ 8 ];
-    const yNum = '000'.substr(0, 3 - y[ 8 ].length) + y[ 8 ];
+    const xNum = RegisterspalteComponent.prefixWithZeroes(x[ 8 ]);
+    const yNum = RegisterspalteComponent.prefixWithZeroes(y[ 8 ]);
     if (xNum < yNum) {
       return -1;
     } else if (xNum > yNum) {
       return 1;
     }
     return 0;
+  }
+
+  private static prefixWithZeroes(s: string): string {
+    return '000'.substr(0, 3 - s.length) + s;
   }
 
   constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {

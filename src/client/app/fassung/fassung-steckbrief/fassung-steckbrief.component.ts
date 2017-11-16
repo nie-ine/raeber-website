@@ -16,7 +16,6 @@ export class FassungSteckbriefComponent implements OnChanges {
   @Input() fassungIRI: string;
   @Input() konvolutIRI: string;
   @Input() convoluteTitle: string;
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
 
   isWrittenWith: string;
   specialDescription: string;

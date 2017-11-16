@@ -1,7 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Event as NavigationEvent} from '@angular/router';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -197,10 +197,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
 
     }
-  }
-
-  goToOtherFassung(idOfFassung: string) {
-    console.log('Altes goToOtherFassung!');
   }
 
   updateAfterNavigation(idOfFassung: string) {

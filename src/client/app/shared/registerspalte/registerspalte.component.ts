@@ -2,14 +2,10 @@
  * Created by Reto Baumgartner (rfbaumgartner) on 27.06.17.
  */
 
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 import { AlphabeticalSortingService } from '../utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../utilities/date-format.service';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
   moduleId: module.id,
@@ -18,164 +14,116 @@ import { globalSearchVariableService } from '../../suche/globalSearchVariablesSe
   styleUrls: [ 'registerspalte.component.css' ],
   providers: [ AlphabeticalSortingService, DateFormatService ]
 })
-export class RegisterspalteComponent implements OnChanges {
+export class RegisterspalteComponent {
 
   @Input() konvolutIRI: string;
-  @Input() poemsFromKonvolut: Array<any>;
+  @Input() unsortedPoems: any[];
   @Input() konvolutView: boolean;
+  @Input() convoluteTitle: string;
+  @Input() convoluteType: string;
+  @Input() poemType: string;
 
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
+  poemIRIArray: any[];
+  isAlphabeticallySorted: boolean = true;
 
-  poems: Array<any>;
-  poemsOld: Array<any>;
-  poemIRIArray: Array<any>;
-  nrOfPoems: number;
-  konvolutId: string;
-  konvolutType: string;
-  knoraKonvolutType: string;
-  konvolutTypeMap: any = {
-    'poem notebook': 'notizbuecher',
-    'poem manuscript convolute': 'manuskripte',
-    'poem typescript convolute': 'typoskripte',
-    'poem typescript convolute with image': 'typoskripte',
-    'printed poem book publication': 'drucke',
-    'poly-author publication convolute': 'drucke',
-    'poem postcard convolute': 'manuskripte',
-    'diary convolute': 'material',
-    'letter convolute': 'material'
-  };
-  konvolutTitle: string;
-  sortingType: string;
-  konvolutIRItoStartownRequest: string;
-  private sub: any;
-
-  constructor(private http: Http, private sortingService: AlphabeticalSortingService,
-              private dateFormatService: DateFormatService) {
-  }
-
-  ngOnChanges() {
-    if(this.konvolutView) {
-      //console.log('dont do request again');
-      //console.log(this.poemsFromKonvolut);
-      this.updatePoemInformation(this.poemsFromKonvolut);
+  private static sortByDate(x: any, y: any): number {
+    if (x[ 1 ] > y[ 1 ]) {
+      return 1;
+    } else if (x[ 1 ] < y[ 1 ]) {
+      return -1;
     } else {
-      if(this.konvolutIRI) {
-        this.konvolutIRItoStartownRequest = this.konvolutIRI;
-        //console.log('start own request with konvolut - IRI: ' + this.konvolutIRI);
-      }
-    }
-    //console.log(this.poemsFromKonvolut);
-    // infos for title and routing
-    if (this.konvolutIRI !== undefined) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI))
-        .map(response => response.json()).subscribe(res => {
-          this.konvolutTitle = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
-          this.konvolutId = res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ].utf8str;
-          this.knoraKonvolutType = res.resinfo.restype_label;
-          this.konvolutType = this.konvolutTypeMap[ this.knoraKonvolutType ];
-        });
-    }
-  }
-
-  updatePoemInformation(poemInformation: Array<any>) {
-    console.log('Update Poem Information');
-    console.log(poemInformation);
-    if(poemInformation !== undefined && poemInformation.length > 0) {
-      this.poems = [];
-      for (let i = 0; i < poemInformation.length; i++) {
-        if (poemInformation[i] !== undefined) {
-          this.poems[poemInformation[i]['11']] = [];
-          this.poems[poemInformation[i]['11']][0] = poemInformation[i][0];
-          this.poems[poemInformation[i]['11']][1] = poemInformation[i][1];
-          this.poems[poemInformation[i]['11']][2] = this.removeHtml(poemInformation[i][2]);
-          this.poems[poemInformation[i]['11']][3] = poemInformation[i][3];
-          this.poems[poemInformation[i]['11']][8] = poemInformation[i][8];
-          this.poems[poemInformation[i]['11']][11] = poemInformation[i][11];
-          this.poems[poemInformation[i]['11']][10] = poemInformation[i][10];
+      if (x[ 4 ] === y[ 4 ]) {
+        if (x[ 5 ] > y[ 5 ]) {
+          return 1;
+        } else if (x[ 5 ] < y[ 5 ]) {
+          return -1;
+        } else {
+          return 0;
         }
-      }
-      console.log(this.poems);
-      this.nrOfPoems = poemInformation.length;
-      for (let i = 0; i < this.poems.length; i++) {
-        if(!this.poems[i]) {
-          this.poems.splice(i,1);
-        }
-      }
-    }
-    //console.log(this.poems);
-
-    this.sortingType = 'alphabetic';
-  }
-
-  createPoemIRIList(poemIRIList: Array<any>) {
-    this.poemIRIArray = poemIRIList;
-  }
-
-  sortAlphabetically() {
-    this.sortingType = 'alphabetic';
-    this.poemsOld = [];
-    this.poemsOld = this.poems;
-    this.poems = [];
-    for (let i = 0; i < this.poemsOld.length; i++) {
-      //console.log('Alphabetic index: ' + this.poemsOld[i].alphabeticIndex + ' PoemTitle: ' + this.poemsOld[i].title);
-      if(this.poemsOld[i]) {
-        this.poems[this.poemsOld[i][ '11' ] - 1] = this.poemsOld[i];
-      }
-    }
-    for (let i = 0; i < this.poems.length; i++) {
-      if(!this.poems[i]) {
-        this.poems.splice(i,1);
-      }
-    }
-  }
-
-  sortChronologically() {
-    //console.log('Sort chronologically');
-    this.sortingType = 'chronologic';
-    this.poemsOld = [];
-    this.poemsOld = this.poems;
-    this.poems = [];
-    //console.log(this.poems);
-    for (let i = 0; i < this.poemsOld.length; i++) {
-      if(this.poemsOld[i]) {
-        //console.log(this.poemsOld[i][ '8' ]);
-        this.poems[this.poemsOld[i][ '8' ] - 1] = this.poemsOld[i];
-      }
-    }
-    for (let i = 0; i < this.poems.length; i++) {
-      if(!this.poems[i]) {
-        this.poems.splice(i,1);
-      }
-    }
-    //console.log(this.poems[0]);
-  }
-
-  formatDate(date: string) {
-    return this.dateFormatService.germanLongDate(date);
-  }
-
-  produceFassungsLink(poem: Array<any>) {
-    if(poem) {
-      if (poem[0] !== undefined && poem[3] !== undefined) {
-        return poem[0].split('/')[ 0 ] + '---' + poem[3].split('raeber/')[ 1 ];
       } else {
-        return 'Linkinformation has not arrived yet';
+        return 0;
       }
-    } else {
-      return null;
     }
   }
 
-  removeHtml(content: string) {
-    if (content !== undefined) {
-      return content.replace(/<span class="zeile">[0-9]+\s*<\/span>/g, '')
+  constructor(private sortingService: AlphabeticalSortingService, private dateFormatService: DateFormatService) {
+  }
+
+  formatDate(date: string): string {
+    return this.dateFormatService.germanNumericDate(date);
+  }
+
+  getSortedPoems(): any[] {
+    return this.unsortedPoems !== undefined ?
+      this.getAppropriateListOfSortedPoems(this.unsortedPoems) :
+      this.unsortedPoems;
+  }
+
+  getNumberOfPoems(): number {
+    return this.unsortedPoems !== undefined ?
+      this.unsortedPoems.filter(x => x !== undefined).length :
+      0;
+  }
+
+  produceFassungsLink(poem: any[]): string {
+    return poem ?
+      poem[ 0 ].split('/')[ 0 ] + '---' + poem[ 3 ].split('raeber/')[ 1 ] :
+      undefined;
+  }
+
+  removeHtml(content: string): string {
+    return content ?
+      content.replace(/<span class="zeile">[0-9]+\s*<\/span>/g, '')
         .replace(/<br[^>a-zA-Z0-9]*>/g, ' ')
         .replace(/\s+/g, ' ')
-        .replace(/<[^>]+>/g, '');
-    } else {
-      return undefined;
-      //console.log('no value yet');
+        .replace(/<[^>]+>/g, '') :
+      undefined;
+  }
+
+  getAppropriateListOfSortedPoems(unsortedPoems: any[]): any[] {
+    return unsortedPoems
+      .filter(x => x !== undefined)
+      .sort((x, y) =>
+        this.isAlphabeticallySorted && !this.isInDiary() ?
+          this.sortAlphabetically(x, y) :
+          RegisterspalteComponent.sortByDate(x, y)
+      );
+  }
+
+  isTypewritten(): boolean {
+    return this.convoluteType === 'poem typescript convolute' ||
+      this.convoluteType === 'poem typescript convolute with image' ||
+      this.convoluteType === 'printed poem book publication' ||
+      this.convoluteType === 'poly-author publication convolute' ||
+      this.convoluteType === 'diary convolute' ||
+      this.convoluteType === 'letter convolute' ||
+      this.poemType === 'TypewrittenPoem' ||
+      this.poemType === 'PublicationPoem';
+  }
+
+  isHandwritten(): boolean {
+    return this.convoluteType === 'poem notebook' ||
+      this.convoluteType === 'poem manuscript convolute' ||
+      this.convoluteType === 'poem postcard convolute' ||
+      this.poemType === 'PoemNote' ||
+      this.poemType === 'HandwrittenPoem' ||
+      this.poemType === 'PostCardPoem';
+  }
+
+  isInDiary(): boolean {
+    return this.convoluteType === 'diary convolute' ||
+      this.poemType === 'DiaryEntry';
+  }
+
+  private sortAlphabetically(x: any, y: any): number {
+    const xNormalized = this.sortingService.germanAlphabeticalSortKey(x[ 0 ]);
+    const yNormalized = this.sortingService.germanAlphabeticalSortKey(y[ 0 ]);
+    if (xNormalized < yNormalized) {
+      return -1;
+    } else if (xNormalized > yNormalized) {
+      return 1;
     }
+    return 0;
   }
 
 }

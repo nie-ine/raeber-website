@@ -14,8 +14,6 @@ export class FassungWeitereComponent {
   @Input() synopsenTags: any[] = [];
   @Input() idOfNext: string;
 
-  @Output() goOtherFassung: EventEmitter<any> = new EventEmitter<any>();
-
   private static getPoemDateFromPoemString(poemString: string) {
     return poemString.split('###')[ 2 ];
   }
@@ -29,10 +27,6 @@ export class FassungWeitereComponent {
   }
 
   constructor(private router: Router) {
-  }
-
-  goToOtherFassung(otherFassung: string) {
-    this.goOtherFassung.emit(otherFassung);
   }
 
   /**

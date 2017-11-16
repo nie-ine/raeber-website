@@ -39,9 +39,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   @Input() loadingIndicatorInput: boolean;
   @Input() lastSearchTerm: string;
 
-  @ViewChild(TextgridComponent)
-  private textgridComponent: TextgridComponent;
-
   relativeSizeOfColumns: string = '43%';
   textboxHeight: number = 0;
   textsHaveAlignedFrames: boolean = false;
@@ -72,6 +69,8 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   allConvolutesSelected: boolean = true;
   loadingIndicator = true;
 
+  @ViewChild(TextgridComponent)
+  private textgridComponent: TextgridComponent;
 
   constructor(private fb: FormBuilder,
               private cdr: ChangeDetectorRef,
@@ -123,7 +122,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     let b: boolean;
     for (const v in children) {
       if (v !== parentFormControlName) {
-        if (b == null || children[ v ].value === b) {
+        if (b === null || children[ v ].value === b) {
           b = children[ v ].value;
         } else {
           res = false;

@@ -23,8 +23,6 @@ export class RegisterspalteComponent {
   @Input() convoluteType: string;
   @Input() poemType: string;
 
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
-
   poemIRIArray: any[];
   isAlphabeticallySorted: boolean = true;
 

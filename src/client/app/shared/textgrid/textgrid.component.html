@@ -1,5 +1,5 @@
 <div *ngIf="searchActivated" id="searchTermBar">
-  Suche nach: {{searchTermfromKonvolut[0]}} ({{getNumberOfShownPoems()}} Resultate)
+  Suche nach: {{ searchTermfromKonvolut[0] }} ({{ getNumberOfShownPoems() }} Resultate)
 </div>
 <div
   [ngClass]="{'rae-poem-list-grid': viewMode == 'grid','rae-poem-list-cols': viewMode == 'cols', 'signalizeSearch': searchActivated}">
@@ -57,7 +57,7 @@
         <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
           <span>In: {{ p[7] }} </span><br>
           <span [ngClass]="{'invisible': p[12] == ' '}">
-            Synopse: <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12]}}</a><br>
+            Synopse: <a [routerLink]="'/synopsen/' + p[9].split('/')[4]" routerLinkActive="active">{{ p[12] }}</a><br>
           </span>
         </div>
       </md-card-footer>

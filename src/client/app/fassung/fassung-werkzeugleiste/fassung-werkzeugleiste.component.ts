@@ -18,7 +18,6 @@ export class FassungWerkzeugleisteComponent {
   @Input() showRegister: boolean;
   @Output() poemResizableChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showRegisterChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
   @Output() showEditedTextChange: EventEmitter<any> = new EventEmitter();
   @Output() showTranscriptionChange: EventEmitter<any> = new EventEmitter();
 
@@ -43,14 +42,4 @@ export class FassungWerkzeugleisteComponent {
         height: '95%'
       });
   }
-
-
-  goToNextFassung() {
-    this.goToOtherFassung.emit(this.idOfNext);
-  }
-
-  goToPrevFassung() {
-    this.goToOtherFassung.emit(this.idOfPrev);
-  }
-
 }

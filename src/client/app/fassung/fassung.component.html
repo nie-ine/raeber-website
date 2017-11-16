@@ -7,12 +7,11 @@
             <div id="rt-mainbody">
               <div class="component-content">
 
-                <span>Aktuelle Seite: {{convoluteTypeGermanLabel}} > <a
-                  [routerLink]="buildLinkToRelatedConvolute(convoluteTitle)">{{convoluteTitle}}</a></span>
+                <span>Aktuelle Seite: {{ convoluteTypeGermanLabel }} > <a
+                  [routerLink]="buildLinkToRelatedConvolute(convoluteTitle)">{{ convoluteTitle }}</a></span>
 
                 <div id="rae-toolbar">
                   <rae-fassung-werkzeugleiste
-                    (goToOtherFassung)="goToOtherFassung($event)"
                     [idOfPrev]="prevPoem.split('###')[0]"
                     [idOfNext]="nextPoem.split('###')[0]"
                     [(showRegister)]="show_register"
@@ -54,8 +53,8 @@
                         <md-card-footer>
                           <button md-button (click)="showEditedText = !showEditedText"
                                   style="background-color:#eee; font-size:12px;">
-                            <md-icon>{{showEditedText ? 'expand_less' : 'expand_more'}}</md-icon>
-                            <span>Text {{showEditedText ? 'verbergen' : 'anzeigen'}}</span>
+                            <md-icon>{{ showEditedText ? 'expand_less' : 'expand_more' }}</md-icon>
+                            <span>Text {{ showEditedText ? 'verbergen' : 'anzeigen' }}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
@@ -66,8 +65,8 @@
                                         *ngIf="showDiplomaticTranscription">
                           <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
                                   style="background-color:#eee; font-size:12px;">
-                            <md-icon>{{showDiplomaticTranscription ? 'expand_more' : 'expand_less'}}</md-icon>
-                            <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
+                            <md-icon>{{ showDiplomaticTranscription ? 'expand_more' : 'expand_less' }}</md-icon>
+                            <span>Diplomatische Umschrift {{ showDiplomaticTranscription ? 'verbergen' : 'anzeigen' }}</span>
                           </button>
                         </md-card-header>
                         <md-card-content *ngIf="showDiplomaticTranscription"
@@ -80,8 +79,8 @@
                         <md-card-footer>
                           <button md-button (click)="showDiplomaticTranscription = !showDiplomaticTranscription"
                                   style="background-color:#eee; font-size:12px;">
-                            <md-icon>{{showDiplomaticTranscription ? 'expand_less' : 'expand_more'}}</md-icon>
-                            <span>Diplomatische Umschrift {{showDiplomaticTranscription ? 'verbergen' : 'anzeigen'}}</span>
+                            <md-icon>{{ showDiplomaticTranscription ? 'expand_less' : 'expand_more' }}</md-icon>
+                            <span>Diplomatische Umschrift {{ showDiplomaticTranscription ? 'verbergen' : 'anzeigen' }}</span>
                           </button>
                         </md-card-footer>
                       </md-card>
@@ -89,8 +88,7 @@
                     <div style="margin-top:20px;">
                       <rae-fassung-steckbrief [fassungIRI]="urlPrefix + poemShortIri"
                                               [konvolutIRI]="convoluteIri"
-                                              [convoluteTitle]=" convoluteTitle"
-                                              (goToOtherFassung) = "goToOtherFassung($event)">
+                                              [convoluteTitle]=" convoluteTitle">
                       </rae-fassung-steckbrief>
                     </div>
                   </div>
@@ -100,7 +98,7 @@
                   <div style="float: right; display: inline-block;padding: 4px;border-bottom: 1px dotted #ccc;">
                     <span style="font-weight: bold; color: #555;padding: 0 4px 0 0;">Synopse:</span>
                     <a [routerLink]="['/synopsen/' + synopsisIri.split('/')[4]]" routerLinkActive="active">
-                      {{synopsisTitle}}
+                      {{ synopsisTitle }}
                     </a>
                   </div>
                 </div>
@@ -109,14 +107,12 @@
                 <!-- Related items by tag -->
                 <div class="itemRelated">
                   <rae-fassung-weitere
-                    (goOtherFassung)="goToOtherFassung($event)"
                     [synopsenTags]="relatedPoems"></rae-fassung-weitere>
                 </div>
 
                 <div class="itemToolbar">
                   <ul>
                     <rae-fassung-blaettern
-                      (goToOtherFassung)="goToOtherFassung($event)"
                       style="font-size: 0.8em; float: left"
                       [idOfPrev]="prevPoem.split('###')[0]"
                       [titleOfPrev]="prevPoem.split('###')[1]"
@@ -138,8 +134,8 @@
                 <rae-registerspalte [konvolutIRI]="convoluteIri"
                                     [konvolutView]="false"
                                     [convoluteTitle]="convoluteTitle"
-                                    [poemType]="poemType"
-                                    (goToOtherFassung)="goToOtherFassung($event)">
+                                    [poemType]="poemType">
+
                 </rae-registerspalte>
               </ng-template>
             </ngb-panel>

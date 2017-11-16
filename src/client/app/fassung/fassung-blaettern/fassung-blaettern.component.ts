@@ -15,15 +15,4 @@ export class FassungBlaetternComponent {
   @Input() titleOfPrev: string;
   @Input() idOfNext: string;
   @Input() titleOfNext: string;
-
-  @Output() goToOtherFassung: EventEmitter<any> = new EventEmitter<any>();
-
-  goToNextFassung() {
-    this.goToOtherFassung.emit(this.idOfNext);
-  }
-
-  goToPrevFassung() {
-    this.goToOtherFassung.emit(this.idOfPrev);
-  }
-
 }

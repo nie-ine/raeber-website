@@ -13,9 +13,13 @@
   </ng-container>
   <md-nav-list dense>
     <a md-list-item *ngFor="let p of getSortedPoems(); let i = index"
+<<<<<<< HEAD
        [routerLink]="['/' + this.convoluteTitle + '/'] + createLinkToPoem(p)"
+       (click)="goToOtherFassung.emit('/' + convoluteTitle + '/' + createLinkToPoem(p))"
+=======
+       [routerLink]="['/' + this.convoluteTitle + '/'] + produceFassungsLink(p)"
+>>>>>>> f41bfa5824da30d64471f9c58938d4ce811b7cbe
        routerLinkActive="active" [ngClass]="{'color0': i % 2}">
-
       <h5 md-line *ngIf="p" style="color: #0e90d2">{{ p[0] }}</h5>
       <h5 md-line *ngIf="p && p[0].length > 20"></h5>
       <h5 md-line *ngIf="p && p[0].length > 40"></h5>

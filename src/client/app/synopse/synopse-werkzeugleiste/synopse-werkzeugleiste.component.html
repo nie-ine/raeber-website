@@ -1,11 +1,11 @@
 <md-toolbar>
 
     <button md-raised-button class="layoutbutton" (click)="toggleShowText()">
-      {{showText ? 'Kein Text' : 'Text'}}
+      {{ showText ? 'Kein Text' : 'Text' }}
     </button>
 
     <button md-raised-button class="layoutbutton" title="Spaltenanzahl" (click)="rotateGridColumns()">
-      {{(columns % 3) + 1}} Spalten
+      {{ (columns % 3) + 1 }} Spalten
     </button>
 
     <button md-raised-button class="layoutbutton" [disabled]="!rahmen || !showText || gridHeight >= 18"
@@ -20,8 +20,8 @@
 
     <button md-raised-button class="layoutbutton" title="Rahmen anzeigen" [disabled]="!showText"
             (click)="toggleFrame()">
-      {{rahmen ? 'Angepasste Höhe'
-      : 'Fixe Höhe'}}
+      {{ rahmen ? 'Angepasste Höhe'
+      : 'Fixe Höhe' }}
     </button>
 
     <button md-raised-button class="layoutbutton" title="neu laden" (click)="neuladen()">
@@ -34,19 +34,19 @@
 
   <md-toolbar-row>
     <button md-raised-button class="layoutbutton" title="ErstLetzt" (click)="setFirstLast()">
-      {{firstLast ? 'Alle Zeugen' : 'Erst + Letzt'}}
+      {{ firstLast ? 'Alle Zeugen' : 'Erst + Letzt' }}
     </button>
     <button md-raised-button class="layoutbutton" title="Duplikate anzeigen" (click)="toggleShowDuplicates()">
-      {{showDuplicates ? '- Duplikate' : '+ Duplikate'}}
+      {{ showDuplicates ? '- Duplikate' : '+ Duplikate' }}
     </button>
     <button md-raised-button class="layoutbutton" title="Notizbücher anzeigen" (click)="toggleShowNotebooks()">
-      {{showNotebooks ? '- Notizbücher' : '+ Notizbücher'}}
+      {{ showNotebooks ? '- Notizbücher' : '+ Notizbücher' }}
     </button>
     <button md-raised-button class="layoutbutton" title="Manuskripte anzeigen" (click)="toggleShowManuscripts()">
-      {{showManuscripts ? '- Manuskripte' : '+ Manuskripte'}}
+      {{ showManuscripts ? '- Manuskripte' : '+ Manuskripte' }}
     </button>
     <button md-raised-button class="layoutbutton" title="Typoskripte anzeigen" (click)="toggleShowTyposcripts()">
-      {{showTyposcripts ? '- Typoskripte' : '+ Typoskripte'}}
+      {{ showTyposcripts ? '- Typoskripte' : '+ Typoskripte' }}
     </button>
     <!--    <form [formGroup]="showConvolutes">
           <md-select placeholder="Konvoluttypen" multiple="true" formControlName="convolutes">

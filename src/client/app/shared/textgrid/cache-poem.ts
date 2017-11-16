@@ -19,4 +19,7 @@ export class CachePoem {
   seqnum: any;
   synopsisIRI: string;
   synopsisTitle: string;
+
+  searchConvolute: string;
+  searchOfficialName: string;
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MdDialog } from '@angular/material';
 import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
+import { CachePoem } from '../shared/textgrid/cache-poem';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   sendInputStringToSuchmaske: string;
   finalQueryArray = [ '' ];
   currentSearchBox = '1';
-  allSearchResults: Array<any>;
+  allSearchResults: Array<CachePoem>;
   notizbuchDisabled = false;
   manuskriptDisabled = false;
   typoscriptDisabled = false;
@@ -1445,25 +1446,41 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                               poem.reservedPointer = this.allSearchResults.length;
                               console.log(poem.reservedPointer);
                               console.log(poem.value['5']);
-                              this.allSearchResults[ poem.reservedPointer ] = [];
-                                this.allSearchResults[ poem.reservedPointer ] = [
-                                  poem.value['8'], // Titel
-                                  poem.value['5'], // date
-                                  poem.value['7'], // text
-                                  poem.value['6'],
-                                  undefined,
-                                  5,
-                                  this.suchmaskeKonvolutIRIMapping[ k ].konvolut,
-                                  this.suchmaskeKonvolutIRIMapping[ k ].officialName,
-                                  8,
-                                  poem.value['11'],
-                                  10,
-                                  11,
-                                  poem.value['12'],
-                                  13,
-                                  poem.value['13']
-                                ];
 
+                              this.allSearchResults[ poem.reservedPointer ] = new CachePoem();
+                              this.allSearchResults[ poem.reservedPointer ].poemTitle = poem.value['8'];
+                              this.allSearchResults[ poem.reservedPointer ].poemCreationDate = poem.value['5'];
+                              this.allSearchResults[ poem.reservedPointer ].poemText = poem.value['7'];
+                              this.allSearchResults[ poem.reservedPointer ].poemIRI = poem.value['6'];
+                              this.allSearchResults[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
+                              this.allSearchResults[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
+                              this.allSearchResults[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
+                              this.allSearchResults[ poem.reservedPointer ].searchConvolute
+                                = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
+                              this.allSearchResults[ poem.reservedPointer ].searchOfficialName
+                                = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
+
+
+                            /*  old textgrid input data. no longer needed
+
+                                this.allSearchResults[ poem.reservedPointer ] = [
+                                    poem.value['8'], // Titel
+                                    poem.value['5'], // date
+                                    poem.value['7'], // text
+                                    poem.value['6'],
+                                    undefined,
+                                    5,
+                                    this.suchmaskeKonvolutIRIMapping[ k ].konvolut,
+                                    this.suchmaskeKonvolutIRIMapping[ k ].officialName,
+                                    8,
+                                    poem.value['11'],
+                                    10,
+                                    11,
+                                    poem.value['12'],
+                                    13,
+                                    poem.value['13']
+                                  ];
+  */
 
 /* ; // titel
 this.allSearchResults[ poem.reservedPointer ][ 1 ] = ; // date
@@ -1496,7 +1513,7 @@ this.allSearchResults[ poem.reservedPointer ][ 14 ] = poem.value['13']; // isFin
 
   sortResultArray() {
     for(let i = 0; i < this.allSearchResults.length - 1; i++ ) {
-      if(this.allSearchResults[i][1] < this.allSearchResults[i + 1][1]) {
+      if(this.allSearchResults[i].poemCreationDate < this.allSearchResults[i + 1].poemCreationDate) {
         //console.log(this.allSearchResults[i][1] + ' ist kleiner als ' + this.allSearchResults[i + 1][1]);
       } else {
         this.helpArray = this.allSearchResults[i + 1];

@@ -24,11 +24,11 @@
       <md-card-title #poemTitle>
         <a class="item" *ngIf="contentType == 'konvolut'"
            [routerLink]="produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
-           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14]) }">
+           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p.isFinalVersion) }">
         </a>
         <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
            [routerLink]="'/' + p.convoluteTitle + produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
-           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p[14])}">
+           [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p.isFinalVersion)}">
         </a>
       </md-card-title>
 

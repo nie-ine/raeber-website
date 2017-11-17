@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
 import { Router } from '@angular/router';
+import { CachePoem } from './cache-poem';
 
 
 @Component({
@@ -87,10 +88,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   /**
    * Orders an array by date (ascending) and seqnum (ascending)
-   * @param {Array<any>} unsorted Array to be sorted
-   * @returns {Array<any>} Sorted array
+   * @param {Array<CachePoem>} unsorted Array to be sorted
+   * @returns {Array<CachePoem>} Sorted array
    */
-  private static sortByDate(unsorted: Array<any>): Array<any> {
+  private static sortByDate(unsorted: Array<CachePoem>): Array<CachePoem> {
     return unsorted.sort((x, y) => {
       if (x.poemCreationDate > y.poemCreationDate) {
           return 1;
@@ -130,16 +131,16 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
     // FIXME: Does not work
-    return !x[ 4 ].includes(type);
+    return !x.convoluteTitle.includes(type);
   }
 
   /**
    * Filters chronologically first and last element in array
-   * @param {Array<any>} x Unfiltered array
-   * @returns {Array<any>} Filtered array
+   * @param {Array<CachePoem>} x Unfiltered array
+   * @returns {Array<CachePoem>} Filtered array
    */
-  private static filterFirstLast(x: Array<any>): Array<any> {
-    let firstLast: Array<any> = [];
+  private static filterFirstLast(x: Array<CachePoem>): Array<CachePoem> {
+    let firstLast: Array<CachePoem> = [];
     firstLast.push(x[ 0 ]);
     if (x.length > 1) {
       firstLast.push(x[ x.length - 1 ]);
@@ -147,11 +148,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return firstLast;
   }
 
-  private static filterSearchResults(x: any): boolean {
-    return x.show;
+  private static filterSearchResults(x: CachePoem): boolean {
+    return x.isVisible;
   }
 
-  private static filterSingleTextbox(x: any) {
+  private static filterSingleTextbox(x: CachePoem): boolean {
     return !x.isVisible;
   }
 
@@ -275,10 +276,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   /**
    * Apply filters for synoptic view
-   * @param {Array<any>} unfiltered Unfiltered poems array
-   * @returns {Array<any>} Filtered poems array
+   * @param {Array<CachePoem>} unfiltered Unfiltered poems array
+   * @returns {Array<CachePoem>} Filtered poems array
    */
-  filterPoems(unfiltered: Array<any>): Array<any> {
+  filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)

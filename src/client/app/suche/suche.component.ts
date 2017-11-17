@@ -1460,40 +1460,25 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                               this.allSearchResults[ poem.reservedPointer ].searchOfficialName
                                 = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
 
-
-                            /*  old textgrid input data. no longer needed
-
-                                this.allSearchResults[ poem.reservedPointer ] = [
-                                    poem.value['8'], // Titel
-                                    poem.value['5'], // date
-                                    poem.value['7'], // text
-                                    poem.value['6'],
-                                    undefined,
-                                    5,
-                                    this.suchmaskeKonvolutIRIMapping[ k ].konvolut,
-                                    this.suchmaskeKonvolutIRIMapping[ k ].officialName,
-                                    8,
-                                    poem.value['11'],
-                                    10,
-                                    11,
-                                    poem.value['12'],
-                                    13,
-                                    poem.value['13']
-                                  ];
-  */
-
-/* ; // titel
-this.allSearchResults[ poem.reservedPointer ][ 1 ] = ; // date
-this.allSearchResults[ poem.reservedPointer ][ 2 ] = ; // text
-this.allSearchResults[ poem.reservedPointer ][ 3 ] = ; // poem IRI
-this.allSearchResults[ poem.reservedPointer ][ 4 ] = undefined;
-this.allSearchResults[ poem.reservedPointer ][ 12 ] = poem.value['12']; // synopsisTitle
-this.allSearchResults[ poem.reservedPointer ][ 9 ] = ; // synopsisIRI
-this.allSearchResults[ poem.reservedPointer ][ 7 ]
-  = ;
-this.allSearchResults[ poem.reservedPointer ][ 6 ]
-  =
-this.allSearchResults[ poem.reservedPointer ][ 14 ] = poem.value['13']; // isFinalVersion*/
+                              /*
+                              TODO: Old indexes (for missed indexes - delete after 2017-11-30):
+                              0: poemTitle
+                              1: poemCreationDate
+                              2: poemText
+                              3: poemIRI
+                              4: ?
+                              5: ?
+                              6: searchConvolute - what is this?
+                              7: searchOfficialName - what is this?
+                              8: seqnum - not used here
+                              9: synopsisIRI
+                              10: dateIndex - not used here
+                              11: alphaIndex - not used here
+                              12: synopsisTitle
+                              13: onPage
+                              14: isFinal - not used here
+                              15: convoluteTitle - not used here
+                               */
                               this.numberOfSearchResults += 1;
                         }
                       }

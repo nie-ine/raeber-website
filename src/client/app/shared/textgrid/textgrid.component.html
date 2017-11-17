@@ -7,7 +7,7 @@
   <div class="rae-poem-container" *ngFor="let p of filterPoems(poemsInGrid); let i = index"
        [ngStyle]="{ 'width': columns }">
 
-    <md-card class="rae-poem-card" *ngIf="p.show || !searchActivated">
+    <md-card class="rae-poem-card" *ngIf="p.isVisible || !searchActivated">
           <span *ngIf="contentType == 'synopse' || contentType == 'suche'" style="float:right;">
             <button md-icon-button (click)="hideTextbox(p.poemIRI);">
               <md-icon>close</md-icon>

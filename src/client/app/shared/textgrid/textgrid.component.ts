@@ -130,7 +130,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
-    // FIXME: Does not work
     return !x.convoluteTitle.includes(type);
   }
 

@@ -98,9 +98,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
           return -1;
         } else {
           if (x.convoluteTitle === y.convoluteTitle) {
-            if (x[ 5 ] > y[ 5 ]) {
+            if (x.seqnum > y.seqnum) {
               return 1;
-            } else if (x[ 5 ] < y[ 5 ]) {
+            } else if (x.seqnum < y.seqnum) {
               return -1;
             } else {
               return 0;
@@ -119,7 +119,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
-    return x[ 6 ] !== '1';
+    return x.sameEdition !== '1';
   }
 
   /**
@@ -129,6 +129,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
+    // FIXME: Does not work
     return !x[ 4 ].includes(type);
   }
 
@@ -151,7 +152,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   private static filterSingleTextbox(x: any) {
-    return !x[ 20 ];
+    return !x.isVisible;
   }
 
   constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {

@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
+import { CachePoem } from '../shared/textgrid/cache-poem';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class KonvolutComponent implements OnInit {
   konvolutBild: string;
   IRI: string;
   output: Subscription;
-  poems: Array<any>;
+  poems: Array<CachePoem>;
   responseArray: Array<any>;
   searchContext: boolean = false;
   searchResultsNo: number;
@@ -148,27 +149,29 @@ export class KonvolutComponent implements OnInit {
     this.gridHeight = height;
   }
 
-  updatePoemInformation(poemInformation: Array<any>) {
+  updatePoemInformation(poemInformation: Array<CachePoem>) {
     //console.log(poemInformation);
-    this.poems = [];
+    this.poems = new Array<CachePoem>();
     for (let i = 0; i < poemInformation.length; i++) {
-      this.poems[ poemInformation[i]['8'] - 1 ] = [];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 0 ] = poemInformation[ i ][ 0 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 1 ] = poemInformation[ i ][ 1 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 2 ] = poemInformation[ i ][ 2 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 3 ] = poemInformation[ i ][ 3 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 4 ] = poemInformation[ i ][ 4 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 5 ] = poemInformation[ i ][ 5 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 6 ] = poemInformation[ i ][ 6 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 7 ] = poemInformation[ i ][ 7 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 8 ] = poemInformation[ i ][ 8 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 9 ] = poemInformation[ i ][ 9 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 10 ] = poemInformation[ i ][ 10 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 11 ] = poemInformation[ i ][ 11 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 12 ] = poemInformation[ i ][ 12 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 13 ] = poemInformation[ i ][ 13 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 14 ] = poemInformation[ i ][ 14 ];
-      this.poems[ poemInformation[i]['8'] - 1 ][ 15 ] = poemInformation[ i ][ 15 ];
+      let poem = new CachePoem();
+      poem.poemTitle = poemInformation[ i ].poemTitle;
+      poem.poemCreationDate = poemInformation[ i ].poemCreationDate;
+      poem.poemText = poemInformation[ i ].poemText;
+      poem.poemIRI = poemInformation[ i ].poemIRI;
+      poem.convoluteTitle = poemInformation[ i ].convoluteTitle;
+      //poem[ 5 ] = poemInformation[ i ][ 5 ];
+      //poem[ 6 ] = poemInformation[ i ][ 6 ];
+      //poem[ 7 ] = poemInformation[ i ][ 7 ];
+      poem.seqnum = poemInformation[ i ].seqnum;
+      poem.synopsisIRI = poemInformation[ i ].synopsisIRI;
+      poem.dateIndex = poemInformation[ i ].dateIndex;
+      poem.alphabeticIndex = poemInformation[ i ].alphabeticIndex;
+      poem.synopsisTitle = poemInformation[ i ].synopsisTitle;
+      poem.onPage = poemInformation[ i ].onPage;
+      poem.isFinalVersion = poemInformation[ i ].isFinalVersion;
+      //poem[ 15 ] = poemInformation[ i ][ 15 ];
+
+      this.poems[ poemInformation[i].seqnum - 1 ] = poem;
     }
     //console.log(this.poems);
   }

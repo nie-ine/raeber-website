@@ -6,6 +6,7 @@ import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Config } from '../shared/config/env.config';
+import { CachePoem } from '../shared/textgrid/cache-poem';
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,7 @@ export class SynopseComponent implements OnInit, AfterViewChecked {
   workTitle: string;
   poemsIri: string[] = [];
 
-  poems: Array<any>;
+  poems: Array<CachePoem>;
   numberOfShownPoems: number;
 
   results: number;
@@ -82,7 +83,7 @@ export class SynopseComponent implements OnInit, AfterViewChecked {
     this.gridHeight = height;
   }
 
-  updatePoemInformation(poemInformation: Array<any>) {
+  updatePoemInformation(poemInformation: Array<CachePoem>) {
     this.poems = poemInformation;
     this.results = this.poems.length;
   }

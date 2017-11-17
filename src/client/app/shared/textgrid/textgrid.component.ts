@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
 import { Router } from '@angular/router';
+import { CachePoem } from './cache-poem';
 
 
 @Component({
@@ -87,20 +88,20 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   /**
    * Orders an array by date (ascending) and seqnum (ascending)
-   * @param {Array<any>} unsorted Array to be sorted
-   * @returns {Array<any>} Sorted array
+   * @param {Array<CachePoem>} unsorted Array to be sorted
+   * @returns {Array<CachePoem>} Sorted array
    */
-  private static sortByDate(unsorted: Array<any>): Array<any> {
+  private static sortByDate(unsorted: Array<CachePoem>): Array<CachePoem> {
     return unsorted.sort((x, y) => {
-      if (x[ 1 ] > y[ 1 ]) {
+      if (x.poemCreationDate > y.poemCreationDate) {
           return 1;
-      } else if (x[ 1 ] < y[ 1 ]) {
+      } else if (x.poemCreationDate < y.poemCreationDate) {
           return -1;
         } else {
-          if (x[ 4 ] === y[ 4 ]) {
-            if (x[ 5 ] > y[ 5 ]) {
+          if (x.convoluteTitle === y.convoluteTitle) {
+            if (x.seqnum > y.seqnum) {
               return 1;
-            } else if (x[ 5 ] < y[ 5 ]) {
+            } else if (x.seqnum < y.seqnum) {
               return -1;
             } else {
               return 0;
@@ -119,7 +120,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterDuplicates(x: any): boolean {
-    return x[ 6 ] !== '1';
+    return x.sameEdition !== '1';
   }
 
   /**
@@ -129,16 +130,16 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {boolean} Filtered
    */
   private static filterConvoluteTypes(x: any, type: string): boolean {
-    return !x[ 4 ].includes(type);
+    return !x.convoluteTitle.includes(type);
   }
 
   /**
    * Filters chronologically first and last element in array
-   * @param {Array<any>} x Unfiltered array
-   * @returns {Array<any>} Filtered array
+   * @param {Array<CachePoem>} x Unfiltered array
+   * @returns {Array<CachePoem>} Filtered array
    */
-  private static filterFirstLast(x: Array<any>): Array<any> {
-    let firstLast: Array<any> = [];
+  private static filterFirstLast(x: Array<CachePoem>): Array<CachePoem> {
+    let firstLast: Array<CachePoem> = [];
     firstLast.push(x[ 0 ]);
     if (x.length > 1) {
       firstLast.push(x[ x.length - 1 ]);
@@ -146,12 +147,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     return firstLast;
   }
 
-  private static filterSearchResults(x: any): boolean {
-    return x.show;
+  private static filterSearchResults(x: CachePoem): boolean {
+    return x.isVisible;
   }
 
-  private static filterSingleTextbox(x: any) {
-    return !x[ 20 ];
+  private static filterSingleTextbox(x: CachePoem): boolean {
+    return !x.isVisible;
   }
 
   constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
@@ -181,9 +182,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.searchForPage = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        console.log('Seite des Poems: ' + poem[ 13 ]);
+        console.log('Seite des Poems: ' + poem.onPage);
         //console.log(poem[13]);
-        if (poem[ 13 ] === this.searchTermfromKonvolut[ 1 ]) {
+        if (poem.onPage === this.searchTermfromKonvolut[ 1 ]) {
           poem.show = true;
         } else {
           poem.show = false;
@@ -196,11 +197,11 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.searchTermArray = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        if (poem[ 0 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        if (poem.poemTitle.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
-        } else if (poem[ 2 ].search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        } else if (poem.poemText.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
           poem.show = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
@@ -256,7 +257,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   resetSinglePoemHiddenState() {
     for (let i in this.poemsInGrid) {
-      this.poemsInGrid[i][20] = false;
+      this.poemsInGrid[i].isVisible = false;
     }
   }
 
@@ -274,10 +275,10 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   /**
    * Apply filters for synoptic view
-   * @param {Array<any>} unfiltered Unfiltered poems array
-   * @returns {Array<any>} Filtered poems array
+   * @param {Array<CachePoem>} unfiltered Unfiltered poems array
+   * @returns {Array<CachePoem>} Filtered poems array
    */
-  filterPoems(unfiltered: Array<any>): Array<any> {
+  filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
     if (unfiltered !== undefined) {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
@@ -303,12 +304,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hideTextbox(iri: string) {
-    this.updatePoemByIriInArray(iri, x => x[20] = true);
+    this.updatePoemByIriInArray(iri, x => x.isVisible = true);
   }
 
   updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
     for (let i in this.poemsInGrid) {
-      if (this.poemsInGrid[i][3] === iri) {
+      if (this.poemsInGrid[i].poemIRI === iri) {
         updateFun(this.poemsInGrid[i]);
       }
     }

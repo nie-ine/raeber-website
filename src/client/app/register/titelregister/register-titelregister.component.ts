@@ -44,12 +44,9 @@ export class RegisterTitelregisterComponent implements OnChanges {
         /*
          * nur Endfassungen aus Verstreutes und den Drucken
          */
-        this.poems[0] = {value:['','/drucke/abgewandt-zugewandt-nachwort', '', 'Nachwort',
-          'Nachwort über das schweizerische Sprachdilemma']};
-        console.log(this.poems);
         this.konvolutTitel = ['GESICHT IM MITTAG 1950', 'Die verwandelten Schiffe 1957', 'GEDICHTE 1960',
           'FLUSSUFER 1963', 'Reduktionen 1981', 'Hochdeutsche Gedichte 1985','Alemannische Gedichte 1985',
-          'Verstreutes'];
+          'Abgewandt Zugewandt (Nachwort)', 'Verstreutes'];
         for(this.konvolutNr = 0; this.konvolutNr < this.konvolutTitel.length; this.konvolutNr++) {
           this.convolutePoemsQuery(this.konvolutTitel[this.konvolutNr], true);
         }
@@ -134,11 +131,7 @@ convolutePoemsQuery(konvolutTitel:string, endFassungen:boolean) {
 
 produceFassungsLink(p: any) {
   if(p && p.value[1] !== undefined && p.value[4] !== undefined && p.value[3] !== undefined) {
-    if (p.value[3]==='Nachwort') {
-      return '/drucke/abgewandt-zugewandt-nachwort';
-    } else {
-      console.log(['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1]);
-    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1];}
+    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1];
   } else {
     return 'Linkinformation has not arrived yet';
   }

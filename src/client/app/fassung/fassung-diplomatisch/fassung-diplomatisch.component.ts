@@ -30,7 +30,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
   private sub: any;
 
-  constructor(private http: Http) {};
+  constructor(private http: Http) {}
 
   ngOnChanges() {
     this.pages = [];

@@ -9,7 +9,7 @@ import { WerklisteUnselbstComponent } from './werkliste-unselbst.component';
 import { LebensdatenComponent } from './lebensdaten.component';
 import { AnleitungComponent } from './anleitung.component';
 import { WerkausgabeComponent } from './werkausgabe.component';
-import { TextausagabenComponent} from './textausgaben.component';
+import { TextausagabenComponent } from './textausgaben.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
 import { HomepageWithInitTextComponent } from './homepagewithinittext.component';

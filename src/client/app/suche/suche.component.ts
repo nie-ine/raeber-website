@@ -460,7 +460,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem'
   ];
 
-  constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location, private cdr: ChangeDetectorRef) {
+  constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location,
+              private cdr: ChangeDetectorRef) {
     this.route.params.subscribe(params => console.log(params));
   }
 

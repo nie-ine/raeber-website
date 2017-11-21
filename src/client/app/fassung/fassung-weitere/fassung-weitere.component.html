@@ -4,9 +4,9 @@
     <ng-container *ngFor="let p of sortByDateAndSeqnum(synopsenTags);">
       <li *ngIf="p !== undefined && !router.url.includes(p.split('###')[0].split('---')[1])">
         <a [routerLink]="[p.split('###')[0]]" routerLinkActive="active">
-          {{p.split('###')[1]}}
+          {{ p.split('###')[1] }}
         </a> <br/>
-        in : {{p.split('###')[0].split('/')[1]}}
+        in : {{ p.split('###')[0].split('/')[1] }}
       </li>
     </ng-container>
   </ul>

@@ -1,9 +1,9 @@
 <div>
   <button md-raised-button title="Registerspalte aus-/einschalten"
-          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">{{showRegister ? '-' : '+'}} Register</button>
+          (click)="showRegister = !showRegister; showRegisterChange.emit(showRegister)">{{ showRegister ? '-' : '+' }} Register</button>
 
   <button md-raised-button title="Texte separat scrollen aus-/einschalten"
-          (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">{{poemResizable ? 'Fixe Höhe' : 'Angepasste Höhe'}}</button>
+          (click)="poemResizable = !poemResizable; poemResizableChange.emit(poemResizable)">{{ poemResizable ? 'Fixe Höhe' : 'Angepasste Höhe' }}</button>
 
   <button md-raised-button title="neu laden" (click)="neuladen()">Reset</button>
 

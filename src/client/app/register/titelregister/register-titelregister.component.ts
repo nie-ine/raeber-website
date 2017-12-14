@@ -131,7 +131,7 @@ convolutePoemsQuery(konvolutTitel:string, endFassungen:boolean) {
 
 produceFassungsLink(p: any) {
   if(p && p.value[1] !== undefined && p.value[4] !== undefined && p.value[3] !== undefined) {
-    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0] + '---' + p.value[3].split('raeber/')[1];
+    return ['/' + p.value[1]+ '/'] + p.value[4].split('/')[0].replace(/[()]/g, '') + '---' + p.value[3].split('raeber/')[1];
   } else {
     return 'Linkinformation has not arrived yet';
   }

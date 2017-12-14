@@ -264,9 +264,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   produceFassungsLink(titel: string, iri: string) {
     if (titel !== undefined && iri !== undefined) {
       if (this.konvolutTitle === undefined) {
-        return '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+        return '/' + titel.split('/')[ 0 ].replace(/[()]/g, '') + '---' + iri.split('raeber/')[ 1 ];
       } else {
-        return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ] + '---' + iri.split('raeber/')[ 1 ];
+        return '/' + this.konvolutTitle + '/' + titel.split('/')[ 0 ].replace(/[()]/g, '') + '---' + iri.split('raeber/')[ 1 ];
       }
     } else {
       return 'Linkinformation has not arrived yet';

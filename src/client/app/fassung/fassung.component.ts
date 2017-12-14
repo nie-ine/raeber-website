@@ -34,7 +34,6 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   editedPoemText: string;
   convoluteIri: string;
   convoluteTitle: string;
-  convoluteLink: string;
   synopsisIri: string = '';
   synopsisTitle: string;
   relatedPoems: any[] = [];
@@ -72,14 +71,13 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
     const poemShortIRI = resultSet.subjects[ 0 ].value[ 3 ].split('/')[ 4 ];
     const poemTitle = resultSet.subjects[ 0 ].value[ 4 ];
-    return '/' + convoluteTitle + '/' + FassungComponent.removeSlashesInRouteElement(poemTitle) +
+    return '/' + convoluteTitle + '/' + FassungComponent.removeSlashesAndParanthesesInRouteElement(poemTitle) +
       '---' + poemShortIRI + '###' + poemTitle;
   }
 
-  private static removeSlashesInRouteElement(element: string) {
+  private static removeSlashesAndParanthesesInRouteElement(element: string) {
     return element.includes('/') ?
-      element.replace(/\//g, '') :
-      element;
+      element.replace(/[/()]/g, '') : element;
   }
 
   goToConvoluteview(searchTerm: string, page: string, convolutURl: string) {

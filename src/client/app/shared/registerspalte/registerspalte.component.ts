@@ -63,7 +63,7 @@ export class RegisterspalteComponent {
 
   createLinkToPoem(poem: CachePoem): string {
     return poem ?
-      poem.poemTitle.split('/')[ 0 ] + '---' + poem.poemIRI.split('raeber/')[ 1 ] :
+      poem.poemTitle.split('/')[ 0 ].replace(/[()]/g, '') + '---' + poem.poemIRI.split('raeber/')[ 1 ] :
       undefined;
   }
 

@@ -32,7 +32,7 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
         .subscribe(res => {
           let title = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str.split('/')[ 0 ];
           let iriPart = this.fassungIRI.split('raeber/')[ 1 ];
-          this.linkPartPoem = title + '---' + iriPart;
+          this.linkPartPoem = title.replace(/[()]/g, '') + '---' + iriPart;
         });
 
       this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/search/'

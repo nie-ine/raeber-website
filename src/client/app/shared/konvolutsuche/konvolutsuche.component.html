@@ -2,8 +2,9 @@
   <form [formGroup]="searchForm">
     <md-input-container class="suchfeld-container" style="width:95% !important;">
       <input mdInput type="text" placeholder="Suchbegriff" formControlName="searchTerm" [value]="defineInputValue()"
-             (keyup.enter)="suche.emit(searchForm)" class="suchfeld">
+             (keyup.enter)="suche.emit(searchForm.value)" class="suchfeld">
     </md-input-container>
+    <button md-raised-button *ngIf="!isConvoluteView" (click)="suche.emit(searchForm.value)">Suche</button>
     <!--<md-input-container class="suchfeld-container" *ngIf="checkIfNotizbuch(konvolutTitle)">-->
     <!--<input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"-->
     <!--(keyup.enter)="suche.emit(searchForm)" class="suchfeld">-->

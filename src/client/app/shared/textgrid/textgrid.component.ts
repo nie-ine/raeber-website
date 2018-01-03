@@ -198,15 +198,15 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
         if (poem.poemTitle.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
-          poem.show = true;
+          poem.isVisible = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
         } else if (poem.poemText.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
-          poem.show = true;
+          poem.isVisible = true;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
         } else {
-          poem.show = false;
+          poem.isVisible = false;
         }
       }
     }
@@ -279,7 +279,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {Array<CachePoem>} Filtered poems array
    */
   filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
-    if (unfiltered !== undefined) {
+    if (unfiltered !== undefined && this.contentType !== 'konvolut') {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)

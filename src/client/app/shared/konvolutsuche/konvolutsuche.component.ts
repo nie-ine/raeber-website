@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'rae-konvolutsuche',
-  templateUrl: './konvolutsuche.component.html'
+  templateUrl: './konvolutsuche.component.html',
+  styleUrls: [ 'konvolutsuche.component.css' ]
 })
 export class KonvolutsucheComponent {
   @Input() konvolutTitle: string;

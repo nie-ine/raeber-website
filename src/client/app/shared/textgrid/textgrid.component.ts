@@ -194,19 +194,22 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   searchAndFilterInTextgrid() {
+    this.numberOfShownPoems = 0;
     this.searchTermArray = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        if (poem.poemTitle.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
-          poem.show = true;
+        if (poem.poemTitle.toUpperCase().search(this.searchTermfromKonvolut[ 0 ].toUpperCase()) !== -1) {
+          poem.isVisible = true;
+          this.numberOfShownPoems += 1;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
-        } else if (poem.poemText.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
-          poem.show = true;
+        } else if (poem.poemText.toUpperCase().search(this.searchTermfromKonvolut[ 0 ].toUpperCase()) !== -1) {
+          poem.isVisible = true;
+          this.numberOfShownPoems += 1;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
         } else {
-          poem.show = false;
+          poem.isVisible = false;
         }
       }
     }
@@ -279,7 +282,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {Array<CachePoem>} Filtered poems array
    */
   filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
-    if (unfiltered !== undefined) {
+    if (unfiltered !== undefined && this.contentType !== 'konvolut') {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
@@ -317,6 +320,14 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   getNumberOfShownPoems(): number {
     return this.filterPoems(this.poemsInGrid).length;
+  }
+
+  hidePoem(poem: any) {
+    if(poem.isVisible !== undefined) {
+      return !poem.isVisible;
+    } else {
+      return false;
+    }
   }
 
 }

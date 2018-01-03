@@ -1,5 +1,5 @@
 <div *ngIf="searchActivated" id="searchTermBar">
-  Suche nach: {{ searchTermfromKonvolut[0] }} ({{ getNumberOfShownPoems() }} Resultate)
+  Suche nach: {{ searchTermfromKonvolut[0] }} ({{ numberOfShownPoems }} Resultate)
 </div>
 
 <div [ngClass]="{'rae-poem-list-grid': true, 'signalizeSearch': searchActivated}">

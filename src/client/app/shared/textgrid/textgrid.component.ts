@@ -198,12 +198,12 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
     this.searchTermArray = undefined;
     for (let poem of this.poemsInGrid) {
       if (poem !== undefined) {
-        if (poem.poemTitle.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        if (poem.poemTitle.toUpperCase().search(this.searchTermfromKonvolut[ 0 ].toUpperCase()) !== -1) {
           poem.isVisible = true;
           this.numberOfShownPoems += 1;
           this.searchTermArray = [];
           this.searchTermArray[ 0 ] = this.searchTermfromKonvolut[ 0 ];
-        } else if (poem.poemText.search(this.searchTermfromKonvolut[ 0 ]) !== -1) {
+        } else if (poem.poemText.toUpperCase().search(this.searchTermfromKonvolut[ 0 ].toUpperCase()) !== -1) {
           poem.isVisible = true;
           this.numberOfShownPoems += 1;
           this.searchTermArray = [];

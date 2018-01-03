@@ -51,7 +51,7 @@ md-card-content {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .signalizeSearch {

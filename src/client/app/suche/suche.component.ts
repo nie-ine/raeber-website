@@ -86,51 +86,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   setOfPerformedQueries = new Set();
   setOfKonvolutIRIsOld = new Set();
   setOfKonvolutQueries = new Set();
-  setOfPoemsNotizbuch79 = new Set();
-  setOfPoemsNotizbuch7982 = new Set();
-  setOfPoemsNotizbuch8088 = new Set();
-  setOfPoemsManuskript79 = new Set();
-  setOfPoemsManuskript7983 = new Set();
-  setOfPoemsManuskriptKarten = new Set();
-  setOfPoemsTyposkript79 = new Set();
-  setOfPoemsTyposkript79Spez = new Set();
-  setOfPoemsTyposkript83 = new Set();
-  setOfPoemsdruckGesicht = new Set();
-  setOfPoemsdruckSchiffe = new Set();
-  setOfPoemsdruckGedichte = new Set();
-  setOfPoemsdruckFlussufer = new Set();
-  setOfPoemsdruckReduktionen = new Set();
-  setOfPoemsAbgewandZugewandtHochdeutscheGedichte = new Set();
-  setOfPoemsAbgewandZugewandtAlemannischeGedichte = new Set();
-  setOfPoemsdzeitschriftAkzente = new Set();
-  setOfPoemszeitschriftBlaetter = new Set();
-  zeitschriftZeit = new Set();
-  zeitschriftTat = new Set();
-  zeitschriftTag = new Set();
-  zeitschriftJahresring = new Set();
-  zeitschriftEnsemble = new Set();
-  zeitschriftSchoenste = new Set();
-  zeitschriftLadZ = new Set();
-  setOfAllSearchResults = new Set();
-  zeitschriftLNN = new Set();
-  zeitschriftKonturen = new Set();
-  numberOfPerformedQueries = 0;
-  setOfResultsInSearchGroup = new Set();
-  setOfSearchTermsInSearchGroup = new Set();
-  zeitschriftLuZ = new Set();
-  zeitschriftDeutscheHefte = new Set();
-  zeitschriftMerkur = new Set();
-  zeitschriftSueddeutsche = new Set();
-  zeitschriftNZZ = new Set();
-  zeitschriftNZN = new Set();
-  materialienTagebuch = new Set();
-  zeitschriftHortulus = new Set();
-  zeitschriftRundschau = new Set();
-  zeitschriftRenaissance = new Set();
   searchTermArray: Array<string>;
   zeitschriftWortTat = new Set();
   startSearchImmediately = false;
   setOfPoemsInResult = new Set();
+  setOfAllSearchResults = new Set();
   warning: string;
   warningread: boolean;
   currentPath: string;
@@ -152,7 +112,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'notizbuch79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch79,
+      'memberPoems': new Set(),
       'officialName': 'Notizbuch 1979'
     },
     {
@@ -160,7 +120,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'notizbuch7982',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch7982,
+      'memberPoems': new Set(),
       'officialName': 'Notizbuch 1979 - 82'
     },
     {
@@ -168,7 +128,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'notizbuch8088',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsNotizbuch8088,
+      'memberPoems': new Set(),
       'officialName': 'Notizbuch 1980 - 1988'
     },
     {
@@ -176,7 +136,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'manuskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript79,
+      'memberPoems': new Set(),
       'officialName': 'Manuskripte 1979'
     },
     {
@@ -184,7 +144,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'manuskript7983',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskript7983,
+      'memberPoems': new Set(),
       'officialName': 'Manuskripte 1979 - 1983'
     },
     {
@@ -192,7 +152,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'manuskriptKarten',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsManuskriptKarten,
+      'memberPoems': new Set(),
       'officialName': 'Karten 1984'
     },
     {
@@ -200,7 +160,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'typoskript79',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79,
+      'memberPoems': new Set(),
       'officialName': 'Typoskripte 1979'
     },
     {
@@ -208,7 +168,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'typoskript79Spez',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript79Spez,
+      'memberPoems': new Set(),
       'officialName': 'Typoskripte 1979 - spez'
     },
     {
@@ -216,7 +176,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'typoskript83',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsTyposkript83,
+      'memberPoems': new Set(),
       'officialName': 'Manuskripte 1983'
     },
     {
@@ -224,7 +184,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckGesicht',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGesicht,
+      'memberPoems': new Set(),
       'officialName': 'Gesicht im Mittag'
     },
     {
@@ -232,7 +192,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckSchiffe',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckSchiffe,
+      'memberPoems': new Set(),
       'officialName': 'Die verwandelten Schiffe'
     },
     {
@@ -240,7 +200,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckGedichte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckGedichte,
+      'memberPoems': new Set(),
       'officialName': 'Gedichte'
     },
     {
@@ -248,7 +208,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckFlussufer',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckFlussufer,
+      'memberPoems': new Set(),
       'officialName': 'Flussufer'
     },
     {
@@ -256,7 +216,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckReduktionen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdruckReduktionen,
+      'memberPoems': new Set(),
       'officialName': 'Reduktionen'
     },
     {
@@ -264,7 +224,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckAbgewandtAll',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsAbgewandZugewandtHochdeutscheGedichte,
+      'memberPoems': new Set(),
       'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte'
     },
     {
@@ -272,7 +232,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'druckAbgewandtAll',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsAbgewandZugewandtAlemannischeGedichte,
+      'memberPoems': new Set(),
       'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte'
     },
     {
@@ -280,7 +240,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftAkzente',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemsdzeitschriftAkzente,
+      'memberPoems': new Set(),
       'officialName': 'Akzente'
     },
     {
@@ -288,7 +248,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftBlaetter',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.setOfPoemszeitschriftBlaetter,
+      'memberPoems': new Set(),
       'officialName': 'Blätter + Bilder'
     },
     {
@@ -296,7 +256,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftSchoenste',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSchoenste,
+      'memberPoems': new Set(),
       'officialName': 'Schönste'
     },
     {
@@ -304,7 +264,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftTag',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTag,
+      'memberPoems': new Set(),
       'officialName': 'Tag'
     },
     {
@@ -312,7 +272,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftTat,
+      'memberPoems': new Set(),
       'officialName': 'Tat'
     },
     {
@@ -320,7 +280,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftZeit',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftZeit,
+      'memberPoems': new Set(),
       'officialName': 'DIE ZEIT'
     },
     {
@@ -328,7 +288,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftEnsemble',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftEnsemble,
+      'memberPoems': new Set(),
       'officialName': 'ensemble'
     },
     {
@@ -336,7 +296,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftHortulus',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftHortulus,
+      'memberPoems': new Set(),
       'officialName': 'Hortulus'
     },
     {
@@ -344,7 +304,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftJahresring',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftJahresring,
+      'memberPoems': new Set(),
       'officialName': 'Jahresring'
     },
     {
@@ -352,7 +312,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftKonturen',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftKonturen,
+      'memberPoems': new Set(),
       'officialName': 'Konturen'
     },
     {
@@ -360,7 +320,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftLNN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLNN,
+      'memberPoems': new Set(),
       'officialName': 'Luzerner Neueste Nachrichten'
     },
     {
@@ -368,7 +328,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftLadZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLadZ,
+      'memberPoems': new Set(),
       'officialName': 'Lyrik aus dieser Zeit'
     },
     {
@@ -376,7 +336,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftLuZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftLuZ,
+      'memberPoems': new Set(),
       'officialName': 'Lyrik unserer Zeit'
     },
     {
@@ -384,7 +344,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftMerkur',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftMerkur,
+      'memberPoems': new Set(),
       'officialName': 'Merkur'
     },
     {
@@ -392,7 +352,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftDeutscheHefte',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftDeutscheHefte,
+      'memberPoems': new Set(),
       'officialName': 'Neue Deutsche Hefte'
     },
     {
@@ -400,7 +360,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftNZN',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZN,
+      'memberPoems': new Set(),
       'officialName': 'Neue Zürcher Nachrichten'
     },
     {
@@ -408,7 +368,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftNZZ',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftNZZ,
+      'memberPoems': new Set(),
       'officialName': 'Neue Zürcher Zeitung'
     },
     {
@@ -416,7 +376,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftRenaissance',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRenaissance,
+      'memberPoems': new Set(),
       'officialName': 'Renaissance'
     },
     {
@@ -424,7 +384,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftRundschau',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftRundschau,
+      'memberPoems': new Set(),
       'officialName': 'Schweizer Rundschau'
     },
     {
@@ -432,7 +392,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftSueddeutsche',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftSueddeutsche,
+      'memberPoems': new Set(),
       'officialName': 'Sueddeutsche Zeitung'
     },
     {
@@ -440,7 +400,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'zeitschriftWortTat',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.zeitschriftWortTat,
+      'memberPoems': new Set(),
       'officialName': 'Wort und Tat'
     },
     {
@@ -448,7 +408,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'suchmaskeKonvolutName': 'materialienTagebuch',
       'enabled': true,
       'IRI': 'undefined',
-      'memberPoems': this.materialienTagebuch,
+      'memberPoems': new Set(),
       'officialName': 'Tagebuch'
     }
   ];
@@ -708,7 +668,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                        searchGroup: number,
                        numberOfTermsInSearchGroup: number,
                        poemResType: string) {
-    this.numberOfPerformedQueries += 1;
       return this.http.get(
         globalSearchVariableService.API_URL +
         globalSearchVariableService.extendedSearch +
@@ -790,7 +749,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                       numberOfTermsInSearchGroup: number,
                       poemResType: string) {
     //console.log('Search in Text');
-    this.numberOfPerformedQueries += 1;
     return this.http.get(
       globalSearchVariableService.API_URL +
       globalSearchVariableService.extendedSearch +
@@ -1347,7 +1305,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         encodeURIComponent(globalSearchVariableService.initialVocabulary) +
         queryPart;
     }
-    this.numberOfPerformedQueries += 1;
     //console.log(queryPart);
     return this.http.get
     (
@@ -1379,7 +1336,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
     performQueryToGetAllowedPoems(queryPart: string, konvolutType: string, rightProperty: string, i: number) {
       //console.log(konvolutType);
-      this.numberOfPerformedQueries += 1;
       return this.http.get
       (
         globalSearchVariableService.API_URL +

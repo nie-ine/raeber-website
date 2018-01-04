@@ -136,7 +136,11 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         return '/drucke/reduktionen';
       } else if (convoluteTitle === 'Hochdeutsche Gedichte 1985') {
         return '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
+      } else if (convoluteTitle === 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte') {
+        return '/drucke/abgewandt-zugewandt-hochdeutsche-gedichte';
       } else if (convoluteTitle === 'Alemannische Gedichte 1985') {
+        return '/drucke/abgewandt-zugewandt-alemannische-gedichte';
+      } else if (convoluteTitle === 'Abgewandt Zugewandt 1985 – Alemannische Gedichte') {
         return '/drucke/abgewandt-zugewandt-alemannische-gedichte';
       } else if (convoluteTitle === 'Tagebuch') {
         return '/material/tagebuecher';

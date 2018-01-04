@@ -27,10 +27,16 @@ export class BasicSearchComponent {
   }
 
   createLinkToSearch(): string {
-    // if(this.route._routerState.snapshot.url.search('reset') === -1) {
-    if(this.route) {
-      return '/resetSuche';
-    } else return '/suche';
+    //console.log((this.route as any)._routerState.snapshot.url.split('?')[0]);
+    // if(this.route._routerState.snapshot.url === '/suche') {
+    if (
+      (this.route as any)._routerState.snapshot.url.split('?')[0] === '/suche' ) {
+      //console.log('Erster Fall');
+      return 'resetSuche';
+    } else {
+      //console.log('Zweiter Fall');
+      return 'suche';
+    }
   }
 
 

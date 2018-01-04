@@ -24,10 +24,15 @@ export class NavigationsleisteComponent implements OnInit {
   }
 
   createLinkToSearch() {
+    //console.log((this.route as any)._routerState.snapshot.url.split('?')[0]);
     // if(this.route._routerState.snapshot.url === '/suche') {
-    if (this.route) {
+    if ( (this.route as any)._routerState.snapshot.url.split('?')[0] === '/suche') {
+      //console.log('Erster Fall');
       return 'resetSuche';
-    } else return 'suche';
+    } else {
+      //console.log('Zweiter Fall');
+      return 'suche';
+    }
   }
 
   private getLinkToAbgewandtZugewandtNachwort() {

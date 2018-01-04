@@ -1626,8 +1626,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           this.arg.get('zeitraumForm.zeitraumVon').value !== ''
             && this.arg.get('zeitraumForm.zeitraumBis').value !== '') {
           if(
-            (date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value
-              && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value)
+            (date.split('-')[0]  >= this.arg.get('zeitraumForm.zeitraumVon').value
+              && date.split('-')[0] <= this.arg.get('zeitraumForm.zeitraumBis').value )
           ) {
             console.log('Poem liegt im beidseitig geschlossenen Intervall');
             return true;
@@ -1636,13 +1636,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           }
         } else if(
           (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
-            && date.split('-')[0] > this.arg.get('zeitraumForm.zeitraumVon').value)
+            && date.split('-')[0] >= this.arg.get('zeitraumForm.zeitraumVon').value)
         ) {
           console.log('Groesser als Linker Intervall');
           return true;
         } else if(
           (this.arg.get('zeitraumForm.zeitraumBis').value !== ''
-            && date.split('-')[0] < this.arg.get('zeitraumForm.zeitraumBis').value)
+            && date.split('-')[0] <= this.arg.get('zeitraumForm.zeitraumBis').value )
         ) {
           console.log('Kleiner als Linker Intervall');
           return true;
@@ -1657,8 +1657,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             && this.route.snapshot.queryParams[ 'zeitEnde' ] !== undefined
         ) {
           if(
-            date.split('-')[0] > this.route.snapshot.queryParams[ 'zeitBeginn' ]
-              && date.split('-')[0] < this.route.snapshot.queryParams[ 'zeitEnde' ]
+            date.split('-')[0] >= this.route.snapshot.queryParams[ 'zeitBeginn' ]
+              && date.split('-')[0] <= this.route.snapshot.queryParams[ 'zeitEnde' ]
           ) {
             console.log('Poem liegt im beidseitig geschlossenen Intervall');
             return true;
@@ -1667,13 +1667,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           }
         } else if(
           this.route.snapshot.queryParams[ 'zeitBeginn' ] !== undefined
-            && date.split('-')[0] > this.route.snapshot.queryParams[ 'zeitBeginn' ]
+            && date.split('-')[0] >= this.route.snapshot.queryParams[ 'zeitBeginn' ]
         ) {
           console.log('Groesser als Linker Intervall');
           return true;
         } else if(
           this.route.snapshot.queryParams[ 'zeitEnde' ] !== undefined
-            && date.split('-')[0] < this.route.snapshot.queryParams[ 'zeitEnde' ]
+            && date.split('-')[0] <= this.route.snapshot.queryParams[ 'zeitEnde' ]
         ) {
           console.log('Kleiner als Linker Intervall');
           return true;

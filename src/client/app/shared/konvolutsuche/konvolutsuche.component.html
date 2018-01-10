@@ -5,6 +5,7 @@
              (keyup.enter)="suche.emit(searchForm.value)" class="suchfeld">
     </md-input-container>
     <button md-raised-button *ngIf="!isConvoluteView" (click)="suche.emit(searchForm.value)">Suche</button>
+    <button md-raised-button *ngIf="checkSearchTermArray()" (click)="resetSearch(searchForm.value)">Zurücksetzen</button>
     <!--<md-input-container class="suchfeld-container" *ngIf="checkIfNotizbuch(konvolutTitle)">-->
     <!--<input mdInput type="number" min="1" max="300" placeholder="Seite / Blatt" formControlName="page"-->
     <!--(keyup.enter)="suche.emit(searchForm)" class="suchfeld">-->

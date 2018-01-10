@@ -1,5 +1,5 @@
 
-  <form [formGroup]="searchForm">
+  <form [formGroup]="searchForm" (keydown.enter)="$event.preventDefault()">
     <md-input-container class="suchfeld-container" style="width:95% !important;">
       <input mdInput type="text" placeholder="Suchbegriff" formControlName="searchTerm" [value]="defineInputValue()"
              (keyup.enter)="suche.emit(searchForm.value)" class="suchfeld">
@@ -11,4 +11,3 @@
     <!--(keyup.enter)="suche.emit(searchForm)" class="suchfeld">-->
     <!--</md-input-container>-->
   </form>
-

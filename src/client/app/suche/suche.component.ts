@@ -890,7 +890,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
-    console.log(arg);
+    //console.log(arg);
     if (
       arg.get('notizbuchForm').pristine
       && arg.get('druckForm').pristine

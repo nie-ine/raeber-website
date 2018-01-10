@@ -438,6 +438,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   handleSearchEvent(arg: AbstractControl) {
+    //console.log(arg);
     if(this.startSearchImmediately) this.startSearchImmediately = false;
     //console.log(arg);
     this.arg = arg;
@@ -889,7 +890,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
-    console.log(arg);
+    //console.log(arg);
     if (
       arg.get('notizbuchForm').pristine
       && arg.get('druckForm').pristine

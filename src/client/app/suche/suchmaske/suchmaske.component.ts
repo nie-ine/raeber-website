@@ -216,6 +216,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
    * Emits updated form model to caller
    */
   onSearchParamsChange() {
+    console.log('Params Change');
     const suchmenuForm = (this.suchmenuForm as FormGroup).controls;
     for (const s in suchmenuForm) {
       suchmenuForm[ s ].valueChanges.forEach(
@@ -262,7 +263,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   startTheSearch() {
-    //console.log('startTheSearch');
     this.startSearch.emit();
   }
 
@@ -296,6 +296,11 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   generatePlaceHolder() {
     if (this.lastSearchTerm) return null;
     else return 'Sucheingabe';
+  }
+
+  resetInputValue() {
+    this.createForm();
+    this.onSearchParamsChange();
   }
 
 

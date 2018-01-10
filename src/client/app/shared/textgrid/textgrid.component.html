@@ -16,7 +16,7 @@
           </button>
         </span>
 
-        <div *ngIf="contentType == 'konvolut'">
+        <div *ngIf="contentType == 'konvolut' && p">
           <md-card-subtitle *ngIf="p.poemCreationDate && !p.convoluteTitle.includes('Typoskripte')">{{ formatDate(p.poemCreationDate) }}</md-card-subtitle>
         </div>
         <div *ngIf="contentType == 'synopse' || contentType == 'suche'">
@@ -24,7 +24,7 @@
         </div>
 
         <md-card-title #poemTitle>
-          <a class="item" *ngIf="contentType == 'konvolut'"
+          <a class="item" *ngIf="contentType == 'konvolut' && p"
              [routerLink]="produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
              [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p.isFinalVersion) }">
           </a>
@@ -35,6 +35,7 @@
         </md-card-title>
 
         <md-card-content
+          *ngIf="p"
           [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
           [ngStyle]="{'height': rahmen ? 'calc(10em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
           <div class="rae-poem" [innerHTML]="highlight(p.poemText,searchTermArray)" #poemText>
@@ -43,7 +44,7 @@
 
         <md-card-footer style="position: static;">
 
-          <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut'">
+          <div class="catItemTagsBlock" *ngIf="contentType == 'konvolut' && p">
             <span [ngClass]="{'invisible': p.synopsisTitle == ' '}">
               Synopse:
               <a [routerLink]="'/synopsen/' + p.synopsisIRI.split('/')[4]" routerLinkActive="active">{{ p.synopsisTitle }}</a>

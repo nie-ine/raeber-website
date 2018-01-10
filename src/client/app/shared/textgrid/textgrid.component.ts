@@ -159,6 +159,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.searchTermfromKonvolut);
     if (this.searchTermfromKonvolut) {
       if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2) {
         this.searchInKonvolut = true;
@@ -170,10 +171,19 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
         this.searchActivated = true;
         this.searchInKonvolut = true;
       }
-      if (!(this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 1)
+      if (!(this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2)
         && !this.searchTermfromKonvolut[ 1 ]) {
         this.searchActivated = false;
         this.searchTermArray = undefined;
+      }
+      if( this.searchTermfromKonvolut[ 0 ] === '') {
+        console.log('Delete Search');
+        this.searchInKonvolut = false;
+        this.searchActivated = false;
+        this.searchTermArray = undefined;
+        for (let poem of this.poemsInGrid) {
+          if ( poem ) poem.isVisible = true;
+        }
       }
     }
   }
@@ -323,7 +333,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hidePoem(poem: any) {
-    if(poem.isVisible !== undefined) {
+    if(poem && poem.isVisible !== undefined) {
       return !poem.isVisible;
     } else {
       return false;

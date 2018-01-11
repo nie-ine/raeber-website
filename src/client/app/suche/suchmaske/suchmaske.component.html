@@ -778,39 +778,42 @@
         </ngb-panel>
         <ngb-panel title="Textart">
           <ng-template ngbPanelContent>
+            <button md-button (click)="selectAllGenres()">
+              {{ allGenresSelected ? 'Alle abwählen' : 'Alle auswählen' }}
+            </button>
             <ul formGroupName="textartForm">
               <li class="cb-l1">
                 <md-checkbox formControlName="textartFreieVerse" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartFreieVerse').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartFreieVerse').value && !suchmenuForm.get('textartForm').pristine">
+                             [class.green]="suchmenuForm.get('textartForm.textartFreieVerse').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartFreieVerse').value">
                   Freie Verse
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="textartGereimteVerse" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartGereimteVerse').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartGereimteVerse').value && !suchmenuForm.get('textartForm').pristine">
+                             [class.green]="suchmenuForm.get('textartForm.textartGereimteVerse').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartGereimteVerse').value">
                   Gereimte Verse
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="textartProsa" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartProsa').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartProsa').value && !suchmenuForm.get('textartForm').pristine">
+                             [class.green]="suchmenuForm.get('textartForm.textartProsa').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartProsa').value">
                   Rhythmische Prosa
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="textartProsanotat" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartProsanotat').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartProsanotat').value && !suchmenuForm.get('textartForm').pristine">
+                             [class.green]="suchmenuForm.get('textartForm.textartProsanotat').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartProsanotat').value">
                   Prosanotat
                 </md-checkbox>
               </li>
               <li class="cb-l1">
                 <md-checkbox formControlName="textartBriefentwurf" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartBriefentwurf').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartBriefentwurf').value && !suchmenuForm.get('textartForm').pristine">
+                             [class.green]="suchmenuForm.get('textartForm.textartBriefentwurf').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartBriefentwurf').value">
                   Briefentwurf
                 </md-checkbox>
               </li>

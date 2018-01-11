@@ -151,6 +151,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
         this.suchmenuForm.get(formGroupPath).markAsDirty();
       }
     }
+    this.setStateOfParentElement(formGroupPath, parentFormControlName);
   }
 
   /**

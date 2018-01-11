@@ -1,19 +1,14 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, EventEmitter, HostListener, Inject, Input, OnChanges, OnInit, Output,
+  ViewChild
+} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-  Druck,
-  Manuskript,
-  Materialien,
-  Notizbuch,
-  Suchwort,
-  Textart,
-  Typoskript,
-  Zeitraum,
+  Druck, Manuskript, Materialien, Notizbuch, Suchwort, Textart, Typoskript, Zeitraum,
   Zeitschrift
 } from './mockSucheCategories';
 import 'rxjs/add/operator/switchMap';
 import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.service';
-import { HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { TextgridComponent } from '../../shared/textgrid/textgrid.component';
 
@@ -66,6 +61,20 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     materialien: false
   };
 
+  /*
+   0 = No child category is selected
+   1 = Some child categories are selected
+   2 = All child categories are selected
+   */
+  parentCategoryState: { [name: string]: number } = {
+    notizbuchForm: 2,
+    manuskriptForm: 2,
+    typoskriptForm: 2,
+    druckForm: 2,
+    zeitschriftForm: 2,
+    materialienForm: 2
+  };
+
   allConvolutesSelected = true;
   allGenresSelected = true;
   loadingIndicator = true;
@@ -111,36 +120,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     //this.onSearchParamsChange();
   }
 
-  /**
-   * Checks if all child elements have the same value
-   * @param {string} formGroupPath Path to respective `FormGroup`
-   * @param {string} parentFormControlName Name of parent `FormControl`
-   * @returns {boolean} True if all have the same value
-   */
-  childElemsHaveSameValues(formGroupPath: string, parentFormControlName: string) {
-    const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    let b: boolean;
-    for (const v in children) {
-      if (v !== parentFormControlName) {
-        if (!b) {
-          b = children[ v ].value;
-        } else if (children[v].value !== b) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  pristineConvolutes() {
-    return this.suchmenuForm.get('notizbuchForm').pristine &&
-      this.suchmenuForm.get('manuskriptForm').pristine &&
-      this.suchmenuForm.get('typoskriptForm').pristine &&
-      this.suchmenuForm.get('druckForm').pristine &&
-      this.suchmenuForm.get('zeitschriftForm').pristine &&
-      this.suchmenuForm.get('materialienForm').pristine;
-  }
-
   selectAllConvolutes() {
     this.allConvolutesSelected = !this.allConvolutesSelected;
     this.toggleGroupDisabled('notizbuchForm', 'notizbuchAll');
@@ -155,19 +134,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.allGenresSelected = !this.allGenresSelected;
     const genres = (this.suchmenuForm.get('textartForm') as FormGroup).controls;
     for (const v in genres) {
-      genres[v].setValue(this.allGenresSelected);
-    }
-  }
-
-  /**
-   * Toggles disabled/enabled state of element
-   * @param {string} formControlPath Path to `FormControl`
-   */
-  toggleDisabled(formControlPath: string) {
-    if ((this.suchmenuForm.get(formControlPath) as FormControl).disabled) {
-      this.suchmenuForm.get(formControlPath).enable();
-    } else {
-      this.suchmenuForm.get(formControlPath).disable();
+      genres[ v ].setValue(this.allGenresSelected);
     }
   }
 
@@ -187,26 +154,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   /**
-   * Examines if the child elements (checkboxes) are checked or not
-   * @param {string} formGroupPath Path to `FormGroup` to which the parent and child elements belong
-   * @param {string} parentFormControlName Name of parent element
-   * @param {boolean} reverseFilter If set to true examines if none is checked
-   * @returns {boolean} True if all (none) is checked, false otherwise
-   */
-  childElemsAreChecked(formGroupPath: string, parentFormControlName: string, reverseFilter: boolean = false) {
-    const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    for (const c in children) {
-      if (c !== parentFormControlName) {
-        const v = children[ c ].value;
-        if (v === reverseFilter) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  /**
    * Aligns the values of the child elements with the value of the parent element
    * @param {string} formGroupPath Path to `FormGroup`
    * @param {string} parentFormControlPath Path to parent `FormControl`
@@ -217,6 +164,21 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     for (const c in children) {
       children[ c ].setValue(allElemValue, { emitModeltoViewChange: true });
     }
+    this.setStateOfParentElement(formGroupPath, parentFormControlPath.split('.').pop());
+  }
+
+  setStateOfParentElement(category: string, parentName: string): void {
+    const children = (this.suchmenuForm.get(category) as FormGroup).controls;
+    this.parentCategoryState[ category ] = Object.keys(children)
+      .filter(e => e !== parentName)
+      .reduce((x, y) => {
+        if (x === -1) {
+          return children[ y ].value ? 2 : 0;
+        } else {
+          const yAsNumVal = children[ y ].value ? 2 : 0;
+          return x === yAsNumVal ? x : 1;
+        }
+      }, -1);
   }
 
   /**
@@ -241,15 +203,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
       manuskriptForm: this.fb.group(new Manuskript()),
       typoskriptForm: this.fb.group(new Typoskript()),
       druckForm: this.fb.group(new Druck()),
-      /*      druckForm: this.fb.group({
-       druckAll: false,
-       druckGesicht: false,
-       druckSchiffe: false,
-       druckGedichte: false,
-       druckFlussufer: false,
-       druckReduktionen: false,
-       druckAbgewandt: this.fb.group(new DruckAbgewandt())
-       }),*/
       zeitschriftForm: this.fb.group(new Zeitschrift()),
       materialienForm: this.fb.group(new Materialien()),
       textartForm: this.fb.group(new Textart()),
@@ -309,6 +262,5 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.createForm();
     this.onSearchParamsChange();
   }
-
 
 }

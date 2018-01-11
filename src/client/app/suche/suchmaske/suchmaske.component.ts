@@ -66,7 +66,8 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     materialien: false
   };
 
-  allConvolutesSelected: boolean = true;
+  allConvolutesSelected = true;
+  allGenresSelected = true;
   loadingIndicator = true;
 
   @ViewChild(TextgridComponent)
@@ -118,18 +119,17 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
    */
   childElemsHaveSameValues(formGroupPath: string, parentFormControlName: string) {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    let res: boolean = true;
     let b: boolean;
     for (const v in children) {
       if (v !== parentFormControlName) {
-        if (b === null || children[ v ].value === b) {
+        if (!b) {
           b = children[ v ].value;
-        } else {
-          res = false;
+        } else if (children[v].value !== b) {
+          return false;
         }
       }
     }
-    return res;
+    return true;
   }
 
   pristineConvolutes() {
@@ -149,7 +149,14 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.toggleGroupDisabled('druckForm', 'druckAll');
     this.toggleGroupDisabled('zeitschriftForm', 'zeitschriftAll');
     this.toggleGroupDisabled('materialienForm', 'materialienAll');
-    //console.log('allConvolutesSelected: ' + this.allConvolutesSelected);
+  }
+
+  selectAllGenres() {
+    this.allGenresSelected = !this.allGenresSelected;
+    const genres = (this.suchmenuForm.get('textartForm') as FormGroup).controls;
+    for (const v in genres) {
+      genres[v].setValue(this.allGenresSelected);
+    }
   }
 
   /**

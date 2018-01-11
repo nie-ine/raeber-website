@@ -417,7 +417,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PostCardPoem',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23TypewrittenPoem',
-    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem'
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PublicationPoem',
+    'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23DiaryConvolute'
   ];
 
   constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location,
@@ -442,13 +443,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     if(this.startSearchImmediately) this.startSearchImmediately = false;
     //console.log(arg);
     this.arg = arg;
-/*    if(this.allSearchResults) {
-      console.log('Reset suchmaskeKonvolutIRIMapping');
-      for(let i = 0; i < this.suchmaskeKonvolutIRIMapping.length; i++) {
-        this.suchmaskeKonvolutIRIMapping[i].enabled = this.suchmaskeKonvolutIRIMappingOld[i].enabled;
-      }
-      console.log(this.suchmaskeKonvolutIRIMapping);
-    }*/
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
     this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
@@ -465,6 +459,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
+    console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.route.snapshot.queryParams[ 'wort' ]) {
       //console.log('Start search immediately');
       this.suchmaskeKonvolutIRIMapping[ 0 ].enabled
@@ -868,9 +863,10 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     this.checkProgress();
-    console.log('Add to final Search Results');
+    //console.log('Add to final Search Results');
     //console.log(searchResults);
     //console.log(singlePoem);
+    console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.allSearchResults === undefined) {
       this.allSearchResults = [];
     }
@@ -900,6 +896,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       && arg.get('zeitschriftForm').pristine
     ) {
       //console.log('Perform Search in all convolutes');
+      console.log(this.suchmaskeKonvolutIRIMapping);
     } else {
       //console.log('Gehe durch jedes Konvolut');
       this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
@@ -939,6 +936,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
       this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
       this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckForm.druckAbgewandtAll').value;
+      console.log(this.suchmaskeKonvolutIRIMapping[ 35 ].enabled);
       //console.log(this.suchmaskeKonvolutIRIMapping);
     }
   }
@@ -1367,6 +1365,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
               } else if (konvolutType === 'poly-author publication') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PublicationPoem';
                 //console.log('Right Property: ' + rightProperty);
+              } else if (konvolutType === 'diary convolute') {
+                rightProperty = 'http://www.knora.org/ontology/kuno-raeber#DiaryEntry';
+                //console.log('Right Property: ' + rightProperty);
               }
               if (
                 data.nodes[ this.l ].resourceClassIri === rightProperty
@@ -1381,12 +1382,14 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         ).subscribe(response => this.responseArray = response);
     }
     onlyChoosePoemsThatAreInChosenConvolutes(poem: any) {
+    console.log(this.suchmaskeKonvolutIRIMapping);
       for (let k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
         this.checkProgress();
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
           this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
           //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
           if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poem.value['6'])) {
+            //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
             this.checkIfDone(this.allSearchResults.length);
             if(!this.setOfPoemsInResult.has(poem.value['6'])) {
               this.setOfPoemsInResult.add(poem.value['6']);

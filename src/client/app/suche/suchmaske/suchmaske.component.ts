@@ -118,18 +118,17 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
    */
   childElemsHaveSameValues(formGroupPath: string, parentFormControlName: string) {
     const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    let res: boolean = true;
     let b: boolean;
     for (const v in children) {
       if (v !== parentFormControlName) {
-        if (b === null || children[ v ].value === b) {
+        if (!b) {
           b = children[ v ].value;
-        } else {
-          res = false;
+        } else if (children[v].value !== b) {
+          return false;
         }
       }
     }
-    return res;
+    return true;
   }
 
   pristineConvolutes() {

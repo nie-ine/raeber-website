@@ -36,7 +36,7 @@
                   Notizbuch
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
+         <!--     <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1948-49
@@ -95,7 +95,7 @@
                              [checked]="false"
                 >Notizbuch 1961-65
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value" color="primary"
                              [class.green]="suchmenuForm.get('notizbuchForm.notizbuch79').value || pristineConvolutes()"
@@ -117,12 +117,12 @@
                              formControlName="notizbuch8088">Notizbuch 1980-88
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1965-80
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="manuskriptForm">
               <li class="cb-l1">
@@ -141,7 +141,7 @@
                 </md-checkbox>
               </li>
 
-              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1948-51
@@ -230,7 +230,7 @@
                              [checked]="false"
                 >Manuskripte 1964-65
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox formControlName="manuskript79" color="primary"
                              [class.green]="suchmenuForm.get('manuskriptForm.manuskript79').value || pristineConvolutes()"
@@ -246,16 +246,18 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
-                             [checked]="false">Karten 1984
+                <md-checkbox formControlName="manuskriptKarten" color="primary"
+                             [class.green]="suchmenuForm.get('manuskriptForm.manuskriptKarten').value || pristineConvolutes()"
+                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskriptKarten').value && !pristineConvolutes()"
+                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Karten 1984
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >Manuskripte divers
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="typoskriptForm">
               <li class="cb-l1">
@@ -273,7 +275,7 @@
                   Typoskripte
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >
@@ -391,7 +393,7 @@
                 >
                   Typoskripte 1965
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox formControlName="typoskript79" color="primary"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
@@ -416,7 +418,7 @@
                   Typoskripte 1983
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
                 <md-checkbox [disabled]="true"
                              [checked]="false"
                 >
@@ -451,7 +453,7 @@
                 >
                   Typoskripte divers
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="druckForm">
               <li class="cb-l1">
@@ -766,11 +768,11 @@
                              [checked]="suchmenuForm.get('materialienForm.materialienAll').value">Tagebuch
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
                 <md-checkbox [disabled]="true"
                              [checked]="false">Brief
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
           </ng-template>
         </ngb-panel>

@@ -264,4 +264,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.onSearchParamsChange();
   }
 
+  openAndCloseSidenav() {
+    this.sidenavOpened = !this.sidenavOpened;
+  }
 }

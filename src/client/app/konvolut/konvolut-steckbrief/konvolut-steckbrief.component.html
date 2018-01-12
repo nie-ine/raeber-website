@@ -1,6 +1,8 @@
 <div class="convolute-description">
   <md-card>
-    <div *ngIf="konvolutBild" class="rae-konvolutbild">
+    <div
+      *ngIf="konvolutBild && konvoluttyp && !konvoluttyp.includes('typescript') && !konvoluttyp.includes('manuscript')"
+      class="rae-konvolutbild">
       <rae-konvolut-steckbrief-miniaturansicht [konvolutBild]="konvolutBild"></rae-konvolut-steckbrief-miniaturansicht>
     </div>
 

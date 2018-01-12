@@ -26,103 +26,109 @@
                         (click)="catHidden.notizbuecher=!catHidden.notizbuecher">
                   <md-icon>{{ catHidden.notizbuecher ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox class="md-checkbox" formControlName="notizbuchAll" color="primary"
-                             [class.green]="childElemsAreChecked('notizbuchForm', 'notizbuchAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('notizbuchForm', 'notizbuchAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('notizbuchForm', 'notizbuchAll')"
-                             [checked]="childElemsAreChecked('notizbuchForm', 'notizbuchAll')"
-                             [indeterminate]="!childElemsHaveSameValues('notizbuchForm', 'notizbuchAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="notizbuchAll" color="primary"
+                             [class.green]="parentCategoryState['notizbuchForm'] === 2"
+                             [class.red]="parentCategoryState['notizbuchForm'] === 0"
+                             [class.blue]="parentCategoryState['notizbuchForm'] === 1"
+                             [checked]="parentCategoryState['notizbuchForm'] === 2"
+                             [indeterminate]="parentCategoryState['notizbuchForm'] === 1"
                              (change)="setValueForChildElems('notizbuchForm', 'notizbuchForm.notizbuchAll')">
-                  Notizbuch
+                  Notizbücher
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+         <!--     <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1948-49
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1949
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1950
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1950-51
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1952-54
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1954-55
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1955-57
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1957-58
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1958-61
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1961-65
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value" color="primary"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch79').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch79').value && !pristineConvolutes()"
+                <md-checkbox disableRipple [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
+                             color="primary"
+                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch79').value"
+                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch79').value"
+                             (change)="setStateOfParentElement('notizbuchForm', 'notizbuchAll')"
                              formControlName="notizbuch79">Notizbuch 1979
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value" color="primary"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch7982').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch7982').value && !pristineConvolutes()"
+                <md-checkbox disableRipple [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
+                             color="primary"
+                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch7982').value"
+                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch7982').value"
+                             (change)="setStateOfParentElement('notizbuchForm', 'notizbuchAll')"
                              formControlName="notizbuch7982">Notizbuch 1979-82
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value" color="primary"
-                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch8088').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch8088').value && !pristineConvolutes()"
+                <md-checkbox disableRipple [checked]="suchmenuForm.get('notizbuchForm.notizbuchAll').value"
+                             color="primary"
+                             [class.green]="suchmenuForm.get('notizbuchForm.notizbuch8088').value"
+                             [class.red]="!suchmenuForm.get('notizbuchForm.notizbuch8088').value"
+                             (change)="setStateOfParentElement('notizbuchForm', 'notizbuchAll')"
                              formControlName="notizbuch8088">Notizbuch 1980-88
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.notizbuecher">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Notizbuch 1965-80
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="manuskriptForm">
               <li class="cb-l1">
@@ -130,132 +136,137 @@
                         (click)="catHidden.manuskripte=!catHidden.manuskripte">
                   <md-icon>{{ catHidden.manuskripte ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox formControlName="manuskriptAll" color="primary"
-                             [class.green]="childElemsAreChecked('manuskriptForm', 'manuskriptAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('manuskriptForm', 'manuskriptAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('manuskriptForm', 'manuskriptAll')"
-                             [checked]="childElemsAreChecked('manuskriptForm', 'manuskriptAll')"
-                             [indeterminate]="!childElemsHaveSameValues('manuskriptForm', 'manuskriptAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="manuskriptAll" color="primary"
+                             [class.green]="parentCategoryState['manuskriptForm'] === 2"
+                             [class.red]="parentCategoryState['manuskriptForm'] === 0"
+                             [class.blue]="parentCategoryState['manuskriptForm'] === 1"
+                             [checked]="parentCategoryState['manuskriptForm'] === 2"
+                             [indeterminate]="parentCategoryState['manuskriptForm'] === 1"
                              (change)="setValueForChildElems('manuskriptForm', 'manuskriptForm.manuskriptAll')">
                   Manuskripte
                 </md-checkbox>
               </li>
 
-              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1948-51
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1951
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1952
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1953
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1954
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1955
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1956
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1957
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1958
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1958-59
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1959-60
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1961
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1962
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1963
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte 1964-65
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript79" color="primary"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript79').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript79').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="manuskript79" color="primary"
+                             (change)="setStateOfParentElement('manuskriptForm', 'manuskriptAll')"
+                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript79').value"
+                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript79').value"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1979
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox formControlName="manuskript7983" color="primary"
-                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript7983').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript7983').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="manuskript7983" color="primary"
+                             (change)="setStateOfParentElement('manuskriptForm', 'manuskriptAll')"
+                             [class.green]="suchmenuForm.get('manuskriptForm.manuskript7983').value"
+                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskript7983').value"
                              [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Manuskripte 1979-83
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
-                             [checked]="false">Karten 1984
+                <md-checkbox disableRipple formControlName="manuskriptKarten" color="primary"
+                             (change)="setStateOfParentElement('manuskriptForm', 'manuskriptAll')"
+                             [class.green]="suchmenuForm.get('manuskriptForm.manuskriptKarten').value"
+                             [class.red]="!suchmenuForm.get('manuskriptForm.manuskriptKarten').value"
+                             [checked]="suchmenuForm.get('manuskriptForm.manuskriptAll').value">Karten 1984
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.manuskripte">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >Manuskripte divers
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="typoskriptForm">
               <li class="cb-l1">
@@ -263,182 +274,185 @@
                         (click)="catHidden.typoskripte=!catHidden.typoskripte">
                   <md-icon>{{ catHidden.typoskripte ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox formControlName="typoskriptAll" color="primary"
-                             [class.green]="childElemsAreChecked('typoskriptForm', 'typoskriptAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('typoskriptForm', 'typoskriptAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('typoskriptForm', 'typoskriptAll')"
-                             [checked]="childElemsAreChecked('typoskriptForm', 'typoskriptAll')"
-                             [indeterminate]="!childElemsHaveSameValues('typoskriptForm', 'typoskriptAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="typoskriptAll" color="primary"
+                             [class.green]="parentCategoryState['typoskriptForm'] === 2"
+                             [class.red]="parentCategoryState['typoskriptForm'] === 0"
+                             [class.blue]="parentCategoryState['typoskriptForm'] === 1"
+                             [checked]="parentCategoryState['typoskriptForm'] === 2"
+                             [indeterminate]="parentCategoryState['typoskriptForm'] === 1"
                              (change)="setValueForChildElems('typoskriptForm', 'typoskriptForm.typoskriptAll')">
                   Typoskripte
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1943-46
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1945-50
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1948-50
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1951
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1952
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1953
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1954
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1955
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1956
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1957
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1958
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1959
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1960
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1961
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1962
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1963
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1965
                 </md-checkbox>
-              </li>
+              </li>-->
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript79" color="primary"
+                <md-checkbox disableRipple formControlName="typoskript79" color="primary"
+                             (change)="setStateOfParentElement('typoskriptForm', 'typoskriptAll')"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript79').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript79').value && !pristineConvolutes()">
+                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript79').value"
+                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript79').value">
                   Typoskripte 1979
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript79Spez" color="primary"
+                <md-checkbox disableRipple formControlName="typoskript79Spez" color="primary"
+                             (change)="setStateOfParentElement('typoskriptForm', 'typoskriptAll')"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript79Spez').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript79Spez').value && !pristineConvolutes()">
+                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript79Spez').value"
+                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript79Spez').value">
                   Typoskripte 1979-spez
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox formControlName="typoskript83" color="primary"
+                <md-checkbox disableRipple formControlName="typoskript83" color="primary"
+                             (change)="setStateOfParentElement('typoskriptForm', 'typoskriptAll')"
                              [checked]="suchmenuForm.get('typoskriptForm.typoskriptAll').value"
-                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript83').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript83').value && !pristineConvolutes()">
+                             [class.green]="suchmenuForm.get('typoskriptForm.typoskript83').value"
+                             [class.red]="!suchmenuForm.get('typoskriptForm.typoskript83').value">
                   Typoskripte 1983
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte 1983 spez.
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte Kutter
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte Hochstrasser
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte Thomas
@@ -446,12 +460,12 @@
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.typoskripte">
-                <md-checkbox [disabled]="true"
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false"
                 >
                   Typoskripte divers
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
             <ul formGroupName="druckForm">
               <li class="cb-l1">
@@ -459,94 +473,71 @@
                         (click)="catHidden.drucke=!catHidden.drucke">
                   <md-icon>{{ catHidden.drucke ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox formControlName="druckAll" color="primary"
-                             [class.green]="childElemsAreChecked('druckForm', 'druckAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('druckForm', 'druckAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('druckForm', 'druckAll')"
-                             [checked]="childElemsAreChecked('druckForm', 'druckAll')"
-                             [indeterminate]="!childElemsHaveSameValues('druckForm', 'druckAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="druckAll" color="primary"
+                             [class.green]="parentCategoryState['druckForm'] === 2"
+                             [class.red]="parentCategoryState['druckForm'] === 0"
+                             [class.blue]="parentCategoryState['druckForm'] === 1"
+                             [checked]="parentCategoryState['druckForm'] === 2"
+                             [indeterminate]="parentCategoryState['druckForm'] === 1"
                              (change)="setValueForChildElems('druckForm', 'druckForm.druckAll')">
                   Selbständige Publikationen
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckGesicht" color="primary" [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckGesicht').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckGesicht').value && !pristineConvolutes()">
+                <md-checkbox disableRipple formControlName="druckGesicht" color="primary"
+                             [checked]="suchmenuForm.get('druckForm.druckAll').value"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
+                             [class.green]="suchmenuForm.get('druckForm.druckGesicht').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckGesicht').value">
                   GESICHT IM MITTAG 1950
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckSchiffe" color="primary" [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckSchiffe').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckSchiffe').value && !pristineConvolutes()">
+                <md-checkbox disableRipple formControlName="druckSchiffe" color="primary"
+                             [checked]="suchmenuForm.get('druckForm.druckAll').value"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
+                             [class.green]="suchmenuForm.get('druckForm.druckSchiffe').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckSchiffe').value">
                   Die
                   verwandelten Schiffe 1957
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckGedichte" color="primary" [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckGedichte').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckGedichte').value && !pristineConvolutes()">
+                <md-checkbox disableRipple formControlName="druckGedichte" color="primary"
+                             [checked]="suchmenuForm.get('druckForm.druckAll').value"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
+                             [class.green]="suchmenuForm.get('druckForm.druckGedichte').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckGedichte').value">
                   GEDICHTE 1960
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckFlussufer" color="primary" [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckFlussufer').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckFlussufer').value && !pristineConvolutes()">
+                <md-checkbox disableRipple formControlName="druckFlussufer" color="primary"
+                             [checked]="suchmenuForm.get('druckForm.druckAll').value"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
+                             [class.green]="suchmenuForm.get('druckForm.druckFlussufer').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckFlussufer').value">
                   FLUSSUFER 1963
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckReduktionen" color="primary"
+                <md-checkbox disableRipple formControlName="druckReduktionen" color="primary"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
                              [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckReduktionen').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckReduktionen').value && !pristineConvolutes()">
+                             [class.green]="suchmenuForm.get('druckForm.druckReduktionen').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckReduktionen').value">
                   Reduktionen 1981
                 </md-checkbox>
               </li>
               <!--<span formGroupName="druckAbgewandt">-->
               <li class="cb-l2" [class.hidden]="!catHidden.drucke">
-                <!--                <md-checkbox formControlName="druckAbgewandtAll"
-                                             [class.green]="childElemsAreChecked('druckForm.druckAbgewandt', 'druckAbgewandtAll')"
-                                             [class.red]="childElemsAreChecked('druckForm.druckAbgewandt', 'druckAbgewandtAll', true)"
-                                             [class.blue]="!childElemsHaveSameValues('druckForm.druckAbgewandt', 'druckAbgewandtAll')"
-                                             [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                                             [indeterminate]="!childElemsHaveSameValues('druckForm.druckAbgewandt', 'druckAbgewandtAll')"
-                                             (change)="setValueForChildElems('druckForm.druckAbgewandt', 'druckForm.druckAbgewandt.druckAbgewandtAll')">-->
-                <md-checkbox formControlName="druckAbgewandtAll" color="primary"
+                <md-checkbox disableRipple formControlName="druckAbgewandtAll" color="primary"
+                             (change)="setStateOfParentElement('druckForm', 'druckAll')"
                              [checked]="suchmenuForm.get('druckForm.druckAll').value"
-                             [class.green]="suchmenuForm.get('druckForm.druckAbgewandtAll').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('druckForm.druckAbgewandtAll').value && !pristineConvolutes()">
+                             [class.green]="suchmenuForm.get('druckForm.druckAbgewandtAll').value"
+                             [class.red]="!suchmenuForm.get('druckForm.druckAbgewandtAll').value">
                   Abgewandt Zugewandt 1985
                 </md-checkbox>
-                <!-- <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
-                                 (change)="toggleDisabled('druckForm.druckAbgewandtAll')">
-                    (change)="toggleGroupDisabled('druckForm.druckAbgewandt', 'druckForm.druckAbgewandt.druckAbgewandtAll')">
-
-                </md-slide-toggle>
-              </li>
-              <!--                <li class="cb-l3" [class.hidden]="!catHidden.drucke">
-                                <md-checkbox formControlName="druckAbgewandtHochdeutsch"
-                                             [checked]="suchmenuForm.get('druckForm.druckAll').value">Hochdeutsche Gedichte 1985
-                                </md-checkbox>
-                              <!-- <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
-                                                (change)="toggleDisabled('druckForm.druckAbgewandt.druckAbgewandtHochdeutsch')">
-
-                              </md-slide-toggle>
-                              </li>
-              <li class="cb-l3" [class.hidden]="!catHidden.drucke">
-                <md-checkbox formControlName="druckAbgewandtAlemannisch"
-                             [checked]="suchmenuForm.get('druckForm.druckAll').value">
-                  Alemannische Gedichte 1985
-                </md-checkbox>
-                <!-- <md-slide-toggle class="disableButton" [checked]="catDisabled.drucke"
-                                  (change)="toggleDisabled('druckForm.druckAbgewandt.druckAbgewandtAlemannisch')">
-
-                </md-slide-toggle>
-              </li>
-              </span>-->
             </ul>
             <ul formGroupName="zeitschriftForm">
               <li class="cb-l1">
@@ -554,191 +545,215 @@
                         (click)="catHidden.zeitschriften=!catHidden.zeitschriften">
                   <md-icon>{{ catHidden.zeitschriften ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox formControlName="zeitschriftAll" color="primary"
-                             [class.green]="childElemsAreChecked('zeitschriftForm', 'zeitschriftAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('zeitschriftForm', 'zeitschriftAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('zeitschriftForm', 'zeitschriftAll')"
-                             [checked]="childElemsAreChecked('zeitschriftForm', 'zeitschriftAll')"
-                             [indeterminate]="!childElemsHaveSameValues('zeitschriftForm', 'zeitschriftAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="zeitschriftAll" color="primary"
+                             [class.green]="parentCategoryState['zeitschriftForm'] === 2"
+                             [class.red]="parentCategoryState['zeitschriftForm'] === 0"
+                             [class.blue]="parentCategoryState['zeitschriftForm'] === 1"
+                             [checked]="parentCategoryState['zeitschriftForm'] === 2"
+                             [indeterminate]="parentCategoryState['zeitschriftForm'] === 1"
                              (change)="setValueForChildElems('zeitschriftForm', 'zeitschriftForm.zeitschriftAll')">
                   Unselbständige Publikationen
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftAkzente" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftAkzente').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftAkzente').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftAkzente" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftAkzente').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftAkzente').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Akzente
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftBlaetter" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftBlaetter').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftBlaetter').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftBlaetter" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftBlaetter').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftBlaetter').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">blätter + bilder
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftSchoenste" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSchoenste').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSchoenste').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftSchoenste" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSchoenste').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSchoenste').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Das Schönste
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftTag" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTag').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTag').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftTag" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTag').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTag').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Der Tages-Anzeiger
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftLandschaft" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLandschaft').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLandschaft').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftLandschaft" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLandschaft').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLandschaft').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Die skeptische
                   Landschaft - NoImp
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftTat" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTat').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTat').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftTat" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTat').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTat').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Die Tat
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftZeit" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftZeit').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftZeit').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftZeit" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftZeit').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftZeit').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">DIE ZEIT
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftEnsemble" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftEnsemble').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftEnsemble').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftEnsemble" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftEnsemble').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftEnsemble').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">ensemble
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftGegengewichte" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftGegengewichte" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftGegengewichte').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Gegengewichte - NoImp
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftHortulus" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftHortulus').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftHortulus').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftHortulus" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftHortulus').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftHortulus').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">hortulus
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftJahresring" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftJahresring').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftJahresring').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftJahresring" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftJahresring').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftJahresring').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Jahresring
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftKonturen" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftKonturen').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftKonturen').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftKonturen" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftKonturen').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftKonturen').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Konturen
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftLNN" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLNN').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLNN').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftLNN" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLNN').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLNN').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Luzerner Neueste
                   Nachrichten
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftLadZ" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLadZ').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLadZ').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftLadZ" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLadZ').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLadZ').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Lyrik aus dieser Zeit
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftLuZ" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLuZ').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLuZ').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftLuZ" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftLuZ').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftLuZ').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Lyrik unserer Zeit
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftMerkur" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftMerkur').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftMerkur').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftMerkur" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftMerkur').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftMerkur').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Merkur
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftDeutscheHefte" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftDeutscheHefte').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftDeutscheHefte').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftDeutscheHefte" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftDeutscheHefte').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftDeutscheHefte').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Deutsche Hefte
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftNZN" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftNZN').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftNZN').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftNZN" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftNZN').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftNZN').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Zürcher
                   Nachrichten
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftNZZ" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftNZZ').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftNZZ').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftNZZ" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftNZZ').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftNZZ').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Neue Zürcher Zeitung
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftRenaissance" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftRenaissance').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftRenaissance').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftRenaissance" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftRenaissance').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftRenaissance').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Renaissance
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftRundschau" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftRundschau').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftRundschau').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftRundschau" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftRundschau').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftRundschau').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Schweizer Rundschau
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftSonntagsblatt" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftSonntagsblatt" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSonntagsblatt').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Sonntagsblatt - NoImp
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftSueddeutsche" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSueddeutsche').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSueddeutsche').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftSueddeutsche" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftSueddeutsche').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftSueddeutsche').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Süddeutsche Zeitung
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <!--<md-checkbox formControlName="zeitschriftTA"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTA').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTA').value && !pristineConvolutes()"
+                <!--<md-checkbox disableRipple formControlName="zeitschriftTA"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftTA').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftTA').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Tages-Anzeiger
                 </md-checkbox>-->
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.zeitschriften">
-                <md-checkbox formControlName="zeitschriftWortTat" color="primary"
-                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftWortTat').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftWortTat').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="zeitschriftWortTat" color="primary"
+                             (change)="setStateOfParentElement('zeitschriftForm', 'zeitschriftAll')"
+                             [class.green]="suchmenuForm.get('zeitschriftForm.zeitschriftWortTat').value"
+                             [class.red]="!suchmenuForm.get('zeitschriftForm.zeitschriftWortTat').value"
                              [checked]="suchmenuForm.get('zeitschriftForm.zeitschriftAll').value">Wort und Tat
                 </md-checkbox>
               </li>
@@ -749,66 +764,70 @@
                         (click)="catHidden.materialien=!catHidden.materialien">
                   <md-icon>{{ catHidden.materialien ? 'expand_less' : 'expand_more' }}</md-icon>
                 </button>
-                <md-checkbox formControlName="materialienAll" color="primary"
-                             [class.green]="childElemsAreChecked('materialienForm', 'materialienAll') || pristineConvolutes()"
-                             [class.red]="childElemsAreChecked('materialienForm', 'materialienAll', true) && !pristineConvolutes()"
-                             [class.blue]="!childElemsHaveSameValues('materialienForm', 'materialienAll')"
-                             [checked]="childElemsAreChecked('materialienForm', 'materialienAll')"
-                             [indeterminate]="suchmenuForm.get('materialienForm').pristine ? false :  !childElemsHaveSameValues('materialienForm', 'materialienAll')"
+                <md-checkbox disableRipple class="md-checkbox" formControlName="materialienAll" color="primary"
+                             [class.green]="parentCategoryState['materialienForm'] === 2"
+                             [class.red]="parentCategoryState['materialienForm'] === 0"
+                             [class.blue]="parentCategoryState['materialienForm'] === 1"
+                             [checked]="parentCategoryState['materialienForm'] === 2"
+                             [indeterminate]="parentCategoryState['materialienForm'] === 1"
                              (change)="setValueForChildElems('materialienForm', 'materialienForm.materialienAll')">
                   Materialien
                 </md-checkbox>
               </li>
               <li class="cb-l2" [class.hidden]="!catHidden.materialien">
-                <md-checkbox formControlName="materialienTagebuch" color="primary"
-                             [class.green]="suchmenuForm.get('materialienForm.materialienTagebuch').value || pristineConvolutes()"
-                             [class.red]="!suchmenuForm.get('materialienForm.materialienTagebuch').value && !pristineConvolutes()"
+                <md-checkbox disableRipple formControlName="materialienTagebuch" color="primary"
+                             (change)="setStateOfParentElement('materialienForm', 'materialienAll')"
+                             [class.green]="suchmenuForm.get('materialienForm.materialienTagebuch').value"
+                             [class.red]="!suchmenuForm.get('materialienForm.materialienTagebuch').value"
                              [checked]="suchmenuForm.get('materialienForm.materialienAll').value">Tagebuch
                 </md-checkbox>
               </li>
-              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
-                <md-checkbox [disabled]="true"
+<!--              <li class="cb-l2" [class.hidden]="!catHidden.materialien">
+                <md-checkbox disableRipple [disabled]="true"
                              [checked]="false">Brief
                 </md-checkbox>
-              </li>
+              </li>-->
             </ul>
           </ng-template>
         </ngb-panel>
         <ngb-panel title="Textart">
           <ng-template ngbPanelContent>
+            <button md-button (click)="selectAllGenres()">
+              {{ allGenresSelected ? 'Alle abwählen' : 'Alle auswählen' }}
+            </button>
             <ul formGroupName="textartForm">
               <li class="cb-l1">
-                <md-checkbox formControlName="textartFreieVerse" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartFreieVerse').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartFreieVerse').value && !suchmenuForm.get('textartForm').pristine">
+                <md-checkbox disableRipple formControlName="textartFreieVerse" color="primary"
+                             [class.green]="suchmenuForm.get('textartForm.textartFreieVerse').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartFreieVerse').value">
                   Freie Verse
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="textartGereimteVerse" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartGereimteVerse').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartGereimteVerse').value && !suchmenuForm.get('textartForm').pristine">
+                <md-checkbox disableRipple formControlName="textartGereimteVerse" color="primary"
+                             [class.green]="suchmenuForm.get('textartForm.textartGereimteVerse').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartGereimteVerse').value">
                   Gereimte Verse
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="textartProsa" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartProsa').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartProsa').value && !suchmenuForm.get('textartForm').pristine">
+                <md-checkbox disableRipple formControlName="textartProsa" color="primary"
+                             [class.green]="suchmenuForm.get('textartForm.textartProsa').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartProsa').value">
                   Rhythmische Prosa
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="textartProsanotat" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartProsanotat').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartProsanotat').value && !suchmenuForm.get('textartForm').pristine">
+                <md-checkbox disableRipple formControlName="textartProsanotat" color="primary"
+                             [class.green]="suchmenuForm.get('textartForm.textartProsanotat').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartProsanotat').value">
                   Prosanotat
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="textartBriefentwurf" color="primary"
-                             [class.green]="suchmenuForm.get('textartForm.textartBriefentwurf').value || suchmenuForm.get('textartForm').pristine"
-                             [class.red]="!suchmenuForm.get('textartForm.textartBriefentwurf').value && !suchmenuForm.get('textartForm').pristine">
+                <md-checkbox disableRipple formControlName="textartBriefentwurf" color="primary"
+                             [class.green]="suchmenuForm.get('textartForm.textartBriefentwurf').value"
+                             [class.red]="!suchmenuForm.get('textartForm.textartBriefentwurf').value">
                   Briefentwurf
                 </md-checkbox>
               </li>
@@ -835,7 +854,7 @@
         <ngb-panel title="Endfassungen">
           <ng-template ngbPanelContent>
             <li class="cb-l1">
-              <md-checkbox formControlName="endfassung" class="cb-l1" color="primary"
+              <md-checkbox disableRipple formControlName="endfassung" class="cb-l1" color="primary"
                            [class.green]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
                            [class.red]="!suchmenuForm.get('endfassung').value || suchmenuForm.pristine"
                            [disabled]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
@@ -843,7 +862,7 @@
               </md-checkbox>
             </li>
             <li class="cb-l1">
-              <md-checkbox formControlName="keineEndfassung" class="cb-l1" color="primary"
+              <md-checkbox disableRipple formControlName="keineEndfassung" class="cb-l1" color="primary"
                            [class.green]="suchmenuForm.get('keineEndfassung').value && !suchmenuForm.pristine"
                            [class.red]="!suchmenuForm.get('keineEndfassung').value || suchmenuForm.pristine"
                            [disabled]="suchmenuForm.get('endfassung').value && !suchmenuForm.pristine"
@@ -856,7 +875,7 @@
           <ng-template ngbPanelContent>
             <ul>
               <li class="cb-l1">
-                <md-checkbox formControlName="strophen" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="strophen" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('strophen').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
@@ -864,7 +883,7 @@
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="keineStrophen" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="keineStrophen" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('keineStrophen').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keineStrophen').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('strophen').value && !suchmenuForm.pristine"
@@ -878,7 +897,7 @@
           <ng-template ngbPanelContent>
             <ul>
               <li class="cb-l1">
-                <md-checkbox formControlName="mundart" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="mundart" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('mundart').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
@@ -886,7 +905,7 @@
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="keineMundart" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="keineMundart" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('keineMundart').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keineMundart').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('mundart').value && !suchmenuForm.pristine"
@@ -900,7 +919,7 @@
           <ng-template ngbPanelContent>
             <ul>
               <li class="cb-l1">
-                <md-checkbox formControlName="zyklus" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="zyklus" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('zyklus').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
@@ -908,7 +927,7 @@
                 </md-checkbox>
               </li>
               <li class="cb-l1">
-                <md-checkbox formControlName="keinZyklus" class="cb-l1" color="primary"
+                <md-checkbox disableRipple formControlName="keinZyklus" class="cb-l1" color="primary"
                              [class.green]="suchmenuForm.get('keinZyklus').value && !suchmenuForm.pristine"
                              [class.red]="!suchmenuForm.get('keinZyklus').value || suchmenuForm.pristine"
                              [disabled]="suchmenuForm.get('zyklus').value && !suchmenuForm.pristine"

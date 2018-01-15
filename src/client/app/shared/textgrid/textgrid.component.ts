@@ -159,7 +159,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
+    console.log(this.poemsInGrid);
     if (this.searchTermfromKonvolut) {
       if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2) {
         this.searchInKonvolut = true;

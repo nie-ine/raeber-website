@@ -58,7 +58,7 @@
 
 
           <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
-            <span>In: {{ p.convoluteTitle }} </span><br>
+            <span>In: {{ p.searchOfficialName }} </span><br>
             <span [ngClass]="{'invisible': p.synopsisTitle == ' '}">
               Synopse: <a [routerLink]="'/synopsen/' + p.synopsisIRI.split('/')[4]" routerLinkActive="active">{{ p.synopsisTitle }}</a><br>
             </span>

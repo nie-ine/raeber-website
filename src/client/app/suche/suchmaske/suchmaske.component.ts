@@ -34,7 +34,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   @Input() loadingIndicatorInput: boolean;
   @Input() lastSearchTerm: string;
 
-  relativeSizeOfColumns: string = '43%';
+  relativeSizeOfColumns: string = '45%';
   textboxHeight: number = 0;
   textsHaveAlignedFrames: boolean = false;
   showTexts: boolean = true;

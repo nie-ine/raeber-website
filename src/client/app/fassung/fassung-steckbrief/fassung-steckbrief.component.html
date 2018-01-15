@@ -50,8 +50,8 @@
           <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
         </span>
     </li>
-    <li *ngIf="pageNumberDescription" >
-      <span class="entryTitle">Seite / Blatt:</span>
+    <li *ngIf="pageNumberDescription && pageNumberDescription !== '0'">
+      <span class="entryTitle">Seite / Blatt: ->> {{pageNumberDescription}}</span>
       <span  [innerHtml]="pageNumberDescription"></span>
     </li>
     <li *ngIf="publicationNumber" class="typeTextfield group2">

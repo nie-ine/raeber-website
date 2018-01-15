@@ -29,7 +29,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
   @Input() viewMode: string = 'grid';
   @Input() showText: boolean = true;
-  @Input() columns: string = '43%';
+  @Input() columns: string = '45%';
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
   @Input() resetPoems: string;
@@ -159,7 +159,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
     if (this.searchTermfromKonvolut) {
       if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2) {
         this.searchInKonvolut = true;

@@ -13,9 +13,9 @@
 .rae-poem-container {
   display: inline-block;
   vertical-align: top;
-  width: 43%;
+  width: 45%;
   padding: 5px;
-  margin: 16px;
+  margin: 8px;
   white-space: normal;
 }
 
@@ -47,7 +47,7 @@ md-card-content {
 
 .rae-poem-card-grid {
   height: 90%;
-  width: 90%;
+  width: 100%;
 }
 
 .hidden {

@@ -14,7 +14,7 @@ export class SucheDarstellungsoptionenService {
   private showTextFlag: boolean = true;
   private textboxHeight: number = 0;
   private numberOfColumns: number = 3;
-  private relativeSizesOfColumns: [string, string, string] = ['93%', '43%', '26%'];
+  private relativeSizesOfColumns: [string, string, string] = ['100%', '45%', '29%'];
   private textsHaveAlignedFrames: boolean = false;
 
   textboxHeight$ = this.textboxHeightSource.asObservable();

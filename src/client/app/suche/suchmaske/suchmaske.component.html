@@ -986,5 +986,7 @@
   </button>-->
 
 <button md-raised-button class="suchmenu-button" (click)="openAndCloseSidenav()">
-  <md-icon >more_vert</md-icon>
+  <md-icon>
+    {{ sidenavOpened ? 'keyboard_arrow_left' : 'keyboard_arrow_right' }}
+  </md-icon>
 </button>

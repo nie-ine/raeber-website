@@ -3,7 +3,13 @@
  */
 
 import {
-  AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output,
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
   SimpleChanges
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
@@ -146,14 +152,13 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   private static filterSingleTextbox(x: CachePoem): boolean {
-    return !x.isVisible;
+    return x.isVisible === true || x.isVisible === undefined;
   }
 
   constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
     if (this.searchTermfromKonvolut) {
       if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2) {
         this.searchInKonvolut = true;
@@ -264,7 +269,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   resetSinglePoemHiddenState() {
     for (let i in this.poemsInGrid) {
-      this.poemsInGrid[i].isVisible = false;
+      this.poemsInGrid[ i ].isVisible = true;
     }
   }
 
@@ -286,7 +291,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    * @returns {Array<CachePoem>} Filtered poems array
    */
   filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
-    if (unfiltered !== undefined && this.contentType === 'synopse') {
+    if (unfiltered !== undefined && this.contentType !== 'konvolut') {
       return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
@@ -300,7 +305,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   formatDate(date: string) {
-    //console.log(date);
     return this.dateFormatService.germanLongDate(date);
   }
 
@@ -311,7 +315,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hideTextbox(iri: string) {
-    this.updatePoemByIriInArray(iri, x => x.isVisible = true);
+    this.updatePoemByIriInArray(iri, x => x.isVisible = false);
   }
 
   updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
@@ -327,11 +331,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hidePoem(poem: any) {
-    if(poem && poem.isVisible !== undefined) {
-      return !poem.isVisible;
-    } else {
-      return false;
-    }
+    return poem && poem.isVisible === false;
   }
 
 }

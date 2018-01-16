@@ -3,13 +3,7 @@
  */
 
 import {
-  AfterViewChecked,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
+  AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output,
   SimpleChanges
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
@@ -152,7 +146,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   private static filterSingleTextbox(x: CachePoem): boolean {
-    return !x.isVisible;
+    return x.isVisible === true || x.isVisible === undefined;
   }
 
   constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
@@ -269,7 +263,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   resetSinglePoemHiddenState() {
     for (let i in this.poemsInGrid) {
-      this.poemsInGrid[i].isVisible = false;
+      this.poemsInGrid[ i ].isVisible = true;
     }
   }
 
@@ -292,20 +286,20 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
     if (unfiltered !== undefined && this.contentType !== 'konvolut') {
-      return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+      const test = (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
         .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x)
         .filter(x => TextgridComponent.filterSingleTextbox(x));
+      return test;
     } else {
       return unfiltered;
     }
   }
 
   formatDate(date: string) {
-    //console.log(date);
     return this.dateFormatService.germanLongDate(date);
   }
 
@@ -316,7 +310,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hideTextbox(iri: string) {
-    this.updatePoemByIriInArray(iri, x => x.isVisible = true);
+    this.updatePoemByIriInArray(iri, x => x.isVisible = false);
   }
 
   updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
@@ -332,11 +326,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hidePoem(poem: any) {
-    if(poem && poem.isVisible !== undefined) {
-      return !poem.isVisible;
-    } else {
-      return false;
-    }
+    return poem && poem.isVisible === false;
   }
 
 }

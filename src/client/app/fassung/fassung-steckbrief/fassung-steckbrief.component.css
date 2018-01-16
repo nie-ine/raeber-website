@@ -11,3 +11,7 @@ div.flex-container {
 .flex-container .content {
   flex: 1 1 auto;
 }
+
+:host ::ng-deep .flex-container .content * {
+  margin: 0;
+}

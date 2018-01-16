@@ -49,7 +49,8 @@
       <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
     </div>
   </div>
-  <div class="flex-container" *ngIf="pageNumberDescription && pageNumberDescription !== '0'">
+  <div class="flex-container"
+       *ngIf="pageNumberDescription && pageNumberDescription !== '0' && pageNumberDescription !== ' '">
     <div class="label">Seite / Blatt:</div>
     <div class="content" [innerHtml]="pageNumberDescription"></div>
   </div>

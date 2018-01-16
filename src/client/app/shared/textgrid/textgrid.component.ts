@@ -3,7 +3,13 @@
  */
 
 import {
-  AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output,
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
   SimpleChanges
 } from '@angular/core';
 import { DateFormatService } from '../utilities/date-format.service';
@@ -286,14 +292,13 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
    */
   filterPoems(unfiltered: Array<CachePoem>): Array<CachePoem> {
     if (unfiltered !== undefined && this.contentType !== 'konvolut') {
-      const test = (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
+      return (this.filterFirstLastFlag ? TextgridComponent.filterFirstLast(unfiltered) : unfiltered)
         .filter(x => this.searchActivated ? TextgridComponent.filterSearchResults(x) : x)
         .filter(x => this.filterDuplicatesFlag ? TextgridComponent.filterDuplicates(x) : x)
         .filter(x => this.filterNotebookFlag ? TextgridComponent.filterConvoluteTypes(x, 'Notizbuch') : x)
         .filter(x => this.filterManuscriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Manuskript') : x)
         .filter(x => this.filterTyposcriptFlag ? TextgridComponent.filterConvoluteTypes(x, 'Typoskript') : x)
         .filter(x => TextgridComponent.filterSingleTextbox(x));
-      return test;
     } else {
       return unfiltered;
     }

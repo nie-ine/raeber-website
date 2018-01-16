@@ -6,14 +6,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdDialogModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdToolbarModule
+  MdButtonModule, MdButtonToggleModule, MdCardModule, MdDialogModule, MdGridListModule, MdIconModule,
+  MdInputModule, MdProgressSpinnerModule, MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,8 +15,7 @@ import { DarstellungsoptionenModule } from '../shared/darstellungsoptionen/darst
 import { KonvolutsucheModule } from '../shared/konvolutsuche/konvolutsuche.module';
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
-import { FromPoemIRIToTextgridInformationComponent }
-  from '../shared/fromPoemIRIToTextgridInformation/fromPoemIRIToTextgridInformation.component';
+import { FromPoemIRIToTextgridInformationComponent } from '../shared/fromPoemIRIToTextgridInformation/fromPoemIRIToTextgridInformation.component';
 import { RegisterspalteModule } from '../shared/registerspalte/registerspalte.module';
 import { TextgridModule } from '../shared/textgrid/textgrid.module';
 import { KonvolutRoutingModule } from './konvolut-routing.module';
@@ -56,6 +49,7 @@ import { ConvoluteNotAvailableComponent } from './convolute-not-available.compon
     MdIconModule,
     MdInputModule,
     MdToolbarModule,
+    MdProgressSpinnerModule,
     RegisterspalteModule,
     TextgridModule,
     NgbModule,

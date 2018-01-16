@@ -16,6 +16,7 @@ export class SynopseWerkzeugleisteComponent {
 
   @Input() showText: boolean = true;
   @Input() gridHeight: number = 0;
+  @Input() hasDuplicates: boolean;
   @Output() showTextChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() vergroessereText = new EventEmitter();
@@ -36,6 +37,7 @@ export class SynopseWerkzeugleisteComponent {
   showManuscripts: boolean = true;
   showTyposcripts: boolean = true;
   showDuplicates: boolean = false;
+  buttonDuplicatesPristine = true;
 
   constructor(public dialog: MdDialog) {
   }

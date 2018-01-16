@@ -20,15 +20,20 @@
                       [routerLink]="['/drucke/abgewandt-zugewandt-hochdeutsche-gedichte']"
                       routerLinkActive="active"><img
                       style="margin: 20px 20px 10px 0px; float: left;" title="Abgewandt Zugewandt,1985" alt="abgewandt"
-                      src="../../assets/jpg/abgewandt.jpg" width="21%"></a><span class="markierung"
-                                                                                 style="color: rgb(208, 5, 1);"><a
-                      [routerLink]="['/anleitung']" target="_blank"><button
-                      type="button" class="icon-help" title="Hilfe" style="margin-top: -50px;"> Erste Hilfe</button></a> <br><a
-                      [routerLink]="['/drucke/gesicht-im-mittag']" routerLinkActive="active"><img
-                      src="../../assets/jpg/gesicht.jpg"
-                      alt="gesicht"
-                      style="margin: 0px 10px 10px; float: right;"
-                      title="GESICHT IM MITTAG, 1950" width="21%"></a></span>
+                      src="../../assets/jpg/abgewandt.jpg" width="21%"></a>
+                      <span class="markierung" style="color: rgb(208, 5, 1);">
+                         <button md-raised-button style="margin-top: -50px" title="Hilfe" (click)="showHelp()">
+                           <md-icon>help</md-icon>
+                         </button><br>
+                        <!--                      <a [routerLink]="['/anleitung']" target="_blank">
+                                              <button type="button" class="icon-help" title="Hilfe"
+                                                      style="margin-top: -50px;">Erste Hilfe</button>
+                                              </a><br>-->
+                      <a [routerLink]="['/drucke/gesicht-im-mittag']" routerLinkActive="active">
+                        <img src="../../assets/jpg/gesicht.jpg" alt="gesicht"
+                             style="margin: 0px 10px 10px; float: right;" title="GESICHT IM MITTAG, 1950" width="21%">
+                      </a>
+                    </span>
                     </p>
                     <p style="padding-left: 200px; padding-right: 20px; margin-top: -10px;"><span
                       style="font-size: 11pt; font-weight: bold;">Das Portal enthält sämtliche Gedichte des Autors mit den Textvorstufen&nbsp;aus dem Nachlass. Durch Handschriften-Reproduktionen, diplomatische Umschriften und synoptische Darstellungen lässt sich die Textgeschichte jedes Gedichtes im Detail verfolgen.<br></span>

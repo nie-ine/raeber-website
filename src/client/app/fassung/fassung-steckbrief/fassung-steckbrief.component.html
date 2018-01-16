@@ -1,97 +1,94 @@
 <div>
   <h3>Weitere Informationen</h3>
-  <ul>
-    <li *ngIf="specialDescription" >
-        <span class="entryTitle">Besonderes:</span>
-        <span [innerHtml]="specialDescription"></span>
-    </li>
-    <li *ngIf="detailDescription" >
-        <span class="entryTitle">Details:</span>
-        <span  [innerHtml]="detailDescription"></span>
-    </li>
-    <!--<li *ngIf="convoluteTitle === 'Verstreutes' && publishedIn && publishedIn.length > 0">
-      <span class="entryTitle">Zeitschrift:</span>
-      <span >
-          <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
-        </span>
-    </li>-->
-    <li *ngIf="!lastAuthorizedPublication && convoluteTitle === 'Verstreutes'">
-      <span class="entryTitle">Letzter Druck:</span>
-      <span>Verstreutes</span>
-    </li>
-    <li *ngIf="lastAuthorizedPublication" >
-        <span class="entryTitle">Letzter Druck:</span>
-        <span >
-          <rae-fassung-steckbrief-konvolut
-            [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
-        </span>
-    </li>
-    <li *ngIf="publishingState === 'unpublished'" >
-        <span class="entryTitle">Letzter Druck:</span>
-        <span >Unpubliziert</span>
-    </li>
-    <li *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0" >
-      <span class="entryTitle">Nachdruck:</span>
-      <span >
-          <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
-        </span>
-    </li>
-    <li *ngIf="isFinalVersion" >
-      <span class="entryTitle">Endfassung:</span>
-      <span >ja</span>
-    </li>
-    <li *ngIf="textartMap[structure]" >
-      <span class="entryTitle">Textart:</span>
-      <span >{{ textartMap[structure] }}</span>
-    </li>
-    <li *ngIf="carrierIRI" >
-      <span class="entryTitle">Signatur:</span>
-      <span >
-          <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
-        </span>
-    </li>
-    <li *ngIf="pageNumberDescription" >
-      <span class="entryTitle">Seite / Blatt:</span>
-      <span  [innerHtml]="pageNumberDescription"></span>
-    </li>
-    <li *ngIf="publicationNumber" class="typeTextfield group2">
-      <span class="entryTitle">Textnr.:</span>
-      <span  [innerHtml]="publicationNumber"></span>
-    </li>
-    <li *ngIf="nachlassPublicationDescription && nachlassPublicationDescription !== ' '" >
-      <span class="entryTitle">Werke:</span>
-      <span  [innerHtml]="nachlassPublicationDescription"></span>
-    </li>
-    <li *ngIf="sameEditionAs && sameEditionAs.length > 0">
-      <span class="entryTitle">Identisch mit:</span>
-      <span >
-          <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
-        </span>
-    </li>
-    <li *ngIf="hasStrophen" >
-        <span class="entryTitle">Strophen:</span>
-        <span >ja</span>
-    </li>
-    <li *ngIf="isPartOfCycle" >
-        <span class="entryTitle">Zyklus:</span>
-        <span >ja</span>
-    </li>
-    <li *ngIf="isInDialect" >
-        <span class="entryTitle">Mundart:</span>
-        <span >ja</span>
-    </li>
-    <li *ngIf="referencePoemIRI && referenceTitle" >
-        <span class="entryTitle">Bezugstext:</span>
-        <span >
-          <rae-fassung-steckbrief-fassung
-            [fassungIRI]="referencePoemIRI"
-            [linkText]="referenceTitle">
-          </rae-fassung-steckbrief-fassung>
-        </span>
-    </li>
-    <li *ngIf="isWrittenWith" >
-        <span class="entryTitle">Schreibzeug:</span>
-        <span >{{ schreibzeugMap[isWrittenWith] }}</span>
-    </li>
-  </ul>
+  <div class="flex-container" *ngIf="specialDescription">
+    <div class="label">Besonderes:</div>
+    <div class="content" [innerHtml]="specialDescription"></div>
+  </div>
+  <div class="flex-container" *ngIf="detailDescription">
+    <div class="label">Details:</div>
+    <div class="content" [innerHtml]="detailDescription"></div>
+  </div>
+  <!--<div class="flex-container" *ngIf="convoluteTitle === 'Verstreutes' && publishedIn && publishedIn.length > 0">
+   <div class="label">Zeitschrift:</div>
+   <div class="content">
+     <rae-fassung-steckbrief-konvolut [konvolutIRI]="publishedIn"></rae-fassung-steckbrief-konvolut>
+    </div>
+  </div>-->
+  <div class="flex-container" *ngIf="!lastAuthorizedPublication && convoluteTitle === 'Verstreutes'">
+    <div class="label">Letzter Druck:</div>
+    <div class="content">Verstreutes</div>
+  </div>
+  <div class="flex-container" *ngIf="lastAuthorizedPublication">
+    <div class="label">Letzter Druck:</div>
+    <div class="content">
+      <rae-fassung-steckbrief-konvolut
+        [konvolutIRI]="[lastAuthorizedPublication]"></rae-fassung-steckbrief-konvolut>
+    </div>
+  </div>
+  <div class="flex-container" *ngIf="publishingState === 'unpublished'">
+    <div class="label">Letzter Druck:</div>
+    <div class="content">Unpubliziert</div>
+  </div>
+  <div class="flex-container" *ngIf="unauthorizedPublication && unauthorizedPublication.length > 0">
+    <div class="label">Nachdruck:</div>
+    <div class="content">
+      <rae-fassung-steckbrief-konvolut [konvolutIRI]="unauthorizedPublication"></rae-fassung-steckbrief-konvolut>
+    </div>
+  </div>
+  <div class="flex-container" *ngIf="isFinalVersion">
+    <div class="label">Endfassung:</div>
+    <div class="content">ja</div>
+  </div>
+  <div class="flex-container" *ngIf="textartMap[structure]">
+    <div class="label">Textart:</div>
+    <div class="content">{{ textartMap[structure] }}</div>
+  </div>
+  <div class="flex-container" *ngIf="carrierIRI">
+    <div class="label">Signatur:</div>
+    <div class="content">
+      <rae-fassung-steckbrief-signatur [carrierIRI]="carrierIRI"></rae-fassung-steckbrief-signatur>
+    </div>
+  </div>
+  <div class="flex-container"
+       *ngIf="pageNumberDescription && pageNumberDescription !== '0' && pageNumberDescription !== ' '">
+    <div class="label">Seite / Blatt:</div>
+    <div class="content" [innerHtml]="pageNumberDescription"></div>
+  </div>
+  <div class="flex-container" *ngIf="publicationNumber">
+    <div class="label">Textnr.:</div>
+    <div class="content" [innerHtml]="publicationNumber"></div>
+  </div>
+  <div class="flex-container" *ngIf="nachlassPublicationDescription && nachlassPublicationDescription !== ' '">
+    <div class="label">Werke:</div>
+    <div class="content" [innerHtml]="nachlassPublicationDescription"></div>
+  </div>
+  <div class="flex-container" *ngIf="sameEditionAs && sameEditionAs.length > 0">
+    <div class="label">Identisch mit:</div>
+    <div class="content">
+      <rae-fassung-steckbrief-konvolut [konvolutIRI]="sameEditionAs"></rae-fassung-steckbrief-konvolut>
+    </div>
+  </div>
+  <div class="flex-container" *ngIf="hasStrophen">
+    <div class="label">Strophen:</div>
+    <div class="content">ja</div>
+  </div>
+  <div class="flex-container" *ngIf="isPartOfCycle">
+    <div class="label">Zyklus:</div>
+    <div class="content">ja</div>
+  </div>
+  <div class="flex-container" *ngIf="isInDialect">
+    <div class="label">Mundart:</div>
+    <div class="content">ja</div>
+  </div>
+  <div class="flex-container" *ngIf="referencePoemIRI && referenceTitle">
+    <div class="label">Bezugstext:</div>
+    <div class="content">
+      <rae-fassung-steckbrief-fassung [fassungIRI]="referencePoemIRI" [linkText]="referenceTitle">
+      </rae-fassung-steckbrief-fassung>
+    </div>
+  </div>
+  <div class="flex-container" *ngIf="isWrittenWith">
+    <div class="label">Schreibzeug:</div>
+    <div class="content">{{ schreibzeugMap[isWrittenWith] }}</div>
+  </div>
 </div>

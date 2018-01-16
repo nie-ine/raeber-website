@@ -106,11 +106,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   ];
   arg: AbstractControl;
   rightProperty: string;
-  convoluteIndex = 0;
-  createConvoluteIndex() {
-    this.convoluteIndex += 1;
-    return this.convoluteIndex;
-  }
+  convoluteIndex = -1;
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',
@@ -127,7 +123,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1979 - 82'
+      'officialName': 'Notizbuch 1979 - 82',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'notizbuch-1980-1988',
@@ -135,7 +132,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1980 - 1988'
+      'officialName': 'Notizbuch 1980 - 1988',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'manuskripte-1979',
@@ -143,7 +141,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1979'
+      'officialName': 'Manuskripte 1979',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'manuskripte-1979-1983',
@@ -151,7 +150,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1979 - 1983'
+      'officialName': 'Manuskripte 1979 - 1983',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'karten-1984',
@@ -159,7 +159,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Karten 1984'
+      'officialName': 'Karten 1984',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'typoskripte-1979',
@@ -167,7 +168,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Typoskripte 1979'
+      'officialName': 'Typoskripte 1979',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'typoskripte-1979-spez',
@@ -175,7 +177,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Typoskripte 1979 - spez'
+      'officialName': 'Typoskripte 1979 - spez',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'typoskripte-1983',
@@ -183,7 +186,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1983'
+      'officialName': 'Manuskripte 1983',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'gesicht-im-mittag',
@@ -191,7 +195,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Gesicht im Mittag'
+      'officialName': 'Gesicht im Mittag',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'die-verwandelten-schiffe',
@@ -199,7 +204,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Die verwandelten Schiffe'
+      'officialName': 'Die verwandelten Schiffe',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'gedichte',
@@ -207,7 +213,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Gedichte'
+      'officialName': 'Gedichte',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'flussufer',
@@ -215,7 +222,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Flussufer'
+      'officialName': 'Flussufer',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'reduktionen',
@@ -223,7 +231,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Reduktionen'
+      'officialName': 'Reduktionen',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'abgewandt-zugewandt-hochdeutsche-gedichte',
@@ -231,7 +240,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte'
+      'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'abgewandt-zugewandt-alemannische-gedichte',
@@ -239,7 +249,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte'
+      'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'akzente',
@@ -247,7 +258,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Akzente'
+      'officialName': 'Akzente',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'blaetter+bilder',
@@ -255,7 +267,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Blätter + Bilder'
+      'officialName': 'Blätter + Bilder',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftSchoenste',
@@ -263,7 +276,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Schönste'
+      'officialName': 'Schönste',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftTag',
@@ -271,7 +285,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Tag'
+      'officialName': 'Tag',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftTat',
@@ -279,7 +294,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Tat'
+      'officialName': 'Tat',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftZeit',
@@ -287,7 +303,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'DIE ZEIT'
+      'officialName': 'DIE ZEIT',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftEnsemble',
@@ -295,7 +312,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'ensemble'
+      'officialName': 'ensemble',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftHortulus',
@@ -303,7 +321,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Hortulus'
+      'officialName': 'Hortulus',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftJahresring',
@@ -311,7 +330,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Jahresring'
+      'officialName': 'Jahresring',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftKonturen',
@@ -319,7 +339,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Konturen'
+      'officialName': 'Konturen',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftLNN',
@@ -327,7 +348,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Luzerner Neueste Nachrichten'
+      'officialName': 'Luzerner Neueste Nachrichten',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftLadZ',
@@ -335,7 +357,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Lyrik aus dieser Zeit'
+      'officialName': 'Lyrik aus dieser Zeit',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftLuZ',
@@ -343,7 +366,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Lyrik unserer Zeit'
+      'officialName': 'Lyrik unserer Zeit',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftMerkur',
@@ -351,7 +375,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Merkur'
+      'officialName': 'Merkur',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftDeutscheHefte',
@@ -359,7 +384,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Neue Deutsche Hefte'
+      'officialName': 'Neue Deutsche Hefte',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftNZN',
@@ -367,7 +393,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Neue Zürcher Nachrichten'
+      'officialName': 'Neue Zürcher Nachrichten',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftNZZ',
@@ -375,7 +402,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Neue Zürcher Zeitung'
+      'officialName': 'Neue Zürcher Zeitung',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftRenaissance',
@@ -383,7 +411,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Renaissance'
+      'officialName': 'Renaissance',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftRundschau',
@@ -391,7 +420,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Schweizer Rundschau'
+      'officialName': 'Schweizer Rundschau',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftSueddeutsche',
@@ -399,7 +429,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Sueddeutsche Zeitung'
+      'officialName': 'Sueddeutsche Zeitung',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'zeitschriftWortTat',
@@ -407,7 +438,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Wort und Tat'
+      'officialName': 'Wort und Tat',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'materialienTagebuch',
@@ -415,7 +447,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Tagebuch'
+      'officialName': 'Tagebuch',
+      'index': this.createConvoluteIndex()
     }
   ];
   poemResTypes = [
@@ -430,6 +463,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   constructor(public dialog: MdDialog, private http: Http, private route: ActivatedRoute, private location: Location,
               private cdr: ChangeDetectorRef) {
     this.route.params.subscribe(params => console.log(params));
+  }
+
+  createConvoluteIndex() {
+    this.convoluteIndex += 1;
+    return this.convoluteIndex;
   }
 
   ngAfterViewChecked() {
@@ -467,82 +505,10 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     }
     console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.route.snapshot.queryParams[ 'wort' ]) {
-      //console.log('Start search immediately');
-      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch7982' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch8088' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript7983' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskriptKarten' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79Spez' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript83' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGesicht' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckSchiffe' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGedichte' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckFlussufer' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckReduktionen' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftAkzente' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftBlaetter' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSchoenste' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTag' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTat' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftZeit' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftEnsemble' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftHortulus' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftJahresring' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftKonturen' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLNN' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLadZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLuZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftMerkur' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftDeutscheHefte' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZN' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRenaissance' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRundschau' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSueddeutsche' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftWortTat' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'materialienTagebuch' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckAbgewandtAll' ],true);
-      //console.log(this.suchmaskeKonvolutIRIMapping);
+      for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
+        console.log(konvolut);
+        konvolut.enabled = this.updateFilterParams(this.route.snapshot.queryParams[ konvolut.suchmaskeKonvolutName ], true);
+      }
       this.startSearchImmediately = true;
       this.searchTermArray = [];
       this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];

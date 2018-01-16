@@ -115,7 +115,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Notizbuch 1979',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'notizbuchForm'
     },
     {
       'konvolut': 'notizbuch-1979-1982',
@@ -124,7 +125,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Notizbuch 1979 - 82',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'notizbuchForm'
     },
     {
       'konvolut': 'notizbuch-1980-1988',
@@ -133,7 +135,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Notizbuch 1980 - 1988',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'notizbuchForm'
     },
     {
       'konvolut': 'manuskripte-1979',
@@ -142,7 +145,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Manuskripte 1979',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'manuskriptForm'
     },
     {
       'konvolut': 'manuskripte-1979-1983',
@@ -151,7 +155,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Manuskripte 1979 - 1983',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'manuskriptForm'
     },
     {
       'konvolut': 'karten-1984',
@@ -160,7 +165,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Karten 1984',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'manuskriptForm'
     },
     {
       'konvolut': 'typoskripte-1979',
@@ -169,7 +175,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Typoskripte 1979',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'typoskriptForm'
     },
     {
       'konvolut': 'typoskripte-1979-spez',
@@ -178,7 +185,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Typoskripte 1979 - spez',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'typoskriptForm'
     },
     {
       'konvolut': 'typoskripte-1983',
@@ -187,7 +195,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Manuskripte 1983',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'typoskriptForm'
     },
     {
       'konvolut': 'gesicht-im-mittag',
@@ -196,7 +205,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Gesicht im Mittag',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'die-verwandelten-schiffe',
@@ -205,7 +215,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Die verwandelten Schiffe',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'gedichte',
@@ -214,7 +225,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Gedichte',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'flussufer',
@@ -223,7 +235,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Flussufer',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'reduktionen',
@@ -232,7 +245,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Reduktionen',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'abgewandt-zugewandt-hochdeutsche-gedichte',
@@ -241,7 +255,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'abgewandt-zugewandt-alemannische-gedichte',
@@ -250,7 +265,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'druckForm'
     },
     {
       'konvolut': 'akzente',
@@ -259,7 +275,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Akzente',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'blaetter+bilder',
@@ -268,7 +285,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Blätter + Bilder',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftSchoenste',
@@ -277,7 +295,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Schönste',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftTag',
@@ -286,7 +305,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Tag',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftTat',
@@ -295,7 +315,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Tat',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftZeit',
@@ -304,7 +325,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'DIE ZEIT',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftEnsemble',
@@ -313,7 +335,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'ensemble',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftHortulus',
@@ -322,7 +345,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Hortulus',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftJahresring',
@@ -331,7 +355,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Jahresring',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftKonturen',
@@ -340,7 +365,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Konturen',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftLNN',
@@ -349,7 +375,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Luzerner Neueste Nachrichten',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftLadZ',
@@ -358,7 +385,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Lyrik aus dieser Zeit',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftLuZ',
@@ -367,7 +395,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Lyrik unserer Zeit',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftMerkur',
@@ -376,7 +405,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Merkur',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftDeutscheHefte',
@@ -385,7 +415,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Neue Deutsche Hefte',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftNZN',
@@ -394,7 +425,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Neue Zürcher Nachrichten',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftNZZ',
@@ -403,7 +435,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Neue Zürcher Zeitung',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftRenaissance',
@@ -412,7 +445,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Renaissance',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftRundschau',
@@ -421,7 +455,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Schweizer Rundschau',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftSueddeutsche',
@@ -430,7 +465,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Sueddeutsche Zeitung',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'zeitschriftWortTat',
@@ -439,7 +475,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Wort und Tat',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     },
     {
       'konvolut': 'materialienTagebuch',
@@ -448,7 +485,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'IRI': 'undefined',
       'memberPoems': new Set(),
       'officialName': 'Tagebuch',
-      'index': this.createConvoluteIndex()
+      'index': this.createConvoluteIndex(),
+      'suchmaskeFormName': 'zeitschriftForm'
     }
   ];
   poemResTypes = [
@@ -485,7 +523,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   handleSearchEvent(arg: AbstractControl) {
     //console.log(arg);
     if(this.startSearchImmediately) this.startSearchImmediately = false;
-    //console.log(arg);
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
@@ -503,10 +540,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
-    console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.route.snapshot.queryParams[ 'wort' ]) {
       for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
-        console.log(konvolut);
         konvolut.enabled = this.updateFilterParams(this.route.snapshot.queryParams[ konvolut.suchmaskeKonvolutName ], true);
       }
       this.startSearchImmediately = true;
@@ -826,19 +861,12 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     } else {
       if (searchResults !== undefined) {
         this.addToFinalSearchResultArray(searchResults, undefined);
-/*      }
-      if (poemIRI !== undefined) {
-        this.addToFinalSearchResultArray(undefined, poemIRI);*/
       }
     }
   }
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     this.checkProgress();
-    //console.log('Add to final Search Results');
-    //console.log(searchResults);
-    //console.log(singlePoem);
-    //console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.allSearchResults === undefined) {
       this.allSearchResults = [];
     }
@@ -858,7 +886,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
-    //console.log(arg);
     if (
       arg.get('notizbuchForm').pristine
       && arg.get('druckForm').pristine
@@ -870,46 +897,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       //console.log('Perform Search in all convolutes');
       console.log(this.suchmaskeKonvolutIRIMapping);
     } else {
-      //console.log('Gehe durch jedes Konvolut');
-      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
-      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled = arg.get('notizbuchForm.notizbuch7982').value;
-      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled = arg.get('notizbuchForm.notizbuch8088').value;
-      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled = arg.get('manuskriptForm.manuskript79').value;
-      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled = arg.get('manuskriptForm.manuskript7983').value;
-      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled = arg.get('manuskriptForm.manuskriptKarten').value;
-      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled = arg.get('typoskriptForm.typoskript79').value;
-      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled = arg.get('typoskriptForm.typoskript79Spez').value;
-      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled = arg.get('typoskriptForm.typoskript83').value;
-      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled = arg.get('druckForm.druckGesicht').value;
-      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled = arg.get('druckForm.druckSchiffe').value;
-      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled = arg.get('druckForm.druckGedichte').value;
-      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
-      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
-      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled = arg.get('zeitschriftForm.zeitschriftAkzente').value;
-      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled = arg.get('zeitschriftForm.zeitschriftBlaetter').value;
-      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled = arg.get('zeitschriftForm.zeitschriftSchoenste').value;
-      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled = arg.get('zeitschriftForm.zeitschriftTag').value;
-      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled = arg.get('zeitschriftForm.zeitschriftTat').value;
-      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled = arg.get('zeitschriftForm.zeitschriftZeit').value;
-      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled = arg.get('zeitschriftForm.zeitschriftEnsemble').value;
-      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled = arg.get('zeitschriftForm.zeitschriftHortulus').value;
-      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled = arg.get('zeitschriftForm.zeitschriftJahresring').value;
-      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled = arg.get('zeitschriftForm.zeitschriftKonturen').value;
-      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled = arg.get('zeitschriftForm.zeitschriftLNN').value;
-      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled = arg.get('zeitschriftForm.zeitschriftLadZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled = arg.get('zeitschriftForm.zeitschriftLuZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled = arg.get('zeitschriftForm.zeitschriftMerkur').value;
-      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled = arg.get('zeitschriftForm.zeitschriftDeutscheHefte').value;
-      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled = arg.get('zeitschriftForm.zeitschriftNZN').value;
-      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled = arg.get('zeitschriftForm.zeitschriftNZZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled = arg.get('zeitschriftForm.zeitschriftRenaissance').value;
-      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled = arg.get('zeitschriftForm.zeitschriftRundschau').value;
-      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
-      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
-      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
-      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckForm.druckAbgewandtAll').value;
-      console.log(this.suchmaskeKonvolutIRIMapping[ 35 ].enabled);
-      //console.log(this.suchmaskeKonvolutIRIMapping);
+      for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
+        konvolut.enabled = arg.get( konvolut.suchmaskeFormName + '.' + konvolut.suchmaskeKonvolutName ).value;
+      }
     }
   }
   updateQueryParamsInURL() {

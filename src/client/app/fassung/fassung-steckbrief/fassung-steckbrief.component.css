@@ -1,17 +1,13 @@
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin-left: 0;
+div.flex-container {
+  display: flex;
+  padding-left: 10px;
 }
 
-li {
-  padding-bottom: 5px;
-  clear: left;
+.flex-container .label {
+  flex: 0 0 150px;
+  font-weight: bold;
 }
 
-.entryTitle {
-  float:left;
-  width:120px;
-  padding-left:10px;
-  font-weight:bold;
+.flex-container .content {
+  flex: 1 1 auto;
 }

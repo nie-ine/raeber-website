@@ -208,6 +208,5 @@ export class KonvolutComponent implements OnInit {
 
   searchingStatus(event: boolean) {
     this.searching = event;
-    console.log(event);
   }
 }

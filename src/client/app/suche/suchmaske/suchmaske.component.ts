@@ -1,19 +1,14 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, EventEmitter, HostListener, Inject, Input, OnChanges, OnInit, Output,
+  ViewChild
+} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-  Druck,
-  Manuskript,
-  Materialien,
-  Notizbuch,
-  Suchwort,
-  Textart,
-  Typoskript,
-  Zeitraum,
+  Druck, Manuskript, Materialien, Notizbuch, Suchwort, Textart, Typoskript, Zeitraum,
   Zeitschrift
 } from './mockSucheCategories';
 import 'rxjs/add/operator/switchMap';
 import { SucheDarstellungsoptionenService } from '../suche-darstellungsoptionen.service';
-import { HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { TextgridComponent } from '../../shared/textgrid/textgrid.component';
 
@@ -39,7 +34,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   @Input() loadingIndicatorInput: boolean;
   @Input() lastSearchTerm: string;
 
-  relativeSizeOfColumns: string = '43%';
+  relativeSizeOfColumns: string = '45%';
   textboxHeight: number = 0;
   textsHaveAlignedFrames: boolean = false;
   showTexts: boolean = true;
@@ -66,7 +61,22 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     materialien: false
   };
 
-  allConvolutesSelected: boolean = true;
+  /*
+   0 = No child category is selected
+   1 = Some child categories are selected
+   2 = All child categories are selected
+   */
+  parentCategoryState: { [name: string]: number } = {
+    notizbuchForm: 2,
+    manuskriptForm: 2,
+    typoskriptForm: 2,
+    druckForm: 2,
+    zeitschriftForm: 2,
+    materialienForm: 2
+  };
+
+  allConvolutesSelected = true;
+  allGenresSelected = true;
   loadingIndicator = true;
 
   @ViewChild(TextgridComponent)
@@ -110,37 +120,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     //this.onSearchParamsChange();
   }
 
-  /**
-   * Checks if all child elements have the same value
-   * @param {string} formGroupPath Path to respective `FormGroup`
-   * @param {string} parentFormControlName Name of parent `FormControl`
-   * @returns {boolean} True if all have the same value
-   */
-  childElemsHaveSameValues(formGroupPath: string, parentFormControlName: string) {
-    const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    let res: boolean = true;
-    let b: boolean;
-    for (const v in children) {
-      if (v !== parentFormControlName) {
-        if (b === null || children[ v ].value === b) {
-          b = children[ v ].value;
-        } else {
-          res = false;
-        }
-      }
-    }
-    return res;
-  }
-
-  pristineConvolutes() {
-    return this.suchmenuForm.get('notizbuchForm').pristine &&
-      this.suchmenuForm.get('manuskriptForm').pristine &&
-      this.suchmenuForm.get('typoskriptForm').pristine &&
-      this.suchmenuForm.get('druckForm').pristine &&
-      this.suchmenuForm.get('zeitschriftForm').pristine &&
-      this.suchmenuForm.get('materialienForm').pristine;
-  }
-
   selectAllConvolutes() {
     this.allConvolutesSelected = !this.allConvolutesSelected;
     this.toggleGroupDisabled('notizbuchForm', 'notizbuchAll');
@@ -149,18 +128,13 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     this.toggleGroupDisabled('druckForm', 'druckAll');
     this.toggleGroupDisabled('zeitschriftForm', 'zeitschriftAll');
     this.toggleGroupDisabled('materialienForm', 'materialienAll');
-    //console.log('allConvolutesSelected: ' + this.allConvolutesSelected);
   }
 
-  /**
-   * Toggles disabled/enabled state of element
-   * @param {string} formControlPath Path to `FormControl`
-   */
-  toggleDisabled(formControlPath: string) {
-    if ((this.suchmenuForm.get(formControlPath) as FormControl).disabled) {
-      this.suchmenuForm.get(formControlPath).enable();
-    } else {
-      this.suchmenuForm.get(formControlPath).disable();
+  selectAllGenres() {
+    this.allGenresSelected = !this.allGenresSelected;
+    const genres = (this.suchmenuForm.get('textartForm') as FormGroup).controls;
+    for (const v in genres) {
+      genres[ v ].setValue(this.allGenresSelected);
     }
   }
 
@@ -177,26 +151,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
         this.suchmenuForm.get(formGroupPath).markAsDirty();
       }
     }
-  }
-
-  /**
-   * Examines if the child elements (checkboxes) are checked or not
-   * @param {string} formGroupPath Path to `FormGroup` to which the parent and child elements belong
-   * @param {string} parentFormControlName Name of parent element
-   * @param {boolean} reverseFilter If set to true examines if none is checked
-   * @returns {boolean} True if all (none) is checked, false otherwise
-   */
-  childElemsAreChecked(formGroupPath: string, parentFormControlName: string, reverseFilter: boolean = false) {
-    const children = (this.suchmenuForm.get(formGroupPath) as FormGroup).controls;
-    for (const c in children) {
-      if (c !== parentFormControlName) {
-        const v = children[ c ].value;
-        if (v === reverseFilter) {
-          return false;
-        }
-      }
-    }
-    return true;
+    this.setStateOfParentElement(formGroupPath, parentFormControlName);
   }
 
   /**
@@ -210,12 +165,28 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     for (const c in children) {
       children[ c ].setValue(allElemValue, { emitModeltoViewChange: true });
     }
+    this.setStateOfParentElement(formGroupPath, parentFormControlPath.split('.').pop());
+  }
+
+  setStateOfParentElement(category: string, parentName: string): void {
+    const children = (this.suchmenuForm.get(category) as FormGroup).controls;
+    this.parentCategoryState[ category ] = Object.keys(children)
+      .filter(e => e !== parentName)
+      .reduce((x, y) => {
+        if (x === -1) {
+          return children[ y ].value ? 2 : 0;
+        } else {
+          const yAsNumVal = children[ y ].value ? 2 : 0;
+          return x === yAsNumVal ? x : 1;
+        }
+      }, -1);
   }
 
   /**
    * Emits updated form model to caller
    */
   onSearchParamsChange() {
+    console.log('Params Change');
     const suchmenuForm = (this.suchmenuForm as FormGroup).controls;
     for (const s in suchmenuForm) {
       suchmenuForm[ s ].valueChanges.forEach(
@@ -233,15 +204,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
       manuskriptForm: this.fb.group(new Manuskript()),
       typoskriptForm: this.fb.group(new Typoskript()),
       druckForm: this.fb.group(new Druck()),
-      /*      druckForm: this.fb.group({
-       druckAll: false,
-       druckGesicht: false,
-       druckSchiffe: false,
-       druckGedichte: false,
-       druckFlussufer: false,
-       druckReduktionen: false,
-       druckAbgewandt: this.fb.group(new DruckAbgewandt())
-       }),*/
       zeitschriftForm: this.fb.group(new Zeitschrift()),
       materialienForm: this.fb.group(new Materialien()),
       textartForm: this.fb.group(new Textart()),
@@ -262,7 +224,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   startTheSearch() {
-    //console.log('startTheSearch');
     this.startSearch.emit();
   }
 
@@ -298,5 +259,12 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
     else return 'Sucheingabe';
   }
 
+  resetInputValue() {
+    this.createForm();
+    this.onSearchParamsChange();
+  }
 
+  openAndCloseSidenav() {
+    this.sidenavOpened = !this.sidenavOpened;
+  }
 }

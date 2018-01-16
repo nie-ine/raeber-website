@@ -25,7 +25,7 @@ export class Suchwort {
 
 export class Notizbuch {
   notizbuchAll = true;
-  notizbuch4849 = true;
+/*  notizbuch4849 = true;
   notizbuch49 = true;
   notizbuch50 = true;
   notizbuch5051 = true;
@@ -34,16 +34,16 @@ export class Notizbuch {
   notizbuch5557 = true;
   notizbuch5758 = true;
   notizbuch5861 = true;
-  notizbuch6165 = true;
+  notizbuch6165 = true;*/
   notizbuch79 = true;
   notizbuch7982 = true;
   notizbuch8088 = true;
-  notizbuch6580 = true;
+  // notizbuch6580 = true;
 }
 
 export class Manuskript {
   manuskriptAll = true;
-  manuskriptDivers = true;
+/*  manuskriptDivers = true;
   manuskript4851 = true;
   manuskript51 = true;
   manuskript52 = true;
@@ -58,7 +58,7 @@ export class Manuskript {
   manuskript61 = true;
   manuskript62 = true;
   manuskript63 = true;
-  manuskript6465 = true;
+  manuskript6465 = true;*/
   manuskript79 = true;
   manuskript7983 = true;
   manuskriptKarten = true;
@@ -66,7 +66,7 @@ export class Manuskript {
 
 export class Typoskript {
   typoskriptAll = true;
-  typoskriptSpezialAll = true;
+/*  typoskriptSpezialAll = true;
   typoskriptSpezialKutter = true;
   typoskriptSpezialHochstrasser = true;
   typoskriptSpezialTRaeber = true;
@@ -87,11 +87,11 @@ export class Typoskript {
   typoskript61 = true;
   typoskript62 = true;
   typoskript63 = true;
-  typoskript65 = true;
+  typoskript65 = true;*/
   typoskript79 = true;
   typoskript79Spez = true;
   typoskript83 = true;
-  typoskript83Spez = true;
+  // typoskript83Spez = true;
 }
 
 export class Druck {
@@ -143,7 +143,7 @@ export class Zeitschrift {
 export class Materialien {
   materialienAll = true;
   materialienTagebuch = true;
-  materialienBrief = true;
+  // materialienBrief = true;
 }
 
 export class Textart {

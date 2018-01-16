@@ -455,7 +455,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.checkProgress();
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }

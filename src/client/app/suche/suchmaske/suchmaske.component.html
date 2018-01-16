@@ -985,11 +985,8 @@
     <md-icon>dehaze</md-icon>
   </button>-->
 
-<md-button-toggle-group #group="mdButtonToggleGroup" class="suchmenu-button" [vertical]="true">
-  <md-button-toggle value="left" (click)="suchmenu.open()">
-    <md-icon>keyboard_arrow_right</md-icon>
-  </md-button-toggle>
-  <md-button-toggle value="center" (click)="suchmenu.close()">
-    <md-icon>keyboard_arrow_left</md-icon>
-  </md-button-toggle>
-</md-button-toggle-group>
+<button md-raised-button class="suchmenu-button" (click)="openAndCloseSidenav()">
+  <md-icon>
+    {{ sidenavOpened ? 'keyboard_arrow_left' : 'keyboard_arrow_right' }}
+  </md-icon>
+</button>

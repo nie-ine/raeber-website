@@ -866,7 +866,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     //console.log('Add to final Search Results');
     //console.log(searchResults);
     //console.log(singlePoem);
-    console.log(this.suchmaskeKonvolutIRIMapping);
+    //console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.allSearchResults === undefined) {
       this.allSearchResults = [];
     }
@@ -1382,7 +1382,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         ).subscribe(response => this.responseArray = response);
     }
     onlyChoosePoemsThatAreInChosenConvolutes(poem: any) {
-    console.log(this.suchmaskeKonvolutIRIMapping);
+    //console.log(this.suchmaskeKonvolutIRIMapping);
       for (let k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
         this.checkProgress();
         if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&

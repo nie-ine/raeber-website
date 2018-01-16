@@ -106,6 +106,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   ];
   arg: AbstractControl;
   rightProperty: string;
+  convoluteIndex = 0;
+  createConvoluteIndex() {
+    this.convoluteIndex += 1;
+    return this.convoluteIndex;
+  }
   suchmaskeKonvolutIRIMapping = [
     {
       'konvolut': 'notizbuch-1979',
@@ -113,7 +118,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1979'
+      'officialName': 'Notizbuch 1979',
+      'index': this.createConvoluteIndex()
     },
     {
       'konvolut': 'notizbuch-1979-1982',

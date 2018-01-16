@@ -3,6 +3,8 @@
  */
 
 import { Component } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import { AnleitungComponent } from './anleitung.component';
 
 @Component({
   moduleId: module.id,
@@ -11,4 +13,16 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
   title = 'Historisch-kritische Online-Edition';
+
+  constructor(public dialog: MdDialog) {
+  }
+
+  showHelp(): void {
+    let dialogRef =
+      this.dialog.open(AnleitungComponent, {
+        width: '700px',
+        height: '90%'
+      });
+  }
+
 }

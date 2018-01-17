@@ -331,7 +331,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hidePoem(poem: any) {
-    return poem && poem.isVisible === false;
+    if(poem) {
+      return poem && poem.isVisible === false;
+    } else return true;
   }
 
 }

@@ -4,7 +4,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdDialogModule } from '@angular/material';
+import { MdDialogModule, MdIconModule } from '@angular/material';
 
 import { routingComponents, StatischRoutingModule } from './statisch-routing.module';
 import { InitKommentarComponent } from './initkommentar.component';
@@ -13,6 +13,7 @@ import { InitKommentarComponent } from './initkommentar.component';
   imports: [
     CommonModule,
     MdDialogModule,
+    MdIconModule,
     StatischRoutingModule
   ],
   declarations: [

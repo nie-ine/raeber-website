@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { MdDialog } from '@angular/material';
 import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
 import { CachePoem } from '../shared/textgrid/cache-poem';
-
+import { createsuchmaskeKonvolutIRIMapping } from './suchServices/suchModel.service';
 
 @Component({
   moduleId: module.id,
@@ -21,11 +21,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   myResources: Array<any>;
   myProperties: Array<any>;
   responseArray: Array<any>;
-  searchResult: Array<any>;
   selectedResource: string;
   selectedProperty: string;
-  boolOperator: string;
-  encodedURL: string;
   searchForVal: string;
   query: string;
   availableboolOperators = [
@@ -41,7 +38,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     { name: '!like', operator: '!LIKE' },
     { name: 'match_boolean', operator: 'MATCH_BOOLEAN' }
   ];
-  arraySize: number;
   array = [
     1
   ];
@@ -51,7 +47,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   l: number;
   m: number;
   o: number;
-  numberOfSearchResultsOld: number;
   isAlreadyInArray = 0;
   helperMap = new Map();
   mapOfAllQueries = new Map();
@@ -106,312 +101,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   ];
   arg: AbstractControl;
   rightProperty: string;
-  suchmaskeKonvolutIRIMapping = [
-    {
-      'konvolut': 'notizbuch-1979',
-      'suchmaskeKonvolutName': 'notizbuch79',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1979'
-    },
-    {
-      'konvolut': 'notizbuch-1979-1982',
-      'suchmaskeKonvolutName': 'notizbuch7982',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1979 - 82'
-    },
-    {
-      'konvolut': 'notizbuch-1980-1988',
-      'suchmaskeKonvolutName': 'notizbuch8088',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Notizbuch 1980 - 1988'
-    },
-    {
-      'konvolut': 'manuskripte-1979',
-      'suchmaskeKonvolutName': 'manuskript79',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1979'
-    },
-    {
-      'konvolut': 'manuskripte-1979-1983',
-      'suchmaskeKonvolutName': 'manuskript7983',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1979 - 1983'
-    },
-    {
-      'konvolut': 'karten-1984',
-      'suchmaskeKonvolutName': 'manuskriptKarten',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Karten 1984'
-    },
-    {
-      'konvolut': 'typoskripte-1979',
-      'suchmaskeKonvolutName': 'typoskript79',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Typoskripte 1979'
-    },
-    {
-      'konvolut': 'typoskripte-1979-spez',
-      'suchmaskeKonvolutName': 'typoskript79Spez',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Typoskripte 1979 - spez'
-    },
-    {
-      'konvolut': 'typoskripte-1983',
-      'suchmaskeKonvolutName': 'typoskript83',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1983'
-    },
-    {
-      'konvolut': 'gesicht-im-mittag',
-      'suchmaskeKonvolutName': 'druckGesicht',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Gesicht im Mittag'
-    },
-    {
-      'konvolut': 'die-verwandelten-schiffe',
-      'suchmaskeKonvolutName': 'druckSchiffe',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Die verwandelten Schiffe'
-    },
-    {
-      'konvolut': 'gedichte',
-      'suchmaskeKonvolutName': 'druckGedichte',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Gedichte'
-    },
-    {
-      'konvolut': 'flussufer',
-      'suchmaskeKonvolutName': 'druckFlussufer',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Flussufer'
-    },
-    {
-      'konvolut': 'reduktionen',
-      'suchmaskeKonvolutName': 'druckReduktionen',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Reduktionen'
-    },
-    {
-      'konvolut': 'abgewandt-zugewandt-hochdeutsche-gedichte',
-      'suchmaskeKonvolutName': 'druckAbgewandtAll',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte'
-    },
-    {
-      'konvolut': 'abgewandt-zugewandt-alemannische-gedichte',
-      'suchmaskeKonvolutName': 'druckAbgewandtAll',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte'
-    },
-    {
-      'konvolut': 'akzente',
-      'suchmaskeKonvolutName': 'zeitschriftAkzente',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Akzente'
-    },
-    {
-      'konvolut': 'blaetter+bilder',
-      'suchmaskeKonvolutName': 'zeitschriftBlaetter',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Blätter + Bilder'
-    },
-    {
-      'konvolut': 'zeitschriftSchoenste',
-      'suchmaskeKonvolutName': 'zeitschriftSchoenste',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Schönste'
-    },
-    {
-      'konvolut': 'zeitschriftTag',
-      'suchmaskeKonvolutName': 'zeitschriftTag',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Tag'
-    },
-    {
-      'konvolut': 'zeitschriftTat',
-      'suchmaskeKonvolutName': 'zeitschriftTat',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Tat'
-    },
-    {
-      'konvolut': 'zeitschriftZeit',
-      'suchmaskeKonvolutName': 'zeitschriftZeit',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'DIE ZEIT'
-    },
-    {
-      'konvolut': 'zeitschriftEnsemble',
-      'suchmaskeKonvolutName': 'zeitschriftEnsemble',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'ensemble'
-    },
-    {
-      'konvolut': 'zeitschriftHortulus',
-      'suchmaskeKonvolutName': 'zeitschriftHortulus',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Hortulus'
-    },
-    {
-      'konvolut': 'zeitschriftJahresring',
-      'suchmaskeKonvolutName': 'zeitschriftJahresring',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Jahresring'
-    },
-    {
-      'konvolut': 'zeitschriftKonturen',
-      'suchmaskeKonvolutName': 'zeitschriftKonturen',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Konturen'
-    },
-    {
-      'konvolut': 'zeitschriftLNN',
-      'suchmaskeKonvolutName': 'zeitschriftLNN',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Luzerner Neueste Nachrichten'
-    },
-    {
-      'konvolut': 'zeitschriftLadZ',
-      'suchmaskeKonvolutName': 'zeitschriftLadZ',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Lyrik aus dieser Zeit'
-    },
-    {
-      'konvolut': 'zeitschriftLuZ',
-      'suchmaskeKonvolutName': 'zeitschriftLuZ',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Lyrik unserer Zeit'
-    },
-    {
-      'konvolut': 'zeitschriftMerkur',
-      'suchmaskeKonvolutName': 'zeitschriftMerkur',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Merkur'
-    },
-    {
-      'konvolut': 'zeitschriftDeutscheHefte',
-      'suchmaskeKonvolutName': 'zeitschriftDeutscheHefte',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Neue Deutsche Hefte'
-    },
-    {
-      'konvolut': 'zeitschriftNZN',
-      'suchmaskeKonvolutName': 'zeitschriftNZN',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Neue Zürcher Nachrichten'
-    },
-    {
-      'konvolut': 'zeitschriftNZZ',
-      'suchmaskeKonvolutName': 'zeitschriftNZZ',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Neue Zürcher Zeitung'
-    },
-    {
-      'konvolut': 'zeitschriftRenaissance',
-      'suchmaskeKonvolutName': 'zeitschriftRenaissance',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Renaissance'
-    },
-    {
-      'konvolut': 'zeitschriftRundschau',
-      'suchmaskeKonvolutName': 'zeitschriftRundschau',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Schweizer Rundschau'
-    },
-    {
-      'konvolut': 'zeitschriftSueddeutsche',
-      'suchmaskeKonvolutName': 'zeitschriftSueddeutsche',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Sueddeutsche Zeitung'
-    },
-    {
-      'konvolut': 'zeitschriftWortTat',
-      'suchmaskeKonvolutName': 'zeitschriftWortTat',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Wort und Tat'
-    },
-    {
-      'konvolut': 'materialienTagebuch',
-      'suchmaskeKonvolutName': 'materialienTagebuch',
-      'enabled': true,
-      'IRI': 'undefined',
-      'memberPoems': new Set(),
-      'officialName': 'Tagebuch'
-    }
-  ];
+  convoluteIndex = -1;
+  suchmaskeKonvolutIRIMapping = createsuchmaskeKonvolutIRIMapping();
   poemResTypes = [
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23PoemNote',
     'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber%23HandwrittenPoem',
@@ -425,6 +116,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
               private cdr: ChangeDetectorRef) {
     this.route.params.subscribe(params => console.log(params));
   }
+
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
@@ -441,11 +133,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   handleSearchEvent(arg: AbstractControl) {
     //console.log(arg);
     if(this.startSearchImmediately) this.startSearchImmediately = false;
-    //console.log(arg);
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
-    this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
+    if (arg.get('suchwortForm').value.suchwortInput !== '') this.inputSearchStringToBeParsed = arg.get('suchwortForm').value.suchwortInput;
+    else this.inputSearchStringToBeParsed = this.searchTerm;
     this.currentPath = '/suche?wort=' + this.inputSearchStringToBeParsed;
     this.location.replaceState(this.currentPath);
   }
@@ -458,84 +150,10 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
-    //console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.route.snapshot.queryParams[ 'wort' ]) {
-      //console.log('Start search immediately');
-      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch7982' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'notizbuch8088' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskript7983' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'manuskriptKarten' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript79Spez' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'typoskript83' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGesicht' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckSchiffe' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckGedichte' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckFlussufer' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckReduktionen' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftAkzente' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftBlaetter' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSchoenste' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTag' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftTat' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftZeit' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftEnsemble' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftHortulus' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftJahresring' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftKonturen' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLNN' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLadZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftLuZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftMerkur' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftDeutscheHefte' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZN' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftNZZ' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRenaissance' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftRundschau' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftSueddeutsche' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'zeitschriftWortTat' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'materialienTagebuch' ],true);
-      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled
-        = this.updateFilterParams(this.route.snapshot.queryParams[ 'druckAbgewandtAll' ],true);
-      //console.log(this.suchmaskeKonvolutIRIMapping);
+      for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
+        konvolut.enabled = this.updateFilterParams(this.route.snapshot.queryParams[ konvolut.suchmaskeKonvolutName ], true);
+      }
       this.startSearchImmediately = true;
       this.searchTermArray = [];
       this.searchTermArray[this.searchTermArray.length] = this.route.snapshot.queryParams[ 'wort' ];
@@ -854,19 +472,12 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     } else {
       if (searchResults !== undefined) {
         this.addToFinalSearchResultArray(searchResults, undefined);
-/*      }
-      if (poemIRI !== undefined) {
-        this.addToFinalSearchResultArray(undefined, poemIRI);*/
       }
     }
   }
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
     this.checkProgress();
-    //console.log('Add to final Search Results');
-    //console.log(searchResults);
-    //console.log(singlePoem);
-    //console.log(this.suchmaskeKonvolutIRIMapping);
     if (this.allSearchResults === undefined) {
       this.allSearchResults = [];
     }
@@ -886,7 +497,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   updateSuchmaskeKonvolutIRIMapping(arg: AbstractControl) {
-    //console.log(arg);
     if (
       arg.get('notizbuchForm').pristine
       && arg.get('druckForm').pristine
@@ -898,87 +508,17 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       //console.log('Perform Search in all convolutes');
       //console.log(this.suchmaskeKonvolutIRIMapping);
     } else {
-      //console.log('Gehe durch jedes Konvolut');
-      this.suchmaskeKonvolutIRIMapping[ 0 ].enabled = arg.get('notizbuchForm.notizbuch79').value;
-      this.suchmaskeKonvolutIRIMapping[ 1 ].enabled = arg.get('notizbuchForm.notizbuch7982').value;
-      this.suchmaskeKonvolutIRIMapping[ 2 ].enabled = arg.get('notizbuchForm.notizbuch8088').value;
-      this.suchmaskeKonvolutIRIMapping[ 3 ].enabled = arg.get('manuskriptForm.manuskript79').value;
-      this.suchmaskeKonvolutIRIMapping[ 4 ].enabled = arg.get('manuskriptForm.manuskript7983').value;
-      this.suchmaskeKonvolutIRIMapping[ 5 ].enabled = arg.get('manuskriptForm.manuskriptKarten').value;
-      this.suchmaskeKonvolutIRIMapping[ 6 ].enabled = arg.get('typoskriptForm.typoskript79').value;
-      this.suchmaskeKonvolutIRIMapping[ 7 ].enabled = arg.get('typoskriptForm.typoskript79Spez').value;
-      this.suchmaskeKonvolutIRIMapping[ 8 ].enabled = arg.get('typoskriptForm.typoskript83').value;
-      this.suchmaskeKonvolutIRIMapping[ 9 ].enabled = arg.get('druckForm.druckGesicht').value;
-      this.suchmaskeKonvolutIRIMapping[ 10 ].enabled = arg.get('druckForm.druckSchiffe').value;
-      this.suchmaskeKonvolutIRIMapping[ 11 ].enabled = arg.get('druckForm.druckGedichte').value;
-      this.suchmaskeKonvolutIRIMapping[ 12 ].enabled = arg.get('druckForm.druckFlussufer').value;
-      this.suchmaskeKonvolutIRIMapping[ 13 ].enabled = arg.get('druckForm.druckReduktionen').value;
-      this.suchmaskeKonvolutIRIMapping[ 14 ].enabled = arg.get('zeitschriftForm.zeitschriftAkzente').value;
-      this.suchmaskeKonvolutIRIMapping[ 15 ].enabled = arg.get('zeitschriftForm.zeitschriftBlaetter').value;
-      this.suchmaskeKonvolutIRIMapping[ 16 ].enabled = arg.get('zeitschriftForm.zeitschriftSchoenste').value;
-      this.suchmaskeKonvolutIRIMapping[ 17 ].enabled = arg.get('zeitschriftForm.zeitschriftTag').value;
-      this.suchmaskeKonvolutIRIMapping[ 18 ].enabled = arg.get('zeitschriftForm.zeitschriftTat').value;
-      this.suchmaskeKonvolutIRIMapping[ 19 ].enabled = arg.get('zeitschriftForm.zeitschriftZeit').value;
-      this.suchmaskeKonvolutIRIMapping[ 20 ].enabled = arg.get('zeitschriftForm.zeitschriftEnsemble').value;
-      this.suchmaskeKonvolutIRIMapping[ 21 ].enabled = arg.get('zeitschriftForm.zeitschriftHortulus').value;
-      this.suchmaskeKonvolutIRIMapping[ 22 ].enabled = arg.get('zeitschriftForm.zeitschriftJahresring').value;
-      this.suchmaskeKonvolutIRIMapping[ 23 ].enabled = arg.get('zeitschriftForm.zeitschriftKonturen').value;
-      this.suchmaskeKonvolutIRIMapping[ 24 ].enabled = arg.get('zeitschriftForm.zeitschriftLNN').value;
-      this.suchmaskeKonvolutIRIMapping[ 25 ].enabled = arg.get('zeitschriftForm.zeitschriftLadZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 26 ].enabled = arg.get('zeitschriftForm.zeitschriftLuZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 27 ].enabled = arg.get('zeitschriftForm.zeitschriftMerkur').value;
-      this.suchmaskeKonvolutIRIMapping[ 28 ].enabled = arg.get('zeitschriftForm.zeitschriftDeutscheHefte').value;
-      this.suchmaskeKonvolutIRIMapping[ 29 ].enabled = arg.get('zeitschriftForm.zeitschriftNZN').value;
-      this.suchmaskeKonvolutIRIMapping[ 30 ].enabled = arg.get('zeitschriftForm.zeitschriftNZZ').value;
-      this.suchmaskeKonvolutIRIMapping[ 31 ].enabled = arg.get('zeitschriftForm.zeitschriftRenaissance').value;
-      this.suchmaskeKonvolutIRIMapping[ 32 ].enabled = arg.get('zeitschriftForm.zeitschriftRundschau').value;
-      this.suchmaskeKonvolutIRIMapping[ 33 ].enabled = arg.get('zeitschriftForm.zeitschriftSueddeutsche').value;
-      this.suchmaskeKonvolutIRIMapping[ 34 ].enabled = arg.get('zeitschriftForm.zeitschriftWortTat').value;
-      this.suchmaskeKonvolutIRIMapping[ 35 ].enabled = arg.get('materialienForm.materialienTagebuch').value;
-      this.suchmaskeKonvolutIRIMapping[ 36 ].enabled = arg.get('druckForm.druckAbgewandtAll').value;
-      //console.log(this.suchmaskeKonvolutIRIMapping[ 35 ].enabled);
-      //console.log(this.suchmaskeKonvolutIRIMapping);
+      for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
+        //console.log(konvolut.suchmaskeFormName + '.' + konvolut.suchmaskeKonvolutName);
+        konvolut.enabled = arg.get( konvolut.suchmaskeFormName + '.' + konvolut.suchmaskeKonvolutName ).value;
+      }
     }
   }
   updateQueryParamsInURL() {
+    for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
+      this.currentPath += '&' + konvolut.suchmaskeKonvolutName + '=' + konvolut.enabled;
+    }
     this.currentPath = this.currentPath +
-      '&notizbuch79=' + this.suchmaskeKonvolutIRIMapping[ 0 ].enabled +
-      '&notizbuch7982=' + this.suchmaskeKonvolutIRIMapping[ 1 ].enabled +
-      '&notizbuch8088=' + this.suchmaskeKonvolutIRIMapping[ 2 ].enabled +
-      '&manuskript79=' + this.suchmaskeKonvolutIRIMapping[ 3 ].enabled +
-      '&manuskript7983=' + this.suchmaskeKonvolutIRIMapping[ 4 ].enabled +
-      '&manuskriptKarten=' + this.suchmaskeKonvolutIRIMapping[ 5 ].enabled +
-      '&typoskript79=' + this.suchmaskeKonvolutIRIMapping[ 6 ].enabled +
-      '&typoskript79Spez=' + this.suchmaskeKonvolutIRIMapping[ 7 ].enabled +
-      '&typoskript83=' + this.suchmaskeKonvolutIRIMapping[ 8 ].enabled +
-      '&druckGesicht=' + this.suchmaskeKonvolutIRIMapping[ 9 ].enabled +
-      '&druckSchiffe=' + this.suchmaskeKonvolutIRIMapping[ 10 ].enabled +
-      '&druckGedichte=' + this.suchmaskeKonvolutIRIMapping[ 11 ].enabled +
-      '&druckFlussufer=' + this.suchmaskeKonvolutIRIMapping[ 12 ].enabled +
-      '&druckReduktionen=' + this.suchmaskeKonvolutIRIMapping[ 13 ].enabled +
-      '&zeitschriftAkzente=' + this.suchmaskeKonvolutIRIMapping[ 14 ].enabled +
-      '&zeitschriftBlaetter=' + this.suchmaskeKonvolutIRIMapping[ 15 ].enabled +
-      '&zeitschriftSchoenste=' + this.suchmaskeKonvolutIRIMapping[ 16 ].enabled +
-      '&zeitschriftTag=' + this.suchmaskeKonvolutIRIMapping[ 17 ].enabled +
-      '&zeitschriftTat=' + this.suchmaskeKonvolutIRIMapping[ 18 ].enabled +
-      '&zeitschriftZeit=' + this.suchmaskeKonvolutIRIMapping[ 19 ].enabled +
-      '&zeitschriftEnsemble=' + this.suchmaskeKonvolutIRIMapping[ 20 ].enabled +
-      '&zeitschriftHortulus=' + this.suchmaskeKonvolutIRIMapping[ 21 ].enabled +
-      '&zeitschriftJahresring=' + this.suchmaskeKonvolutIRIMapping[ 22 ].enabled +
-      '&zeitschriftKonturen=' + this.suchmaskeKonvolutIRIMapping[ 23 ].enabled +
-      '&zeitschriftLNN=' + this.suchmaskeKonvolutIRIMapping[ 24 ].enabled +
-      '&zeitschriftLadZ=' + this.suchmaskeKonvolutIRIMapping[ 25 ].enabled +
-      '&zeitschriftLuZ=' + this.suchmaskeKonvolutIRIMapping[ 26 ].enabled +
-      '&zeitschriftMerkur=' + this.suchmaskeKonvolutIRIMapping[ 27 ].enabled +
-      '&zeitschriftDeutscheHefte=' + this.suchmaskeKonvolutIRIMapping[ 28 ].enabled +
-      '&zeitschriftNZN=' + this.suchmaskeKonvolutIRIMapping[ 29 ].enabled +
-      '&zeitschriftNZZ=' + this.suchmaskeKonvolutIRIMapping[ 30 ].enabled +
-      '&zeitschriftRenaissance=' + this.suchmaskeKonvolutIRIMapping[ 31 ].enabled +
-      '&zeitschriftRundschau=' + this.suchmaskeKonvolutIRIMapping[ 32 ].enabled +
-      '&zeitschriftSueddeutsche=' + this.suchmaskeKonvolutIRIMapping[ 33 ].enabled +
-      '&zeitschriftWortTat=' + this.suchmaskeKonvolutIRIMapping[ 34 ].enabled +
-      '&materialienTagebuch=' + this.suchmaskeKonvolutIRIMapping[ 35 ].enabled +
-      '&druckAbgewandtAll=' + this.suchmaskeKonvolutIRIMapping[ 36 ].enabled +
       '&textartFreieVerse=' + this.arg.get('textartForm.textartFreieVerse').value +
       '&textartProsanotat=' + this.arg.get('textartForm.textartProsanotat').value +
       '&textartProsa=' + this.arg.get('textartForm.textartProsa').value +

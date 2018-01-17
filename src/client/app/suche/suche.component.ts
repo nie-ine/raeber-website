@@ -554,6 +554,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
 
   executeFinalQueries() {
+    this.checkProgress();
     this.allSearchResultsLengthOld = 0;
     this.noMoreChanges = false;
     this.setOfPoemsInResult.clear();

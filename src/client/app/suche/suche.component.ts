@@ -147,7 +147,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.checkProgress();
     for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
       this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
     }
@@ -173,6 +172,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
 
   executeFinalQueries() {
+    this.checkProgress();
     this.allSearchResultsLengthOld = 0;
     this.noMoreChanges = false;
     this.setOfPoemsInResult.clear();
@@ -186,7 +186,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     this.setOfAllSearchResults.clear();
     if(this.arg) this.updateQueryParamsInURL();
     if (!this.queries) {
-      console.log('No query defined');
+      //console.log('No query defined');
     } else {
       this.allSearchResults = undefined;
       this.translateQueriesReturnedFromParserToKnoraRequests(this.queries);
@@ -199,17 +199,17 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
       this.firstTermAfterOr = true;
-      console.log('Request Group nr: ' + this.i);
+      //console.log('Request Group nr: ' + this.i);
       this.finalTemporaryResults = undefined;
       this.temporarySearchResults = undefined;
       for (this.j = 0; this.j < queries[ this.i ].length; this.j++) {
         if (this.j !== 0) {
-          console.log('And merge with?');
+          //console.log('And merge with?');
         }
         this.numberOfQueries += 1;
-        console.log('Search for: '
-          + queries[ this.i ][ this.j ].searchString
-          + ' in: ' + queries[ this.i ][ this.j ].where);
+        //console.log('Search for: '
+        //  + queries[ this.i ][ this.j ].searchString
+        //  + ' in: ' + queries[ this.i ][ this.j ].where);
         this.searchTerm = queries[ this.i ][ this.j ].searchString;
         if (this.searchTermArray === undefined) {
           this.searchTermArray = [];
@@ -942,11 +942,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                     if(this.checkIfHasStrophe(poem.value['9'])) {
                       if(this.checkIfIsInDialect(poem.value['14'])) {
                         if(this.checkIfPartOfCycle(poem.value['15'])) {
-                              console.log('Date: ' + poem.value['5'] + ' Titel: ' + poem.value['8']);
-                              console.log(this.allSearchResults);
+                              //console.log('Date: ' + poem.value['5'] + ' Titel: ' + poem.value['8']);
+                              //console.log(this.allSearchResults);
                               poem.reservedPointer = this.allSearchResults.length;
-                              console.log(poem.reservedPointer);
-                              console.log(poem.value['5']);
+                              //console.log(poem.reservedPointer);
+                              //console.log(poem.value['5']);
 
                               this.allSearchResults[ poem.reservedPointer ] = new CachePoem();
                               this.allSearchResults[ poem.reservedPointer ].poemTitle = poem.value['8'];
@@ -1173,7 +1173,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             (date.split('-')[0]  >= this.arg.get('zeitraumForm.zeitraumVon').value
               && date.split('-')[0] <= this.arg.get('zeitraumForm.zeitraumBis').value )
           ) {
-            console.log('Poem liegt im beidseitig geschlossenen Intervall');
+            //console.log('Poem liegt im beidseitig geschlossenen Intervall');
             return true;
           } else {
             return false;
@@ -1182,13 +1182,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           (this.arg.get('zeitraumForm.zeitraumVon').value !== ''
             && date.split('-')[0] >= this.arg.get('zeitraumForm.zeitraumVon').value)
         ) {
-          console.log('Groesser als Linker Intervall');
+          //console.log('Groesser als Linker Intervall');
           return true;
         } else if(
           (this.arg.get('zeitraumForm.zeitraumBis').value !== ''
             && date.split('-')[0] <= this.arg.get('zeitraumForm.zeitraumBis').value )
         ) {
-          console.log('Kleiner als Linker Intervall');
+          //console.log('Kleiner als Linker Intervall');
           return true;
         } else return false;
       } else {
@@ -1204,7 +1204,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             date.split('-')[0] >= this.route.snapshot.queryParams[ 'zeitBeginn' ]
               && date.split('-')[0] <= this.route.snapshot.queryParams[ 'zeitEnde' ]
           ) {
-            console.log('Poem liegt im beidseitig geschlossenen Intervall');
+            //console.log('Poem liegt im beidseitig geschlossenen Intervall');
             return true;
           } else {
             return false;
@@ -1213,13 +1213,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           this.route.snapshot.queryParams[ 'zeitBeginn' ] !== undefined
             && date.split('-')[0] >= this.route.snapshot.queryParams[ 'zeitBeginn' ]
         ) {
-          console.log('Groesser als Linker Intervall');
+          //console.log('Groesser als Linker Intervall');
           return true;
         } else if(
           this.route.snapshot.queryParams[ 'zeitEnde' ] !== undefined
             && date.split('-')[0] <= this.route.snapshot.queryParams[ 'zeitEnde' ]
         ) {
-          console.log('Kleiner als Linker Intervall');
+          //console.log('Kleiner als Linker Intervall');
           return true;
         } else return false;
       }

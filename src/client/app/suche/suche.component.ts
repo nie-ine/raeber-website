@@ -144,6 +144,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
 
   executeFinalQueries() {
+    this.menuArray = [];
     this.noMoreChange = false;
     this.setOfPoemsInResult.clear();
     this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
@@ -492,9 +493,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                     if( this.checkIfHasStrophe( poem.value[ '9' ] ) ) {
                       if( this.checkIfIsInDialect(poem.value[ '14' ] ) ) {
                         if( this.checkIfPartOfCycle( poem.value[ '15' ] ) ) {
-                          //console.log(this.noMoreChange);
                           this.setOfWholePoemsInResult.add(poem);
-                          this.noMoreChanges();
+                          this.sizeOld = this.setOfWholePoemsInResult.size;
+                          setTimeout(() => {
+                            this.setToArray(this.setOfWholePoemsInResult.size);
+                          }, 3000);
                           this.numberOfSearchResults += 1;
                         }
                       }
@@ -505,10 +508,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           }
     }
 
-  noMoreChanges() {
-    setTimeout(() => {
-      if( this.setOfPoemsInResult.size === this.sizeOld) {
-        console.log('no more changes');
+  setToArray(newSize: number) {
+    if( newSize === this.sizeOld ) {
         this.setOfWholePoemsInResult.forEach((value: string, key: string) => {
           (value as any).reservedPointer = this.helpArray.length;
           this.helpArray[ (value as any).reservedPointer ] = new CachePoem();
@@ -519,7 +520,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           this.helpArray[ (value as any).reservedPointer ].synopsisIRI = (value as any).value['11'];
           this.helpArray[ (value as any).reservedPointer ].synopsisTitle = (value as any).value['12'];
           this.helpArray[ (value as any).reservedPointer ].isFinalVersion = (value as any).value['13'];
-          this.helpArray[ (value as any).reservedPointer ].searchOfficialName = (value as any).value['15'];
+          this.helpArray[ (value as any).reservedPointer ].searchOfficialName = (value as any).value['3'];
           /*
           TODO: Old indexes (for missed indexes - delete after 2017-11-30):
           0: poemTitle
@@ -540,20 +541,17 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           15: convoluteTitle - not used here
            */
         });
-        console.log(this.helpArray);
+        this.sortResultArray();
         this.setOfKonvolutIRIs.clear();
         this.setOfAlowedPoemIRIs.clear();
         this.setOfPerformedQueries.clear();
         this.setOfKonvolutIRIsOld.clear();
         this.setOfKonvolutQueries.clear();
         this.setOfWholePoemsInResult.clear();
-        this.setOfPoemsInResult.clear();
         this.poemsToCheck.clear();
         this.setOfWholePoemsInResult.clear();
         this.renderPage();
-      } else this.sizeOld = this.setOfPoemsInResult.size;
-    }, 3000);
-
+    }
   }
 
   renderPage() {
@@ -566,7 +564,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       for ( let i = 0; i <  this.menuEntries; i++ ) {
         this.menuArray[ i ] = i + 1;
       }
-      console.log(this.menuArray);
+      //console.log(this.menuArray);
       this.menuArray[this.menuEntries] = '';
       this.allSearchResults = this.helpArray.slice(0, this.poemsPerPage);
     }
@@ -574,7 +572,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   choosePage(page: number) {
     this.chosenPage = page;
-    console.log('chose Page: ' + page);
+    //console.log('chose Page: ' + page);
     this.allSearchResults = this.helpArray.slice(
       page * this.poemsPerPage, ( page + 1) * this.poemsPerPage );
   }
@@ -587,13 +585,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   sortResultArray() {
-    for(let i = 0; i < this.allSearchResults.length - 1; i++ ) {
-      if(this.allSearchResults[i].poemCreationDate < this.allSearchResults[i + 1].poemCreationDate) {
+    for(let i = 0; i < this.helpArray.length - 1; i++ ) {
+      if(this.helpArray[i].poemCreationDate < this.helpArray[i + 1].poemCreationDate) {
         //console.log(this.allSearchResults[i][1] + ' ist kleiner als ' + this.allSearchResults[i + 1][1]);
       } else {
-        this.helpArray = this.allSearchResults[i + 1];
-        this.allSearchResults[i + 1] = this.allSearchResults[i];
-        this.allSearchResults[i] = this.helpArray;
+        let help = this.helpArray[i + 1];
+        this.helpArray[i + 1] = this.helpArray[i];
+        this.helpArray[i] = help;
       }
     }
   }

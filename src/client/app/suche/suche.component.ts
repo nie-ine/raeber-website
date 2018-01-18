@@ -63,6 +63,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   noMoreChange = false;
   menuEntries = 0;
   menuArray: Array<any>;
+  chosenPage: number;
+  poemsPerPage = 50;
   arrayOfResultsInAllSearchGroups = [
     {
       'setOfSearchTermsInSearchGroup': new Set(),
@@ -149,6 +151,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     this.numberOfSearchResults = 0;
     this.allSearchResults = [];
     this.searchTermArray = [];
+    this.helpArray = [];
     this.partOfAllSearchResults = undefined;
     if(this.arg) this.updateQueryParamsInURL();
     if (!this.queries) {
@@ -504,10 +507,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   noMoreChanges() {
     setTimeout(() => {
-      if( this.setOfPoemsInResult.size === this.sizeOld && !this.noMoreChange) {
-        this.noMoreChange = true;
+      if( this.setOfPoemsInResult.size === this.sizeOld) {
         console.log('no more changes');
-        this.helpArray = [];
         this.setOfWholePoemsInResult.forEach((value: string, key: string) => {
           (value as any).reservedPointer = this.helpArray.length;
           this.helpArray[ (value as any).reservedPointer ] = new CachePoem();
@@ -550,30 +551,39 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         this.poemsToCheck.clear();
         this.setOfWholePoemsInResult.clear();
         this.renderPage();
-
-        this.helpArray = null;
       } else this.sizeOld = this.setOfPoemsInResult.size;
     }, 3000);
 
   }
 
   renderPage() {
-    if(this.helpArray <= 50) {
+    if(this.helpArray <= this.poemsPerPage) {
       this.allSearchResults = this.helpArray;
     } else {
-      this.menuEntries = this.helpArray.length / 50;
+      this.chosenPage = 0;
+      this.menuEntries = this.helpArray.length / this.poemsPerPage;
       this.menuArray = [];
       for ( let i = 0; i <  this.menuEntries; i++ ) {
-        this.menuArray[ i ] = i;
+        this.menuArray[ i ] = i + 1;
       }
       console.log(this.menuArray);
       this.menuArray[this.menuEntries] = '';
-      this.allSearchResults = this.helpArray.slice(0, 50);
+      this.allSearchResults = this.helpArray.slice(0, this.poemsPerPage);
     }
   }
 
-  choosePage() {
-    console.log('chose Page');
+  choosePage(page: number) {
+    this.chosenPage = page;
+    console.log('chose Page: ' + page);
+    this.allSearchResults = this.helpArray.slice(
+      page * this.poemsPerPage, ( page + 1) * this.poemsPerPage );
+  }
+
+  checkIfChosen(page: number) {
+    if (page === this.chosenPage ) {
+      return true;
+    } else return false;
+
   }
 
   sortResultArray() {

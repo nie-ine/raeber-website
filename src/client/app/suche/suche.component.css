@@ -10,3 +10,12 @@
 >>> .mat-input-underline {
   margin-bottom: 3px;
 }
+
+.chosenPage {
+  color: green;
+  font-weight: bold;
+}
+
+.pointer {
+  cursor: pointer;
+}

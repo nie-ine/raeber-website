@@ -20,24 +20,10 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   myResources: Array<any>;
   myProperties: Array<any>;
-  responseArray: Array<any>;
   selectedResource: string;
   selectedProperty: string;
   searchForVal: string;
   query: string;
-  availableboolOperators = [
-    { name: 'equal to', operator: 'EQ' },
-    { name: 'not equal to', operator: '!EQ' },
-    { name: 'greater than', operator: 'GT' },
-    { name: 'greater or equal', operator: 'GT_EQ' },
-    { name: 'lower than', operator: 'LT' },
-    { name: 'lower or equal than', operator: 'LT_EQ' },
-    { name: 'exists', operator: 'EXISTS' },
-    { name: 'match', operator: 'MATCH' },
-    { name: 'like', operator: 'LIKE' },
-    { name: '!like', operator: '!LIKE' },
-    { name: 'match_boolean', operator: 'MATCH_BOOLEAN' }
-  ];
   array = [
     1
   ];
@@ -53,7 +39,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   count = 0;
   numberOfPropertiesInSearchBox = '';
   helpArray: any;
-  str: string;
   value: string;
   sendInputStringToSuchmaske: string;
   finalQueryArray = [ '' ];
@@ -65,17 +50,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   druckDisabled = false;
   materialDisabled = false;
   inputSearchStringToBeParsed: string;
-  numberOfQueries = 0;
   input: Array<any>;
   searchTerm: string;
   numberOfSearchResults: number;
   queries: Array<any>;
   partOfAllSearchResults: Array<any>;
   trueIfDuplicate = false;
-  temporarySearchResults: Array<any>;
-  finalTemporaryResults: Array<any>;
   firstTermAfterOr = true;
-  konvolutIDToGetIRI: any;
   setOfKonvolutIRIs = new Set();
   setOfAlowedPoemIRIs = new Set();
   setOfPerformedQueries = new Set();
@@ -85,13 +66,10 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   zeitschriftWortTat = new Set();
   startSearchImmediately = false;
   setOfPoemsInResult = new Set();
-  setOfAllSearchResults = new Set();
   warning: string;
   warningread: boolean;
   currentPath: string;
   loadingIndicatorInput: boolean;
-  allSearchResultsLengthOld: number;
-  noMoreChanges = false;
   progressIndicator = 0;
   arrayOfResultsInAllSearchGroups = [
     {
@@ -131,7 +109,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   handleSearchEvent(arg: AbstractControl) {
-    //console.log(arg);
     if(this.startSearchImmediately) this.startSearchImmediately = false;
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
@@ -148,8 +125,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.checkProgress();
-    for (this.o = 0; this.o < this.suchmaskeKonvolutIRIMapping.length; this.o++) {
-      this.getKonvolutIRI(this.suchmaskeKonvolutIRIMapping[ this.o ].konvolut, this.o);
+    for (let konvolut of this.suchmaskeKonvolutIRIMapping) {
+      this.getKonvolutIRI(konvolut.konvolut, konvolut.index);
     }
     if (this.route.snapshot.queryParams[ 'wort' ]) {
       for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
@@ -173,17 +150,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
 
   executeFinalQueries() {
-    this.allSearchResultsLengthOld = 0;
-    this.noMoreChanges = false;
     this.setOfPoemsInResult.clear();
     this.sendInputStringToSuchmaske = this.inputSearchStringToBeParsed;
     this.warning = '';
-    this.numberOfQueries = 0;
     this.numberOfSearchResults = 0;
     this.allSearchResults = [];
     this.searchTermArray = [];
     this.partOfAllSearchResults = undefined;
-    this.setOfAllSearchResults.clear();
     if(this.arg) this.updateQueryParamsInURL();
     if (!this.queries) {
       console.log('No query defined');
@@ -194,22 +167,16 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   translateQueriesReturnedFromParserToKnoraRequests(queries: Array<any>) {
-    this.str = JSON.stringify(queries, null, 4);
-    //console.log('Queries: ' + this.str);
-    this.temporarySearchResults = undefined;
     for (this.i = 0; this.i < queries.length; this.i++) {
       this.firstTermAfterOr = true;
       console.log('Request Group nr: ' + this.i);
-      this.finalTemporaryResults = undefined;
-      this.temporarySearchResults = undefined;
       for (this.j = 0; this.j < queries[ this.i ].length; this.j++) {
         if (this.j !== 0) {
-          console.log('And merge with?');
+          //console.log('And merge with?');
         }
-        this.numberOfQueries += 1;
-        console.log('Search for: '
-          + queries[ this.i ][ this.j ].searchString
-          + ' in: ' + queries[ this.i ][ this.j ].where);
+        //console.log('Search for: '
+        //  + queries[ this.i ][ this.j ].searchString
+        //  + ' in: ' + queries[ this.i ][ this.j ].where);
         this.searchTerm = queries[ this.i ][ this.j ].searchString;
         if (this.searchTermArray === undefined) {
           this.searchTermArray = [];
@@ -233,7 +200,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   getQueries(queries: Array<any>) {
-    //console.log(queries);
     this.queries = queries;
     if (this.startSearchImmediately) {
       this.executeFinalQueries();
@@ -247,14 +213,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           searchTerm,
           firstTermAfterOr,
           searchGroup,
-          numberOfTermsInSearchGroup,
-          this.poemResTypes[ this.m ]);
+          numberOfTermsInSearchGroup);
         this.performSearchInText(
           searchTerm,
-          firstTermAfterOr,
           searchGroup,
-          numberOfTermsInSearchGroup,
-          this.poemResTypes[ this.m ]);
+          numberOfTermsInSearchGroup);
       }
     } else if (location === 'title') {
       for (this.m = 0; this.m < this.poemResTypes.length; this.m++) {
@@ -262,17 +225,14 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           searchTerm,
           firstTermAfterOr,
           searchGroup,
-          numberOfTermsInSearchGroup,
-          this.poemResTypes[ this.m ]);
+          numberOfTermsInSearchGroup);
       }
     } else if (location === 'text') {
       for (this.m = 0; this.m < this.poemResTypes.length; this.m++) {
         this.performSearchInText(
           searchTerm,
-          firstTermAfterOr,
           searchGroup,
-          numberOfTermsInSearchGroup,
-          this.poemResTypes[ this.m ]);
+          numberOfTermsInSearchGroup);
       }
     }
   }
@@ -280,8 +240,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   performSearchInTitle(searchTerm: string,
                        firstTermAfterOr: boolean,
                        searchGroup: number,
-                       numberOfTermsInSearchGroup: number,
-                       poemResType: string) {
+                       numberOfTermsInSearchGroup: number) {
       return this.http.get(
         globalSearchVariableService.API_URL +
         globalSearchVariableService.extendedSearch +
@@ -343,11 +302,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             if (data.subjects[0] !== undefined) {
               //console.log('add to temporary results');
               this.addToTemporarySearchResultArray(data.subjects,
-                firstTermAfterOr,
                 searchGroup,
                 numberOfTermsInSearchGroup,
-                searchTerm,
-                undefined);
+                searchTerm);
           } else {
             //console.log('Keine Treffer fuer diese Suche');
           }
@@ -358,10 +315,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
   }
   performSearchInText(searchTerm: string,
-                      firstTermAfterOr: boolean,
                       searchGroup: number,
-                      numberOfTermsInSearchGroup: number,
-                      poemResType: string) {
+                      numberOfTermsInSearchGroup: number) {
     //console.log('Search in Text');
     return this.http.get(
       globalSearchVariableService.API_URL +
@@ -419,16 +374,11 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log('Data From Text');
-          //console.log(data);
           if (data.subjects[ 0 ] !== undefined) {
-            //console.log('add to temporary search array');
             this.addToTemporarySearchResultArray(data.subjects,
-              firstTermAfterOr,
               searchGroup,
               numberOfTermsInSearchGroup,
-              searchTerm,
-              undefined);
+              searchTerm);
           } else {
             //console.log('Keine Treffer fuer diese Suche');
           }
@@ -440,11 +390,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   addToTemporarySearchResultArray(searchResults: Array<any>,
-                                  firstTermAfterOr: boolean,
                                   searchGroup: number,
                                   numberOfTermsInSearchGroup: number,
-                                  searchTerm: string,
-                                  poemIRI: string) {
+                                  searchTerm: string) {
     //console.log('add to temporary result');
     this.checkProgress();
     if (this.partOfAllSearchResults === undefined) {
@@ -474,6 +422,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         this.addToFinalSearchResultArray(searchResults, undefined);
       }
     }
+    searchResults =  null;
   }
 
   addToFinalSearchResultArray(searchResults: Array<any>, singlePoem: any) {
@@ -488,11 +437,13 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         this.onlyChoosePoemsThatAreInChosenConvolutes(
           poem);
       }
+      searchResults = null;
     }
     if(singlePoem) {
       //console.log('add poem to final search results');
       this.onlyChoosePoemsThatAreInChosenConvolutes(
         singlePoem);
+      singlePoem = null;
     }
   }
 
@@ -509,7 +460,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       //console.log(this.suchmaskeKonvolutIRIMapping);
     } else {
       for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
-        //console.log(konvolut.suchmaskeFormName + '.' + konvolut.suchmaskeKonvolutName);
         konvolut.enabled = arg.get( konvolut.suchmaskeFormName + '.' + konvolut.suchmaskeKonvolutName ).value;
       }
     }
@@ -537,7 +487,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
 
 
   getKonvolutIRI(konvolut_id: string, i: number) {
-    //console.log('Get IRI Component for Konvolut - ID: ' + konvolut_id);
     if (konvolut_id === 'notizbuch-1979') {
       this.performQueryToGetIRI(
         '%23PoemNotebook' +
@@ -844,7 +793,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
         encodeURIComponent(globalSearchVariableService.initialVocabulary) +
         queryPart;
     }
-    //console.log(queryPart);
     return this.http.get
     (
       queryPart
@@ -869,7 +817,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           return null;
         }
       )
-      .subscribe(response => this.responseArray = response);
+      .subscribe(response => response = response);
   }
 
 
@@ -886,7 +834,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
           (lambda: Response) => {
             const data = lambda.json();
             //console.log(data);
-            for (this.l = 0; this.l < data.nodes.length; this.l++) {
+            for (let poems of data.nodes) {
               if (konvolutType === 'poem notebook') {
                 rightProperty = 'http://www.knora.org/ontology/kuno-raeber#PoemNote';
                 //console.log('Right Property: ' + rightProperty);
@@ -910,43 +858,28 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                 //console.log('Right Property: ' + rightProperty);
               }
               if (
-                data.nodes[ this.l ].resourceClassIri === rightProperty
+                poems.resourceClassIri === rightProperty
               ) {
-                //this.setOfAlowedPoemIRIs.add(data.nodes[this.l].resourceIri);
-                this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(data.nodes[ this.l ].resourceIri);
+                this.suchmaskeKonvolutIRIMapping[ i ].memberPoems.add(poems.resourceIri);
                 }
               }
-            //console.log(this.setOfAlowedPoemIRIs);
             return null;
           }
-        ).subscribe(response => this.responseArray = response);
+        ).subscribe(response => response = response);
     }
-    onlyChoosePoemsThatAreInChosenConvolutes(poem: any) {
-    //console.log(this.suchmaskeKonvolutIRIMapping);
-      for (let k = 0; k < this.suchmaskeKonvolutIRIMapping.length; k++) {
+    onlyChoosePoemsThatAreInChosenConvolutes( poem: any ) {
+      for ( let konvolut of this.suchmaskeKonvolutIRIMapping ) {
         this.checkProgress();
-        if (this.suchmaskeKonvolutIRIMapping[ k ].enabled &&
-          this.suchmaskeKonvolutIRIMapping[ k ].enabled.toString() !== 'false') {
-          //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-          if(this.suchmaskeKonvolutIRIMapping[ k ].memberPoems.has(poem.value['6'])) {
-            //console.log(this.suchmaskeKonvolutIRIMapping[ k ].enabled + " " + this.suchmaskeKonvolutIRIMapping[ k ].konvolut);
-            this.checkIfDone(this.allSearchResults.length);
-            if(!this.setOfPoemsInResult.has(poem.value['6'])) {
-              this.setOfPoemsInResult.add(poem.value['6']);
-              //console.log('checktextart');
-              if(this.checkTextart(poem.value['10'])) {
-                //console.log('checkdate');
-                if(this.checkTimeInterval(poem.value['5'])) {
-                  //console.log('checkFinalVersion');
-                  if(this.checkIfFinalVersion(poem.value['13'])) {
-                    if(this.checkIfHasStrophe(poem.value['9'])) {
-                      if(this.checkIfIsInDialect(poem.value['14'])) {
-                        if(this.checkIfPartOfCycle(poem.value['15'])) {
-                              console.log('Date: ' + poem.value['5'] + ' Titel: ' + poem.value['8']);
-                              console.log(this.allSearchResults);
+        if ( konvolut.enabled && konvolut.enabled.toString() !== 'false' ) {
+          if( konvolut.memberPoems.has( poem.value[ '6' ] ) ) { this.checkIfDone( this.allSearchResults.length );
+            if( !this.setOfPoemsInResult.has( poem.value[ '6' ] ) ) { this.setOfPoemsInResult.add( poem.value[ '6' ] );
+              if( this.checkTextart( poem.value[ '10' ] ) ) {
+                if( this.checkTimeInterval( poem.value[ '5' ] ) ) {
+                  if( this.checkIfFinalVersion( poem.value[ '13' ] ) ) {
+                    if( this.checkIfHasStrophe( poem.value[ '9' ] ) ) {
+                      if( this.checkIfIsInDialect(poem.value[ '14' ] ) ) {
+                        if( this.checkIfPartOfCycle( poem.value[ '15' ] ) ) {
                               poem.reservedPointer = this.allSearchResults.length;
-                              console.log(poem.reservedPointer);
-                              console.log(poem.value['5']);
 
                               this.allSearchResults[ poem.reservedPointer ] = new CachePoem();
                               this.allSearchResults[ poem.reservedPointer ].poemTitle = poem.value['8'];
@@ -956,10 +889,8 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                               this.allSearchResults[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
                               this.allSearchResults[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
                               this.allSearchResults[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
-                              this.allSearchResults[ poem.reservedPointer ].searchConvolute
-                                = this.suchmaskeKonvolutIRIMapping[ k ].konvolut;
-                              this.allSearchResults[ poem.reservedPointer ].searchOfficialName
-                                = this.suchmaskeKonvolutIRIMapping[ k ].officialName;
+                              this.allSearchResults[ poem.reservedPointer ].searchConvolute = konvolut.konvolut;
+                              this.allSearchResults[ poem.reservedPointer ].searchOfficialName = konvolut.officialName;
 
                               /*
                               TODO: Old indexes (for missed indexes - delete after 2017-11-30):
@@ -1148,10 +1079,6 @@ export class SucheComponent implements OnInit, AfterViewChecked {
       }
       }
     checkTimeInterval(date: string): boolean {
-      //console.log('Check time interval');
-      //console.log(this.route.snapshot.queryParams[ 'zeitBeginn' ]);
-      //console.log(this.route.snapshot.queryParams[ 'zeitEnde' ]);
-      //console.log(date);
       if(!this.arg) {
         if(this.route.snapshot.queryParams[ 'zeitBeginn' ] === undefined
           && this.route.snapshot.queryParams[ 'zeitEnde' ] === undefined) return true;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 
 @Component({
@@ -14,11 +14,11 @@ export class GetKonvolutIRIComponent implements OnChanges {
   @Output() sendKonvolutIRIBack: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendKonvolutBildBack: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendKonvolutTypeBack: EventEmitter<any> = new EventEmitter<any>();
+  @Output() sendSearchingStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  responseArray: Array<any>;
-  http: Http;
+  http: HttpClient;
 
-  constructor(http: Http) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 
@@ -155,34 +155,34 @@ export class GetKonvolutIRIComponent implements OnChanges {
         '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
         '&compop=LIKE' +
         '&searchval=Tagebuch');
-    } else {
+    } else if (this.konvolut_id) {
       this.sendKonvolutTitleBack.emit('Es gibt kein Konvolut mit diesem Titel');
       this.sendKonvolutIRIBack.emit(undefined);
+      this.sendSearchingStatus.emit(false);
     }
   }
 
   performQuery(queryPart: string) {
-    //console.log('Klicked on Menu: ' + this.konvolut_id);
-    return this.http.get
-    (
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      globalSearchVariableService.initialVocabulary +
-      queryPart
-    )
-      .map(
-        (lambda: Response) => {
-          const data = lambda.json();
-          //console.log(data);
-          if(data.subjects[ 0 ]!== undefined) {
-            this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
-            this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
-            this.sendKonvolutBildBack.emit(data.subjects[ 0 ].preview_path);
-            this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);
+    return this.http
+      .request(new HttpRequest('GET', globalSearchVariableService.API_URL +
+        globalSearchVariableService.extendedSearch +
+        globalSearchVariableService.initialVocabulary +
+        queryPart))
+      .subscribe((response: any) => {
+          if (response instanceof HttpResponse) {
+            const data = response.body;
+            if (data !== undefined) {
+              this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
+              this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
+              this.sendKonvolutBildBack.emit(data.subjects[ 0 ].preview_path);
+              this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);
+              this.sendSearchingStatus.emit(false);
+            }
           }
-          return data.resourcetypes;
-        }
-      )
-      .subscribe(response => this.responseArray = response);
+        },
+        err => {
+          this.sendSearchingStatus.emit(false);
+          this.sendKonvolutTitleBack.emit('Es gibt kein Konvolut mit diesem Titel');
+        });
   }
 }

@@ -177,6 +177,14 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     });
+    this.addPackageBundles({
+      name: 'tslib',
+      path: 'node_modules/tslib',
+      packageMeta: {
+        main: 'tslib.js',
+        defaultExtension: 'js'
+      }
+    });
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

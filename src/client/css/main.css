@@ -7933,3 +7933,8 @@ body #k2Container select, body #k2Container input[type="file"] {
   visibility: visible;
   transition: all .2s ease-in-out;
 }
+
+.mat-progress-spinner {
+  height: 50px !important;
+  width: 50px !important;
+}

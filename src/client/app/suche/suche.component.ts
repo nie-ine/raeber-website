@@ -8,6 +8,7 @@ import { MdDialog } from '@angular/material';
 import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
 import { CachePoem } from '../shared/textgrid/cache-poem';
 import { createsuchmaskeKonvolutIRIMapping } from './suchServices/suchModel.service';
+import { createKnoraV1APICall } from './suchServices/createKnoraV1APICall';
 
 @Component({
   moduleId: module.id,
@@ -239,71 +240,17 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                        searchGroup: number,
                        numberOfTermsInSearchGroup: number) {
       return this.http.get(
-        globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-        '&compop=LIKE' +
-        '&searchval=' + encodeURIComponent(searchTerm) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-        '&compop=!EQ' +
-        '&searchval=GREGORIAN:2217-01-27' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-        '&compop=!EQ' +
-        '&searchval=123455666'+
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666'+
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isInDialect' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStructure' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isPartOfCycle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStrophe' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&show_nrows=2000')
+        createKnoraV1APICall(searchTerm, 'title') )
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-            //console.log('Data from Titel');
-            //console.log(data.subjects[0]);
             if (data.subjects[0] !== undefined) {
-              //console.log('add to temporary results');
               this.addToTemporarySearchResultArray(data.subjects,
                 searchGroup,
                 numberOfTermsInSearchGroup,
                 searchTerm);
           } else {
-            //console.log('Keine Treffer fuer diese Suche');
+              //
           }
           return null;
         }
@@ -316,58 +263,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                       numberOfTermsInSearchGroup: number) {
     //console.log('Search in Text');
     return this.http.get(
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-      '&compop=!EQ' +
-      '&searchval=GREGORIAN:2217-01-27' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-      '&compop=LIKE' +
-      '&searchval=' + encodeURIComponent(searchTerm) +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-      '&compop=!EQ' +
-      '&searchval=123455666'+
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isInDialect' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStructure' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isPartOfCycle' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasStrophe' +
-      '&compop=!EQ' +
-      '&searchval=123455666' +
-      '&show_nrows=2000')
+      createKnoraV1APICall(searchTerm, 'text') )
       .map(
         (lambda: Response) => {
           const data = lambda.json();

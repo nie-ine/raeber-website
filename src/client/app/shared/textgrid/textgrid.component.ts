@@ -29,7 +29,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   @Input() contentType: string = 'suche'; // synopse OR konvolut OR suche
   @Input() viewMode: string = 'grid';
   @Input() showText: boolean = true;
-  @Input() columns: string = '43%';
+  @Input() columns: string = '45%';
   @Input() rahmen: boolean = true;
   @Input() poemsInGrid: Array<any>;
   @Input() resetPoems: string;
@@ -152,14 +152,14 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   private static filterSingleTextbox(x: CachePoem): boolean {
-    return !x.isVisible;
+    return x.isVisible === true || x.isVisible === undefined;
   }
 
   constructor(private cdr: ChangeDetectorRef, private dateFormatService: DateFormatService, private router: Router) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchTermfromKonvolut);
+    console.log(this.poemsInGrid);
     if (this.searchTermfromKonvolut) {
       if (this.searchTermfromKonvolut[ 0 ] && this.searchTermfromKonvolut[ 0 ].length > 2) {
         this.searchInKonvolut = true;
@@ -270,7 +270,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
 
   resetSinglePoemHiddenState() {
     for (let i in this.poemsInGrid) {
-      this.poemsInGrid[i].isVisible = false;
+      this.poemsInGrid[ i ].isVisible = true;
     }
   }
 
@@ -306,7 +306,6 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   formatDate(date: string) {
-    //console.log(date);
     return this.dateFormatService.germanLongDate(date);
   }
 
@@ -317,7 +316,7 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hideTextbox(iri: string) {
-    this.updatePoemByIriInArray(iri, x => x.isVisible = true);
+    this.updatePoemByIriInArray(iri, x => x.isVisible = false);
   }
 
   updatePoemByIriInArray(iri: string, updateFun: (x: any) => void) {
@@ -333,11 +332,9 @@ export class TextgridComponent implements OnChanges, AfterViewChecked {
   }
 
   hidePoem(poem: any) {
-    if(poem && poem.isVisible !== undefined) {
-      return !poem.isVisible;
-    } else {
-      return false;
-    }
+    if(poem) {
+      return poem && poem.isVisible === false;
+    } else return true;
   }
 
 }

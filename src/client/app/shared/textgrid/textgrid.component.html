@@ -29,7 +29,7 @@
              [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p.isFinalVersion) }">
           </a>
           <a class="item" *ngIf="contentType == 'synopse' || contentType == 'suche'"
-             [routerLink]="'/' + p.convoluteTitle + produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
+             [routerLink]="'/' + p.searchOfficialName + produceFassungsLink(p.poemTitle,p.poemIRI)" routerLinkActive="active"
              [innerHTML]="highlight(p.poemTitle,searchTermArray)" [ngStyle]="{ 'color': produceTitleCss(p.isFinalVersion)}">
           </a>
         </md-card-title>
@@ -58,7 +58,7 @@
 
 
           <div class="catItemTagsBlock" *ngIf="contentType == 'suche'">
-            <span>In: {{ p.convoluteTitle }} </span><br>
+            <span>In: {{ p.searchOfficialName }} </span><br>
             <span [ngClass]="{'invisible': p.synopsisTitle == ' '}">
               Synopse: <a [routerLink]="'/synopsen/' + p.synopsisIRI.split('/')[4]" routerLinkActive="active">{{ p.synopsisTitle }}</a><br>
             </span>

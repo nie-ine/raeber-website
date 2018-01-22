@@ -3,11 +3,13 @@
   <ng-container *ngIf="(convoluteType === undefined && poemType === undefined) || !isDiaryEntry()">
     <md-button-toggle-group style="box-shadow:none;" (change)="isAlphabeticallySorted = !isAlphabeticallySorted">
       <md-button-toggle value="alpha" checked="true">
-        <md-icon>sort_by_alpha</md-icon>
+        <md-icon title="Alphabetisch sortieren">sort_by_alpha</md-icon>
       </md-button-toggle>
       <md-button-toggle value="chrono">
-        <md-icon *ngIf="isManuscript() || isPostcard() || isInSerialPublication() || isLetter()">access_time</md-icon>
-        <md-icon *ngIf="isNote() || isTyposcript() || isInMonograph()">swap_vert</md-icon>
+        <md-icon *ngIf="isManuscript() || isPostcard() || isInSerialPublication() || isLetter()"
+                 title="Chronologisch sortieren">access_time
+        </md-icon>
+        <md-icon *ngIf="isNote() || isTyposcript() || isInMonograph()" title="Konvolutreihenfolge">swap_vert</md-icon>
       </md-button-toggle>
     </md-button-toggle-group>
   </ng-container>

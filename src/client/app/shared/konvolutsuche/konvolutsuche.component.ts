@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 export class KonvolutsucheComponent {
   @Input() konvolutTitle: string;
   @Output() suche = new EventEmitter<FormGroup>();
+  @Output() reset = new EventEmitter<FormGroup>();
   @Input() searchTermArray: Array<string>;
   searchForm: FormGroup;
   isConvoluteView: boolean = true;
+  fg: any;
 
   constructor(router: Router) {
     this.searchForm = new FormGroup({
@@ -40,6 +42,16 @@ export class KonvolutsucheComponent {
   defineInputValue() {
     if (this.searchTermArray) return this.searchTermArray[ 0 ];
     else return null;
+  }
+
+  resetSearch(fg: any) {
+    fg.searchTerm = '';
+    this.suche.emit(fg);
+  }
+
+  checkSearchTermArray() {
+    if (this.searchTermArray && this.searchTermArray[ 0 ].length > 2) return true;
+    else return false;
   }
 
 }

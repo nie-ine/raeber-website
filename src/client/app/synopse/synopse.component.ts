@@ -68,13 +68,13 @@ export class SynopseComponent implements OnInit, AfterViewChecked {
   setColumns(cols: number) {
     switch (cols) {
       case 1:
-        this.columns = '93%';
+        this.columns = '100%';
         break;
       case 2:
-        this.columns = '43%';
+        this.columns = '45%';
         break;
       case 3:
-        this.columns = '26%';
+        this.columns = '29%';
         break;
     }
   }

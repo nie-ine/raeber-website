@@ -52,6 +52,7 @@ export class KonvolutComponent implements OnInit {
 
 
   private _esearch = new ExtendedSearch();
+  private searching: boolean = true;
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging, public dialog: MdDialog) {
     this.viewMode = 'grid';
@@ -134,13 +135,13 @@ export class KonvolutComponent implements OnInit {
   setColumns(cols: number) {
     switch (cols) {
       case 1:
-        this.columns = '93%';
+        this.columns = '100%';
         break;
       case 2:
-        this.columns = '43%';
+        this.columns = '45%';
         break;
       case 3:
-        this.columns = '26%';
+        this.columns = '29%';
         break;
     }
   }
@@ -151,7 +152,7 @@ export class KonvolutComponent implements OnInit {
 
   updatePoemInformation(poemInformation: Array<CachePoem>) {
     //console.log(poemInformation);
-    this.poems = new Array<CachePoem>();
+    this.poems = [];
     for (let i = 0; i < poemInformation.length; i++) {
       let poem = new CachePoem();
       poem.poemTitle = poemInformation[ i ].poemTitle;
@@ -205,4 +206,7 @@ export class KonvolutComponent implements OnInit {
       });
   }
 
+  searchingStatus(event: boolean) {
+    this.searching = event;
+  }
 }

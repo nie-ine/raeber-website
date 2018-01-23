@@ -8,7 +8,7 @@ import { MdDialog } from '@angular/material';
 import { SuchmaskeHilfeComponent } from './suchmaske-hilfe/suchmaske-hilfe.component';
 import { CachePoem } from '../shared/textgrid/cache-poem';
 import { createsuchmaskeKonvolutIRIMapping } from './suchServices/suchModel.service';
-import { createKnoraV1APICall } from './suchServices/createKnoraV1APICall';
+import { createKnoraV1APICall } from './suchServices/createKnoraV1APICall.service';
 
 @Component({
   moduleId: module.id,

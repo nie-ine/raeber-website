@@ -22,7 +22,6 @@ export class ImageFrameComponent implements OnInit {
   @Output() pictureIncreased = new EventEmitter();
 
   pictureIdBase: string;
-  orignameWithoutPath: string;
 
   zoomfactor = 5;
   heightAndWidth = 100;
@@ -31,10 +30,11 @@ export class ImageFrameComponent implements OnInit {
   overflow = 'auto';
   resize = 'both';
   px = 'px';
+  counter = 0;
 
   ngOnInit() {
     this.pictureIdBase = this.pictureData.path.split(this.pictureData.nx + ',' + this.pictureData.ny)[ 0 ];
-    this.width = this.initWidth;
+    this.width = this.initWidth + this.counter % 2;
     this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
   }
 
@@ -46,11 +46,15 @@ export class ImageFrameComponent implements OnInit {
 
   reduceFrameSize() {
     this.width -= 200;
+    if (this.width < 1) {
+      this.width += 200;
+    }
     this.height = Math.ceil(this.width * this.pictureData.ny / this.pictureData.nx);
     this.pictureReduced.emit(null);
   }
 
   resetSize() {
+    this.counter++;
     this.ngOnInit();
   }
 

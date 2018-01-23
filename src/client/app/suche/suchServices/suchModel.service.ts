@@ -51,7 +51,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Manuskripte 1979 - 1983',
+      'officialName': 'Manuskripte 1979-83',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'manuskriptForm'
     },
@@ -81,7 +81,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Typoskripte 1979 - spez',
+      'officialName': 'Typoskripte 1979-spez',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'typoskriptForm'
     },
@@ -101,7 +101,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Gesicht im Mittag',
+      'officialName': 'GESICHT IM MITTAG 1950',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -111,7 +111,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Die verwandelten Schiffe',
+      'officialName': 'Die verwandelten Schiffe 1957',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -121,7 +121,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Gedichte',
+      'officialName': 'GEDICHTE 1960',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -131,7 +131,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Flussufer',
+      'officialName': 'FLUSSUFER 1963',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -141,7 +141,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Reduktionen',
+      'officialName': 'Reduktionen 1981',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -151,7 +151,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte',
+      'officialName': 'Hochdeutsche Gedichte 1985 ',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },
@@ -161,7 +161,7 @@ export function createsuchmaskeKonvolutIRIMapping() {
       'enabled': true,
       'IRI': 'undefined',
       'memberPoems': new Set(),
-      'officialName': 'Abgewandt Zugewandt 1985 – Alemannische Gedichte',
+      'officialName': 'Alemannische Gedichte 1985',
       'index': createConvoluteIndex(),
       'suchmaskeFormName': 'druckForm'
     },

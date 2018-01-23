@@ -11,8 +11,17 @@
                   <md-icon (click)="showHelp()" style="cursor: pointer;">help</md-icon>
                 </sup></h1>
 
-<rae-suche-werkzeugleiste> </rae-suche-werkzeugleiste>
-                Belege: {{ numberOfSearchResults }} {{ warning }}
+                <rae-suche-werkzeugleiste> </rae-suche-werkzeugleiste>
+                Belege: {{ numberOfSearchResults }} {{ warning }} <span *ngIf="numberOfSearchResults > 50">
+                - Ergebnisseite:
+                  <span *ngFor="let entry of menuArray; let i = index" (click)="choosePage(i)"
+                        [ngClass]="{'chosenPage': checkIfChosen(i), 'pointer': true }">
+
+                    {{ entry }}
+
+                    </span>
+
+              </span>
 
 
                 <br>

@@ -377,19 +377,21 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                       if( this.checkIfHasStrophe( poem.value[ '9' ] ) ) {
                         if( this.checkIfIsInDialect(poem.value[ '14' ] ) ) {
                           if( this.checkIfPartOfCycle( poem.value[ '15' ] ) ) {
-                            poem.reservedPointer = this.helpArray.length;
-                            this.helpArray[ poem.reservedPointer ] = new CachePoem();
-                            this.helpArray[ poem.reservedPointer ].poemTitle = poem.value['8'];
-                            this.helpArray[ poem.reservedPointer ].poemCreationDate = poem.value['5'];
-                            this.helpArray[ poem.reservedPointer ].poemText = poem.value['7'];
-                            this.helpArray[ poem.reservedPointer ].poemIRI = poem.value['6'];
-                            this.helpArray[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
-                            this.helpArray[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
-                            this.helpArray[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
-                            this.helpArray[ poem.reservedPointer ].searchOfficialName = poem.value['3'];
-                            this.numberOfSearchResults += 1;
-                            this.sortResultArray();
-                            this.renderPage();
+                            if( this.checkIfSearchTermIsInHtml( poem.value['7'] ) ) {
+                              poem.reservedPointer = this.helpArray.length;
+                              this.helpArray[ poem.reservedPointer ] = new CachePoem();
+                              this.helpArray[ poem.reservedPointer ].poemTitle = poem.value['8'];
+                              this.helpArray[ poem.reservedPointer ].poemCreationDate = poem.value['5'];
+                              this.helpArray[ poem.reservedPointer ].poemText = poem.value['7'];
+                              this.helpArray[ poem.reservedPointer ].poemIRI = poem.value['6'];
+                              this.helpArray[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
+                              this.helpArray[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
+                              this.helpArray[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
+                              this.helpArray[ poem.reservedPointer ].searchOfficialName = poem.value['3'];
+                              this.numberOfSearchResults += 1;
+                              this.sortResultArray();
+                              this.renderPage();
+                            }
                           }
                         }
                       }
@@ -399,6 +401,15 @@ export class SucheComponent implements OnInit, AfterViewChecked {
               }
           }
     }
+
+  checkIfSearchTermIsInHtml( poemText: string ) {
+    for( let searchTerm of this.searchTermArray ) {
+      if(poemText
+          .replace(/<(?:.|\n)*?>/gm, '')
+          .search(searchTerm) !== -1
+      ) return true;
+    } return false;
+  }
 
   checkIfKonvolutIsChosen(poem: any) {
     if( this.setOfAllowedConvolutes.has(poem.value['3'] ) ) return true;

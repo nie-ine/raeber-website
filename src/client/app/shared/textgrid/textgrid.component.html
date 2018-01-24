@@ -38,7 +38,9 @@
           *ngIf="p"
           [ngClass]="{'rae-poem-card-content-grid': viewMode == 'grid', 'rae-poem-card-content-cols': viewMode == 'cols', 'hidden': !showText}"
           [ngStyle]="{'height': rahmen ? 'calc(10em - '+poemTitle.offsetHeight+'px + '+gridTextHeight+'em)' :  'calc(15px + '+poemText.offsetHeight+'px)', 'overflow-y': rahmen ? 'auto' : 'auto'}">
-          <div class="rae-poem" [innerHTML]="highlight(p.poemText,searchTermArray)" #poemText>
+          <div class="rae-poem"
+               [innerHTML]="highlight(p.poemText,searchTermArray)"
+               #poemText>
           </div>
         </md-card-content>
 

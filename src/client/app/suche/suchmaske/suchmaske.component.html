@@ -840,14 +840,13 @@
         <ngb-panel title="Zeitraum">
           <ng-template ngbPanelContent>
             <div formGroupName="zeitraumForm">
-              von
-              <md-input-container style="width: 70px; align: center">
-                <input mdInput formControlName="zeitraumVon" class="ip-epoche"  />
-              </md-input-container>
-              bis
-              <md-input-container style="width: 70px; align: center">
-                <input mdInput formControlName="zeitraumBis" class="ip-epoche"/>
-              </md-input-container>
+              <md-select formControlName="zeitraumVon" placeholder="Von" [(ngModel)]="chosenStartYear">
+                <md-option [value]="year" *ngFor="let year of yearPickerArray; let i = index">{{ year }}</md-option>
+              </md-select>
+              <md-select formControlName="zeitraumBis" placeholder="Bis" [(ngModel)]="chosenEndYear">
+                <md-option [value]="year" *ngFor="let year of yearPickerArray; let i = index">{{ year }}</md-option>
+              </md-select>
+              <span *ngIf="chosenStartYear > chosenEndYear"style="color: darkred;"> <br>Das Enddatum liegt vor dem Startdatum!</span>
             </div>
           </ng-template>
         </ngb-panel>

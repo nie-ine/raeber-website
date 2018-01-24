@@ -39,6 +39,12 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   textsHaveAlignedFrames: boolean = false;
   showTexts: boolean = true;
   navIsFixed = false;
+  yearPickerArray: Array<any>;
+  endYearPickerArray: Array<any>;
+  firstYear = 1948;
+  lastYear = 1992;
+  chosenStartYear: number;
+  chosenEndYear: number;
 
   /*
    Options for extension of fulltext search
@@ -117,6 +123,10 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    this.yearPickerArray = [];
+    for(let i = 0; i < this.lastYear - this.firstYear; i++) {
+      this.yearPickerArray[ i ] = this.firstYear + i;
+    }
     //this.onSearchParamsChange();
   }
 
@@ -267,4 +277,5 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   openAndCloseSidenav() {
     this.sidenavOpened = !this.sidenavOpened;
   }
+
 }

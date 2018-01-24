@@ -27,7 +27,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   @Output() startSearch: EventEmitter<any> = new EventEmitter<any>();
   // Form model which contains all search parameters
   suchmenuForm: FormGroup;
-  @Input() sidenavOpened: boolean;
   @Input() searchTermArray: Array<string>;
   @Input() poemsInGrid: string;
   @Input() startSearchImmediately: boolean;
@@ -45,6 +44,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   lastYear = 1992;
   chosenStartYear: number;
   chosenEndYear: number;
+  sidenavOpened = true;
 
   /*
    Options for extension of fulltext search
@@ -114,7 +114,6 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   ngOnChanges() {
     //console.log(this.loadingIndicator);
     this.loadingIndicator = this.loadingIndicatorInput;
-    if (this.startSearchImmediately) this.sidenavOpened = false;
     //console.log('Data arrived back in Suchmaske: ');
     //console.log(this.poemsInGrid);
     //console.log(this.searchTermArray);
@@ -123,6 +122,7 @@ export class SuchmaskeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if( this.startSearchImmediately ) this.sidenavOpened = false;
     this.yearPickerArray = [];
     for(let i = 0; i < this.lastYear - this.firstYear; i++) {
       this.yearPickerArray[ i ] = this.firstYear + i;

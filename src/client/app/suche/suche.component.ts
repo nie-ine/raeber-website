@@ -96,7 +96,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   handleSearchEvent(arg: AbstractControl) {
-    if(this.startSearchImmediately) this.startSearchImmediately = false;
+    this.startSearchImmediately = false;
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
@@ -117,6 +117,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     //   this.getKonvolutIRI(konvolut.konvolut, konvolut.index);
     // }
     if (this.route.snapshot.queryParams[ 'wort' ]) {
+      this.startSearchImmediately = true;
       for ( let i = 0; i < this.suchmaskeKonvolutIRIMapping.length; i ++ ) {
         this.suchmaskeKonvolutIRIMapping[ i ].enabled =
           this.updateFilterParams(
@@ -124,13 +125,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             true
           );
       }
-      this.startSearchImmediately = true;
       this.searchTermArray = [ ];
       this.searchTermArray[ this.searchTermArray.length ] = this.route.snapshot.queryParams[ 'wort' ];
-      //setTimeout(() => {
-        //console.log('Wait for Konvolutes to load');
         this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
-      //}, 3000);
 
     }
     if ( this.allSearchResults === undefined ) {
@@ -141,6 +138,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   executeFinalQueries() {
+    this.startSearchImmediately = false;
     this.checkProgress();
     this.menuArray = [];
     this.noMoreChange = false;

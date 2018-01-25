@@ -1,7 +1,14 @@
-<input  #searchfield [placeholder]="placeholder" (focus)="placeholder=''"
-        (keyup.enter)="sendRequest(searchfield.value)" style="width: 120px;">
-<button md-icon-button class="search-button"
-        (click)="sendRequest(searchfield.value)" style="padding-top: 7px;">
+<input  #searchfield
+        [placeholder]="placeholder"
+        (focus)="placeholder=''"
+        (keyup.enter)="sendRequest(searchfield.value)"
+        style="width: 120px;"
+        (keyup.enter)="searchfield.value = ''">
+<button md-icon-button
+        class="search-button"
+        (click)="sendRequest(searchfield.value)"
+        (click)="searchfield.value = ''"
+        style="padding-top: 7px;">
   <md-icon>search</md-icon>
 </button>
 

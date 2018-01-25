@@ -96,7 +96,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   handleSearchEvent(arg: AbstractControl) {
-    if(this.startSearchImmediately) this.startSearchImmediately = false;
+    this.startSearchImmediately = false;
     this.arg = arg;
     this.updateSuchmaskeKonvolutIRIMapping(arg);
     //Send String to Parser:
@@ -117,6 +117,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
     //   this.getKonvolutIRI(konvolut.konvolut, konvolut.index);
     // }
     if (this.route.snapshot.queryParams[ 'wort' ]) {
+      this.startSearchImmediately = true;
       for ( let i = 0; i < this.suchmaskeKonvolutIRIMapping.length; i ++ ) {
         this.suchmaskeKonvolutIRIMapping[ i ].enabled =
           this.updateFilterParams(
@@ -124,13 +125,9 @@ export class SucheComponent implements OnInit, AfterViewChecked {
             true
           );
       }
-      this.startSearchImmediately = true;
       this.searchTermArray = [ ];
       this.searchTermArray[ this.searchTermArray.length ] = this.route.snapshot.queryParams[ 'wort' ];
-      //setTimeout(() => {
-        //console.log('Wait for Konvolutes to load');
         this.inputSearchStringToBeParsed = this.route.snapshot.queryParams[ 'wort' ];
-      //}, 3000);
 
     }
     if ( this.allSearchResults === undefined ) {
@@ -141,6 +138,7 @@ export class SucheComponent implements OnInit, AfterViewChecked {
   }
 
   executeFinalQueries() {
+    this.startSearchImmediately = false;
     this.checkProgress();
     this.menuArray = [];
     this.noMoreChange = false;
@@ -377,19 +375,21 @@ export class SucheComponent implements OnInit, AfterViewChecked {
                       if( this.checkIfHasStrophe( poem.value[ '9' ] ) ) {
                         if( this.checkIfIsInDialect(poem.value[ '14' ] ) ) {
                           if( this.checkIfPartOfCycle( poem.value[ '15' ] ) ) {
-                            poem.reservedPointer = this.helpArray.length;
-                            this.helpArray[ poem.reservedPointer ] = new CachePoem();
-                            this.helpArray[ poem.reservedPointer ].poemTitle = poem.value['8'];
-                            this.helpArray[ poem.reservedPointer ].poemCreationDate = poem.value['5'];
-                            this.helpArray[ poem.reservedPointer ].poemText = poem.value['7'];
-                            this.helpArray[ poem.reservedPointer ].poemIRI = poem.value['6'];
-                            this.helpArray[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
-                            this.helpArray[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
-                            this.helpArray[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
-                            this.helpArray[ poem.reservedPointer ].searchOfficialName = poem.value['3'];
-                            this.numberOfSearchResults += 1;
-                            this.sortResultArray();
-                            this.renderPage();
+                            if( this.checkIfSearchTermIsInHtml( poem.value['7'] ) ) {
+                              poem.reservedPointer = this.helpArray.length;
+                              this.helpArray[ poem.reservedPointer ] = new CachePoem();
+                              this.helpArray[ poem.reservedPointer ].poemTitle = poem.value['8'];
+                              this.helpArray[ poem.reservedPointer ].poemCreationDate = poem.value['5'];
+                              this.helpArray[ poem.reservedPointer ].poemText = poem.value['7'];
+                              this.helpArray[ poem.reservedPointer ].poemIRI = poem.value['6'];
+                              this.helpArray[ poem.reservedPointer ].synopsisIRI = poem.value['11'];
+                              this.helpArray[ poem.reservedPointer ].synopsisTitle = poem.value['12'];
+                              this.helpArray[ poem.reservedPointer ].isFinalVersion = poem.value['13'];
+                              this.helpArray[ poem.reservedPointer ].searchOfficialName = poem.value['3'];
+                              this.numberOfSearchResults += 1;
+                              this.sortResultArray();
+                              this.renderPage();
+                            }
                           }
                         }
                       }
@@ -399,6 +399,15 @@ export class SucheComponent implements OnInit, AfterViewChecked {
               }
           }
     }
+
+  checkIfSearchTermIsInHtml( poemText: string ) {
+    for( let searchTerm of this.searchTermArray ) {
+      if(poemText
+          .replace(/<(?:.|\n)*?>/gm, '')
+          .search(searchTerm) !== -1
+      ) return true;
+    } return false;
+  }
 
   checkIfKonvolutIsChosen(poem: any) {
     if( this.setOfAllowedConvolutes.has(poem.value['3'] ) ) return true;

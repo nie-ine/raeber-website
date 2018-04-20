@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { InitKommentarComponent } from './initkommentar.component';
 import { Router } from '@angular/router';
+import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class HomepageWithInitTextComponent {
 
 
-  constructor(public dialog: MdDialog, private router: Router) {
+  constructor(public dialog: MdDialog, private router: Router, private testversionGuard: TestversionGuard) {
     this.openDialog();
   }
 
@@ -22,8 +23,9 @@ export class HomepageWithInitTextComponent {
       height: '600px',
       disableClose: true
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.router.navigateByUrl('/start');
+    dialogRef.afterClosed().subscribe(() => {
+      this.testversionGuard.acceptTestversionInfo();
+      this.router.navigateByUrl(this.testversionGuard.redirectUrl);
     });
   }
 }

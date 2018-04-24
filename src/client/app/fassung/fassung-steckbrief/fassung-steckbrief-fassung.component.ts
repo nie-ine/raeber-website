@@ -4,7 +4,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { KunoRaeberGUI, Text } from '../../shared/utilities/iris';
-import { equals, exists, ExtendedSearch, KnoraResource } from '../../shared/utilities/knora-api-params';
+import { equals, exists, ExtendedSearch, KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

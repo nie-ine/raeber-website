@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-api-params';
+import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-request';
 import { KunoRaeberGUI } from '../shared/utilities/iris';
 
 @Component({

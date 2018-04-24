@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { PropertyListsQuery } from '../../shared/utilities/knora-api-params';
+import { PropertyListsQuery } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

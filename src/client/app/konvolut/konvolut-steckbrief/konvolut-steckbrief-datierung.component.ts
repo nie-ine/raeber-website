@@ -5,7 +5,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { Event } from '../../shared/utilities/iris';
-import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 
 @Component({

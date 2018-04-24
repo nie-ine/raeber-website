@@ -5,7 +5,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { Text } from '../../utilities/iris';
-import { KnoraResource } from '../../utilities/knora-api-params';
+import { KnoraResource } from '../../utilities/knora-request';
 
 @Component({
   moduleId: module.id,

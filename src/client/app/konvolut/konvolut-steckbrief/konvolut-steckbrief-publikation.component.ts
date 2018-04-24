@@ -3,7 +3,7 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { equals, ExtendedSearch, KnoraResource } from '../../shared/utilities/knora-api-params';
+import { equals, ExtendedSearch, KnoraResource } from '../../shared/utilities/knora-request';
 import { ActivatedRoute } from '@angular/router';
 import { Text, Work } from '../../shared/utilities/iris';
 

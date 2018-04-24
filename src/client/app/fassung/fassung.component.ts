@@ -4,7 +4,7 @@ import { ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router } from 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { equals, exists, ExtendedSearch, KnoraResource } from '../shared/utilities/knora-api-params';
+import { equals, exists, ExtendedSearch, KnoraResource } from '../shared/utilities/knora-request';
 import { DateFormatService } from '../shared/utilities/date-format.service';
 import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text } from '../shared/utilities/iris';
 

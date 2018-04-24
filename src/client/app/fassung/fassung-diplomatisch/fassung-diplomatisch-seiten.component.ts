@@ -4,7 +4,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { Work } from '../../shared/utilities/iris';
-import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { equals, exists, ExtendedSearch, notEquals } from '../../shared/utilities/knora-api-params';
+import { equals, exists, ExtendedSearch, notEquals } from '../../shared/utilities/knora-request';
 import { AlphabeticalSortingService } from '../../shared/utilities/alphabetical-sorting.service';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { KunoRaeberGUI } from '../../shared/utilities/iris';

@@ -4,7 +4,7 @@
 
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-api-params';
+import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-request';
 import { KnoraBase, KunoRaeberGUI } from '../shared/utilities/iris';
 
 

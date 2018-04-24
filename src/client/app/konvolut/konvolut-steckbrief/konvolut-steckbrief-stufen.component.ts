@@ -3,7 +3,7 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 import { Text } from '../../shared/utilities/iris';
 
 

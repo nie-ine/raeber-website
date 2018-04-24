@@ -1,4 +1,4 @@
-import { ExtendedSearch, like, notEquals } from '../../shared/utilities/knora-api-params';
+import { ExtendedSearch, like, notEquals } from '../../shared/utilities/knora-request';
 import { KunoRaeberGUI } from '../../shared/utilities/iris';
 
 export function createKnoraV1APICall(searchTerm: string, propertyToSearchIn: string) {

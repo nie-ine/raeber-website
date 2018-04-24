@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
-import { KnoraQuery } from '../utilities/knora-api-params';
+import { KnoraQuery } from '../utilities/knora-request';
 
 @Injectable()
 export class DynamicPaging {

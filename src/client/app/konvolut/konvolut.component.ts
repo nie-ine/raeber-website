@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
-import { ExtendedSearch } from '../shared/utilities/knora-api-params';
+import { ExtendedSearch } from '../shared/utilities/knora-request';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { CachePoem } from '../textgrid/cache-poem';
-import { equals, exists, ExtendedSearch, notEquals } from '../utilities/knora-api-params';
+import { equals, exists, ExtendedSearch, notEquals } from '../utilities/knora-request';
 import { KnoraBase, KunoRaeberGUI } from '../utilities/iris';
 
 @Component({

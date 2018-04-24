@@ -4,7 +4,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { KnoraBase, Text } from '../../shared/utilities/iris';
-import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

@@ -7,7 +7,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CachePoem } from '../shared/textgrid/cache-poem';
 import { Text, Work } from '../shared/utilities/iris';
-import { KnoraResource } from '../shared/utilities/knora-api-params';
+import { KnoraResource } from '../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

@@ -5,7 +5,7 @@
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { Text } from '../utilities/iris';
-import { KnoraResource } from '../utilities/knora-api-params';
+import { KnoraResource } from '../utilities/knora-request';
 
 declare var $: any;
 

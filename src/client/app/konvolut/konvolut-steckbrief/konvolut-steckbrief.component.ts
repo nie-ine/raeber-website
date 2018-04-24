@@ -8,7 +8,7 @@ import { DateFormatService } from '../../shared/utilities/date-format.service';
 import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
 import { KOMMENTARINHALTE } from '../konvolut-kommentar/konvolut-kommentar-inhalte';
 import { Human, KunoRaeber, Text, Work } from '../../shared/utilities/iris';
-import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { KunoRaeber } from '../utilities/iris';
-import { GraphDataQuery } from '../utilities/knora-api-params';
+import { GraphDataQuery } from '../utilities/knora-request';
 
 @Component({
   moduleId: module.id,

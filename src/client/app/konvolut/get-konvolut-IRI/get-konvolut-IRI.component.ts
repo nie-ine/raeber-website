@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
-import { equals, ExtendedSearch, like } from '../../shared/utilities/knora-api-params';
+import { equals, ExtendedSearch, like } from '../../shared/utilities/knora-request';
 import { KunoRaeber, Text } from '../../shared/utilities/iris';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { equals, ExtendedSearch } from '../../shared/utilities/knora-api-params';
+import { Text } from '../../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -17,23 +18,20 @@ export class GetKonvolutIRIsComponent implements OnChanges {
 
   http: Http;
 
-  private sub: any;
   constructor(http: Http) {
     this.http = http;
   }
 
   ngOnChanges() {
     if (this.konvolutTitelText) {
-      this.http.get(globalSearchVariableService.API_URL +
-        '/search/?searchtype=extended' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=' +
-        this.konvolutTitelText)
+      this.http.get(
+        new ExtendedSearch()
+          .property(Text.hasConvoluteTitle, equals, this.konvolutTitelText)
+          .toString())
         .map(
           (lambda: Response) => {
             const data = lambda.json();
-             if(data.subjects[ 0 ]!== undefined) {
+            if (data.subjects[ 0 ] !== undefined) {
               this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
               this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);
             }

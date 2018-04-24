@@ -3,13 +3,19 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Text, Work } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-api-params';
 
 
 @Component({
   moduleId: module.id,
   selector: 'rae-fassung-steckbrief-konvolut',
-  templateUrl: 'fassung-steckbrief-konvolut.component.html'
+  template: `
+    <span *ngFor="let pub of publications; let i = index">
+      {{ pub['title'] }}
+      <span *ngIf="i+1 < publications.length">,</span>
+    </span>
+  `
 })
 export class FassungSteckbriefKonvolutComponent implements OnChanges {
 
@@ -26,16 +32,15 @@ export class FassungSteckbriefKonvolutComponent implements OnChanges {
       this.publications.push({ 'title': '', 'type': '', 'alias': '' });
       try {
 
-        this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.konvolutIRI[ i ]))
+        this.http.get(new KnoraResource(this.konvolutIRI[ i ]).toString())
           .map(response => response.json()).subscribe(res => {
           this.publications[ i ][ 'title' ] =
-            res.props[ 'http://www.knora.org/ontology/' +
-            (res.resinfo.restype_label === 'poly-author publication' ? 'work#hasPublicationTitle' : 'text#hasConvoluteTitle') ]
+            res.props[ (res.resinfo.restype_label === 'poly-author publication' ? Work.hasPublicationTitle : Text.hasConvoluteTitle) ]
               .values[ 0 ].utf8str;
           this.publications[ i ][ 'alias' ] =
             res.resinfo.restype_label === 'poly-author publication' ?
               null :
-              res.props[ 'http://www.knora.org/ontology/text#hasAlias' ].values[ 0 ].utf8str;
+              res.props[ Text.hasAlias ].values[ 0 ].utf8str;
           this.publications[ i ][ 'type' ] = res.resinfo.restype_label;
         });
       } catch (TypeError) {

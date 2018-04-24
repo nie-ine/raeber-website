@@ -1,143 +1,159 @@
 import { Config } from '../config/env.config';
+import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text, Work } from './iris';
 
-/**
- * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/11/17.
- */
+type OntologyProps
+  = Human
+  | KunoRaeber
+  | KunoRaeberGUI
+  | KnoraBase
+  | Text
+  | Work;
 
-/**
- * Base abstract class for configuring a request to Knora API
- */
+type Compop = (prop: OntologyProps, val?: string) => string;
+
+export const equals: Compop =
+  (prop: OntologyProps, val: string) => `property_id=${encodeURIComponent(prop)}&compop=EQ&searchval=${encodeURIComponent(val)}`;
+export const exists: Compop =
+  (prop: OntologyProps) => `property_id=${encodeURIComponent(prop)}&compop=EXISTS&searchval=`;
+export const like: Compop =
+  (prop: OntologyProps, val: string) => `property_id=${encodeURIComponent(prop)}&compop=LIKE&searchval=${encodeURIComponent(val)}`;
+export const notEquals: Compop =
+  (prop: OntologyProps, val: string) => `property_id=${encodeURIComponent(prop)}&compop=!EQ&searchval=${encodeURIComponent(val)}`;
+
+
 export abstract class KnoraRequest {
-  protected _host = Config.API + '/search/';
-  protected abstract _searchtype: string;
-  protected abstract _filterByRestype: string;
-  protected abstract _filterByProject: string;
-  protected abstract _showNRows: number;
-  protected abstract _startAt: number;
+  protected abstract _endpoint: string;
 
-  /**
-   * Serialises string
-   */
+  public abstract toString(): string;
+}
+
+export class KnoraResource extends KnoraRequest {
+  protected _endpoint = `${Config.API}/resources/`;
+  private readonly _iri: string;
+
+  constructor(id: string) {
+    super();
+    this._iri = this._endpoint + encodeURIComponent(id);
+  }
+
+  toString(): string {
+    return this._iri;
+  }
+}
+
+export class PropertyListsQuery extends KnoraRequest {
+  protected _endpoint = `${Config.API}/propertylists/`;
+  private _iri: string;
+
+  constructor(id: string) {
+    super();
+    this._iri = this._endpoint + encodeURIComponent(id);
+    return this;
+  }
+
+  toString(): string {
+    return this._iri;
+  }
+}
+
+export class GraphDataQuery extends KnoraRequest {
+  protected _endpoint = `${Config.API}/graphdata/`;
+  private readonly _iri: string;
+  private _depth = '1';
+
+  constructor(id: string) {
+    super();
+    this._iri = this._endpoint + encodeURIComponent(id);
+    return this;
+  }
+
+  depth(level: number) {
+    this._depth = level.toString();
+    return this;
+  }
+
+  toString(): string {
+    return this._iri + '?depth=' + this._depth;
+  }
+}
+
+export abstract class KnoraQuery extends KnoraRequest {
+  protected _endpoint = `${Config.API}/search/`;
+  protected abstract _searchtype: string;
+  protected _filterByRestype: string;
+  protected _filterByProject: string;
+  protected _showNRows: string;
+  protected _startAt: string;
+
   public abstract toString(): string;
 
-  set filterByRestype(v: string) {
-    this._filterByRestype = v;
+  filterByRestype(v: OntologyProps) {
+    this._filterByRestype = encodeURIComponent(v);
+    return this;
   }
 
-  set filterByProject(v: string) {
-    this._filterByProject = v;
+  filterByProject(v: string) {
+    this._filterByProject = encodeURIComponent(v);
+    return this;
   }
 
-  set showNRows(v: number) {
-    this._showNRows = v;
+  showNRows(v: number) {
+    this._showNRows = v.toString();
+    return this;
   }
 
-  set startAt(v: number) {
-    this._startAt = v;
-  }
-
-  set host(v: string) {
-    this._host = v;
-  }
-}
-
-/**
- * Helper class for defining a property triple as requested by Knora API
- */
-export class KnoraProperty {
-
-  private _propertyId: string;
-  private _compop: string;
-  private _searchval: string;
-
-  /**
-   * Serialises property
-   * @returns {string} Formatted string
-   */
-  public toString() {
-    return 'property_id=' + encodeURIComponent(this._propertyId) +
-      '&compop=' + encodeURIComponent(this._compop) +
-      '&searchval=' + encodeURIComponent(this._searchval);
-  }
-
-  constructor(readonly propertyId: string, readonly compop: string, readonly searchval: string) {
-    this._propertyId = propertyId;
-    this._compop = compop;
-    this._searchval = searchval;
+  startAt(v: number) {
+    this._startAt = v.toString();
+    return this;
   }
 
 }
 
-/**
- * Helper class for configuring a fulltext search request to Knora API
- */
-export class FulltextSearch extends KnoraRequest {
-  set searchstring(v: string) {
-    this._searchstring = v;
-  }
+export class FulltextSearch extends KnoraQuery {
 
   protected _searchstring: string = '';
   protected _searchtype = 'fulltext';
-  protected _filterByRestype: string = '';
-  protected _filterByProject: string = '';
-  protected _showNRows: number = 0;
-  protected _startAt: number = 0;
 
-  /**
-   * Serialises request
-   * @returns {string} Formatted string
-   */
+  searchstring(v: string) {
+    this._searchstring = encodeURIComponent(v);
+    return this;
+  }
+
   public toString() {
-    return this._host + this._searchstring +
+    return this._endpoint + this._searchstring +
       '?searchtype=' + this._searchtype +
-      (this._filterByRestype.length > 0 ? '&filter_by_restype=' + encodeURIComponent(this._filterByRestype) : '') +
-      (this._filterByProject.length > 0 ? '&filter_by_project=' + encodeURIComponent(this._filterByProject) : '') +
-      (this._showNRows > 0 ? '&show_nrows=' + encodeURIComponent(this._showNRows.toString()) : '') +
-      (this._startAt > 0 ? '&start_at=' + encodeURIComponent(this._startAt.toString()) : '');
+      (this._filterByRestype ? `&filter_by_restype=${this._filterByRestype}` : '') +
+      (this._filterByProject ? `&filter_by_project=${this._filterByProject}` : '') +
+      (this._showNRows ? `&show_nrows=${this._showNRows}` : '') +
+      (this._startAt ? `&start_at=${this._startAt}` : '');
   }
 }
 
-/**
- * Helper class configuring an extended search request to Knora API.
- */
-export class ExtendedSearch extends KnoraRequest {
-
-  set filterByOwner(v: string) {
-    this._filterByOwner = v;
-  }
-
-  set property(v: KnoraProperty) {
-    this._property.push(v);
-  }
+export class ExtendedSearch extends KnoraQuery {
 
   protected _searchtype = 'extended';
-  protected _filterByRestype: string = '';
-  protected _filterByProject: string = '';
-  protected _filterByOwner: string = '';
-  protected _property: Array<KnoraProperty> = [];
-  protected _showNRows: number = 0;
-  protected _startAt: number = 0;
+  protected _filterByOwner: string;
+  protected _property: string = '';
 
-  /**
-   * Serialises request
-   * @returns {string} Formatted string
-   */
+  filterByOwner(v: string) {
+    this._filterByOwner = v;
+    return this;
+  }
+
+  property(k: OntologyProps, predicate: Compop, v?: string) {
+    this._property += (`&${predicate(k, v)}`);
+    return this;
+  }
+
   public toString() {
-    let propString: string = '';
-    if (this._property.length > 0) {
-      for (let e of this._property) {
-        propString += '&';
-        propString += e.toString();
-      }
-    }
-    return this._host +
+    return this._endpoint +
       '?searchtype=' + this._searchtype +
-      (this._filterByRestype.length > 0 ? '&filter_by_restype=' + encodeURIComponent(this._filterByRestype) : '') +
-      (this._filterByProject.length > 0 ? '&filter_by_project=' + encodeURIComponent(this._filterByProject) : '') +
-      (this._filterByOwner.length > 0 ? '&filter_by_owner=' + encodeURIComponent(this._filterByOwner) : '') +
-      propString +
-      (this._showNRows > 0 ? '&show_nrows=' + encodeURIComponent(this._showNRows.toString()) : '') +
-      (this._startAt > 0 ? '&start_at=' + encodeURIComponent(this._startAt.toString()) : '');
+      (this._filterByRestype ? `&filter_by_restype=${this._filterByRestype}` : '') +
+      (this._filterByProject ? `&filter_by_project=${this._filterByProject}` : '') +
+      (this._filterByOwner ? `&filter_by_owner=${this._filterByOwner}` : '') +
+      this._property +
+      (this._showNRows ? `&show_nrows=${this._showNRows}` : '') +
+      (this._startAt ? `&start_at=${this._startAt}` : '');
   }
 
 }

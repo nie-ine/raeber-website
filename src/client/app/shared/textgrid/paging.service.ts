@@ -1,11 +1,7 @@
-/**
- * Created by Sebastian Schüpbach (sebastian.schuepbach@unibas.ch) on 7/12/17.
- */
-
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
-import { KnoraRequest } from '../utilities/knora-api-params';
+import { KnoraQuery } from '../utilities/knora-api-params';
 
 @Injectable()
 export class DynamicPaging {
@@ -23,14 +19,15 @@ export class DynamicPaging {
     this._size = v;
   }
 
-  loadText(req: KnoraRequest): Observable<Array<any>> {
-    req.showNRows = this._size;
-    req.startAt = this._offset;
+  loadText(req: KnoraQuery): Observable<Array<any>> {
+    req
+      .showNRows(this._size)
+      .startAt(this._offset);
     this._offset = this._offset + this._size;
     return this.getText(req);
   }
 
-  getText(params: KnoraRequest): Observable<Array<any>> {
+  getText(params: KnoraQuery): Observable<Array<any>> {
     return this.http
       .get(params.toString())
       .map(response => response.json().subjects);

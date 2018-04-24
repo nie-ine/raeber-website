@@ -5,8 +5,9 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Config } from '../shared/config/env.config';
 import { CachePoem } from '../shared/textgrid/cache-poem';
+import { Text, Work } from '../shared/utilities/iris';
+import { KnoraResource } from '../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -48,16 +49,13 @@ export class SynopseComponent implements OnInit, AfterViewChecked {
       this.synopseTag = params[ 'synopse' ];
     });
 
-    let searchParamsPrefix = Config.API + '/resources/';
-    let searchParamsWork = searchParamsPrefix + encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIri);
-
     this.route.params
-      .switchMap((params: Params) =>
-        this.http.get(searchParamsWork))
+      .switchMap(() =>
+        this.http.get(new KnoraResource(`http://rdfh.ch/kuno-raeber/${this.workIri}`).toString()))
       .map(response => response.json())
       .subscribe((res: any) => {
-        this.poemsIri = res.props[ 'http://www.knora.org/ontology/work#isExpressedIn' ].values;
-        this.workTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+        this.poemsIri = res.props[ Work.isExpressedIn ].values;
+        this.workTitle = res.props[ Text.hasTitle ].values[ 0 ].utf8str;
       });
   }
 

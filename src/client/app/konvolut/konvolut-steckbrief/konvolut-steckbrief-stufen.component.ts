@@ -3,7 +3,8 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { KnoraResource } from '../../shared/utilities/knora-api-params';
+import { Text } from '../../shared/utilities/iris';
 
 
 @Component({
@@ -35,21 +36,20 @@ export class KonvolutSteckbriefStufenComponent implements OnChanges {
     this.publications = [];
 
     for (let i = 0; i < this.konvolutIRI.length; i++) {
-      this.publications.push({'title': '', 'type': '', 'alias': ''});
+      this.publications.push({ 'title': '', 'type': '', 'alias': '' });
 
       try {
-        this.sub = this.http.get(globalSearchVariableService.API_URL
-          + '/resources/' + encodeURIComponent(this.konvolutIRI[i]))
+        this.sub = this.http.get(new KnoraResource(this.konvolutIRI[ i ]).toString())
           .map(response => response.json()).subscribe(res => {
-            this.publications[i]['title'] = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteTitle' ].values[ 0 ].utf8str;
-            this.publications[i]['alias'] = res.props['http://www.knora.org/ontology/text#hasAlias'].values[0].utf8str;
-            this.publications[i]['type'] = res.resinfo.restype_label;
+            this.publications[ i ][ 'title' ] = res.props[ Text.hasConvoluteTitle ].values[ 0 ].utf8str;
+            this.publications[ i ][ 'alias' ] = res.props[ Text.hasAlias ].values[ 0 ].utf8str;
+            this.publications[ i ][ 'type' ] = res.resinfo.restype_label;
 
           });
       } catch (TypeError) {
-        this.publications[i]['title'] = null;
-        this.publications[i]['alias'] = null;
-        this.publications[i]['type'] = null;
+        this.publications[ i ][ 'title' ] = null;
+        this.publications[ i ][ 'alias' ] = null;
+        this.publications[ i ][ 'type' ] = null;
       }
     }
   }

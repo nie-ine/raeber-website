@@ -4,8 +4,10 @@
 
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
-declare var $ :any;
+import { Text } from '../utilities/iris';
+import { KnoraResource } from '../utilities/knora-api-params';
+
+declare var $: any;
 
 @Component({
   moduleId: module.id,
@@ -62,17 +64,17 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
   }
 
   ngOnChanges() {
-    if(this.textIRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.textIRI))
+    if (this.textIRI) {
+      this.sub = this.http.get(new KnoraResource(this.textIRI).toString())
         .map(response => response.json())
         .subscribe(res => {
-          this.text = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str;
+          this.text = res.props[ Text.hasContent ].values[ 0 ].utf8str;
           this.updateSchichten();
-          if(this.text.match('schicht1')) {
+          if (this.text.match('schicht1')) {
             this.showStufe1 = true;
             this.showStufe1Change.emit(this.showStufe1);
           }
-          if(this.text.match('einfuegung')) {
+          if (this.text.match('einfuegung')) {
             this.showStufe2 = true;
             this.showStufe2Change.emit(this.showStufe2);
           }
@@ -108,32 +110,32 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     // faerbe alles in der Grundfarbe ein ausser Zeilennummern und Markierungen
 
     for (let i = 0; i < this.transkriptionElements.length; i++) {
-      this.transkriptionElements[i].style.color = this.farbeNeutral;
+      this.transkriptionElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.transkriptionElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.transkriptionElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.zeileElements.length; i++) {
-      this.zeileElements[i].style.color = this.farbeZeilennummer;
+      this.zeileElements[ i ].style.color = this.farbeZeilennummer;
     }
 
     for (let i = 0; i < this.markierungElements.length; i++) {
-      this.markierungElements[i].style.color = this.farbeMarkierung;
+      this.markierungElements[ i ].style.color = this.farbeMarkierung;
     }
 
     for (let i = 0; i < this.herausgeberElements.length; i++) {
-      this.herausgeberElements[i].style.color = this.farbeMarkierung;
+      this.herausgeberElements[ i ].style.color = this.farbeMarkierung;
     }
 
     for (let i = 0; i < this.streichung_typoElements.length; i++) {
-      this.streichung_typoElements[i].style.color = this.farbeNeutral;
+      this.streichung_typoElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.streichung_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.streichung_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
   }
@@ -142,22 +144,22 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     // faerbe alles in der Grundfarbe ein ausser die Grundschicht
 
     for (let i = 0; i < this.transkriptionElements.length; i++) {
-      this.transkriptionElements[i].style.color = this.farbeNeutral;
+      this.transkriptionElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.transkriptionElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.transkriptionElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.grundschichtElements.length; i++) {
-      this.grundschichtElements[i].setAttribute('style', 'font-weight:normal');
-      this.grundschichtElements[i].style.color = this.farbeErste;
+      this.grundschichtElements[ i ].setAttribute('style', 'font-weight:normal');
+      this.grundschichtElements[ i ].style.color = this.farbeErste;
 
-      let children = this.grundschichtElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.grundschichtElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].setAttribute('style', 'font-weight:normal');
-        children[j].style.color = this.farbeErste;
+        children[ j ].setAttribute('style', 'font-weight:normal');
+        children[ j ].style.color = this.farbeErste;
       }
     }
   }
@@ -166,65 +168,65 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     // faerbe alle Einfuegungen blau ein
 
     for (let i = 0; i < this.transkriptionElements.length; i++) {
-      this.transkriptionElements[i].style.color = this.farbeNeutral;
+      this.transkriptionElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.transkriptionElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.transkriptionElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.einfuegungElements.length; i++) {
-      this.einfuegungElements[i].style.color = this.farbeEinfuegung;
+      this.einfuegungElements[ i ].style.color = this.farbeEinfuegung;
 
-      let children = this.einfuegungElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegungElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeEinfuegung;
+        children[ j ].style.color = this.farbeEinfuegung;
       }
     }
 
     for (let i = 0; i < this.einfuegung_typoElements.length; i++) {
-      this.einfuegung_typoElements[i].style.color = this.farbeEinfuegung;
+      this.einfuegung_typoElements[ i ].style.color = this.farbeEinfuegung;
 
-      let children = this.einfuegung_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegung_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeEinfuegung;
+        children[ j ].style.color = this.farbeEinfuegung;
       }
     }
 
     for (let i = 0; i < this.einfuegung_gestr_typoElements.length; i++) {
-      this.einfuegung_gestr_typoElements[i].style.color = this.farbeEinfuegung;
+      this.einfuegung_gestr_typoElements[ i ].style.color = this.farbeEinfuegung;
 
-      let children = this.einfuegung_gestr_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegung_gestr_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeEinfuegung;
+        children[ j ].style.color = this.farbeEinfuegung;
       }
     }
 
     for (let i = 0; i < this.streichung_typoElements.length; i++) {
-      this.streichung_typoElements[i].style.color = this.farbeNeutral;
+      this.streichung_typoElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.streichung_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.streichung_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.einfuegung_gestrElements.length; i++) {
-      this.einfuegung_gestrElements[i].style.color = this.farbeEinfuegung;
+      this.einfuegung_gestrElements[ i ].style.color = this.farbeEinfuegung;
 
-      let children = this.einfuegung_gestrElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegung_gestrElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeEinfuegung;
+        children[ j ].style.color = this.farbeEinfuegung;
       }
     }
 
     for (let i = 0; i < this.markierungElements.length; i++) {
-      this.markierungElements[i].style.color = this.farbeMarkierung;
+      this.markierungElements[ i ].style.color = this.farbeMarkierung;
     }
 
     for (let i = 0; i < this.zeileElements.length; i++) {
-      this.zeileElements[i].style.color = this.farbeZeilennummer;
+      this.zeileElements[ i ].style.color = this.farbeZeilennummer;
     }
   }
 
@@ -232,68 +234,68 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     // faerbe alles, das nicht gestrichen wurde, in der Farbe der Enfassung ein
 
     for (let i = 0; i < this.transkriptionElements.length; i++) {
-      this.transkriptionElements[i].style.color = this.farbeLetzte;
+      this.transkriptionElements[ i ].style.color = this.farbeLetzte;
 
-      let children = this.transkriptionElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.transkriptionElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeLetzte;
+        children[ j ].style.color = this.farbeLetzte;
       }
     }
 
     for (let i = 0; i < this.einfuegung_gestrElements.length; i++) {
-      this.einfuegung_gestrElements[i].style.color = this.farbeNeutral;
+      this.einfuegung_gestrElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.einfuegung_gestrElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegung_gestrElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.einfuegung_gestr_typoElements.length; i++) {
-      this.einfuegung_gestr_typoElements[i].style.color = this.farbeNeutral;
+      this.einfuegung_gestr_typoElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.einfuegung_gestr_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.einfuegung_gestr_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.unsicher_gestrElements.length; i++) {
-      this.unsicher_gestrElements[i].style.color = this.farbeNeutral;
+      this.unsicher_gestrElements[ i ].style.color = this.farbeNeutral;
     }
 
     for (let i = 0; i < this.streichungElements.length; i++) {
-      this.streichungElements[i].style.color = this.farbeNeutral;
+      this.streichungElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.streichungElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.streichungElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.streichung_typoElements.length; i++) {
-      this.streichung_typoElements[i].style.color = this.farbeNeutral;
+      this.streichung_typoElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.streichung_typoElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.streichung_typoElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
 
     for (let i = 0; i < this.ueberschriebenElements.length; i++) {
-      this.ueberschriebenElements[i].style.color = this.farbeNeutral;
+      this.ueberschriebenElements[ i ].style.color = this.farbeNeutral;
     }
 
     for (let i = 0; i < this.streichung_doppelElement.length; i++) {
-      this.streichung_doppelElement[i].style.color = this.farbeNeutral;
+      this.streichung_doppelElement[ i ].style.color = this.farbeNeutral;
     }
 
     for (let i = 0; i < this.blocktilgungElements.length; i++) {
-      this.blocktilgungElements[i].style.color = this.farbeNeutral;
+      this.blocktilgungElements[ i ].style.color = this.farbeNeutral;
 
-      let children = this.blocktilgungElements[i].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
+      let children = this.blocktilgungElements[ i ].getElementsByTagName('*') as HTMLCollectionOf<HTMLElement>;
       for (let j = 0; j < children.length; j++) {
-        children[j].style.color = this.farbeNeutral;
+        children[ j ].style.color = this.farbeNeutral;
       }
     }
   }
@@ -303,16 +305,16 @@ export class DimplomatischerTextComponent implements OnInit, DoCheck, OnChanges 
     this.textIsMovableChange.emit(this.textIsMovable);
 
     if (this.textIsMovable) {
-      $('.rae-diplomatic').draggable({disabled: false, cursor: 'move'});
+      $('.rae-diplomatic').draggable({ disabled: false, cursor: 'move' });
     } else {
-      $('.rae-diplomatic').draggable({disabled: true, cursor: 'auto'});
+      $('.rae-diplomatic').draggable({ disabled: true, cursor: 'auto' });
     }
     /*$('.umschrift').toggle(function() {
-        jQuery(".umschrift").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
-      },
-      function() {
-        jQuery(".umschrift").draggable({disabled: true}).css( {cursor:"auto"});
-      });*/
+     jQuery(".umschrift").draggable({disabled:false,cursor:"move"}).css( {cursor:"move"});
+     },
+     function() {
+     jQuery(".umschrift").draggable({disabled: true}).css( {cursor:"auto"});
+     });*/
   }
 
 }

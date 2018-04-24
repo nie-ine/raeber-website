@@ -3,7 +3,8 @@
  */
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { KnoraBase, Text } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -41,12 +42,11 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
         let seqnum: number;
         this.pages.push({'diplIRI': null, 'pageIRI': null, 'pagenumber': null, 'picData': null, 'origName': null});
 
-        this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/'
-          + encodeURIComponent(this.diplomaticIRIs[i]))
+        this.sub = this.http.get(new KnoraResource(this.diplomaticIRIs[i]).toString())
           .map(results => results.json())
           .subscribe(res => {
             try {
-              seqnum = Number(res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ]);
+              seqnum = Number(res.props[ KnoraBase.seqnum ].values[ 0 ]);
               this.showPage[ i ] = true;
             } catch (TypeError) {
               console.log('Cannot get seqnum for this page.');
@@ -55,7 +55,7 @@ export class FassungDiplomatischComponent implements OnChanges, AfterViewInit {
 
             try {
               this.pages[seqnum][ 'pageIRI' ]
-                = res.props[ 'http://www.knora.org/ontology/text#isDiplomaticTranscriptionOfTextOnPage' ].values[ 0 ];
+                = res.props[ Text.isDiplomaticTranscriptionOfTextOnPage ].values[ 0 ];
             } catch (TypeError) {
               console.log('Cannot set IRI of page for this page.');
             }

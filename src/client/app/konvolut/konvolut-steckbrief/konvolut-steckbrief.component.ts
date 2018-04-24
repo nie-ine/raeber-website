@@ -5,9 +5,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { MdDialog } from '@angular/material';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { KonvolutKommentarComponent } from '../konvolut-kommentar/konvolut-kommentar.component';
 import { KOMMENTARINHALTE } from '../konvolut-kommentar/konvolut-kommentar-inhalte';
+import { Human, KunoRaeber, Text, Work } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -49,84 +50,83 @@ export class KonvolutSteckbriefComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.IRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL
-        + '/resources/' + encodeURIComponent(this.IRI))
+      this.sub = this.http.get(new KnoraResource(this.IRI).toString())
         .map(response => response.json()).subscribe(res => {
 
           this.konvoluttyp = res.resinfo.restype_label;
 
           try {
-            this.publicationTitle = res.props[ 'http://www.knora.org/ontology/work#hasPublicationDescription' ].values[ 0 ].utf8str;
+            this.publicationTitle = res.props[ Work.hasPublicationDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.publicationTitle = null;
           }
 
           try {
-            this.publisherDescription = res.props[ 'http://www.knora.org/ontology/work#hasPublisherDescription' ].values[ 0 ].utf8str;
+            this.publisherDescription = res.props[ Work.hasPublisherDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.publisherDescription = null;
           }
 
           try {
-            this.printerDescription = res.props[ 'http://www.knora.org/ontology/work#hasPrinterDescription' ].values[ 0 ].utf8str;
+            this.printerDescription = res.props[ Work.hasPrinterDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.printerDescription = null;
           }
 
           try {
-            this.convoluteDescription = res.props[ 'http://www.knora.org/ontology/text#hasConvoluteDescription' ].values[ 0 ].utf8str;
+            this.convoluteDescription = res.props[ Text.hasConvoluteDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.convoluteDescription = null;
           }
 
           try {
-            this.carrierDescription = res.props[ 'http://www.knora.org/ontology/text#hasCarrierDescription' ].values[ 0 ].utf8str;
+            this.carrierDescription = res.props[ Text.hasCarrierDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.carrierDescription = null;
           }
 
           try {
             this.carrierCollectionDescription
-              = res.props[ 'http://www.knora.org/ontology/text#hasCarrierCollectionDescription' ].values[ 0 ].utf8str;
+              = res.props[ Text.hasCarrierCollectionDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.carrierCollectionDescription = null;
           }
 
           try {
-            this.comment = res.props[ 'http://www.knora.org/ontology/text#hasComment' ].values[ 0 ].utf8str;
+            this.comment = res.props[ Text.hasComment ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.comment = null;
           }
 
           try {
-            this.archiveSignature = res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str;
+            this.archiveSignature = res.props[ Work.hasArchiveSignature ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.archiveSignature = null;
           }
 
           try {
             this.convoluteSizeDescripton =
-              res.props[ 'http://www.knora.org/ontology/text#hasConvoluteSizeDescription' ].values[ 0 ].utf8str;
+              res.props[ Text.hasConvoluteSizeDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.convoluteSizeDescripton = null;
           }
 
           try {
             this.convoluteContentRepresentation =
-              res.props[ 'http://www.knora.org/ontology/text#hasConvoluteContentRepresentation' ].values[ 0 ].utf8str;
+              res.props[ Text.hasConvoluteContentRepresentation ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.convoluteContentRepresentation = null;
           }
 
           try {
             this.convoluteOriginDescription =
-              res.props[ 'http://www.knora.org/ontology/text#hasConvoluteOriginDescription' ].values[ 0 ].utf8str;
+              res.props[ Text.hasConvoluteOriginDescription ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.convoluteOriginDescription = null;
           }
 
           try {
-            this.creatingPeriod = res.props[ 'http://www.knora.org/ontology/human#hasCreatingPeriod' ].values[ 0 ];
+            this.creatingPeriod = res.props[ Human.hasCreatingPeriod ].values[ 0 ];
           } catch (TypeError) {
             this.creatingPeriod = null;
           }
@@ -134,9 +134,9 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           this.containsEarlierStagesOfPublicationIRIs = [];
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values.length; i++) {
+            res.props[ Text.containsEarlierStagesOfPublication ].values.length; i++) {
               this.containsEarlierStagesOfPublicationIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/text#containsEarlierStagesOfPublication' ].values[ i ]);
+                .push(res.props[ Text.containsEarlierStagesOfPublication ].values[ i ]);
             }
           } catch (TypeError) {
             // skip if there is no print convolute
@@ -145,11 +145,11 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           this.laterStagesIRIs = [];
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfManuscriptConvolute' ]
+            res.props[ KunoRaeber.containsEarlierStagesOfManuscriptConvolute ]
               .values.length; i++) {
               this.laterStagesIRIs
                 .push(res
-                  .props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfManuscriptConvolute' ]
+                  .props[ KunoRaeber.containsEarlierStagesOfManuscriptConvolute ]
                   .values[ i ]);
             }
           } catch (TypeError) {
@@ -157,11 +157,11 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           }
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTypescriptConvolute' ]
+            res.props[ KunoRaeber.containsEarlierStagesOfTypescriptConvolute ]
               .values.length; i++) {
               this.laterStagesIRIs
                 .push(res
-                  .props[ 'http://www.knora.org/ontology/kuno-raeber#containsEarlierStagesOfTypescriptConvolute' ]
+                  .props[ KunoRaeber.containsEarlierStagesOfTypescriptConvolute ]
                   .values[ i ]);
             }
           } catch (TypeError) {
@@ -171,9 +171,9 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           this.earlierStagesIRIs = [];
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfNotebook' ].values.length; i++) {
+            res.props[ KunoRaeber.containsLaterStagesOfNotebook ].values.length; i++) {
               this.earlierStagesIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfNotebook' ]
+                .push(res.props[ KunoRaeber.containsLaterStagesOfNotebook ]
                   .values[ i ]);
             }
           } catch (TypeError) {
@@ -181,10 +181,10 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           }
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfManuscriptConvolute' ]
+            res.props[ KunoRaeber.containsLaterStagesOfManuscriptConvolute ]
               .values.length; i++) {
               this.earlierStagesIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfManuscriptConvolute' ]
+                .push(res.props[ KunoRaeber.containsLaterStagesOfManuscriptConvolute ]
                   .values[ i ]);
             }
           } catch (TypeError) {
@@ -192,10 +192,10 @@ export class KonvolutSteckbriefComponent implements OnChanges {
           }
           try {
             for (let i = 0; i <
-            res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTypescriptConvolute' ]
+            res.props[ KunoRaeber.containsLaterStagesOfTypescriptConvolute ]
               .values.length; i++) {
               this.earlierStagesIRIs
-                .push(res.props[ 'http://www.knora.org/ontology/kuno-raeber#containsLaterStagesOfTypescriptConvolute' ]
+                .push(res.props[ KunoRaeber.containsLaterStagesOfTypescriptConvolute ]
                   .values[ i ]);
             }
           } catch (TypeError) {

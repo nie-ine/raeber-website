@@ -11,6 +11,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 // The app module
 import { AppModule } from './app.module';
 
+import 'hammerjs';
+
 if (String('<%= BUILD_TYPE %>') === 'prod') { enableProdMode(); }
 
 // Compile and launch the module with i18n providers

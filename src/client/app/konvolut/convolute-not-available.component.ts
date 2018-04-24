@@ -4,7 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'rae-convolute-not-available',
-  templateUrl: './convolute-not-available.component.html'
+  template: `
+    <div style="text-align:center; margin-top:65px;">
+      <h3>Konvolut <b>{{ convoluteTitle }}</b> ist noch nicht verfügbar</h3>
+    </div>
+  `
 })
 export class ConvoluteNotAvailableComponent {
 

@@ -4,7 +4,8 @@
 
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../../suche/globalSearchVariablesService';
+import { Text } from '../../utilities/iris';
+import { KnoraResource } from '../../utilities/knora-api-params';
 
 @Component({
   moduleId: module.id,
@@ -20,11 +21,11 @@ export class TextgridSynopsenlinkComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.workIRI) {
-      this.http.get(globalSearchVariableService.API_URL + /resources/ + encodeURIComponent(this.workIRI))
+      this.http.get(new KnoraResource(this.workIRI).toString())
         .map(result => result.json())
         .subscribe(res => {
           try {
-            this.synopsenTitel = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
+            this.synopsenTitel = res.props[ Text.hasTitle ].values[ 0 ].utf8str;
           } catch (TypeError) {
             this.synopsenTitel = '';
           }

@@ -6,8 +6,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
-  MdButtonModule, MdButtonToggleModule, MdCardModule, MdDialogModule, MdGridListModule, MdIconModule,
-  MdInputModule, MdProgressSpinnerModule, MdToolbarModule
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdDialogModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdProgressSpinnerModule,
+  MdToolbarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

@@ -13,21 +13,22 @@ import { TextausagabenComponent } from './textausgaben.component';
 import { PdfNotizbuecherComponent } from './pdf-notizbuecher.component';
 import { PdfSynopsenComponent } from './pdf-synopsen.component';
 import { HomepageWithInitTextComponent } from './homepagewithinittext.component';
+import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'werkausgabe', component: WerkausgabeComponent },
-      { path: 'textausgaben', component: TextausagabenComponent},
-      { path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent },
-      { path: 'anleitung', component: AnleitungComponent },
-      { path: 'lebensdaten', component: LebensdatenComponent },
-      { path: 'werkliste-selbst', component: WerklisteSelbstComponent },
-      { path: 'werkliste-unselbst', component: WerklisteUnselbstComponent},
-      { path: 'signaturen', component: SignaturenComponent },
-      { path: 'impressum', component: ImpressumComponent },
-      { path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent },
-      { path: 'start', component: HomepageComponent },
+      {path: 'werkausgabe', component: WerkausgabeComponent, canActivate: [TestversionGuard]},
+      {path: 'textausgaben', component: TextausagabenComponent, canActivate: [TestversionGuard]},
+      {path: 'material/pdf-dateien/notizbuecher', component: PdfNotizbuecherComponent, canActivate: [TestversionGuard]},
+      {path: 'anleitung', component: AnleitungComponent, canActivate: [TestversionGuard]},
+      {path: 'lebensdaten', component: LebensdatenComponent, canActivate: [TestversionGuard]},
+      {path: 'werkliste-selbst', component: WerklisteSelbstComponent, canActivate: [TestversionGuard]},
+      {path: 'werkliste-unselbst', component: WerklisteUnselbstComponent, canActivate: [TestversionGuard]},
+      {path: 'signaturen', component: SignaturenComponent, canActivate: [TestversionGuard]},
+      {path: 'impressum', component: ImpressumComponent, canActivate: [TestversionGuard]},
+      {path: 'material/pdf-dateien/synopsen', component: PdfSynopsenComponent, canActivate: [TestversionGuard]},
+      {path: 'start', component: HomepageComponent, canActivate: [TestversionGuard]},
       { path: 'init', component: HomepageWithInitTextComponent }
     ])
   ],

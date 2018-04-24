@@ -21,6 +21,7 @@ import {
 import { SynopseComponent } from './synopse.component';
 import { SynopseWerkzeugleisteComponent } from './synopse-werkzeugleiste/synopse-werkzeugleiste.component';
 import { SynopseHilfeComponent } from './synopse-hilfe/synopse-hilfe.component';
+import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { SynopseHilfeComponent } from './synopse-hilfe/synopse-hilfe.component';
     KonvolutModule,
     TextgridModule,
     RouterModule.forChild([
-      { path: 'synopsen/:synopse', component: SynopseComponent }
+      {path: 'synopsen/:synopse', component: SynopseComponent, canActivate: [TestversionGuard]}
     ])
   ],
   declarations: [

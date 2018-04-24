@@ -32,7 +32,7 @@ import {
   MdSlideToggleModule,
   MdToolbarModule
 } from '@angular/material';
-import { CoreRoutingModule, routingComponents } from './core-routing.module';
+import { CoreRoutingModule } from './core-routing.module';
 import { ScrollToTopComponent } from './scroll-to-top.component';
 import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 

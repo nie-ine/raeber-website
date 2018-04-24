@@ -34,6 +34,7 @@ import {
 } from '@angular/material';
 import { CoreRoutingModule } from './core-routing.module';
 import { ScrollToTopComponent } from './scroll-to-top.component';
+import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 
 @NgModule({
   imports: [
@@ -60,17 +61,16 @@ import { ScrollToTopComponent } from './scroll-to-top.component';
     MdInputModule,
     NgbModule.forRoot(),
     CoreRoutingModule
-    /*    RouterModule.forRoot([
-      { path: '', redirectTo: '/start', pathMatch: 'full' },
-      { path: '**', component: PageNotFoundComponent }
-     ])*/
   ],
   declarations: [
     KopfzeileComponent,
     HaupttextComponent,
     NavigationsleisteComponent,
     PageNotFoundComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+  ],
+  providers: [
+    TestversionGuard
   ],
   exports: [
     KopfzeileComponent,

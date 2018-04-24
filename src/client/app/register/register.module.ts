@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { FromKonvolutIRIToPoemIRIsModule } from '../shared/fromKonvolutIRIToPoemIRIs/fromKonvolutIRIToPoemIRIs.module';
 import { FromPoemIRIToTextgridInformationModule } from '../shared/fromPoemIRIToTextgridInformation/FromPoemIRIToTextgridInformation.module';
 import { GetKonvolutIRIsComponent } from './titelregister/get-konvolut-IRIs.component';
+import { TestversionGuard } from '../shared/testversion-service/testversion-guard.service';
 
 
 @NgModule({
@@ -24,8 +25,8 @@ import { GetKonvolutIRIsComponent } from './titelregister/get-konvolut-IRIs.comp
     MdButtonModule,
     MdListModule,
     RouterModule.forChild([
-      { path: 'register', component: RegisterComponent },
-      { path: 'register/:zeitraum', component: RegisterComponent }
+      {path: 'register', component: RegisterComponent, canActivate: [TestversionGuard]},
+      {path: 'register/:zeitraum', component: RegisterComponent, canActivate: [TestversionGuard]}
     ])
   ],
   declarations: [

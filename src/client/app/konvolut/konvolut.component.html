@@ -65,9 +65,6 @@
           <div id="rt-sidebar-a">
             <div class="rt-block ">
               <div class="module-surround">
-                <!--                <div class="module-title">
-                                  <h2 class="title">Register</h2>
-                                </div>-->
                 <div class="module-content">
                   <ngb-accordion #acc="ngbAccordion" activeIds="register,suche" destroyOnHide="false">
                     <ngb-panel id="register" title="Register">
@@ -116,12 +113,3 @@
   [poemIRIArray]="poemIRIArray"
   (sendPoemInformationBack)="updatePoemInformation($event)"
 ></from-poem-iri-to-textgrid-information>
-
-<!--
-<from-konvolut-iri-to-poem-iris
-  [konvolutIRI]="IRI"
-  [konvolutType]="konvolutType"
-  (sendPoemIRIsBack)="createPoemIRIList($event)"
-  (signalizeThatNoRequestDefined)="deletePoemsInCache($event)"
-></from-konvolut-iri-to-poem-iris>
--->

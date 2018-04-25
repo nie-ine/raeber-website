@@ -29,7 +29,7 @@ export enum KunoRaeber {
   PoemManuscriptConvolute = 'http://www.knora.org/ontology/kuno-raeber#HandwrittenPoem',
   PoemNote = 'http://www.knora.org/ontology/kuno-raeber#PoemNote',
   PoemNotebook = 'http://www.knora.org/ontology/kuno-raeber#PoemNotebook',
-  PoemPostcardConvolute = 'http://www.knora.org/ontology/kuno-raeber#PoemPostardConvolute',
+  PoemPostcardConvolute = 'http://www.knora.org/ontology/kuno-raeber#PoemPostcardConvolute',
   PoemTypescriptConvolute = 'http://www.knora.org/ontology/kuno-raeber#PoemTypescriptConvolute',
   PolyAuthorPublicationConvolute = 'http://www.knora.org/ontology/kuno-raeber#PolyAuthorPublicationConvolute',
   PrintedPoemBookPublication = 'http://www.knora.org/ontology/kuno-raeber#PrintedPoemBookPublication',

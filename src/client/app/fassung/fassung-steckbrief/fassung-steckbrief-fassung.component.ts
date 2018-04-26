@@ -1,9 +1,10 @@
 /**
  * Created by retobaumgartner on 10.10.17.
  */
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { KunoRaeberGUI, Text } from '../../shared/utilities/iris';
+import { equals, exists, ExtendedSearch, KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,
@@ -26,24 +27,20 @@ export class FassungSteckbriefFassungComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.fassungIRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-        encodeURIComponent(this.fassungIRI))
+      this.sub = this.http.get(new KnoraResource(this.fassungIRI).toString())
         .map(result => result.json())
         .subscribe(res => {
-          let title = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str.split('/')[ 0 ];
+          let title = res.props[ Text.hasTitle ].values[ 0 ].utf8str.split('/')[ 0 ];
           let iriPart = this.fassungIRI.split('raeber/')[ 1 ];
           this.linkPartPoem = title.replace(/[()]/g, '') + '---' + iriPart;
         });
 
-      this.sub2 = this.http.get(globalSearchVariableService.API_URL + '/search/'
-        + '?searchtype=extended'
-        + '&filter_by_restype=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#Poem')
-        + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI')
-        + '&compop=EQ'
-        + '&searchval=' + encodeURIComponent(this.fassungIRI)
-        + '&property_id=' + encodeURIComponent('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteTitle')
-        + '&compop=EXISTS'
-        + '&searchval=')
+      this.sub2 = this.http.get(
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeberGUI.Poem)
+          .property(KunoRaeberGUI.hasPoemIri, equals, this.fassungIRI)
+          .property(KunoRaeberGUI.hasConvoluteTitle, exists)
+          .toString())
         .map(results => results.json())
         .subscribe(res => {
           this.linkPartConv = res.subjects[ 0 ].value[ 1 ];

@@ -1,14 +1,12 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Event as NavigationEvent } from '@angular/router';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { ExtendedSearch, KnoraProperty } from '../shared/utilities/knora-api-params';
-import { Config } from '../shared/config/env.config';
-import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
+import { equals, exists, ExtendedSearch, KnoraResource } from '../shared/utilities/knora-request';
 import { DateFormatService } from '../shared/utilities/date-format.service';
+import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text } from '../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -55,17 +53,13 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private static createRequestForNeighbouringPoem(convoluteIRI: string, seqnumOfNeighbour: number) {
-    let searchParams = new ExtendedSearch();
-    searchParams.filterByRestype = 'http://www.knora.org/ontology/kuno-raeber-gui#Poem';
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasConvoluteIRI', 'EQ', convoluteIRI);
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/knora-base#seqnum', 'EQ', (seqnumOfNeighbour).toString());
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemIRI', 'EXISTS', '');
-    searchParams.property =
-      new KnoraProperty('http://www.knora.org/ontology/kuno-raeber-gui#hasPoemTitle', 'EXISTS', '');
-    return searchParams.toString();
+    return new ExtendedSearch()
+      .filterByRestype(KunoRaeberGUI.Poem)
+      .property(KunoRaeberGUI.hasConvoluteIri, equals, convoluteIRI)
+      .property(KnoraBase.seqnum, equals, seqnumOfNeighbour.toString())
+      .property(KunoRaeberGUI.hasPoemIri, exists)
+      .property(KunoRaeberGUI.hasPoemTitle, exists)
+      .toString();
   }
 
   private static buildRouteTitleStringFromResultSet(resultSet: any, convoluteTitle: string) {
@@ -97,9 +91,9 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       this.convoluteTitle = p.konvolut;
       this.poemShortIri = p.fassung.split('---')[ 1 ];
     });
-    router.events.subscribe( (event: NavigationEvent) => {
+    router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationEnd) {
-        this.updateAfterNavigation('abc---'+this.poemShortIri);
+        this.updateAfterNavigation('abc---' + this.poemShortIri);
       }
     });
   }
@@ -158,42 +152,42 @@ export class FassungComponent implements OnInit, AfterViewChecked {
     console.log('Search in Convolute for Page: ' + searchTerm.page);
     console.log(searchTerm.searchTerm.length);
     console.log(this.convoluteTitle);
-    if(searchTerm.searchTerm.length > 1 || searchTerm.page !== null) {
-      if(this.convoluteTitle === 'Notizbuch 1979') {
+    if (searchTerm.searchTerm.length > 1 || searchTerm.page !== null) {
+      if (this.convoluteTitle === 'Notizbuch 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979');
-      } else if(this.convoluteTitle === 'Notizbuch 1979-82') {
+      } else if (this.convoluteTitle === 'Notizbuch 1979-82') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979-1982');
-      } else if(this.convoluteTitle === 'Notizbuch 1980-88') {
+      } else if (this.convoluteTitle === 'Notizbuch 1980-88') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1980-1988');
-      } else if(this.convoluteTitle === 'Manuskripte 1979') {
+      } else if (this.convoluteTitle === 'Manuskripte 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979');
-      } else if(this.convoluteTitle === 'Manuskripte 1979-83') {
+      } else if (this.convoluteTitle === 'Manuskripte 1979-83') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979-1983');
-      } else if(this.convoluteTitle === 'Karten 1984') {
+      } else if (this.convoluteTitle === 'Karten 1984') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/karten-1984');
-      } else if(this.convoluteTitle === 'Typoskripte 1979') {
+      } else if (this.convoluteTitle === 'Typoskripte 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1979');
-      } else if(this.convoluteTitle === 'Typoskripte 1979-spez') {
+      } else if (this.convoluteTitle === 'Typoskripte 1979-spez') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1979-spez');
-      } else if(this.convoluteTitle === 'Typoskripte 1983') {
+      } else if (this.convoluteTitle === 'Typoskripte 1983') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'typoskripte/typoskripte-1983');
-      } else if(this.convoluteTitle === 'GESICHT IM MITTAG 1950') {
+      } else if (this.convoluteTitle === 'GESICHT IM MITTAG 1950') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/gesicht-im-mittag');
-      } else if(this.convoluteTitle === 'Die verwandelten Schiffe 1957') {
+      } else if (this.convoluteTitle === 'Die verwandelten Schiffe 1957') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/die-verwandelten-schiffe');
-      } else if(this.convoluteTitle === 'GEDICHTE 1960') {
+      } else if (this.convoluteTitle === 'GEDICHTE 1960') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/gedichte');
-      } else if(this.convoluteTitle === 'FLUSSUFER 1963') {
+      } else if (this.convoluteTitle === 'FLUSSUFER 1963') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/flussufer');
-      } else if(this.convoluteTitle === 'Reduktionen 1981') {
+      } else if (this.convoluteTitle === 'Reduktionen 1981') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/reduktionen');
-      } else if(this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte') {
+      } else if (this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Hochdeutsche Gedichte') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/abgewandt-zugewandt-hochdeutsche-gedichte');
-      } else if(this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Alemannische Gedichte') {
+      } else if (this.convoluteTitle === 'Abgewandt Zugewandt 1985 – Alemannische Gedichte') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/abgewandt-zugewandt-alemannische-gedichte');
-      } else if(this.convoluteTitle === 'Verstreutes') {
+      } else if (this.convoluteTitle === 'Verstreutes') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'drucke/verstreutes');
-      } else if(this.convoluteTitle === 'Tagebuch') {
+      } else if (this.convoluteTitle === 'Tagebuch') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'material/tagebuecher');
       }
 
@@ -208,7 +202,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   belongsToSynopsis() {
-    return this.synopsisIri.split('/')[4] !== undefined;
+    return this.synopsisIri.split('/')[ 4 ] !== undefined;
   }
 
   private getDataFromDB() {
@@ -218,26 +212,26 @@ export class FassungComponent implements OnInit, AfterViewChecked {
 
   private getBasicInformationOnCurrentPoem() {
     this.http
-      .get(Config.API + '/resources/' + encodeURIComponent(this.urlPrefix + this.poemShortIri))
+      .get(new KnoraResource(this.urlPrefix + this.poemShortIri).toString())
       .map(result => result.json())
       .subscribe(res => {
         this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
-        this.poemTitle = res.props[ 'http://www.knora.org/ontology/text#hasTitle' ].values[ 0 ].utf8str;
-        const textEdition = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasEdition' ].values[ 0 ];
+        this.poemTitle = res.props[ Text.hasTitle ].values[ 0 ].utf8str;
+        const textEdition = res.props[ KunoRaeber.hasEdition ].values[ 0 ];
         this.getEditedPoemText(textEdition);
-        this.poemSeqnum = res.props[ 'http://www.knora.org/ontology/knora-base#seqnum' ].values[ 0 ];
+        this.poemSeqnum = res.props[ KnoraBase.seqnum ].values[ 0 ];
         this.creationDateOfPoem = this.poemType === 'DiaryEntry' ?
-          this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/text#hasEnteringDate' ].values[ 0 ].dateval1) :
-          this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasCreationDate' ].values[ 0 ].dateval1);
+          this.dfs.germanLongDate(res.props[ Text.hasEnteringDate ].values[ 0 ].dateval1) :
+          this.dfs.germanLongDate(res.props[ Human.hasCreationDate ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
-          this.dfs.germanLongDate(res.props[ 'http://www.knora.org/ontology/human#hasModificationDate' ].values[ 0 ].utf8str);
+          this.dfs.germanLongDate(res.props[ Human.hasModificationDate ].values[ 0 ].utf8str);
         switch (this.poemType) {
           case 'PoemNote':
-            this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
+            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Notizbuch';
             break;
           case 'HandwrittenPoem':
-            this.diplomaticIRIs = res.props[ 'http://www.knora.org/ontology/kuno-raeber#hasDiplomaticTranscription' ].values;
+            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Manuskript';
             break;
           case 'PostCardPoem':
@@ -255,9 +249,9 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getEditedPoemText(editedTextIri: string) {
-    this.http.get(Config.API + '/resources/' + encodeURIComponent(editedTextIri))
+    this.http.get(new KnoraResource(editedTextIri).toString())
       .map(result => result.json())
-      .subscribe(res => this.editedPoemText = res.props[ 'http://www.knora.org/ontology/text#hasContent' ].values[ 0 ].utf8str);
+      .subscribe(res => this.editedPoemText = res.props[ Text.hasContent ].values[ 0 ].utf8str);
   }
 
   private getNeighbouringPoems() {
@@ -284,24 +278,16 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getConvoluteIriSynopsisIriAndRelatedPoems() {
-    this.http
-      .get(globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-        '&compop=EQ' +
-        '&searchval=' +
-        encodeURIComponent(this.urlPrefix + this.poemShortIri) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
-        '&compop=EXISTS' +
-        '&searchval='
-      )
+
+    this.http.get(
+      new ExtendedSearch()
+        .filterByRestype(KunoRaeberGUI.Poem)
+        .property(KunoRaeberGUI.hasPoemIri, equals, this.urlPrefix + this.poemShortIri)
+        .property(KunoRaeberGUI.hasConvoluteIri, exists)
+        .property(KunoRaeberGUI.hasSynopsisIri, exists)
+        .property(KunoRaeberGUI.hasSynopsisTitle, exists)
+        .toString()
+    )
       .map(result => result.json())
       .subscribe(res => {
         if (res.subjects[ 0 ] !== undefined) {
@@ -316,43 +302,25 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   private getInformationOnRelatedPoems() {
-    const request = globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-      '&compop=EQ' +
-      '&searchval=' +
-      encodeURIComponent(this.synopsisIri) +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&show_nrows=2000';
     return this.http.get(
-      request
+      new ExtendedSearch()
+        .filterByRestype(KunoRaeberGUI.Poem)
+        .property(KunoRaeberGUI.hasSynopsisIri, equals, this.synopsisIri)
+        .property(KunoRaeberGUI.hasPoemTitle, exists)
+        .property(KunoRaeberGUI.hasPoemCreationDate, exists)
+        .property(KunoRaeberGUI.hasPoemText, exists)
+        .property(KunoRaeberGUI.hasPoemIri, exists)
+        .property(KunoRaeberGUI.hasConvoluteIri, exists)
+        .property(KunoRaeberGUI.hasConvoluteTitle, exists)
+        .property(KnoraBase.seqnum, exists)
+        .showNRows(2000)
+        .toString()
     )
       .map(
         (lambda: Response) => lambda.json()
       )
       .subscribe(response => {
-        this.relatedPoems = [];
+          this.relatedPoems = [];
           for (let res of response.subjects) {
             this.relatedPoems.push('/' + res.value[ 3 ] + '/' +
               FassungComponent.produceFassungsLink(res.value[ 7 ], res.value[ 5 ]) +

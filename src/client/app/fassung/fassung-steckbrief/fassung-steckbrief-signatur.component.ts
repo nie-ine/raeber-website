@@ -3,7 +3,8 @@
  */
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Work } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 
 @Component({
@@ -25,11 +26,10 @@ export class FassungSteckbriefSignaturComponent implements OnChanges {
   ngOnChanges() {
     this.signature = '';
     if (this.carrierIRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' +
-        encodeURIComponent(this.carrierIRI))
+      this.sub = this.http.get(new KnoraResource(this.carrierIRI).toString())
         .map(result => result.json())
         .subscribe(res => {
-          this.signature = res.props[ 'http://www.knora.org/ontology/work#hasArchiveSignature' ].values[ 0 ].utf8str;
+          this.signature = res.props[ Work.hasArchiveSignature ].values[ 0 ].utf8str;
         });
     }
   }

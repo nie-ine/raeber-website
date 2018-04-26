@@ -3,7 +3,8 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Work } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 @Component({
   moduleId: module.id,
@@ -25,10 +26,10 @@ export class FassungDiplomatischSeitenComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.pageIRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL + '/resources/' + encodeURIComponent(this.pageIRI))
+      this.sub = this.http.get(new KnoraResource(this.pageIRI).toString())
         .map(results => results.json())
         .subscribe(res => {
-          this.properties[ 'pagenumber' ] = res.props[ 'http://www.knora.org/ontology/work#hasPageNumber' ].values[ 0 ].utf8str;
+          this.properties[ 'pagenumber' ] = res.props[ Work.hasPageNumber ].values[ 0 ].utf8str;
           this.properties[ 'picData' ] = res.resinfo.locdata;
           this.properties[ 'pageIRI' ] = this.pageIRI;
           this.properties[ 'origName' ]

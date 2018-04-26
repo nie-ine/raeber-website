@@ -4,7 +4,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { DateFormatService } from '../../shared/utilities/date-format.service';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { Event } from '../../shared/utilities/iris';
+import { KnoraResource } from '../../shared/utilities/knora-request';
 
 
 @Component({
@@ -26,19 +27,18 @@ export class KonvolutSteckbriefDatierungComponent implements OnChanges {
   ngOnChanges() {
 
     if (this.dateIRI) {
-      this.sub = this.http.get(globalSearchVariableService.API_URL
-        + '/resources/' + encodeURIComponent(this.dateIRI))
+      this.sub = this.http.get(new KnoraResource(this.dateIRI).toString())
 
         .map(response => response.json()).subscribe(res => {
 
           try {
-            this.startIso = res.props[ 'http://www.knora.org/ontology/event#hasStartDate' ].values[ 0 ].dateval1;
+            this.startIso = res.props[ Event.hasStartDate ].values[ 0 ].dateval1;
           } catch (TypeError) {
             this.startIso = null;
           }
 
           try {
-            this.endIso = res.props[ 'http://www.knora.org/ontology/event#hasEndDate' ].values[ 0 ].dateval1;
+            this.endIso = res.props[ Event.hasEndDate ].values[ 0 ].dateval1;
           } catch (TypeError) {
             this.endIso = null;
           }

@@ -4,11 +4,12 @@
 
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
+import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-request';
+import { KnoraBase, KunoRaeberGUI } from '../shared/utilities/iris';
 
 
 interface Poem {
-  [title: string]: string;
+  [ title: string ]: string;
 }
 
 @Component({
@@ -19,10 +20,6 @@ interface Poem {
 export class WerklisteUnselbstComponent {
   title = 'Unselbständige Publikationen';
   private poemsInVerstreutes: Poem = {};
-
-  constructor(private http: Http) {
-    this.getLinkToPoem();
-  }
 
   private static getIriFromRequestResult(elem: any) {
     return elem.value[ 3 ].split('/')[ 4 ];
@@ -36,28 +33,24 @@ export class WerklisteUnselbstComponent {
     return text.replace(/\//g, '');
   }
 
+  constructor(private http: Http) {
+    this.getLinkToPoem();
+  }
+
   buildLinkFromPoemTitleAndSeqnum(poemTitle: string) {
     return '/Verstreutes/' + WerklisteUnselbstComponent.removeSlashes(poemTitle) + '---' + this.poemsInVerstreutes[ poemTitle ];
   }
 
   private getLinkToPoem() {
     return this.http.get(
-      globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-      '&compop=EQ' +
-      '&searchval=Verstreutes' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&show_nrows=300'
+      new ExtendedSearch()
+        .filterByRestype(KunoRaeberGUI.Poem)
+        .property(KunoRaeberGUI.hasConvoluteTitle, equals, 'Verstreutes')
+        .property(KunoRaeberGUI.hasPoemTitle, exists)
+        .property(KunoRaeberGUI.hasPoemIri, exists)
+        .property(KnoraBase.seqnum, exists)
+        .showNRows(300)
+        .toString()
     )
       .map(lambda => lambda.json())
       .subscribe(res => {

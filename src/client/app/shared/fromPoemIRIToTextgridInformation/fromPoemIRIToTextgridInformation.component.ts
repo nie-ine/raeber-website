@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
 import { Router } from '@angular/router';
 import { CachePoem } from '../textgrid/cache-poem';
+import { equals, exists, ExtendedSearch, notEquals } from '../utilities/knora-request';
+import { KnoraBase, KunoRaeberGUI } from '../utilities/iris';
 
 @Component({
   moduleId: module.id,
   selector: 'from-poem-iri-to-textgrid-information',
-  templateUrl: 'fromPoemIRIToTextgridInformation.component.html'
+  template: ``
 })
 export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   @Input() contentType: string;
@@ -20,7 +21,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
   countRequests: number;
   poemInformation: Array<CachePoem>;
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http) {
   }
 
   ngOnChanges() {
@@ -50,38 +51,19 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
     if (this.contentType === 'synopse') {
       return this.http.get
       (
-        globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-        '&compop=EQ' +
-        '&searchval=' +
-        encodeURIComponent('http://rdfh.ch/kuno-raeber/' + this.workIRI) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSameEditionAs' +
-        '&compop=EXISTS' +
-        '&searchval=' +
-        '&show_nrows=2000'
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeberGUI.Poem)
+          .property(KunoRaeberGUI.hasSynopsisIri, equals, 'http://rdfh.ch/kuno-raeber/' + this.workIRI)
+          .property(KunoRaeberGUI.hasPoemTitle, exists)
+          .property(KunoRaeberGUI.hasPoemCreationDate, exists)
+          .property(KunoRaeberGUI.hasPoemText, exists)
+          .property(KunoRaeberGUI.hasPoemIri, exists)
+          .property(KunoRaeberGUI.hasConvoluteIri, exists)
+          .property(KunoRaeberGUI.hasConvoluteTitle, exists)
+          .property(KnoraBase.seqnum, exists)
+          .property(KunoRaeberGUI.hasSameEditionAs, exists)
+          .showNRows(2000)
+          .toString()
       )
         .map(
           (lambda: Response) => {
@@ -89,7 +71,8 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
               this.poemInformation[ this.i ] = new CachePoem();
               this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 7 ]; // poem title
-              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 4 ]; // poem creation date
+              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 4 ]; // poem creation
+                                                                                                    // date
               this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ]; // poem text
               this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ]; // poem IRI
               this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ]; // convolute Title
@@ -138,53 +121,24 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
     } else {
       return this.http.get
       (
-        globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=EQ' +
-        '&searchval=' +
-        encodeURIComponent(this.konvolutIRI) +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemCreationDate' +
-        '&compop=!EQ' +
-        '&searchval=GREGORIAN:2217-01-27' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemText' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fknora-base%23seqnum' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasDateIndex' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasAlphabeticIndex' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisTitle' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasSynopsisIRI' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isFinalVersion' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +
-/*        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23isOnPage' +
-        '&compop=!EQ' +
-        '&searchval=123455666' +*/
-        '&show_nrows=2000'
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeberGUI.Poem)
+          .property(KunoRaeberGUI.hasConvoluteIri, equals, this.konvolutIRI)
+          .property(KunoRaeberGUI.hasPoemTitle, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasPoemCreationDate, notEquals, 'GREGORIAN:2217-01-27')
+          .property(KunoRaeberGUI.hasPoemText, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasPoemIri, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasConvoluteIri, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasConvoluteTitle, notEquals, '123455666')
+          .property(KnoraBase.seqnum, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasDateIndex, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasAlphabeticIndex, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasSynopsisTitle, notEquals, '123455666')
+          .property(KunoRaeberGUI.hasSynopsisIri, notEquals, '123455666')
+          .property(KunoRaeberGUI.isFinalVersion, notEquals, '123455666')
+          .property(KunoRaeberGUI.isOnPage, notEquals, '123455666')
+          .showNRows(2000)
+          .toString()
       )
         .map(
           (lambda: Response) => {

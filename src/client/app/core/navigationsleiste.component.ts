@@ -5,7 +5,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { globalSearchVariableService } from '../suche/globalSearchVariablesService';
+import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-request';
+import { KunoRaeberGUI } from '../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -36,19 +37,13 @@ export class NavigationsleisteComponent implements OnInit {
   }
 
   private getLinkToAbgewandtZugewandtNachwort() {
-    const request = globalSearchVariableService.API_URL +
-      globalSearchVariableService.extendedSearch +
-      'http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23Poem' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasConvoluteTitle' +
-      '&compop=EQ' +
-      '&searchval=Abgewandt Zugewandt (Nachwort)' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemTitle' +
-      '&compop=EQ' +
-      '&searchval=Nachwort über das schweizerische Sprachdilemma' +
-      '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Fkuno-raeber-gui%23hasPoemIRI' +
-      '&compop=EXISTS' +
-      '&searchval=' +
-      '&show_nrows=1';
+    const request = new ExtendedSearch()
+      .filterByRestype(KunoRaeberGUI.Poem)
+      .property(KunoRaeberGUI.hasConvoluteTitle, equals, 'Abgewandt Zugewandt (Nachwort)')
+      .property(KunoRaeberGUI.hasPoemTitle, equals, 'Nachwort über das schweizerische Sprachdilemma')
+      .property(KunoRaeberGUI.hasPoemIri, exists)
+      .showNRows(1)
+      .toString();
     return this.http.get(request)
       .map(lambda => lambda.json())
       .subscribe(res => this.abgewandtZugewandtNachwortIri =

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
-import { globalSearchVariableService } from '../../suche/globalSearchVariablesService';
+import { equals, ExtendedSearch, like } from '../../shared/utilities/knora-request';
+import { KunoRaeber, Text } from '../../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
   selector: 'get-konvolut-iri',
-  templateUrl: 'get-konvolut-IRI.component.html'
+  template: ``
 })
 export class GetKonvolutIRIComponent implements OnChanges {
 
@@ -25,136 +26,131 @@ export class GetKonvolutIRIComponent implements OnChanges {
   ngOnChanges() {
     if (this.konvolut_id === 'notizbuch-1979') {
       this.performQuery(
-        '%23PoemNotebook' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=Notizbuch%201979');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemNotebook)
+          .property(Text.hasConvoluteTitle, equals, 'Notizbuch 1979')
+          .toString());
     } else if (this.konvolut_id === 'notizbuch-1979-1982') {
       this.performQuery(
-        '%23PoemNotebook' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Notizbuch%201979-82');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemNotebook)
+          .property(Text.hasConvoluteTitle, like, 'Notizbuch 1979-82')
+          .toString());
     } else if (this.konvolut_id === 'notizbuch-1980-1988') {
       this.performQuery(
-        '%23PoemNotebook' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Notizbuch%201980-88');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemNotebook)
+          .property(Text.hasConvoluteTitle, like, 'Notizbuch 1980-88')
+          .toString());
     } else if (this.konvolut_id === 'notizbuch-1965-80') {
       this.performQuery(
-        '%23PoemNotebook' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Notizbuch%201965-80');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemNotebook)
+          .property(Text.hasConvoluteTitle, like, 'Notizbuch 1965-80')
+          .toString());
     } else if (this.konvolut_id === 'manuskripte-1979') {
       this.performQuery(
-        '%23PoemManuscriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Manuskripte%201979');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemManuscriptConvolute)
+          .property(Text.hasConvoluteTitle, like, 'Manuskripte 1979')
+          .toString());
     } else if (this.konvolut_id === 'manuskripte-1979-1983') {
       this.performQuery(
-        '%23PoemManuscriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Manuskripte%201979-83');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemManuscriptConvolute)
+          .property(Text.hasConvoluteTitle, like, 'Manuskripte 1979-83')
+          .toString());
     } else if (this.konvolut_id === 'karten-1984') {
       this.performQuery(
-        '%23PoemPostcardConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Karten%201984');
-    } else if (this.konvolut_id === 'karten-1984') {
-      this.performQuery(
-        '%23PoemManuscriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Karten%201984');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemManuscriptConvolute)
+          .property(Text.hasConvoluteTitle, like, 'Karten 1984')
+          .toString());
     } else if (this.konvolut_id === 'typoskripte-1979') {
       this.performQuery(
-        '%23PoemTypescriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=Typoskripte%201979');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemTypescriptConvolute)
+          .property(Text.hasConvoluteTitle, equals, 'Typoskripte 1979')
+          .toString());
     }
     if (this.konvolut_id === 'typoskripte-1979-spez') {
       this.performQuery(
-        '%23PoemTypescriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=Typoskripte%201979-spez');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemTypescriptConvolute)
+          .property(Text.hasConvoluteTitle, equals, 'Typoskripte 1979-spez')
+          .toString());
     } else if (this.konvolut_id === 'typoskripte-1983') {
       this.performQuery(
-        '%23PoemTypescriptConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=EQ' +
-        '&searchval=Typoskripte%201983');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemTypescriptConvolute)
+          .property(Text.hasConvoluteTitle, equals, 'Typoskripte 1983')
+          .toString());
     } else if (this.konvolut_id === 'gesicht-im-mittag') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=gesicht');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'die-verwandelten-schiffe')
+          .toString());
     } else if (this.konvolut_id === 'die-verwandelten-schiffe') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Schiffe');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'Schiffe')
+          .toString());
     } else if (this.konvolut_id === 'gedichte') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=GEDICHTE%201960');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'GEDICHTE 1960')
+          .toString());
     } else if (this.konvolut_id === 'flussufer') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Flussufer');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'Flussufer')
+          .toString());
     } else if (this.konvolut_id === 'reduktionen') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Reduktionen');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'Reduktionen')
+          .toString());
     } else if (this.konvolut_id === 'abgewandt-zugewandt-hochdeutsche-gedichte') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Hochdeutsche');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'Hochdeutsche')
+          .toString());
     } else if (this.konvolut_id === 'abgewandt-zugewandt-alemannische-gedichte') {
       this.performQuery(
-        '%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Alemannische');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, 'Alemannische')
+          .toString());
     } else if (this.konvolut_id === 'abgewandt-zugewandt-nachwort') {
-      this.performQuery('%23PrintedPoemBookPublication' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=(Nachwort)');
+      this.performQuery(
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
+          .property(Text.hasConvoluteTitle, like, '(Nachwort)')
+          .toString());
     } else if (this.konvolut_id === 'verstreutes') {
       this.performQuery(
-        '%23PolyAuthorPublicationConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Verstreutes');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PolyAuthorPublicationConvolute)
+          .property(Text.hasConvoluteTitle, like, 'Verstreutes')
+          .toString());
     } else if (this.konvolut_id === 'tagebuecher') {
       this.performQuery(
-        '%23DiaryConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Tagebuch');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.DiaryConvolute)
+          .property(Text.hasConvoluteTitle, like, 'tagebuecher-2')
+          .toString());
     } else if (this.konvolut_id === 'tagebuecher-2') {
       this.performQuery(
-        '%23DiaryConvolute' +
-        '&property_id=http%3A%2F%2Fwww.knora.org%2Fontology%2Ftext%23hasConvoluteTitle' +
-        '&compop=LIKE' +
-        '&searchval=Tagebuch');
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.DiaryConvolute)
+          .property(Text.hasConvoluteTitle, like, 'Tagebuch')
+          .toString());
     } else if (this.konvolut_id) {
       this.sendKonvolutTitleBack.emit('Es gibt kein Konvolut mit diesem Titel');
       this.sendKonvolutIRIBack.emit(undefined);
@@ -164,10 +160,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
 
   performQuery(queryPart: string) {
     return this.http
-      .request(new HttpRequest('GET', globalSearchVariableService.API_URL +
-        globalSearchVariableService.extendedSearch +
-        globalSearchVariableService.initialVocabulary +
-        queryPart))
+      .request(new HttpRequest('GET', queryPart))
       .subscribe((response: any) => {
           if (response instanceof HttpResponse) {
             const data = response.body;

@@ -9,9 +9,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { DynamicPaging } from '../shared/textgrid/paging.service';
-import { ExtendedSearch } from '../shared/utilities/knora-api-params';
+import { ExtendedSearch } from '../shared/utilities/knora-request';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { KonvolutHilfeComponent } from './konvolut-hilfe/konvolut-hilfe.component';
@@ -42,17 +41,23 @@ export class KonvolutComponent implements OnInit {
   konvolutType: string;
   resetPoems: string;
   konvolutView = true;
-  searchOnPage: number;
 
   viewMode: string;
   konvolut_type: string;
 
-  private data: Observable<Array<number>>;
+  searching = true;
+
   private sub: any;
 
-
   private _esearch = new ExtendedSearch();
-  private searching: boolean = true;
+
+  static removeHtml(content: string) {
+    if (content !== undefined) {
+      return content.replace(/<[^>]+>/g, '');
+    } else {
+      return undefined;
+    }
+  }
 
   constructor(private http: Http, private route: ActivatedRoute, private dp: DynamicPaging, public dialog: MdDialog) {
     this.viewMode = 'grid';
@@ -64,14 +69,12 @@ export class KonvolutComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.konvolut_id = params[ 'konvolut' ];
       setTimeout(() => {
-        console.log(this.route.snapshot.queryParams['wort']);
-        console.log(this.route.snapshot.queryParams['page']);
-        if(this.route.snapshot.queryParams['wort'] !== 'null' && this.route.snapshot.queryParams['wort'] !== undefined) {
+        if (this.route.snapshot.queryParams[ 'wort' ] !== 'null' && this.route.snapshot.queryParams[ 'wort' ] !== undefined) {
           this.searchTermArray = [];
-          this.searchTermArray[ 0 ] = this.route.snapshot.queryParams['wort'];
+          this.searchTermArray[ 0 ] = this.route.snapshot.queryParams[ 'wort' ];
         }
-        if(this.route.snapshot.queryParams['page'] !== 'null' && this.route.snapshot.queryParams['page'] !== undefined) {
-          this.searchTermArray[ 1 ] = this.route.snapshot.queryParams['page'];
+        if (this.route.snapshot.queryParams[ 'page' ] !== 'null' && this.route.snapshot.queryParams[ 'page' ] !== undefined) {
+          this.searchTermArray[ 1 ] = this.route.snapshot.queryParams[ 'page' ];
         }
       }, 3000);
 
@@ -87,17 +90,14 @@ export class KonvolutComponent implements OnInit {
 
   updateKonvolutTitle(konvolutTitle: string) {
     this.konvolutTitle = konvolutTitle;
-    //console.log('Konvolut - Titel: ' + this.konvolutTitle);
   }
 
   updateKonvolutIRI(konvolutIRI: string) {
     this.IRI = konvolutIRI;
-    //console.log('IRI: ' + this.IRI);
   }
 
   updateKonvolutBild(konvolutBild: string) {
     this.konvolutBild = konvolutBild;
-    //console.log('Konvolutbild: ' + this.konvolutBild);
   }
 
   /**
@@ -115,7 +115,6 @@ export class KonvolutComponent implements OnInit {
    * @param {FormGroup} fg Search parameters
    */
   searchInConvolute(fg: any) {
-    //console.log(fg);
     this.searchTermArray = [];
     this.searchResultsNo = 0;
     this.searchTermArray[ 0 ] = fg.searchTerm;
@@ -151,7 +150,6 @@ export class KonvolutComponent implements OnInit {
   }
 
   updatePoemInformation(poemInformation: Array<CachePoem>) {
-    //console.log(poemInformation);
     this.poems = [];
     for (let i = 0; i < poemInformation.length; i++) {
       let poem = new CachePoem();
@@ -172,9 +170,8 @@ export class KonvolutComponent implements OnInit {
       poem.isFinalVersion = poemInformation[ i ].isFinalVersion;
       //poem[ 15 ] = poemInformation[ i ][ 15 ];
 
-      this.poems[ poemInformation[i].seqnum - 1 ] = poem;
+      this.poems[ poemInformation[ i ].seqnum - 1 ] = poem;
     }
-    //console.log(this.poems);
   }
 
   createPoemIRIList(poemIRIList: Array<any>) {
@@ -182,28 +179,17 @@ export class KonvolutComponent implements OnInit {
   }
 
   updateKonvolutType(konvolutType: string) {
-    //console.log('KonvolutType: ' + konvolutType);
     this.konvolutType = konvolutType;
   }
 
-  deletePoemsInCache(input: string) {
+  deletePoemsInCache() {
     this.resetPoems = 'reset';
   }
 
-  removeHtml(content: string) {
-    if (content !== undefined) {
-      return content.replace(/<[^>]+>/g, '');
-    } else {
-      return undefined;
-      //console.log('no value yet');
-    }
-  }
-
   showHelp(): void {
-    let dialogRef =
-      this.dialog.open(KonvolutHilfeComponent, {
-        width: '500px'
-      });
+    this.dialog.open(KonvolutHilfeComponent, {
+      width: '500px'
+    });
   }
 
   searchingStatus(event: boolean) {

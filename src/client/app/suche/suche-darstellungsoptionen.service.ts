@@ -17,11 +17,17 @@ export class SucheDarstellungsoptionenService {
   private relativeSizesOfColumns: [string, string, string] = ['100%', '45%', '29%'];
   private textsHaveAlignedFrames: boolean = false;
 
+  // noinspection TsLint
   textboxHeight$ = this.textboxHeightSource.asObservable();
+  // noinspection TsLint
   showTexts$ = this.showTextsSource.asObservable();
+  // noinspection TsLint
   numberOfColumns$ = this.numberOfColumnsSource.asObservable();
+  // noinspection TsLint
   relativeSizeOfColumns$ = this.relativeSizeOfColumnsSource.asObservable();
+  // noinspection TsLint
   textsHaveAlignedFrames$ = this.textsHaveAlignedFramesSource.asObservable();
+  // noinspection TsLint
   noSinglePoemIsHidden$ = this.noSinglePoemIsHiddenSource.asObservable();
 
 

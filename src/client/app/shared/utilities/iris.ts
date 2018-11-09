@@ -65,8 +65,8 @@ export enum KnoraBase {
 export enum Text {
   containsEarlierStagesOfPublication = 'http://www.knora.org/ontology/004C/information-carrier#containsEarlierStagesOfPublication',
   hasAlias = 'http://www.knora.org/ontology/0059/text#hasAlias',
-  hasCarrierCollectionDescription = 'http://www.knora.org/ontology/004C/information-carrier#hasCarrierDescription', //WHAT about this?
-  hasCarrierDescription = 'http://www.knora.org/ontology/004C/information-carrier#hasCarrierDescription', //WHAT about this?
+  hasCarrierCollectionDescription = 'http://www.knora.org/ontology/004C/information-carrier#hasCarrierDescription', 
+  hasCarrierDescription = 'http://www.knora.org/ontology/004C/information-carrier#carrierHasDescription', //WHAT about this?
   hasComment = 'http://www.knora.org/ontology/0059/text#hasComment',
   hasContent = 'http://www.knora.org/ontology/004F/language#hasContent',
   hasConvoluteContentRepresentation = 'http://www.knora.org/ontology/004C/information-carrier#convoluteHasContentRepresentation',
@@ -82,10 +82,10 @@ export enum Text {
   hasStructure = 'http://www.knora.org/ontology/0059/text#hasStructure', // HERE a whole new ontology has been defined and no equivalent existing ... !!!
   hasTitle = 'http://www.knora.org/ontology/0059/text#hasTitle',
   isDiplomaticTranscriptionOfTextOnPage = 'http://www.knora.org/ontology/005A/text-editing#isDiplomaticTranscriptionOfTextOnPage',
-  isFinalVersion = 'http://www.knora.org/ontology/0059/text#isFinalVersion', //new in Kuno Raueber or in Kuno Raeber gui??? Both exist
+  isFinalVersion = 'http://www.knora.org/ontology/004D/kuno-raeber#isFinalVersion',
   isInDialect = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#isInDialect',
-  isPartOfCycle = 'http://www.knora.org/ontology/0059/text#isPartOfCycle', //new in Kuno Raueber or in Kuno Raeber gui??? Both exist
-  isWrittenWith = 'http://www.knora.org/ontology/0059/text#isWrittenWith' // lives in two ontologies: raeber-gui and infocar
+  isPartOfCycle = 'http://www.knora.org/ontology/004D/kuno-raeber#isPartOfCycle',
+  isWrittenWith = 'http://www.knora.org/ontology/004C/information-carrier#isWrittenWith'
 }
 
 export enum Work {

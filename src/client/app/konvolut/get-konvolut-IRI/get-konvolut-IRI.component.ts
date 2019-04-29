@@ -63,7 +63,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
     } else if (this.konvolut_id === 'karten-1984') {
       this.performQuery(
         new ExtendedSearch()
-          .filterByRestype(KunoRaeber.PoemManuscriptConvolute)
+          .filterByRestype(KunoRaeber.PoemPostcardConvolute)
           .property(Text.hasConvoluteTitle, like, 'Karten 1984')
           .toString());
     } else if (this.konvolut_id === 'typoskripte-1979') {

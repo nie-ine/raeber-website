@@ -34,7 +34,9 @@ export enum KunoRaeber {
   PolyAuthorPublicationConvolute = 'http://www.knora.org/ontology/004D/kuno-raeber#PolyAuthorPublicationConvolute',
   PrintedPoemBookPublication = 'http://www.knora.org/ontology/004D/kuno-raeber#PrintedPoemBookPublication',
   PublicationPoem = 'http://www.knora.org/ontology/004D/kuno-raeber#PublicationPoem',
-  TypewrittenPoem = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPoem'
+  TypewrittenPoem = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPoem',
+  TypewrittenPostface = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPostface',
+  hasScientificEdition = 'http://www.knora.org/ontology/004D/kuno-raeber#ScientificEdition'
 }
 
 export enum KunoRaeberGUI {
@@ -85,7 +87,8 @@ export enum Text {
   isFinalVersion = 'http://www.knora.org/ontology/004D/kuno-raeber#isFinalVersion',
   isInDialect = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#isInSwissGerman', // CHANGED .,..
   isPartOfCycle = 'http://www.knora.org/ontology/004D/kuno-raeber#isPartOfCycle',
-  isWrittenWith = 'http://www.knora.org/ontology/shared/information-carrier#isWrittenWith'
+  isWrittenWith = 'http://www.knora.org/ontology/shared/information-carrier#isWrittenWith',
+  expressionHasTitle = 'http://www.knora.org/ontology/shared/text#expressionHasTitle'
 }
 
 export enum Work {

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { equals, exists, ExtendedSearch } from '../shared/utilities/knora-request';
-import { KunoRaeberGUI } from '../shared/utilities/iris';
+import { KunoRaeber, KunoRaeberGUI, Text} from '../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -38,17 +38,17 @@ export class NavigationsleisteComponent implements OnInit {
 
   private getLinkToAbgewandtZugewandtNachwort() {
     const request = new ExtendedSearch()
-      .filterByRestype(KunoRaeberGUI.Poem)
-      .property(KunoRaeberGUI.hasConvoluteTitle, equals, 'Abgewandt Zugewandt (Nachwort)')
-      .property(KunoRaeberGUI.hasPoemTitle, equals, 'Nachwort über das schweizerische Sprachdilemma')
-      .property(KunoRaeberGUI.hasPoemIri, exists)
+      .filterByRestype(KunoRaeber.TypewrittenPostface)
+      .property(Text.expressionHasTitle, equals, 'NACHWORT ÜBER DAS SCHWEIZERISCHE SPRACHDILEMMA')
       .showNRows(1)
       .toString();
-    return this.http.get(request)
-      .map(lambda => lambda.json())
-      .subscribe(res => this.abgewandtZugewandtNachwortIri =
-        '/Abgewandt Zugewandt (Nachwort)/Nachwort über das schweizerische Sprachdilemma---' +
-        res.subjects[ 0 ].value[ 2 ].split('/')[ 4 ]);
+      return this.http.get(request)
+        .map(lambda => lambda )
+        .subscribe(res => {
+            let objectIri = res.json().subjects[0].obj_id.split('/')[4];
+            this.abgewandtZugewandtNachwortIri = '/Abgewandt Zugewandt (Nachwort)/Nachwort über das schweizerische Sprachdilemma---' + objectIri;
+          }
+        );
   }
 
 }

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { equals, exists, ExtendedSearch, KnoraResource } from '../shared/utilities/knora-request';
 import { DateFormatService } from '../shared/utilities/date-format.service';
-import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text } from '../shared/utilities/iris';
+import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text, TextEditing } from '../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +21,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   showEditedText: boolean = true;
   showDiplomaticTranscription: boolean = false;
 
-  urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
+  urlPrefix: string = 'http://rdfh.ch/004D/';
 
   diplomaticIRIs: Array<string>;
 
@@ -213,25 +213,25 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   private getBasicInformationOnCurrentPoem() {
     this.http
       .get(new KnoraResource(this.urlPrefix + this.poemShortIri).toString())
-      .map(result => result.json())
+      .map(lambda => lambda )
       .subscribe(res => {
-        this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
-        this.poemTitle = res.props[ Text.hasTitle ].values[ 0 ].utf8str;
-        const textEdition = res.props[ KunoRaeber.hasEdition ].values[ 0 ];
+        this.poemType = res.json().resinfo[ 'restype_id' ].split('#')[ 1 ];
+        this.poemTitle = res.json().props[ Text.hasTitle ].values[ 0 ].utf8str;
+        const textEdition = res.json().props[ TextEditing.hasScientificEdition ].values[ 0 ];
         this.getEditedPoemText(textEdition);
-        this.poemSeqnum = res.props[ KnoraBase.seqnum ].values[ 0 ];
+        this.poemSeqnum = res.json().props[ KnoraBase.seqnum ].values[ 0 ];
         this.creationDateOfPoem = this.poemType === 'DiaryEntry' ?
-          this.dfs.germanLongDate(res.props[ Text.hasEnteringDate ].values[ 0 ].dateval1) :
-          this.dfs.germanLongDate(res.props[ Human.hasCreationDate ].values[ 0 ].dateval1);
+          this.dfs.germanLongDate(res.json().props[ Text.hasEnteringDate ].values[ 0 ].dateval1) :
+          this.dfs.germanLongDate(res.json().props[ Human.hasCreationDate ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
-          this.dfs.germanLongDate(res.props[ Human.hasModificationDate ].values[ 0 ].utf8str);
+          this.dfs.germanLongDate(res.json().props[ Human.hasModificationDate ].values[ 0 ].utf8str);
         switch (this.poemType) {
           case 'PoemNote':
-            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
+            this.diplomaticIRIs = res.json().props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Notizbuch';
             break;
           case 'HandwrittenPoem':
-            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
+            this.diplomaticIRIs = res.json().props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Manuskript';
             break;
           case 'PostCardPoem':

@@ -16,7 +16,6 @@ export enum KunoRaeber {
   containsLaterStagesOfNotebook = 'http://www.knora.org/ontology/004D/kuno-raeber#containsLaterStagesOfNotebook',
   containsLaterStagesOfTypescriptConvolute = 'http://www.knora.org/ontology/004D/kuno-raeber#containsLaterStagesOfTypescriptConvolute',
   hasDiplomaticTranscription = 'http://www.knora.org/ontology/shared/text-editing#hasDiplomaticTranscription',
-  hasEdition = 'http://www.knora.org/ontology/shared/text-editing#hasEdition',
   hasReferencePoem = 'http://www.knora.org/ontology/004D/kuno-raeber#hasReferencePoem',
   hasReferenceTitle = 'http://www.knora.org/ontology/004D/kuno-raeber#hasReferenceTitle',
   hasSameEditionAs = 'http://www.knora.org/ontology/shared/text-editing#hasSameEditionAs',
@@ -35,8 +34,7 @@ export enum KunoRaeber {
   PrintedPoemBookPublication = 'http://www.knora.org/ontology/004D/kuno-raeber#PrintedPoemBookPublication',
   PublicationPoem = 'http://www.knora.org/ontology/004D/kuno-raeber#PublicationPoem',
   TypewrittenPoem = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPoem',
-  TypewrittenPostface = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPostface',
-  hasScientificEdition = 'http://www.knora.org/ontology/004D/kuno-raeber#ScientificEdition'
+  TypewrittenPostface = 'http://www.knora.org/ontology/004D/kuno-raeber#TypewrittenPostface'
 }
 
 export enum KunoRaeberGUI {
@@ -82,13 +80,12 @@ export enum Text {
   hasSpecialDescription = 'http://www.knora.org/ontology/shared/text#hasSpecialDescription',
   hasStrophe = 'http://www.knora.org/ontology/004D/kuno-raeber#hasStrophe',
   hasStructure = 'http://www.knora.org/ontology/shared/text#hasStructure', // HERE a whole new ontology has been defined and no equivalent existing ... !!!
-  hasTitle = 'http://www.knora.org/ontology/shared/text#hasTitle',
+  hasTitle = 'http://www.knora.org/ontology/shared/text#expressionHasTitle',
   isDiplomaticTranscriptionOfTextOnPage = 'http://www.knora.org/ontology/shared/text-editing#isDiplomaticTranscriptionOfTextOnPage',
   isFinalVersion = 'http://www.knora.org/ontology/004D/kuno-raeber#isFinalVersion',
   isInDialect = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#isInSwissGerman', // CHANGED .,..
   isPartOfCycle = 'http://www.knora.org/ontology/004D/kuno-raeber#isPartOfCycle',
   isWrittenWith = 'http://www.knora.org/ontology/shared/information-carrier#isWrittenWith',
-  expressionHasTitle = 'http://www.knora.org/ontology/shared/text#expressionHasTitle'
 }
 
 export enum Work {
@@ -105,4 +102,8 @@ export enum Work {
   hasUnauthorizedPublication = 'http://www.knora.org/ontology/shared/publishing#hasUnauthorizedPublication',
   isExpressedIn = 'http://www.knora.org/ontology/shared/concept#isExpressedIn',
   isPublishedIn = 'http://www.knora.org/ontology/shared/publishing#isPublishedIn'
+}
+
+export enum TextEditing {
+  hasScientificEdition = 'http://www.knora.org/ontology/shared/text-editing#hasScientificEdition'
 }

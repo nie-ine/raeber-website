@@ -53,7 +53,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       (
         new ExtendedSearch()
           .filterByRestype(KunoRaeberGUI.Poem)
-          .property(KunoRaeberGUI.hasSynopsisIri, equals, 'http://rdfh.ch/kuno-raeber/' + this.workIRI)
+          .property(KunoRaeberGUI.hasSynopsisIri, equals, 'http://rdfh.ch/004D/' + this.workIRI)
           .property(KunoRaeberGUI.hasPoemTitle, exists)
           .property(KunoRaeberGUI.hasPoemCreationDate, exists)
           .property(KunoRaeberGUI.hasPoemText, exists)

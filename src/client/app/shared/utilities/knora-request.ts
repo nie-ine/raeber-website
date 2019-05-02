@@ -1,5 +1,5 @@
 import { Config } from '../config/env.config';
-import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text, Work } from './iris';
+import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text, Work , TextEditing} from './iris';
 
 type OntologyProps
   = Human
@@ -7,7 +7,8 @@ type OntologyProps
   | KunoRaeberGUI
   | KnoraBase
   | Text
-  | Work;
+  | Work
+  | TextEditing;
 
 type Compop = (prop: OntologyProps, val?: string) => string;
 

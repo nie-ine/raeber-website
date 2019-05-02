@@ -39,12 +39,13 @@ export class NavigationsleisteComponent implements OnInit {
   private getLinkToAbgewandtZugewandtNachwort() {
     const request = new ExtendedSearch()
       .filterByRestype(KunoRaeber.TypewrittenPostface)
-      .property(Text.expressionHasTitle, equals, 'NACHWORT ÜBER DAS SCHWEIZERISCHE SPRACHDILEMMA')
+      .property(Text.hasTitle, equals, 'NACHWORT ÜBER DAS SCHWEIZERISCHE SPRACHDILEMMA')
       .showNRows(1)
       .toString();
       return this.http.get(request)
         .map(lambda => lambda )
         .subscribe(res => {
+            // console.log(res.json().subjects[0]);
             let objectIri = res.json().subjects[0].obj_id.split('/')[4];
             this.abgewandtZugewandtNachwortIri = '/Abgewandt Zugewandt (Nachwort)/Nachwort über das schweizerische Sprachdilemma---' + objectIri;
           }

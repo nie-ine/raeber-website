@@ -76,7 +76,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ]; // poem text
               this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ]; // poem IRI
               this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ]; // convolute Title
-              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 13 ]; // poem seqnum
               this.poemInformation[ this.i ].sameEdition = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
               if (this.poemInformation[ this.i ].convoluteTitle.includes('Notizbuch')) {
                 this.poemInformation[ this.i ].convolutePath = '/notizbuecher/notizbuch-'
@@ -145,18 +145,18 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
             const data = lambda.json();
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
               this.poemInformation[ this.i ] = new CachePoem();
-              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 9 ];
-              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 6 ];
-              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 8 ];
-              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 7 ];
-              this.poemInformation[ this.i ].alphabeticIndex = data.subjects[ this.i ].value[ 2 ];
+              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ];
+              this.poemInformation[ this.i ].alphabeticIndex = data.subjects[ this.i ].value[ 1 ];
               this.poemInformation[ this.i ].dateIndex = data.subjects[ this.i ].value[ 5 ];
-              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ];
-              this.poemInformation[ this.i ].synopsisIRI = data.subjects[ this.i ].value[ 10 ];
-              this.poemInformation[ this.i ].synopsisTitle = data.subjects[ this.i ].value[ 11 ];
-              this.poemInformation[ this.i ].isFinalVersion = data.subjects[ this.i ].value[ 12 ];
-              this.poemInformation[ this.i ].onPage = data.subjects[ this.i ].value[ 13 ];
-              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 13 ];
+              this.poemInformation[ this.i ].synopsisIRI = data.subjects[ this.i ].value[ 9 ];
+              this.poemInformation[ this.i ].synopsisTitle = data.subjects[ this.i ].value[ 10 ];
+              this.poemInformation[ this.i ].isFinalVersion = data.subjects[ this.i ].value[ 11 ];
+              this.poemInformation[ this.i ].onPage = data.subjects[ this.i ].value[ 12 ];
+              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ];
               this.poemInformation[ this.i ].isVisible = false;
             }
             this.sendPoemInformationBack.emit(this.poemInformation);

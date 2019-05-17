@@ -146,12 +146,12 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Notizbuch 1950-51'},
         canActivate: [TestversionGuard]
       },
-      {
-        path: 'notizbuecher/notizbuch-1952-1954',
-        component: ConvoluteNotAvailableComponent,
-        data: {title: 'Notizbuch 1952-54'},
-        canActivate: [TestversionGuard]
-      },
+      // {
+      //   path: 'notizbuecher/notizbuch-1952-1954',
+      //   component: ConvoluteNotAvailableComponent,
+      //   data: {title: 'Notizbuch 1952-54'},
+      //   canActivate: [TestversionGuard]
+      // },
       {
         path: 'notizbuecher/notizbuch-1954-1955',
         component: ConvoluteNotAvailableComponent,

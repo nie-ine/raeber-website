@@ -89,7 +89,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
       this.performQuery(
         new ExtendedSearch()
           .filterByRestype(KunoRaeber.PrintedPoemBookPublication)
-          .property(Text.hasConvoluteTitle, like, 'die-verwandelten-schiffe')
+          .property(Text.hasConvoluteTitle, like, 'Gesicht')
           .toString());
     } else if (this.konvolut_id === 'die-verwandelten-schiffe') {
       this.performQuery(
@@ -164,7 +164,9 @@ export class GetKonvolutIRIComponent implements OnChanges {
       .subscribe((response: any) => {
           if (response instanceof HttpResponse) {
             const data = response.body;
-            if (data !== undefined) {
+            if (data === undefined || data.subjects.length === 0 ) {
+              console.log('no data for query: ' + queryPart );
+            } else {
               this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
               this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
               this.sendKonvolutBildBack.emit(data.subjects[ 0 ].preview_path);

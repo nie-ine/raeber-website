@@ -157,7 +157,10 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979');
       } else if (this.convoluteTitle === 'Notizbuch 1979-82') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979-1982');
-      } else if (this.convoluteTitle === 'Notizbuch 1980-88') {
+      } else if (this.convoluteTitle === 'Notizbuch 1952-54') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1952-1954');
+      }
+        else if (this.convoluteTitle === 'Notizbuch 1980-88') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1980-1988');
       } else if (this.convoluteTitle === 'Manuskripte 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979');

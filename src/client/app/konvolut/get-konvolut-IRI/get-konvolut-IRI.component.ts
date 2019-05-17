@@ -30,7 +30,14 @@ export class GetKonvolutIRIComponent implements OnChanges {
           .filterByRestype(KunoRaeber.PoemNotebook)
           .property(Text.hasConvoluteTitle, equals, 'Notizbuch 1979')
           .toString());
-    } else if (this.konvolut_id === 'notizbuch-1979-1982') {
+    } else if (this.konvolut_id === 'notizbuch-1952-1954') {
+      this.performQuery(
+        new ExtendedSearch()
+          .filterByRestype(KunoRaeber.PoemNotebook)
+          .property(Text.hasConvoluteTitle, like, 'Notizbuch 1952-54')
+          .toString());
+    }
+      else if (this.konvolut_id === 'notizbuch-1979-1982') {
       this.performQuery(
         new ExtendedSearch()
           .filterByRestype(KunoRaeber.PoemNotebook)

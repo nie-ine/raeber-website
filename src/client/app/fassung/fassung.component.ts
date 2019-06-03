@@ -159,9 +159,22 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979-1982');
       } else if (this.convoluteTitle === 'Notizbuch 1952-54') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1952-1954');
-      }
-        else if (this.convoluteTitle === 'Notizbuch 1980-88') {
+      } else if (this.convoluteTitle === 'Notizbuch 1980-88') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1980-1988');
+      } else if (this.convoluteTitle === 'Manuskripte 1952') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1952');
+      } else if (this.convoluteTitle === 'Manuskripte 1953') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1953');
+      } else if (this.convoluteTitle === 'Manuskripte 1954') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1954');
+      } else if (this.convoluteTitle === 'Manuskripte 1955') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1955');
+      } else if (this.convoluteTitle === 'Manuskripte 1956') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1956');
+      } else if (this.convoluteTitle === 'Manuskripte 1957') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1957');
+      } else if (this.convoluteTitle === 'Manuskripte 1963') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1963');
       } else if (this.convoluteTitle === 'Manuskripte 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979');
       } else if (this.convoluteTitle === 'Manuskripte 1979-83') {

@@ -29,6 +29,13 @@ export class GetKonvolutIRIComponent implements OnChanges {
     this.konvolut_map.set('notizbuch-1979-1982', {Restype: KunoRaeber.PoemNotebook, CMP: like, Title: 'Notizbuch 1979-82'});
     this.konvolut_map.set('notizbuch-1980-1988', {Restype: KunoRaeber.PoemNotebook, CMP: like, Title: 'Notizbuch 1980-88'});
     this.konvolut_map.set('notizbuch-1965-80', {Restype: KunoRaeber.PoemNotebook, CMP: like, Title: 'Notizbuch 1965-80'});
+    this.konvolut_map.set('manuskripte-1952', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1952'});
+    this.konvolut_map.set('manuskripte-1953', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1953'});
+    this.konvolut_map.set('manuskripte-1954', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1954'});
+    this.konvolut_map.set('manuskripte-1955', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1955'});
+    this.konvolut_map.set('manuskripte-1956', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1956'});
+    this.konvolut_map.set('manuskripte-1957', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1957'});
+    this.konvolut_map.set('manuskripte-1963', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1963'});
     this.konvolut_map.set('manuskripte-1979', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979'});
     this.konvolut_map.set('manuskripte-1979-1983', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979-83'});
     this.konvolut_map.set('karten-1984', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Karten 1984'});

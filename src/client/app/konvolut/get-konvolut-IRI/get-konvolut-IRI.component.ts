@@ -38,7 +38,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
     this.konvolut_map.set('manuskripte-1963', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1963'});
     this.konvolut_map.set('manuskripte-1979', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979'});
     this.konvolut_map.set('manuskripte-1979-1983', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979-83'});
-    this.konvolut_map.set('karten-1984', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Karten 1984'});
+    this.konvolut_map.set('karten-1984', {Restype: KunoRaeber.PoemPostcardConvolute, CMP: like, Title: 'Karten 1984'});
     this.konvolut_map.set('typoskripte-1979', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: equals, Title: 'Typoskripte 1979'});
     this.konvolut_map.set('typoskripte-1979-spez', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: like, Title: 'Typoskripte 1979-spez'});
     this.konvolut_map.set('typoskripte-1983', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: like, Title: 'Typoskripte 1983'});

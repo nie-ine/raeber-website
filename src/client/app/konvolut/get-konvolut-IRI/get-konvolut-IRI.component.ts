@@ -39,6 +39,9 @@ export class GetKonvolutIRIComponent implements OnChanges {
     this.konvolut_map.set('manuskripte-1979', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979'});
     this.konvolut_map.set('manuskripte-1979-1983', {Restype: KunoRaeber.PoemManuscriptConvolute, CMP: like, Title: 'Manuskripte 1979-83'});
     this.konvolut_map.set('karten-1984', {Restype: KunoRaeber.PoemPostcardConvolute, CMP: like, Title: 'Karten 1984'});
+    this.konvolut_map.set('typoskripte-1943-1946', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: equals, Title: 'Typoskripte 1943-46'});
+    this.konvolut_map.set('typoskripte-1952', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: equals, Title: 'Typoskripte 1952'});
+    this.konvolut_map.set('typoskripte-1953', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: equals, Title: 'Typoskripte 1953'});
     this.konvolut_map.set('typoskripte-1979', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: equals, Title: 'Typoskripte 1979'});
     this.konvolut_map.set('typoskripte-1979-spez', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: like, Title: 'Typoskripte 1979-spez'});
     this.konvolut_map.set('typoskripte-1983', {Restype: KunoRaeber.PoemTypescriptConvolute, CMP: like, Title: 'Typoskripte 1983'});

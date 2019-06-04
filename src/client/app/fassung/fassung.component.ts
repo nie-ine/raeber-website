@@ -109,6 +109,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   buildLinkToRelatedConvolute(convoluteTitle: string): string {
+    console.log('convoluteTitle: ' + convoluteTitle);
     if (convoluteTitle.includes('Notizbuch')) {
       return '/notizbuecher/notizbuch-' + convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
     } else if (convoluteTitle.includes('Manuskripte')) {

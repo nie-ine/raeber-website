@@ -216,12 +216,12 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         component: KonvolutComponent,
         canActivate: [TestversionGuard]
       },
-      {
+      /*{
         path: 'typoskripte/typoskripte-1943-1946',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1943-46'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'typoskripte/typoskripte-1945-1950',
         component: ConvoluteNotAvailableComponent,
@@ -240,7 +240,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Typoskripte 1951'},
         canActivate: [TestversionGuard]
       },
-      {
+      /*{
         path: 'typoskripte/typoskripte-1952',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1952'},
@@ -251,7 +251,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1953'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'typoskripte/typoskripte-1954',
         component: ConvoluteNotAvailableComponent,

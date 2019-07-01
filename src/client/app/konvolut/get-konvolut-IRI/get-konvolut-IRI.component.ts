@@ -59,7 +59,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
   }
 
   ngOnChanges() {
-
+    console.log(this.konvolut_id);
     if (this.konvolut_map.has(this.konvolut_id)) {
       let info = this.konvolut_map.get(this.konvolut_id);
       this.performQuery(
@@ -84,6 +84,7 @@ export class GetKonvolutIRIComponent implements OnChanges {
               console.log('no data for query: ' + queryPart );
             } else {
               this.sendKonvolutTitleBack.emit(data.subjects[ 0 ].value[ 1 ]);
+              console.log('fuu: ' + data.subjects[ 0 ].obj_id);
               this.sendKonvolutIRIBack.emit(data.subjects[ 0 ].obj_id);
               this.sendKonvolutBildBack.emit(data.subjects[ 0 ].preview_path);
               this.sendKonvolutTypeBack.emit(data.subjects[ 0 ].iconlabel);

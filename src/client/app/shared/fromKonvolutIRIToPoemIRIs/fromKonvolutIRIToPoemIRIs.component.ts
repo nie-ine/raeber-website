@@ -39,7 +39,7 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
       .map(
         (lambda: Response) => {
           const data = lambda.json();
-          //console.log(data);
+          console.log(data);
           for (this.i = 0; this.i < data.nodes.length; this.i++) {
             if (
               data.nodes[ this.i ].resourceClassIri === this.rightProperty
@@ -49,6 +49,7 @@ export class FromKonvolutIRIToPoemIRIsComponent implements OnChanges {
               //console.log(data.nodes[ this.i ].resourceClassLabel);
             }
           }
+          console.log('this.sendPoemIRIsBack: '  + this.sendPoemIRIsBack)
           this.sendPoemIRIsBack.emit(this.poemIRIArray);
           return data.resourcetypes;
         }

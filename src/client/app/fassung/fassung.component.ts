@@ -232,6 +232,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
       .get(new KnoraResource(this.urlPrefix + this.poemShortIri).toString())
       .map(lambda => lambda )
       .subscribe(res => {
+        console.log('this: ' +res.json());
         this.poemType = res.json().resinfo[ 'restype_id' ].split('#')[ 1 ];
         this.poemTitle = res.json().props[ Text.hasTitle ].values[ 0 ].utf8str;
         const textEdition = res.json().props[ TextEditing.hasScientificEdition ].values[ 0 ];

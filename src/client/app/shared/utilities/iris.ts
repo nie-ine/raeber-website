@@ -42,7 +42,8 @@ export enum KunoRaeberGUI {
   hasConvoluteIri = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasConvoluteIRI',
   hasConvoluteTitle = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasConvoluteTitle',
   hasDateIndex = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasPublishingStateIndex', // WHAT'S THAT THING ?hasDateIndex --> hasPublishingStateIndex
-  hasPoemCreationDate = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasPoemCreationDate',
+  hasPoemCreationDate = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasCreationDate',
+  hasPoemCreationDateType = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasCreationDateType',
   hasPoemIri = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasPoemIRI',
   hasPoemText = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasPoemText',
   hasPoemTitle = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#hasPoemTitle',
@@ -64,28 +65,28 @@ export enum KnoraBase {
 
 export enum Text {
   containsEarlierStagesOfPublication = 'http://www.knora.org/ontology/shared/information-carrier#containsEarlierStagesOfPublication',
-  hasAlias = 'http://www.knora.org/ontology/shared/text#hasAlias',
   hasCarrierCollectionDescription = 'http://www.knora.org/ontology/shared/information-carrier#hasCarrierDescription',
   hasCarrierDescription = 'http://www.knora.org/ontology/shared/information-carrier#carrierHasDescription', //WHAT about this? It's here but changed directions?
-  hasComment = 'http://www.knora.org/ontology/shared/text#hasComment',
-  hasContent = 'http://www.knora.org/ontology/shared/language#hasContent',
   hasConvoluteContentRepresentation = 'http://www.knora.org/ontology/shared/information-carrier#convoluteHasContentRepresentation',
   hasConvoluteDescription = 'http://www.knora.org/ontology/shared/information-carrier#ConvolutehasDescription',
   hasConvoluteOriginDescription = 'http://www.knora.org/ontology/shared/information-carrier#convoluteHasOriginDescription',
   hasConvoluteSizeDescription = 'http://www.knora.org/ontology/shared/information-carrier#convoluteHasSizeDescription',
   hasConvoluteTitle = 'http://www.knora.org/ontology/shared/information-carrier#convoluteHasTitle',
-  hasDetailDescription = 'http://www.knora.org/ontology/shared/text#hasDetailDescription',
   hasEnteringDate = 'http://www.knora.org/ontology/shared/information-carrier#hasDiaryEnteringDate',
+  isWrittenWith = 'http://www.knora.org/ontology/shared/information-carrier#isWrittenWith',
+  hasComment = 'http://www.knora.org/ontology/shared/text#hasComment',
+  hasContent = 'http://www.knora.org/ontology/shared/language#hasContent',
+  hasDetailDescription = 'http://www.knora.org/ontology/shared/text#hasDetailDescription',
+  hasAlias = 'http://www.knora.org/ontology/shared/text#hasAlias',
   hasPublicationNumber = 'http://www.knora.org/ontology/shared/publishing#hasPublicationNumber',
   hasSpecialDescription = 'http://www.knora.org/ontology/shared/text#hasSpecialDescription',
   hasStrophe = 'http://www.knora.org/ontology/004D/kuno-raeber#hasStrophe',
   hasStructure = 'http://www.knora.org/ontology/shared/text#hasStructure', // HERE a whole new ontology has been defined and no equivalent existing ... !!!
-  hasTitle = 'http://www.knora.org/ontology/shared/text#expressionHasTitle',
-  isDiplomaticTranscriptionOfTextOnPage = 'http://www.knora.org/ontology/shared/text-editing#isDiplomaticTranscriptionOfTextOnPage',
+  hasTitle = 'http://www.knora.org/ontology/shared/text#hasTitle',
+  isDiplomaticTranscriptionOfTextOnPage = 'http://www.knora.org/ontology/shared/scientific-editing#isDiplomaticTranscriptionOfTextOnPage',
   isFinalVersion = 'http://www.knora.org/ontology/004D/kuno-raeber#isFinalVersion',
-  isInDialect = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#isInSwissGerman', // CHANGED .,..
+  isInDialect = 'http://www.knora.org/ontology/004E/kuno-raeber-gui#isInSwissGerman',
   isPartOfCycle = 'http://www.knora.org/ontology/004D/kuno-raeber#isPartOfCycle',
-  isWrittenWith = 'http://www.knora.org/ontology/shared/information-carrier#isWrittenWith',
 }
 
 export enum Work {
@@ -105,5 +106,5 @@ export enum Work {
 }
 
 export enum TextEditing {
-  hasScientificEdition = 'http://www.knora.org/ontology/shared/text-editing#hasScientificEdition'
+  hasScientificEdition = 'http://www.knora.org/ontology/shared/scientific-editing#hasScientificEdition'
 }

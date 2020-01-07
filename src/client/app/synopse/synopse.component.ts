@@ -51,7 +51,7 @@ export class SynopseComponent implements OnInit, AfterViewChecked {
 
     this.route.params
       .switchMap(() =>
-        this.http.get(new KnoraResource(`http://rdfh.ch/kuno-raeber/${this.workIri}`).toString()))
+        this.http.get(new KnoraResource(`http://rdfh.ch/004D/${this.workIri}`).toString()))
       .map(response => response.json())
       .subscribe((res: any) => {
         this.poemsIri = res.props[ Work.isExpressedIn ].values;

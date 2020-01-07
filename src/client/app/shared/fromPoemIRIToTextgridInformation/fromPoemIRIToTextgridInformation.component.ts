@@ -31,7 +31,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       this.countRequests = 0;
       this.performQuery();
     } else {
-      //if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
+      if(this.konvolutIRI) console.log('Konvoluttitle to get Poems with Cache ' + this.konvolutIRI);
       this.poemInformation = [];
       this.countRequests = 0;
       this.performQuery();
@@ -53,7 +53,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
       (
         new ExtendedSearch()
           .filterByRestype(KunoRaeberGUI.Poem)
-          .property(KunoRaeberGUI.hasSynopsisIri, equals, 'http://rdfh.ch/kuno-raeber/' + this.workIRI)
+          .property(KunoRaeberGUI.hasSynopsisIri, equals, 'http://rdfh.ch/004D/' + this.workIRI)
           .property(KunoRaeberGUI.hasPoemTitle, exists)
           .property(KunoRaeberGUI.hasPoemCreationDate, exists)
           .property(KunoRaeberGUI.hasPoemText, exists)
@@ -76,7 +76,7 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
               this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ]; // poem text
               this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ]; // poem IRI
               this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ]; // convolute Title
-              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ]; // poem seqnum
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 13 ]; // poem seqnum
               this.poemInformation[ this.i ].sameEdition = data.subjects[ this.i ].value[ 8 ]; // hasSameEditionAs
               if (this.poemInformation[ this.i ].convoluteTitle.includes('Notizbuch')) {
                 this.poemInformation[ this.i ].convolutePath = '/notizbuecher/notizbuch-'
@@ -119,6 +119,26 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         )
         .subscribe(response => this.responseArray = response);
     } else {
+      // console.log('this.konvolutIRI: ' + this.konvolutIRI);
+      const fuu = new ExtendedSearch()
+        .filterByRestype(KunoRaeberGUI.Poem)
+        .property(KunoRaeberGUI.hasConvoluteIri, equals, this.konvolutIRI)
+        .property(KunoRaeberGUI.hasPoemTitle, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasPoemCreationDate, notEquals, 'GREGORIAN:2217-01-27')
+        .property(KunoRaeberGUI.hasPoemText, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasPoemIri, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasConvoluteIri, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasConvoluteTitle, notEquals, '123455666')
+        .property(KnoraBase.seqnum, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasDateIndex, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasAlphabeticIndex, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasSynopsisTitle, notEquals, '123455666')
+        .property(KunoRaeberGUI.hasSynopsisIri, notEquals, '123455666')
+        .property(KunoRaeberGUI.isFinalVersion, notEquals, '123455666')
+        .property(KunoRaeberGUI.isOnPage, notEquals, '123455666')
+        .showNRows(2000)
+        .toString();
+      console.log('extended search:' + fuu);
       return this.http.get
       (
         new ExtendedSearch()
@@ -143,22 +163,24 @@ export class FromPoemIRIToTextgridInformationComponent implements OnChanges {
         .map(
           (lambda: Response) => {
             const data = lambda.json();
+            // console.log('data: ' + data);
             for (this.i = 0; this.i < data.subjects.length; this.i++) {
               this.poemInformation[ this.i ] = new CachePoem();
-              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 9 ];
-              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 6 ];
-              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 8 ];
-              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 7 ];
-              this.poemInformation[ this.i ].alphabeticIndex = data.subjects[ this.i ].value[ 2 ];
+              this.poemInformation[ this.i ].poemTitle = data.subjects[ this.i ].value[ 7 ];
+              this.poemInformation[ this.i ].poemCreationDate = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ].poemText = data.subjects[ this.i ].value[ 6 ];
+              this.poemInformation[ this.i ].poemIRI = data.subjects[ this.i ].value[ 5 ];
+              this.poemInformation[ this.i ].alphabeticIndex = data.subjects[ this.i ].value[ 1 ];
               this.poemInformation[ this.i ].dateIndex = data.subjects[ this.i ].value[ 5 ];
-              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 1 ];
-              this.poemInformation[ this.i ].synopsisIRI = data.subjects[ this.i ].value[ 10 ];
-              this.poemInformation[ this.i ].synopsisTitle = data.subjects[ this.i ].value[ 11 ];
-              this.poemInformation[ this.i ].isFinalVersion = data.subjects[ this.i ].value[ 12 ];
-              this.poemInformation[ this.i ].onPage = data.subjects[ this.i ].value[ 13 ];
-              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 4 ];
+              this.poemInformation[ this.i ].seqnum = data.subjects[ this.i ].value[ 13 ];
+              this.poemInformation[ this.i ].synopsisIRI = data.subjects[ this.i ].value[ 9 ];
+              this.poemInformation[ this.i ].synopsisTitle = data.subjects[ this.i ].value[ 10 ];
+              this.poemInformation[ this.i ].isFinalVersion = data.subjects[ this.i ].value[ 11 ];
+              this.poemInformation[ this.i ].onPage = data.subjects[ this.i ].value[ 12 ];
+              this.poemInformation[ this.i ].convoluteTitle = data.subjects[ this.i ].value[ 3 ];
               this.poemInformation[ this.i ].isVisible = false;
             }
+            // console.log('this.sendPoemInformationBack: ' + this.sendPoemInformationBack)
             this.sendPoemInformationBack.emit(this.poemInformation);
             return null;
           }

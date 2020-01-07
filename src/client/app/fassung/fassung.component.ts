@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { equals, exists, ExtendedSearch, KnoraResource } from '../shared/utilities/knora-request';
 import { DateFormatService } from '../shared/utilities/date-format.service';
-import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text } from '../shared/utilities/iris';
+import { Human, KnoraBase, KunoRaeber, KunoRaeberGUI, Text, TextEditing } from '../shared/utilities/iris';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +21,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   showEditedText: boolean = true;
   showDiplomaticTranscription: boolean = false;
 
-  urlPrefix: string = 'http://rdfh.ch/kuno-raeber/';
+  urlPrefix: string = 'http://rdfh.ch/004D/';
 
   diplomaticIRIs: Array<string>;
 
@@ -109,6 +109,7 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   }
 
   buildLinkToRelatedConvolute(convoluteTitle: string): string {
+    console.log('convoluteTitle: ' + convoluteTitle);
     if (convoluteTitle.includes('Notizbuch')) {
       return '/notizbuecher/notizbuch-' + convoluteTitle.split(' ')[ 1 ].replace('-', '-19');
     } else if (convoluteTitle.includes('Manuskripte')) {
@@ -157,8 +158,24 @@ export class FassungComponent implements OnInit, AfterViewChecked {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979');
       } else if (this.convoluteTitle === 'Notizbuch 1979-82') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1979-1982');
+      } else if (this.convoluteTitle === 'Notizbuch 1952-54') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1952-1954');
       } else if (this.convoluteTitle === 'Notizbuch 1980-88') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'notizbuecher/notizbuch-1980-1988');
+      } else if (this.convoluteTitle === 'Manuskripte 1952') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1952');
+      } else if (this.convoluteTitle === 'Manuskripte 1953') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1953');
+      } else if (this.convoluteTitle === 'Manuskripte 1954') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1954');
+      } else if (this.convoluteTitle === 'Manuskripte 1955') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1955');
+      } else if (this.convoluteTitle === 'Manuskripte 1956') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1956');
+      } else if (this.convoluteTitle === 'Manuskripte 1957') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1957');
+      } else if (this.convoluteTitle === 'Manuskripte 1963') {
+        this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1963');
       } else if (this.convoluteTitle === 'Manuskripte 1979') {
         this.goToConvoluteview(searchTerm.searchTerm, searchTerm.page, 'manuskripte/manuskripte-1979');
       } else if (this.convoluteTitle === 'Manuskripte 1979-83') {
@@ -213,25 +230,26 @@ export class FassungComponent implements OnInit, AfterViewChecked {
   private getBasicInformationOnCurrentPoem() {
     this.http
       .get(new KnoraResource(this.urlPrefix + this.poemShortIri).toString())
-      .map(result => result.json())
+      .map(lambda => lambda )
       .subscribe(res => {
-        this.poemType = res.resinfo[ 'restype_id' ].split('#')[ 1 ];
-        this.poemTitle = res.props[ Text.hasTitle ].values[ 0 ].utf8str;
-        const textEdition = res.props[ KunoRaeber.hasEdition ].values[ 0 ];
+        console.log('this: ' +res.json());
+        this.poemType = res.json().resinfo[ 'restype_id' ].split('#')[ 1 ];
+        this.poemTitle = res.json().props[ Text.hasTitle ].values[ 0 ].utf8str;
+        const textEdition = res.json().props[ TextEditing.hasScientificEdition ].values[ 0 ];
         this.getEditedPoemText(textEdition);
-        this.poemSeqnum = res.props[ KnoraBase.seqnum ].values[ 0 ];
+        this.poemSeqnum = res.json().props[ KnoraBase.seqnum ].values[ 0 ];
         this.creationDateOfPoem = this.poemType === 'DiaryEntry' ?
-          this.dfs.germanLongDate(res.props[ Text.hasEnteringDate ].values[ 0 ].dateval1) :
-          this.dfs.germanLongDate(res.props[ Human.hasCreationDate ].values[ 0 ].dateval1);
+          this.dfs.germanLongDate(res.json().props[ Text.hasEnteringDate ].values[ 0 ].dateval1) :
+          this.dfs.germanLongDate(res.json().props[ Human.hasCreationDate ].values[ 0 ].dateval1);
         this.modificationDateOfPoem =
-          this.dfs.germanLongDate(res.props[ Human.hasModificationDate ].values[ 0 ].utf8str);
+          this.dfs.germanLongDate(res.json().props[ Human.hasModificationDate ].values[ 0 ].utf8str);
         switch (this.poemType) {
           case 'PoemNote':
-            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
+            this.diplomaticIRIs = res.json().props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Notizbuch';
             break;
           case 'HandwrittenPoem':
-            this.diplomaticIRIs = res.props[ KunoRaeber.hasDiplomaticTranscription ].values;
+            this.diplomaticIRIs = res.json().props[ KunoRaeber.hasDiplomaticTranscription ].values;
             this.convoluteTypeGermanLabel = 'Manuskript';
             break;
           case 'PostCardPoem':

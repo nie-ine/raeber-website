@@ -151,6 +151,7 @@ export class KonvolutComponent implements OnInit {
 
   updatePoemInformation(poemInformation: Array<CachePoem>) {
     this.poems = [];
+    // console.log('poemInformation: '+ poemInformation);
     for (let i = 0; i < poemInformation.length; i++) {
       let poem = new CachePoem();
       poem.poemTitle = poemInformation[ i ].poemTitle;
@@ -169,9 +170,9 @@ export class KonvolutComponent implements OnInit {
       poem.onPage = poemInformation[ i ].onPage;
       poem.isFinalVersion = poemInformation[ i ].isFinalVersion;
       //poem[ 15 ] = poemInformation[ i ][ 15 ];
-
       this.poems[ poemInformation[ i ].seqnum - 1 ] = poem;
     }
+    // console.log('this.poems: ' + this.poems);
   }
 
   createPoemIRIList(poemIRIList: Array<any>) {

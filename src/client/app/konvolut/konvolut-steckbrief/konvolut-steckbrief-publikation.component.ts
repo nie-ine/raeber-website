@@ -24,7 +24,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
 
   ngOnChanges() {
     this.publications = [];
-
+    // console.log('konvolutiri: ' + this.konvolutIRI)
     for (let i = 0; i < this.konvolutIRI.length; i++) {
       this.publications.push({ 'title': '', 'size': '', 'alias': '' });
 
@@ -50,6 +50,7 @@ export class KonvolutSteckbriefPublikationComponent implements OnChanges {
             this.http.get(searchParams))
           .map(response => response.json())
           .subscribe((res: any) => {
+            console.log(this.publications[i]);
             this.publications[ i ][ 'size' ] = res.subjects.length;
           });
       } catch (TypeError) {

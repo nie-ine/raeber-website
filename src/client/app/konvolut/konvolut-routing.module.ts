@@ -28,7 +28,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Manuskripte 1951'},
         canActivate: [TestversionGuard]
       },
-      {
+      /*{
         path: 'manuskripte/manuskripte-1952',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Manuskripte 1952'},
@@ -63,7 +63,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Manuskripte 1957'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'manuskripte/manuskripte-1958',
         component: ConvoluteNotAvailableComponent,
@@ -94,12 +94,12 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Manuskripte 1962'},
         canActivate: [TestversionGuard]
       },
-      {
+/*      {
         path: 'manuskripte/manuskripte-1963',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Manuskripte 1963'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'manuskripte/manuskripte-1964-1965',
         component: ConvoluteNotAvailableComponent,
@@ -146,12 +146,12 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Notizbuch 1950-51'},
         canActivate: [TestversionGuard]
       },
-      {
-        path: 'notizbuecher/notizbuch-1952-1954',
-        component: ConvoluteNotAvailableComponent,
-        data: {title: 'Notizbuch 1952-54'},
-        canActivate: [TestversionGuard]
-      },
+      // {
+      //   path: 'notizbuecher/notizbuch-1952-1954',
+      //   component: ConvoluteNotAvailableComponent,
+      //   data: {title: 'Notizbuch 1952-54'},
+      //   canActivate: [TestversionGuard]
+      // },
       {
         path: 'notizbuecher/notizbuch-1954-1955',
         component: ConvoluteNotAvailableComponent,
@@ -216,12 +216,12 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         component: KonvolutComponent,
         canActivate: [TestversionGuard]
       },
-      {
+      /*{
         path: 'typoskripte/typoskripte-1943-1946',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1943-46'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'typoskripte/typoskripte-1945-1950',
         component: ConvoluteNotAvailableComponent,
@@ -240,7 +240,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         data: {title: 'Typoskripte 1951'},
         canActivate: [TestversionGuard]
       },
-      {
+      /*{
         path: 'typoskripte/typoskripte-1952',
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1952'},
@@ -251,7 +251,7 @@ import { TestversionGuard } from '../shared/testversion-service/testversion-guar
         component: ConvoluteNotAvailableComponent,
         data: {title: 'Typoskripte 1953'},
         canActivate: [TestversionGuard]
-      },
+      },*/
       {
         path: 'typoskripte/typoskripte-1954',
         component: ConvoluteNotAvailableComponent,

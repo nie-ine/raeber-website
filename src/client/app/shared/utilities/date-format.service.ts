@@ -65,11 +65,21 @@ export class DateFormatService {
   }
 
   germanNumericDate(isoDate: string): string {
-    let parts = isoDate.split('-');
-    let year = parts[ 0 ];
-    let month = parts[ 1 ];
-    let day = parts[ 2 ].split(' ')[0];
-    return day + '.' + month + '.' + year;
+    var countOccurence = (isoDate.match(/-/g) || []).length;
+    if (countOccurence > 0) {
+      let parts = isoDate.split('-');
+      let year = parts[ 0 ];
+      let month = parts[ 1 ];
+      let day = parts[ 2 ].split(' ')[0];
+      // console.log('date = ' + day + '.' + month + '.' + year);
+      return day + '.' + month + '.' + year ;
+      }
+      else {
+        let year = isoDate;
+        let month = '01';
+        let day = '01';
+      return day + '.' + month + '.' + year;
+    }
   }
 
 }

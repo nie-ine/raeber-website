@@ -41,6 +41,7 @@ export class KonvolutSteckbriefStufenComponent implements OnChanges {
       try {
         this.sub = this.http.get(new KnoraResource(this.konvolutIRI[ i ]).toString())
           .map(response => response.json()).subscribe(res => {
+            console.log(this.publications[i]);
             this.publications[ i ][ 'title' ] = res.props[ Text.hasConvoluteTitle ].values[ 0 ].utf8str;
             this.publications[ i ][ 'alias' ] = res.props[ Text.hasAlias ].values[ 0 ].utf8str;
             this.publications[ i ][ 'type' ] = res.resinfo.restype_label;
